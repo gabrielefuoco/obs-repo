@@ -12,7 +12,7 @@ L'analisi delle regole associative è una tecnica di data mining che identifica 
 **Definizioni:**
 
 * **Insieme di elementi (I):**  $I = \{i_1, i_2, \dots, i_d\}$
-* **Insieme di transazioni (T):** $T = \{t_1, t_2, \dots, t_n\}$, dove ogni $t_j$ contiene un sottoinsieme degli elementi di I.
+* **Insieme di transazioni (T):** $T = \{t_1, t_2, \dots, t_n\}$, dove ogni*ogni* $t_j$ contiene un sottoinsieme degli elementi di I.
 * **Itemset (X):** sottinsieme degli elementi di I.
 
 **Metriche chiave:**
@@ -398,10 +398,6 @@ Queste misure sono **oggettive**, ma spesso vengono utilizzate anche misure **so
 
 * **Supporto non omogeneo:** La scelta della soglia di supporto può essere difficile, poiché un supporto troppo basso può generare un numero elevato di itemset frequenti, mentre un supporto troppo alto può far perdere regole importanti.
 * **Pattern cross support:** Le regole possono contenere item con supporto molto diverso, rendendo la regola poco interessante per l'analisi.
-
-
-
-
 
 ## 15.2.1 Tabella di Contingenza
 

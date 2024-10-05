@@ -451,35 +451,3 @@ $s.t. A\vec{w}\geq v$
 * All'interno del nostro cervello ci sono circa 90 miliardi di neuroni.
 * Ogni neurone può avere da 5k a 100k dendriti.
 
-## Rete Neuronale: Perceptron
-
-**Introduzione:**
-
-* La rete riceve input, non tutti con la stessa importanza.
-* Ogni input è associato ad un **peso** che ne determina l'influenza.
-* Lo **stimolo** ricevuto dalla rete è la combinazione lineare degli input ponderati: 
-  
-  $\sum_{i=1}^d w_{i}x_{i}$
-
-* Se lo stimolo supera una certa **soglia** ($\theta$), la rete attiva un'uscita.
-
-**Funzione di Attivazione:**
-
-* La funzione **segno** ($sign$) implementa un semispazio:
-
-  $h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},\vec{x}>$
-
-* **Esempio:** Funzione AND
-
-**Algoritmo di Apprendimento:**
-
-* **Inizializzazione:** $\vec{w}^{(1)}=(0,0,\dots,0)$
-* **Iterazione:**
-    * Finché esiste un input $i$ per cui $y_{i} <\vec{w}^{(1)},\vec{x_{i}}> \leq_{0}$:
-        * Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
-        * Incrementa il contatore di iterazioni: $t=t+1$
-
-**Convergenza:**
-
-* L'algoritmo converge sempre nel caso di dati **linearmente separabili**.
-* Al termine, restituisce un **iperpiano separatore**. 
