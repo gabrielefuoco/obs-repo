@@ -1,4 +1,3 @@
-
 ## Introduzione
 
 La regressione è una tecnica statistica utilizzata per studiare la relazione tra una variabile dipendente *y* e un insieme di variabili indipendenti o regressori $(X_1, X_2, ..., X_k)$. I modelli di regressione permettono di stabilire matematicamente come *y* è spiegata dalle variabili $X_i$ tramite un'equazione:
