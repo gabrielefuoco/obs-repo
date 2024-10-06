@@ -1,4 +1,4 @@
-### Assunzioni sulla Funzione di Etichettatura
+## Assunzioni sulla Funzione di Etichettatura
 Assumiamo che esista una funzione di etichettatura $f(x)$ che ci fornisce l'etichetta vera per un'istanza $x$.
 
 **Problemi di Rappresentazione:**
@@ -36,7 +36,7 @@ Assumiamo che esista una funzione di etichettatura $f(x)$ che ci fornisce l'etic
 
 
 
----
+
 # inserire esempio 1
 L'errore del classificatore, come illustrato nel disegno, si verifica quando un'istanza con un valore di $x$ inferiore a $\theta$ appartiene alla classe 1, ma il classificatore la classifica erroneamente come classe 0. Allo stesso modo, per la classe 1, l'errore si verifica quando un'istanza con un valore di $x$ maggiore di $\theta$ appartiene alla classe 0, ma il classificatore la classifica erroneamente come classe 1.
 
@@ -52,8 +52,8 @@ Immaginiamo di avere un classificatore che separa le istanze in due classi (0 e 
 
 In sostanza, l'errore del classificatore si verifica quando la soglia scelta non riesce a separare correttamente le istanze in base alla loro classe reale. Questo può accadere quando la distribuzione dei dati non è perfettamente separabile o quando la soglia è stata scelta in modo non ottimale.
 
----
-### Come la Distribuzione delle Classi e le Probabilità a Priori Influenzano la Classificazione con Soglia
+
+## Come la Distribuzione delle Classi e le Probabilità a Priori Influenzano la Classificazione con Soglia
 
 La probabilità di osservare un'istanza $x$ e l'errore di un classificatore con soglia $\theta$ dipendono dalla distribuzione delle classi e dalla probabilità a priori di ciascuna classe.
 #### 1. Probabilità congiunta e probabilità condizionata
@@ -72,7 +72,8 @@ $P(x \cap y) = P(x|y)P(y) = P(y|x)P(x)$
 Nel caso di classificazione binaria, dove $Y = \{0, 1\}$, la formula si semplifica in:
 
 $p(x) = p(x|y=0)p(y=0) + p(x|y=1)p(y=1)$
----
+
+
 #### 2. Funzione di loss per un classificatore con soglia
 $$L_D(f_D) = \int_{x < \theta} p(x|y=1)p(y=1) dx+ \int_{x < \theta} p(x|y=0)p(y=0) dx \ge0$$
 
@@ -100,7 +101,7 @@ Più le classi sono sovrapposte e più il classificatore è destinato a sbagliar
 
 Immaginiamo di avere due classi, una con una distribuzione normale centrata in 0 e l'altra con una distribuzione normale centrata in 5. Se la varianza delle due distribuzioni è molto bassa, le classi saranno ben separate e il classificatore avrà un basso errore. Se la varianza è alta, le classi saranno sovrapposte e il classificatore avrà un errore maggiore.
 
----
+
 ## Approcci al Machine Learning
 Nell'ambito del machine learning, possiamo distinguere due grandi famiglie di approcci:
 
@@ -123,7 +124,7 @@ Nell'ambito del machine learning, possiamo distinguere due grandi famiglie di ap
 * Un approccio comune è l'utilizzo di una funzione soglia: $h_{\theta}(x) = 1[x \geq \theta], 0 \text{ altrimenti}$.
 * Esiste una funzione soglia che può essere accurata quanto il classificatore Bayesiano.
 * Tuttavia, non conosciamo a priori la forma delle classi e quindi non possiamo determinare la soglia ottimale.
----
+
 ## Funzione di LOSS
 
 La funzione di loss è uno strumento fondamentale nell'apprendimento automatico per quantificare l'errore di un modello predittivo. 
@@ -174,15 +175,12 @@ L'errore empirico è **parametrico** perché dipende dalla funzione di loss scel
 L'errore di generalizzazione è anch'esso parametrico, perché dipende dalla funzione di loss. È il valore atteso della loss:
 
 $$L_D(h) = E_{x,y \sim D}[l(h,(x_i,y_i))]$$ 
-
-
----
-### Apprendimento PAC Standard
+## Apprendimento PAC Standard
 
 L'apprendimento PAC (Probably Approximately Correct) è un framework per l'analisi degli algoritmi di apprendimento. L'obiettivo è garantire che un algoritmo di apprendimento possa trovare un'ipotesi che sia "abbastanza buona" con "alta probabilità".
 L'apprendimento **PAC standard** assume che esista un'ipotesi perfetta nella classe di ipotesi. In questo caso, l'obiettivo è trovare un'ipotesi che sia "vicina" all'ipotesi perfetta. La probabilità di successo è misurata tramite la probabilità che l'errore dell'ipotesi trovata sia inferiore a un valore di soglia $\epsilon$.
 
-### Apprendimento PAC Agnostico
+## Apprendimento PAC Agnostico
 
 L'apprendimento PAC agnostico rilassa l'assunzione di realizzabilità, ovvero non assume che esista un'ipotesi perfetta nella classe di ipotesi. In questo caso, l'obiettivo è trovare un'ipotesi che sia "vicina" alla migliore ipotesi possibile nella classe di ipotesi.
 
@@ -215,7 +213,7 @@ $$L_D(h_S) \leq min_{h \in H} L_D(h) + \epsilon$$
 * L'apprendimento PAC agnostico è più difficile dell'apprendimento PAC standard, poiché l'algoritmo di apprendimento deve trovare un'ipotesi che sia "vicina" alla migliore ipotesi possibile, piuttosto che all'ipotesi perfetta.
 * La complessità computazionale dell'apprendimento PAC agnostico può essere elevata, soprattutto per classi di ipotesi di grandi dimensioni.
 
----
+
 ##  Convergenza Uniforme e Sample Complexity
 
 **Obiettivo:** Determinare le condizioni per cui la probabilità che un insieme di training $S$ sia $\epsilon$-rappresentativo sia maggiore o uguale a $1-\delta$.
@@ -289,8 +287,6 @@ Questa formula ci permette di calcolare la dimensione minima dell'insieme di tra
 **Nota:**
 
 - La formula della sample complexity è valida anche per insiemi di ipotesi infiniti, a condizione che $|H|\leq 2^{bd}$, dove $b$ è il numero di bit necessari per rappresentare un'ipotesi e $d$ è la dimensione dello spazio di input.
-
----
 
 ## Predittori Lineari
 

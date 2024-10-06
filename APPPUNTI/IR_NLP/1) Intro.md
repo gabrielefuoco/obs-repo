@@ -1,4 +1,4 @@
-### Linguaggio naturale
+## Linguaggio naturale
 
 * **Unicità:** Il linguaggio naturale è un linguaggio specifico per gli umani, progettato per gestire la complessità della comunicazione.
 * **Interazione multimodale:** È fondamentale per interagire in contesti che coinvolgono anche altre modalità, come la visione.
@@ -54,7 +54,7 @@
 * **Comprensione del testo:** NLP (Machine Learning, AI generativa, ...). 
 
 
----
+
 ## Topic Detection and Tracking
 
 **Contesto:** Fine anni '90 (inizio del text mining)
@@ -76,7 +76,6 @@
 La **modellazione di topic stocastica** è una tecnica che utilizza modelli probabilistici per analizzare grandi quantità di testo e identificare i temi principali (topic) presenti nei documenti.  Si basa sull'idea che ogni documento sia una combinazione di diversi topic, e che ogni parola abbia una probabilità di appartenere a un determinato topic. Questo approccio permette di scoprire i temi principali, analizzare la loro distribuzione nei documenti e classificare i documenti in base ai topic che contengono. Un esempio di modello di topic stocastico è il Latent Dirichlet Allocation (LDA). 
 
 ---
-
 ### Relation Extraction
 
 * **Relazione con Named Entity Recognition:** Per estrarre le relazioni tra entità nominate, è necessario prima identificare le entità stesse.
@@ -87,7 +86,7 @@ La **modellazione di topic stocastica** è una tecnica che utilizza modelli prob
 
 * **Approccio tradizionale:** Negli anni '90, la summarization era affrontata come estrazione di parole chiave (key phrase extraction).
 * **Guida alla summarization:** Le proprietà di un documento possono essere utilizzate per guidare il processo di summarization. 
----
+
 ## Appunti di Studio: KDD Pipeline e NLP
 
 ### KDD Pipeline in NLP
@@ -102,11 +101,7 @@ La **modellazione di topic stocastica** è una tecnica che utilizza modelli prob
 * **Criteri statistici:** La statistica offre diversi criteri per la valutazione.
 * **Accuracy:** L'accuracy presenta diversi problemi nella stima delle prestazioni di un classificatore. 
 
-
----
-## Appunti di Studio: Funzioni Principali e Browsing
-
-### Funzioni Principali
+## Funzioni Principali
 
 * **Funzione principale:**  Il compito principale di un sistema di elaborazione del linguaggio naturale (NLP) è quello di **estrarre informazioni** da testi.
 * **Macro categorie:** Le funzioni principali possono essere suddivise in due macro categorie:

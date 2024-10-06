@@ -1,5 +1,3 @@
-
-**Da Esperienza a Competenza**
 L'apprendimento automatico si basa sul principio di trasformare l'esperienza in competenza. Questo processo avviene attraverso l'analisi di dati e la creazione di modelli predittivi.
 
 ### Training Set
@@ -26,7 +24,6 @@ L'apprendimento automatico si basa sul principio di trasformare l'esperienza in 
 * **Capacità di Generalizzazione:** La capacità del Predittore di estendere le conoscenze acquisite dal training set a nuovi dati. 
 
 **In sintesi:**
-
 L'apprendimento automatico si basa sull'addestramento di un modello (Learner) su un insieme di dati di esempio (Training Set) per creare un Predittore che può classificare nuovi esempi in modo accurato. La capacità di generalizzazione del Predittore è fondamentale per la sua efficacia. 
 
 
@@ -43,7 +40,7 @@ L'apprendimento automatico si basa sull'addestramento di un modello (Learner) su
 * **Com'è fatto l'input?**  La natura e la struttura dei dati di input sono fondamentali per l'apprendimento automatico.
 * **Come possiamo automatizzare il processo di apprendimento?**  L'obiettivo è sviluppare algoritmi che possano imparare da soli, senza intervento umano.
 * **Come possiamo essere sicuri che il predittore (output) sia di buona qualità?**  È necessario valutare la performance del modello e garantire che sia in grado di generalizzare a nuovi dati. 
----
+
 ## Framework dell'Apprendimento Statistico
 
 ### 1) Input del Learner
@@ -122,7 +119,6 @@ Se l'insieme di ipotesi H è finito, allora il predittore $h_S$ ottenuto tramite
 
 Il seguente teorema fornisce una garanzia per la generalizzazione dei modelli quando l'insieme di ipotesi è finito. Le assunzioni di IID e di realizzabilità sono importanti per garantire che il training set sia rappresentativo della distribuzione dei dati reali. Il concetto di overfitting si riferisce alla situazione in cui un modello si adatta troppo bene al training set e non riesce a generalizzare a nuovi dati. La probabilità di accuratezza (PAC) fornisce una misura della probabilità che un modello sia approssimativamente corretto. 
 
----
 ## Come deve essere fatta $h_S$?
 
 **Condizioni:**
@@ -187,10 +183,11 @@ $\leq \sum_{h \in H_b} e^{-m \epsilon}$
     * $m \leq \frac{1}{\epsilon} ln \frac{|H|}{\delta}$ 
     * Se m supera questa soglia, l'ipotesi è PAC.
     * Se H è infinita, la soglia è infinita.
----
+
 ## Sample Complexity
 
-$m_H(\epsilon, \delta)$ 
+$$m_H(\epsilon, \delta)$$
+
 * **Significato:** Indica la dimensione minima del training set necessaria per ottenere un'ipotesi **probabilmente approssimativamente corretta (PAC)**.
 * **Formula:** $m_H(\epsilon, \delta) = \frac{1}{\epsilon}ln \frac{|H|}{\delta}$
 * **PAC-Learnability:**  Un concetto legato alla Sample Complexity. Una classe di ipotesi H è **PAC-Learnable** se esiste una funzione $m_H(\epsilon, \delta)$ tale che, con un training set di dimensione $m \geq m_H(\epsilon, \delta)$, l'algoritmo ERM produce un'ipotesi PAC.
@@ -198,10 +195,9 @@ $m_H(\epsilon, \delta)$
 **Definizione:**
 
 Una classe di ipotesi H è **PAC-Learnable** se esiste una funzione $m_H(\epsilon, \delta)$ detta **Sample Complexity** tale che, se $m = |S| \geq m_H(\epsilon, \delta)$ sotto l'assunzione di realizzabilità, allora $h_S = ERM_H(S)$ è PAC, ovvero:
+$$Pr[L_D(h_s) \leq \epsilon] \geq 1- \delta$$
 
-$Pr[L_D(h_s) \leq \epsilon] \geq 1- \delta$
-
-**Teorema:**
+### Teorema:
 
 Se H è finita, allora è PAC-Learnable.
 

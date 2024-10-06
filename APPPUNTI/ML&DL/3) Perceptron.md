@@ -90,7 +90,7 @@ Il teorema del Perceptron dimostra che l'algoritmo del Perceptron converge in un
 **Svantaggi:**
 * **Linearità:** L'algoritmo del Perceptron può solo classificare set di dati linearmente separabili.
 * **Sensibilità al rumore:** L'algoritmo del Perceptron può essere sensibile al rumore nei dati.
----
+
 ## Regressori Lineari
 
 Parliamo di regressione quando il dominio target (la nostra *y*) è finito. Vogliamo predire dei valori in un intervallo reale.
