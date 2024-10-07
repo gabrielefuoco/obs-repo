@@ -75,13 +75,11 @@ Le strategie di ricerca non informata non utilizzano informazioni sulla distanza
 * **Complessità temporale e spaziale:** Le risorse computazionali necessarie per eseguire l'algoritmo. 
 
 ### Ricerca Best-First
-
 La ricerca Best-First è una strategia generale che utilizza una funzione di costo f(n) per valutare i nodi. La frontiera è una coda con priorità, dove il nodo con il valore f(n) minimo viene selezionato per l'espansione. 
 
 La scelta della funzione f(n) determina il comportamento dell'algoritmo.
 
 ### Ricerca in Ampiezza
-
 La ricerca in ampiezza è una strategia che esplora lo spazio degli stati in modo sistematico, espandendo prima la radice, poi i suoi successori, e così via. 
 
 È utile quando tutte le azioni hanno lo stesso costo. Può essere implementata come una ricerca Best-First con f(n) pari alla profondità del nodo. Un'implementazione più efficiente utilizza una coda FIFO.
@@ -89,12 +87,11 @@ La ricerca in ampiezza è una strategia che esplora lo spazio degli stati in mod
 La ricerca in ampiezza è completa anche su spazi infiniti e, se le azioni hanno lo stesso costo, è anche ottimale. La complessità spaziale e temporale è $O(bd),$ dove d è la profondità e b è il numero di successori di ogni nodo.
 
 ### Ricerca in Profondità
-
 La ricerca in profondità esplora lo spazio degli stati espandendo sempre il nodo con la maggiore profondità. Può essere implementata come una ricerca Best-First con f(n) pari all'opposto della profondità. Un'implementazione più efficiente utilizza una coda LIFO.
 
 La ricerca in profondità è completa solo se la struttura è aciclica e non è ottimale. La complessità spaziale è $O(b · m) $e quella temporale è $O(bm)$, dove b è il branching factor e m è la massima profondità dell'albero. 
 
-## Strategie di Ricerca Non Informata: Sintesi
+## Strategie di Ricerca Non Informata
 
 ### Iterative Deepening
 
@@ -108,8 +105,7 @@ La Bidirectional Best-First è una strategia che esegue due ricerche simultaneam
 
 L'algoritmo è completo e può essere ottimale a seconda della strategia utilizzata. La complessità spaziale e temporale è $O(b^\frac{d}{2})$.
 
----
-### Strategie di Ricerca Informata o Euristica
+## Strategie di Ricerca Informata o Euristica
 - **Caratteristiche**:
   - Utilizzano **informazioni aggiuntive** (euristiche) per stimare la distanza o il costo per raggiungere l'obiettivo.
   - L'euristica è rappresentata dalla funzione $h(n)$, che fornisce una stima del costo dal nodo corrente all'obiettivo.
@@ -137,6 +133,7 @@ L'algoritmo è completo e può essere ottimale a seconda della strategia utilizz
   - **Non garantisce l'ottimalità** della soluzione poiché ignora il costo accumulato (ossia $g(n)$).
   - Completo solo in spazi di ricerca finiti.
   - Complessità spaziale e temporale: $O(|v|)$, dove $|v|$ è il numero di nodi, ma può migliorare a $O(b \cdot m)$, con $b$ il branching factor e $m$ la profondità massima dell'albero.
+
 ---
 ### Riepilogo delle Funzioni di Valutazione
 - **Greedy Best-First Search**: $f(n) = h(n)$ (solo euristica, non ottimale).
@@ -146,17 +143,8 @@ L'algoritmo è completo e può essere ottimale a seconda della strategia utilizz
 - **Greedy Best-First**: Veloce ma non garantisce la soluzione ottima.
 - **UCS**: Lenta ma garantisce l'ottimalità.
 - **A***: Unisce i vantaggi di entrambe, garantendo l'ottimalità in modo più efficiente (se l'euristica è ben scelta).
---- 
-### A* Tree Search
-- **Funzione di costo**: $f(n) = g(n) + h(n)$  (combina UCS e Greedy Search).
-  - $g(n)$: costo del percorso dal nodo iniziale a $n$ (guarda al passato).
-  - $h(n)$: euristica, stima del costo dal nodo $n$ all'obiettivo (guarda al futuro).
-  - - **Strategia**: best-first.
-- **Caratteristica**: L'euristica introduce un rilassamento del problema, migliorando i tempi di risoluzione ma riducendo la bontà della soluzione (trade-off).
-- **Caso senza euristica**: $f(n) = g(n)$, e l'algoritmo diventa una *Uniform Cost Search (UCS)*.
-- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.
----
-### Proprietà delle Euristiche
+
+## Proprietà delle Euristiche
 Esistono due proprietà principali per le euristiche: **ammissibilità** e **consistenza**.
 
 #### 1. Ammissibilità
@@ -177,14 +165,29 @@ Esistono due proprietà principali per le euristiche: **ammissibilità** e **con
 - **Relazione tra ammissibilità e consistenza**: 
   - Ogni euristica **consistente** è anche **ammissibile**.
   - Il contrario **non** è vero: un'euristica ammissibile non è necessariamente consistente.
----
-### Completezza di A* Tree Search
+
+### Considerazioni sulle Euristiche
+- **Necessità di valutazioni quantitative**:
+  - Le euristiche devono fornire una stima **numerica** e non solo qualitativa.
+  
+- **Motivo**:
+  - **Ricerca Best-First**: La valutazione qualitativa può essere sufficiente (confronto tra stati).
+  - **Ricerca A∗**: Necessita di una combinazione di criteri numerici per quantificare quanto uno stato sia preferibile rispetto a un altro.
+
+# A* Tree Search
+- **Funzione di costo**: $f(n) = g(n) + h(n)$  (combina UCS e Greedy Search).
+  - $g(n)$: costo del percorso dal nodo iniziale a $n$ (guarda al passato).
+  - $h(n)$: euristica, stima del costo dal nodo $n$ all'obiettivo (guarda al futuro).
+  - - **Strategia**: best-first.
+- **Caratteristica**: L'euristica introduce un rilassamento del problema, migliorando i tempi di risoluzione ma riducendo la bontà della soluzione (trade-off).
+- **Caso senza euristica**: $f(n) = g(n)$, e l'algoritmo diventa una *Uniform Cost Search (UCS)*.
+- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.### Completezza di A* Tree Search
 - **Completezza**: L'algoritmo A\* è completo, ovvero **trova sempre una soluzione** se esiste, a condizione che:
   - Lo spazio degli stati abbia una soluzione o sia finito.
   - I costi delle azioni siano **positivi** e maggiori di una soglia $\epsilon > 0$.
 
----
-### Ottimalità di A* Tree Search
+
+## Ottimalità di A* Tree Search
 - **Premessa**: Se l'euristica $h(n)$ è **ammissibile**, l'algoritmo A\* è **ottimale** in termini di costo. Vediamo come dimostrarlo.
 
 #### Passi per dimostrare l'ottimalità:
@@ -254,8 +257,7 @@ In pratica, questo passaggio della dimostrazione mostra che A* espanderà sempre
 
 In altre parole, l'algoritmo A* non sceglierà mai un cammino peggiore finché esiste un cammino migliore, garantendo così l'ottimalità della soluzione.
 
----
-### A\* Graph Search
+## A\* Graph Search
 - Nella **Tree Search**, gli stati possono essere generati più volte, esplorando ripetutamente lo stesso stato attraverso percorsi diversi. Questo peggiora le prestazioni ma riduce la memoria utilizzata (poiché non vengono memorizzati gli stati già visitati).
 - La **Graph Search** migliora le prestazioni memorizzando gli **stati visitati** in un set chiamato **closed list**. Prima di espandere un nodo, si verifica se il suo stato è già presente nel set. Se uno stato è già stato visitato, non viene riesplorato.
   
@@ -303,11 +305,7 @@ Da cui segue che:
 - **Contraddizione**
 	Se il nodo $p$ era nella frontiera al momento dell'espansione di $n'$, allora avrebbe dovuto essere espanso **prima** di $n'$, poiché il suo valore $f(p)$ è minore di $f(n')$. L'espansione di $p$ avrebbe generato i suoi successori, inclusi i nodi antenati di $n$, e questo processo sarebbe continuato fino a espandere $n$ prima di $n'$, il che contraddice l'ipotesi che $n'$ sia stato espanso prima di $n$, dimostrando che A* Graph Search espande sempre i nodi sul cammino ottimo prima di quelli subottimali, garantendo così l'**ottimalità**.
 
-### Riassunto:
-- La **Graph Search** salva memoria ma può ignorare stati con cammini meno costosi se non correttamente gestita.
-- La **consistenza** dell'euristica garantisce che l'algoritmo esplori i nodi sul cammino ottimo prima di quelli subottimali, mantenendo l'**ottimalità** anche in A* Graph Search.
-- ---
-### Teorema: Consistenza implica Ammissibilità
+## Teorema: Consistenza implica Ammissibilità
 - **Obiettivo**: Dimostrare che se un'euristica $h(n)$ è **consistente**, allora è anche **ammissibile**.
 - **Metodo**: La dimostrazione viene condotta per **induzione**.
 #### Caso base: stato $n = 1$ (dista 1 dal goal):
@@ -365,8 +363,7 @@ Da cui segue che:
    $$
    - L'euristica è ammissibile per lo stato $n$ a distanza $k+1$ dal goal.
 
----
-### Weighted A∗ Search
+## Weighted A∗ Search
 - **Obiettivo**: Ridurre il numero di nodi espansi accettando soluzioni subottime ma soddisfacenti.
 - **Modifica della funzione di costo**:
   $$
@@ -383,8 +380,7 @@ Da cui segue che:
   - **Più euristica**: Aumentando $w$, si esplorano meno nodi, ma si potrebbe ottenere una soluzione **non ottima**.
   - **Trade-off**: Minor tempo e spazio, ma soluzioni meno accurate.
 
----
-### Recursive Best-First Search (RBFS)
+## Recursive Best-First Search (RBFS)
 - **Obiettivo**: Ridurre il numero di nodi memorizzati nella frontiera, come alternativa alla ricerca A∗.
   
 - **Funzionamento**:
@@ -394,12 +390,3 @@ Da cui segue che:
   - Durante il ritorno, aggiorna il valore $f$ di ogni nodo con il miglior valore $f$ dei suoi figli.
   
 - **Problema**: **Rigenerazione di nodi**: i nodi vengono spesso ricalcolati.
-
----
-### Considerazioni sulle Euristiche
-- **Necessità di valutazioni quantitative**:
-  - Le euristiche devono fornire una stima **numerica** e non solo qualitativa.
-  
-- **Motivo**:
-  - **Ricerca Best-First**: La valutazione qualitativa può essere sufficiente (confronto tra stati).
-  - **Ricerca A∗**: Necessita di una combinazione di criteri numerici per quantificare quanto uno stato sia preferibile rispetto a un altro.

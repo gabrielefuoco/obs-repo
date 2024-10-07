@@ -47,7 +47,7 @@
 | **Subgame Perfect Equilibrium (SPE)** | Un equilibrio che è un equilibrio di Nash per il gioco completo e per ogni sottogioco. |
 | **Algoritmo Minimax** | Un algoritmo che cerca di minimizzare le perdite massime in situazioni di conflitto. |
 
----
+
 Modella situazioni in cui agenti (umani o artificiali) interagiscono. Gli agenti possono competere, collaborare o negoziare per raggiungere i propri obiettivi.
 
 ### Tipi di giochi:
@@ -72,7 +72,7 @@ Modella situazioni in cui agenti (umani o artificiali) interagiscono. Gli agenti
 
 Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco per massimizzare i propri obiettivi. Esempio: aste.
 
-### Giochi Coalizionali
+## Giochi Coalizionali
    Sono giochi cooperativi dove gli agenti (giocatori) cooperano per ottenere benefici comuni, detti **worth**, in base alla coalizione di cui fanno parte. Gli agenti possono essere persone, aziende, partiti politici, ecc.
 
 2. **Obiettivo**:  
@@ -141,7 +141,7 @@ Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco
    - Formula:  
      $∀S ⊂ N, v(S) ∈ {0, 1}$  
      Quando un gioco semplice è anche a somma costante, si parla di **proper simple games**, dove la somma delle worth delle coalizioni e dei non membri è costante.
----
+
 ## Esempio
 Questo esempio riguarda la distribuzione della **ricchezza** (o "worth") in un gioco coalizionale tra tre giocatori  A, B, C. 
 ### Dati iniziali
@@ -198,7 +198,7 @@ Se invece la **worth totale** fosse  45 (cioè  $x_A + x_B + x_C = 45$\)), un'im
 -  \{B, C\}\) riceve  15 + 25 = 40\), che soddisfa la loro worth.
 Tuttavia, questo non è possibile nel contesto del problema, poiché la ricchezza totale è 42, non 45.
 
----
+
 ## Core di un Gioco Coalizionale
 Il **core** è un concetto fondamentale nella teoria dei giochi coalizionali e rappresenta l'insieme delle distribuzioni (o imputazioni) della **ricchezza** tra i giocatori che sono **stabili**, ovvero tali che nessuna coalizione abbia incentivi a "rompere" l'accordo e formare una coalizione separata.
 
@@ -247,9 +247,7 @@ $$
 $$
 In altre parole, un'imputazione è definita additiva se la soluzione per due giochi combinati è la somma delle soluzioni dei due giochi separati.
 
-
----
-### Shapley Value
+## Shapley Value
  Lo **Shapley Value** è una soluzione importante nella teoria dei giochi coalizionali, che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi **contributi marginali** a tutte le possibili coalizioni. Viene considerato una soluzione **meritocratica**, poiché si basa su quanto un giocatore contribuisce a una coalizione rispetto a quanto la coalizione ottiene senza di lui.
 - Lo Shapley Value è l'unica **pre-imputazione** (una distribuzione che non deve necessariamente rispettare la razionalità individuale) che soddisfa le 3 proprietà elencate prima.
 - Lo Shapley Value esiste **sempre** in qualsiasi gioco, anche se non sempre rispetta le condizioni di razionalità individuale.
@@ -280,7 +278,6 @@ Lo shapley value puo essere interpretato come una **media pesata** dei contribut
 #### Esempio
 Immaginiamo tre giocatori   A ,   B , e   C . Se   A ,   B , e   C  formano coalizioni diverse, lo Shapley Value di un giocatore è la media dei suoi contributi marginali calcolati su tutte le coalizioni possibili. Per esempio, se aggiungere   A  a una coalizione   S  aumenta la worth di   S , il contributo marginale di   A  in quella coalizione sarà  $v(S ∪ \{A\}) - v(S)$ 
 
----
 ## Nucleolo in un gioco coalizionale
 
 Il **nucleolo** è un concetto di soluzione per i giochi coalizionali, che si concentra sulla riduzione dell'insoddisfazione massima tra i giocatori. L'idea alla base del nucleolo è quella di minimizzare l'insoddisfazione, o **eccesso** (excess), delle coalizioni in modo gerarchico: prima si riduce l'insoddisfazione massima, poi quella successiva e così via, fino ad ottenere una distribuzione delle risorse più equa e stabile possibile.
@@ -352,8 +349,7 @@ $$
 $$
 Questo procedimento si ripete, restringendo sempre di più l'insieme delle coalizioni critiche, fino a ottenere la soluzione finale, che rappresenta il nucleolo.
 
----
-
+### Contested Garment Rule
 La **Contested Garment Rule** è un criterio per dividere un'eredità tra due creditori con debiti $d_1 \ e \ d_2 \ \ (\text{dove} \ \ (d_1 \leq d_2))$ e un totale da dividere $e$ con $(0 \leq e \leq d)$:
 
 1. Il creditore 1 può concedere al creditore 2 un importo massimo di $\max(e - d_1, 0) .$
@@ -361,8 +357,6 @@ La **Contested Garment Rule** è un criterio per dividere un'eredità tra due cr
 3. L'importo rimanente, cioè $( e - \max(e - d_1, 0) - \max(e - d_2, 0) )$, viene diviso equamente tra i due creditori.
 
 Questa regola combina linearmente il criterio di divisione eguale dei guadagni e delle perdite. È stato dimostrato che esiste una sola divisione dell'eredità che segue questa regola e che tale divisione corrisponde esattamente al nucleolo del gioco associato, dove ogni coalizione pretende il massimo tra 0 e ciò che le è concesso da chi non fa parte della coalizione.
-
----
 
 ## Aste e Mechanism Design
 Si occupano di stabilire regole per le aste in modo da incentivare comportamenti strategici da parte degli agenti. Esistono due principali categorie di aste:
@@ -380,8 +374,7 @@ Ci concentriamo sulle aste *single good*, in particolare:
 
 Il **Mechanism Design** mira a creare regole che inducano gli agenti a seguire strategie ottimali, garantendo un *mechanism design truthful*, ovvero rendendo conveniente rivelare le proprie vere preferenze o valori.
 
----
-### Sealed-Bid Auctions (Aste a busta chiusa)
+## Sealed-Bid Auctions (Aste a busta chiusa)
 In questo tipo di asta, le offerte sono **segrete** e il vincitore è colui che offre la cifra più alta.
 Gli agenti devono basarsi su:
   - Il valore che attribuiscono al bene.
@@ -393,8 +386,7 @@ Gli agenti devono basarsi su:
 - Ogni partecipante ha un valore attribuito al bene indipendente da quello degli altri.
 - Ciascun giocatore conosce la distribuzione di probabilità da cui vengono estratti i valori degli altri partecipanti, ma non conosce i valori esatti.
 Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere influenzata dalla distribuzione di probabilità delle valutazioni altrui, rendendo complessa la scelta di una strategia ottimale.
----
-### Second-Price Auctions (Aste al secondo prezzo)
+## Second-Price Auctions (Aste al secondo prezzo)
  Ogni partecipante fa la propria offerta e vince chi ha offerto di più, ma paga il secondo prezzo più alto, non la propria offerta.
 - **Mechanism Design truthful**: l'asta al secondo prezzo incoraggia i partecipanti a fare offerte corrispondenti al reale valore che attribuiscono al bene. Questa strategia è ottimale indipendentemente dalle strategie degli altri.
 
@@ -414,8 +406,7 @@ Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere i
 	**Conclusione**: Offrire più del valore che attribuisco al bene mi può portare a un guadagno negativo. Poiché non posso prevedere esattamente come si comporteranno gli altri, la strategia migliore resta offrire $s_i = v_i$, cioè il valore esatto che attribuisco al bene.
 
 - Il meccanismo dell’asta giapponese si comporta in modo simile all'asta al secondo prezzo: anch’esso è **truthful** e incoraggia i partecipanti a fare offerte veritiere.
----
-### First-Price Auctions: Aste al Primo Prezzo
+## First-Price Auctions: Aste al Primo Prezzo
 
 Nelle **aste al primo prezzo**, i partecipanti presentano offerte segrete e chi offre di più vince, ma deve pagare l'importo offerto 
 
@@ -469,8 +460,8 @@ Questo significa che ogni giocatore offre una frazione $\frac{n-1}{n}$ del propr
 - In un'asta al primo prezzo, la strategia ottimale per ciascun giocatore è offrire una frazione del proprio valore.
 - In un contesto con 2 giocatori, questa frazione è la metà del valore stimato.
 - Per $n$ giocatori, la frazione ottimale è $\frac{n-1}{n}$.
----
-#### Giochi Strategici
+
+## Giochi Strategici
 - **Definizione**: Giochi in cui ogni giocatore agisce per il proprio interesse individuale, senza considerare coalizioni o accordi tra giocatori.
 - **Obiettivo**: Massimizzare il proprio profitto, spesso in presenza di obiettivi contrastanti tra i giocatori.
 
@@ -498,8 +489,8 @@ I  Prigioniero 1 subisce una pena più severa (-4) mentre il Prigioniero 2 ricev
   - **Situazione**: Entrambi i prigionieri confessano.
   - **Motivazione**: Anche se non confessare sarebbe più vantaggioso se l’altro non confessa, confessare diventa la scelta migliore se si sospetta che l’altro confessi.
   - **Risultato**: L’equilibrio di Nash si verifica quando entrambi i giocatori scelgono di confessare, poiché nessuno ha incentivo a deviare dalla propria scelta data la scelta dell’altro.
----
-### Equilibrio di Nash
+
+# Equilibrio di Nash
 
 #### Definizione Formale di Gioco Strategico
 1. **Giocatori**: Un insieme di $N$ giocatori.
@@ -546,9 +537,7 @@ Un profilo di azione $s^*$ è un equilibrio di Nash se e solo se ogni azione $s^
 $$
 s^*_i \in B_i(s^*_{-i}) \quad \forall i \in N
 $$
----
-
-### Strategie Miste
+## Strategie Miste
 Una **strategia mista** è una distribuzione di probabilità sulle azioni che un giocatore può scegliere. In altre parole, ogni giocatore sceglie un’azione non in modo deterministico, ma con una certa probabilità.
 Questo approccio garantisce sempre l’esistenza di un equilibrio di Nash, anche in giochi complessi con strategie non deterministiche.
 Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, introducendo un elemento di casualità e permettendo di gestire situazioni stocastiche.
@@ -567,7 +556,7 @@ Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, intro
 - La funzione di utilità di Von Neumann-Morgenstern $v(\cdot)$ rappresenta le preferenze sui premi di una lotteria. L'utilità della lotteria $U(p)$ è calcolata come la somma ponderata dei valori $v(z)$ dei premi, con i pesi dati dalle probabilità. Questa funzione soddisfa gli assiomi di indipendenza e continuità, garantendo valori unici e consistenti per rappresentare le preferenze tra diverse lotterie.
 - Questa funzione rappresenta le preferenze dei giocatori in termini di utilità attesa.
 
-#### Strategie Miste nei Giochi Strategici
+## Strategie Miste nei Giochi Strategici
 
 1. **Utilità Attesa di una Strategia Mista**:
    - La **utilità attesa** di una strategia mista $\sigma$ per un giocatore $i$ è:
@@ -589,7 +578,7 @@ Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, intro
 - **Strategie Miste**: 
 - **Utilità Attesa**: Calcolata come la somma ponderata dei valori degli esiti possibili, con i pesi dati dalle probabilità degli esiti stessi.
 - **Equilibrio di Nash**: In presenza di strategie miste, è un profilo in cui nessun giocatore può migliorare la propria utilità attesa cambiando unilateralmente la propria strategia mista.
----
+
 # Teorema di Nash:
 
 Il **Teorema di Nash** afferma che in ogni gioco non cooperativo con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. Questo equilibrio ha due proprietà fondamentali:
@@ -618,7 +607,7 @@ Un profilo di strategie miste $\sigma^* = (\sigma^*_i)_{i \in N}$ è un equilibr
 3. **Implicazioni della Degenerazione**:
    - Se una strategia mista in equilibrio include più azioni nel suo supporto, non può degenerare in una strategia pura senza rischiare di alterare l'equilibrio.
 
-### Dimostrazione del Teorema di Nash
+## Dimostrazione del Teorema di Nash
 #### Teorema: 
 Esiste sempre un equilibrio misto di Nash. 
 * Il teorema dimostra che esiste sempre un equilibrio misto di Nash e che tutte le azioni nel supporto di una strategia mista in equilibrio sono best response rispetto alle strategie degli altri giocatori.
@@ -672,8 +661,8 @@ $$
 $$
 Dove $B(σ^*_{-i})$ è l'insieme delle best response alle strategie degli altri giocatori.
 
----
-### Esempio di Equilibrio di Nash Misto: Bach e Stravinsky
+
+## Esempio di Equilibrio di Nash Misto: Bach e Stravinsky
 
 - **Scenario**: Due giocatori devono scegliere tra andare a un concerto di Bach o di Stravinsky. Le preferenze sono diverse, ma entrambi preferiscono essere insieme.
 
@@ -704,7 +693,7 @@ Dove $B(σ^*_{-i})$ è l'insieme delle best response alle strategie degli altri 
   - **Informazione completa**: Conosci le preferenze e utilità dell'avversario.
   - **Informazione incompleta**: Non sai cosa sceglierà l'avversario e viceversa.
 
-### Giochi in forma estesa
+## Giochi in forma estesa
 I giochi in forma estesa rappresentano situazioni in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato. Questa rappresentazione si basa su un **game tree,** una struttura che mostra i nodi di decisione (dove un giocatore sceglie un'azione) e i nodi terminali (dove si determinano i risultati e le utilità).
 - **Modalità di gioco**: Giocati in sequenza, tenendo conto degli eventi passati.
 - **Informazione e Memoria**:

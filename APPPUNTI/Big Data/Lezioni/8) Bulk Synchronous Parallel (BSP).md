@@ -14,8 +14,6 @@
 | **l**                       | Il costo di una barriera di sincronizzazione.                                                                                        |
 | **w**                       | Il costo massimo dell'elaborazione locale in un superstep.                                                                           |
 
----
-
 - Il modello Bulk Synchronous Parallel (BSP) è stato sviluppato da Leslie Valiant dell'Università di Harvard a partire dalla fine degli anni '80.
 - L'interesse per questo modello è cresciuto a partire dal 2010, quando Google l'ha adottato come una delle principali tecnologie per l'analisi dei grafi su larga scala (Google Pregel).
 
@@ -76,7 +74,7 @@ Il costo di un algoritmo BSP è la somma dei costi di ciascun superstep:
 $$W+Hh+Sl=\sum^S_{s=1}w_s+g\sum^S_{s=1}h_s+Sl$$
 dove S è il numero di superstep.
 
----
+
 ## FAQ sul Modello Bulk Synchronous Parallel (BSP)
 
 **1. Cos'è il modello Bulk Synchronous Parallel (BSP)?**

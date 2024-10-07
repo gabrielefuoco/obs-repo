@@ -16,8 +16,7 @@
 | **Spark SQL**                           | Modulo Spark per lavorare con dati strutturati utilizzando query simili a SQL.                                    |
 | **Catalyst**                            | Ottimizzatore di query in Spark SQL e Dataset.                                                                    |
 
----
-#### 1. MapReduce: Debolezze e Limitazioni
+## 1. MapReduce: Debolezze e Limitazioni
 
 **Modello di Programmazione**:
 - MapReduce è difficile da usare per certi problemi; anche operazioni semplici possono richiedere più passaggi.
@@ -32,9 +31,8 @@
 **Limitazioni nell'elaborazione in tempo reale**:
 - Non è adatto per l'elaborazione **streaming** o in tempo reale perché scansiona l'intero input prima di procedere con l'elaborazione.
 
----
 
-#### 2. Apache Spark: Vantaggi
+## 2. Apache Spark: Vantaggi
 
 **Prestazioni**:
 - Spark è un motore general-purpose per il Big Data, significativamente più veloce di Hadoop grazie all'elaborazione **in-memory**. Questo riduce la necessità di scrivere su disco e aumenta le prestazioni, specialmente per i calcoli iterativi.
@@ -54,22 +52,19 @@
   - **MLlib** per il machine learning distribuito
   - **GraphX** per il calcolo su grafi
 
----
-
-#### 3. Confronto Spark vs Hadoop MapReduce
+## 3. Confronto Spark vs Hadoop MapReduce
 
 - Entrambi distribuiscono i calcoli su più nodi, ma **Spark** gestisce meglio la memoria e offre un modello più generalizzato.
 - **Compatibilità**: Spark può leggere/scrivere da sistemi come HDFS, Cassandra e S3, garantendo flessibilità.
-  
+---
 #### 4. Architettura di Spark
-
 - **Spark Core**: La base del motore Spark, gestisce task, memoria, e interazione con lo storage.
 - Moduli di alto livello (SQL, Streaming, MLlib, GraphX) permettono di lavorare su diversi tipi di dati senza dover cambiare il motore sottostante.
 
 #### 5. Gestione del Cluster
 - Spark supporta diversi gestori di cluster come **YARN**, **Mesos** e **Kubernetes**, oltre a una modalità standalone per piccole configurazioni.
----
-### Architettura Spark
+
+## Architettura Spark
 
 - **Driver ed Esecutori**: Ogni applicazione Spark si compone di un **programma driver** e **esecutori** distribuiti su un cluster.
   - **Driver**: Processo che esegue la funzione `main()` e crea l'oggetto **SparkContext**.
@@ -77,8 +72,8 @@
 - **SparkContext**: Si connette a un **gestore del cluster** per allocare risorse e distribuire i task.
 - Una volta connesso al cluster, Spark invia il codice dell'applicazione (come file jar) agli esecutori, che eseguono i task richiesti.
 
----
-### Modello di Programmazione Spark: RDD (Resilient Distributed Dataset)
+
+## Modello di Programmazione Spark: RDD (Resilient Distributed Dataset)
 - Gli **RDD** sono strutture dati immutabili, distribuite, in-memory e fault-tolerant.
 - Gli RDD vengono partizionati per ottimizzare la distribuzione dei dati e sono manipolabili tramite una varietà di operatori.
 #### Caratteristiche degli RDD:
@@ -89,10 +84,7 @@
 - Gli **esecutori** sui nodi worker eseguono operazioni sui loro pezzi di RDD in parallelo, garantendo efficienza.
 - Le **partizioni** sono frammenti logici dei dati che consentono un’elaborazione parallela.
 
----
-
 ### RDD: Distribuiti, Immutabili e Fault-Tolerant
-
 - Gli RDD sono **distribuiti** nei nodi del cluster. Quando c'è sufficiente memoria, sono conservati in-memory, altrimenti su disco.
 - La loro **immutabilità** garantisce che qualsiasi operazione su di essi crei nuovi RDD, preservando lo stato originale.
 - **Fault tolerance**: Spark ricostruisce automaticamente gli RDD persi grazie al lineage, che tiene traccia di come sono stati generati.
@@ -578,7 +570,7 @@ model.transform(df).show()
 
 In questo esempio, il modello viene addestrato sui dati e utilizzato per predire le etichette del dataset.
 
----
+
 ## Domande Frequenti su Apache Spark
 
 ### 1. Cosa rende Apache Spark più veloce di Hadoop MapReduce?

@@ -41,7 +41,7 @@ In questi casi, la **decomposizione funzionale** o **"task parallelism"** è pre
 - Di solito è implementato nel **paradigma client-server**:
   - Un processo master assegna i task ai processi slave.
   - Può essere implementato a qualsiasi livello del programma, per esempio, facendo eseguire più input in parallelo o assegnando task specifici a ciascun processore.
----
+
 ## Problematiche della programmazione parallela
 Lo scopo principale di un programma parallelo è ottenere migliori prestazioni rispetto alla versione seriale. Alcuni aspetti da considerare:
 
@@ -72,7 +72,7 @@ Lo scopo principale di un programma parallelo è ottenere migliori prestazioni r
   - Un processo può essere occupato con nuovi task mentre attende il completamento della comunicazione.
   - Ciò è possibile utilizzando tecniche di comunicazione **non-bloccanti** e computazione **non specifica ai dati**.
   - Tuttavia, nella pratica, è difficile implementare efficacemente questa interleaving.
----
+
 ## Metriche di Prestazione nei Sistemi Paralleli
 
 ### Tempo di esecuzione
@@ -94,7 +94,7 @@ $$  S = \frac{Ts}{Tp}$$
 $$  E = \frac{S}{p}$$
   
   - Misura quanto efficacemente ogni processore viene utilizzato. Esempio: somma di _n_ numeri su _n_ processori, $Tp = O(log(n)), \ E = O(\frac{1}{log(n)}).$
----
+
 ## Legge di Amdahl
 - **Legge di Amdahl**: se una frazione **f** di un calcolo è intrinsecamente sequenziale, il massimo speedup ottenibile su _p_ processori è:
   
@@ -106,7 +106,7 @@ $$  S ≤ \frac{1}{f + \frac{1-f}{p}}$$
 ### Considerazioni su Amdahl
 - Sebbene Amdahl suggerisca di limitare l'uso di macchine parallele, in alcuni casi (come le previsioni meteorologiche), l'aumento delle dimensioni del problema migliora la precisione, consentendo ad esempio previsioni più accurate.
 
----
+
 ## FAQ sulla Programmazione Parallela
 
 ### 1. Quali sono i principali tipi di decomposizione dei problemi nella programmazione parallela?

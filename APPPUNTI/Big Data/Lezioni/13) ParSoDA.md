@@ -17,7 +17,6 @@
 | **Emoji Sentiment Analysis** | L'analisi del sentiment basata sull'interpretazione delle emoji utilizzate in un testo.                                                                    |
 | **Parsoda-py**               | Una versione Python di PaRSoDA che offre un linguaggio di programmazione più accessibile e integrazione con librerie Python come NumPy, Pandas e PyCOMPSs. |
 
-
 ### Motivazioni e Obiettivi
 - **Big Data nei Social Media**: I social media come Twitter e Flickr generano enormi quantità di dati, che possono essere sfruttati per **estrarre informazioni utili** su comportamenti e dinamiche umane.
 - **Crescita dell'analisi dei social media**: L'analisi dei social media è in rapido sviluppo, con applicazioni in:
@@ -29,7 +28,7 @@
 - **Barriere d'ingresso**: Nonostante l'esistenza di framework paralleli come MapReduce e Spark, la loro adozione è limitata dalle **competenze di programmazione** richieste.
 - **PaRSoDA**: La libreria **PaRSoDA (Parallel Social Data Analytics)** è stata creata per facilitare la costruzione di applicazioni di analisi dati parallele, rendendo più accessibile l'estrazione di conoscenza dai dati dei social media.
 
-### Caratteristiche di PaRSoDA
+## Caratteristiche di PaRSoDA
 - **Accessibilità**: PaRSoDA riduce le competenze di programmazione necessarie per sviluppare applicazioni di analisi dati.
 - **Funzionalità avanzate**: Include strumenti per l'elaborazione e l'analisi dei dati dai social media, con particolare attenzione a:
   - Mobilità degli utenti;
@@ -46,8 +45,8 @@
 5. **Riduzione Dati**: Aggregazione dei dati per shard utilizzando funzioni di riduzione specifiche.
 6. **Analisi Dati**: Esecuzione di funzioni di analisi per estrarre informazioni rilevanti.
 7. **Visualizzazione Dati**: Presentazione dei risultati tramite funzioni di visualizzazione personalizzabili.
----
-### Come configurare le fasi in PaRSoDA
+
+## Come configurare le fasi in PaRSoDA
 - PaRSoDA definisce un insieme di metodi che possono essere utilizzati per impostare ciascuna fase.
 - Tabella: Principali metodi della classe _SocialDataApplication_.
 
@@ -154,9 +153,7 @@ Un **punto di interesse (POI)** è una località significativa o interessante vi
 
 Utilizzando un dataset di elementi geolocalizzati provenienti da social media come Flickr e Twitter, è possibile analizzare informazioni (ad esempio, testo, hashtag, dati geospaziali) per scoprire la ROI di un POI.
 
----
-
-### Struttura dell'Applicazione di Estrazione delle ROI
+## Struttura dell'Applicazione di Estrazione delle ROI
 
 1. **Acquisizione dati**:  
    Utilizziamo un file chiamato **"colosseo500m.json"** contenente tutti i post di Flickr pubblicati entro 500 metri dal Colosseo.
@@ -321,7 +318,7 @@ Modificare la funzione di mapping e le funzioni di riduzione per ridurre l'overh
 In particolare:
 - Funzione di mapping: invece di inviare l'intero elemento geolocalizzato alla fase di riduzione, dovrebbe inviare solo le coordinate <lat, lng> di ogni elemento.
 - Funzione di riduzione: deve solo memorizzare i punti su un file senza fare nulla su di essi (cioè, funzione identità).
----
+
 ## Parsoda-py: Abilitazione di Runtime HPC basati su Python per l'Analisi Parallela dei Dati
 
 ### Panoramica
@@ -390,7 +387,7 @@ L'esempio seguente mostra l'applicazione di **sequential pattern mining** su COM
 9 app.set_visualizer(SortGapBide("trajectory_mining.txt", sort_key="support", mode="descending", min_length=3))
 10 app.execute()
 ```
----
+
 # FAQ su PaRSoDA
 
 ## 1. Qual è lo scopo principale di PaRSoDA?

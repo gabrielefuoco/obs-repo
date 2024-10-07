@@ -18,8 +18,7 @@
 | **Percezione** | Fase in cui l'agente calcola l'insieme delle possibili percezioni in un ambiente con osservazioni parziali. |
 | **Aggiornamento** | Fase in cui l'agente aggiorna il belief state combinando l'azione scelta e la percezione. |
 
----
-### Ricerca di Stati Finali
+## Ricerca di Stati Finali
 
 Le strategie di ricerca precedenti si focalizzavano sul trovare cammini attraverso lo spazio degli stati. Altre volte, siamo interessati solo allo stato finale e non al cammino percorso per raggiungerlo. Ad esempio, nel problema delle n regine, ci interessa solo trovare una configurazione valida.
 
@@ -95,7 +94,6 @@ Bisogna definire un piano mediante tre fasi:
 
 Si utilizza anche in questo caso una ricerca AND-OR che, tuttavia, non dispone di un singolo stato ma di un insieme di stati (belief states) ed è presente un meccanismo di aggiornamento di quest'ultimo.
 
----
 ## Domande Frequenti sulla Ricerca in Ambienti Complessi
 
 

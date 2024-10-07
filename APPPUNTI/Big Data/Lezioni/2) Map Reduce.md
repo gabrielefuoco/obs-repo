@@ -13,7 +13,7 @@
 | **Clustering**              | Il processo di raggruppamento di un insieme di oggetti in gruppi (cluster) in base alla loro somiglianza.                                                                                                                   |
 | **Algoritmo K-means**       | Un algoritmo di clustering che mira a partizionare gli oggetti in k cluster, dove ogni oggetto appartiene al cluster con la media più vicina.                                                                               |
 
----
+
 
 L'idea chiave di **MapReduce** è basata sul concetto di "divide et impera" per affrontare problemi di big data, suddividendo un grande problema in sotto-problemi più piccoli che possono essere eseguiti in parallelo. 
 
@@ -100,7 +100,7 @@ L'idea chiave è fornire un'astrazione funzionale che consente di gestire grandi
 - **Reduce**: I reducer elaborano tutte le coppie con la stessa chiave.
 - **Barriera**: Tra map e reduce avviene un grande ordinamento e raggruppamento distribuito, necessario per sincronizzare le fasi.
 
----
+
 ## "Hello World" in MapReduce: WordCount
 
 - **Problema:** Contare il numero di occorrenze di ogni parola in una grande collezione di documenti
@@ -187,8 +187,8 @@ Calcolare il prodotto matrice-vettore *y = A x x*.
 
 ### Flussi di lavoro MapReduce
 - Problemi complessi possono richiedere più job MapReduce concatenati, con l'output di un job che diventa l'input del successivo. Tuttavia, la gestione di file intermedi rallenta le prestazioni.
----
-### Clustering k-means in MapReduce
+
+## Clustering k-means in MapReduce
 
 #### Clustering
 - Processo di esaminare una collezione di "punti" e raggrupparli in "cluster" secondo una certa misura di distanza
@@ -212,8 +212,8 @@ Noto algoritmo di clustering appartenente alla classe degli algoritmi di assegna
 2. Selezionare **k punti** iniziali come centroidi.
 3. Per ogni punto dati, assegnarlo al centroide più vicino e ricalcolare i centroidi.
 4. Ripetere finché i cluster non migliorano più.
----
-### Esecuzione di un'iterazione di k-means con MapReduce
+
+## Esecuzione di un'iterazione di k-means con MapReduce
 
 #### Classificazione dei punti
 - Ogni punto dati viene assegnato al centroide del cluster più vicino, minimizzando la distanza euclidea:
@@ -230,7 +230,6 @@ Noto algoritmo di clustering appartenente alla classe degli algoritmi di assegna
   Dove $n_j$ è il numero di punti nel cluster $j$ e $x_i$ sono i punti assegnati.
 
 ---
-
 ### MapReduce per la classificazione dei punti
 - **Map**: Dato l'insieme di centroidi $\{u_j\}$ e un punto $x_i$, la funzione Map assegna il punto al centroide più vicino e emette la coppia chiave-valore $(z_i, x_i)$, dove:
   - $z_i$ è il cluster più vicino.
@@ -246,7 +245,6 @@ map([μ_1, μ_2, ..., μ_k], x_i): \\
 Il **centroide assegnato** $z_i$ è la **chiave**, e il **punto dati** $x_i$ è il **valore**.
 
 ---
-
 ### MapReduce per il ricalcolo dei centroidi
 - **Reduce**: Per ogni cluster $j$, la funzione Reduce calcola la media dei punti $x_i$ assegnati al cluster e produce il nuovo centroide.
 

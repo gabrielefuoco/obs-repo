@@ -1,5 +1,3 @@
-## Classificatori Bayesiani
-
 ### Introduzione
 
 * In molte applicazioni, la relazione tra gli attributi di input e la classe target non è deterministica.
@@ -42,7 +40,7 @@
 * Dato un record con attributi $X_1, X_2, ..., X_d$, l'obiettivo è prevedere la classe Y.
 * Si vuole trovare il valore di Y che massimizza la **probabilità a posteriori**: $P(Y|X_1, X_2, ..., X_d)$.
 
-### Teorema di Bayes
+## Teorema di Bayes
 
 * Il teorema di Bayes permette di calcolare la probabilità a posteriori:
 
@@ -69,7 +67,7 @@ $P(Y|X_1, X_2, ..., X_d) = \frac{P(X_1, X_2, ..., X_d|Y)P(Y)}{P(X_1, X_2, ..., X
     * Questo approccio diventa computazionalmente proibitivo all'aumentare del numero di attributi, a causa dell'incremento esponenziale delle possibili combinazioni di valori.
     * Inoltre, con un training set di piccole dimensioni, si rischia di avere stime imprecise delle probabilità condizionate di classe.
 
-### Assunzione di Naïve Bayes
+## Assunzione di Naïve Bayes
 
 * **Assunzione di indipendenza condizionale:** Assume l'indipendenza tra gli attributi Xi quando la classe è nota.
 * In questo modo, la probabilità condizionata di classe di tutti gli attributi può essere scomposta come un prodotto delle probabilità condizionate di classe di ogni singolo attributo Xi:
@@ -129,7 +127,7 @@ $$P(X_1, ..., X_d|Y_j) = P(X_1|Y_j)P(X_2|Y_j)...P(X_d|Y_j)$$
 
 * Nel caso della distribuzione Normale, la probabilità condizionata dell'attributo $x_{i}$ dato la classe $Y=y_{j}$ (ovvero $P(X_{i}=x_{i}|Y=y_{j})$) può essere calcolata usando la funzione di densità della Normale, con i parametri media $\mu_{ij}$ e varianza $\sigma_{ij}^2$ stimati dai dati del training set appartenenti alla classe yj.
 
-$P(X_{i}=x_{i}|Y=y_{j})=\frac{1}{\sqrt{ 2 \pi\sigma_{ij} }}e^-\frac{(x_{i}-\mu_{ij})^2}{2\sigma^2_{ij}}$
+$$P(X_{i}=x_{i}|Y=y_{j})=\frac{1}{\sqrt{ 2 \pi\sigma_{ij} }}e^-\frac{(x_{i}-\mu_{ij})^2}{2\sigma^2_{ij}}$$
 
 ### Problemi con Probabilità Zero
 
@@ -156,7 +154,7 @@ _Dove:_
 * $N_c$ = numero istanze della classe C
 * $N_{ic}$ = numero istanze con valore $A_{i}$ nella classe C
 
-## Appunti: Reti Bayesiane
+## Reti Bayesiane
 
 
 * Le reti bayesiane sono in grado di catturare forme più generiche di indipendenza condizionale, usando rappresentazioni grafiche delle relazioni probabilistiche tra un insieme di variabili casuali.
@@ -203,7 +201,7 @@ $$= \prod_{i=1}^{n} P(X_i|X_1, ..., X_{i-1}) = \prod_{i=1}^{n} P(X_i|Parents(X_i
 
 
 
-**Inference and Learning**
+### Inference and Learning
 
 La probabilità che una classe Y assuma un valore specifico y, dato dall'insieme di attributi osservati su un dato record x è dato dalla seguente:
 

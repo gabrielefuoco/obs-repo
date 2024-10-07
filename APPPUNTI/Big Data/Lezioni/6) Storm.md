@@ -81,7 +81,7 @@ Storm supporta l'integrazione con linguaggi diversi da Java (non JVM) tramite il
 
 L'integrazione avviene tramite uno script che esegue la logica dell'applicazione.
 
----
+
 ## Astrazioni di dati e calcolo
 Il paradigma di programmazione offerto da Storm si basa su cinque astrazioni per dati e calcolo:
 - Tuple: è l'unità base di dati che può essere elaborata da un'applicazione Storm. Una tupla consiste in una lista di campi (es. byte, char, integer, long e altri);
@@ -122,7 +122,7 @@ Parte della creazione di una topologia è definire quali stream ogni bolt dovreb
 - In global grouping l'intero stream va a un singolo task del bolt. Specificamente, va al task con l'id più basso.
 - In none grouping il programmatore non si preoccupa di come lo stream è raggruppato. Attualmente, i raggruppamenti none sono equivalenti ai raggruppamenti shuffle.
 - In local grouping se il bolt di destinazione ha uno o più task nello stesso processo worker, le tuple saranno miscelate solo a quei task in-process. Altrimenti, questo agisce come un normale raggruppamento shuffle.
----
+
 ## Problema 1: Aggiungere punti esclamativi a parole casuali
 
 ### Descrizione:
@@ -162,8 +162,6 @@ L'obiettivo è creare un'applicazione Storm che prenda parole da una sorgente ca
 - Il **bolt** aggiunge sei punti esclamativi a ogni parola.
 - La **topologia** definisce come i vari componenti (spout e bolt) interagiscono.
 
----
-
 ## Problema 2: Conteggio delle occorrenze delle parole
 ### Descrizione:
 L'applicazione Storm prende frasi casuali, le divide in parole e conta quante volte ogni parola appare. La **tick tuple** viene usata per gestire il conteggio ed emissione dei risultati in modo efficiente.
@@ -182,7 +180,7 @@ L'applicazione Storm prende frasi casuali, le divide in parole e conta quante vo
 2. Il bolt **SplitSentence** divide le frasi in parole.
 3. Il bolt **WordCount** conta le parole e le emette solo quando riceve una tick tuple.
 4. La **tick tuple** attiva l'emissione dei conteggi ogni 10 secondi.
----
+
 # Domande frequenti su Apache Storm
 
 ## 1. Cos'è Apache Storm e in cosa si differenzia da Hadoop?

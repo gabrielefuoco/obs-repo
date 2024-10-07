@@ -70,7 +70,7 @@ Basata su un modello "4V":, si aggiunge il **Valore**
 - Riguardo la **scalabilità** (in dimensione dei dati e dimensione delle caratteristiche) spesso non è possibile usare metodi analitici tradizionali a causa dell'enormità dei dati!
 	  - La complessità dei dati non consente l'elaborazione manuale. Abbiamo bisogno di tecniche automatizzate.
 ---
-### I dati possono essere molto complessi
+### Complessità dei dati
 I dati possono includere tabelle, serie temporali, immagini, grafici e possono avere aspetti spaziali e temporali, con connessioni tra diversi tipi.
 #### 1. Dati transazionali
 Esempi di grandi volumi di transazioni:
@@ -97,8 +97,8 @@ Esempi di dati spaziali e temporali:
 Dati su abitudini e attività degli utenti:
 - **Amazon**: traccia articoli visualizzati, carrelli, recensioni, acquisti.
 - **Google e Bing**: registrano attività di navigazione e query di ricerca di milioni di utenti giornalmente.
----
-### Dati strutturati
+
+## Dati strutturati
 - **Oggetti** descritti da una raccolta di **attributi** (es. colore degli occhi, temperatura).
 - Gli attributi sono anche noti come **variabili**, **campi** o **feature** e descrivono un oggetto.
 - Gli oggetti possono essere chiamati anche **record**, **casi**, **entità** o **istanze**.
@@ -124,7 +124,7 @@ Dati su abitudini e attività degli utenti:
 - **Dati ordinati**: Sequenze di valori, come serie temporali o dati genomici.
 - **Dati grafici**: Strutture a grafo (es. collegamenti del Web).
 
----
+
 ## Cosa si può fare con i dati?
 ### Scenario 1: Motore di ricerca
 I dati includono pagine navigate, query, pagine cliccate e annunci cliccati. Le informazioni utili da estrarre sono:

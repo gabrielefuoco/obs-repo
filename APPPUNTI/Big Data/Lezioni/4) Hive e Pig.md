@@ -17,7 +17,7 @@
 | Join                            | Un'operazione di database che combina righe di due o più tabelle in base a una condizione di join.                                           |
 | PageRank                        | Un algoritmo che assegna un punteggio di importanza alle pagine web, basato sul numero e sulla qualità dei link che puntano a quella pagina. |
 
----
+
 ### Hive
 Hive è un'applicazione di data warehousing in Hadoop.
 - Il linguaggio di query è HQL, variante di SQL.
@@ -51,7 +51,7 @@ Hive è un'applicazione di data warehousing in Hadoop.
   - Fornisce un'interfaccia di query semplice, utilizzando il modello MapReduce di Hadoop.
   - Supporta anche l'esecuzione su Spark tramite Hive on Spark.
 
-### Cos'è Hive?
+## Cos'è Hive?
 - Hive è un data warehouse basato su Hadoop, progettato per fornire funzionalità di riepilogo, query e analisi dei dati.
 **Struttura**
 - **Accesso a diversi storage**: consente l'integrazione con vari sistemi di archiviazione dati.
@@ -103,7 +103,7 @@ my      11297   4135
 in      10797   12445
 is      8882    6884
 ```
----
+
 ## Hive: Dietro le Quinte (Approfondimento non richiesto)
 Quando si esegue una query SQL in Hive, il sistema la trasforma in una serie di operazioni MapReduce, adattando il linguaggio SQL alle capacità di elaborazione distribuita di Hadoop.
 ## Fasi della trasformazione
@@ -151,15 +151,15 @@ Ogni fase del piano di esecuzione include informazioni specifiche come:
 - **Predicati**: Le condizioni per filtrare i dati.
 - **Alias delle tabelle**: Gli alias usati per riferirsi alle tabelle nel piano di esecuzione.
 
----
+
 # Apache Pig: Motivazione
 
-## Big Data
+### Big Data
 - I dati dei Big Data presentano le caratteristiche delle "3 V": **varietà** (provengono da molteplici fonti e formati) e **volume** (insiemi di dati molto grandi).
 - Non è necessario modificare i dati originali, l'analisi richiede solo operazioni di lettura.
 - I dati analizzati possono essere temporanei e spesso vengono eliminati dopo l'analisi.
 
-## Obiettivi dell'Analisi dei Dati
+### Obiettivi dell'Analisi dei Dati
 - **Velocità**: Sfruttare la potenza dell'elaborazione parallela su sistemi distribuiti.
 - **Facilità**: Consentire la scrittura di programmi o query senza una curva di apprendimento complessa, offrendo compiti di analisi predefiniti.
 - **Flessibilità**: Permettere la trasformazione dei dati in strutture utili senza un overhead eccessivo, supportando elaborazioni personalizzate.
@@ -172,8 +172,8 @@ Ogni fase del piano di esecuzione include informazioni specifiche come:
 - Utilizza il framework MapReduce per eseguire tutte le operazioni di elaborazione dati.
   - Gli script Pig Latin vengono convertiti in uno o più job MapReduce, che poi vengono eseguiti su Hadoop.
 - **Apache Pig** è disponibile anche su **Spark** come motore di esecuzione, consentendo la conversione dei comandi Pig Latin in trasformazioni e azioni Spark per un'elaborazione più rapida e flessibile.
----
-# Pig Latin
+
+## Pig Latin
 
 - **Linguaggio di trasformazione dati** orientato agli insiemi e procedurale
   - Offre primitive per operazioni come filtrare, combinare, suddividere e ordinare i dati.
@@ -219,7 +219,7 @@ Ogni fase del piano di esecuzione include informazioni specifiche come:
   - Le tuple in una bag possono avere lunghezze e tipi di campo diversi.
 - **Map**: Collezione di coppie chiave-valore.
   - La chiave è un atom, mentre il valore può essere di qualsiasi tipo.
----
+
 # Comandi Pig Latin
 
 ## `LOAD`
@@ -312,8 +312,8 @@ joined_data = JOIN results BY querystring, revenue BY querystring;
 ---
 # Esempio di Analisi Dati: Trovare utenti che tendono a visitare pagine "buone"
 
-## Dati di Esempio
-### Visite
+### Dati di Esempio
+#### Visite
 ```
 user | url           | time
 -----|---------------|-----
@@ -323,7 +323,7 @@ Amy  | www.myblog.com| 10:00
 Amy  | www.flickr.com| 10:05
 Fred | cnn.com/index | 12:00
 ```
-### Pagine
+#### Pagine
 ```
 url            | pagerank
 ---------------|----------
@@ -423,7 +423,7 @@ store GoodUsers into '/data/good_users';
 - Pig Latin richiede circa 1/20 delle righe di codice rispetto a Java
 - Il tempo di sviluppo con Pig è circa 1/16 rispetto a Hadoop puro
 - Le prestazioni sono paragonabili a quelle di Hadoop puro
----
+
 ## Come Pig viene utilizzato in pratica
 - Utile per calcoli su grandi dataset distribuiti
 - Astrae i dettagli del framework di esecuzione
@@ -432,7 +432,7 @@ store GoodUsers into '/data/good_users';
   - Le trasformazioni sono convertite in flussi di dati MapReduce
   - HDFS tiene traccia di dove sono memorizzati i dati
 - Le operazioni sono pianificate vicino ai loro dati
----
+
 
 # FAQ su Hive e Pig
 

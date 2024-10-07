@@ -28,7 +28,6 @@
 | **Teorema di Grohe** | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
 
 
----
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
 
 - Con una **rappresentazione esplicita**, i vincoli sono trattati come un database, dove per ogni vincolo si definisce un insieme di variabili e un insieme di valori validi. Ad esempio, se abbiamo tre vincoli $C1(WA,NT), C2(WA,SA), C3(NT,SA)$, questi rappresentano restrizioni sui valori ammissibili tra le variabili $WA, NT, SA$.
@@ -58,8 +57,7 @@ il grafo collegherà tutte le variabili coinvolte in ciascun vincolo, ma con arc
 
 Tuttavia, se i vincoli coinvolgono **più di due variabili**, il **Constraint Graph** diventa meno efficiente. In questi casi, si utilizza un **ipergrafo**, dove un **iper-arco** collega **più di due nodi**. L'ipergrafo è più informativo perché mostra meglio come le variabili sono collegate dai vincoli complessi.
 
----
-### Problema dell' Omomorfismo
+## Problema dell' Omomorfismo
 Il **Problema dell'Omomorfismo** (Hom) consiste nel decidere se esiste una corrispondenza tra due strutture relazionali. Una **struttura relazionale** è costituita da:
 
 1. **Simboli di relazione**: $r_1, r_2, ..., r_n$, ciascuno con una propria **arità** (cioè il numero di elementi che partecipano alla relazione).
@@ -71,8 +69,7 @@ Un **omomorfismo** tra due strutture relazionali è una **mappatura** che preser
 
 Il problema consiste nel verificare se è possibile "trasferire" la struttura dei dati di un database a un altro in modo che le relazioni tra gli elementi siano mantenute.
 
----
-### Core
+## Core
 Il **core** di un CSP (Constraint Satisfaction Problem) è la *versione più semplice* e ridotta del problema originale, ottenuta attraverso un processo di semplificazione. 
 Immagina le variabili e le relazioni di un CSP come un database di fatti (tuple). Quando troviamo una struttura ridondante o relazioni tra variabili che possono essere "compresse", possiamo ridurre il numero di vincoli senza perdere informazioni importanti.
 
@@ -86,8 +83,7 @@ In altre parole:
 
 La soluzione del problema semplificato può essere usata per risolvere il problema originale, semplificando il processo di risoluzione.
 
----
-### Backtracking Search
+## Backtracking Search
 Ѐ l'algoritmo di ricerca non informata usato solitamente per risolvere problemi di CSP.
 - **Algoritmo Base**: 
   - Sceglie una variabile non assegnata.
@@ -109,8 +105,7 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
 - **Propagazione**:
   - Ottimizza il backtracking forzando l'arc consistency: quando un vincolo viene verificato, la propagazione si estende agli altri vincoli collegati, migliorando l'efficienza della ricerca.
 
----
-### Tipi di consistenza
+## Tipi di consistenza
 
 - **1-Consistency (Node-Consistency)**:
   - Consistenza a livello di singola variabile.
@@ -129,9 +124,7 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
   - **Costo computazionale:** O(n · d^k), dove *n* è il numero di variabili e *d* è la dimensione massima dei domini.
   - Se *k* è fissato, il costo è polinomiale.
 
----
-
-### Euristiche per la Risoluzione dei CSP
+## Euristiche per la Risoluzione dei CSP
 
 - **Variable Ordering**:
   - **Minimum Remaining Values (MRV)**:
@@ -153,8 +146,8 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
  **Problema del Punto Critico**
 - In problemi bilanciati (stesso numero di variabili e vincoli), può verificarsi una **transizione di fase** chiamata **punto critico**, in cui gli algoritmi euristici potrebbero fallire.
 - Questo è un problema generale per molti algoritmi euristici, non solo per quelli basati su minimo conflitto.
----
-### Omomorfismo su strutture acicliche
+
+## Omomorfismo su strutture acicliche
 Il problema dell'omomorfismo su strutture acicliche si riferisce alla decisione se esiste un **omomorfismo** (una mappa che preserva la struttura) tra due strutture relazionali, chiamate $A$ e $B$, che rappresentano vincoli e relazioni di un problema CSP (Constraint Satisfaction Problem). 
 La complessità di risolvere questo problema su strutture **acicliche** (che non contengono cicli) è **O(||A|| · ||B|| · log ||B||)**, dove $\|A\|$ e $\|B\|$ rappresentano la dimensione delle strutture.
 
@@ -185,8 +178,8 @@ L'algoritmo di Yannakakis trasforma il problema su strutture acicliche in una se
   - Decidere se esiste una soluzione.
   - Calcolare una soluzione.
   - Trovare tutte le soluzioni.
----
-### Strutture quasi ad Albero
+
+## Strutture quasi ad Albero
 Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione di un grafo che rappresenta un problema di soddisfacimento di vincoli in una forma aciclica, per sfruttare algoritmi efficienti applicabili ai grafi senza cicli. Questo avviene attraverso la rimozione di nodi dal grafo, rendendolo aciclico.
 
 ### Procedura e Concetti chiave
@@ -223,7 +216,7 @@ Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione d
 - Le **Strutture quasi ad Albero** trasformano un problema ciclico in uno aciclico rimuovendo un minimo numero di nodi (cut set).
 - Questo permette di utilizzare metodi più efficienti per risolvere il problema, riducendo la complessità.
 - L'approccio può essere ulteriormente ottimizzato usando **ipergrafi**, fissando interi vincoli invece di singole variabili.
----
+
 ## Join Tree 
  Un **Join-Tree** è una struttura che organizza gli iperarchi in modo tale che ogni variabile si propaghi correttamente lungo l'albero e non venga "persa" o riutilizzata in modo errato. Questo permette una corretta gestione dei vincoli tra le variabili.
 * Sia l'**ipergrafo H** una struttura che rappresenta vincoli complessi tra gruppi di variabili, con ogni iper-arco collegando più di due variabili.
@@ -240,7 +233,7 @@ Possiamo dire che H è un ipergrafo aciclico ⇐⇒ esso ha un join-tree.
 La definizione di un ipergrafo aciclico è più potente di quella di un grafo aciclico. Mentre un grafo aciclico è un grafo senza cicli, in un ipergrafo avere dei cicli potrebbe non apportare problemi, quindi in alcuni casi si può considerare aciclico. 
 Decidere se un ipergrafo è aciclico è un problema log-space-completo ed è trattabile in tempo lineare. La stessa complessità per i grafi
 
----
+
 ## Tree Decomposition 
 La **tree decomposition** è un metodo che permette di semplificare un problema complesso rappresentato da un grafo, suddividendolo in sottoproblemi aciclici più facili da risolvere.
 - **Obiettivo**: Prendere un grafo con cicli e trasformarlo in una struttura che può essere trattata come un **albero**, eliminando i cicli.
@@ -277,8 +270,8 @@ richiede tempo lineare. Se k non è fissato (è parte dell’input) il problema 
         - Costo totale: $O((D^(k+1) + log D^(k+1)) · (n + m))$
 - **Feasibility**:
     - Ogni problema CSP con tree-width ≤ k è risolvibile in tempo polinomiale, dove k è fissato.
----
-### Teorema di Grohe
+
+## Teorema di Grohe
 Il **Teorema di Grohe** afferma che risolvere problemi CSP appartenenti a S è **fattibile in tempo polinomiale** (P-TIME) **se e solo se** il **core** delle strutture in S ha una **treewidth (tw)** fissata (limitata da un valore $k$).
 
 #### Contesto del Teorema:

@@ -22,8 +22,7 @@
 | **ZooKeeper**                        | Un servizio di coordinamento distribuito utilizzato da Storm per gestire lo stato del cluster e la comunicazione tra i nodi.                           |
 | **Mini-batch**                       | Una tecnica per elaborare i dati in streaming suddividendoli in piccoli batch e elaborando ogni batch come un'unità indipendente.                      |
 
----
-#### Cos'è uno Stream?
+## Cos'è uno Stream?
 - Uno **stream** è un flusso continuo di dati non limitati (potenzialmente infiniti). A differenza dei dati limitati, che sono finiti e statici, i dati non limitati crescono continuamente e devono essere elaborati man mano che vengono prodotti. Il modello di streaming opera con un **modello push**, in cui la fonte di dati controlla il flusso e l’elaborazione, spesso in un contesto **pubblica/sottoscrivi**.
 - Il concetto di **tempo** è centrale in questi sistemi e può riferirsi a diversi momenti chiave: **tempo dell'evento** (quando l'evento si verifica), **tempo di ingestione** (quando i dati sono ricevuti), e **tempo di elaborazione** (quando i dati vengono effettivamente processati).
 
@@ -53,7 +52,7 @@
 #### Elaborazione Agnostica del Tempo
 - In questo tipo di elaborazione, il tempo non è un fattore determinante, ed è usato in situazioni dove l'ordine temporale degli eventi non è importante, come nel **filtraggio** di dati o nell'**inner join** (unire dataset su un campo comune).
 
-### Elaborazione Agnostica del Tempo
+## Elaborazione Agnostica del Tempo
 
 #### Esempio di Filtraggio
 - **Obiettivo**: Filtrare log di traffico web per includere solo quelli provenienti da un dominio specifico.
@@ -65,15 +64,13 @@
 - **Metodo**: Quando un valore arriva da una fonte, viene temporaneamente memorizzato. Quando un valore corrispondente arriva dall'altra fonte, i dati vengono uniti. La logica di join non dipende dal tempo di arrivo dei dati, ma solo dal fatto che entrambi i dati siano presenti.
 - **Conclusione**: Anche in questo caso, il tempo non è un fattore rilevante per l’elaborazione.
 
----
-### Elaborazione Approssimativa
+## Elaborazione Approssimativa
 - **Definizione**: Si utilizzano algoritmi che forniscono risposte approssimative basate su un riepilogo dei dati ("sketch"), anziché analizzare ogni elemento singolarmente.
 - **Esempi**: 
   - **Top-N approssimativo**: Trova gli N elementi più frequenti senza dover esaminare tutti i dati.
   - **K-means in streaming**: Algoritmo di clustering che aggiorna i centri in modo incrementale man mano che nuovi dati vengono ricevuti.
   
----
-### Finestre Temporali (Windowing)
+## Finestre Temporali (Windowing)
 - Le finestre temporali suddividono i flussi di dati in blocchi finiti per l’elaborazione. Esistono diversi tipi di finestre:
   
 1. **Finestre Fisse**: Intervalli di tempo predefiniti, es. 5 minuti.
@@ -88,15 +85,15 @@
 - Si basano sul **tempo dell'evento**, ovvero quando gli eventi si verificano, e richiedono di bufferizzare i dati per tener conto di eventuali ritardi.
 - **Problema di completezza**: Non sempre è chiaro quando abbiamo ricevuto tutti i dati relativi a un intervallo temporale, causando difficoltà nell’elaborazione accurata.
 
----
-### Operatori di Base per lo Streaming
+
+## Operatori di Base per lo Streaming
 1. **Aggregazione a Finestre**: Calcola aggregati su finestre temporali, ad esempio:
    - Velocità media
    - Numero di accessi a un URL in un certo periodo
 2. **Join a Finestre**: Unisce i dati basati su una finestra temporale. Utilizzato per correlare eventi che si verificano nello stesso intervallo di tempo, come ad esempio:
    - Temperatura registrata in diverse stazioni meteorologiche nello stesso intervallo di tempo.
   
----
+
 ### Elaborazione di Eventi Complessi
 - **Obiettivo**: Rilevare pattern o sequenze di eventi all'interno di uno stream di dati.
 - **Evento complesso**: Una sequenza definita da condizioni logiche (es. valori dei dati) e temporali (es. avvenimenti entro un certo intervallo di tempo).
@@ -142,7 +139,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 - **Limitazioni per gli stream**: MR non è adatto agli stream continui, ma solo a finestre di dati molto grandi.
 - **Problema**: I dati non si muovono tra le fasi di elaborazione, creando alta latenza e bassa efficienza.
 
----
+
 ## Mantenere i Dati in Movimento
 #### Stream Discretizzati (Mini-batch)
 
@@ -172,8 +169,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   Operatori di lunga durata → Flusso continuo di dati
   ```
 
----
-### Discussione sul Mini-batch
+
 - **Vantaggi**: Facile da implementare, coerenza e tolleranza ai guasti ben gestibili.
 - **Svantaggi**: Difficoltà a gestire eventi con tempi specifici e sessioni.
 
@@ -223,8 +219,8 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   - I grandi sistemi di streaming devono supportare diversi tipi di parallelizzazione per bilanciare carico, distribuzione e prestazioni.
   - L'architettura deve garantire che tutti i tre tipi siano supportati per migliorare la scalabilità e l'efficienza.
 
----
-### Apache Storm
+
+## Apache Storm
 - **Descrizione**: Piattaforma scalabile per l'elaborazione di flussi di dati in tempo reale.
   - **Calcolo basato su tuple**: Le unità di elaborazione sono tuple, che rappresentano elementi di dati.
   - **Topologia**: Un programma Storm è strutturato come un **grafo di topologia**, dove:
@@ -345,7 +341,6 @@ Processo Worker
 
 Una topologia in esecuzione consiste in molti processi worker distribuiti su molte macchine.
 
----
 ### Tolleranza ai guasti
 
 - I **worker** inviano segnali di "heartbeat" (controllo di attività) a Nimbus tramite **ZooKeeper**.
@@ -354,7 +349,7 @@ Una topologia in esecuzione consiste in molti processi worker distribuiti su mol
 - Se **Nimbus** smette di funzionare, le topologie continueranno a funzionare normalmente, ma non sarà possibile eseguire nuove riassegnazioni dei task.
   - Questo è diverso da Hadoop, dove se il **JobTracker** smette di funzionare, tutti i job in esecuzione vengono persi.
 - È preferibile eseguire ZooKeeper con almeno **3 nodi**, in modo da poter tollerare il fallimento di 1 server ZooKeeper.
----
+
 ## Una Topologia di Conteggio Parole di Esempio
 
 ### APACHE STORM

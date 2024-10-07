@@ -1,5 +1,4 @@
 
-
 Un modello di classificazione costruisce una mappatura dagli attributi di un record alla sua classe, utilizzando una collezione di record etichettati come training set.
 
 _L'obiettivo è di assegnare i record non noti a una classe nel modo più accurato possibile._ Per farlo, viene utilizzato il training set per costruire il modello e il test set per validarlo.
@@ -20,16 +19,13 @@ Un albero decisionale è composto da:
 * Gli alberi di decisione sono robusti rispetto la presenza di attributi fortemente correlati.
 
 ### Applicare il modello al data set
-
 Partendo dal nodo radice, applichiamo la condizione di test dell'attributo associato e seguiamo il percorso appropriato. Raggiunto un nodo foglia, assegniamo il valore dell'attributo di classe associato all'istanza del test.
 
 ### Tree Induction Algorithm
-
 A partire da un solo dataset è possibile costruire una moltitudine di alberi decisionali, ma alcuni saranno migliori di altri.  
 La strategia impiegata si basa su **tecniche greedy,** ovvero la costruzione dell'albero avviene dall'alto verso il basso, prendendo una serie di decisioni ottimali a livello locale. Questi algoritmi devono tenere conti di problemi come la scelta dei criteri di split e di stop, l'underfitting e l'overfitting.
 
 #### Algoritmo di Hunt
-
 Attua un approccio ricorsivo che suddivide progressivamente un insieme di record Dt in insiemi di record via via più puri.
 
 * La _procedura di costruzione_ di un albero decisionale a partire da un training set Dt con possibili etichette di classe yt = y1, ..., yk è la seguente:
@@ -39,45 +35,33 @@ Attua un approccio ricorsivo che suddivide progressivamente un insieme di record
 
 Questa procedura ricorsiva costruisce l'albero decidendo per ogni nodo interno l'attributo discriminante per la suddivisione, fino a quando non si ottengono nodi foglia con un'unica classe assegnata.
 
-### Scelta del criterio di split
+## Scelta del criterio di split negli alberi decisionali
 
-Determina l'attributo da selezionare e come le istanze saranno distribuite sui nodi foglia.
+La costruzione di un albero decisionale prevede la scelta di un criterio di split, ovvero la definizione di come le istanze vengono distribuite sui nodi foglia. Questo processo dipende dal tipo di attributo utilizzato per la divisione:
 
-Il risultato dipende dal tipo di attributo:
+* **Attributi binari:** Generano due possibili risultati.
+* **Attributi nominali:** Possono essere divisi in due modi:
+    * **Split a più vie:** Crea una partizione per ogni valore distinto dell'attributo.
+    * **Split a due vie:** Suddivide in modo ottimale i valori dell'attributo in due insiemi.
+* **Attributi ordinali:** Simili agli attributi nominali, ma preservano l'ordinamento dei valori.
+* **Attributi continui:** Possono essere divisi in modo binario o a più vie, a seconda del test di comparazione utilizzato:
+    * **Binario (split a due vie):** Test del tipo $A< v$.
+    * **A più vie:** Suddivisione in intervalli di valori del tipo $v_{i}\leq A\leq v_{i}+1$.
 
-* **Binario:** Due risultati.
-* **Nominale:** Due possibili condizioni:
-    * **Split a più vie:** Vengono generati tante partizioni quanti sono i valori distinti del corrispondente attributo.
-    * **Split a due vie:** Partiziona in maniera ottimale tutti i valori assunti dal corrispondente attributo in due insiemi.
-* **Ordinale:** Come nel caso nominale, ma preservando l'ordinamento dei valori.
-* **Continui:** Si possono avere split binari o a più vie, a seconda del test di comparazione utilizzato.
-    * **Binario** (split a due vie): test di comparazione del tipo $A< v$.
-    * **A più vie**: suddivisione in più intervalli di valori del tipo $v_{i}\leq A\leq v_{i}+1$.
+Per gli **split a due vie sugli attributi ordinali**, si considerano tutti i possibili valori v tra il minimo e il massimo dell'attributo nel training set per costruire il test $A< v$. Questo approccio, chiamato partizione binaria, può essere computazionalmente costoso.
 
-#### Per gli split a due vie sugli attributi ordinali:
+Per gli **split a più vie**, si discretizzano i valori continui in intervalli disgiunti che coprono l'intera gamma di valori. La discretizzazione richiede di definire il numero di intervalli e la posizione dei punti di divisione. I valori di uno stesso intervallo vengono mappati alla stessa categoria ordinale.
 
-* Si considerano tutti i possibili valori v compresi tra min e max dell'attributo nel training set per costruire il test $A< v$ _[approccio della partizione binaria, potenzialmente costoso]_.
+##@ Criterio di ottimizzazione dello split
 
-#### Per gli split a più vie: 
+La scelta del criterio di split migliore si basa su misure di bontà che mirano a creare partizioni (nodi figli) il più pure possibile, associando istanze della stessa classe allo stesso nodo. Nodi impuri, con istanze di classi diverse, tendono ad aumentare la profondità dell'albero, richiedendo ulteriori partizionamenti.
 
-* Si discretizzano i valori continui in intervalli disgiunti che coprono l'intera gamma di valori.
-* La discretizzazione richiede di decidere il numero di intervalli (categorie) e dove posizionare i punti di divisione.
-* I valori di uno stesso intervallo vengono mappati alla stessa categoria ordinale.
-
-Quindi per gli split a più vie si opera una discretizzazione dell'attributo continuo in categorie ordinali, determinando il numero di categorie e i punti di divisione tra di esse.
-
-### Criterio che definisce lo split migliore
-
-Le misure di bontà delle condizioni di split mirano a creare partizioni (nodi figli) il più pure possibile, associando istanze della stessa classe allo stesso nodo.
-
-Nodi impuri con istanze di classi diverse tendono ad aumentare la profondità dell'albero attraverso ulteriori partizionamenti.
-
-Alberi più profondi sono più **_soggetti a overfitting_**, meno interpretabili e computazionalmente più costosi. Pertanto, è necessario introdurre misure di impurità dei nodi per guidare la costruzione dell'albero verso partizioni ottimali ed evitare eccessive suddivisioni.
+Alberi più profondi sono più soggetti a overfitting, meno interpretabili e computazionalmente più costosi. Per evitare eccessive suddivisioni, si introducono misure di impurità dei nodi per guidare la costruzione dell'albero verso partizioni ottimali.
 
 In sintesi, le misure di impurità permettono di bilanciare la purezza dei nodi con la complessità dell'albero, conducendo ad alberi decisionali ottimali.
 
-### Misure di impurità dei nodi
 
+## Misure di impurità dei nodi
 * Misurano quanto sono diversi i valori di classe contenuti in un solo nodo.
 * Per valutare l'impurità di un nodo *t*, con record appartenenti a *k classi* e con *n nodi figli*, si usano:
 
@@ -86,7 +70,7 @@ In sintesi, le misure di impurità permettono di bilanciare la purezza dei nodi 
     * **Misclassification Error:** $Error(t) = 1 - \max p(i|t)$
     * **Impurità complessiva:** $Impurity_{split} = \sum_{i=1}^{n} \frac{m_i}{m} meas(i)$
 
-    * _p(t) rappresenta la frequenza delle istanze del training set della classe j nel nodo t_
+    * _p(j|t) rappresenta la frequenza delle istanze del training set della classe j nel nodo t_
 
 ### Determinare il partizionamento migliore
 
@@ -100,7 +84,7 @@ _Il guadagno è una misura non negativa, in quanto P>M._
 
 $GINI(t)=1-\sum_{j=1}^k[p(j|t)]^2$
 
-dove p(j|t) è la frequenza relativa della classe j al nodo t.
+*dove p(j|t) è la frequenza relativa della classe j al nodo t.*
 
 * **Massimo:** $\left( 1-\frac{1}{nc} \right)$ ottenuto quando i record sono distribuiti equamente.
 * **Minimo:** (0) ottenuto quando i record appartengono a una sola classe.
@@ -113,11 +97,8 @@ Quando è necessario effettuare lo split a due vie, l'indice di GINI è definito
 $1-(P_{1})^-(P_{2}^2)$
 
 #### Calcolare indice di GINI per più nodi
-
-$GINI_{split}=\sum_{i=1}^k k \frac{n_{i}}{n} GINI(i)$
-
-$\frac{\text{numero di oggetti presenti nel nodo corrente}}{\text{numero di oggetti totali}}$
-ni/n rappresenta il peso del nodo, calcolato come: 
+$$GINI_{split}=\sum_{i=1}^k k \frac{n_{i}}{n} GINI(i)$$
+$$\frac{\text{numero di oggetti presenti nel nodo corrente}}{\text{numero di oggetti totali}}$$
 
 #### Attributi binari:
 
@@ -133,13 +114,12 @@ _Per ogni coppia di valori contigui ne scelgo uno intermedio. In base ai valori 
 
 $Entropy(t)=- \sum_{j=1}^k p(j|t)\log_{2}(p(j|t))$
 
-_dove t rappresenta il nodo e_ p(j|t) _è la frequenza relativa alla classe j nel nodo t_
+_dove t rappresenta il nodo e p(j|t) è la frequenza relativa alla classe j nel nodo t_
 
 Dato nc=numero di classi, allora possiamo definire:
 
 * **Massimo = (log2(nc))** quando i record sono equamente distribuiti
-$=n_{c} \frac{1}{n_{c}}\log_{2}\left( \frac{1}{n_{c}} \right)=-\log_{2}\left( \frac{1}{n_{c}} \right)=\log_{2}(n_{c})$
-
+$$=n_{c} \frac{1}{n_{c}}\log_{2}\left( \frac{1}{n_{c}} \right)=-\log_{2}\left( \frac{1}{n_{c}} \right)=\log_{2}(n_{c})$$
 * **Minimo = (0)** quando i record appartengono alla stessa classe.
 
 #### Guadagno
@@ -163,38 +143,33 @@ $Error(t)=1-max_{i}p(i|t)$
 * **Min = (0)**
 
 ### Criteri per interrompere lo split
-
 * Quando tutti i record appartengono alla stessa classe.
 * Quando tutti i record hanno valori simili su tutti gli attributi.
 * Quando il numero dei record è inferiore a una certa soglia.
 
 ### Pro della classificazione con gli alberi decisionali
-
 * Basso costo.
 * Veloci e facili da interpretare.
 * Robusti rispetto al rumore.
 
 ### Contro
-
 * Lo spazio dell'albero può crescere esponenzialmente.
 * Non considerano le interazioni tra attributi. 
 
-### Model Overfitting
-
+## Model Overfitting
 * Si verifica quando, nel tentativo di minimizzare l'errore sul training set, viene selezionato un modello eccessivamente complesso che non riesce ad apprendere la vera natura delle relazioni tra gli attributi.
 * Questo accade perché l'errore di classificazione sul training set non fornisce stime accurate circa il comportamento dell'albero decisionale su record sconosciuti.
 * Se il training set non è sufficientemente rappresentativo, il *test error* cresce e il *training error* decresce con l'aumento del numero dei nodi.
 * _L'overfitting determina alberi decisionali più complessi del necessario._
 
 ### Alta complessità del modello
-
 Modelli più complessi hanno una migliore capacità di rappresentare dati complessi, ma un modello eccessivamente complesso tende a specializzarsi sui soli dati di training, portando a scarse prestazioni su nuovi dati (overfitting). Per stimare quando un modello diventa troppo complesso, si utilizzano metriche di stima dell'errore di generalizzazione come:
 
 * **Validation set:** dividere i dati in training e validation set (problema: diminuisce troppo la dimensione del training set).
 * Incorporare la complessità del modello nell'errore _(Occam's Razor: preferire il modello più semplice)._ 
 * Stimare bound statistici sull'errore di generalizzazione a partire dall'errore di training e dalla complessità del modello (approccio ottimistico).
 
-### Generalization error
+## Generalization error
 
 * Numero di errori commessi sul dataset reale e'(t).
 
@@ -221,7 +196,7 @@ dove:
 
     _Dove il primo termine è il costo degli errori di classificazione e il secondo è il costo di codifica della complessità dell'albero, pesato da un fattore α._
 
-### Pruning: strategie di selezione dei modelli
+## Pruning: strategie di selezione dei modelli
 
 * **Prepruning**
 
@@ -238,7 +213,7 @@ dove:
     * **Vantaggio:** _le decisioni di potatura si basano su un albero inizialmente completo, tendendo a restituire risultati migliori._
     * **Svantaggio:** _maggiore costo computazionale dovuto alla necessità di sviluppare inizialmente l'albero completo._
 
-### Costruzione dei dataset tramite partizionamento
+## Costruzione dei dataset tramite partizionamento
 
 * **Holdout:** Il set viene partizionato in due set disgiunti: test set (1/3) e training set (2/3). Lo svantaggio è che il training set potrebbe non essere sufficientemente grande.
 * **Random Subsampling:** Variante di Holdout, che consiste in un'esecuzione ripetuta di Holdout in cui il training set è scelto casualmente.
@@ -262,7 +237,7 @@ In molti dataset, le classi sono _distorte,_ ossia vi sono molti più record di 
 * Molti dei metodi di classificazione funzionano bene solo quando il training set ha una rappresentazione equilibrata di tutte le classi.
 * L'accuratezza non è adatta per valutare i modelli in presenza di squilibrio.
 
-### Metriche alternative per la valutazione del modello
+## Metriche alternative per la valutazione del modello
 
 * **Matrice di confusione:** valuta la capacità di un classificatore sulla base di 4 indicatori:
 
@@ -301,16 +276,16 @@ In molti dataset, le classi sono _distorte,_ ossia vi sono molti più record di 
 
     * Lo scopo è minimizzare il costo complessivo di errata classificazione.
     * Queste tecniche utilizzano una Matrice dei Costi che, a differenza della Confusion Matrix, introduce dei _parametri di penalità_ per indicare il costo di classificare erroneamente un record in una classe sbagliata.
-    $C(M)=\sum C(i,j) \times f(i,j)$ 
-    dove 
-    C(i,j)= Costo della classificazione dell'elemento della classe i nella classe j
-    f(i,j)= num di elementi della classe i classificati nella classe j
+	    $C(M)=\sum C(i,j) \times f(i,j)$ 
+	    dove 
+	    *C(i,j)*= Costo della classificazione dell'elemento della classe i nella classe j
+	    *f(i,j)*= num di elementi della classe i classificati nella classe j
 
     * Una penalità negativa indica un premio ottenuto per una corretta classificazione.
     * In caso di problema di _classi sbilanciate_: l'importanza di riconoscere correttamente le osservazioni positive è maggiore di quello delle osservazioni negative; in pratica, _mi costa di più classificare il + come - che viceversa_.
     * L'obiettivo è di minimizzare i costi di errata classificazione e si basa sulla seguente regola:
     Classifica il nodo t con la classe i se il valore i minimizza $C(i|t)=\sum_{j} p(j|t) \times C(j,i)$ 
-    * p(j|t) rappresenta la frequenza relativa alla classe j al nodo t.
+    * *p(j|t) rappresenta la frequenza relativa alla classe j al nodo t.*
 
 * **Approccio basato sul campionamento:** Eseguono un lavoro di pre-processing sui dati in modo da fornire una distribuzione bilanciata tra le classi.
 
@@ -405,7 +380,7 @@ $Accuracy(r)=\frac{nr}{n}$
 * Dove nr è il numero di istanze correttamente classificate da r.
 * n è il numero di istanze che soddisfano l'antecedente di r.
 
-### Criteri di valutazione delle regole
+## Criteri di valutazione delle regole
 
 * **Likelihood Ratio:** Usato per potare le regole che hanno una copertura scarsa.
 $LikelihoodRatio(r) = 2\sum_{i=1}^k f_i \log_2(\frac{f_i}{e_i})$ 
@@ -425,34 +400,35 @@ $$
 m\text{-}estimate(r) = \frac{f_+ + k p_+}{n + k}
 $$
 
-Dove \( k \) è il numero di classi, \( f_+ \) è il numero di esempi positivi coperti dalla regola \( r \), \( n \) è il numero di esempi coperti dalla regola \( r \) e \( p_+ \) è la probabilità a priori della classe \( + \).
+Dove $k$ è il numero di classi, $f_+$ è il numero di esempi positivi coperti dalla regola $r$, $n$ è il numero di esempi coperti dalla regola $r$ e $p_+$ è la probabilità a priori della classe $+$. 
 
-Si osservi che per \( p_+ = \frac{1}{k} \), \( m\text{-}estimate \) coincide con Laplace.
+Si osservi che per $p_+ = \frac{1}{k}$, $m$-estimate coincide con Laplace.
+
 
 * **FOIL:** _First order inductive learner_, misura la variazione dovuta all'incremento della regola con l'aggiunta di un nuovo atomo.
 
-Supponiamo una regola $r_0$:  
-$A \to +$ copre $p_0$ esempi positivi e $n_0$ esempi negativi.
-
-Dopo aver aggiunto un nuovo atomo $B$, la regola estesa $r_1$ risulta così definita:  
-$A, B \to +$ copre $p_1$ esempi positivi e $n_1$ esempi negativi.
-
-Il guadagno di informazioni di FOIL della regola estesa è definito come segue:
-
-$$
-FoilGain(r_0, r_1) = p_1 \left( \log_2 \left( \frac{p_1}{p_1 + n_1} \right) - \log_2 \left( \frac{p_0}{p_0 + n_0} \right) \right)
-$$
-
-L'indice è proporzionale a $p_1$ e a $\frac{p_1}{p_1 + n_1}$, quindi tende a favorire regole che hanno elevata *coverage* e *accuracy*. Misura alternativa:
-
-$$
-v(r_0, r_1) = \frac{p_1 - n_1}{p_1 + n_1} - \frac{p_0 - n_0}{p_0 + n_0}
-$$
-
-* Supponendo una regola iniziale r0 che copre un certo numero di esempi positivi e negativi, dopo l'aggiunta di un nuovo atomo B, la regola estesa r1 copre un diverso numero di esempi positivi e negativi.
-* Il guadagno di informazioni di FOIL della regola estesa è calcolato in base _alla differenza tra i logaritmi delle proporzioni di esempi positivi nella regola estesa e nella regola iniziale._
-* L'indice è proporzionale alla differenza tra il numero di esempi positivi e negativi nella regola estesa, normalizzata rispetto al numero totale di esempi.
-* L'indice tende a favorire regole che hanno una copertura elevata e un'accuratezza elevata.
+	Supponiamo una regola $r_0$:  
+	$A \to +$ copre $p_0$ esempi positivi e $n_0$ esempi negativi.
+	
+	Dopo aver aggiunto un nuovo atomo $B$, la regola estesa $r_1$ risulta così definita:  
+	$A, B \to +$ copre $p_1$ esempi positivi e $n_1$ esempi negativi.
+	
+	Il guadagno di informazioni di FOIL della regola estesa è definito come segue:
+	
+	$$
+	FoilGain(r_0, r_1) = p_1 \left( \log_2 \left( \frac{p_1}{p_1 + n_1} \right) - \log_2 \left( \frac{p_0}{p_0 + n_0} \right) \right)
+	$$
+	
+	L'indice è proporzionale a $p_1$ e a $\frac{p_1}{p_1 + n_1}$, quindi tende a favorire regole che hanno elevata *coverage* e *accuracy*. Misura alternativa:
+	
+	$$
+	v(r_0, r_1) = \frac{p_1 - n_1}{p_1 + n_1} - \frac{p_0 - n_0}{p_0 + n_0}
+	$$
+	
+	* Supponendo una regola iniziale r0 che copre un certo numero di esempi positivi e negativi, dopo l'aggiunta di un nuovo atomo B, la regola estesa r1 copre un diverso numero di esempi positivi e negativi.
+	* Il guadagno di informazioni di FOIL della regola estesa è calcolato in base _alla differenza tra i logaritmi delle proporzioni di esempi positivi nella regola estesa e nella regola iniziale._
+	* L'indice è proporzionale alla differenza tra il numero di esempi positivi e negativi nella regola estesa, normalizzata rispetto al numero totale di esempi.
+	* L'indice tende a favorire regole che hanno una copertura elevata e un'accuratezza elevata.
 
 ### Rule pruning
 
@@ -477,7 +453,7 @@ Semplifica le regole di _learn one rule_ per migliorare l'errore di generalizzaz
 * **Caso 2: problemi multi-classe**
 
     * Le classi sono ordinate in base a un criterio di rilevanza delle stesse.
-    * Si suppone un insieme di classi {y1, y2, ...yc}, dove y1 è la classe meno rilevante e yk è la classe più diffusa.
+    * Si suppone un insieme di classi $\{y_1, y_2, ...y_c\}$, dove y1 è la classe meno rilevante e yc è la classe più diffusa.
     * Le regole vengono costruite partendo dalla classe più piccola e considerando gli esempi delle altre classi come negativi.
     * Questo processo viene ripetuto fino a quando rimane solo una classe yc, che viene considerata come classe di default secondo il criterio di stop.
 
@@ -501,33 +477,35 @@ Semplifica le regole di _learn one rule_ per migliorare l'errore di generalizzaz
         * Si confronta il set di regole contenente r con i set di regole contenenti r∗ e r′ e si sceglie l'insieme di regole che minimizza il criterio di _Minimum Description Length_.
 
 * Ripetere il processo di generazione e ottimizzazione delle regole per gli esempi positivi rimanenti.
----
-### Metodi indiretti: C4.5 rules
 
-* È possibile trasformare un decision tree in un insieme di regole: ogni percorso dal nodo radice al nodo foglia di un albero può essere espresso come una regola di classificazione.
-    * Le condizioni di test costituiscono i predicati dell'antecedente della regola.
-    * L'etichetta di classe delle foglie costituisce il conseguente della regola.
+## Metodi indiretti: C4.5 rules
 
-L'algoritmo su cui ci focalizzeremo sarà il C4.5Rules che è così costituito:
+È possibile trasformare un albero decisionale in un insieme di regole: ogni percorso dal nodo radice al nodo foglia di un albero può essere espresso come una regola di classificazione.
+
+* Le condizioni di test costituiscono i predicati dell'antecedente della regola.
+* L'etichetta di classe delle foglie costituisce il conseguente della regola.
+
+L'algoritmo su cui ci focalizzeremo sarà il C4.5Rules, che è così costituito:
 
 1. Le regole di classificazione vengono estratte per ogni percorso dalla radice ai nodi foglia dell'albero decisionale.
-2. Per ogni regola r : A → y:
-    * (a) Considera una regola alternativa r′ : A′ → y dove A′ è ottenuto rimuovendo un atomo da A.
-    * (b) La regola semplificata viene mantenuta a condizione che il suo tasso di errore pessimistico sia inferiore a quello della regola originale r.
-    * (c) Riparti da A fino a che l'errore pessimistico della regola non può essere migliorato ulteriormente.
+2. Per ogni regola `r : A → y`:
+    * (a) Considera una regola alternativa `r′ : A′ → y` dove `A′` è ottenuto rimuovendo un atomo da `A`.
+    * (b) La regola semplificata viene mantenuta a condizione che il suo tasso di errore pessimistico sia inferiore a quello della regola originale `r`.
+    * (c) Riparti da `A` fino a che l'errore pessimistico della regola non può essere migliorato ulteriormente.
     * (d) Poiché alcune delle regole possono diventare identiche dopo la potatura, le regole duplicate vengono scartate.
 
 Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Based. In particolare:
 
 1. Le regole caratterizzate dal medesimo conseguente (classe) vengono raggruppate all'interno dello stesso sottoinsieme.
-2. Viene calcolato per ciascun sottoinsieme il valore di description length così definito:
-    * Description length = L(error) + gL(model)
+2. Viene calcolato per ciascun sottoinsieme il valore di *description length* così definito:
 
-    * L(error) = num di bit necessari a codificare la classificazione errata
-    * L(model) = num di bit necessari a rappresentare il modello
-    * g = parametro che dipende dal num di attributi ridondanti (0,5 di default). Assume un valore più piccolo all'aumentare degli attributi ridondanti
+    * *Description length* = `L(error)` + `gL(model)`
 
-* Le classi sono disposte in base al valore di description length. Viene data massima priorità alla classe caratterizzata dal minimo valore di description length poiché ci si aspetta che contenga il miglior set di regole.
+    * `L(error)` = numero di bit necessari a codificare la classificazione errata
+    * `L(model)` = numero di bit necessari a rappresentare il modello
+    * `g` = parametro che dipende dal numero di attributi ridondanti (0,5 di default). Assume un valore più piccolo all'aumentare degli attributi ridondanti
+
+* Le classi sono disposte in base al valore di *description length*. Viene data massima priorità alla classe caratterizzata dal minimo valore di *description length* poiché ci si aspetta che contenga il miglior set di regole. 
 
 ### Vantaggi e svantaggi dei classificatori Rule-Based
 
@@ -548,7 +526,8 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 
 - Espressività simile, ma l'insieme di regole prodotte è di solito diverso.
 - La costruzione degli alberi decisionali tiene conto della qualità di tutti i figli generati, mentre l'aggiunta di un atomo alle regole valuta solo la bontà della classe determinata.
----
+
+
 ## Tecniche di Classificazione - Nearest Neighbor
 
 ### Eager Learners vs. Lazy Learners
@@ -608,7 +587,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
     * Determinare un set di oggetti più piccolo che offre le medesime prestazioni del set originale.
     * Rimuovere oggetti dal training set per migliorare l'efficienza.
 
-### Strutture a Indice
+## Strutture a Indice
 
 **Problema:** Trovare il punto più vicino a un dato punto in un insieme di punti.
 
@@ -652,7 +631,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 * Ha complessità temporale e spaziale esponenziale $O(n\cdot 2^d)$ rispetto alla dimensionalità d dei dati.
 * Non scala bene ad alte dimensionalità a causa della sua natura esponenziale.
 
-### Kd-trees (k-dimensional tree)
+## Kd-trees (k-dimensional tree)
 
 * **Struttura dati:** Albero utilizzato per organizzare un insieme di punti in uno spazio k-dimensionale.
 * **Ogni nodo:** Rappresenta un iper-rettangolo nello spazio k-D e contiene un punto chiamato "punto di separazione".

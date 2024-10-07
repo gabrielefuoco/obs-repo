@@ -171,9 +171,9 @@ Una distanza che soddisfa tutte le proprietà è detta **Metrica**.
 Query che recuperano tutti i dati che ricadono in un determinato intervallo di valori.
 
 Dati un insieme di punti P e una range query con raggio r da un punto q, sfruttando la disuguaglianza triangolare è possibile limitare il numero di distanze d(xi,q) da calcolare per rispondere alla query:
+$d(p,q)\leq d(p,x_{i})+d(q,x_{i})\to d(q,x_{i})\geq d(p,q)-d(p,x_{i}) \to \text{tutti i punti }x_{i} \text{per cui } d(p,q)-d(p,x_{i})>r$ devono essere scartati, poiché il punto $x_i$ non può essere un vicino più prossimo di q entro il raggio r; quindi, può essere scartato senza essere valutato ulteriormente.
 
-* $d(p,q)\leq d(p,x_{i})+d(q,x_{i})\to d(q,x_{i})\geq d(p,q)-d(p,x_{i}) \to \text{tutti i punti }x_{i} \text{per cui } d(p,q)-d(p,x_{i})>r$ devono essere scartati, poiché il punto xi non può essere un vicino più prossimo di q entro il raggio r; quindi, può essere scartato senza essere valutato ulteriormente.
-* $d(p,x_{i})\leq d(q,p)+d(p,x_{i})\to \text{tutti i punti xi per cui } d(p,x_{i})+d(p,q)<r$ devono essere accettati senza essere valutati.
+$d(p,x_{i})\leq d(q,p)+d(p,x_{i})\to \text{tutti i punti }x_{i} \text{per cui } d(p,x_{i})+d(p,q)<r$ devono essere accettati senza essere valutati.
 
 ### Dissimilarità non metriche
 

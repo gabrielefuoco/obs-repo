@@ -23,7 +23,7 @@
   - Archiviazione dei workflow in controllo di versione (rollback a versioni precedenti).
   - Sviluppo collaborativo dei workflow da parte di più persone.
   - Scrittura di test per validare i workflow.
----
+
 # Strumenti di Programmazione basati su Workflow
 
 ## Apache Airflow
@@ -78,7 +78,7 @@ with DAG(dag_id="daily_backup", start_date=datetime(2023, 1, 1),
 task_A >> [task_B, task_C]
 [task_B, task_C] >> task_D
 ```
----
+
 # Tipi di Task in Airflow
 - **Operators**: Task predefiniti che i programmatori possono concatenare per costruire la maggior parte di un DAG.
 - **Sensors**: Sottoclasse speciale di **Operators** che attende un evento esterno.
@@ -180,7 +180,7 @@ EmailOperator(
 )
 ```
 
----
+
 
 # Esempio di Programmazione con Apache Airflow
 
@@ -278,7 +278,7 @@ vote(test_data, [m1, m2, m3, m4, m5])
 ensemble_taskflow()
 ```
 
----
+
 # FAQ su Apache Airflow
 
 ## 1. Cos'è Apache Airflow?

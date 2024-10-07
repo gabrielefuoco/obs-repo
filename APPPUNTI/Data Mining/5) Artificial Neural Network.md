@@ -1,8 +1,6 @@
-
 Le reti neurali artificiali sono un modello astratto ispirato al funzionamento del sistema nervoso umano. Sono costituite da un insieme di nodi (neuroni) connessi tra loro tramite collegamenti (assoni e dendriti). Ogni connessione ha un peso associato che rappresenta la forza della sinapsi.
 
 Analogamente ai neuroni biologici, i nodi raccolgono segnali in ingresso, li sommano e, se superano una certa soglia, si attivano trasmettendo un segnale in uscita. I segnali possono essere eccitatori o inibitori.
-
 
 ### Componenti Principali:
 * **Nodi o unità (neuroni)**
@@ -28,7 +26,7 @@ Analogamente ai neuroni biologici, i nodi raccolgono segnali in ingresso, li som
 * **Modello Biologico**: ha l’obiettivo di imitare sistemi neurali biologici come le funzionalità auditive e visive.
 	* Rispetto ai neuroni biologici, le reti neurali artificiali hanno una connettività molto maggiore ma tempi di commutazione più lenti (millisecondi invece di nanosecondi).
 * **Modello guidato dalle applicazioni**: caratterizzato da un'architettura condizionata dalle necessità applicative
----
+
 ## Perceptron
 
 Il Perceptron è una delle prime e più semplici reti neurali, introdotto da Rosenblatt nel 1962. Ha un'architettura a singolo strato con:
@@ -119,7 +117,6 @@ Questa è la principale **limitazione del percettrone**: non può risolvere prob
 Il teorema di convergenza del perceptron assicura che il perceptron riuscirà a delimitare le 2 classi se il sistema è linearmente separabile.
 
 In altre parole, nell'ottimizzazione non esistono minimi locali. Ciò significa che il perceptron convergerà sempre verso la soluzione ottimale, senza rimanere bloccato in minimi locali.
-
 
 ### Funzioni Booleane Primitive
 

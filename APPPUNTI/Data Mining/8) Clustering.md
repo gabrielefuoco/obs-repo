@@ -1,6 +1,4 @@
 
-## Cos'è la Cluster Analysis
-
 L'analisi dei cluster è una tecnica di apprendimento non supervisionato che raggruppa oggetti dati in base alla loro similarità. L'obiettivo è creare gruppi **coesi**, ovvero con oggetti simili tra loro, e **ben separati**, ovvero con oggetti diversi da quelli di altri gruppi.
 
 La clusterizzazione può essere vista come una forma di classificazione, ma a differenza della classificazione supervisionata, non utilizza etichette di classe predefinite. Le etichette dei cluster vengono determinate direttamente dai dati.
@@ -8,12 +6,7 @@ La clusterizzazione può essere vista come una forma di classificazione, ma a di
 Sebbene la divisione in gruppi possa sembrare simile alla clusterizzazione, non sempre è così. Inoltre, termini come **segmentazione** e **partizionamento**, a volte usati come sinonimi di clustering, spesso si riferiscono ad approcci diversi. Il termine partizionamento è spesso associato a tecniche che dividono i grafici in sottografi, non strettamente correlate al clustering.
 
 La clusterizzazione può essere utilizzata anche come pre-processing per migliorare l'attività di classificazione del *KNN*. 
-
-## Tipi di Clustering
-
-Questo documento presenta una panoramica dei diversi tipi di clustering, un'importante tecnica di apprendimento non supervisionato utilizzata per raggruppare dati simili in insiemi distinti.
-
-### Approcci al Clustering
+## Approcci al Clustering
 
 Esistono diversi approcci al clustering, ognuno con le sue caratteristiche e applicazioni:
 
@@ -252,11 +245,11 @@ L'algoritmo Bisecting K-means divide l'insieme di punti in due cluster, selezion
 * Il cluster da dividere può essere scelto in base alle dimensioni, all'SSE o a entrambi.
 * L'algoritmo può produrre un clustering gerarchico o partizionale.
 
-## 17.8.4 K-modes
+## K-modes
 
 Variante del k-means per dati categorici. Utilizza la **moda** invece della media e richiede nuove misure di distanza per dati categorici.
 
-## 17.9 Clustering Gerarchico
+## Clustering Gerarchico
 
 Le tecniche di clustering gerarchico generano una gerarchia di cluster.
 
@@ -410,7 +403,6 @@ La correlazione tra queste due matrici può essere utilizzata per valutare la qu
 
 **Limitazioni:** La correlazione non è una buona misura per i cluster basati su contiguità o densità. 
 
-
 ## Valutare il Clustering tramite Grafici di Correlazione
 
 La visualizzazione dei dati tramite grafici di correlazione può essere un metodo efficace per valutare la qualità del clustering. 
@@ -442,8 +434,7 @@ La visualizzazione dei dati tramite grafici di correlazione è uno strumento uti
 
 ![image](image75.png){
 
-#  Misure Interne: 
-## SSE
+## Misure Interne: SSE
 
 Un'altra possibilità per valutare la qualità del clustering è quella di misurare la **Somma degli Errori Quadratici (SSE)**.
 
@@ -469,10 +460,6 @@ La curva seguente mostra l'SSE in funzione del numero di cluster:
 **Utilizzo dell'SSE per determinare il numero di cluster (k):**
 
 I punti di flessione nella curva SSE possono indicare il numero ottimale di cluster. In questo esempio, i punti di flessione a 5 e 10 cluster suggeriscono che questi potrebbero essere buoni valori per *k*.
-
-**Conclusione:**
-
-L'SSE è una misura utile per valutare la qualità del clustering e per determinare il numero ottimale di cluster. La curva SSE può essere utilizzata per confrontare diversi algoritmi di clustering e per ottimizzare i parametri dell'algoritmo. 
 
 ## Coesione e Separazione nella Clusterizzazione
 

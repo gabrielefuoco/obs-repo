@@ -24,9 +24,7 @@
 | **Avversione al rischio**                        | La tendenza degli esseri umani a preferire un guadagno certo a un guadagno incerto con un valore atteso maggiore.                                                                                                                   |
 | **Premio di assicurazione**                      | La differenza tra il valore atteso di un evento e il valore monetario che un individuo accetterebbe con certezza.                                                                                                                   |
 
-
-
-### Agenti non Razionali
+## Agenti non Razionali
 Gli agenti non razionali sono caratterizzati da una componente casuale nel loro comportamento, dovuta a:
 * **Aspetti realmente casuali:** Eventi imprevedibili che influenzano il comportamento dell'agente.
 * **Modellazione dell'incertezza:** Utilizzo della teoria della probabilità per rappresentare l'incertezza nel comportamento dell'agente.
@@ -49,7 +47,7 @@ Per utilizzare Expectimax, è necessario avere un modello probabilistico del com
 ### Simulazione
 La simulazione è un metodo per stimare le probabilità di comportamento dell'avversario. Tuttavia, la simulazione può essere computazionalmente costosa, soprattutto se l'avversario sta anche simulando le nostre mosse.
 
----
+
 ### Incertezza e Strategia Ottima
 In alcuni giochi, non esiste una strategia ottima deterministica. L'introduzione di incertezza, come scelte casuali, può migliorare il valore atteso della strategia, rendendola più efficace.
 
@@ -65,7 +63,6 @@ ExpectiMiniMax è un algoritmo che estende MiniMax per gestire l'incertezza. L'a
 ### Giochi con Più Agenti
 In giochi con più agenti, ogni nodo ha associata una tripla di valori che rappresenta l'utilità/stima per ogni giocatore in quello stato. Gli algoritmi possono far emergere forme di coalizione tra i giocatori, con ogni giocatore che cerca di massimizzare il proprio valore.
 
----
 ### Utilità
 L'utilità è una funzione che misura la soddisfazione di un agente rispetto a un determinato stato o risultato. Un agente razionale dovrebbe massimizzare la propria utilità. Tuttavia, non sempre è facile definire una funzione di utilità che rifletta accuratamente le preferenze di un agente.
 
@@ -126,7 +123,7 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 * **⪰:** Preferenza debole
 
 
----
+
 ## Teorema di Ramsey, von Neumann & Morgenstern
 Questo teorema dimostra che se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
 

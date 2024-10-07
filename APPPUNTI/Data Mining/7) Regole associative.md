@@ -312,7 +312,7 @@ $$
 
 dove *k* è il numero di elementi e *n* è la dimensione degli itemset.
 
----
+
 ## Hash Tree per la Generazione di Regole Associative
 
 ### Struttura dell'Hash Tree
@@ -515,12 +515,6 @@ Il paradosso di Simpson si verifica perché la relazione osservata tra le due va
 **Conclusione:**
 È importante considerare le variabili nascoste quando si analizzano i dati per evitare di trarre conclusioni errate. La stratificazione dei dati, ovvero l'analisi separata di sottogruppi, può aiutare a identificare le relazioni reali tra le variabili e a evitare il paradosso di Simpson.
 
-
-
-
-
-
-
 ## Effetti della Distribuzione del Supporto
 La distribuzione del supporto negli itemset può influenzare significativamente l'analisi delle regole associative.
 
@@ -544,7 +538,7 @@ L'analisi di regole associative in dataset con supporto non omogeneo presenta sf
 La presenza di itemset con supporto molto diverso tra loro può portare a conclusioni errate sull'interesse delle regole associative.
 
 **Esempio:**
-![[7) Regole associative-20241004204644292.png|524]]
+![[7) Regole associative-20241004204644292.png|564]]
 
 * La regola *q → p* ha una confidenza alta (4/5), ma il supporto di *q* è basso (5/30).
 * La regola *p → q* ha una confidenza bassa (4/25), ma il supporto di *p* è alto (25/30).
@@ -648,7 +642,7 @@ Gli hyperclique sono interessanti perché possono rivelare pattern con basso sup
 
 La h-confidence può essere utilizzata in sostituzione o congiunzione con il supporto per trovare itemset con supporti comparati. 
 
-## Regole Associative: Attributi Categorici e Continui
+## Attributi Categorici e Continui
 
 Fino ad ora abbiamo considerato solamente regole associative create a partire da attributi binari. Vogliamo estendere l'utilizzo delle regole associative anche all'uso degli attributi categorici e continui per poter creare regole del tipo:
 
@@ -690,7 +684,7 @@ Possiamo quindi riassumere quanto detto con i seguenti punti:
 
 Un approccio per ridurre questo overhead è evitare che attributi, adesso binari, derivanti dallo stesso attributo categorico siano presenti più di una volta all'interno di una regola.
 
-## 16.2 Gestione di Attributi Continui
+## Gestione di Attributi Continui
 
 Le regole associative che includono attributi a valori continui sono dette regole associative quantitative:
 $$\begin{gather}
@@ -703,7 +697,7 @@ $$
 
 Non abbiamo più attributi di tipo categorico ma abbiamo valori che descrivono una distribuzione. Di seguito riportati i tre approcci per gestire questi dati.
 
-## 16.2.1 Discretizzazione
+## Discretizzazione
 
 Abbiamo dei dati tabellari con degli attributi continui. In questo caso, per sostituire tali attributi con attributi binari asimmetrici, quello che possiamo fare è di discretizzare il dominio, cioè dividere il dominio in intervalli come mostrato in figura:
 
@@ -779,7 +773,7 @@ Se \(μ > μ'\), vanno invertiti nella formula. Al denominatore abbiamo la varia
 
 Se questo valore \(Z\) è superiore ad una soglia fissata (\(Z_α\), che è un valore calcolato in base ad una determinata confidenza, come nei test statistici), allora la regola è significativa.
 
----
+
 
 ## 16.2.3 Senza Discretizzazione (minApriori)
 
@@ -812,7 +806,7 @@ Sup(W1, W2) = 0.33 + O + 0.4 + O + 0.17 = 0.9
 Sup(W1, W2, W3) =0+0+0+0 + 0.17 = 0.17
 
 
-## 16.3 Regole Associative Multi-Livello
+## Regole Associative Multi-Livello
 
 Un aspetto che va considerato è il fatto che quando abbiamo dei termini questi sono organizzati in gruppi basati sulla semantica dei propri elementi. Per esempio il cibo può essere pane o latte, a sua volta il latte può essere scremato o parzialmente scremato e così via.
 

@@ -14,7 +14,7 @@
 | **Visualizzazione dei Risultati** | Rappresentazione grafica dei pattern di mobilità scoperti, per facilitarne la comprensione e l'interpretazione.          |
 | **Originale e Destinazione**      | Punti di partenza e di arrivo dei movimenti degli utenti.                                                                |
 
----
+
 ## Analisi dei social media
 L'analisi dei social media si concentra sull'uso di tecniche e strumenti per:
 - **Raccogliere** dati dai social network e dai media online.
@@ -60,7 +60,7 @@ SMA4TD è una metodologia ideata per scoprire i **pattern di mobilità** degli u
 
 Queste definizioni formali sono cruciali per analizzare e scoprire pattern di mobilità a partire dai dati estratti dai social media.
 
----
+
 ## SMA4TD: Metodologia in 7 Fasi
 
 ### 1. Definizione degli eventi (E)
@@ -117,7 +117,7 @@ Queste definizioni formali sono cruciali per analizzare e scoprire pattern di mo
    - Minimizzare lo **sforzo cognitivo**,
    - Strutturare graficamente in **gerarchie**.
 
-----
+
 # Caso di studio 1: FIFA World Cup 2014
 
 ### Contesto generale
@@ -195,7 +195,7 @@ Dove *s* indica il supporto del pattern (percentuale di transazioni che contengo
 - **Sequenze più frequenti** di partite seguite nello stesso stadio o per una stessa squadra.
 - **Pattern di movimento** raggruppati per fase della competizione.
 
----
+
 
 # Caso di studio 2: EXPO 2015
 

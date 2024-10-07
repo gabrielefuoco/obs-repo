@@ -26,8 +26,7 @@
 | Cloudera CDH                                  | Una distribuzione integrata basata su Hadoop che contiene tutti i componenti necessari per la produzione.                                                                            |
 | MapR                                          | Una distribuzione integrata basata su Hadoop che utilizza un file system proprietario (MapR-FS) invece di HDFS.                                                                      |
 
----
-### Cos'è Apache Hadoop?
+## Cos'è Apache Hadoop?
 Apache Hadoop è un framework software open-source progettato per il **calcolo distribuito** affidabile e scalabile su set di dati massivi, utilizzando **cluster di hardware commodity**. È stato originariamente sviluppato da Yahoo! per gestire grandi quantità di dati su infrastrutture distribuite.
 
 #### Obiettivi principali:
@@ -70,7 +69,7 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 - MapReduce consente la programmazione di calcoli distribuiti, e può essere migliorato con strumenti come:
   - **Apache Pig** e **Apache Hive** per una programmazione più accessibile.
   - **Apache HBase** per un accesso più efficiente ai dati distribuiti.
----
+
 ## HDFS
 - Progettato per hardware a basso costo, HDFS è tollerante ai guasti e fornisce **accesso veloce ai dati** per applicazioni con grandi set di dati.
 - Presupposti:
@@ -135,7 +134,7 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 - Quando un file viene eliminato, viene spostato nella directory **/trash**.
 - I file possono essere recuperati fino a quando rimangono in /trash (durata predefinita: 6 ore).
 - Dopo questo periodo, il file viene rimosso permanentemente.
----
+
 ## YARN
 
 - **YARN** (Yet Another Resource Negotiator) è il gestore di risorse e pianificatore di job di Hadoop.
@@ -226,8 +225,8 @@ Cloudera CDH può essere installato su un **cluster a singolo nodo** usando hype
 - **Compressione**: Comprimere dati di input, output dei map e output dei reduce per risparmiare larghezza di banda.
 - **Gestione del Buffer di Spill**: Ottimizzare il buffer di ordinamento e i record di spill per evitare eccessivi scritture su disco.
 - **Traffico di rete**: Comprimere l'output dei map e usare un combiner per ridurre i dati trasmessi durante lo shuffle.
----
-### Hadoop nel Cloud
+
+## Hadoop nel Cloud
 
 #### Vantaggi
 - **Scalabilità ed Elasticità**: Beneficia della flessibilità del Cloud.
@@ -380,7 +379,7 @@ Per quanto riguarda i **linguaggi di programmazione per Hadoop**:
 - Utilizza gli stream standard Unix come interfaccia tra Hadoop e il programma MapReduce.
 - Consente di utilizzare qualsiasi linguaggio (ad esempio Python) che possa leggere l'input standard (stdin) e scrivere sull'output standard (stdout) per scrivere il programma MapReduce.
 - L'interfaccia del Reducer per lo streaming è diversa da Java: invece di ricevere `reduce(k, Iterator[v])`, lo script riceve una riga per valore, inclusa la chiave.
----
+
 # FAQ su Apache Hadoop
 
 ## 1. Cos'è Apache Hadoop e quali sono i suoi obiettivi principali?

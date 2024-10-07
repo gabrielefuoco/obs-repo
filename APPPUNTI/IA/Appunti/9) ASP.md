@@ -89,8 +89,8 @@
 - **Linguaggio $L ∈ Σ^p_2$**:
   - Esiste un programma logico (PL) che risolve i problemi rappresentati da L.
   - Il programma prende come input una **istanza** (w) e fornisce una risposta "yes" se w appartiene al problema rappresentato da L.
----
-### Datalog
+
+## Datalog
 - **Termini:** 
   - Possono essere **costanti** o **variabili**.
   - **Costanti:** oggetti esistenti nel mondo, iniziano con una lettera minuscola o sono racchiuse tra virgolette. I numeri sono costanti, ma vanno gestiti con l'**ipotesi di mondo chiuso**.
@@ -172,8 +172,8 @@ parent(mario, ciccio).
 
 ### Differenze tra Datalog e Prolog
 - **Ordine**: In **Datalog** l'ordine delle regole non è importante, tutto è basato sulla **logica**.
----
-### Interpretazione in un Programma di Logica
+
+## Interpretazione in un Programma di Logica
 - **Interpretazione (I):**
   - Un insieme di **atomi ground**(senza variabili).
   - Definisce il **significato** degli atomi nel programma: 
@@ -221,8 +221,8 @@ b :- not(c).
   - È un modello.
 **Modelli minimali:**
   - **I2** e **I3** sono modelli minimali poiché non esiste un sottoinsieme di essi che sia un modello.
-  ---
-### Differenza tra Logica Monotona e Non Monotona
+
+## Differenza tra Logica Monotona e Non Monotona
 - **Logica Monotona:**
   - Nuove informazioni **non influenzano** i modelli esistenti.
   - **Regole:** La negazione può essere interpretata come una disgiunzione.
@@ -297,7 +297,7 @@ noReach(X) :- target(X), not reach(X).
 - **Teorema:** 
   - Se il programma è **positivo** (senza negazioni), esiste un **unico modello minimale**.
   - Se c'è **negazione o disgiunzione**, la situazione diventa più complessa e non necessariamente esiste un modello unico.
----
+
 ## Disjunctive Logic Programming (DLP)
 
 - In **DLP**, le regole possono avere **disgiunzioni** nella testa, permettendo di modellare situazioni in cui possono verificarsi più alternative.
@@ -474,9 +474,7 @@ d.
 
 3. **Risultato**: L'interpretazione I = {a, d} è un **Answer Set**.
 
----
-
-### Teoremi Importanti per la DLP
+## Teoremi Importanti per la DLP
 
 1. **Modello Minimo Unico per Programmi Positivi**
    - Un programma di **Datalog positivo senza disgiunzione** ha sempre un **unico modello minimale**.
@@ -498,7 +496,6 @@ d.
      - Questa condizione diventa **necessaria e sufficiente** se non ci sono **cicli** nel grafo delle dipendenze.
 
 ---
-
 ### Grafo delle Dipendenze
 - Il **grafo delle dipendenze** tra predicati permette di identificare cicli di dipendenze che potrebbero complicare la verifica delle condizioni di supporto.
   - Se ci sono cicli che coinvolgono la **negazione**, il programma può diventare più difficile da risolvere.

@@ -35,7 +35,7 @@
 - Framework come **Pregel** di Google sono progettati per l’elaborazione efficiente di **grafi su larga scala**:
   - Supportano algoritmi **graph-parallel** iterativi.
   - Si basano sul modello **Bulk Synchronous Parallel (BSP)**.
----
+
 ## Il Modello Bulk Synchronous Parallel (BSP)
 
 ### Architettura di un sistema BSP
@@ -50,7 +50,7 @@
   1. **Calcolo concorrente**: ogni processore esegue calcoli locali in modo asincrono.
   2. **Comunicazione globale**: i processi scambiano dati tra loro.
   3. **Sincronizzazione**: ogni processo attende che tutti raggiungano la stessa barriera prima di procedere.
----
+
 ## Framework Pregel e Programmazione Vertex-Centric
 - **Pregel** (Google) supporta l'elaborazione distribuita di grafi basandosi su:
   - **BSP**: i vertici eseguono calcoli locali, inviano messaggi e si sincronizzano.
@@ -66,7 +66,7 @@
   - **Gelly (Apache Flink)**
   - **GraphX (Apache Spark)**
 
----
+
 # Apache Spark GraphX
 
 ## Caratteristiche Chiave
@@ -205,7 +205,7 @@ Dove:
 - I **grafi** sono strumenti potenti per modellare scenari reali.
 - Nei **Big Data**, framework come **GraphX** sono essenziali per l'elaborazione distribuita dei grafi, garantendo **scalabilità** e **tolleranza ai guasti**.
 - **GraphX** fornisce un'API ottimizzata per eseguire elaborazioni complesse di grafi, integrata nell'ecosistema Spark.
----
+
 # Domande Frequenti sui Grafi e GraphX
 
 ## 1. Cosa sono i grafi e perché sono importanti nell'analisi dei dati?

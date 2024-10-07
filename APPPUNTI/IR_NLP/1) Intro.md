@@ -1402,3 +1402,398 @@ con K una costante di normalizzazione.
 Se il termine più frequente (the) si verifica cf1 volte, allora il 2° termine più frequente (of) si verifica cf1/2 volte, il
 3° termine più frequente (and) si verifica cf1/3 volte...
 
+## La legge di Zipf: le implicazioni di Luhn
+
+Luhn (1958):
+
+* Sia le parole estremamente comuni che quelle estremamente rare non sono molto utili per l'indicizzazione.
+* I concetti più discriminanti hanno una frequenza da bassa a media.
+
+**Ponderazione della Rilevanza dei Termini**
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Ricerca booleana: abbondanza o carestia**
+
+Fino ad ora, tutte le query sono state booleane.
+
+* Spesso si ottengono risultati troppo pochi (o addirittura vuoti) o troppi (>1K).
+* I documenti o corrispondono o no.
+* Buono per gli utenti esperti con una precisa comprensione delle loro esigenze e della collezione.
+* Buono anche per le applicazioni: le applicazioni possono facilmente consumare migliaia di risultati.
+* Non buono per la maggior parte degli utenti.
+* La maggior parte degli utenti è incapace/non disposta a scrivere query booleane.
+* La maggior parte degli utenti non vuole scorrere migliaia di risultati.
+* Questo è particolarmente vero per la ricerca sul web.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Recupero classificato**
+
+Restituire un ordinamento sui (primi) documenti della collezione per una query.
+
+**Query di testo libero:**
+
+* La query dell'utente è semplicemente una o più parole in una lingua umana.
+* Piuttosto che un linguaggio di query di operatori ed espressioni.
+
+Il recupero classificato e le query di testo libero sono due scelte separate.
+
+* Ma in pratica, il recupero classificato è normalmente stato associato alle query di testo libero e viceversa.
+
+"Abbondanza o carestia" non è un problema.
+
+Un sistema produce un set di risultati classificati, i set di risultati di grandi dimensioni non sono un problema.
+
+* La dimensione del set di risultati non è un problema.
+* Mostriamo solo i primi k (≈ 10) risultati.
+* Non sovraccarichiamo l'utente.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Punteggio come base del recupero classificato**
+
+Desideriamo restituire in ordine i documenti più probabilmente utili per il ricercatore.
+
+Come possiamo classificare i documenti della collezione rispetto a una query?
+
+* Assegnare un punteggio (in [0, 1]) a ciascun documento.
+* Questo punteggio misura quanto bene il documento e la query "corrispondono".
+
+Cosa ne pensi di usare misure di similarità per insiemi finiti?
+
+* Ad esempio, Jaccard, Sorensen-Dice, Overlap, Simple Matching, ecc.
+* Sono efficienti e forniscono la normalizzazione della lunghezza.
+    * Cioè, i documenti e le query non devono avere le stesse dimensioni.
+* Ma non considerano:
+    * La frequenza del termine (tf) nel documento.
+        * Più frequente è il termine di query nel documento, più alto dovrebbe essere il punteggio.
+    * La scarsità del termine nella collezione (frequenza di menzione del documento).
+        * I termini rari in una collezione sono più informativi dei termini frequenti.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Dalle matrici di incidenza alle matrici di conteggio**
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Modello Bag-of-words (BoW)**
+
+Ipotesi di indipendenza dei termini.
+
+* L'ordinamento delle parole in un documento viene scartato.
+    * In un certo senso, un passo indietro rispetto all'indice posizionale.
+
+Contro:
+
+* Informazioni sintattiche mancanti (ad esempio, struttura frasale, ordine delle parole, informazioni di prossimità).
+* Informazioni semantiche mancanti (ad esempio, senso delle parole).
+* Manca il controllo di un modello booleano (ad esempio, richiedere che un termine appaia in un documento).
+    * Data una query a due termini "A B", si potrebbe preferire un documento che contiene A frequentemente ma non B, rispetto a un documento che contiene sia A che B, ma entrambi meno frequentemente.
+
+Pro:
+
+* Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica - non più booleana.
+* Tende a funzionare abbastanza bene nella pratica nonostante le ipotesi semplificative.
+* Consente un'implementazione efficiente per grandi collezioni di documenti.
+* La query diventa un vettore nello stesso spazio dei documenti -> Modello dello spazio vettoriale.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Tipi di frequenza**
+
+Vogliamo usare tf quando calcoliamo i punteggi di corrispondenza query-documento. Ma come?
+
+* La frequenza grezza del termine non è ciò che vogliamo:
+    * Un documento con 10 occorrenze del termine è più rilevante di un documento con 1 occorrenza del termine.
+    * Ma non 10 volte più rilevante.
+* La rilevanza non aumenta proporzionalmente alla frequenza del termine.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Tipi di frequenza**
+
+Il peso di frequenza logaritmica del termine t in d:
+
+* 0 → 0, 1 → 1, 2 → 1.3, 10 → 2, 1000 → 4, ecc.
+
+Punteggio per una coppia documento-query: somma sui termini t sia in q che in d:
+
+* Il punteggio è 0 se nessuno dei termini di query è presente nel documento. 
+
+
+## Tipi di frequenza
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+I termini rari sono più informativi dei termini frequenti.
+
+* Ricorda le stop words.
+* Considera un termine nella query che è raro nella collezione: ad esempio, "arachnocentrico".
+* Un documento che contiene questo termine è molto probabilmente rilevante per la query.
+
+"arachnocentrico"
+
+Pertanto, più raro è il termine, maggiore è il suo peso.
+
+**Frequenza della collezione (cf) vs. Frequenza del documento (df)**
+
+* Quale è meglio per la ricerca?
+* Ad esempio, "assicurazione": cf=10440, df=3997.
+* Ad esempio, "prova": cf=10422, df=8760.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Frequenza inversa del documento**
+
+La frequenza del documento di un termine t:
+
+* Una misura inversa dell'informatività di t.
+
+Definisci l'idf (frequenza inversa del documento) di t come:
+
+* log (N/dft) invece di N/dft
+per "smorzare" l'effetto dell'idf.
+
+Nota che:
+
+* La df di un termine è unica.
+* Influisce sulla classificazione dei documenti solo per le query a k termini (k<1).
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Frequenza del termine - frequenza inversa del documento**
+
+Schema di ponderazione più noto nella ricerca dell'informazione.
+
+Il peso tf-idf di un termine è il prodotto del suo peso tf e del suo peso idf.
+
+* Aumenta con il numero di occorrenze all'interno di un documento.
+* Aumenta con la rarità del termine nella collezione.
+
+Punteggio per una coppia documento-query: somma sui termini t sia in q che in d.
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Frequenza del termine - frequenza inversa del documento**
+
+Varianti:
+
+* Come viene calcolato "tf" (con/senza logaritmi).
+* Se i termini nella query sono anche ponderati.
+* Normalizzazione della lunghezza.
+    * I documenti hanno dimensioni diverse.
+    * I testi lunghi e prolissi di solito:
+        * Usano gli stessi termini ripetutamente.
+        * Hanno numerosi termini diversi.
+    * Le variazioni di lunghezza possono essere normalizzate.
+    * Compensano i fattori tf (grandi per i testi lunghi, piccoli per quelli brevi).
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Matrice di peso Tf.Idf**
+
+
+**Documenti e query come vettori**
+
+Ci viene dato uno spazio vettoriale a |V| dimensioni.
+
+* I termini sono gli assi dello spazio.
+* I documenti sono punti o vettori in questo spazio.
+
+Molto alto-dimensionale.
+
+* Decine di milioni di dimensioni quando si applica questo a un motore di ricerca web.
+
+Molto sparso.
+
+* La maggior parte delle voci è zero.
+
+Fai lo stesso per le query: rappresentale come vettori nello spazio.
+
+Classifica i documenti in base alla loro prossimità alla query in questo spazio.
+
+* Prossimità = similarità dei vettori.
+* Prossimità ≈ inversa della distanza.
+
+**Prossimità dello spazio vettoriale**
+
+Primo taglio: distanza tra due punti.
+
+* Cioè, distanza tra i punti finali dei due vettori.
+
+Distanza euclidea?
+
+* Una cattiva idea.
+* Perché la distanza euclidea è grande per i vettori:
+    * Di lunghezze diverse.
+
+La distanza euclidea tra q e d2 è grande anche se la distribuzione dei termini nella query q e la distribuzione dei termini nel documento d2 sono molto simili.
+
+* Controesempio principale: la distanza euclidea è molto grande tra un documento e lo stesso concatenato con se stesso...
+
+
+**Prossimità dello spazio vettoriale**
+
+I documenti lunghi sarebbero più simili tra loro in virtù della lunghezza, non dell'argomento.
+
+Tuttavia, possiamo normalizzare implicitamente guardando gli angoli.
+
+* Idea chiave: classifica i documenti in base all'angolo con la query.
+
+Classifica i documenti in ordine decrescente dell'angolo tra query e documento.
+
+In alternativa, classifica i documenti in ordine crescente di coseno(query,documento).
+
+* Il coseno è una funzione monotona decrescente per l'intervallo [0o, 180o].
+
+Un vettore può essere normalizzato (in lunghezza) dividendo ciascuna delle sue componenti per la sua lunghezza.
+
+* Dividere un vettore per la sua norma L2 lo rende un vettore unitario (di lunghezza) (sulla superficie dell'ipersfera unitaria).
+* I documenti lunghi e brevi hanno ora pesi comparabili.
+
+**Prossimità dello spazio vettoriale**
+
+Similarità del coseno = prodotto interno normalizzato.
+
+
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Prossimità dello spazio vettoriale**
+
+Quanto sono simili i romanzi:
+
+SaS: Ragione e Sentimento
+PaP: Orgoglio e Pregiudizio, e
+WH: Cime Tempestose?
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+**Prossimità dello spazio vettoriale**
+
+Quanto sono simili i romanzi:
+
+SaS: Ragione e Sentimento
+PaP: Orgoglio e Pregiudizio, e
+WH: Cime Tempestose?
+
+dot(SaS,PaP) ≈ 12.1
+dot(SaS,WH) ≈ 13.4
+dot(PaP,WH) ≈ 10.1
+cos(SaS,PaP) ≈ 0.94
+cos(SaS,WH) ≈ 0.79
+cos(PaP,WH) ≈ 0.69
+
+**Ponderazione di frequenza logaritmica**
+
+Dopo la normalizzazione della lunghezza.
+
+
+
+## Prossimità dello spazio vettoriale
+
+
+## Varianti di ponderazione Tf-Idf
+
+Andrea Tagarelli
+Università della Calabria
+Ricerca dell'Informazione e
+Elaborazione del Linguaggio Naturale
+
+## Varianti di ponderazione Tf-Idf
+
+Molti motori di ricerca consentono ponderazioni diverse per le query rispetto ai documenti.
+
+**Notazione SMART:** indica la combinazione in uso in un motore, con la notazione ddd.qqq, usando gli acronimi della tabella precedente.
+
+Uno schema di ponderazione molto standard è: lnc.ltc
+
+* **Documento:** tf logaritmico, nessun idf, normalizzazione del coseno.
+* **Query:** tf logaritmico, idf, normalizzazione del coseno.
+
+
+
+## Varianti di ponderazione Tf-Idf
+
+| Termine | Query | Documento | Prod |
+|---|---|---|---|
+| tf-raw | tf-wt | df | idf | wt | n'lize | tf-raw | tf-wt | wt | n'lize |
+| auto | 0 | 0 | 5000 | 2.3 | 0 | 0 | 1 | 1 | 1 | 0.52 | 0 |
+| best | 1 | 1 | 50000 | 1.3 | 1.3 | 0.34 | 0 | 0 | 0 | 0 | 0 |
+| car | 1 | 1 | 10000 | 2.0 | 2.0 | 0.52 | 1 | 1 | 1 | 0.52 | 0.27 |
+| insurance | 1 | 1 | 1000 | 3.0 | 3.0 | 0.78 | 2 | 1.3 | 1.3 | 0.68 | 0.53 |
+
+**Documento:** assicurazione auto assicurazione auto
+**Query:** migliore assicurazione auto
+
+**Punteggio = 0 + 0 + 0.27 + 0.53 = 0.8**
+
+**Lunghezza del documento =**
+
+
+## Classifica dello spazio vettoriale
+
+**Riepilogo:**
+
+* Rappresentare ogni documento e query come un vettore tf-idf ponderato.
+* Calcolare il punteggio di similarità del coseno per il vettore di query e ogni vettore di documento.
+* Classificare i documenti rispetto alla query in base al punteggio.
+* Restituire i primi K all'utente.
+
+**Pro:**
+
+* Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica.
+* Funziona abbastanza bene nella pratica nonostante le ipotesi semplificative.
+* Implementazione efficiente.
+
+**Contro:**
+
+* Informazioni sintattiche mancanti.
+* Informazioni semantiche mancanti.
+* Ipotesi di indipendenza dei termini (BoW).
+* Ipotesi che i vettori dei termini siano ortogonali a coppie.
+* Manca il controllo di un modello booleano (ad esempio, richiedere che un termine appaia in un documento).
+

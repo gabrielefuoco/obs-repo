@@ -1,4 +1,4 @@
-## Introduzione
+### Introduzione
 
 La regressione è una tecnica statistica utilizzata per studiare la relazione tra una variabile dipendente *y* e un insieme di variabili indipendenti o regressori $(X_1, X_2, ..., X_k)$. I modelli di regressione permettono di stabilire matematicamente come *y* è spiegata dalle variabili $X_i$ tramite un'equazione:
 $$Y = f(X_1, X_2, ..., X_k) + b$$
@@ -10,7 +10,7 @@ Nel caso della regressione lineare, il modello è rappresentato da un'equazione 
 $$y = wx + b$$
 Il problema chiave è stimare i parametri *w* e *b* in modo che il modello si adatti al meglio ai dati osservati.
 
-## Stima dei Parametri
+### Stima dei Parametri
 
 La stima dei parametri *w* e *b* del modello di regressione lineare $y = wx + b$ viene formulata come un problema di minimizzazione della funzione di costo $J(w, b)$. La funzione di costo misura la somma degli scarti quadratici tra i valori osservati $y^{(i)}$ e i valori teorici $wx^{(i)} + b$, divisa per $2m$:
 $$J(w, b) = \frac{1}{2m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})^2$$
@@ -22,14 +22,14 @@ Per minimizzare $J(w, b)$, si utilizza l'algoritmo di discesa del gradiente. I p
 
 2. **Aggiornamento dei parametri:** Calcolare i nuovi parametri $w'$ e $b'$ che riducono $J(w, b)$, usando le formule delle derivate parziali.
 
-   ### Caso semplice (1 attributo, 1 variabile dipendente):
+    **Caso semplice (1 attributo, 1 variabile dipendente):**
    $$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
    $$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
 
-   ### Caso più complesso (n attributi, 1 variabile dipendente):
-   #### Modello di regressione lineare a più valori:
+    **Caso più complesso (n attributi, 1 variabile dipendente):**
+    **Modello di regressione lineare a più valori:**
    $$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
-   #### Aggiornamento dei parametri:
+    **Aggiornamento dei parametri:**
 $$
 \begin{aligned}
 w_1' = w_1 - \alpha \frac{\partial}{\partial w_1} J(w_1, b)  \\
@@ -69,7 +69,7 @@ $$
 
 **Risultato:** Tutti i valori di un attributo vengono trasformati in una scala con media 0 e deviazione standard 1. 
 
----
+
 ## Funzione logistica
 
 **Regressione logistica:** Algoritmo di apprendimento automatico per problemi di classificazione binaria.
@@ -101,7 +101,7 @@ $$
 * Si utilizza una nuova funzione di costo convessa per permettere l'applicazione della discesa del gradiente durante l'addestramento.
 * Formula: $J(w,b)=\frac{1}{2m}\sum_{i=1}^m(wx^{(i)}+b-y^{(i)})$ 
 
-### Calcolo delle derivate per l'aggiornamento dei parametri
+## Calcolo delle derivate per l'aggiornamento dei parametri
 
 **Formule di aggiornamento dei parametri:**
 $$w' = w - \alpha\frac{\partial J(w,b)}{\partial w}$$

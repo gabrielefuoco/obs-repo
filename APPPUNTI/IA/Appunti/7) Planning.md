@@ -43,7 +43,6 @@
 | **Mutex** | Vincoli che escludono azioni o stati incompatibili. |
 | **Frame Actions** | Azioni che lasciano inalterati gli stati attuali, mantenendo il sistema stabile tra un'azione e l'altra. |
 
----
 Il *planning* (pianificazione) riguarda la progettazione di sequenze di azioni necessarie per raggiungere un obiettivo specifico. 
 
 1. **Modello di Pianificazione**:
@@ -172,7 +171,7 @@ Per un'azione `a` (che è una ground instance di un operatore):
 
 6. **Rappresentazione State-Variable**:
    - Invece di utilizzare variabili booleane per tutto, possiamo usare **atomi** per rappresentare proprietà **statiche** (che non cambiano) e **valori** per rappresentare proprietà **dinamiche** (che cambiano). Ad esempio, `top(p1) = c3` indica che il pallet `p1` è sopra la pedana `c3`, e questa informazione può cambiare.
----
+
 # State-Space Planning
 
 Nel **state-space planning**, il problema di pianificazione è rappresentato come uno spazio di stati, dove:
@@ -239,8 +238,7 @@ Nel **backward search**, si parte dal goal e si lavora all'indietro per determin
    - Il branching factor può essere molto grande, proprio come nel forward search.
    - Questo significa che ci possono essere molte possibili azioni da considerare.
 
-### Lifting
-
+## Lifting
 Il **lifting** è una tecnica utilizzata per ridurre la complessità del problema di pianificazione:
 
 1. **Uso di Variabili**:
@@ -276,9 +274,7 @@ Per gestire tali problemi, sono necessari:
 - **Algoritmi diversi**, come quelli basati su vincoli o algoritmi domain-specific che considerano le interazioni tra gli obiettivi.
 - **Planner più sofisticati** che non assumono la serializzabilità dei goal.
 
----
-
-### Tecniche del Planning-Graph
+## Tecniche del Planning-Graph
 
 Il **Planning-Graph** è una struttura che cerca di risolvere il problema dell’elevato branching factor (numero di possibili stati e azioni) nel planning. Viene utilizzato in algoritmi come **Graphplan**, che rilassano temporaneamente il problema per ottenere una soluzione più semplice e poi rifinire la ricerca.
 

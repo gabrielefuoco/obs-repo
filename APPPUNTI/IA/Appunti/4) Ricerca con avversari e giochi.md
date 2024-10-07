@@ -20,11 +20,10 @@
 | **Componente Connessa** | Insieme di nodi in un grafo che sono collegati tra loro da un cammino. |
 
 
----
 ### Ambienti Competitivi
 Gli ambienti competitivi sono caratterizzati dalla presenza di due o più agenti con obiettivi in conflitto. Questo genera problemi di ricerca con avversari.
 
-### Approcci alla Teoria dei Giochi
+## Approcci alla Teoria dei Giochi
 Esistono tre approcci principali per affrontare gli ambienti multi-agente nella teoria dei giochi:
 
 1. **Economia aggregata:** Si considera un aggregato di agenti come un'economia, senza predire l'azione del singolo agente.
@@ -53,8 +52,7 @@ Una soluzione è una strategia s → A che da uno stato s ∈ S decide quale azi
 ### Albero di Gioco
 Definiamo Albero di Gioco un albero di ricerca che segue ogni sequenza di mosse fino a raggiungere uno stato terminale. L'albero di gioco potrebbe essere infinito se lo spazio degli stati è illimitato o se le regole del gioco consentono di ripetere le posizioni (stati) all'infinito.
 
----
-### Giochi a Somma Zero
+## Giochi a Somma Zero
 Vi sono due player che giocano a turni, dove le azioni che avvantaggiano un player danneggiano l'altro, dunque non è possibile un risultato dove vincono entrambi. Vi è una competizione pura: gli agenti hanno funzioni di utilità opposte e si può pensare che uno cerchi di massimizzare un certo valore mentre l'altro cerca di minimizzarlo. Si differenziano dalla più ampia categoria dei giochi generali, dove gli agenti hanno funzioni di utilità indipendenti e, di conseguenza, possono cooperare, ignorarsi o anche essere in competizione (magari in una forma minore rispetto a quella dei giochi a somma zero).
 
 ### Ricerca MiniMax
@@ -84,7 +82,7 @@ Ad ogni turno, MAX preferirà muoversi verso uno stato di valore massimo mentre 
 #### Efficienza
 Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è O(b · m) mentre quella temporale è O(bm) dove m è la profondità e b è il fattore di branching.
 
----
+
 ## Alpha-Beta Pruning: 
 La ricerca MiniMax, utilizzata per determinare la strategia ottima in un gioco a somma zero, può diventare computazionalmente costosa a causa della crescita esponenziale del numero di stati con l'aumentare della profondità dell'albero di gioco. L'Alpha-Beta Pruning è una tecnica di ottimizzazione che permette di potare porzioni dell'albero di gioco irrilevanti per la ricerca, riducendo il numero di nodi da esplorare.
 
@@ -102,7 +100,7 @@ L'efficacia del pruning dipende dall'ordine in cui vengono esplorati i successor
 ### Ricerca a Profondità Limitata
 Nei giochi reali, gli alberi di gioco sono spesso troppo grandi per essere esplorati completamente. La ricerca a profondità limitata risolve questo problema interrompendo la ricerca ad una certa profondità e utilizzando euristiche per stimare il valore dei nodi non esplorati. Tuttavia, in questo caso non si hanno garanzie di ottimalità.
 
----
+
 ## Ricerca Euristica Alpha-Beta
 Nei giochi reali, il tempo di calcolo è spesso limitato, rendendo impossibile esplorare completamente l'albero di gioco. La ricerca euristica Alpha-Beta risolve questo problema interrompendo la ricerca ad una certa profondità e utilizzando una valutazione euristica per stimare il valore dei nodi non esplorati.
 
@@ -119,7 +117,6 @@ L'euristica deve soddisfare le seguenti proprietà:
 ### Importanza dell'Euristica
 Un'euristica ben definita può migliorare l'efficienza del pruning Alpha-Beta, permettendo di ordinare le mosse in base al loro valore e di tagliare nodi meno promettenti. Tuttavia, è importante ricordare che l'euristica fornisce solo una stima e potrebbe portare a tagliare nodi importanti.
 
----
 ## Ricerca ad Albero Monte Carlo
 La ricerca ad Albero Monte Carlo è una tecnica utilizzata per la ricerca in giochi complessi, in particolare quando è difficile definire buone euristiche o il fattore di branching è troppo elevato. Questa tecnica si basa su simulazioni casuali per costruire un albero di gioco e stimare il valore di ogni stato.
 
@@ -136,7 +133,7 @@ La politica di simulazione determina come vengono scelte le mosse durante le sim
 ### UCB1
 Una politica di selezione comune è l'Upper Confidence Bounds applied to Trees (UCB1). Questa politica assegna un valore a ogni nodo, che è la somma del fattore di sfruttamento $(U(n)/N(n))$ e del fattore di esplorazione $(c · \sqrt{(log N\frac{(padre(n))}{N(n))}})$. Il fattore di sfruttamento rappresenta il valore medio delle simulazioni passate per il nodo, mentre il fattore di esplorazione incoraggia l'esplorazione di nodi meno esplorati.
 
----
+
 ## Pacman Veloce
 Il gioco Pacman vs Fantasmi è un esempio di gioco su grafo, dove i fantasmi cercano di catturare Pacman.
 ### Modellazione del Gioco
