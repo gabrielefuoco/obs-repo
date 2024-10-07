@@ -982,7 +982,7 @@ doc2: posizione1, posizione2 … ;
 * **Limiti degli indici biword:** gli indici biword non possono essere utilizzati per le query di prossimità.
 * **Algoritmo di unione ricorsivo:** utilizzato per le query di frase, ma con la necessità di gestire più della semplice uguaglianza.
 
----
+
 ## Dimensione dell'indice posizionale
 
 * Un indice posizionale espande in modo sostanziale l'archiviazione dei postings.
@@ -1044,15 +1044,17 @@ BSBIndexConstruction()
 2   while (all documents have not been processed)
 3       do n ← n + 1
 4          block ← ParseNextBlock()
-5          BSBI-Invert(block)
-6          WriteBlockToDisk(block, fn)
-7   MergeBlocks(f1, ..., fn; f_merged)
+5          BSBI-Invert(block) //costruisce inverted index
+6          WriteBlockToDisk(block, fn)  //scriviamo sul disco, presuppone la   ù
+           presenza di una struttura di blocco sul disco
+7   MergeBlocks(f_1, ..., f_n; f_merged)
 
 ```
 
+
 #### Ordinamento di 10 blocchi di 10 milioni di record.
 * Innanzitutto, leggiamo ogni blocco e ordiniamo al suo interno:
-    * Quicksort richiede O(N ln N) passaggi in media.
+    * Quicksort richiede $O(N \cdot ln (N))$ passaggi in media.
     * Nel nostro caso N=10 milioni.
 * 10 volte questa stima
     * ci fornisce 10 run ordinate di 10 milioni di record ciascuna.
@@ -1064,206 +1066,186 @@ BSBIndexConstruction()
 
 * Possiamo fare delle **merge binarie**, con un albero di merge di $log_2(10) = 4$ livelli.
     * Durante ogni livello, leggiamo in memoria le run a blocchi di 10 milioni, le uniamo e le riscriviamo.
+==Nota: invece che fare i merge alla fine, potremmo fare dei merge con struttura ad albero. durante ogni layer(partizionamento) leggiamo in memoria e poi facciamo la merge e aggiorninamo il nuovo indice, che poi a sua volta il prossimo layer sarà fuso con un altra merge ==
+
 ![[1) Intro-20241003112202805.png]]
 * Ma è più efficiente fare un **multi-way merge**, dove si legge da tutti i blocchi simultaneamente.
     * Apriamo tutti i file di blocco simultaneamente, manteniamo un **buffer di lettura** per ciascuno e un **buffer di scrittura** per il file di output.
     * In ogni iterazione, scegliamo il termID più basso che non è stato elaborato usando una coda di priorità.
-    * Uniamo tutte le liste di postings per quel termID e lo scriviamo.
+    * Uniamo tutte le liste di postings (una o più) per quel termID, che derivano dai vari blocchi, e lo scriviamo.
 * A condizione che si leggano blocchi di dimensioni decenti da ogni blocco in memoria e poi si scriva un blocco di output di dimensioni decenti.
-    
-## SPIMI: Indicizzazione in memoria a passaggio singolo
+- **Assunzione:**  Vi è una condivisione solo parziale del lessico tra i vari documenti.
+==problema legato alla crescita del lessico
+non va trascurata la gestione dei termini (token precessati) e id dei termini
+La compressione con perdita può caratterizzare solo quei termini che non forniscono **informazioni essenziali per la comprensione del testo** e **soluzioni intermedie di valutazione dei token**. 
+
+## SPIMI: Indicizzazione in memoria a passaggio singolo (approccio lazy)
 
 * **Problema rimanente con l'algoritmo basato sull'ordinamento:**
     * La mappatura (termine, termID) potrebbe non entrare in memoria.
     * Abbiamo bisogno del dizionario (che cresce dinamicamente) per implementare una mappatura termine-termID.
 
-* **Idea chiave 1:** Generare dizionari separati per ogni blocco - non c'è bisogno di mantenere la mappatura termine-termID tra i blocchi.
+Idee chiave: sono complementari
+* **Idea chiave 1:** Generare dizionari separati per ogni blocco - non c'è bisogno di mantenere la mappatura termine-termID tra i blocchi (mapping across block).
 * **Idea chiave 2:** Non ordinare. Accumulare i postings nelle liste di postings man mano che si verificano.
 
 * Sulla base di queste due idee, generiamo un indice invertito completo per ogni blocco.
 * Questi indici separati possono quindi essere uniti in un unico grande indice.
 * SPIMI può indicizzare collezioni di qualsiasi dimensione a condizione che ci sia abbastanza spazio su disco disponibile.
-* Ogni lista di postings è dinamica e immediatamente disponibile per raccogliere i postings.
+* **Ogni lista di postings è una struttura dinamica e immediatamente disponibile per collezionare i postings**.
     * **più veloce** - non è necessario ordinare.
-    * **risparmia memoria** - i termID dei postings non devono essere memorizzati. 
+    * **risparmia memoria** - i termID dei postings non devono essere memorizzati e non vi sono fasi di sorting intermedie. 
+    * In pratica, è una struttura che conserviamo in memoria e che viene riallocata all'occorrenza.
+    * Evitiamo di tenere traccia dei term-id, l'algoritmo lavora direttamente con i termini
 
 
 ![[1) Intro-20241003093740166.png]]
+Linea 5) il token raw viene pre-processato: riconduciamo il token a quello che è un index-term.
+Linea 10) rendiamo immediatamente disponibile il posting (occorrenza del termine) nel documento dove è stato osservato.
+Linee 8-9) se ha raggiunto la dimensione limite,
+Linea 11)L'ordinamento è rimandato alla fase successiva, quando tutti i postings per un blocco sono stati raccolti. 
 
----
----
+## Indicizzazione Distribuita
 
-## Indicizzazione distribuita
+L'indicizzazione distribuita prevede l'esecuzione di due task paralleli: il parsing e l'inversione dell'indice. Un'unica macchina master coordina il processo, suddividendo l'indice in una serie di task paralleli. Ogni split rappresenta un insieme di documenti gestito come blocchi. La macchina master assegna i ruoli ai diversi nodi del sistema.
 
 ### Parser
 
-● Il master assegna uno split a una macchina parser inattiva.
-● Il parser legge un documento alla volta ed emette coppie (termine, doc).
-● Il parser scrive le coppie in j partizioni.
-○ Es.: Ogni partizione è per un intervallo di lettere iniziali dei termini (ad esempio, a-f, g-p, q-z), quindi j = 3.
-● Ora per completare l'inversione dell'indice.
+* Il master assegna uno split a una macchina parser inattiva.
+* Il parser legge un documento alla volta ed emette coppie (termine, documento).
+* Il parser scrive le coppie in *j* partizioni. Le partizioni (fold) sono determinate in modo lessicografico.
+    * **Esempio:** Ogni partizione è per un intervallo di lettere iniziali dei termini (ad esempio, a-f, g-p, q-z), quindi *j* = 3.
+
+Una volta completato il parsing, si procede con l'inversione dell'indice.
 
 ### Inverter
 
-● Un inverter raccoglie tutte le coppie (termine, doc) (cioè, postings) per una partizione di termini.
-● Ordina e scrive nelle liste di postings. 
+* Un inverter raccoglie tutte le coppie (termine, doc) (cioè, postings) per una partizione di termini.
+* Ordina e scrive le liste di postings. 
+
 
 ![[1) Intro-20241003093756427.png]]
 
+La figura mostra come l'indicizzazione distribuita possa essere vista come un'istanza particolare del modello MapReduce.
+
+**Fase di Map:**
+
+* Partendo dalla collezione di documenti in input, la fase di map produce liste di coppie (termine, documento).
+
+**Fase di Reduce:**
+
+* La fase di reduce prende le liste di occorrenze (coppie termine-documento) e produce le liste di postings, ovvero le liste di documenti in cui un termine compare. 
+
 ![[1) Intro-20241003093804693.png]]
-## Indicizzazione distribuita
+## Indicizzazione Distribuita
 
 L'algoritmo di costruzione dell'indice è un'istanza di MapReduce (Dean e Ghemawat 2004).
-● Un framework robusto e concettualmente semplice per il calcolo distribuito, senza dover
-scrivere codice per la parte di distribuzione.
-● Il sistema di indicizzazione di Google (circa 2002) come composto da una serie di fasi, ciascuna
-implementata in MapReduce.
+
+* **MapReduce:** Un framework robusto e concettualmente semplice per il calcolo distribuito, che permette di eseguire calcoli complessi senza dover scrivere codice per la parte di distribuzione.
+* **Sistema di indicizzazione di Google (circa 2002):** Composto da una serie di fasi, ciascuna implementata in MapReduce.
 
 ### Schema per la costruzione dell'indice in MapReduce
 
-● Funzioni map e reduce
-map: input → list(k, v)
-reduce: (k,list(v)) → output
-● Istanza dello schema per la costruzione dell'indice
-map: collection → list(termID, docID)
-reduce: (<termID1, list(docID)>, <termID2, list(docID)>, …) → (postings list1, postings list2, …)
+* **Funzioni map e reduce:**
+    * `map`: input → list(k, v)
+    * `reduce`: (k,list(v)) → output
+* **Istanza dello schema per la costruzione dell'indice:**
+    * `map`: collection → list(termID, docID)
+    * `reduce`: (<termID1, list(docID)>, <termID2, list(docID)>, …) → (postings list1, postings list2, …)
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+Fino ad ora, abbiamo ipotizzato che le collezioni siano statiche, ma:
 
-## Indicizzazione dinamica
+* **Documenti in arrivo:** I documenti arrivano nel tempo e devono essere inseriti.
+* **Documenti eliminati e modificati:** I documenti vengono eliminati e modificati (ad esempio, quando l'entità dell'editing è tale da toccare la maggior parte dei termini, come upgrade, motivi di privacy o cambio di normativa).
 
-Fino ad ora, abbiamo ipotizzato che le collezioni siano statiche, ma
-● I documenti arrivano nel tempo e devono essere inseriti.
-● I documenti vengono eliminati e modificati.
 Questo significa che il dizionario e le liste di postings devono essere modificati:
-● Aggiornamenti dei postings per i termini già presenti nel dizionario.
-● Nuovi termini aggiunti al dizionario.
+
+* **Aggiornamenti dei postings:** Per i termini già presenti nel dizionario.
+* **Nuovi termini:** Aggiunti al dizionario.
 
 ### Approccio più semplice
 
-● Mantenere un "grande" indice principale, i nuovi documenti vanno in un "piccolo" indice ausiliario.
-● Ricerca su entrambi, unione dei risultati.
-● Eliminazioni
-○ Vettore di bit di invalidazione per i documenti eliminati.
-○ Filtra i documenti in output su un risultato di ricerca tramite questo vettore di bit di invalidazione.
-● Periodicamente, re-indicizzare in un unico indice principale.
-
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
-
-## Indicizzazione dinamica
+* **Indice principale e indice ausiliario:** Mantenere un "grande" indice principale, i nuovi documenti vanno in uno (o più) "piccolo" indice ausiliario.
+* **Ricerca:** La ricerca viene effettuata su entrambi gli indici, unendo i risultati.
+* **Eliminazioni:**
+    * **Vettore di bit di invalidazione:** Un vettore di bit indica i documenti eliminati.
+    * **Filtraggio:** I documenti in output su un risultato di ricerca vengono filtrati tramite questo vettore di bit di invalidazione.
+* **Re-indicizzazione:** Periodicamente, re-indicizzare in un unico indice principale.
 
 ### Problemi con gli indici principali e ausiliari
 
-● Problema delle fusioni frequenti - si tocca molto.
-● Scarsa performance durante la fusione.
-● In realtà:
-○ La fusione dell'indice ausiliario nell'indice principale è efficiente se si mantiene un
-file separato per ogni lista di postings.
-○ La fusione è la stessa di una semplice append.
-○ Ma poi avremmo bisogno di molti file - inefficiente per il sistema operativo.
-● Ipotesi: L'indice è un unico grande file.
-○ In realtà: Usare uno schema da qualche parte nel mezzo (ad esempio, dividere le liste di postings molto grandi, raccogliere le liste di postings di lunghezza 1 in un unico file, ecc.).
+* **Merge frequenti:** Il problema delle merge frequenti.
+* **Scarsa performance:** Scarsa performance durante le merge.
+* **Efficienza della fusione:** La fusione dell'indice ausiliario nell'indice principale è efficiente se si mantiene un file separato per ogni lista di postings.
+    * La fusione è la stessa di una semplice append.
+    * Ma poi avremmo bisogno di molti file - inefficiente per il sistema operativo.
+* **Ipotesi:** L'indice è un unico grande file.
+    * **Realtà:** Usare uno schema da qualche parte nel mezzo (ad esempio, dividere le liste di postings molto grandi, raccogliere le liste di postings di lunghezza 1 in un unico file, ecc.).
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+## Fusione Logaritmica
 
-## Indicizzazione dinamica
+La fusione logaritmica è una tecnica di ordinamento che utilizza una serie di indici di dimensioni crescenti per ordinare un insieme di dati. 
 
-### Fusione logaritmica
+**Principio di funzionamento:**
 
-● Mantenere una serie di indici, ciascuno due volte più grande del precedente.
-○ In qualsiasi momento, alcune di queste potenze di 2 sono istanziate.
-● Mantenere il più piccolo (Z0) in memoria.
-● Quelli più grandi (I0, I1, …) su disco.
-● Se Z0 diventa troppo grande (> n), scrivilo su disco come I0.
-● o uniscilo con I0 (se I0 esiste già) come Z1.
-● O scrivi la fusione Z1 su disco come I1 (se non c'è I1).
-● O uniscilo con I1 per formare Z2.
+1. **Serie di indici:** Si mantiene una serie di indici, ciascuno con una dimensione doppia rispetto al precedente. Ad esempio, si potrebbe avere un indice di dimensione 1, 2, 4, 8, 16, e così via.
+2. **Memoria e disco:** L'indice più piccolo $(Z_0)$ è mantenuto in memoria, mentre gli indici più grandi $(I_0, I_1, ...)$ sono memorizzati sul disco.
+3. **Fusione e scrittura:** Quando l'indice $Z_0$ diventa troppo grande (supera la sua capacità), viene scritto sul disco come $I_0$. In alternativa, se $I_0$ esiste già, $Z_0$ viene unito con $I_0$ per formare $Z_1$.
+4. **Iterazione:** Se $Z_1$ non è ancora troppo grande, viene mantenuto in memoria. Altrimenti, viene scritto sul disco come $I_1$. Se $I_1$ esiste già, $Z_1$ viene unito con $I_1$ per formare $Z_2$.
+5. **Ripetizione:** Questo processo di fusione e scrittura viene ripetuto fino a quando tutti i dati non sono stati ordinati.
 
-### Indicizzazione dinamica
+![[1) Intro-20241007154640070.png|551]]
 
-Indice ausiliario e principale:
-● T/n fusioni, dove T è il numero di postings e n è la dimensione dell'ausiliario.
-● Il tempo di costruzione dell'indice è O(T2/n) come nel caso peggiore un posting viene toccato
-T/n volte.
+![[1) Intro-20241007154611506.png|637]]
+## Indicizzazione Dinamica
 
-Fusione logaritmica:
-● Ogni posting viene fuso al massimo O(log (T/n)) volte,
-● cioè, la complessità è O(T log (T/n)).
+### Indice Ausiliario e Principale
 
-La fusione logaritmica è molto più efficiente per la costruzione dell'indice.
-● Ma l'elaborazione delle query ora richiede la fusione di O(log (T/n)) indici.
-● Mentre è O(1) se si ha solo un indice principale e uno ausiliario.
+* **Fusione T/n:**
+    * Si utilizzano indici ausiliari di dimensione $n$ e un indice principale con $T$ postings.
+    * Il tempo di costruzione dell'indice è $O\left( \frac{T^2}{n} \right)$ 
+ nel caso peggiore, poiché un posting potrebbe essere toccato $\frac{T}{n}$ volte.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+### Fusione Logaritmica
 
-## Indicizzazione dinamica
+* **Efficienza:** Ogni posting viene fuso al massimo $O\left( log\left( \frac{T}{n} \right) \right)$ volte, con una complessità di $O\left( T \cdot log\left( \frac{T}{n} \right) \right)$
+* **Vantaggi:** La fusione logaritmica è molto più efficiente per la costruzione dell'indice rispetto alla fusione $\frac{T}{n}$.
+* **Svantaggi:** L'elaborazione delle query richiede la fusione di $O\left( log\left( \frac{T}{n} \right) \right)$ indici, mentre con un solo indice principale e ausiliario la complessità è $O(1)$.
 
-### Ulteriori problemi con più indici
+# skip da qui
+### Ulteriori Problemi con Più Indici
 
-● Le statistiche a livello di collezione sono difficili da mantenere.
-○ ad esempio, quando parliamo di correzione ortografica: quale delle diverse alternative corrette presentiamo all'utente?
-■ Potremmo voler scegliere quella con il maggior numero di risultati.
-■ Come manteniamo i migliori con più indici e vettori di bit di invalidazione?
-■ Una possibilità: ignorare tutto tranne l'indice principale per tale ordinamento.
-● Vedremo più di queste statistiche utilizzate nel ranking dei risultati.
+* **Statistiche a livello di collezione:** Difficili da mantenere.
+    * Esempio: correzione ortografica. Quale alternativa corretta presentare all'utente?
+        * Potrebbe essere desiderabile scegliere l'alternativa con il maggior numero di risultati.
+        * Come mantenere le migliori alternative con più indici e vettori di bit di invalidazione?
+        * Una possibilità: ignorare tutto tranne l'indice principale per l'ordinamento.
+* **Ranking dei risultati:** Le statistiche a livello di collezione sono utilizzate nel ranking dei risultati.
 
+### Indicizzazione Dinamica nei Motori di Ricerca
 
-## Indicizzazione dinamica
+* **Modifiche incrementali:** I grandi motori di ricerca effettuano l'indicizzazione dinamica con frequenti modifiche incrementali (notizie, blog, nuove pagine web).
+* **Ricostruzione periodica:** Periodicamente, l'indice viene ricostruito da zero.
+    * L'elaborazione delle query viene commutata sul nuovo indice e il vecchio indice viene eliminato.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+### Requisiti per la Ricerca in Tempo Reale
 
-Tutti i grandi motori di ricerca ora effettuano l'indicizzazione dinamica.
-I loro indici hanno frequenti modifiche incrementali.
-● Notizie, blog, nuove pagine web tematiche.
-Ma (a volte/tipicamente) ricostruiscono anche periodicamente l'indice da zero.
-● L'elaborazione delle query viene quindi commutata sul nuovo indice e il vecchio indice viene eliminato.
+* **Bassa latenza:** Elevata produttività di valutazione delle query.
+* **Elevato tasso di ingestione:** Immediata disponibilità dei dati.
+* **Letture e scritture concorrenti:** Gestione di letture e scritture simultanee dell'indice.
+* **Dominanza del segnale temporale:** Priorità ai dati più recenti.
 
-### Requisiti per la ricerca in tempo reale
+### Organizzazione dell'Indice in Earlybird di Twitter
 
-● Bassa latenza, elevata produttività di valutazione delle query.
-● Elevato tasso di ingestione e immediata disponibilità dei dati.
-● Letture e scritture concorrenti dell'indice.
-● Dominanza del segnale temporale.
-
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
-
-## Indicizzazione dinamica
-
-### Organizzazione dell'indice in Earlybird di Twitter
-
-● Consiste di più segmenti di indice.
-○ Ogni segmento è relativamente piccolo, contenendo fino a 223 tweet.
-○ Ogni posting in un segmento è una parola a 32 bit: 24 bit per l'ID del tweet e 8 bit
-per la posizione nel tweet.
-● Solo un segmento può essere scritto in un dato momento.
-○ Abbastanza piccolo da stare in memoria.
-○ I nuovi postings vengono semplicemente accodati alla lista di postings.
-○ Ma la lista di postings viene attraversata all'indietro per dare la priorità ai tweet più recenti.
-● I segmenti rimanenti sono ottimizzati per la sola lettura.
-○ Postings ordinati in ordine cronologico inverso (il più recente per primo).
-
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+* **Segmenti di indice:** L'indice è composto da più segmenti.
+    * Ogni segmento è relativamente piccolo (fino a 223 tweet).
+    * Ogni posting in un segmento è una parola a 32 bit: 24 bit per l'ID del tweet e 8 bit per la posizione nel tweet.
+* **Scrittura:** Solo un segmento può essere scritto in un dato momento.
+    * Il segmento è abbastanza piccolo da stare in memoria.
+    * I nuovi postings vengono accodati alla lista di postings.
+    * La lista di postings viene attraversata all'indietro per dare la priorità ai tweet più recenti.
+* **Lettura:** I segmenti rimanenti sono ottimizzati per la sola lettura.
+    * I postings sono ordinati in ordine cronologico inverso (il più recente per primo).
 
 ## Costruzione dell'indice: riepilogo
 
@@ -1284,10 +1266,7 @@ Elaborazione del Linguaggio Naturale
 
 ### Indicizzazione dinamica: più indici, fusione logaritmica
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+
 
 ## Compressione
 
@@ -1309,10 +1288,7 @@ Premessa: Gli algoritmi di decompressione sono veloci.
 ● Diminuire il tempo necessario per leggere le liste di postings dal disco.
 ● I grandi motori di ricerca mantengono una parte significativa dei postings in memoria.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+
 
 ## Compressione
 
@@ -1327,81 +1303,77 @@ stemming, eliminazione dei numeri.
 ■
 Quasi nessuna perdita di qualità nella lista dei primi k.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+# skip fino a qui
 
 ## Dimensione del vocabolario vs. dimensione della collezione
 
 ### Quanto è grande il vocabolario dei termini?
 
-● Cioè, quante parole distinte ci sono?
-Possiamo assumere un limite superiore?
-● Non proprio: almeno 7020 = 1037 parole diverse di lunghezza 20.
-In pratica, il vocabolario continuerà a crescere con la dimensione della collezione.
-● Soprattutto con Unicode ☺.
+* **Cioè, quante parole distinte ci sono?**
+* **Possiamo assumere un limite superiore?**
+    * Non proprio: almeno $7020 = 1037$ parole diverse di lunghezza $20$.
+    * In pratica, il vocabolario continuerà a crescere con la dimensione della collezione.
+    * Soprattutto con Unicode.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+### Legge di Heaps: $M = kT^b$
 
-## Dimensione del vocabolario vs. dimensione della collezione
-
-### Legge di Heaps: M = kTb
-
-● M è la dimensione del vocabolario, T è il numero di token nella
-collezione.
-● Valori tipici: 30 ≤ k ≤ 100 e b ≈ 0.5.
-● In un grafico log-log della dimensione del vocabolario M vs. T, la legge di Heaps prevede una linea
-con pendenza di circa ½.
-● È la relazione più semplice possibile (lineare) tra i due in
-spazio log-log.
-○ log M = log k + b log T.
-● Un'osservazione empirica ("legge empirica").
-
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
-
-## Dimensione del vocabolario vs. dimensione della collezione
+* **M** è la dimensione del vocabolario (cresce seguento una **power law**: funzione lineare in scala doppia logaritmica con offset k), **T** è il numero di token nella collezione.
+* Valori tipici: $30 ≤ k ≤ 100$ e $b ≈ 0.5$.
+* In un grafico log-log della dimensione del vocabolario M vs. T, la legge di Heaps prevede una linea con pendenza di circa ½.
+* È la relazione più semplice possibile (lineare) tra i due in spazio log-log.
+    * $log M = log k + b log T$.
+* Un'osservazione empirica ("legge empirica").
 
 ### Legge di Heaps per Reuters RCV1:
 
-log10M = 0.49 log10T + 1.64
-->
-M = 101.64T0.49
-cioè, k = 101.64 ≈ 44 e b = 0.49.
+$log_{10}M = 0.49 log_{10}T + 1.64$
+$\to$
+$M = 10^{1.64}T^{0.49}$
+cioè, $k=10^{1.64}≈ 44$ e $b = 0.49$.
 
 Buona aderenza empirica per Reuters RCV1:
-● Per i primi 1.000.020 token, prevede
-38.323 termini;
-● in realtà, 38.365 termini.
 
-Andrea Tagarelli
-Università della Calabria
-Information Retrieval e
-Elaborazione del Linguaggio Naturale
+* Per i primi 1.000.020 token, prevede 38.323 termini;
+* in realtà, 38.365 termini. 
 
-## Legge di Zipf
+![[1) Intro-20241007160038284.png|371]]
+==fase transitoria iniziale: inizia a fittare a regime==
+## Distribuzione Skewd di Tipo Power Law
 
-La legge di Heaps fornisce la dimensione del vocabolario nelle collezioni.
-Ma, nel linguaggio naturale, ci sono
-● alcuni termini molto frequenti e
-● molti termini molto rari.
+La distribuzione skewd di tipo power law è caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa. 
+
+**Caratteristiche:**
+
+* **Concentrazione di massa:** La maggior parte della massa è concentrata in una piccola porzione della distribuzione.
+* **Coda lunga:** La distribuzione presenta una coda che si estende per un lungo periodo, con valori che diminuiscono lentamente.
+
+**Nota:** La distribuzione skewd di tipo power law è spesso osservata in fenomeni naturali e sociali. 
+
+## Legge di Heaps e Legge di Zipf
+
+La legge di Heaps fornisce una stima della dimensione del vocabolario in un corpus di testo. Tuttavia, nel linguaggio naturale, si osserva una distribuzione non uniforme delle parole: alcuni termini sono molto frequenti, mentre molti altri sono molto rari.
 
 ### Legge di Zipf
 
-● Zipf (1949) ha scoperto che il termine i-esimo più frequente ha una frequenza di collezione proporzionale a 1/i:
-cfi ∝ 1/i = K/i,
-con K una costante di normalizzazione.
-● cioè, log cfi = log K - log i.
-● relazione lineare inversa tra log cfi e log i -> una legge di potenza.
-Se il termine più frequente (the) si verifica cf1 volte, allora il 2° termine più frequente (of) si verifica cf1/2 volte, il
-3° termine più frequente (and) si verifica cf1/3 volte...
+Zipf (1949) ha scoperto una relazione empirica tra la frequenza di un termine e il suo rango nel vocabolario. La legge di Zipf afferma che il termine i-esimo più frequente ha una frequenza di collezione proporzionale a 1/i:
 
+$$cfi \propto \frac{1}{i} = \frac{K}{i}$$
+
+dove $cfi$ è la frequenza del termine i-esimo, $i$ è il suo rango nel vocabolario e $K$ è una costante di normalizzazione.
+
+In forma logaritmica, la legge di Zipf si esprime come:
+
+$$log(cfi) = log(K) - log(i)$$
+
+Questa equazione indica una relazione lineare inversa tra il logaritmo della frequenza del termine e il logaritmo del suo rango. Questa relazione è nota come legge di potenza.
+
+**Esempio:**
+
+Se il termine più frequente ("the") si verifica $cf1$ volte, allora il secondo termine più frequente ("of") si verifica $cf1/2$ volte, il terzo termine più frequente ("and") si verifica $cf1/3$ volte, e così via.
+
+
+
+![[1) Intro-20241007160144378.png]]
 ## La legge di Zipf: le implicazioni di Luhn
 
 Luhn (1958):
