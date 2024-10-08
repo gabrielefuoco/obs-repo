@@ -1,0 +1,127 @@
+## Caratteristiche delle Feature 
+
+Le feature per le reti neurali devono possedere diverse caratteristiche fondamentali per garantire un'efficace rappresentazione delle immagini e un corretto funzionamento della rete.
+
+### Proprietà delle Feature
+
+* **Precisione:** Una feature deve descrivere **esattamente** il contenuto di una porzione di immagine.
+* **Distintività:** Le feature di due zone diverse dell'immagine devono essere diverse, permettendo di distinguerle. Deve esistere una metrica per stabilire se due feature sono uguali o distinte.
+* **Invarianza:** Le feature devono essere robuste rispetto alle trasformazioni geometriche di base, come rotazione e scala. Ad esempio, la feature di un finestrino dovrebbe rimanere pressoché uguale anche se la prospettiva cambia.
+* **Numerosità:** Le feature devono essere numerose per descrivere piccole porzioni dell'immagine e, di conseguenza, l'immagine nel suo complesso. Possono essere sovrapposte per ogni porzione di immagine.
+* **Ripetibilità e Precisione:** Il processo di estrazione delle feature deve essere ripetibile e preciso. Due esecuzioni dello stesso algoritmo devono produrre gli stessi risultati.
+
+### Esempi
+
+Un esempio di applicazione delle feature è la ricerca di immagini. Un algoritmo che descrive le immagini e permette di ricercarle a partire da una query deve essere ripetibile per garantire risultati affidabili.
+
+### Descrizione delle Feature
+
+Le feature sono generalmente descritte da **vettori numerici**, che rappresentano le proprietà dell'immagine. Questi numeri devono essere **consistenti** per porzioni di immagini simili. Ad esempio, due pezzi di immagine simili dovrebbero avere vettori numerici simili.
+
+Ogni feature è associata a un **vettore**, che può essere monodimensionale o multidimensionale. I vettori hanno spesso almeno 100 elementi.
+
+### Distintività delle Feature
+
+Le feature devono essere **distintive**, ovvero in grado di discriminare tra oggetti e sfondo. In generale, le feature si trovano sui **contorni** o in zone con **alta variabilità di contrasto**. Le zone con colorazioni uniformi, come lo sfondo, non hanno tipicamente feature distintive perché non ci sono caratteristiche che permettono di distinguere un punto da un altro.
+
+In sintesi, le feature per le reti neurali devono essere precise, distintive, invarianti, numerose e il processo di estrazione deve essere ripetibile e preciso. Queste caratteristiche sono fondamentali per garantire la corretta funzionalità delle reti neurali e la loro capacità di apprendere e di eseguire compiti complessi. 
+  
+## Estrazione di Feature Invarianti alla Scala: SIFT
+
+### Introduzione
+
+L'algoritmo SIFT (Scale-Invariant Feature Transform) è un metodo per estrarre feature invarianti alla scala, ovvero feature che rimangono riconoscibili anche se l'immagine viene ridimensionata, ruotata, traslata o modificata in luminosità. 
+ Queste feature sono rappresentate da vettori di 128 elementi, chiamati "descrittori", che descrivono in modo univoco un punto specifico dell'immagine.
+
+### Applicazione Pratica: Creazione di Panorami
+
+Un'applicazione pratica di SIFT è la creazione di panorami a partire da più immagini della stessa scena scattate da diverse prospettive. L'obiettivo è sovrapporre le immagini in modo preciso, unendo le aree comuni per ottenere una vista panoramica completa.
+
+### Passaggi dell'Algoritmo SIFT
+
+L'algoritmo SIFT si compone di quattro passaggi principali:
+
+1. **Identificazione dei Punti di Interesse:** L'algoritmo identifica i punti di interesse nell'immagine, che sono generalmente posizionati sui bordi degli oggetti o in zone con elevato contrasto. Questi punti sono caratterizzati da una forte variazione di gradiente.
+
+2. **Calcolo dei Descrittori:** Per ogni punto di interesse, l'algoritmo calcola un descrittore, un vettore di 128 elementi che descrive in modo univoco il punto. Il descrittore è calcolato applicando un istogramma su un intorno del punto, considerando i gradienti dei pixel in diverse direzioni.
+
+3. **Matching dei Descrittori:** L'algoritmo confronta i descrittori estratti da due immagini diverse per trovare le corrispondenze tra i punti di interesse. Il matching è effettuato cercando i descrittori più simili tra loro.
+
+4. **Trasformazione Geometrica:** Una volta trovate le corrispondenze tra i punti di interesse, l'algoritmo calcola una trasformazione geometrica che permette di sovrapporre le due immagini. Questa trasformazione può includere traslazioni, rotazioni e cambiamenti di scala.
+
+## Dettagli sull'Algoritmo
+
+#### Identificazione dei Punti di Interesse
+
+L'algoritmo SIFT utilizza un metodo di rilevamento dei punti di interesse basato sul calcolo del gradiente. Il gradiente è una misura della variazione di luminosità in un punto dell'immagine. I punti di interesse sono identificati come punti con un elevato gradiente, che indicano la presenza di un bordo o di un angolo.
+
+#### Calcolo dei Descrittori
+
+Il descrittore di un punto di interesse è un vettore di 128 elementi che descrive in modo univoco il punto. Il descrittore è calcolato applicando un istogramma su un intorno del punto, considerando i gradienti dei pixel in diverse direzioni. L'istogramma è un grafico che mostra la distribuzione dei gradienti in diverse direzioni.
+
+#### Matching dei Descrittori
+
+Il matching dei descrittori è effettuato cercando i descrittori più simili tra loro. La similarità tra due descrittori è misurata utilizzando una distanza euclidea. I descrittori più simili sono considerati corrispondenti.
+
+#### Trasformazione Geometrica
+
+La trasformazione geometrica è calcolata utilizzando un algoritmo di stima del movimento rigido. Questo algoritmo utilizza le corrispondenze tra i punti di interesse per calcolare una trasformazione che permette di sovrapporre le due immagini.
+  
+## SIFT (Scale-Invariant Feature Transform)
+
+Il processo SIFT è un algoritmo per l'estrazione di feature da immagini, progettato per essere **ripetibile** e **preciso**. Due esecuzioni dello stesso algoritmo sulla stessa immagine dovrebbero produrre lo stesso risultato.
+
+### Feature
+
+Le feature SIFT sono descrittori numerici che rappresentano le proprietà di un'immagine. Questi numeri devono essere **consistenti** per porzioni di immagini simili. Ogni feature è associata a un vettore mono o multidimensionale.
+
+### Numerosità
+
+Le feature SIFT sono **numerose** perché si riferiscono a singole porzioni di immagine. È possibile avere più feature sovrapposte per una singola immagine. Per calcolare una feature, si considera un intorno di pixel e tutti i valori di quel intorno.
+
+### Distintività
+
+Le feature SIFT devono essere **distintive**. Questo significa che dovrebbero essere in grado di discriminare tra oggetti e sfondo. In generale, le feature SIFT si trovano sui **contorni** o in zone con **alta variabilità di contrasto**. 
+
+### Scopo
+
+L'obiettivo di SIFT è identificare le porzioni di immagine più significative, indipendentemente dalla loro dimensione o orientamento. Ad esempio, in un'immagine di una montagna, SIFT potrebbe identificare i picchi, le valli e le curve del terreno.
+
+### Estrazione delle Feature
+
+SIFT estrae **punti** dall'immagine, che rappresentano le feature. Ogni punto è descritto da un **vettore di 128 elementi**, che fornisce una rappresentazione univoca del punto.
+
+### Matching delle Feature
+
+SIFT trova la **corrispondenza** tra i punti estratti da due immagini diverse. Questo processo è illustrato nell'immagine seguente:
+
+# immagine montagnaa
+
+Le linee rosse nell'immagine mostrano le corrispondenze tra i punti trovati da SIFT nelle due immagini.
+
+### Descrizione delle Feature
+
+Per descrivere ogni punto, SIFT calcola un **istogramma** dei pixel contenuti in un intorno del punto. Questo istogramma viene poi convertito in un **vettore numerico**, che rappresenta la feature.
+
+
+## Edge Detection
+
+L'edge detection è un processo che identifica i bordi di un'immagine, ovvero le aree in cui c'è un brusco cambiamento di luminosità o colore. Questo processo si basa sul calcolo del gradiente dell'immagine, che misura la variazione di luminosità in una direzione specifica.
+
+**Principio di base:**
+
+* **Zona uniforme:** Se non c'è variazione di gradiente, siamo in una zona uniforme, quindi non c'è un bordo.
+* **Bordo:** Se c'è variazione di gradiente lungo una direzione, siamo su un bordo.
+* **Angolo:** Se c'è variazione di gradiente lungo entrambe le direzioni, molto probabilmente siamo su un angolo.
+
+## Algoritmo 
+
+L'algoritmo SIFT si basa su quattro concetti chiave:
+
+1. **Scale Space Extrema Detection:** Questo passaggio identifica i punti di interesse nell'immagine, che sono generalmente posizionati sui bordi degli oggetti o in zone con elevato contrasto. Questo processo si basa sulla creazione di una piramide di immagini a diverse scale e sulla ricerca di massimi e minimi locali in questa piramide.
+
+2. **Keypoint Localization:** Questo passaggio affina la posizione dei punti di interesse identificati nel passaggio precedente, rendendoli invarianti rispetto a variazioni di intensità. Questo processo si basa su un'interpolazione del gradiente dell'immagine per trovare la posizione esatta del punto di interesse.
+
+3. **Orientation Assignment:** Questo passaggio assegna un'orientazione a ciascun punto di interesse, rendendolo invariante rispetto a rotazioni. Questo processo si basa sul calcolo dell'istogramma dei gradienti dei pixel in un intorno del punto di interesse.
+
+4. **Local Descriptor Creation:** Questo passaggio genera un descrittore di 128 elementi per ciascun punto di interesse, che descrive in modo univoco il punto. Questo descrittore è invariante rispetto a variazioni di luminosità, contrasto e rotazione. Il numero di elementi del descrittore può variare a seconda dei parametri utilizzati.

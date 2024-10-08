@@ -1338,42 +1338,66 @@ Buona aderenza empirica per Reuters RCV1:
 
 ![[1) Intro-20241007160038284.png|371]]
 ==fase transitoria iniziale: inizia a fittare a regime==
-## Distribuzione Skewd di Tipo Power Law
 
-La distribuzione skewd di tipo power law è caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa. 
+## Distribuzione Skewd di Tipo Power-law
+
+La distribuzione skewd di tipo power-law è caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa. 
 
 **Caratteristiche:**
 
 * **Concentrazione di massa:** La maggior parte della massa è concentrata in una piccola porzione della distribuzione.
 * **Coda lunga:** La distribuzione presenta una coda che si estende per un lungo periodo, con valori che diminuiscono lentamente.
 
-**Nota:** La distribuzione skewd di tipo power law è spesso osservata in fenomeni naturali e sociali. 
+**Nota:** La distribuzione skewd di tipo power-law è spesso osservata in fenomeni naturali e sociali. 
+
+### Distribuzione di tipo Power-law
+La **distribuzione di tipo power law** è un modello matematico che descrive la distribuzione di molti fenomeni naturali e sociali, come la dimensione delle città, la frequenza delle parole in un linguaggio e la ricchezza delle persone.  È caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa(simile alla funzione esponenziale).  In altre parole, pochi elementi hanno un valore molto alto, mentre molti altri hanno un valore molto basso. 
+
+### Legge di Pareto
+Un esempio di questo modello è la **legge di Pareto**, nota anche come principio 80-20, che afferma che l'80% degli effetti deriva dal 20% delle cause.  Nel contesto del linguaggio naturale, la legge di Zipf è un esempio di distribuzione di tipo power law, dove pochi termini sono molto frequenti, mentre molti altri sono molto rari. 
+
+**Esempi di distribuzione di tipo power law:**
+
+* **Distribuzione della ricchezza tra individui:** Pochi individui possiedono la maggior parte della ricchezza, mentre molti altri hanno una ricchezza molto bassa.
+* **Numero di pagine di siti web:** Pochi siti web hanno un numero molto elevato di pagine, mentre molti altri hanno un numero di pagine molto basso.
+* **Numero di follower di un social network:** Pochi utenti hanno un numero molto elevato di follower, mentre molti altri hanno un numero di follower molto basso.
+* **Dimensione delle città:** Poche città hanno una popolazione molto elevata, mentre molte altre hanno una popolazione molto bassa.
+- **Frequenza delle parole in un documento**
 
 ## Legge di Heaps e Legge di Zipf
 
-La legge di Heaps fornisce una stima della dimensione del vocabolario in un corpus di testo. Tuttavia, nel linguaggio naturale, si osserva una distribuzione non uniforme delle parole: alcuni termini sono molto frequenti, mentre molti altri sono molto rari.
+La legge di Heaps (prima legge di potenza) fornisce una stima della dimensione del vocabolario in un corpus di testo. Tuttavia, nel linguaggio naturale, si osserva una distribuzione non uniforme delle parole: alcuni termini sono molto frequenti, mentre molti altri sono molto rari.
 
-### Legge di Zipf
+### Legge di Zipf (seconda legge di potenza)
 
-Zipf (1949) ha scoperto una relazione empirica tra la frequenza di un termine e il suo rango nel vocabolario. La legge di Zipf afferma che il termine i-esimo più frequente ha una frequenza di collezione proporzionale a 1/i:
+Zipf (1949) ha scoperto una relazione empirica tra la *frequenza* di un termine e il suo *rango* nel vocabolario. 
+Emerge che vi siano termini più frequenti di altri, che sono in minoranza rispetto agli atlri
+La legge di Zipf afferma che l' i-esimo termine più frequente ha una frequenza di collezione proporzionale a $\frac{1}{i}$:
 
-$$cfi \propto \frac{1}{i} = \frac{K}{i}$$
+$$cf_{i} \propto \frac{1}{i} = \frac{K}{i}$$
 
-dove $cfi$ è la frequenza del termine i-esimo, $i$ è il suo rango nel vocabolario e $K$ è una costante di normalizzazione.
+dove $cf_{i}$ è la frequenza del termine i-esimo, $i$ è il suo rango nel vocabolario(posizione in una classifica stabilita su una lista di frequenze) e $K$ è una costante di normalizzazione.
 
 In forma logaritmica, la legge di Zipf si esprime come:
 
-$$log(cfi) = log(K) - log(i)$$
+$$log(cf_{i}) = log(K) - log(i)$$
 
 Questa equazione indica una relazione lineare inversa tra il logaritmo della frequenza del termine e il logaritmo del suo rango. Questa relazione è nota come legge di potenza.
+È dunque una power law con slope negativa
 
 **Esempio:**
 
 Se il termine più frequente ("the") si verifica $cf1$ volte, allora il secondo termine più frequente ("of") si verifica $cf1/2$ volte, il terzo termine più frequente ("and") si verifica $cf1/3$ volte, e così via.
 
 
+![[1) Intro-20241007160144378.png|504]]
+In posizioni di rank basse (origine) abbiamo alta frequenza.  
+La frequenza scende linearmente con scala doppia logaritmica 
 
-![[1) Intro-20241007160144378.png]]
+
+# AAAAAAAAAAAAAAAAAA
+
+
 ## La legge di Zipf: le implicazioni di Luhn
 
 Luhn (1958):
