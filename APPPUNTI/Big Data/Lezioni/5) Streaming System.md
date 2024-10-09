@@ -187,8 +187,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 | Operatori binari temporali   | Unioni di flussi di dati basati su correlazioni temporali, come Join e Cross.                                            |
 | Iterazioni                   | Supporto nativo per iterazioni, che permettono di eseguire calcoli ripetuti su dati in arrivo.                           |
 
----
-### Gestire le Imperfezioni - Watermark
+## Gestire le Imperfezioni - Watermark
 - **Problema**: I dati possono arrivare in anticipo, in orario o in ritardo rispetto al tempo previsto.
 - **Soluzione**: L'uso di **watermark**, che tracciano il progresso temporale degli eventi durante l'elaborazione.
   - **Definizione**: Un watermark è una funzione \( F(P) \to E \), dove:
@@ -196,7 +195,6 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
     - \( E \): Punto nel tempo dell'evento.
   - **Funzione**: Indica che il sistema crede di aver ricevuto tutti i dati con tempi di evento inferiori a \( E \). In altre parole, segnala che non ci si aspetta più dati precedenti a questo punto temporale.
 
----
 ### Watermark Perfetti vs Euristici
 - **Watermark Perfetti**: Possibile se si ha conoscenza completa dei dati in ingresso, con tutti i dati in anticipo o in orario.
 - **Watermark Euristici**: Utilizzano stime basate su informazioni parziali, ideali quando una conoscenza perfetta dei dati non è praticabile.
@@ -206,14 +204,14 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   - Il tasso di transazione è costante, il che semplifica la gestione degli errori.
   - **Domanda**: Possiamo applicare questi principi di affidabilità a una vera esecuzione in streaming?
 
----
+
 ### Creazione di Snapshot - Approccio Naive
 - **Processo di Snapshot**:
   - Pausare l'esecuzione su determinati punti temporali $t_1, t_2, \dots.$
   - Raccogliere lo stato attuale del sistema (es. lo stato della memoria o dei calcoli).
   - Ripristinare l'esecuzione una volta terminata la raccolta dello snapshot.
 
----
+
 ### Partizionamento e Scalabilità Automatici
 - **Tre Tipi di Parallelizzazione**:
   - I grandi sistemi di streaming devono supportare diversi tipi di parallelizzazione per bilanciare carico, distribuzione e prestazioni.
@@ -230,7 +228,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   
 - **Motore di Basso Livello**: È un sistema flessibile, che permette di gestire calcoli personalizzati e adattarsi a diverse architetture di elaborazione.
 
----
+
 ### Vantaggi di Apache Storm
 - **Gratuito, semplice e open source**: Facile accessibilità per sviluppatori.
 - **Multilinguaggio**: Può essere utilizzato con qualsiasi linguaggio di programmazione.
@@ -238,7 +236,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 - **Tolleranza ai guasti**: Garantisce che i dati vengano elaborati correttamente anche in caso di errori.
 - **Robustezza**: Si integra bene con molte tecnologie di database ed è robusto nel gestire grandi carichi di lavoro.
 
----
+
 ### Storm vs Hadoop
 - **Somiglianze**:
   - Entrambi i sistemi utilizzano cluster per l'elaborazione distribuita.
@@ -247,7 +245,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   - **Hadoop** esegue job **MapReduce**, che hanno una fine definita.
   - **Storm** esegue **topologie**, che elaborano dati in modo continuo e teoricamente senza fine.
   
----
+
 ### Modello Dati di Storm
 - **Tupla**: L'unità base di dati in Storm, composta da un elenco di campi.
   - Ogni campo può avere diversi tipi di dati come byte, integer, float, ecc.
@@ -256,14 +254,14 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
     - **Nome del campo**: `getValueByField(String)`
     - **Indice posizionale**: `getValue(int)`
     
----
+
 ### Concetti di Storm: Stream e Spout
 - **Stream**: Una sequenza illimitata di tuple, rappresentata come coppie chiave-valore, ad esempio `<"UIUC", 5>`.
 - **Spout**: La sorgente dei dati di uno stream. Ad esempio:
   - Una **API Twitterhose** può fungere da spout, emettendo un flusso continuo di tweet.
 
----
-### I Componenti di una Topologia Storm
+
+## Componenti di una Topologia Storm
 
 #### Spout
 - **Funzione**: Uno spout è la fonte di dati in una topologia Storm. Esso si occupa di:
@@ -285,7 +283,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   - `execute(Tuple input)`: Viene eseguito per ogni tupla ricevuta. Contiene la logica di elaborazione.
   - `prepare(Map stormConf, TopologyContext context, OutputCollector collector)`: Configura il bolt, ad esempio per inizializzare risorse o settaggi necessari.
 
----
+
 ### Definizione di una Topologia Storm
 
 - **Cos'è una Topologia**: È un'astrazione di un grafo diretto aciclico (DAG) che rappresenta il flusso di elaborazione dei dati. La topologia Storm viene distribuita su un cluster per elaborare i dati in tempo reale.
@@ -293,13 +291,13 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
   - **Bolt**: Nodo che trasforma/elabora i dati. Consuma un certo numero di stream di input, li processa e può emettere nuovi flussi(stream).
 - Ogni nodo (spout o bolt) viene eseguito in parallelo, migliorando l'efficienza di elaborazione.
 
----
+
 ### Architettura di Apache Storm
 - **Processi Worker**: Ogni macchina in un cluster Storm può eseguire uno o più processi worker, che gestiscono task di spout e bolt.
 - **Executor**: Sono i thread che eseguono le operazioni della topologia.
 - **Task**: Sono le unità di lavoro gestite dagli executor.
   
----
+
 ### Componenti di Storm
 1. **Nimbus**
    - È il **master** del cluster Storm, con responsabilità come:
@@ -319,7 +317,7 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
    - Nimbus e i supervisor comunicano solo tramite ZooKeeper, garantendo che il sistema continui a funzionare anche se uno dei componenti viene temporaneamente interrotto.
    - Poiché tutti i dati di stato vengono memorizzati in ZooKeeper, è possibile riavviare Nimbus o un supervisor senza perdita di dati o di stato.
 
----
+
 ### Storm vs Hadoop
 - **Storm**: Elabora dati in modo **continuo** e in tempo reale, tramite topologie.
 - **Hadoop**: Esegue job **MapReduce**, che hanno una durata finita e terminano una volta completato il calcolo.
@@ -477,90 +475,3 @@ public class ReportBolt extends BaseRichBolt {
     }
 }
 ```
----
-### Quiz
-1. Spiegare la differenza tra tempo dell'evento, tempo di ingestione e tempo di elaborazione nei sistemi di elaborazione di stream. Fornire un esempio.
-2. Quali sono le differenze principali tra i modelli di dati "cassa" e "tornello"? Fornire un esempio di applicazione per ogni modello.
-3. Descrivere due sfide nell'elaborazione di stream di dati e come vengono affrontate dagli algoritmi di streaming.
-4. Quali sono i tre principali approcci per l'elaborazione di stream di dati? Descrivere brevemente ogni approccio.
-5. Definire "finestra temporale" nell'elaborazione di stream di dati e fornire due esempi di tipi di finestre.
-6. Cosa sono i watermark nell'elaborazione di stream? Come aiutano a gestire i dati in ritardo?
-7. Spiegare la differenza tra watermark perfetti ed euristici.
-8. Descrivere due vantaggi dell'utilizzo di Apache Storm per l'elaborazione di stream di dati.
-9. Quali sono i tre tipi di parallelizzazione che i grandi sistemi di streaming devono supportare?
-10. Descrivere come Apache Storm gestisce la tolleranza ai guasti nel caso in cui un worker, un supervisor o Nimbus si blocchi.
-
-### Chiave di Risposta del Quiz
-- **Tempo dell'evento:** Il momento in cui l'evento si verifica nella realtà (es. un utente effettua un acquisto online).
-- **Tempo di ingestione:** Il momento in cui il sistema riceve i dati dell'evento (es. il server web registra l'acquisto).
-- **Tempo di elaborazione:** Il momento in cui il sistema elabora i dati (es. l'acquisto viene aggiunto al database).
-- **Esempio:** Un utente effettua un acquisto alle 14:00 (tempo dell'evento), il server registra l'acquisto alle 14:01 (tempo di ingestione) e il sistema aggiorna il database alle 14:05 (tempo di elaborazione).
-- **Modello di cassa:** Solo incrementi sono consentiti (es. conteggio visite sito web). Applicazione: conteggio eventi in tempo reale.
-- **Modello di tornello:** Incrementi e decrementi sono consentiti (es. saldo conto corrente). Applicazione: monitoraggio transazioni finanziarie.
-- **Sfida 1:** Dati illimitati e memoria limitata. **Soluzione:** Algoritmi di streaming processano dati in una sola passata con memoria limitata.
-- **Sfida 2:** Dati in arrivo continuo e risultati in tempo reale. **Soluzione:** Algoritmi di streaming forniscono risultati continui e incrementali.
-- **Elaborazione agnostica del tempo:** Il tempo non è rilevante (es. filtraggio).
-- **Elaborazione approssimativa:** Utilizzo di stime per ottenere risultati rapidi con risorse limitate (es. conteggio approssimativo).
-- **Finestre temporali:** Elaborazione dati in blocchi di tempo definiti (es. calcolo della media mobile).
-- **Finestra temporale:** Intervallo di tempo definito per elaborare un sottoinsieme di dati in streaming.
-- **Esempio 1:** Finestra fissa di 5 minuti.
-- **Esempio 2:** Finestra scorrevole di 1 minuto che si aggiorna ogni 10 secondi.
-- **Watermark:** Marcatori temporali che indicano che tutti i dati fino a un certo tempo sono stati ricevuti.
-- **Gestione dati in ritardo:** I watermark permettono di elaborare i dati in ordine di tempo dell'evento anche se arrivano in ritardo.
-- **Watermark perfetti:** Conoscenza completa dei dati in ingresso (es. dati generati in modo ordinato).
-- **Watermark euristici:** Stime basate su informazioni parziali (es. dati con ritardi variabili).
-- **Vantaggio 1:** Elaborazione in tempo reale e a bassa latenza, ideale per applicazioni sensibili al tempo.
-- **Vantaggio 2:** Scalabilità orizzontale, che consente di gestire grandi volumi di dati.
-- **Parallelizzazione dei dati:** Distribuzione dei dati su diversi nodi.
-- **Parallelizzazione del modello:** Divisione del modello di elaborazione.
-- **Parallelizzazione pipeline:** Elaborazione di diverse fasi della pipeline in parallelo.
-- **Worker:** Il supervisor rileva il guasto e riavvia il worker.
-- **Supervisor:** Nimbus rileva il guasto e riassegna i task ad altri supervisor.
-- **Nimbus:** Le topologie continuano a funzionare, ma nuove riassegnazioni saranno possibili solo dopo il riavvio di Nimbus.
-
----
-# FAQ sull'elaborazione di flussi di dati
-
-## 1. Cosa si intende per "stream" nell'elaborazione dei dati?
-
-Uno stream di dati è una sequenza continua e potenzialmente infinita di dati. A differenza dei dati statici, che sono di dimensioni finite e immutabili, gli stream di dati sono dinamici e crescono continuamente nel tempo. L'elaborazione di stream riguarda l'analisi e l'elaborazione di questi dati in tempo reale, man mano che vengono generati.
-
-## 2. Qual è la differenza tra tempo di elaborazione e tempo dell'evento?
-
-Il tempo dell'evento si riferisce al momento in cui un evento si è verificato nel mondo reale, mentre il tempo di elaborazione si riferisce al momento in cui l'evento viene elaborato dal sistema. A causa di ritardi nella rete o altri fattori, il tempo di elaborazione può essere significativamente diverso dal tempo dell'evento.
-
-## 3. Cosa sono le finestre temporali nell'elaborazione di stream?
-
-Le finestre temporali sono intervalli di tempo utilizzati per suddividere uno stream di dati in blocchi finiti per l'elaborazione. Questo è necessario perché non è possibile elaborare l'intero flusso infinito in una volta sola. Le finestre temporali possono essere basate sul tempo di elaborazione o sul tempo dell'evento.
-
-## 4. Quali sono le sfide nell'elaborazione di stream di dati?
-
-L'elaborazione di stream di dati presenta diverse sfide, tra cui:
-
-- **Gestione di dati in arrivo continuo:** A differenza dei dati batch, gli stream di dati arrivano continuamente, richiedendo sistemi in grado di gestire carichi di lavoro elevati e sostenuti.
-- **Elaborazione in tempo reale:** L'elaborazione deve avvenire in tempo reale o quasi reale per ottenere informazioni tempestive.
-- **Tolleranza ai guasti:** I sistemi di elaborazione di stream devono essere tolleranti ai guasti per garantire l'elaborazione continua dei dati anche in caso di guasti hardware o software.
-
-## 5. Cos'è un watermark nell'elaborazione di stream?
-
-Un watermark è un meccanismo utilizzato per gestire il disordine dei dati negli stream. Fornisce una stima del punto nel tempo fino al quale il sistema ha ricevuto tutti i dati per un determinato evento. I watermark consentono ai sistemi di elaborazione di stream di fornire risultati accurati anche quando i dati arrivano fuori ordine.
-
-## 6. Qual è la differenza tra Apache Storm e Hadoop?
-
-Mentre sia Apache Storm che Hadoop sono framework di elaborazione distribuita, sono progettati per scopi diversi. Hadoop è adatto per l'elaborazione batch di grandi set di dati statici, mentre Storm è progettato per l'elaborazione di stream di dati in tempo reale.
-
-## 7. Quali sono i componenti principali di un'architettura Apache Storm?
-
-Un'architettura Apache Storm è composta da tre componenti principali:
-
-- **Nimbus:** Il nodo master responsabile della distribuzione del codice e dell'assegnazione dei task ai nodi worker.
-- **Supervisor:** I nodi worker che eseguono i task assegnati da Nimbus.
-- **ZooKeeper:** Un servizio di coordinamento distribuito utilizzato per gestire lo stato del cluster e la comunicazione tra Nimbus e i nodi supervisor.
-
-## 8. Quali sono i vantaggi dell'utilizzo di Apache Storm per l'elaborazione di stream?
-
-Apache Storm offre diversi vantaggi per l'elaborazione di stream, tra cui:
-
-- **Velocità e scalabilità:** Storm è estremamente veloce e può scalare orizzontalmente per gestire enormi volumi di dati.
-- **Tolleranza ai guasti:** Storm è progettato per essere tollerante ai guasti e può gestire i guasti dei nodi senza perdere dati.
-- **Facilità d'uso:** Storm fornisce un'API semplice e facile da usare per lo sviluppo di applicazioni di elaborazione di stream.

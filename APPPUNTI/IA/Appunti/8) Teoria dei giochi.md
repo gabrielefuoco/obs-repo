@@ -718,11 +718,3 @@ I giochi in forma estesa rappresentano situazioni in cui i giocatori prendono de
 ### Algoritmo Minimax:
 La dimostrazione del teorema che ogni gioco estensivo a informazione perfetta ammette un Subgame Perfect Equilibrium di strategie pure si basa sul principio del Minimax, un algoritmo che cerca di minimizzare le perdite massime in situazioni di conflitto, tipicamente usato in giochi competitivi a due giocatori.
 
-In sintesi:
-- Nei giochi estensivi i giocatori scelgono in sequenza.
-- Possono avere informazione perfetta o imperfetta.
-- Gli equilibri di Nash possono essere estesi a Subgame Perfect Equilibria, dove le strategie rimangono ottimali in ogni sottogioco.
-- Il teorema sugli SPE si basa sull'algoritmo Minimax, il quale garantisce strategie pure ottimali nei giochi a informazione perfetta.
-
-
-

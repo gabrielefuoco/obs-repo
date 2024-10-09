@@ -150,11 +150,11 @@ def pregel[A](
   - `sendMsg`: invia messaggi ai vertici adiacenti.
   - `mergeMsg`: unisce i messaggi ricevuti in uno solo.
 
-## Vantaggi di GraphX
+### Vantaggi di GraphX
 - **Scalabilità** e supporto per l'elaborazione di **grafi su larga scala**.
 - **Integrazione con Spark** per combinare analisi di dati e machine learning.
 - Ampia collezione di **algoritmi per grafi** e operatori per la manipolazione flessibile.
----
+
 ## Esempio di Programmazione
 
 ### L'algoritmo PageRank
@@ -201,74 +201,7 @@ Dove:
   - L'insieme S = {s1,...,sn} contiene le n frasi presenti in T.
   - L'insieme E contiene gli archi del grafo ed è creato collegando ogni coppia di frasi in S, dove ogni connessione è associata a un peso wi,j che rappresenta la similarità testuale tra si e sj.
 
-## Messaggi Chiave
+### Messaggi Chiave
 - I **grafi** sono strumenti potenti per modellare scenari reali.
 - Nei **Big Data**, framework come **GraphX** sono essenziali per l'elaborazione distribuita dei grafi, garantendo **scalabilità** e **tolleranza ai guasti**.
 - **GraphX** fornisce un'API ottimizzata per eseguire elaborazioni complesse di grafi, integrata nell'ecosistema Spark.
-
-# Domande Frequenti sui Grafi e GraphX
-
-## 1. Cosa sono i grafi e perché sono importanti nell'analisi dei dati?
-
-Un grafo è una struttura matematica composta da un insieme di vertici (nodi) collegati da archi. Sono utilizzati per rappresentare relazioni e connessioni tra oggetti, come reti sociali, relazioni tra dati e conoscenza, o sistemi di raccomandazione. La loro capacità di modellare scenari complessi li rende strumenti potenti per l'analisi dei dati.
-
-## 2. Quali sono le sfide nell'elaborazione di grafi su larga scala e come vengono affrontate?
-
-I grafi su larga scala, con milioni o miliardi di vertici e archi, presentano sfide significative per gli strumenti di elaborazione tradizionali. I framework come Hadoop e Spark non sono ottimizzati per la struttura dei grafi, causando inefficienze e prestazioni ridotte. Per questo motivo, sono stati sviluppati framework specifici per l'elaborazione di grafi, come Pregel e GraphX, che sfruttano il parallelismo e architetture distribuite per gestire efficacemente la mole di dati.
-
-## 3. Cos'è il modello Bulk Synchronous Parallel (BSP) e come si applica all'elaborazione dei grafi?
-
-Il modello BSP è un paradigma di calcolo parallelo in cui l'elaborazione avviene in "superstep". Ogni superstep consiste in tre fasi: calcolo locale sui processori, comunicazione globale tra i processori e sincronizzazione per garantire che tutti i processori siano allineati prima di procedere al superstep successivo. Questo modello si adatta bene all'elaborazione dei grafi perché consente di suddividere il grafo in parti elaborabili in parallelo, riducendo la comunicazione e migliorando le prestazioni.
-
-## 4. Cosa significa programmazione "vertex-centric" e quali sono i suoi vantaggi?
-
-La programmazione "vertex-centric" è un approccio in cui l'elaborazione si concentra sui singoli vertici del grafo. Ogni vertice esegue una funzione definita dall'utente sui propri dati e può inviare messaggi ai vertici adiacenti. Questo approccio semplifica lo sviluppo di algoritmi sui grafi, migliorando la leggibilità del codice e facilitando il ragionamento sulle operazioni da eseguire.
-
-## 5. Cos'è Apache Spark GraphX e quali sono le sue caratteristiche principali?
-
-Apache Spark GraphX è una libreria di Apache Spark progettata per l'elaborazione distribuita di grafi su larga scala. Offre:
-
-- **Resilient Distributed Graphs (RDG):** un'estensione degli RDD di Spark per gestire i dati del grafo in modo distribuito e resiliente ai guasti.
-- **Algoritmi per grafi:** algoritmi predefiniti come PageRank, ricerca di componenti connesse e conteggio dei triangoli.
-- **Operatori per grafi:** funzioni per manipolare i grafi, come mappatura, filtraggio e aggregazione.
-- **Integrazione con Spark:** sinergia con altri componenti di Spark per combinare l'elaborazione dei grafi con machine learning e analisi dei dati.
-
-## 6. Come funziona il partizionamento "vertex-cut" in GraphX e perché è importante?
-
-Il partizionamento "vertex-cut" in GraphX assegna gli archi alle macchine in base ai loro vertici di origine e destinazione. I vertici possono essere replicati su più nodi per ridurre la comunicazione durante l'elaborazione. Questo approccio riduce il traffico di rete e migliora le prestazioni complessive.
-
-## 7. Cosa sono gli EdgeTriplet e come vengono utilizzati in GraphX?
-
-Un EdgeTriplet in GraphX è una struttura dati che rappresenta un arco con informazioni aggiuntive sui vertici di origine e destinazione. Fornisce una vista completa dell'arco e dei suoi vertici adiacenti, facilitando operazioni come l'aggregazione di informazioni dai vicini o l'applicazione di filtri basati sugli attributi dei vertici.
-
-## 8. Puoi fornire un esempio di applicazione pratica di GraphX?
-
-Un esempio pratico è l'utilizzo di GraphX per implementare l'algoritmo PageRank, che classifica l'importanza delle pagine web in base ai collegamenti in entrata. GraphX può elaborare grafi web su larga scala, calcolando il PageRank in modo efficiente e scalabile. Questo risultato può essere utilizzato per migliorare i motori di ricerca o per analizzare l'influenza e la reputazione di siti web e utenti sui social media.
-
-### Quiz
-
-
-1. **Quali sono i vantaggi dell'utilizzo di un framework Graph-Parallel rispetto a framework tradizionali come Hadoop o Spark per l'elaborazione di grafi su larga scala?**
-2. **Descrivere il modello di calcolo Bulk Synchronous Parallel (BSP) e come viene applicato all'elaborazione di grafi.**
-3. **Quali sono le caratteristiche principali di Apache Spark GraphX?**
-4. **Spiegare il concetto di Resilient Distributed Graph (RDG) in GraphX.**
-5. **Qual è lo scopo della struttura dati EdgeTriplet in GraphX?**
-6. **Come viene implementato il partizionamento Vertex-Cut in GraphX per la distribuzione dei dati?**
-7. **Descrivere l'API Pregel in GraphX e il suo funzionamento.**
-8. **Quali sono i vantaggi dell'utilizzo di GraphX per l'elaborazione di grafi?**
-9. **Come funziona l'algoritmo PageRank e a cosa serve?**
-10. **In che modo TextRank utilizza PageRank per il riassunto di testo?**
-
-### Chiave di Risposta del Quiz
-
-1. I framework Graph-Parallel sono ottimizzati per l'elaborazione di grafi, considerando la loro struttura sottostante e riducendo gli spostamenti di dati, a differenza di Hadoop e Spark che sono più generalisti e meno efficienti per questo tipo di elaborazione.
-2. Il modello BSP organizza il calcolo in superstep, ognuno composto da fasi di calcolo locale, comunicazione globale e sincronizzazione, garantendo correttezza e scalabilità per problemi iterativi come quelli sui grafi.
-3. GraphX offre RDG per la gestione di grafi distribuiti, algoritmi predefiniti, operatori per manipolazioni flessibili e integrazione con altri componenti di Spark.
-4. RDG è un'estensione degli RDD di Spark che partiziona i dati del grafo (vertici e archi) su un cluster, garantendo resilienza e elaborazione distribuita efficiente.
-5. EdgeTriplet fornisce una vista completa di un arco, includendo informazioni sui vertici di origine e destinazione, facilitando l'elaborazione basata sul contesto locale.
-6. Il partizionamento Vertex-Cut assegna gli archi alle macchine e distribuisce i vertici, riducendo la comunicazione inter-nodo e ottimizzando l'utilizzo della memoria.
-7. L'API Pregel permette di implementare algoritmi iterativi vertex-centric, definendo funzioni per il comportamento dei vertici, l'invio di messaggi e la loro unione.
-8. GraphX offre scalabilità, integrazione con Spark, un'ampia collezione di algoritmi, operatori flessibili e supporto per l'elaborazione distribuita, semplificando l'analisi di grafi complessi.
-9. PageRank assegna un punteggio di importanza ai vertici di un grafo in base al numero e all'importanza dei link in entrata, simulando il comportamento di un utente che naviga casualmente il grafo.
-10. TextRank modella un testo come un grafo di frasi, assegnando pesi agli archi in base alla similarità semantica. Applica poi PageRank per identificare le frasi più centrali e informative per il riassunto.
-

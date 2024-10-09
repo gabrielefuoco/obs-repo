@@ -1,32 +1,33 @@
 
-| Termine                                       | **Spiegazione**                                                                                                                                                                      |
+| **Termine**                                       | **Spiegazione**                                                                                                                                                                      |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Apache Hadoop                                 | Un framework software open-source per l'elaborazione distribuita di grandi set di dati su cluster di hardware commodity.                                                             |
-| HDFS (Hadoop Distributed File System)         | Un sistema di file distribuito progettato per gestire grandi set di dati e garantire tolleranza ai guasti tramite la replica dei dati.                                               |
-| Hadoop YARN (Yet Another Resource Negotiator) | Un gestore di risorse che si occupa di allocare le risorse del cluster alle applicazioni, garantendo un'esecuzione efficiente.                                                       |
-| Hadoop MapReduce                              | Un modello di programmazione per l'elaborazione distribuita dei dati, che suddivide il lavoro in task Map (filtraggio e classificazione) e task Reduce (aggregazione dei risultati). |
-| Scalabilità Orizzontale                       | La capacità di un sistema di aumentare le prestazioni aggiungendo più macchine al cluster.                                                                                           |
-| Server Commodity                              | Server economici e facilmente reperibili.                                                                                                                                            |
-| Mapper                                        | Una funzione che elabora una coppia chiave-valore di input e produce un insieme di coppie chiave-valore intermedie.                                                                  |
-| Reducer                                       | Una funzione che elabora un insieme di coppie chiave-valore intermedie con la stessa chiave e produce un insieme di coppie chiave-valore di output.                                  |
-| Shuffle and Sort                              | La fase di MapReduce che raggruppa le coppie chiave-valore intermedie per chiave e le ordina.                                                                                        |
-| Combiner                                      | Una funzione opzionale che può essere utilizzata per aggregare i dati intermedi prima che vengano inviati ai reducer.                                                                |
-| Partizionamento                               | Il processo di divisione dei dati in sottoinsiemi che vengono elaborati dai reducer.                                                                                                 |
-| NameNode                                      | Il server master in HDFS che gestisce lo spazio dei nomi del file system e controlla l'accesso ai file.                                                                              |
-| DataNode                                      | I server che archiviano i blocchi di dati, replicati per garantire la tolleranza ai guasti.                                                                                          |
-| EditLog                                       | Un registro delle transazioni che registra le modifiche ai metadati in HDFS.                                                                                                         |
-| FsImage                                       | Un file che contiene la mappatura dei blocchi e altre proprietà del file system in HDFS.                                                                                             |
-| ResourceManager (RM)                          | Gestisce globalmente le risorse del cluster, pianifica e alloca risorse per i job in YARN.                                                                                           |
-| NodeManager (NM)                              | Agente distribuito su ogni nodo del cluster, monitorizza e riporta lo stato delle risorse al ResourceManager in YARN.                                                                |
-| ApplicationMaster (AM)                        | Creato per ogni applicazione, negozia le risorse con il ResourceManager e coordina l'esecuzione dei task con i NodeManager in YARN.                                                  |
-| Località dei Dati                             | Il principio di eseguire i task vicino ai dati per evitare l'uso eccessivo della larghezza di banda.                                                                                 |
-| Amazon Elastic MapReduce (EMR)                | Un servizio AWS che distribuisce il lavoro su server virtuali in AWS (EC2), supporta anche Hive, Pig, HBase, Spark.                                                                  |
-| Google Cloud Dataproc                         | Un servizio Google Cloud che esegue su Google Cloud, supporta anche Hadoop e Spark.                                                                                                  |
-| Hadoop Streaming                              | Un'API che permette di scrivere funzioni Map e Reduce in linguaggi di programmazione diversi da Java.                                                                                |
-| Cloudera CDH                                  | Una distribuzione integrata basata su Hadoop che contiene tutti i componenti necessari per la produzione.                                                                            |
-| MapR                                          | Una distribuzione integrata basata su Hadoop che utilizza un file system proprietario (MapR-FS) invece di HDFS.                                                                      |
+| **Apache Hadoop**                                 | Un framework software open-source per l'elaborazione distribuita di grandi set di dati su cluster di hardware commodity.                                                             |
+| **HDFS (Hadoop Distributed File System)**         | Un sistema di file distribuito progettato per gestire grandi set di dati e garantire tolleranza ai guasti tramite la replica dei dati.                                               |
+| **Hadoop YARN (Yet Another Resource Negotiator)** | Un gestore di risorse che si occupa di allocare le risorse del cluster alle applicazioni, garantendo un'esecuzione efficiente.                                                       |
+| **Hadoop MapReduce**                              | Un modello di programmazione per l'elaborazione distribuita dei dati, che suddivide il lavoro in task Map (filtraggio e classificazione) e task Reduce (aggregazione dei risultati). |
+| **Scalabilità Orizzontale**                       | La capacità di un sistema di aumentare le prestazioni aggiungendo più macchine al cluster.                                                                                           |
+| **Server Commodity**                              | Server economici e facilmente reperibili.                                                                                                                                            |
+| **Mapper**                                        | Una funzione che elabora una coppia chiave-valore di input e produce un insieme di coppie chiave-valore intermedie.                                                                  |
+| **Reducer**                                       | Una funzione che elabora un insieme di coppie chiave-valore intermedie con la stessa chiave e produce un insieme di coppie chiave-valore di output.                                  |
+| **Shuffle and Sort**                              | La fase di MapReduce che raggruppa le coppie chiave-valore intermedie per chiave e le ordina.                                                                                        |
+| **Combiner**                                      | Una funzione opzionale che può essere utilizzata per aggregare i dati intermedi prima che vengano inviati ai reducer.                                                                |
+| **Partizionamento**                               | Il processo di divisione dei dati in sottoinsiemi che vengono elaborati dai reducer.                                                                                                 |
+| **NameNode**                                      | Il server master in HDFS che gestisce lo spazio dei nomi del file system e controlla l'accesso ai file.                                                                              |
+| **DataNode**                                      | I server che archiviano i blocchi di dati, replicati per garantire la tolleranza ai guasti.                                                                                          |
+| **EditLog**                                       | Un registro delle transazioni che registra le modifiche ai metadati in HDFS.                                                                                                         |
+| **FsImage**                                       | Un file che contiene la mappatura dei blocchi e altre proprietà del file system in HDFS.                                                                                             |
+| **ResourceManager (RM)**                          | Gestisce globalmente le risorse del cluster, pianifica e alloca risorse per i job in YARN.                                                                                           |
+| **NodeManager (NM)**                              | Agente distribuito su ogni nodo del cluster, monitorizza e riporta lo stato delle risorse al ResourceManager in YARN.                                                                |
+| **ApplicationMaster (AM)**                        | Creato per ogni applicazione, negozia le risorse con il ResourceManager e coordina l'esecuzione dei task con i NodeManager in YARN.                                                  |
+| **Località dei Dati**                             | Il principio di eseguire i task vicino ai dati per evitare l'uso eccessivo della larghezza di banda.                                                                                 |
+| **Amazon Elastic MapReduce (EMR)**                | Un servizio AWS che distribuisce il lavoro su server virtuali in AWS (EC2), supporta anche Hive, Pig, HBase, Spark.                                                                  |
+| **Google Cloud Dataproc**                         | Un servizio Google Cloud che esegue su Google Cloud, supporta anche Hadoop e Spark.                                                                                                  |
+| **Hadoop Streaming**                              | Un'API che permette di scrivere funzioni Map e Reduce in linguaggi di programmazione diversi da Java.                                                                                |
+| **Cloudera CDH**                                  | Una distribuzione integrata basata su Hadoop che contiene tutti i componenti necessari per la produzione.                                                                            |
+| **MapR**                                          | Una distribuzione integrata basata su Hadoop che utilizza un file system proprietario (MapR-FS) invece di HDFS.                                                                      |
 
 ## Cos'è Apache Hadoop?
+
 Apache Hadoop è un framework software open-source progettato per il **calcolo distribuito** affidabile e scalabile su set di dati massivi, utilizzando **cluster di hardware commodity**. È stato originariamente sviluppato da Yahoo! per gestire grandi quantità di dati su infrastrutture distribuite.
 
 #### Obiettivi principali:
@@ -45,15 +46,12 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 #### Hadoop MapReduce:
 - Paradigma di programmazione che consente l'**elaborazione distribuita** di grandi dataset in modo parallelo.
 - Il sistema suddivide il lavoro in **task Map** (dove i dati vengono filtrati e classificati) e **task Reduce** (dove i risultati parziali vengono combinati).
-
----
-### Architettura del cluster Hadoop:
+## Architettura del cluster Hadoop:
 - I nodi di calcolo sono organizzati in **rack**, ognuno contenente da 8 a 64 nodi.
 - I rack sono collegati tramite reti ad alta velocità (Ethernet Gigabit), ma la **comunicazione intra-rack** è più rapida rispetto alla comunicazione tra rack.
 - Poiché i nodi possono guastarsi, Hadoop si basa sulla **replicazione** dei dati e sulla ridondanza per garantire l'affidabilità.
 
----
-### Hadoop su hardware commodity:
+## Hadoop su hardware commodity:
 - **Vantaggi**:
   - Utilizzo di **hardware standardizzato** e accessibile, senza dover dipendere da costosi fornitori proprietari.
   - Possibilità di scalare orizzontalmente (aggiungendo più nodi) piuttosto che verticalmente (aggiornando l'hardware esistente).
@@ -114,8 +112,7 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
   - **API Java**: per le applicazioni che interagiscono direttamente con HDFS.
   - **FS Shell**: un'interfaccia a riga di comando per interagire con HDFS.
 
----
-### Esempi di comandi FS Shell
+## Esempi di comandi FS Shell
 
 - **Creare una directory**:
   ```bash
@@ -162,7 +159,7 @@ YARN cerca di eseguire i task vicino ai dati per evitare l'uso eccessivo della l
 - **Rack locale**: Se non disponibile un nodo locale.
 - **Fuori dal rack**: Come ultima opzione.
 
----
+## Flusso dei dati
 #### Flusso dei Dati MapReduce con un Reducer
 1. **Phase Map**:
    - I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
@@ -201,8 +198,8 @@ YARN cerca di eseguire i task vicino ai dati per evitare l'uso eccessivo della l
 - Il **Combiner** è un'ottimizzazione locale per ridurre il traffico di rete tra i task Map e Reduce.
 - Aggrega localmente i dati intermedi con la stessa chiave prima di trasmetterli ai Reducer.
 - Anche con un combiner, il task Reduce finale è comunque necessario per aggregare i risultati da più nodi.
----
-### Distribuzioni di Hadoop
+
+## Distribuzioni di Hadoop
 - **Cloudera CDH e MapR**: 
   - Sono distribuzioni integrate basate su Hadoop che contengono tutti i componenti necessari per la produzione.
   - **Cloudera**: Si è fusa con Hortonworks nel 2019.
@@ -379,85 +376,3 @@ Per quanto riguarda i **linguaggi di programmazione per Hadoop**:
 - Utilizza gli stream standard Unix come interfaccia tra Hadoop e il programma MapReduce.
 - Consente di utilizzare qualsiasi linguaggio (ad esempio Python) che possa leggere l'input standard (stdin) e scrivere sull'output standard (stdout) per scrivere il programma MapReduce.
 - L'interfaccia del Reducer per lo streaming è diversa da Java: invece di ricevere `reduce(k, Iterator[v])`, lo script riceve una riga per valore, inclusa la chiave.
-
-# FAQ su Apache Hadoop
-
-## 1. Cos'è Apache Hadoop e quali sono i suoi obiettivi principali?
-
-Apache Hadoop è un framework software open-source progettato per l'elaborazione distribuita di enormi set di dati (Big Data) su cluster di hardware commodity, cioè economici e facilmente reperibili.
-
-I suoi obiettivi principali sono:
-
-- **Archiviare ed elaborare** enormi quantità di dati.
-- Garantire **affidabilità e scalabilità** anche in caso di guasto dell'hardware.
-
-## 2. Quali sono i componenti principali di Hadoop?
-
-Hadoop include tre componenti fondamentali:
-
-- **HDFS (Hadoop Distributed File System):** Un sistema di file distribuito per l'archiviazione di grandi set di dati, progettato per garantire tolleranza ai guasti tramite la replica dei dati.
-- **Hadoop YARN (Yet Another Resource Negotiator):** Un gestore di risorse che si occupa di allocare le risorse del cluster alle applicazioni, garantendo un'esecuzione efficiente.
-- **Hadoop MapReduce:** Un modello di programmazione per l'elaborazione distribuita dei dati, che suddivide il lavoro in task Map (filtraggio e classificazione) e task Reduce (aggregazione dei risultati).
-
-## 3. Come funziona l'architettura di un cluster Hadoop?
-
-Un cluster Hadoop è composto da nodi di calcolo organizzati in rack. I nodi all'interno di un rack comunicano più velocemente rispetto a quelli in rack differenti. Per garantire affidabilità, Hadoop replica i dati su più nodi.
-
-## 4. Quali sono i vantaggi e gli svantaggi dell'utilizzo di hardware commodity con Hadoop?
-
-**Vantaggi:**
-
-- **Economicità:** L'utilizzo di hardware standard riduce i costi rispetto a soluzioni proprietarie.
-- **Scalabilità orizzontale:** È possibile aumentare le prestazioni del cluster aggiungendo semplicemente nuovi nodi.
-
-**Svantaggi:**
-
-- **Maggiore tasso di guasti:** L'hardware commodity è generalmente meno affidabile, ma Hadoop mitiga questo problema tramite replica dei dati e gestione distribuita dei task.
-
-## 5. Come funziona HDFS e quali sono i suoi componenti principali?
-
-HDFS è un file system progettato per archiviare grandi dataset su hardware commodity. È tollerante ai guasti e offre un accesso rapido ai dati per applicazioni che elaborano grandi quantità di informazioni.
-
-I suoi componenti principali sono:
-
-- **NameNode:** Il server master che gestisce lo spazio dei nomi del file system e controlla l'accesso ai file.
-- **DataNode:** I server che archiviano i blocchi di dati, replicati per garantire la tolleranza ai guasti.
-
-## 6. Qual è il ruolo di YARN in Hadoop e come si differenzia da MapReduce?
-
-YARN è il gestore di risorse di Hadoop introdotto in Hadoop 2.0. Si occupa di allocare le risorse del cluster a diverse applicazioni, non solo MapReduce, migliorando l'efficienza e la scalabilità rispetto alla precedente versione di Hadoop.
-
-## 7. Cos'è un Combiner in MapReduce e come ottimizza l'elaborazione dei dati?
-
-Il Combiner è un componente opzionale in MapReduce che aggrega localmente i dati intermedi prodotti dai task Map prima di inviarli ai task Reduce. Ciò riduce la quantità di dati trasmessi sulla rete, migliorando le prestazioni complessive del job.
-
-## 8. Quali sono le sfide principali dell'utilizzo di Hadoop nel cloud?
-
-Nonostante i vantaggi di scalabilità ed elasticità offerti dal cloud, l'utilizzo di Hadoop in questo ambiente presenta alcune sfide:
-
-- **Spostamento dei dati:** Trasferire grandi quantità di dati nel cloud può essere lento e costoso.
-- **Sicurezza e privacy:** La protezione dei dati sensibili nel cloud richiede attenzione e l'adozione di misure di sicurezza adeguate.
-
-### Domande
-1. Quali sono i tre componenti principali di Hadoop e quali sono le loro funzioni?
-2. In che modo HDFS garantisce la tolleranza ai guasti?
-3. Descrivere la differenza tra la comunicazione intra-rack e inter-rack in un cluster Hadoop.
-4. Quali sono i vantaggi e gli svantaggi dell'utilizzo di hardware commodity per Hadoop?
-5. Spiegare il concetto di "spostare il calcolo vicino ai dati" in HDFS.
-6. Descrivere la differenza tra NameNode e DataNode in HDFS.
-7. Come gestisce YARN l'allocazione delle risorse in modo diverso da Hadoop 1.0?
-8. Quali sono i tre tipi di flusso di dati in MapReduce in base al numero di reducer?
-9. Qual è lo scopo di un combiner in MapReduce?
-10. Confrontare i vantaggi e le sfide dell'utilizzo di Hadoop nel cloud.
-
-### Risposte
-1. I tre componenti principali di Hadoop sono HDFS, YARN e MapReduce. **HDFS** è il sistema di file distribuito che archivia i dati in modo ridondante. **YARN** è il gestore di risorse che gestisce le risorse del cluster e pianifica i lavori. **MapReduce** è il framework di programmazione che consente l'elaborazione distribuita dei dati.
-2. HDFS garantisce la tolleranza ai guasti replicando i dati su più DataNode. Se un DataNode si guasta, HDFS può recuperare i dati dalle repliche su altri nodi.
-3. La comunicazione intra-rack si riferisce alla comunicazione tra i nodi all'interno dello stesso rack, mentre la comunicazione inter-rack si riferisce alla comunicazione tra i nodi in rack diversi. La comunicazione intra-rack è in genere più veloce della comunicazione inter-rack perché i nodi all'interno dello stesso rack sono collegati tramite una rete ad alta velocità.
-4. I vantaggi dell'utilizzo di hardware commodity per Hadoop includono costi inferiori, scalabilità e flessibilità. Gli svantaggi includono prestazioni inferiori e affidabilità rispetto alle soluzioni proprietarie.
-5. "Spostare il calcolo vicino ai dati" in HDFS significa che è più efficiente elaborare i dati sul nodo in cui sono archiviati, anziché spostare i dati sul nodo in cui è in esecuzione l'applicazione. Questo riduce al minimo il movimento dei dati attraverso la rete, il che può migliorare le prestazioni.
-6. **NameNode** è il nodo master in HDFS che gestisce il namespace del file system e tiene traccia di dove sono archiviati i blocchi di dati. **DataNode** sono i nodi slave che archiviano i blocchi di dati effettivi.
-7. YARN distribuisce la gestione delle risorse e la pianificazione dei lavori su più nodi, mentre in Hadoop 1.0, queste funzioni erano centralizzate nel JobTracker, creando un collo di bottiglia.
-8. I tre tipi di flusso di dati in MapReduce sono: con un reducer, senza reducer e con più reducer.
-9. Un combiner in MapReduce è un'ottimizzazione che aggrega localmente i dati intermedi con la stessa chiave prima di inviarli ai reducer. Questo riduce la quantità di dati che devono essere trasferiti attraverso la rete, il che può migliorare le prestazioni.
-10. I vantaggi dell'utilizzo di Hadoop nel cloud includono scalabilità, elasticità e nessuna gestione dell'infrastruttura. Le sfide includono lo spostamento dei dati nel cloud, la sicurezza dei dati e la privacy dei dati.

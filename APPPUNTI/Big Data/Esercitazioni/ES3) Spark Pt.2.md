@@ -1,9 +1,3 @@
-# Da fare:
-* **Esecuzione locale:** URL master, debug, Java, Scala, Python.
-* **Esecuzione su cluster:** EC2, cluster privati (standalone, Mesos, YARN, EMR).
-* **Esempio: PageRank:** Descrizione dell'algoritmo PageRank e la sua implementazione in Scala.
-* **Spark: Combinazione di librerie (pipeline unificata):** Esempio di utilizzo di Spark SQL, MLlib e Spark Streaming per creare una pipeline di elaborazione dati completa.
-* **Spark GraphX:** Esempio di creazione di un grafo e di esecuzione di query su un grafo.
 
 ### Componenti Software
 
@@ -118,7 +112,6 @@
 * Il livello di storage viene scelto passando un oggetto `org.apache.spark.storage.StorageLevel` al metodo `persist()`.
 * Il metodo `cache()` utilizza il livello predefinito `StorageLevel.MEMORY_ONLY`.
 
----
 
 ## Persistenza RDD: Scegliere il Livello di Storage
 
@@ -129,10 +122,6 @@
 **Livello Disco:** Evita di trasferire i dati su disco a meno che le funzioni che hanno calcolato i tuoi dataset siano costose o filtrino una grande quantità di dati. In generale, ricalcolare una partizione è veloce quanto leggerla da disco.
 
 **Livelli Replicati:** Se hai bisogno di un rapido recupero da errori (ad esempio, in un'applicazione web), utilizza i livelli di storage replicati. Questi livelli replicano le partizioni su più nodi, garantendo una continuità di esecuzione anche in caso di perdita di dati.
-
-```
-12
-```
 
 ## Come Funziona Spark a Tempo di Esecuzione
 
@@ -151,7 +140,7 @@
 * **Task:** Ogni stage viene eseguito come una serie di task, una per ogni partizione.
 * **Azioni:** Le azioni guidano l'esecuzione del DAG.
 
-## Esecuzione di uno Stage
+### Esecuzione di uno Stage
 
 * **Spark:** Crea un task per ogni partizione del nuovo RDD, pianifica e assegna i task ai nodi worker.
 * **Esecuzione Interna:** Tutto questo processo avviene internamente, senza intervento dell'utente.
@@ -187,21 +176,6 @@ log:
             shouldCache = true
 ```
 
-**Vista a Livello di Partizione:**
-
-```
-z*
-k
-y
-f X Z X
-```
-
-**Task:**
-
-* Task 1
-* Task 2 ...
-
-**Fonte:** https://cwiki.apache.org/confluence/display/SPARK/Spark4-lnternals
 
 **Spiegazione:**
 
@@ -213,116 +187,37 @@ f X Z X
 
 ## Durata di un Job in Spark (Flusso dei Task)
 
-**1. Oggetti RDD:**
-
-* `rddl.join(rdd2)`: Unione di due RDD.
-* `.groupBy(...)`: Raggruppamento di elementi in base a una chiave.
-* `.filter(...)`: Filtraggio di elementi in base a una condizione.
-
-**2. Costruzione del DAG di operatori:**
-
-* Il DAG (Directed Acyclic Graph) rappresenta le operazioni sugli RDD come un grafo.
-
-**3. DAG Scheduler:**
-
-* Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.
-
-**4. Task Scheduler:**
-
-* Il Task Scheduler assegna i task ai worker del cluster.
-
-**5. Worker:**
-
-* I worker eseguono i task assegnati.
-
-**6. Cluster Manager:**
-
-* Gestisce i nodi del cluster e assegna i task ai worker.
-
-**7. Threads:**
-
-* I thread eseguono i task all'interno dei worker.
-
-**8. Block Manager:**
-
-* Memorizza e serve i blocchi di dati.
-
-**9. Dividi il DAG in stage di task:**
-
-* Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.
-
-**10. Invia ogni stage e i suoi task quando sono pronti:**
-
-* Il Task Scheduler invia gli stage e i task ai worker quando sono pronti per l'esecuzione.
-
-**11. Lancia i task tramite Master:**
-
-* Il Master (o Cluster Manager) lancia i task sui worker.
-
-**12. Riprova i task falliti e strag­gler:**
-
-* Il Task Scheduler riprova i task falliti o che impiegano troppo tempo (stragglers).
-
-**13. Esegui i task:**
-
-* I worker eseguono i task assegnati.
-
-**14. Memorizza e servi i blocchi:**
-
-* Il Block Manager memorizza e serve i blocchi di dati utilizzati dai task.
-
+| Fase                                                  | **Descrizione**                                                                                                                                                                          |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Oggetti RDD**                                        | * `rddl.join(rdd2)`: Unione di due RDD. <br> * `.groupBy(...)`: Raggruppamento di elementi in base a una chiave. <br> * `.filter(...)`: Filtraggio di elementi in base a una condizione. |
+| **2. Costruzione del DAG di operatori**                   | Il DAG (Directed Acyclic Graph) rappresenta le operazioni sugli RDD come un grafo.                                                                                                       |
+| **3. DAG Scheduler**                                      | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.                                                                                                           |
+| **4. Task Scheduler**                                     | Il Task Scheduler assegna i task ai worker del cluster.                                                                                                                                  |
+| **5. Worker**                                             | I worker eseguono i task assegnati.                                                                                                                                                      |
+| **6. Cluster Manager**                                    | Gestisce i nodi del cluster e assegna i task ai worker.                                                                                                                                  |
+| **7. Threads**                                            | I thread eseguono i task all'interno dei worker.                                                                                                                                         |
+| **8. Block Manager**                                      | Memorizza e serve i blocchi di dati.                                                                                                                                                     |
+| **9. Dividi il DAG in stage di task**                     | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.                                                                                                           |
+| **10. Invia ogni stage e i suoi task quando sono pronti** | Il Task Scheduler invia gli stage e i task ai worker quando sono pronti per l'esecuzione.                                                                                                |
+| **11. Lancia i task tramite Master**                      | Il Master (o Cluster Manager) lancia i task sui worker.                                                                                                                                  |
+| **12. Riprova i task falliti e strag­gler**               | Il Task Scheduler riprova i task falliti o che impiegano troppo tempo (stragglers).                                                                                                      |
+| **13. Esegui i task**                                     | I worker eseguono i task assegnati.                                                                                                                                                      |
+| **14. Memorizza e servi i blocchi**                       | Il Block Manager memorizza e serve i blocchi di dati utilizzati dai task.                                                                                                                |
 
 **Spiegazione:**
+Il processo inizia con la creazione di un DAG di operatori che rappresenta le operazioni sugli RDD. Il DAG Scheduler divide il DAG in stage, che vengono poi assegnati ai worker del cluster. I worker eseguono i task assegnati, memorizzando i dati nel Block Manager. Il Task Scheduler gestisce l'esecuzione dei task, riprovando quelli falliti o che impiegano troppo tempo.
 
-Questo diagramma mostra il flusso dei task in un'applicazione Spark. Il processo inizia con la creazione di un DAG di operatori che rappresenta le operazioni sugli RDD. Il DAG Scheduler divide il DAG in stage, che vengono poi assegnati ai worker del cluster. I worker eseguono i task assegnati, memorizzando i dati nel Block Manager. Il Task Scheduler gestisce l'esecuzione dei task, riprovando quelli falliti o che impiegano troppo tempo.
+## Architettura di un'Applicazione Spark
 
-**In sintesi:**
-
-* Il DAG Scheduler pianifica l'esecuzione del DAG.
-* Il Task Scheduler assegna i task ai worker.
-* I worker eseguono i task.
-* Il Block Manager memorizza e serve i dati.
-
-
----
-
-## Anatomia di un'Applicazione Spark (Cluster)
-
-**Applicazione:**
-
-* Un'applicazione Spark è un programma che viene eseguito su un cluster di nodi.
-* L'applicazione è composta da diversi componenti che lavorano insieme per elaborare i dati.
-
-**Client:**
-
-* Il client è il punto di ingresso per l'applicazione Spark.
-* Invia l'applicazione al Cluster Manager.
-* Alloca le risorse necessarie per l'esecuzione dell'applicazione (core, memoria).
-
-**Cluster Manager (YARN/Mesos):**
-
-* Il Cluster Manager è responsabile della gestione dei nodi del cluster.
-* Assegna le risorse ai worker (Spark Worker) per l'esecuzione dei task.
-
-**Nodi Dati:**
-
-* I nodi dati sono i nodi del cluster che memorizzano i dati.
-* Esempio: Nodo 1, Nodo 2, Nodo 3, Nodo 4.
-
-**Spark Worker:**
-
-* Gli Spark Worker sono i processi che eseguono i task assegnati dal Cluster Manager.
-* Memorizzano i dati in memoria per un accesso rapido.
-
-**Driver:**
-
-* Il Driver è il processo che esegue la funzione principale dell'applicazione.
-* Crea il SparkContext, che è il punto di accesso all'API Spark.
-
-**Executors:**
-
-* Gli Executors sono i processi che eseguono i task assegnati dal Driver.
-* Sono eseguiti sui nodi dati.
+| Componente                       | Descrizione                                                                                                                                                                   |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Applicazione**                 | Un programma che viene eseguito su un cluster di nodi, composto da diversi componenti che lavorano insieme per elaborare i dati.                                              |
+| **Client**                       | Il punto di ingresso per l'applicazione Spark. <br>Invia l'applicazione al Cluster Manager e alloca le risorse necessarie per l'esecuzione dell'applicazione (core, memoria). |
+| **Cluster Manager (YARN/Mesos)** | Gestisce i nodi del cluster e assegna le risorse ai worker (Spark Worker) per l'esecuzione dei task.                                                                          |
+| **Nodi Dati**                    | I nodi del cluster che memorizzano i dati. <br>Esempio: Nodo 1, Nodo 2, Nodo 3, Nodo 4.                                                                                       |
+| **Spark Worker**                 | I processi che eseguono i task assegnati dal Cluster Manager. Memorizzano i dati in memoria per un accesso rapido.                                                            |
+| **Driver**                       | Il processo che esegue la funzione principale dell'applicazione. Crea il SparkContext, che è il punto di accesso all'API Spark.                                               |
+| **Executors**                    | I processi che eseguono i task assegnati dal Driver. Sono eseguiti sui nodi dati.                                                                                             |
 
 ## Tolleranza agli Errori in Spark
 
@@ -378,7 +273,6 @@ val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
     * **Aspettare:** Aspettare che un CPU occupato si liberi per avviare un task sui dati sullo stesso server.
     * **Avviare Immediatamente:** Avviare immediatamente un nuovo task in un luogo più lontano che richiede lo spostamento dei dati.
 * **Comportamento Tipico:** Spark in genere aspetta un po' nella speranza che un CPU occupato si liberi. Una volta scaduto il timeout, inizia a spostare i dati da lontano al CPU libero.
----
 
 ## Spark: Impostazione del Livello di Parallelismo
 
@@ -554,7 +448,7 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING);
     * **Tabelle in Hive:**
     * **File di dati strutturati:** JSON, Parquet, CSV, Avro.
 * **Manipolazione:** I DataFrames possono essere manipolati in modo simile agli RDD.
----
+
 ## _MLlib_
 
 _MLlib_, la libreria di Machine Learning (ML) di Spark, fornisce molti algoritmi ML _distribuiti_. Questi algoritmi coprono compiti come l'estrazione di feature, la classificazione, la regressione, il clustering, la raccomandazione e altro ancora. MLlib fornisce anche strumenti come ML Pipelines per la costruzione di flussi di lavoro, CrossValidator per la messa a punto dei parametri e la persistenza del modello per il salvataggio e il caricamento dei modelli.
@@ -632,19 +526,6 @@ model.transform(df).show()
 Spark Streaming è un'estensione di Spark che consente di analizzare i dati in streaming. I dati vengono ingeriti e analizzati in micro-batch, ovvero in piccoli blocchi di dati elaborati in modo sequenziale.
 
 Spark Streaming utilizza un'astrazione di alto livello chiamata **DStream** (discretized stream) che rappresenta un flusso continuo di dati. Un DStream è essenzialmente una sequenza di RDD, dove ogni RDD rappresenta un micro-batch di dati.
-
-**Fonti di dati:**
-
-Spark Streaming può ricevere dati da diverse fonti, tra cui:
-
-* **Kinesis**
-* **Twitter**
-* **Database**
-* **Dashboard**
-* **Kafka**
-* **Flume**
-* **HDFS/S3**
-* **HDFS**
 
 **Funzionamento interno:**
 
@@ -766,7 +647,7 @@ graph.vertices.filter { case (id, (name, pos)) => pos == "postdoc" }.count
 // Conta tutti i bordi in cui src > dst
 graph.edges.filter(e => e.srcId > e.dstId).count
 ```
----
+
 ## Esempio: PageRank
 
 L'algoritmo PageRank è un esempio di elaborazione dati più complessa con Spark, che illustra:

@@ -1,4 +1,3 @@
-
 L'analisi dei cluster è una tecnica di apprendimento non supervisionato che raggruppa oggetti dati in base alla loro similarità. L'obiettivo è creare gruppi **coesi**, ovvero con oggetti simili tra loro, e **ben separati**, ovvero con oggetti diversi da quelli di altri gruppi.
 
 La clusterizzazione può essere vista come una forma di classificazione, ma a differenza della classificazione supervisionata, non utilizza etichette di classe predefinite. Le etichette dei cluster vengono determinate direttamente dai dati.
@@ -246,24 +245,18 @@ Variante del k-means per dati categorici. Utilizza la **moda** invece della medi
 ## Clustering Gerarchico
 
 Le tecniche di clustering gerarchico generano una gerarchia di cluster.
-
 * **Agglomerative (bottom up):** Inizia con punti singoli e unisce i cluster più vicini.
 * **Divisive (top down):** Inizia con un cluster unico e divide i cluster fino a ottenere punti singoli.
 
 **Visualizzazione:**
-
 * **Dendrogramma:** Visualizza le relazioni cluster-subcluster e l'ordine di unione/divisione.
 * **Diagramma di cluster nidificato:** Per insiemi di punti bidimensionali.
 
-
-
 **Vantaggi:**
-
 * Non richiede di specificare il numero di cluster iniziale.
 * Si possono ottenere quanti cluster si vogliono.
 
 **Note:**
-
 * Gli algoritmi gerarchici utilizzano una matrice di similarità/dissimilarità.
 * Il valore di *k* non è definito a priori.
 
@@ -347,8 +340,6 @@ Date le precedenti definizioni di punti core, punti border e punti noise, l'algo
 3. **Creare connessioni tra i core point:** Inserire un collegamento tra tutti i core point che si trovano a una distanza inferiore a *Eps* l'uno dall'altro.
 4. **Creare i cluster:** Ogni gruppo di core point connessi forma un cluster separato.
 5. **Assegnare i border point:** Assegnare ogni border point al cluster del suo core point associato.
-
-In sintesi, DBSCAN identifica i cluster come gruppi di core point connessi, includendo i border point associati a questi core point. I punti noise vengono scartati. 
 
 ### Complessità Temporale e Spaziale
 
@@ -444,8 +435,7 @@ La curva seguente mostra l'SSE in funzione del numero di cluster:
     * **Numero di cluster pari a 10:** L'errore diminuisce ancora in modo significativo.
 * **Miglioramento minimo con molti cluster:** Aumentando ulteriormente il numero di cluster, il miglioramento dell'SSE diventa minimo.
 
-**Utilizzo dell'SSE per determinare il numero di cluster (k):**
-
+#### Utilizzo dell'SSE per determinare il numero di cluster (k):
 I punti di flessione nella curva SSE possono indicare il numero ottimale di cluster. In questo esempio, i punti di flessione a 5 e 10 cluster suggeriscono che questi potrebbero essere buoni valori per *k*.
 
 ## Coesione e Separazione nella Clusterizzazione
@@ -625,5 +615,3 @@ La clusterizzazione basata su grafi sfrutta la rappresentazione dei dati come gr
     4. Si applica il DBSCAN per identificare i cluster in base alla densità.
 
 **Vantaggi:** Questo algoritmo è più efficace rispetto all'algoritmo SNN tradizionale.
-
-**In sintesi:** La clusterizzazione basata su grafi offre un approccio alternativo alla clusterizzazione tradizionale, sfruttando la struttura dei dati come grafi per identificare i cluster. Le tecniche SNN e SNN Density Based Clustering sono particolarmente utili per gestire cluster di diverse dimensioni e densità.

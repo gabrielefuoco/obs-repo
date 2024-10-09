@@ -15,7 +15,6 @@
 | **Parallelismo dei Dati**        | Esecuzione di task paralleli sullo stesso codice, applicato a diversi sottoinsiemi di dati.                                                                            |
 | **Parallelismo dei Task**        | Esecuzione simultanea di task diversi all'interno di un DAG.                                                                                                           |
 
-
 **Apache Airflow** è una piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio dei workflow. Consente di creare applicazioni di elaborazione dati strutturate come DAG (Directed Acyclic Graph) di task.
 
 ### Caratteristiche principali
@@ -80,6 +79,7 @@ task_A >> [task_B, task_C]
 ```
 
 # Tipi di Task in Airflow
+
 - **Operators**: Task predefiniti che i programmatori possono concatenare per costruire la maggior parte di un DAG.
 - **Sensors**: Sottoclasse speciale di **Operators** che attende un evento esterno.
 - **TaskFlow Tasks**: Funzioni Python personalizzate, impacchettate come task.
@@ -278,80 +278,3 @@ vote(test_data, [m1, m2, m3, m4, m5])
 ensemble_taskflow()
 ```
 
-
-# FAQ su Apache Airflow
-
-## 1. Cos'è Apache Airflow?
-
-Apache Airflow è una piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio di flussi di lavoro (workflow). In Airflow, questi flussi di lavoro vengono creati come DAG (Directed Acyclic Graph), ossia grafici aciclici diretti, composti da task che definiscono le azioni da eseguire.
-
-## 2. Quali sono i vantaggi di definire i workflow come codice Python in Airflow?
-
-Definire i workflow come codice Python in Airflow offre diversi vantaggi:
-
-- **Gestione del codice sorgente**: I workflow possono essere archiviati in sistemi di controllo di versione come Git, consentendo il rollback a versioni precedenti, il confronto delle modifiche e la collaborazione tra sviluppatori.
-- **Sviluppo collaborativo**: Più persone possono lavorare contemporaneamente sullo stesso workflow, semplificando lo sviluppo di progetti complessi.
-- **Testabilità**: I workflow Python possono essere sottoposti a test automatizzati per garantirne la correttezza e l'affidabilità.
-
-## 3. Qual è la differenza tra operatori, sensori e task TaskFlow in Airflow?
-
-- **Operatori**: Sono i blocchi di costruzione di base dei DAG di Airflow e rappresentano task predefiniti per azioni comuni come l'esecuzione di comandi, l'invio di email o l'interazione con database.
-- **Sensori**: Sono una sottoclasse di operatori specializzati nell'attesa del verificarsi di eventi esterni, come la presenza di un file in un bucket cloud o il superamento di una certa ora.
-- **Task TaskFlow**: Sono funzioni Python personalizzate decorate con @task che consentono di scrivere DAG più concisi e leggibili, semplificando il passaggio di dati tra i task.
-
-## 4. Come funziona il meccanismo di scheduling in Airflow?
-
-Airflow utilizza uno scheduler che monitora continuamente i DAG e attiva l'esecuzione dei task in base alle loro dipendenze e alla pianificazione definita. Lo scheduler delega l'esecuzione effettiva dei task a un executor, che può essere configurato per eseguire i task localmente o su un sistema distribuito.
-
-## 5. Cosa sono i provider in Airflow e a cosa servono?
-
-I provider sono pacchetti che estendono le funzionalità di Airflow con operatori, sensori e hook per interagire con servizi esterni specifici, come AWS, Google Cloud Platform o Snowflake. L'utilizzo dei provider semplifica l'integrazione di Airflow con diverse piattaforme e servizi.
-
-## 6. Quali sono i principali componenti di Apache Airflow?
-
-- **Scheduler**: Attiva i workflow programmati e invia i task all'executor.
-- **Executor**: Gestisce l'esecuzione dei task, delegandoli ai worker.
-- **Webserver**: Fornisce un'interfaccia utente per monitorare, attivare e fare debug di DAG e task.
-- **Directory DAG**: Contiene i file DAG letti dallo scheduler, dall'executor e dai worker.
-- **Database Metadata**: Archivia lo stato dei task e dei DAG, consentendo ad Airflow di riprendere l'esecuzione in caso di errori o interruzioni.
-
-## 7. Come posso eseguire task in parallelo in Airflow?
-
-Airflow supporta due tipi di parallelismo:
-
-- **Parallelismo dei dati**: Esecuzione dello stesso task su diversi sottoinsiemi di dati, utile per elaborazioni batch su grandi volumi di dati.
-- **Parallelismo dei task**: Esecuzione simultanea di task indipendenti, utile per ottimizzare la durata complessiva del workflow.
-
-## 8. Cos'è l'API TaskFlow e quali sono i suoi vantaggi?
-
-L'API TaskFlow è un modo moderno e conciso per scrivere DAG in Airflow utilizzando il decoratore @task. Tra i vantaggi dell'utilizzo di TaskFlow troviamo:
-
-- **Maggiore leggibilità**: I DAG scritti con TaskFlow sono più facili da leggere e comprendere rispetto a quelli scritti con operatori tradizionali.
-- **Gestione semplificata delle dipendenze**: TaskFlow gestisce automaticamente le dipendenze tra i task in base al flusso di dati.
-- **Migliore organizzazione del codice**: Le funzioni Python decorate con @task possono essere raggruppate in moduli separati, migliorando l'organizzazione del codice.
-
-### Quiz
-
-1. **Quali sono i vantaggi di definire i workflow come codice Python in Apache Airflow?**
-2. **Spiega la differenza tra parallelismo dei dati e parallelismo dei task in Airflow.**
-3. **Descrivi la funzione dello Scheduler in Apache Airflow.**
-4. **Cosa sono gli Operators in Airflow e fornisci un esempio di un Operator comunemente utilizzato.**
-5. **In che modo i Sensors differiscono dagli Operators in Airflow?**
-6. **Quali sono i vantaggi dell'utilizzo dell'API TaskFlow in Airflow?**
-7. **Spiega il concetto di XCom in Apache Airflow e come viene utilizzato.**
-8. **Descrivi brevemente il processo di Ensemble Learning.**
-9. **Come viene implementato l'Ensemble Learning nell'esempio fornito utilizzando Airflow?**
-10. **Quali sono i componenti principali di un'architettura Apache Airflow?**
-
-### Chiave di Risposta del Quiz
-
-1. Definire i workflow come codice Python consente il controllo di versione, la collaborazione tra sviluppatori e la scrittura di test per i workflow.
-2. Il parallelismo dei dati esegue lo stesso task su diversi sottoinsiemi di dati, mentre il parallelismo dei task esegue task diversi contemporaneamente.
-3. Lo Scheduler in Airflow attiva i workflow in base alla pianificazione definita e invia i task all'executor per l'esecuzione.
-4. Gli Operators sono template predefiniti per i task in Airflow. Un esempio comune è il BashOperator, che esegue un comando Bash.
-5. I Sensors, a differenza degli Operators, attendono il verificarsi di un evento esterno prima di procedere con l'esecuzione del task successivo nel DAG.
-6. L'API TaskFlow semplifica la scrittura dei DAG, consentendo di definire i task come funzioni Python e gestendo automaticamente le dipendenze tra di essi.
-7. XCom è un meccanismo che permette ai task di scambiarsi informazioni. Un task può "pushare" un valore XCom e un altro task può "pullarlo" per utilizzarlo.
-8. L'Ensemble Learning combina le previsioni di più modelli per ottenere risultati più accurati rispetto a un singolo modello.
-9. Nell'esempio, l'Ensemble Learning viene implementato addestrando diversi modelli in parallelo e quindi aggregando le loro previsioni tramite votazione.
-10. I componenti principali di Airflow sono: Scheduler, Executor, Webserver, Directory DAG e Database Metadata

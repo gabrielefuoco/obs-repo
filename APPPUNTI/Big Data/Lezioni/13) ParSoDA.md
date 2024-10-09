@@ -238,7 +238,6 @@ public class IsGeoTagged extends AbstractFilterFunction {
 }
 ```
 ---
-
 ### Parsoda - Altri Casi d'Uso Applicativi
 
 I post sui social media sono spesso accompagnati da **coordinate geografiche** o altre informazioni (es. testo, campi di localizzazione) che permettono di identificare la posizione degli utenti.
@@ -312,13 +311,6 @@ Tabella: Top 5 luoghi visitati a Roma
 | Totale               | 285     | 803    |
 **-65% righe di codice**
 
----
-#### Parsoda - Compito
-Modificare la funzione di mapping e le funzioni di riduzione per ridurre l'overhead di rete durante la fase di shuffling di MapReduce.
-In particolare:
-- Funzione di mapping: invece di inviare l'intero elemento geolocalizzato alla fase di riduzione, dovrebbe inviare solo le coordinate <lat, lng> di ogni elemento.
-- Funzione di riduzione: deve solo memorizzare i punti su un file senza fare nulla su di essi (cioè, funzione identità).
-
 ## Parsoda-py: Abilitazione di Runtime HPC basati su Python per l'Analisi Parallela dei Dati
 
 ### Panoramica
@@ -387,83 +379,3 @@ L'esempio seguente mostra l'applicazione di **sequential pattern mining** su COM
 9 app.set_visualizer(SortGapBide("trajectory_mining.txt", sort_key="support", mode="descending", min_length=3))
 10 app.execute()
 ```
-
-# FAQ su PaRSoDA
-
-## 1. Qual è lo scopo principale di PaRSoDA?
-
-PaRSoDA (Parallel Social Data Analytics) è una libreria software progettata per semplificare l'analisi parallela dei big data provenienti dai social media. L'obiettivo principale è rendere più accessibile l'estrazione di informazioni utili da questi dati, anche a utenti con competenze di programmazione limitate.
-
-## 2. Quali sono le caratteristiche principali di PaRSoDA?
-
-- **Accessibilità:** PaRSoDA riduce le competenze di programmazione necessarie per sviluppare applicazioni di analisi dei dati.
-- **Funzionalità avanzate:** Offre strumenti per l'elaborazione e l'analisi dei dati social, con particolare attenzione alla mobilità degli utenti, ai sentimenti e alle tendenze degli argomenti.
-- **Supporto Big Data:** Le funzioni sono basate sul modello MapReduce e progettate per l'esecuzione parallela su sistemi HPC e cloud.
-
-## 3. Quali sono le fasi principali di un'applicazione PaRSoDA?
-
-1. **Acquisizione dati:** Raccolta parallela di dati dai social media.
-2. **Filtraggio dati:** Applicazione di filtri per selezionare i dati rilevanti.
-3. **Mappatura dati:** Trasformazione delle informazioni nei dati social.
-4. **Partizionamento dati:** Suddivisione dei dati in shard per l'elaborazione parallela.
-5. **Riduzione dati:** Aggregazione dei dati per shard.
-6. **Analisi dati:** Esecuzione di algoritmi di analisi per estrarre informazioni.
-7. **Visualizzazione dati:** Presentazione dei risultati in modo intuitivo.
-
-## 4. Come si configura un'applicazione PaRSoDA?
-
-PaRSoDA definisce un insieme di metodi per impostare ogni fase dell'analisi. Ad esempio, setCrawlers() specifica le funzioni di crawling per l'acquisizione dati, setFilters() definisce i filtri da applicare e così via. Per ogni metodo, è possibile specificare funzioni predefinite o personalizzate.
-
-## 5. Cosa sono i "metadati" in PaRSoDA e come vengono gestiti?
-
-I metadati in PaRSoDA sono informazioni strutturate che descrivono gli elementi dei social media raccolti. PaRSoDA utilizza un modello di metadati flessibile per rappresentare elementi provenienti da diverse piattaforme social. Questo modello include campi comuni a tutti i social network (ad esempio, ID utente, timestamp) e campi specifici della sorgente (ad esempio, hashtag per Twitter, tag geografici per Flickr).
-
-## 6. In che modo PaRSoDA gestisce l'elaborazione di grandi quantità di dati?
-
-PaRSoDA utilizza il modello di programmazione MapReduce per l'elaborazione parallela dei dati. Ciò significa che i dati vengono suddivisi in blocchi più piccoli (shard) e elaborati contemporaneamente su più nodi di un cluster. Questo approccio consente a PaRSoDA di gestire dataset di grandi dimensioni in modo efficiente.
-
-## 7. Quali sono alcuni esempi di casi d'uso di PaRSoDA?
-
-PaRSoDA può essere utilizzato per una varietà di applicazioni di analisi dei dati social, tra cui:
-
-- **Estrazione di regioni di interesse (ROI):** Identificazione di luoghi popolari e punti di riferimento in base ai dati di geolocalizzazione.
-- **Analisi dei sentimenti:** Determinazione dell'atteggiamento generale (positivo, negativo o neutro) espresso nei post sui social media.
-- **Estrazione di traiettorie:** Individuazione di schemi di movimento degli utenti e creazione di mappe di mobilità.
-- **Scoperta di itemset frequenti:** Identificazione di gruppi di elementi che compaiono frequentemente insieme, come ad esempio luoghi visitati in sequenza.
-
-## 8. Quali sono i vantaggi dell'utilizzo di PaRSoDA-py rispetto alla versione Java originale?
-
-PaRSoDA-py, la versione Python di PaRSoDA, offre diversi vantaggi:
-
-- **Maggiore facilità d'uso:** Python è un linguaggio di programmazione più accessibile rispetto a Java, rendendo PaRSoDA-py più facile da imparare e utilizzare.
-- **Integrazione con l'ecosistema Python:** PaRSoDA-py può essere facilmente integrato con altre librerie Python popolari per l'analisi dei dati, come NumPy e Pandas.
-- **Supporto per runtime aggiuntivi:** PaRSoDA-py supporta diversi runtime di esecuzione, tra cui Spark e COMPSs, consentendo agli utenti di scegliere l'ambiente più adatto alle proprie esigenze.
-- **Tipizzazione dinamica:** La tipizzazione dinamica di Python semplifica la scrittura e la manutenzione del codice PaRSoDA-py.
-
-In sintesi, PaRSoDA-py offre una maggiore flessibilità, facilità d'uso ed efficienza rispetto alla versione Java originale, rendendo l'analisi parallela dei dati social accessibile a un pubblico più ampio.
-
----
-### Quiz
-1. Quali sono le sfide principali dell'analisi dei Big Data sui social media?
-2. In che modo PaRSoDA affronta le barriere d'ingresso nell'analisi parallela dei dati?
-3. Descrivere le sette fasi del processo di analisi dei dati in PaRSoDA.
-4. Quali sono le differenze tra funzioni predefinite e funzioni personalizzate in PaRSoDA? Fornire esempi.
-5. Spiegare come PaRSoDA utilizza un modello di metadati per gestire elementi di social media eterogenei.
-6. In che modo il Secondary Sort in Hadoop può essere utilizzato per ottimizzare le operazioni di join?
-7. Confrontare e confrontare Map-side Join e Reduce-side Join in Hadoop.
-8. Descrivere l'obiettivo e la struttura dell'applicazione di estrazione delle Regioni di Interesse (ROI) in PaRSoDA.
-9. Quali sono i vantaggi dell'utilizzo di Parsoda-py rispetto alla versione Java originale?
-10. Come Parsoda-py supporta diversi runtime di esecuzione per l'analisi parallela dei dati?
-
-### Chiave di Risposta del Quiz
-1. Le sfide principali dell'analisi dei Big Data sui social media includono l'enorme volume, la velocità e la varietà dei dati, che richiedono tecniche di elaborazione parallela e distribuita. Altre sfide includono la necessità di gestire dati non strutturati, la complessità dell'analisi del sentiment e la protezione della privacy degli utenti.
-2. PaRSoDA riduce le barriere d'ingresso nell'analisi parallela dei dati fornendo un'interfaccia di programmazione di alto livello che semplifica lo sviluppo di applicazioni di analisi dei dati. Astrae la complessità della gestione di framework paralleli come MapReduce, rendendoli accessibili a un pubblico più ampio.
-3. Le sette fasi del processo di analisi dei dati in PaRSoDA sono: (1) Acquisizione Dati, (2) Filtraggio Dati, (3) Mapping Dati, (4) Partizionamento Dati, (5) Riduzione Dati, (6) Analisi Dati e (7) Visualizzazione Dati.
-4. Le funzioni predefinite in PaRSoDA sono funzioni pre-costruite per attività comuni, come l'acquisizione di dati da Twitter o il filtraggio di elementi geotaggati. Le funzioni personalizzate sono scritte dagli utenti per implementare funzionalità specifiche dell'applicazione.
-5. PaRSoDA utilizza un modello di metadati con sezioni "basic" ed "extra" per rappresentare elementi di social media eterogenei. La sezione "basic" contiene campi comuni a tutti i social network, mentre la sezione "extra" contiene campi specifici della sorgente.
-6. Il Secondary Sort in Hadoop può essere utilizzato per ottimizzare le operazioni di join garantendo che tutti i record con la stessa chiave di join vengano inviati allo stesso reducer. Ciò riduce la quantità di dati che devono essere trasferiti durante la fase di shuffle.
-7. Map-side Join viene eseguito durante la fase di mapping ed è adatto per piccoli set di dati che possono essere caricati in memoria. Reduce-side Join viene eseguito durante la fase di riduzione ed è più adatto per set di dati più grandi.
-8. L'applicazione di estrazione delle Regioni di Interesse (ROI) mira a identificare i confini geografici di un Punto di Interesse (POI) analizzando i dati dei social media geolocalizzati. Estrae coordinate geografiche, raggruppa i punti geospaziali e visualizza la ROI come un poligono su una mappa.
-9. Parsoda-py offre un linguaggio di programmazione Python più conciso e accessibile, consentendo agli utenti con diverse competenze di programmazione di utilizzare la libreria. Inoltre, si integra con l'ecosistema Python, fornendo accesso a librerie come NumPy e Pandas.
-10. Parsoda-py supporta diversi runtime di esecuzione, inclusi ParsodaSingleCoreDriver, ParsodaMultiCoreDriver, ParsodaPySparkDriver e ParsodaPyCompssDriver. Gli utenti possono passare da un runtime all'altro semplicemente modificando la classe del driver nel codice.
-

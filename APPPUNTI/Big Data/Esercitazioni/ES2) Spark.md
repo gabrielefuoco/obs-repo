@@ -9,7 +9,7 @@
 
 **YARN & MapReduce:**
 - Architettura con un resource manager master, node manager per nodo e AppMaster per applicazione.
----
+
 ## Debolezze e limitazioni di MapReduce
 
 **Modello di programmazione**
@@ -22,7 +22,7 @@
 - Utilizzo limitato della memoria.
 **Non adatto per l'elaborazione in tempo reale**
 - Necessità di scansionare l'intero input prima dell'elaborazione.
----
+
 ## Apache Spark
 
 - Motore veloce e general-purpose per Big Data, non una modifica di Hadoop.
@@ -47,7 +47,7 @@
 - Programmazione più user-friendly: Transformations e Actions.
 - Agnostico rispetto allo storage (es. HDFS, Cassandra, S3, Parquet).
 
----
+
 ## Stack di Spark: Utilizzo dei componenti Hadoop
 
 ### Componenti di Elaborazione
@@ -73,7 +73,7 @@
 - **Apache Kafka**: Piattaforma di streaming per flussi di dati distribuiti.
 - **Flume**: Servizio distribuito per la raccolta e l'aggregazione di grandi quantità di dati log.
 
----
+
 ## Integrazione di Spark nell'ecosistema Hadoop
 Spark sfrutta componenti chiave di Hadoop e di altri progetti Apache per creare un ambiente di Big Data flessibile e scalabile. Nello stack Spark:
 

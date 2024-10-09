@@ -16,7 +16,7 @@
 | **Spark SQL**                           | Modulo Spark per lavorare con dati strutturati utilizzando query simili a SQL.                                    |
 | **Catalyst**                            | Ottimizzatore di query in Spark SQL e Dataset.                                                                    |
 
-## 1. MapReduce: Debolezze e Limitazioni
+## MapReduce: Debolezze e Limitazioni
 
 **Modello di Programmazione**:
 - MapReduce è difficile da usare per certi problemi; anche operazioni semplici possono richiedere più passaggi.
@@ -32,7 +32,7 @@
 - Non è adatto per l'elaborazione **streaming** o in tempo reale perché scansiona l'intero input prima di procedere con l'elaborazione.
 
 
-## 2. Apache Spark: Vantaggi
+## Apache Spark: Vantaggi
 
 **Prestazioni**:
 - Spark è un motore general-purpose per il Big Data, significativamente più veloce di Hadoop grazie all'elaborazione **in-memory**. Questo riduce la necessità di scrivere su disco e aumenta le prestazioni, specialmente per i calcoli iterativi.
@@ -52,16 +52,15 @@
   - **MLlib** per il machine learning distribuito
   - **GraphX** per il calcolo su grafi
 
-## 3. Confronto Spark vs Hadoop MapReduce
-
+### Confronto Spark vs Hadoop MapReduce
 - Entrambi distribuiscono i calcoli su più nodi, ma **Spark** gestisce meglio la memoria e offre un modello più generalizzato.
 - **Compatibilità**: Spark può leggere/scrivere da sistemi come HDFS, Cassandra e S3, garantendo flessibilità.
----
-#### 4. Architettura di Spark
+
+### Architettura di Spark
 - **Spark Core**: La base del motore Spark, gestisce task, memoria, e interazione con lo storage.
 - Moduli di alto livello (SQL, Streaming, MLlib, GraphX) permettono di lavorare su diversi tipi di dati senza dover cambiare il motore sottostante.
 
-#### 5. Gestione del Cluster
+### Gestione del Cluster
 - Spark supporta diversi gestori di cluster come **YARN**, **Mesos** e **Kubernetes**, oltre a una modalità standalone per piccole configurazioni.
 
 ## Architettura Spark
@@ -89,27 +88,23 @@
 - La loro **immutabilità** garantisce che qualsiasi operazione su di essi crei nuovi RDD, preservando lo stato originale.
 - **Fault tolerance**: Spark ricostruisce automaticamente gli RDD persi grazie al lineage, che tiene traccia di come sono stati generati.
 
----
 ### API RDD e Idoneità
 - **API RDD**: Disponibile per vari linguaggi (Scala, Python, Java, R), l'API consente di interagire con RDD in modo facile e intuitivo. Le operazioni possono essere eseguite sia da interfacce interattive che da script.
 - **Idoneità**: Gli RDD sono ideali per operazioni batch che devono essere applicate a un intero dataset, ma sono meno adatti per applicazioni che richiedono aggiornamenti asincroni e a grana fine.
 
----
 ### Operazioni sugli RDD: Trasformazioni e Azioni
 - Le applicazioni Spark si scrivono in termini di **trasformazioni** e **azioni** sugli RDD:
   - **Trasformazioni**: Operazioni "lazy" che definiscono un nuovo RDD da un dataset esistente, come `map`, `filter`, `join`. Poiché sono lazy, non vengono eseguite fino a quando non viene richiesta un'azione.
   - **Azioni**: Eseguono effettivamente i calcoli sui dati, restituendo risultati al driver o salvando su storage esterno (es. `count`, `collect`, `save`).
 
----
 ### Modello di Programmazione Spark: DAG
 - Spark utilizza un **grafo aciclico diretto (DAG)** per descrivere l'esecuzione di job. Ogni job Spark è scomposto in una serie di trasformazioni (nodi del grafo) e azioni che Spark esegue in modo parallelo e ottimizzato.
 
----
 ### Funzioni di Ordine Superiore
 - Spark sfrutta le **funzioni di ordine superiore** per operare in parallelo su RDD, distribuendo i task tra i nodi del cluster.
   - **Trasformazioni**: Sono lazy e creano nuovi RDD senza eseguirli immediatamente.
   - **Azioni**: Avviano effettivamente il calcolo e restituiscono il risultato al driver o lo scrivono su storage.
----
+
 ### Trasformazioni e azioni disponibili su RDD in Spark
 
 - `Seq[T]`: sequenza di elementi di tipo T
@@ -324,7 +319,7 @@ JavaPairRDD<String, Integer> counts = textFile
 counts.saveAsTextFile("hdfs://...");
 ```
 
-### Nota su `PairRDD`
+##### Nota su `PairRDD`
 In Java, Spark utilizza `Tuple2` per rappresentare le coppie chiave-valore nelle operazioni su RDD.
 
 ---
@@ -344,9 +339,7 @@ In Java, Spark utilizza `Tuple2` per rappresentare le coppie chiave-valore nelle
      new SparkContext(conf)
      ```
 
----
-
-### Esempio: WordCount in Java
+## Esempio: WordCount in Java
 
 Parte 1: Importazione e configurazione Spark
 ```java
@@ -390,8 +383,7 @@ Parte 2: Elaborazione dei dati
 }
 ```
 
----
-### Persistenza RDD
+## Persistenza RDD
 
 - **RDD di default**: Viene ricalcolato ogni volta che un'azione viene eseguita.
 - **Persistenza**: Consente di memorizzare in memoria le partizioni di un RDD per il riutilizzo rapido, migliorando le performance.
@@ -406,8 +398,7 @@ Parte 2: Elaborazione dei dati
 - La serializzazione rende gli oggetti più efficienti in termini di spazio.
 - Gli storage replicati andrebbero utilizzati solo se si desidera un rapido ripristino dai guasti
 
----
-### Runtime di Spark
+## Runtime di Spark
 
 1. **Driver Program**:
    - Esegue il codice principale e invia task ai worker.
@@ -425,20 +416,18 @@ Parte 2: Elaborazione dei dati
        Task          Task
    ```
 
----
 ### Esecuzione degli Stage
 - **RDD** vengono trasformati in un **DAG** di operazioni.
 - Il **DAG** è diviso in **stage** (insieme di operazioni senza shuffle).
 - Ogni stage è suddiviso in **task** (uno per partizione).
 - Le **azioni** guidano l'esecuzione e scatenano il calcolo.
----
 ### Riepilogo Componenti Spark
 1. **RDD**: Dataset distribuito e partizionato.
 2. **DAG**: Grafo logico delle operazioni su RDD.
 3. **Stage**: Insieme di task eseguiti in parallelo.
 4. **Task**: Unità fondamentale di esecuzione in Spark.
----
-### **Fault Tolerance in Spark**
+
+## Fault Tolerance in Spark
 
 - **RDD lineage**: Gli RDD tengono traccia delle trasformazioni che li hanno creati, registrando un "lineage".
 - **Ricalcolo dei dati**: Se un dato viene perso, Spark può ricalcolarlo seguendo il lineage.
@@ -453,7 +442,6 @@ val ones = cachedSics.map(_ => 1)
 val count = ones.reduce(_+_)
 ```
 
----
 ### Scheduling dei Job in Spark
 - Lo **scheduler** costruisce un **DAG di stage** a partire dal lineage di un RDD quando viene eseguita un'azione.
 - Uno **stage** contiene tutte le trasformazioni con dipendenze strette (piplined).
@@ -465,7 +453,6 @@ val count = ones.reduce(_+_)
   - Spark assegna i task in base alla località dei dati (data locality).
   - Se una partizione è già in memoria su un nodo, il task viene inviato a quel nodo.
 
----
 ### API DataFrame e Dataset
 1. **DataFrame** (da Spark 1.3):
    - Collezione distribuita di dati organizzati in colonne, come una tabella.
@@ -481,8 +468,7 @@ val count = ones.reduce(_+_)
    - Usa l'ottimizzatore **Catalyst** per ottimizzare le query e il piano di esecuzione.
 
 - **SparkSession**: Punto di ingresso per entrambe le API.
-
----
+  
 ### Dataset
 - Combina i vantaggi degli **RDD** (strong typing, uso di lambda) con il motore di esecuzione ottimizzato di **Spark SQL**.
 - Manipolabile tramite trasformazioni come `map`, `filter`, `flatMap`.
@@ -500,8 +486,7 @@ val names = people.map(_.name) // names è un Dataset[String]
 Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING());
 ```
 
----
-### DataFrame in Spark
+## DataFrame in Spark
 
 - **DataFrame**: Dataset organizzato in colonne con nome.
   - Simile a una tabella di un database relazionale, ma con ottimizzazioni più avanzate.
@@ -517,7 +502,6 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING());
 #### Manipolazione:
   - Simile a come si manipolano gli RDD, con operazioni come `select`, `filter`, `groupBy`, ecc.
 
----
 ### Spark Streaming
 - Estensione di Spark per l'analisi di **dati in streaming**.
   - Dati ingeriti in **micro-batch** e analizzati in tempo reale.
@@ -532,7 +516,6 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING());
   ```
   - Il flusso di dati viene segmentato in micro-batch, elaborato e restituito come output.
 
----
 ### Spark MLlib
 - Libreria per **Machine Learning distribuito**.
   - Supporta algoritmi per:
@@ -548,8 +531,8 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING());
   - **Statistica**: statistiche descrittive, test d'ipotesi.
 
 - Utilizza **DataFrame** per supportare vari tipi di dati e algoritmi.
----
-### Esempio Spark MLlib: Regressione Logistica
+
+## Esempio Spark MLlib: Regressione Logistica
 
 - Dataset contenente **etichette** e **vettori di caratteristiche**.
 - Obiettivo: predire etichette dai vettori usando la **Regressione Logistica**.
@@ -569,89 +552,4 @@ model.transform(df).show()
 ```
 
 In questo esempio, il modello viene addestrato sui dati e utilizzato per predire le etichette del dataset.
-
-
-## Domande Frequenti su Apache Spark
-
-### 1. Cosa rende Apache Spark più veloce di Hadoop MapReduce?
-
-Apache Spark è significativamente più veloce di Hadoop MapReduce principalmente grazie all'elaborazione **in-memory**. Mentre MapReduce si basa su disco per l'archiviazione e il recupero dei dati, Spark cerca di mantenere i dati in memoria il più possibile. Questo riduce drasticamente i tempi di accesso e di elaborazione, rendendo Spark particolarmente vantaggioso per i calcoli iterativi.
-
-### 2. Quali sono i principali vantaggi del modello di programmazione di Spark rispetto a MapReduce?
-
-Il modello di programmazione di Spark offre diversi vantaggi rispetto a MapReduce:
-
-- **Maggiore flessibilità**: Spark offre diverse strutture dati come RDD, Dataset e DataFrame, che semplificano la gestione di dati strutturati e semi-strutturati.
-- **API più user-friendly**: le trasformazioni (map) e le azioni (reduce) sono integrate in un'API più intuitiva per gli sviluppatori.
-- **Supporto per iterazioni**: Spark gestisce le iterazioni in modo più efficiente di MapReduce, evitando la scrittura su disco ad ogni iterazione.
-
-### 3. Cosa sono gli RDD in Spark?
-
-RDD sta per "Resilient Distributed Dataset". Si tratta di strutture dati immutabili, distribuite, in-memory e fault-tolerant.
-
-- **Immutabili**: una volta creati, gli RDD non possono essere modificati. Ogni trasformazione crea un nuovo RDD.
-- **Distribuiti**: gli RDD sono suddivisi in partizioni distribuite tra i nodi del cluster.
-- **In-memory**: Spark cerca di mantenere gli RDD in memoria per velocizzare l'elaborazione.
-- **Fault-tolerant**: in caso di guasto di un nodo, gli RDD possono essere ricostruiti automaticamente grazie al lineage.
-
-### 4. Quali sono le differenze tra trasformazioni e azioni in Spark?
-
-- **Trasformazioni**: operazioni "lazy" che definiscono un nuovo RDD da uno esistente (es. map, filter, join). Non vengono eseguite immediatamente, ma solo quando viene richiesta un'azione.
-- **Azioni**: operazioni che attivano l'esecuzione dei calcoli sui dati e restituiscono un risultato (es. count, collect, save).
-
-### 5. Come gestisce Spark la tolleranza ai guasti?
-
-Spark garantisce la tolleranza ai guasti tramite il lineage degli RDD. Ogni RDD tiene traccia delle trasformazioni che lo hanno generato, consentendo a Spark di ricostruire automaticamente le partizioni perse in caso di guasto di un nodo.
-
-### 6. Cosa sono DataFrame e Dataset in Spark?
-
-- **DataFrame**: collezione distribuita di dati organizzati in colonne con nome, simile a una tabella di un database relazionale. Supporta dati strutturati e semi-strutturati e permette query simili a SQL tramite Spark SQL.
-- **Dataset**: collezione distribuita e tipizzata di oggetti JVM. Offre un'interfaccia object-oriented type-safe e sfrutta l'ottimizzatore Catalyst per ottimizzare le query.
-
-Da Spark 2.0, DataFrame è implementato come caso speciale di Dataset.
-
-### 7. Cosa rende Spark adatto all'elaborazione di dati in streaming?
-
-Spark Streaming è un'estensione di Spark che consente l'elaborazione di dati in streaming in tempo reale. I dati in ingresso vengono suddivisi in micro-batch elaborati da Spark come RDD, consentendo analisi in near real-time.
-
-### 8. Quali tipi di algoritmi di Machine Learning sono supportati da Spark MLlib?
-
-Spark MLlib offre una libreria di algoritmi di Machine Learning distribuiti per:
-
-- **Classificazione**: es. Regressione Logistica.
-- **Regressione**.
-- **Clustering**: es. K-means.
-- **Raccomandazione**.
-- **Alberi decisionali**, **foreste casuali**, etc.
-
-MLlib fornisce anche strumenti per la trasformazione delle caratteristiche, la valutazione dei modelli e l'ottimizzazione degli iperparametri.
-
----
-### Quiz
-
-**Istruzioni:** Rispondi alle seguenti domande in 2-3 frasi.
-
-1. Quali sono le principali debolezze di MapReduce rispetto a Spark?
-2. Descrivi brevemente il concetto di "elaborazione in-memory" e il suo impatto sulle prestazioni di Spark.
-3. Quali sono i vantaggi di utilizzare RDD in Spark?
-4. Spiega la differenza tra trasformazioni e azioni in Spark.
-5. Cosa sono le funzioni di ordine superiore in Spark e come vengono utilizzate?
-6. Descrivi la differenza tra le trasformazioni map e flatMap in Spark.
-7. Cosa si intende per "lineage" di un RDD e perché è importante per la tolleranza ai guasti?
-8. Quali sono i diversi livelli di persistenza disponibili per gli RDD in Spark?
-9. Descrivi la funzione di Spark Streaming e il concetto di DStream.
-10. Fornisci un esempio di un'applicazione pratica di Spark MLlib.
-
-### Risposte al Quiz
-
-1. **Debolezze di MapReduce:** MapReduce è meno flessibile, richiede più passaggi per operazioni semplici e soffre di prestazioni inferiori a causa della costante scrittura su disco. Spark, al contrario, eccelle nell'elaborazione in-memory, offre un modello di programmazione più versatile e gestisce meglio le iterazioni.
-2. **Elaborazione in-memory:** Spark elabora i dati principalmente in memoria (RAM) invece di fare affidamento su letture/scritture su disco. Questo riduce drasticamente i tempi di elaborazione, rendendo Spark significativamente più veloce di Hadoop, specialmente per calcoli iterativi.
-3. **Vantaggi degli RDD:** Gli RDD offrono un'astrazione potente per lavorare con dati distribuiti, garantendo immutabilità, distribuzione efficiente e tolleranza ai guasti grazie al lineage.
-4. **Trasformazioni vs. Azioni:** Le trasformazioni in Spark sono operazioni lazy che definiscono un nuovo RDD da uno esistente senza eseguire immediatamente il calcolo. Le azioni, invece, attivano l'elaborazione e restituiscono risultati concreti al driver o li scrivono su storage.
-5. **Funzioni di ordine superiore:** Spark utilizza funzioni di ordine superiore, come map, filter e reduce, per applicare operazioni a ogni elemento di un RDD in parallelo. Ciò consente di distribuire il carico di lavoro tra i nodi del cluster, migliorando le prestazioni.
-6. **map vs. flatMap:** Entrambe le trasformazioni applicano una funzione a ogni elemento di un RDD. map crea un nuovo RDD con lo stesso numero di elementi dell'RDD originale, mentre flatMap può generare un numero variabile di elementi, appiattendo il risultato finale in un unico RDD.
-7. **Lineage RDD:** Il lineage è un grafico aciclico diretto (DAG) che tiene traccia delle trasformazioni che hanno portato alla creazione di un RDD. In caso di guasto e perdita di una partizione, Spark può utilizzare il lineage per ricostruire la partizione persa, garantendo la tolleranza ai guasti.
-8. **Livelli di persistenza:** Spark offre diversi livelli di persistenza per gli RDD, tra cui MEMORY_ONLY, MEMORY_AND_DISK, MEMORY_ONLY_SER e DISK_ONLY, permettendo di bilanciare l'utilizzo della memoria, la velocità di accesso e la resilienza ai guasti.
-9. **Spark Streaming:** Spark Streaming elabora flussi di dati in tempo reale suddividendoli in micro-batch e applicando le operazioni Spark a ogni batch. DStream è un'astrazione di alto livello che rappresenta un flusso continuo di dati come una sequenza di RDD.
-10. **Applicazione di Spark MLlib:** Un esempio pratico è la classificazione di email come spam o non spam. Utilizzando algoritmi di Machine Learning come la regressione logistica, Spark MLlib può addestrare un modello su un set di dati di email etichettate per prevedere la classificazione di nuove email in arrivo.
 

@@ -1,41 +1,41 @@
 ---
 
 ---
-| Termine                        | Spiegazione                                                                                                                                                |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Programmazione Funzionale (FP) | Un paradigma di programmazione che vede il calcolo come la valutazione di funzioni matematiche, evitando l'uso di iteratori e cicli.                       |
-| Funzione                       | Un blocco di codice identificato da un nome, che può accettare parametri e restituire un valore, idealmente senza effetti collaterali.                     |
-| Metodo                         | Un blocco di codice definito all'interno di un'istanza di classe, legato al contesto dell'oggetto a cui appartiene.                                        |
-| Funzione Pura                  | Una funzione che rispetta due principi: determinismo (stesso input, stesso output) e assenza di effetti collaterali (non modifica lo stato esterno).       |
-| Effetto Collaterale            | Un'azione che influisce su qualcosa al di fuori del contesto della funzione, come la modifica di variabili globali o l'esecuzione di operazioni di I/O.    |
-| Cittadini di Prima Classe      | In programmazione funzionale, le funzioni sono considerate cittadini di prima classe, il che significa che possono essere utilizzate come valori ordinari. |
-| Espressione Lambda             | Una funzione anonima, definita in modo conciso con la sintassi `(parametri) -> espressione`.                                                               |
-| Funzioni di Ordine Superiore   | Funzioni che accettano altre funzioni come argomenti o che restituiscono funzioni come risultato.                                                          |
-| Stream                         | Una sequenza di elementi da una sorgente di dati che supporta operazioni aggregate.                                                                        |
-| Operazioni Intermedie          | Operazioni che trasformano uno Stream in un nuovo Stream, come `filter`, `map`, `sorted`.                                                                  |
-| Operazione Terminale           | Un'operazione che conclude il flusso di uno Stream, come `reduce`, `collect`, `forEach`.                                                                   |
-| Collector                      | Un'utilità per combinare gli elementi di uno Stream in un risultato finale, come una collezione o un valore singolo.                                       |
-| Optional                       | Un contenitore che può contenere o meno un valore, utile per gestire situazioni in cui un risultato potrebbe non essere presente.                          |
-| Interfaccia Funzionale         | Un'interfaccia con un solo metodo astratto, utilizzata per rappresentare funzioni.                                                                         |
-| Macchina di Turing             | Un modello matematico per computer general-purpose, spesso associato alla programmazione imperativa.                                                       |
-| Lambda Calcolo                 | Una notazione matematica per esprimere funzioni e applicazione di funzioni, spesso associata alla programmazione funzionale.                               |
-| Lazy Evaluation                | Valutazione ritardata, dove le operazioni vengono eseguite solo quando necessario.                                                                         |
-| Eager Evaluation               | Valutazione immediata, dove le operazioni vengono eseguite non appena vengono incontrate.                                                                  |
-| Peek                           | Un'operazione intermedia che restituisce una copia dello stream e applica una funzione Consumer sul risultato.                                             |
-| Parallel Stream                | Una versione multithread di uno Stream, che consente di eseguire le operazioni in parallelo.                                                               |
-| Function                       | Un'interfaccia funzionale che accetta un singolo argomento e restituisce un risultato.                                                                     |
-| BiFunction                     | Un'interfaccia funzionale che accetta due argomenti e restituisce un risultato.                                                                            |
-| Predicate                      | Un'interfaccia funzionale che accetta un singolo argomento e restituisce un valore booleano.                                                               |
-| Consumer                       | Un'interfaccia funzionale che accetta un singolo argomento e non restituisce alcun risultato.                                                              |
-| Supplier                       | Un'interfaccia funzionale che non accetta argomenti e restituisce un risultato.                                                                            |
-| Compose                        | Un metodo che concatena due funzioni, applicando la seconda funzione al risultato della prima.                                                             |
-| AndThen                        | Un metodo che concatena due funzioni, applicando la prima funzione al risultato della seconda.                                                             |
-| Comparator                     | Un'interfaccia funzionale che confronta due oggetti e restituisce un valore negativo, zero o positivo a seconda dell'ordine degli oggetti.                 |
-| BinaryOperator                 | Un'interfaccia funzionale che accetta due argomenti dello stesso tipo e restituisce un risultato dello stesso tipo.                                        |
+| Termine                            | Spiegazione                                                                                                                                                |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Programmazione Funzionale (FP)** | Un paradigma di programmazione che vede il calcolo come la valutazione di funzioni matematiche, evitando l'uso di iteratori e cicli.                       |
+| **Funzione**                       | Un blocco di codice identificato da un nome, che può accettare parametri e restituire un valore, idealmente senza effetti collaterali.                     |
+| **Metodo**                         | Un blocco di codice definito all'interno di un'istanza di classe, legato al contesto dell'oggetto a cui appartiene.                                        |
+| **Funzione Pura**                  | Una funzione che rispetta due principi: determinismo (stesso input, stesso output) e assenza di effetti collaterali (non modifica lo stato esterno).       |
+| **Effetto Collaterale**            | Un'azione che influisce su qualcosa al di fuori del contesto della funzione, come la modifica di variabili globali o l'esecuzione di operazioni di I/O.    |
+| **Cittadini di Prima Classe**      | In programmazione funzionale, le funzioni sono considerate cittadini di prima classe, il che significa che possono essere utilizzate come valori ordinari. |
+| **Espressione Lambda**             | Una funzione anonima, definita in modo conciso con la sintassi `(parametri) -> espressione`.                                                               |
+| **Funzioni di Ordine Superiore**   | Funzioni che accettano altre funzioni come argomenti o che restituiscono funzioni come risultato.                                                          |
+| **Stream**                         | Una sequenza di elementi da una sorgente di dati che supporta operazioni aggregate.                                                                        |
+| **Operazioni Intermedie**          | Operazioni che trasformano uno Stream in un nuovo Stream, come `filter`, `map`, `sorted`.                                                                  |
+| **Operazione Terminale**           | Un'operazione che conclude il flusso di uno Stream, come `reduce`, `collect`, `forEach`.                                                                   |
+| **Collector**                      | Un'utilità per combinare gli elementi di uno Stream in un risultato finale, come una collezione o un valore singolo.                                       |
+| **Optional**                       | Un contenitore che può contenere o meno un valore, utile per gestire situazioni in cui un risultato potrebbe non essere presente.                          |
+| **Interfaccia Funzionale**         | Un'interfaccia con un solo metodo astratto, utilizzata per rappresentare funzioni.                                                                         |
+| **Macchina di Turing**             | Un modello matematico per computer general-purpose, spesso associato alla programmazione imperativa.                                                       |
+| **Lambda Calcolo**                 | Una notazione matematica per esprimere funzioni e applicazione di funzioni, spesso associata alla programmazione funzionale.                               |
+| **Lazy Evaluation**                | Valutazione ritardata, dove le operazioni vengono eseguite solo quando necessario.                                                                         |
+| **Eager Evaluation**               | Valutazione immediata, dove le operazioni vengono eseguite non appena vengono incontrate.                                                                  |
+| **Peek**                           | Un'operazione intermedia che restituisce una copia dello stream e applica una funzione Consumer sul risultato.                                             |
+| **Parallel Stream**                | Una versione multithread di uno Stream, che consente di eseguire le operazioni in parallelo.                                                               |
+| **Function**                       | Un'interfaccia funzionale che accetta un singolo argomento e restituisce un risultato.                                                                     |
+| **BiFunction**                     | Un'interfaccia funzionale che accetta due argomenti e restituisce un risultato.                                                                            |
+| **Predicate**                      | Un'interfaccia funzionale che accetta un singolo argomento e restituisce un valore booleano.                                                               |
+| **Consumer**                       | Un'interfaccia funzionale che accetta un singolo argomento e non restituisce alcun risultato.                                                              |
+| **Supplier**                       | Un'interfaccia funzionale che non accetta argomenti e restituisce un risultato.                                                                            |
+| **Compose**                        | Un metodo che concatena due funzioni, applicando la seconda funzione al risultato della prima.                                                             |
+| **AndThen**                        | Un metodo che concatena due funzioni, applicando la prima funzione al risultato della seconda.                                                             |
+| **Comparator**                     | Un'interfaccia funzionale che confronta due oggetti e restituisce un valore negativo, zero o positivo a seconda dell'ordine degli oggetti.                 |
+| **BinaryOperator**                 | Un'interfaccia funzionale che accetta due argomenti dello stesso tipo e restituisce un risultato dello stesso tipo.                                        |
 
----
-### Cos'è la Programmazione Funzionale?
-- La **Programmazione Funzionale** è un paradigma che vede il calcolo come la valutazione di funzioni matematiche:
+## Cos'è la Programmazione Funzionale?
+
+La **Programmazione Funzionale** è un paradigma che vede il calcolo come la valutazione di funzioni matematiche:
   - Non si utilizzano iteratori, cicli `for` o `while`, ma solo funzioni.
   
 - **Funzione** vs **Metodo**:
@@ -81,7 +81,6 @@ La versione dichiarativa non modifica la collezione originale, ma ne restituisce
   - Le funzioni possono essere composte liberamente, indipendentemente dal contesto.
 
 ---
-
 ### Vantaggi della Programmazione Funzionale
 
 - **Assenza di stato condiviso**:
@@ -102,7 +101,6 @@ La versione dichiarativa non modifica la collezione originale, ma ne restituisce
   - Spesso più leggibili, compatti e semplici da capire.
 
 ---
-
 ### Funzione Pura
 Una **funzione pura** deve rispettare due principi fondamentali:
 - **Determinismo**: dati gli stessi input, produce sempre lo stesso output.
@@ -114,7 +112,6 @@ Una **funzione pura** deve rispettare due principi fondamentali:
 Una funzione non pura viola questi principi, risultando imprevedibile e capace di generare effetti collaterali.
 
 ---
-
 ### Effetto Collaterale
 - Si verifica quando la valutazione di un'espressione influisce su qualcosa al di fuori del suo contesto.
 - **Funzioni pure**:
@@ -223,7 +220,6 @@ public static void printFormatted(String str, Function<String,String> format) {
   - Macchina di Turing: attraverso celle di memoria e operazioni di lettura/scrittura
   - Lambda Calcolo: rappresenta i dati come funzioni e usa astrazione e applicazione di funzioni
 
----
 # Macchina di Turing vs Lambda Calcolo
 
 ## Paradigma di Programmazione:
@@ -327,35 +323,35 @@ public static boolean isPrime(int n) {
 ---
 # Operatori Stream
 
-| Nome metodo | Descrizione |
-|-------------|-------------|
-| anyMatch(f) | Restituisce true se qualsiasi elemento dello stream soddisfa il predicato dato |
-| allMatch(f) | Restituisce true se tutti gli elementi dello stream soddisfano il predicato dato |
-| average() | Restituisce la media aritmetica dei numeri nello stream |
-| collect(f) | Converte lo stream in una collezione e la restituisce |
-| count() | Restituisce il numero di elementi nello stream |
-| distinct() | Restituisce gli elementi unici dallo stream |
-| filter(f) | Restituisce gli elementi che soddisfano il predicato dato |
-| forEach(f) | Esegue un'azione su ogni elemento dello stream |
-| limit(size) | Restituisce solo i prossimi size elementi dello stream |
-| map(f) | Applica la funzione data ad ogni elemento dello stream |
-| noneMatch(f) | Restituisce true se zero elementi dello stream soddisfano il predicato dato |
-| parallel() | Restituisce una versione multithread di questo stream |
-| peek(f) | Esamina solo il primo elemento dello stream |
-| reduce(f) | Applica la funzione di riduzione binaria data agli elementi dello stream |
-| sequential() | Single-threaded, opposto di parallel() |
-| skip(n) | Omette i prossimi n elementi dallo stream |
-| sorted() | Restituisce gli elementi dello stream in ordine ordinato |
-| sum() | Restituisce la somma degli elementi nello stream |
-| toArray() | Converte lo stream in array |
+| Nome metodo      | Descrizione                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| **anyMatch(f)**  | Restituisce true se qualsiasi elemento dello stream soddisfa il predicato dato   |
+| **allMatch(f)**  | Restituisce true se tutti gli elementi dello stream soddisfano il predicato dato |
+| **average()**    | Restituisce la media aritmetica dei numeri nello stream                          |
+| **collect(f)**   | Converte lo stream in una collezione e la restituisce                            |
+| **count()**      | Restituisce il numero di elementi nello stream                                   |
+| **distinct()**   | Restituisce gli elementi unici dallo stream                                      |
+| **filter(f)**    | Restituisce gli elementi che soddisfano il predicato dato                        |
+| **forEach(f)**   | Esegue un'azione su ogni elemento dello stream                                   |
+| **limit(size)**  | Restituisce solo i prossimi size elementi dello stream                           |
+| **map(f)**       | Applica la funzione data ad ogni elemento dello stream                           |
+| **noneMatch(f)** | Restituisce true se zero elementi dello stream soddisfano il predicato dato      |
+| **parallel()**   | Restituisce una versione multithread di questo stream                            |
+| **peek(f)**      | Esamina solo il primo elemento dello stream                                      |
+| **reduce(f)**    | Applica la funzione di riduzione binaria data agli elementi dello stream         |
+| **sequential()** | Single-threaded, opposto di parallel()                                           |
+| **skip(n)**      | Omette i prossimi n elementi dallo stream                                        |
+| **sorted()**     | Restituisce gli elementi dello stream in ordine ordinato                         |
+| **sum()**        | Restituisce la somma degli elementi nello stream                                 |
+| **toArray()**    | Converte lo stream in array                                                      |
 
-| Metodo statico | Descrizione |
-|----------------|-------------|
-| concat(s1, s2) | Unisce due stream |
-| empty() | Restituisce uno stream di zero elementi |
-| iterate(seed, f) | Restituisce uno stream infinito con l'elemento di partenza dato |
-| of(values) | Converte i valori dati in uno stream |
-| range(start, end) | Restituisce un intervallo di valori interi come stream |
+| Metodo statico    | Descrizione                                                     |
+| ----------------- | --------------------------------------------------------------- |
+| **concat(s1, s2)**    | Unisce due stream                                               |
+| **empty()**           | Restituisce uno stream di zero elementi                         |
+| **iterate(seed, f)**  | Restituisce uno stream infinito con l'elemento di partenza dato |
+| **of(values)**        | Converte i valori dati in uno stream                            |
+| **range(start, end)** | Restituisce un intervallo di valori interi come stream          |
 
 # Risultati Opzionali
 
@@ -441,13 +437,13 @@ System.out.println(employeesMap);
 
 # Interfacce Funzionali Java
 
-| Interfaccia | Input | Output | Scopo |
-|-------------|-------|--------|-------|
-| Function | Singolo oggetto di qualsiasi tipo | Singolo oggetto di qualsiasi tipo | Applicare logica sull'input, permettere concatenazione di logica |
-| BiFunction | Due oggetti di qualsiasi tipo | Singolo oggetto di qualsiasi tipo | Applicare logica su entrambi gli input, permettere concatenazione di logica |
-| Predicate | Singolo oggetto di qualsiasi tipo | Boolean | Testare se il valore è conforme alla logica booleana |
-| Consumer/BiConsumer | Singolo/doppio oggetto di qualsiasi tipo | Nessuno | Usare un valore e output, eseguire qualche effetto collaterale |
-| Supplier | Nessuno | Singolo oggetto di qualsiasi tipo | Creare un oggetto del tipo desiderato |
+| Interfaccia         | Input                                    | Output                            | Scopo                                                                       |
+| ------------------- | ---------------------------------------- | --------------------------------- | --------------------------------------------------------------------------- |
+| **Function**            | Singolo oggetto di qualsiasi tipo        | Singolo oggetto di qualsiasi tipo | Applicare logica sull'input, permettere concatenazione di logica            |
+| **BiFunction**          | Due oggetti di qualsiasi tipo            | Singolo oggetto di qualsiasi tipo | Applicare logica su entrambi gli input, permettere concatenazione di logica |
+| **Predicate**           | Singolo oggetto di qualsiasi tipo        | Boolean                           | Testare se il valore è conforme alla logica booleana                        |
+| **Consumer/BiConsumer** | Singolo/doppio oggetto di qualsiasi tipo | Nessuno                           | Usare un valore e output, eseguire qualche effetto collaterale              |
+| **Supplier**            | Nessuno                                  | Singolo oggetto di qualsiasi tipo | Creare un oggetto del tipo desiderato                                       |
 
 # Interfaccia Function Java
 
@@ -512,12 +508,12 @@ System.out.println(sizeChecker.negate().test(sentence));
 
 # Interfacce Consumer/Supplier Java
 
-## $Consumer<T>: (BiConsumer<T,U>)$
-
+$$Consumer<T>: (BiConsumer<T,U>)$$
 - Rappresenta un'operazione che accetta un singolo argomento di input e non restituisce alcun risultato.
 - Funzione: `void accept(T t)` (`void accept(T t, U u)`)
 
-## $Supplier<T>:$
+--- 
+$$Supplier<T>:$$
 
 - Rappresenta un fornitore di risultati.
 - Funzione: `T get()`
@@ -618,18 +614,16 @@ System.out.println(streamSupplier.get().noneMatch(s -> true)); // false
 
 # Operazioni Intermedie
 
-| Operazione Stream | Scopo | Input |
-|-------------------|-------|-------|
-| filter | Filtra gli elementi secondo un predicato | Predicate |
-| map/flatMap | Applica una funzione sugli elementi dello stream | Function |
-| limit | Restituisce i primi n elementi dello stream | int |
-| sorted | Ordina gli elementi dello stream | Comparator |
-| distinct | Scarta i duplicati usando il metodo equals | |
-| Reduce/Fold | Applica una funzione su tutti gli elementi dello stream | BinaryOperator |
-| peek | Restituisce una copia dello stream e poi applica una funzione Consumer sul risultato | Consumer |
-| skip | Scarta i primi n elementi dello stream risultante | Long |
-
----
+| Operazione Stream | Scopo                                                                                | Input          |
+| ----------------- | ------------------------------------------------------------------------------------ | -------------- |
+| **filter**            | Filtra gli elementi secondo un predicato                                             | Predicate      |
+| **map/flatMap**       | Applica una funzione sugli elementi dello stream                                     | Function       |
+| **limit**             | Restituisce i primi n elementi dello stream                                          | int            |
+| **sorted**            | Ordina gli elementi dello stream                                                     | Comparator     |
+| **distinct**          | Scarta i duplicati usando il metodo equals                                           |                |
+| **Reduce/Fold**       | Applica una funzione su tutti gli elementi dello stream                              | BinaryOperator |
+| **peek**              | Restituisce una copia dello stream e poi applica una funzione Consumer sul risultato | Consumer       |
+| **skip**              | Scarta i primi n elementi dello stream risultante                                    | Long           |
 
 # Operazioni di Terminazione
 
@@ -644,14 +638,14 @@ Esempi di operazioni di terminazione:
 
 ## Tabella delle Operazioni di Terminazione
 
-| Operazione Stream | Scopo | Input |
-|-------------------|-------|-------|
-| forEach | Per ogni elemento, applica una funzione Consumer | Consumer |
-| count | Conta gli elementi dello stream | |
-| collect | Riduce lo stream in una collezione desiderata | Collector |
-| min/max | Restituisce l'elemento min/max secondo un Comparator | Comparator |
-| anyMatch/allMatch/noneMatch | Restituisce se qualsiasi/tutti/nessuno degli elementi dello stream soddisfano il predicato fornito | Predicate |
-| findFirst/findAny | Restituisce un Optional contenente il primo/qualsiasi risultato | |
+| Operazione Stream           | Scopo                                                                                              | Input      |
+| --------------------------- | -------------------------------------------------------------------------------------------------- | ---------- |
+| **forEach**                     | Per ogni elemento, applica una funzione Consumer                                                   | Consumer   |
+| **count**                       | Conta gli elementi dello stream                                                                    |            |
+| **collect**                     | Riduce lo stream in una collezione desiderata                                                      | Collector  |
+| **min/max**                     | Restituisce l'elemento min/max secondo un Comparator                                               | Comparator |
+| **anyMatch/allMatch/noneMatch** | Restituisce se qualsiasi/tutti/nessuno degli elementi dello stream soddisfano il predicato fornito | Predicate  |
+| **findFirst/findAny**           | Restituisce un Optional contenente il primo/qualsiasi risultato                                    |            |
 
 # collect() usando Collectors
 
@@ -759,7 +753,7 @@ company.stream()
         Collectors.counting()))
     .forEach((s, d) -> System.out.println("Group: " + s + "\tTotal Employees: " + d));
 ```
----
+
 # Operazione peek()
 
 - Restituisce uno stream composto dagli elementi di questo stream.
@@ -877,7 +871,7 @@ I principi chiave della programmazione funzionale includono:
 | Concatenazione di funzioni | Sì | Solo se nella stessa istanza | Le lambda permettono la concatenazione |
 | Supporto alla concorrenza e multicore | Sì | Richiede strumenti di sincronizzazione | Sì - se puramente funzionale |
 
-# Limitazioni di Java per la Programmazione Funzionale
+## Limitazioni di Java per la Programmazione Funzionale
 
 - Differenze tra tipi base e oggetti
 - Distinzione tra array e liste
@@ -885,61 +879,3 @@ I principi chiave della programmazione funzionale includono:
 - Eccessiva verbosità
 - Gestione non facile di mappe (chiave/valore)
 - Combinazione non facile di valori per creare una lista
-
----
-# FAQ sulla Programmazione Funzionale in Java
-
-## 1. Cosa si intende per Programmazione Funzionale?
-
-La Programmazione Funzionale è un paradigma di programmazione che considera il calcolo come la valutazione di funzioni matematiche. Invece di utilizzare istruzioni per descrivere i passaggi da eseguire (come nella programmazione imperativa), si utilizzano funzioni pure, senza effetti collaterali, per trasformare i dati.
-
-## 2. Quali sono i vantaggi della Programmazione Funzionale?
-
-La Programmazione Funzionale offre diversi vantaggi, tra cui:
-
-- **Maggiore leggibilità e manutenibilità del codice**: le funzioni pure sono più facili da capire e testare in isolamento.
-- **Migliore gestione della concorrenza**: l'assenza di effetti collaterali riduce i rischi di race conditions e altri problemi legati alla concorrenza.
-- **Codice più conciso ed espressivo**: le espressioni lambda e le funzioni di ordine superiore consentono di scrivere codice più elegante e sintetico.
-- **Maggiore affidabilità**: l'immutabilità dei dati riduce gli errori e rende il codice più prevedibile.
-
-## 3. Cosa sono le Funzioni Pure e perché sono importanti?
-
-Una Funzione Pura è una funzione che rispetta due principi fondamentali:
-
-- **Determinismo**: dati gli stessi input, produce sempre lo stesso output.
-- **Assenza di effetti collaterali**: non modifica lo stato del programma al di fuori del suo contesto, come ad esempio variabili globali o file.
-
-L'utilizzo di funzioni pure rende il codice più facile da testare, debuggare e ragionare, in quanto il loro comportamento è prevedibile e non dipendente da fattori esterni.
-
-## 4. Come si applica la Programmazione Funzionale in Java?
-
-Java, pur essendo un linguaggio orientato agli oggetti, offre diverse funzionalità per la programmazione funzionale introdotte con Java 8:
-
-- **Espressioni Lambda**: funzioni anonime che possono essere passate come argomenti ad altre funzioni.
-- **Interfacce Funzionali**: interfacce con un solo metodo astratto, utilizzate per rappresentare funzioni.
-- **API Stream**: consente di elaborare collezioni di dati in modo dichiarativo e funzionale, sfruttando operazioni come map, filter e reduce.
-- **Optional**: un contenitore che può contenere o meno un valore, utile per gestire situazioni in cui un risultato potrebbe non essere presente.
-
-## 5. Qual è la differenza tra map e flatMap?
-
-Entrambe applicano una funzione a ciascun elemento di uno Stream, ma map restituisce uno Stream con lo stesso numero di elementi dell'originale, mentre flatMap appiattisce i risultati in un unico Stream. Ad esempio, se si applica map a una lista di liste, si ottiene una lista di Stream, mentre con flatMap si ottiene un unico Stream contenente tutti gli elementi delle liste concatenate.
-
-## 6. Cosa sono le operazioni terminali e intermedie negli Stream?
-
-Le operazioni intermedie (map, filter, sorted, etc.) trasformano uno Stream in un nuovo Stream, mentre le operazioni terminali (forEach, collect, reduce, etc.) producono un risultato finale o un effetto collaterale, consumando lo Stream. Le operazioni intermedie sono lazy, ovvero vengono eseguite solo quando viene richiamata un'operazione terminale.
-
-## 7. Cosa sono i Collectors e come si usano?
-
-I Collectors sono un'utilità per combinare gli elementi di uno Stream in un risultato finale, come una collezione o un valore singolo. Ad esempio, Collectors.toList() crea una lista, Collectors.groupingBy() raggruppa gli elementi in base a un criterio, Collectors.joining() concatena gli elementi in una stringa.
-
-## 8. Quali sono le limitazioni di Java per la Programmazione Funzionale?
-
-Nonostante le nuove funzionalità, Java presenta ancora alcune limitazioni per la programmazione funzionale:
-
-- Non è un linguaggio puramente funzionale, quindi l'immutabilità dei dati non è sempre garantita.
-- La gestione di tuple e mappe non è così elegante come in altri linguaggi funzionali.
-- La verbosità del linguaggio può rendere il codice meno conciso.
-
-Nonostante queste limitazioni, la programmazione funzionale può portare notevoli benefici in Java, migliorando la leggibilità, la manutenibilità e la scalabilità del codice.
-
----

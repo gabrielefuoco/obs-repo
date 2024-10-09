@@ -50,7 +50,6 @@
 | **Semantica con Aggregati**             | La semantica che definisce il significato di un programma con aggregati.                                                               |
 | **Programma Ridotto con Aggregati**     | Un programma ridotto che elimina le regole con letterali aggregati falsi e rimuove i letterali aggregati dai corpi delle regole.       |
 
----
 ### Logica Classica vs Logica Non-Monotona
 - **Logica classica (monotona):**
   - Ogni nuova informazione **aumenta** la conoscenza.
@@ -310,7 +309,6 @@ noReach(X) :- target(X), not reach(X).
 - Un **programma** è un insieme finito di regole e constraint (regole con testa vuota).
 
 ---
-
 ### Forma di una regola in DLP
 
 Una regola generica in DLP ha la seguente forma:
@@ -333,7 +331,6 @@ attendsDLP(john).
   - Uno in cui `john` è curioso (`isCurious(john)`).
 
 ---
-
 ### Tipologie di Derivazioni in DLP
 
 1. **Brave-Reasoning:**
@@ -351,7 +348,6 @@ attendsDLP(john).
      ```
 
 ---
-
 ### Integrity Constraints
 
 - Le **regole senza testa** sono utilizzate per scartare modelli che violano determinati vincoli.
@@ -361,7 +357,6 @@ attendsDLP(john).
     ```
 
 ---
-
 ### Esempio: Problema del Vertex Cover
 - Determinare un **vertex cover** minimale (insieme di nodi che coprono tutti gli archi di un grafo).
 
@@ -378,7 +373,6 @@ node(y) :- edge(_, y).
   - Il vincolo (`:-`) assicura che ogni arco del grafo sia coperto da almeno un nodo.
 
 ---
-
 ### Esempio: Problema del Dominating Set
 
 - **Obiettivo:** Trovare un insieme di nodi che dominano tutti gli altri nodi nel grafo (ogni nodo è dominato o ha un nodo vicino che lo domina).
@@ -395,7 +389,6 @@ dominated(x) :- inDS(x).
   - Ogni nodo è **dominato** da un nodo nel dominating set o appartiene al dominating set stesso.
 
 ---
-
 ### Weak Constraints
 
 - **Vincoli deboli** sono vincoli che si preferisce **non violare**, ma la loro violazione non rende il modello non valido. Tuttavia, ogni violazione impone una penalità.
@@ -410,7 +403,6 @@ dominated(x) :- inDS(x).
 - **Livello delle penalità:** I vincoli deboli possono avere livelli (`@i`), e si cerca di minimizzare la somma dei pesi dei vincoli violati, a partire dal livello 1.
 
 ---
-
 ### Esempio di Weak Constraint
 ```prolog
 :-~ inDS(x), [1@1, x].
@@ -419,29 +411,24 @@ dominated(x) :- inDS(x).
 - Gli **Answer Set** validi sono quelli che minimizzano le penalità associate ai vincoli violati.
 
 ---
-
 ### Complessità
 
 - I problemi in DLP (come il **vertex cover** o il **dominating set**) sono **NP-completi**.
   - La ricerca di un modello minimale in DLP è computazionalmente equivalente a risolvere problemi NP-completi.
 ---
 ### Semantica per la Disjunctive Logic Programming (DLP)
-
 La semantica di DLP si basa sulla ricerca di **Answer Set**, chiamati anche **modelli stabili**. 
 
 ---
-
 #### Answer Set per Programmi Positivi
 - Per i programmi **positivi** (senza negazione), un **Answer Set** è un **modello minimale** del programma, simile alla semantica della logica classica.
   - Un modello minimale è un insieme di atomi veri che non può essere ridotto ulteriormente senza violare le regole del programma.
 
 ---
-
 #### Negazione e Complicazioni
 Quando viene introdotta la **negazione** nel programma, il calcolo degli **Answer Set** diventa più complesso. 
 
 ---
-
 #### Riduzione di un Programma P rispetto a una Interpretazione I
 Dato un programma P e una interpretazione I, la **riduzione** del programma positivo $P^I$ viene ottenuta seguendo questi passi:
 
@@ -449,7 +436,6 @@ Dato un programma P e una interpretazione I, la **riduzione** del programma posi
 2. **Rimuovere i letterali negativi** dai corpi delle altre regole.
 
 ---
-
 #### Definizione di Answer Set
 Un **Answer Set** di un programma P è una interpretazione $I$ tale che $I$ è un **modello minimale** del programma ridotto $(P^I)$.
 
@@ -505,7 +491,6 @@ d.
 Le **funzioni di aggregazione** sono state aggiunte ai sistemi di **Answer Set Programming (ASP)** per permettere di eseguire operazioni come somma, conteggio, minimo, massimo, ecc., su insiemi di dati. Queste funzioni sono particolarmente utili per gestire insiemi di valori e calcoli complessi, che in SQL sono facili da implementare ma in DLP richiedono maggiore attenzione.
 
 ---
-
 #### Sintassi di Base per l'Aggregazione
 
 - **Aggregazione di un insieme**: `{Variabili : CongiunzioneDiAtomi}`  
@@ -518,7 +503,6 @@ Le **funzioni di aggregazione** sono state aggiunte ai sistemi di **Answer Set P
   - Se aggiungessimo una condizione come `emp(EmpId, male, Skill, Salary)`, otterremmo l'insieme degli ID degli **impiegati maschili**.
 
 ---
-
 #### Funzioni di Aggregazione
 
 Le **funzioni di aggregazione** sono indicate con `f{}` dove `f` rappresenta una funzione specifica. Alcune delle funzioni di aggregazione più comuni includono:
@@ -528,7 +512,6 @@ Le **funzioni di aggregazione** sono indicate con `f{}` dove `f` rappresenta una
 - **#max**: Massimo
 
 ---
-
 ##### Esempio: Conteggio con Aggregazione
 Se voglio contare il numero di impiegati maschili, posso utilizzare:
 ```prolog
@@ -537,7 +520,6 @@ Se voglio contare il numero di impiegati maschili, posso utilizzare:
 Questo vincolo richiede che il numero di impiegati maschili sia compreso tra 5 e 10.
 
 ---
-
 #### Esempio di Aggregazione con #sum
 Supponiamo di avere una base di dati con le seguenti istanze:
 ```prolog
@@ -555,7 +537,6 @@ sum(S) :- S = #sum{Y : emp(Id, , , Y)}.
 - **Risultato**: La somma ottenuta sarebbe **4500** (anziché 5500) perché uno dei salari `1000` viene considerato duplicato e ignorato.
 
 ---
-
 #### Gestione dei Duplicati
 Per evitare la rimozione dei duplicati durante l'aggregazione, possiamo includere anche l'ID degli impiegati nell'espressione di aggregazione. In questo modo, ogni occorrenza viene trattata come distinta:
 ```prolog
@@ -564,7 +545,6 @@ sum(S) :- S = #sum{Y, Id : emp(Id, , , Y)}.
 - **Risultato**: Includendo l'ID, la somma sarà correttamente **5500**.
 
 ---
-
 ### Semantica in Presenza di Aggregati
 
 Quando utilizziamo **aggregati**, la semantica degli **Answer Set** si estende rispetto alla semantica base.
@@ -579,14 +559,5 @@ Per verificare se un'interpretazione I è un **Answer Set** in presenza di aggre
    - Rimuovere i letterali aggregati e negativi dalle regole rimanenti.
 
 3. Se l'interpretazione **I** è un **modello minimale** del programma ridotto, allora I è un **Answer Set**.
-
----
-### Riepilogo
-
-- Le **funzioni di aggregazione** permettono di eseguire operazioni come somma, conteggio, minimo e massimo su insiemi di dati.
-- Possono essere utilizzate per definire vincoli, contare elementi, o sommare valori con l'ausilio di espressioni come `#sum`, `#count`, etc.
-- È importante gestire correttamente i **duplicati** per ottenere risultati accurati.
-- La semantica degli **Answer Set** con aggregati prevede una riduzione del programma che elimina regole con aggregati falsi e verifica se l'interpretazione è minimale.
-
 
 

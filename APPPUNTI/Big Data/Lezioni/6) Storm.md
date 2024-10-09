@@ -84,11 +84,11 @@ L'integrazione avviene tramite uno script che esegue la logica dell'applicazione
 
 ## Astrazioni di dati e calcolo
 Il paradigma di programmazione offerto da Storm si basa su cinque astrazioni per dati e calcolo:
-- Tuple: è l'unità base di dati che può essere elaborata da un'applicazione Storm. Una tupla consiste in una lista di campi (es. byte, char, integer, long e altri);
-- Stream: rappresenta una sequenza illimitata di tuple, che è creata o elaborata in parallelo. Gli stream possono essere creati usando serializzatori standard (es. integer, double) o con serializzatori personalizzati;
-- Spout: è la sorgente dati di uno stream. I dati sono letti da diverse fonti esterne, come API di social network, reti di sensori, sistemi di code (es. Java Message Service, Kafka, Redis), e poi sono alimentati nell'applicazione;
-- Bolt: rappresenta l'entità di elaborazione. Specificamente, può eseguire qualsiasi tipo di task o algoritmo (es. pulizia dati, funzioni, join, query);
-- Topology: rappresenta un job. Una topologia generica è configurata come un DAG, dove spout e bolt rappresentano i vertici del grafo e gli stream agiscono come i loro archi. Può girare per sempre fino a quando non viene fermata.
+- **Tuple**: è l'unità base di dati che può essere elaborata da un'applicazione Storm. Una tupla consiste in una lista di campi (es. byte, char, integer, long e altri);
+- **Stream**: rappresenta una sequenza illimitata di tuple, che è creata o elaborata in parallelo. Gli stream possono essere creati usando serializzatori standard (es. integer, double) o con serializzatori personalizzati;
+- **Spout**: è la sorgente dati di uno stream. I dati sono letti da diverse fonti esterne, come API di social network, reti di sensori, sistemi di code (es. Java Message Service, Kafka, Redis), e poi sono alimentati nell'applicazione;
+- **Bolt**: rappresenta l'entità di elaborazione. Specificamente, può eseguire qualsiasi tipo di task o algoritmo (es. pulizia dati, funzioni, join, query);
+- **Topology**: rappresenta un job. Una topologia generica è configurata come un DAG, dove spout e bolt rappresentano i vertici del grafo e gli stream agiscono come i loro archi. Può girare per sempre fino a quando non viene fermata.
 
 ## Dettagli implementativi: Spout
 Uno Spout è una sorgente di stream in una topologia. Generalmente gli spout leggono tuple da una fonte esterna e le emettono nella topologia (es. l'API di Twitter).
@@ -181,79 +181,4 @@ L'applicazione Storm prende frasi casuali, le divide in parole e conta quante vo
 3. Il bolt **WordCount** conta le parole e le emette solo quando riceve una tick tuple.
 4. La **tick tuple** attiva l'emissione dei conteggi ogni 10 secondi.
 
-# Domande frequenti su Apache Storm
-
-## 1. Cos'è Apache Storm e in cosa si differenzia da Hadoop?
-
-Apache Storm è un sistema di elaborazione di flussi di dati distribuito, open-source e fault-tolerant. A differenza di Hadoop, che esegue job MapReduce con una durata definita, Storm esegue "topologie" che elaborano flussi di dati continui senza mai terminare (a meno che non vengano interrotte).
-
-## 2. Quali sono i componenti principali di un cluster Storm?
-
-Un cluster Storm è composto da tre tipi di nodi:
-
-- **Nodo Master (Nimbus):** Distribuisce il codice, assegna i task ai worker e monitora lo stato del cluster. È stateless e utilizza ZooKeeper per la persistenza dei dati.
-- **Nodi Worker (Supervisor):** Eseguono i processi worker che gestiscono i task assegnati da Nimbus. Ogni worker esegue un sottoinsieme di una topologia.
-- **ZooKeeper:** Fornisce servizi di coordinamento e gestione dello stato tra Nimbus e i Supervisor.
-
-## 3. Come gestisce Storm la tolleranza ai guasti?
-
-Storm è progettato per essere fault-tolerant. Se un worker si arresta in modo anomalo, il Supervisor lo riavvia. Se il riavvio fallisce, Nimbus riassegna il task a un altro worker. Sia Nimbus che i Supervisor sono "fail-fast" e "stateless", garantendo che il sistema possa riprendersi dagli errori senza perdere dati.
-
-## 4. Quali sono le cinque astrazioni chiave di dati e calcolo in Storm?
-
-Storm utilizza cinque astrazioni per l'elaborazione dei dati:
-
-- **Tuple:** Unità base di dati, rappresentata come un elenco di campi.
-- **Stream:** Sequenza illimitata di tuple, elaborate in parallelo.
-- **Spout:** Sorgente dei dati, legge da fonti esterne e genera stream di tuple.
-- **Bolt:** Unità di elaborazione, esegue operazioni sulle tuple ricevute e può emetterne di nuove.
-- **Topology:** Grafo diretto aciclico (DAG) che definisce il flusso di dati tra spout e bolt.
-
-## 5. Cosa sono le Tick Tuple e come vengono utilizzate?
-
-Le Tick Tuple sono tuple speciali emesse a intervalli regolari, utili per attività temporizzate all'interno di una topologia, come l'emissione periodica di risultati aggregati o la pulizia della cache.
-
-## 6. Quali sono i tipi di raggruppamento di stream disponibili in Storm?
-
-I raggruppamenti di stream definiscono come le tuple vengono distribuite tra i bolt. Alcuni tipi comuni sono:
-
-- **Shuffle Grouping:** Distribuzione casuale delle tuple tra i bolt.
-- **Fields Grouping:** Le tuple con lo stesso valore per i campi specificati vengono inviate allo stesso bolt.
-- **Direct Grouping:** Il bolt emittente decide a quale bolt ricevente inviare la tupla.
-- **All Grouping:** Lo stream viene replicato su tutti i bolt.
-
-## 7. Come posso testare una topologia Storm localmente?
-
-Storm fornisce una classe LocalCluster che consente di simulare un cluster Storm sul proprio computer, utile per lo sviluppo e il debug delle topologie prima di distribuirle su un cluster reale.
-
-## 8. Storm supporta linguaggi diversi da Java?
-
-Sì, Storm supporta linguaggi non JVM tramite il concetto di "componenti multilingua". Ciò significa che è possibile scrivere spout e bolt in linguaggi come Python, Ruby o JavaScript, che interagiscono con il resto della topologia tramite protocolli di comunicazione standard.
-
----
-### Quiz a Risposta Breve
-
-1. Descrivi brevemente Apache Maven e il suo ruolo nello sviluppo software.
-2. Quali sono le differenze principali tra un cluster Hadoop e un cluster Storm?
-3. Quali sono i tre componenti principali di un cluster Storm e le loro funzioni?
-4. Cosa sono le tick tuple in Storm e come vengono utilizzate?
-5. Spiega la differenza tra uno Spout e un Bolt in una topologia Storm.
-6. Quali sono i metodi principali che devi implementare quando crei uno Spout personalizzato?
-7. Descrivi il concetto di "raggruppamento degli stream" in Storm e fornisci un esempio di un tipo di raggruppamento.
-8. Nel Problema 1, come viene modificata la parola di input dal bolt?
-9. Nel Problema 2, qual è lo scopo di fieldsGrouping?
-10. Nel contesto di Storm, cosa si intende per elaborazione "fault-tolerant"?
-
-### Risposte al Quiz
-
-1. Apache Maven è uno strumento di gestione e automazione della build di progetti software. Semplifica la gestione delle dipendenze, la compilazione del codice, l'esecuzione dei test e il packaging dell'applicazione.
-2. Hadoop è progettato per l'elaborazione batch di grandi set di dati, mentre Storm è progettato per l'elaborazione di flussi di dati in tempo reale. Hadoop esegue job MapReduce con una durata definita, mentre Storm esegue topologie che elaborano dati continuamente.
-3. I tre componenti principali di un cluster Storm sono: Nimbus (il nodo master), i Supervisor (che eseguono i processi worker) e ZooKeeper (per la gestione dello stato e la tolleranza ai guasti).
-4. Le tick tuple sono tuple speciali emesse a intervalli regolari in una topologia. Sono utili per eseguire operazioni periodiche, come l'aggregazione dei dati o la scrittura su database, senza dover gestire manualmente il tempo.
-5. Uno Spout è la sorgente dei dati in una topologia, leggendo dati da fonti esterne ed emettendoli come tuple. Un Bolt elabora le tuple ricevute dagli spout o da altri bolt, eseguendo operazioni come il filtraggio, l'aggregazione o la scrittura su database.
-6. I metodi principali da implementare in uno Spout personalizzato sono: open() (per l'inizializzazione), nextTuple() (per l'emissione di tuple), ack() e fail() (per la gestione degli esiti delle tuple), e declareOutputFields() (per dichiarare lo schema delle tuple emesse).
-7. Il "raggruppamento degli stream" determina come le tuple vengono distribuite tra le istanze dei bolt in una topologia. Ad esempio, fieldsGrouping invia tuple con lo stesso valore in un campo specifico alla stessa istanza del bolt.
-8. Nel Problema 1, il bolt aggiunge tre punti esclamativi due volte alla parola di input, trasformando ad esempio "ciao" in "ciao!!!!!!".
-9. Nel Problema 2, fieldsGrouping assicura che tutte le occorrenze della stessa parola vengano inviate alla stessa istanza del bolt WordCount, consentendo un conteggio accurato.
-10. L'elaborazione "fault-tolerant" in Storm si riferisce alla capacità del sistema di continuare a funzionare correttamente anche in caso di guasti hardware o software. Ciò viene ottenuto tramite la replica dei dati, il monitoraggio dello stato dei worker e la riassegnazione automatica dei task in caso di errori.
 

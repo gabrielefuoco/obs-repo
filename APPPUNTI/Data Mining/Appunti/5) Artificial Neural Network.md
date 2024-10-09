@@ -186,7 +186,7 @@ $$sigmoid(x) = \sigma(x) = \frac{1}{1 + e^{-x}}$$
 
 $$tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
 
-![[5) Artificial Neural Network-20241004155903346.png|218]]
+	![[5) Artificial Neural Network-20241004155903346.png|218]]
 - Quando deriviamo abbiamo un update del peso più elevato rispetto alla funzione sigmoidea
 - I dati sono centrati verso lo 0, rendendo l'apprendimento più facile
 - Usata nel livello di output

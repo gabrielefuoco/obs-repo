@@ -78,6 +78,7 @@ La chiave è l'efficiente generazione degli itemset frequenti, ancora un problem
 
 
 ### Frequente Itemset Generation
+
 Approccio "brute-force" per trovare gli itemset frequenti in un insieme di transazioni, e le strategie per ridurre la sua complessità computazionale.
 
 **Approccio "brute-force"**
@@ -137,6 +138,7 @@ L'efficacia del pruning basato sul supporto di Apriori può essere dimostrata co
 
 
 ## Algoritmo Apriori
+
 L'algoritmo Apriori è un algoritmo per la scoperta di itemset frequenti in un insieme di dati di transazioni. L'obiettivo è trovare tutti gli itemset che appaiono in almeno una certa percentuale di transazioni, definita come *minsup*.
 **Descrizione dell'Algoritmo:**
 L'algoritmo Apriori opera in modo iterativo, partendo da itemset di dimensione 1 e aumentando gradualmente la dimensione degli itemset fino a quando non vengono trovati tutti gli itemset frequenti.
@@ -164,8 +166,7 @@ L'algoritmo Apriori opera in modo iterativo, partendo da itemset di dimensione 1
 * L'algoritmo termina quando non vengono generati nuovi itemset frequenti.
 
 ### Pseudocodice
-
-```
+``` pseudo
 k = 1
 F_k = {i | i ∈ I and σ(i) ≥ N × minsup}
 repeat
@@ -181,10 +182,11 @@ repeat
     Fk = {c | c ∈ Lk and σ(c) ≥ N × minsup}
 until Fk = ∅
 Result =  ∪ F_{k}
+
 ```
 
-Dove:
 
+Dove:
 * *N* è il numero totale di transazioni.
 * *minsup* è la soglia di supporto minima.
 * *I* è l'insieme di tutti gli item.
@@ -205,7 +207,7 @@ Per ridurre il numero di itemset da verificare, si può applicare il **pruning**
 
 ## Generazione di Candidati con il Principio Apriori
 
-### Metodo *Fk−*1*×*Fk−*2*
+### Metodo $F_{k−1}×F_{k−2}$
 
 Questo metodo genera itemset di cardinalità *k* combinando itemset frequenti di cardinalità *k −*1 e *k −*2. Il processo prevede:
 
@@ -214,7 +216,7 @@ Questo metodo genera itemset di cardinalità *k* combinando itemset frequenti di
 3. **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
 4. **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
 
-### Metodo *Fk−*1*×Fk−*1*
+### Metodo $F_{k−1}×F_{k−1}$
 
 Questo metodo ottimizza la generazione di candidati combinando due itemset di cardinalità *k −*1. Il processo prevede:
 
@@ -573,8 +575,7 @@ Il cross-support è un problema che si presenta nell'analisi delle regole associ
 **Misura di Cross-Support:**
 Dato un itemset $X = \{x_1, x_2, ..., x_n\}$, la misura di cross-support, r, è definita come:
 
-$r = \frac{min\{s(x_1), ..., s(x_n)\}}{max\{s(x_1), ..., s(x_n)\}}$
-
+$$r = \frac{min\{s(x_1), ..., s(x_n)\}}{max\{s(x_1), ..., s(x_n)\}}$$
 dove s(xi) è il supporto dell'i-esimo elemento.
 
 **Interpretazione:**
@@ -596,11 +597,11 @@ L'H-confidence è una misura che aiuta a identificare regole associative signifi
 
 Dato un itemset $X = \{x_1, x_2, ..., x_n\}$, l'H-confidence è definita come:
 
-$H = min\{c(X_1 \to X_2) | X_1 \subset X \wedge X_2 = X - X_1\}$
+$$H = min\{c(X_1 \to X_2) | X_1 \subset X \wedge X_2 = X - X_1\}$$
 
 dove $c(X_1 \to X_2)$ è la confidenza della regola $X_1 \to X_2$, definita come:
 
-$c(X_1, X_2) = \frac{s(X_1 \cup X_2)}{s(X_1)}$
+$$c(X_1, X_2) = \frac{s(X_1 \cup X_2)}{s(X_1)}$$
 
 **Calcolo:**
 * Si considera la confidenza minima di tutte le regole ottenibili da $X$ effettuando un partizionamento degli elementi.
@@ -820,19 +821,20 @@ Latte scremato -> pane integrale
 
 Sono tutte indicative di un'associazione più generale tra latte e pane. Le ultime te slide non le ha spiegate ma le riporto come immagine per completezza
 **Supporto e confidenza variano da livello a livello:**
-
-- If X è genitore di X1 e X2, then 
-	- σ(X) ≤ σ(X1) + σ(X2)
+```
+If X è genitore di X1 e X2, then 
+	σ(X) ≤ σ(X1) + σ(X2)
     
-- If σ(X1 ∪ Y1) ≥ minsup, 
-- and X è genitore di X1, 
-- Y è genitore di Y1 
-- then σ(X ∪ Y1) ≥ minsup, 
-- σ(X1 ∪ Y) ≥ minsup σ
-- (X ∪ Y) ≥ minsup
+If σ(X1 ∪ Y1) ≥ minsup, 
+and X è genitore di X1, 
+Y è genitore di Y1 
+then σ(X ∪ Y1) ≥ minsup, 
+σ(X1 ∪ Y) ≥ minsup 
+σ(X ∪ Y) ≥ minsup
     
-- If conf(X1 ⇒ Y1) ≥ minconf, 
-- then conf(X1 ⇒ Y) ≥ minconf
+If conf(X1 ⇒ Y1) ≥ minconf, 
+then conf(X1 ⇒ Y) ≥ minconf
+```
 
 
 ## Conseguenze

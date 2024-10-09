@@ -165,28 +165,28 @@ Calcolare il prodotto matrice-vettore *y = A x x*.
 **Soluzione quando il vettore non entra in memoria:**
 * Dividere *x* e *A* in blocchi più piccoli (strisce o blocchi quadrati) per eseguire il calcolo in parallelo. 
 
----
-### Panoramica dell'esecuzione di MapReduce
-- **Architettura master-worker**: Il master coordina i task map e reduce, assegnando i task ai worker e monitorando l'esecuzione.
+## Panoramica dell'esecuzione di MapReduce
+
+**Architettura master-worker**: Il master coordina i task map e reduce, assegnando i task ai worker e monitorando l'esecuzione.
 - **Gestione dei guasti**: 
   - Se il master si guasta, l'intero job viene riavviato.
   - Se un worker map si guasta, i task mappati devono essere rieseguiti.
   - Se un worker reduce si guasta, i task vengono riassegnati ad altri worker.
 
 ### Ottimizzazione: Combiner
-- Migliora le prestazioni riducendo i dati intermedi grazie a una fase di combinazione locale prima del reduce.
+ Migliora le prestazioni riducendo i dati intermedi grazie a una fase di combinazione locale prima del reduce.
 - Il **combiner** esegue una riduzione preliminare, riducendo il traffico di rete e migliorando l'efficienza.
 - È applicabile quando la funzione reduce è **associativa** e **commutativa**.
 
 ### Shuffle and Sort
-- Avviene tra le fasi Map(+Combiner) e Reduce, ordinando e ridistribuendo i dati verso i reducer corretti.
+Avviene tra le fasi Map(+Combiner) e Reduce, ordinando e ridistribuendo i dati verso i reducer corretti.
 - Ogni mapper ordina i propri dati e li scrive su disco, poi i reducer scaricano e uniscono i file ordinati.
 
 ### Ottimizzazione: Partizionamento
-- Utilizza un partizionatore per assegnare le coppie chiave-valore ai reducer, garantendo una distribuzione efficiente delle chiavi tra i reducer.
+Utilizza un partizionatore per assegnare le coppie chiave-valore ai reducer, garantendo una distribuzione efficiente delle chiavi tra i reducer.
 
 ### Flussi di lavoro MapReduce
-- Problemi complessi possono richiedere più job MapReduce concatenati, con l'output di un job che diventa l'input del successivo. Tuttavia, la gestione di file intermedi rallenta le prestazioni.
+Problemi complessi possono richiedere più job MapReduce concatenati, con l'output di un job che diventa l'input del successivo. Tuttavia, la gestione di file intermedi rallenta le prestazioni.
 
 ## Clustering k-means in MapReduce
 
@@ -269,69 +269,3 @@ Il **nuovo centroide** $u_j$ viene calcolato come la **media** dei punti assegna
 - Ogni iterazione necessita di trasmettere i nuovi centroidi a tutti i mapper.
 - **Distribuzione intelligente dei punti**: Ogni mapper gestisce più punti, riducendo il numero totale di mapper.
 - La procedura viene ripetuta finché non si raggiunge la **convergenza** (i centroidi non cambiano più) o si raggiunge un numero massimo di iterazioni.
----
-### Domande
-1. Descrivere brevemente il concetto di "divide et impera" nel contesto di MapReduce.
-2. Quali sono i vantaggi dell'utilizzo di server commodity per MapReduce?
-3. Spiegare la differenza tra le funzioni "map" e "reduce" in MapReduce.
-4. Qual è lo scopo della fase "shuffle and sort" in MapReduce?
-5. Come un "combiner" può migliorare le prestazioni di un job MapReduce?
-6. Descrivere il funzionamento dell'algoritmo "WordCount" in MapReduce.
-7. Cosa succede se un worker "mapper" fallisce durante l'esecuzione di un job MapReduce?
-8. Come viene gestita la tolleranza ai guasti in MapReduce?
-9. Qual è il ruolo del "partizionamento" in MapReduce?
-10. Fornire un esempio di problema del mondo reale che può essere risolto utilizzando MapReduce.
-### Risposte
-1. In MapReduce, "divide et impera" significa suddividere un problema di elaborazione dati di grandi dimensioni in sottoproblemi più piccoli che possono essere elaborati in parallelo da diversi nodi del cluster.
-2. L'utilizzo di server commodity in MapReduce offre diversi vantaggi, tra cui la convenienza economica, la scalabilità orizzontale e la tolleranza ai guasti grazie alla ridondanza.
-3. La funzione "map" elabora una coppia chiave-valore di input alla volta e produce un insieme di coppie chiave-valore intermedie. La funzione "reduce" elabora tutte le coppie chiave-valore intermedie con la stessa chiave e produce un insieme di coppie chiave-valore di output.
-4. La fase "shuffle and sort" in MapReduce raggruppa le coppie chiave-valore intermedie per chiave e le ordina, preparando i dati per l'elaborazione da parte dei reducer.
-5. Un "combiner" può migliorare le prestazioni di un job MapReduce aggregando i dati intermedi prima che vengano inviati ai reducer, riducendo così la quantità di dati che devono essere trasferiti sulla rete.
-6. L'algoritmo "WordCount" in MapReduce conta la frequenza delle parole in un insieme di documenti. La fase "map" emette ogni parola con un conteggio di 1, la fase "shuffle and sort" raggruppa le parole, e la fase "reduce" somma i conteggi per ogni parola.
-7. Se un worker "mapper" fallisce durante l'esecuzione di un job MapReduce, il master assegnerà i suoi task non completati ad altri worker disponibili.
-8. MapReduce gestisce la tolleranza ai guasti replicando i dati e utilizzando un master per monitorare lo stato dei worker.
-9. Il "partizionamento" in MapReduce determina quale reducer elaborerà una determinata chiave, garantendo una distribuzione uniforme del carico di lavoro tra i reducer.
-10. Un esempio di problema del mondo reale che può essere risolto utilizzando MapReduce è l'analisi dei log web per identificare le pagine più popolari.
-
----
-## Domande Frequenti
-
-### 1. Cosa si intende per MapReduce?
-
-MapReduce è un modello di programmazione progettato per elaborare enormi set di dati (Big Data) in modo efficiente su un cluster di computer. Introdotto da Google nel 2004, questo modello si basa sul principio "divide et impera" per semplificare l'elaborazione parallela.
-
-### 2. In che modo MapReduce affronta le sfide dell'elaborazione di Big Data?
-
-MapReduce affronta le sfide dei Big Data suddividendo grandi compiti di elaborazione in unità più piccole ed eseguibili in parallelo su diversi nodi di un cluster. Questa architettura distribuita consente di elaborare enormi quantità di dati che non potrebbero essere gestite da un singolo computer.
-
-### 3. Potresti spiegare le fasi principali di un lavoro MapReduce?
-
-Un lavoro MapReduce si articola in due fasi principali: Map e Reduce.
-
-- **Fase Map:** I dati di input vengono suddivisi in blocchi e ogni nodo esegue la funzione "Map" su un blocco di dati assegnato. Questa funzione estrae coppie chiave-valore dai dati di input.
-- **Fase Reduce:** Le coppie chiave-valore vengono raggruppate in base alla chiave e ogni nodo esegue la funzione "Reduce" su un set di chiavi univoche. Questa funzione aggrega i valori associati alla stessa chiave per produrre l'output finale.
-
-### 4. Qual è il ruolo di "Shuffle and Sort" in MapReduce?
-
-"Shuffle and Sort" è una fase intermedia cruciale che si svolge tra le fasi Map e Reduce. In questa fase, le coppie chiave-valore prodotte dai mapper vengono ripartite tra i reducer, assicurando che tutte le coppie con la stessa chiave siano elaborate dallo stesso reducer.
-
-### 5. In che modo "Combiner" ottimizza un lavoro MapReduce?
-
-Un "Combiner" è una funzione opzionale che agisce come una fase di pre-riduzione. Viene eseguito dopo la fase Map e prima dello Shuffle, aggregando i dati intermedi con la stessa chiave a livello locale. Questo riduce la quantità di dati da trasferire durante lo Shuffle, migliorando le prestazioni complessive.
-
-### 6. Puoi fornire un esempio pratico di utilizzo di MapReduce?
-
-Certo. Un esempio classico è l'algoritmo "WordCount", che conta la frequenza delle parole in un grande corpus di testo.
-
-- **Map:** ogni occorrenza di una parola viene mappata alla coppia (parola, 1).
-- **Reduce:** le coppie con la stessa parola vengono aggregate, sommando i conteggi per ottenere la frequenza totale di quella parola.
-
-### 7. Come gestisce MapReduce i guasti dei nodi?
-
-La tolleranza ai guasti è una caratteristica intrinseca di MapReduce. Se un nodo che esegue un'attività Map fallisce, il master riassegna l'attività a un altro nodo. Se un nodo Reducer fallisce, i suoi dati intermedi vengono rielaborati da altri Reducer.
-
-### 8. Quali sono i vantaggi chiave dell'utilizzo di MapReduce?
-
-- **Scalabilità:** MapReduce permette di elaborare enormi set di dati distribuendo il carico di lavoro su un cluster di computer.
-- **Tolleranza ai guasti:** il sistema è progettato per gestire i guasti dei nodi senza interrompere l'elaborazione.
-- **Facilità di utilizzo:** il modello di programmazione relativamente semplice consente agli sviluppatori di concentrarsi sulla logica dell'applicazione senza dover gestire la complessità della programmazione parallela.

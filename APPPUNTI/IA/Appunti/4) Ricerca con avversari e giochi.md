@@ -19,7 +19,6 @@
 | **Grafo di Gioco** | Rappresentazione grafica del gioco, dove i nodi rappresentano gli stati e gli archi rappresentano le mosse possibili. |
 | **Componente Connessa** | Insieme di nodi in un grafo che sono collegati tra loro da un cammino. |
 
-
 ### Ambienti Competitivi
 Gli ambienti competitivi sono caratterizzati dalla presenza di due o più agenti con obiettivi in conflitto. Questo genera problemi di ricerca con avversari.
 
@@ -148,45 +147,3 @@ Una strategia vincente per i fantasmi esiste se, per ogni possibile posizione di
 ### Complessità
 La complessità dell'algoritmo per trovare una strategia vincente per i fantasmi è polinomiale se lo stato del gioco viene rappresentato in modo logaritmico. La dimensione dello stato è data da $(k + 1) · log_2 |V|$, 
 dove $k$ è il numero di fantasmi, $|V|$ è il numero di nodi nel grafo.
-
----
-
-**1. Cosa sono gli ambienti competitivi e come si differenziano dagli ambienti non competitivi?**
-
-Gli ambienti competitivi sono caratterizzati dalla presenza di due o più agenti con obiettivi in conflitto. Questo genera problemi di ricerca con avversari. Negli ambienti non competitivi, gli agenti collaborano o non interagiscono tra loro.
-
-**2. Quali sono i tre approcci principali per affrontare gli ambienti multi-agente nella teoria dei giochi?**
-
-I tre approcci principali sono: l'economia aggregata, l'ambiente non deterministico e gli alberi di gioco.
-
-**3. Cosa sono i giochi a somma zero e come si differenziano dai giochi generali?**
-
-I giochi a somma zero sono giochi in cui la somma dei guadagni di tutti i giocatori è sempre zero. Un giocatore può vincere solo se un altro giocatore perde. Nei giochi generali, gli agenti possono avere funzioni di utilità indipendenti e possono cooperare, ignorarsi o competere.
-
-**4. Cosa è un albero di gioco e come viene utilizzato nella ricerca in ambienti competitivi?**
-
-Un albero di gioco è una struttura ad albero che rappresenta tutte le possibili sequenze di mosse in un gioco, fino a raggiungere uno stato terminale. Viene utilizzato per analizzare le possibili strategie dei giocatori e per determinare la migliore strategia per raggiungere l'obiettivo.
-
-**5. Cosa è la ricerca MiniMax e come funziona?**
-
-La ricerca MiniMax è un algoritmo di ricerca che determina la strategia ottima in un gioco a somma zero, assumendo che entrambi i giocatori giochino in modo ottimale. Calcola il valore MiniMax di ogni stato, che rappresenta l'utilità di trovarsi in quello stato, considerando le mosse ottimali di entrambi i giocatori.
-
-**6. Cosa è l'Alpha-Beta Pruning e come migliora l'efficienza della ricerca MiniMax?**
-
-L'Alpha-Beta Pruning è una tecnica di potatura dell'albero di gioco che elimina rami irrilevanti per la ricerca MiniMax, riducendo il numero di nodi da esplorare. Utilizza due valori, α e β, per fare pruning, eliminando i nodi che non possono portare a una soluzione migliore.
-
-**7. Cosa è la ricerca a profondità limitata e come viene utilizzata nei giochi reali?**
-
-La ricerca a profondità limitata è una tecnica che interrompere la ricerca ad una certa profondità e utilizza euristiche per stimare il valore dei nodi non esplorati. Viene utilizzata nei giochi reali quando gli alberi di gioco sono troppo grandi per essere esplorati completamente.
-
-**8. Cosa è la ricerca euristica Alpha-Beta e come funziona?**
-
-La ricerca euristica Alpha-Beta è una variante della ricerca Alpha-Beta che utilizza una valutazione euristica per stimare il valore dei nodi non esplorati. Interrompe la ricerca ad una certa profondità e utilizza l'euristica per decidere se un nodo è promettente o meno.
-
-**9. Cosa è la ricerca ad Albero Monte Carlo e come funziona?**
-
-La ricerca ad Albero Monte Carlo è una tecnica che utilizza simulazioni casuali per costruire un albero di gioco e stimare il valore di ogni stato. Si basa su quattro fasi: selezione, espansione, simulazione e retropropagazione.
-
-**10. Cosa è UCB1 e come viene utilizzata nella ricerca ad Albero Monte Carlo?**
-
-UCB1 è una politica di selezione che bilancia l'esplorazione di nuovi nodi con lo sfruttamento di nodi già esplorati. Assegna un valore a ogni nodo, che è la somma del fattore di sfruttamento e del fattore di esplorazione.

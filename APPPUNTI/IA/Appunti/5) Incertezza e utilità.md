@@ -122,8 +122,6 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 * **∼:** Indifferenza
 * **⪰:** Preferenza debole
 
-
-
 ## Teorema di Ramsey, von Neumann & Morgenstern
 Questo teorema dimostra che se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
 
@@ -156,45 +154,3 @@ Gli esseri umani non sempre si comportano in modo razionale e possono avere pref
 * **Premio di assicurazione:** La differenza tra il valore atteso di un evento e il valore monetario che un individuo accetterebbe con certezza è definito premio di assicurazione.
 
 * **Irrazionalità:**  Le scelte degli esseri umani possono essere irrazionali, come dimostrato da esempi in cui le preferenze non sono coerenti con una funzione di utilità.
-
----
-
-**1. Cosa si intende per "agente non razionale" e quali sono le cause di questa non razionalità?**
-
-**Risposta:** Un agente non razionale è un agente che non si comporta in modo perfettamente razionale, ma presenta una componente casuale nel suo comportamento. Questa non razionalità può essere dovuta ad aspetti realmente casuali, come eventi imprevedibili che influenzano il comportamento dell'agente, o alla modellazione dell'incertezza, ovvero l'utilizzo della teoria della probabilità per rappresentare l'incertezza nel comportamento dell'agente.
-
-**2. Come si gestisce l'incertezza nel comportamento di un agente non razionale?**
-
-**Risposta:** L'incertezza nel comportamento di un agente non razionale viene gestita utilizzando il concetto di valore atteso, che rappresenta il valore medio di un risultato, ponderato in base alla probabilità di ogni possibile evento.
-
-**3. Qual è la differenza tra MiniMax ed Expectimax?**
-
-**Risposta:** Expectimax è un algoritmo di ricerca che estende MiniMax per gestire agenti non razionali. Mentre MiniMax si basa sul concetto di "caso peggiore", Expectimax considera i risultati casuali e calcola il valore atteso dei nodi chance.
-
-**4. Come si stimano le probabilità di comportamento di un avversario o dell'ambiente?**
-
-**Risposta:** Le probabilità possono essere note a priori o stimate tramite simulazioni. La simulazione è un metodo per stimare le probabilità di comportamento dell'avversario, ma può essere computazionalmente costosa.
-
-**5. In che modo l'incertezza può migliorare la strategia ottima in un gioco?**
-
-**Risposta:** In alcuni giochi, non esiste una strategia ottima deterministica. L'introduzione di incertezza, come scelte casuali, può migliorare il valore atteso della strategia, rendendola più efficace.
-
-**6. Qual è il ruolo dell'utilità nel contesto degli agenti razionali?**
-
-**Risposta:** L'utilità è una funzione che misura la soddisfazione di un agente rispetto a un determinato stato o risultato. Un agente razionale dovrebbe massimizzare la propria utilità.
-
-**7. Cosa si intende per "insensibilità alle trasformazioni monotone" in relazione alla funzione di utilità?**
-
-**Risposta:** L'insensibilità alle trasformazioni monotone è la proprietà di una funzione di utilità di non essere influenzata da trasformazioni monotone della scala. In alcuni contesti, la scala della funzione di utilità non è importante.
-
-**8. Quali sono gli assiomi di razionalità per le preferenze di un agente?**
-
-**Risposta:** Gli assiomi di razionalità per le preferenze di un agente sono: Orderability, Continuity, Substitutability e Monotonicity. Questi assiomi garantiscono che le preferenze dell'agente siano coerenti e razionali.
-
-**9. Cosa afferma il teorema di Ramsey, von Neumann & Morgenstern?**
-
-**Risposta:** Il teorema afferma che se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
-
-**10. Qual è il principio della Massima Utilità Attesa (MEU) e quali sono i suoi limiti?**
-
-**Risposta:** Il principio MEU afferma che un agente razionale dovrebbe scegliere l'azione che massimizza la sua utilità attesa. Tuttavia, il principio MEU non è sempre applicabile agli esseri umani, che spesso non si comportano in modo razionale e possono avere preferenze che non sono facilmente quantificabili con una funzione di utilità.

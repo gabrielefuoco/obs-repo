@@ -63,9 +63,7 @@ $$
 **Metodo:**
 
 * Per ogni valore $x$ di un attributo $i$, si sottrae la media $\mu_{i}$ di quell'attributo e si divide per la deviazione standard $\sigma_{i}$:
-
-  $x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$
-
+  $$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
 **Risultato:** Tutti i valori di un attributo vengono trasformati in una scala con media 0 e deviazione standard 1. 
 
 

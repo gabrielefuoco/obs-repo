@@ -87,7 +87,7 @@ La **modellazione di topic stocastica** è una tecnica che utilizza modelli prob
 * **Approccio tradizionale:** Negli anni '90, la summarization era affrontata come estrazione di parole chiave (key phrase extraction).
 * **Guida alla summarization:** Le proprietà di un documento possono essere utilizzate per guidare il processo di summarization. 
 
-## Appunti di Studio: KDD Pipeline e NLP
+## KDD Pipeline e NLP
 
 ### KDD Pipeline in NLP
 
@@ -127,7 +127,7 @@ La **modellazione di topic stocastica** è una tecnica che utilizza modelli prob
 * **Problema:** In alcuni casi, non è possibile ottenere un gold standard (set di dati perfetto) generato da un esperto di dominio.
 * **Soluzione:** Si può ricorrere a un **silver standard**, generato in modo automatico.
 * **Esempio:** Nel caso di AI generativa e problemi di allineamento dei modelli linguistici di grandi dimensioni (LLM), spesso si utilizza GPT-4 per generare un silver standard.
----
+
 ## Funzioni Principali - Estrazione di Informazioni
 
 **Contesto:** Insieme alla classificazione e al clustering, l'estrazione di informazioni è un task fondamentale nell'analisi di informazioni sul web.
@@ -155,7 +155,7 @@ La **modellazione di topic stocastica** è una tecnica che utilizza modelli prob
 * **Specificare un elemento:** Specificare un elemento da estrarre per uno slot, ad esempio, utilizzando un modello di regex.
 * **Modelli precedenti e successivi:** Potrebbe essere necessario un modello precedente (pre-filler) per identificare il contesto appropriato e un modello successivo (post-filler) per identificare la fine del riempitivo. ==(es:estrazione di termini da un modello. definiziamo il template a priori e per ogni slot creiamo dei pattern)==
 
----
+
 ## Funzioni Principali - Recupero di Documenti
 
 Selezionare documenti da una collezione in risposta a una query dell'utente.
@@ -173,7 +173,7 @@ Selezionare documenti da una collezione in risposta a una query dell'utente.
 * Rappresentazione dei bisogni informativi.
 * E il loro abbinamento. 
 
----
+
 
 ## Panoramica delle Applicazioni di Base
 
@@ -207,7 +207,7 @@ Le principali aree di applicazione coprono due aspetti:
 * **Personalizzazione dell'accesso alle informazioni:**  Adattare l'accesso alle informazioni alle esigenze individuali degli utenti.
 * **Filtraggio di notizie in newsgroup Usenet:**  Rimuovere le notizie non pertinenti o indesiderate.
 * **Rilevamento di messaggi spam:**  Identificare e filtrare i messaggi di posta elettronica indesiderati. 
----
+
 ## Panoramica delle Applicazioni di Base
 
 ### Categorizzazione Gerarchica
@@ -317,8 +317,9 @@ Classificare le email come spam o legittime utilizzando il text mining.
 * La distribuzione non uniforme delle classi (molto più spam che email legittime) complica l'apprendimento del classificatore. 
 
 
----
-## Vocabolario(modello di rappresentazione dei testi)
+
+# Vocabolario(modello di rappresentazione dei testi)
+
 
 ## Definizione di Termine
 
@@ -363,7 +364,7 @@ Classificare le email come spam o legittime utilizzando il text mining.
 * **Pragmatica**
 * **Semiotica**
 * **Morfologia** 
----
+
 ## Tokenizzazione: Problemi lessicali e morfologici
 * Un token è un termine candidato.
 * Come organizziamo un testo?
@@ -441,7 +442,7 @@ Classificare le email come spam o legittime utilizzando il text mining.
 **Conclusione:**
 
 * La stop-list deve contenere termini che si aspettano di essere molto frequenti all'interno della collezione. 
----
+
 ## Normalizzazione
 
 **Obiettivo:** Uniformizzare le parole nel testo indicizzato e nelle parole di query nella stessa forma.
@@ -631,7 +632,7 @@ Le prestazioni di vari algoritmi sono simili.
 
 hanno lo stesso impatto va diverse peculiarità
 
----
+
 ## Modello Booleano
 
 Il modello booleano confronta l'istruzione di query booleana con gli insiemi di termini utilizzati per identificare il contenuto testuale (termini di indice). 
@@ -711,7 +712,7 @@ Difficile esprimere richieste complesse dell'utente.
 
 **Conclusioni:** da utilizzare solo quando le esigenze degli utenti sono esprimibili tramite query corte e semplici e necessitiamo di sapere solo se un item c'è o non c'è. 
 
----
+
 ## Estensione del modello booleano
 
 ### Incorporare metodi di classificazione
@@ -772,7 +773,7 @@ Difficile esprimere richieste complesse dell'utente.
 * **Calcolo della somiglianza:**
     * Considera ogni documento e query come punti multidimensionali (considerando due schemi di pesatura).
 
----
+
 ## Sparsità
 #### Rappresentazione di matrici termine-documento
 - Adottando un modello di rappresentazione di questo un modello poco sparso è irrealistico.
@@ -1212,98 +1213,80 @@ La fusione logaritmica è una tecnica di ordinamento che utilizza una serie di i
 * **Vantaggi:** La fusione logaritmica è molto più efficiente per la costruzione dell'indice rispetto alla fusione $\frac{T}{n}$.
 * **Svantaggi:** L'elaborazione delle query richiede la fusione di $O\left( log\left( \frac{T}{n} \right) \right)$ indici, mentre con un solo indice principale e ausiliario la complessità è $O(1)$.
 
-# skip da qui
-### Ulteriori Problemi con Più Indici
+## Ulteriori Problemi con Più Indici
 
-* **Statistiche a livello di collezione:** Difficili da mantenere.
-    * Esempio: correzione ortografica. Quale alternativa corretta presentare all'utente?
-        * Potrebbe essere desiderabile scegliere l'alternativa con il maggior numero di risultati.
-        * Come mantenere le migliori alternative con più indici e vettori di bit di invalidazione?
-        * Una possibilità: ignorare tutto tranne l'indice principale per l'ordinamento.
-* **Ranking dei risultati:** Le statistiche a livello di collezione sono utilizzate nel ranking dei risultati.
+Mantenere le statistiche a livello di collezione con più indici è complesso. Ad esempio, per la correzione ortografica, è difficile scegliere l'alternativa corretta con il maggior numero di risultati. 
+
+* **Problema:** Come mantenere le migliori alternative con più indici e vettori di bit di invalidazione?
+* **Possibile soluzione:** Ignorare tutto tranne l'indice principale per l'ordinamento.
+
+Il ranking dei risultati si basa su queste statistiche, rendendo la loro gestione cruciale.
 
 ### Indicizzazione Dinamica nei Motori di Ricerca
 
-* **Modifiche incrementali:** I grandi motori di ricerca effettuano l'indicizzazione dinamica con frequenti modifiche incrementali (notizie, blog, nuove pagine web).
-* **Ricostruzione periodica:** Periodicamente, l'indice viene ricostruito da zero.
-    * L'elaborazione delle query viene commutata sul nuovo indice e il vecchio indice viene eliminato.
+I motori di ricerca effettuano l'indicizzazione dinamica con:
+
+* **Modifiche incrementali frequenti:**  es. notizie, blog, nuove pagine web.
+* **Ricostruzioni periodiche dell'indice da zero:** L'elaborazione delle query viene commutata sul nuovo indice e il vecchio indice viene eliminato.
 
 ### Requisiti per la Ricerca in Tempo Reale
+
+La ricerca in tempo reale richiede:
 
 * **Bassa latenza:** Elevata produttività di valutazione delle query.
 * **Elevato tasso di ingestione:** Immediata disponibilità dei dati.
 * **Letture e scritture concorrenti:** Gestione di letture e scritture simultanee dell'indice.
 * **Dominanza del segnale temporale:** Priorità ai dati più recenti.
 
-### Organizzazione dell'Indice in Earlybird di Twitter
 
-* **Segmenti di indice:** L'indice è composto da più segmenti.
-    * Ogni segmento è relativamente piccolo (fino a 223 tweet).
-    * Ogni posting in un segmento è una parola a 32 bit: 24 bit per l'ID del tweet e 8 bit per la posizione nel tweet.
-* **Scrittura:** Solo un segmento può essere scritto in un dato momento.
-    * Il segmento è abbastanza piccolo da stare in memoria.
-    * I nuovi postings vengono accodati alla lista di postings.
-    * La lista di postings viene attraversata all'indietro per dare la priorità ai tweet più recenti.
-* **Lettura:** I segmenti rimanenti sono ottimizzati per la sola lettura.
-    * I postings sono ordinati in ordine cronologico inverso (il più recente per primo).
-
-## Costruzione dell'indice: riepilogo
+## Costruzione dell'Indice: Riepilogo
 
 ### Indicizzazione basata sull'ordinamento
 
-● Inversione in memoria ingenua.
-● Indicizzazione basata sull'ordinamento bloccato (BSBI).
-● L'ordinamento per fusione è efficace per l'ordinamento basato su disco rigido (evita le ricerche!).
+Esistono diverse tecniche di indicizzazione basata sull'ordinamento:
+
+* **Inversione in memoria ingenua.**
+* **Indicizzazione basata sull'ordinamento bloccato (BSBI).**
+* **L'ordinamento per fusione è efficace per l'ordinamento basato su disco rigido (evita le ricerche!).**
 
 ### Indicizzazione in memoria a passaggio singolo (SPIMI)
 
-● Nessun dizionario globale.
-● Genera un dizionario separato per ogni blocco.
-● Non ordinare i postings.
-● Accumulare i postings nelle liste di postings man mano che si verificano.
-
-### Indicizzazione distribuita usando MapReduce
-
-### Indicizzazione dinamica: più indici, fusione logaritmica
-
-
+* **Nessun dizionario globale.**
+* **Genera un dizionario separato per ogni blocco.**
+* **Non ordinare i postings.**
+* **Accumulare i postings nelle liste di postings man mano che si verificano.**
 
 ## Compressione
 
-Usare meno spazio su disco.
-Mantenere più cose in memoria.
-● Aumenta la velocità di trasferimento dei dati dal disco alla memoria.
-● [leggi dati compressi | decomprimi] è più veloce di [leggi dati non compressi].
-Premessa: Gli algoritmi di decompressione sono veloci.
-● Vero per gli algoritmi di decompressione che utilizziamo.
+La compressione è fondamentale per:
+
+* **Ridurre lo spazio su disco.**
+* **Mantenere più cose in memoria.**
+* **Aumentare la velocità di trasferimento dei dati dal disco alla memoria.**
+* **[leggi dati compressi | decomprimi] è più veloce di [leggi dati non compressi].**
+
+**Premessa:** Gli algoritmi di decompressione sono veloci.
+* **Vero per gli algoritmi di decompressione che utilizziamo.**
 
 ### Compressione del dizionario
 
-● Renderlo abbastanza piccolo da tenerlo nella memoria principale.
-● Renderlo così piccolo da poter tenere anche alcune liste di postings nella memoria principale.
+* **Renderlo abbastanza piccolo da tenerlo nella memoria principale.**
+* **Renderlo così piccolo da poter tenere anche alcune liste di postings nella memoria principale.**
 
 ### Compressione del/dei file di postings
 
-● Ridurre lo spazio su disco necessario.
-● Diminuire il tempo necessario per leggere le liste di postings dal disco.
-● I grandi motori di ricerca mantengono una parte significativa dei postings in memoria.
-
-
-
-## Compressione
+* **Ridurre lo spazio su disco necessario.**
+* **Diminuire il tempo necessario per leggere le liste di postings dal disco.**
+* **I grandi motori di ricerca mantengono una parte significativa dei postings in memoria.**
 
 ### Compressione senza perdita vs. con perdita
 
-● Compressione senza perdita: tutte le informazioni vengono preservate.
-○ Ciò che facciamo principalmente in IR.
-● Compressione con perdita: scarta alcune informazioni.
-○ Diversi passaggi di pre-elaborazione possono essere visti come compressione con perdita: conversione in minuscolo, stop words,
-stemming, eliminazione dei numeri.
-○ Potare le voci di postings che hanno poche probabilità di apparire nella lista dei primi k per qualsiasi query.
-■
-Quasi nessuna perdita di qualità nella lista dei primi k.
-
-# skip fino a qui
+* **Compressione senza perdita:** tutte le informazioni vengono preservate.
+    * Ciò che facciamo principalmente in IR.
+* **Compressione con perdita:** scarta alcune informazioni.
+    * Diversi passaggi di pre-elaborazione possono essere visti come compressione con perdita: conversione in minuscolo, stop words, stemming, eliminazione dei numeri.
+    * Potare le voci di postings che hanno poche probabilità di apparire nella lista dei primi k per qualsiasi query.
+        * Quasi nessuna perdita di qualità nella lista dei primi k.
 
 ## Dimensione del vocabolario vs. dimensione della collezione
 
@@ -1425,10 +1408,7 @@ Fino ad ora, tutte le query sono state booleane.
 * La maggior parte degli utenti non vuole scorrere migliaia di risultati.
 * Questo è particolarmente vero per la ricerca sul web.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Recupero classificato**
 
@@ -1451,10 +1431,6 @@ Un sistema produce un set di risultati classificati, i set di risultati di grand
 * Mostriamo solo i primi k (≈ 10) risultati.
 * Non sovraccarichiamo l'utente.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
 
 **Punteggio come base del recupero classificato**
 
@@ -1476,17 +1452,10 @@ Cosa ne pensi di usare misure di similarità per insiemi finiti?
     * La scarsità del termine nella collezione (frequenza di menzione del documento).
         * I termini rari in una collezione sono più informativi dei termini frequenti.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Dalle matrici di incidenza alle matrici di conteggio**
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
 
 **Modello Bag-of-words (BoW)**
 
@@ -1509,10 +1478,7 @@ Pro:
 * Consente un'implementazione efficiente per grandi collezioni di documenti.
 * La query diventa un vettore nello stesso spazio dei documenti -> Modello dello spazio vettoriale.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Tipi di frequenza**
 
@@ -1523,10 +1489,7 @@ Vogliamo usare tf quando calcoliamo i punteggi di corrispondenza query-documento
     * Ma non 10 volte più rilevante.
 * La rilevanza non aumenta proporzionalmente alla frequenza del termine.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Tipi di frequenza**
 
@@ -1541,10 +1504,7 @@ Punteggio per una coppia documento-query: somma sui termini t sia in q che in d:
 
 ## Tipi di frequenza
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 I termini rari sono più informativi dei termini frequenti.
 
@@ -1618,10 +1578,7 @@ Varianti:
     * Le variazioni di lunghezza possono essere normalizzate.
     * Compensano i fattori tf (grandi per i testi lunghi, piccoli per quelli brevi).
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Matrice di peso Tf.Idf**
 
@@ -1690,10 +1647,6 @@ Similarità del coseno = prodotto interno normalizzato.
 
 
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
 
 **Prossimità dello spazio vettoriale**
 
@@ -1703,10 +1656,7 @@ SaS: Ragione e Sentimento
 PaP: Orgoglio e Pregiudizio, e
 WH: Cime Tempestose?
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+
 
 **Prossimità dello spazio vettoriale**
 

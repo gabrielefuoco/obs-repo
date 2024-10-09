@@ -62,7 +62,8 @@ In sintesi, le misure di impurità permettono di bilanciare la purezza dei nodi 
 
 
 ## Misure di impurità dei nodi
-* Misurano quanto sono diversi i valori di classe contenuti in un solo nodo.
+
+ Misurano quanto sono diversi i valori di classe contenuti in un solo nodo.
 * Per valutare l'impurità di un nodo *t*, con record appartenenti a *k classi* e con *n nodi figli*, si usano:
 
     * **Gini Index:**  $GINI(t) = 1 - \sum_{j=1}^{k} [p(j|t)]^2$
@@ -72,8 +73,7 @@ In sintesi, le misure di impurità permettono di bilanciare la purezza dei nodi 
 
     * _p(j|t) rappresenta la frequenza delle istanze del training set della classe j nel nodo t_
 
-### Determinare il partizionamento migliore
-
+#### Determinare il partizionamento migliore
 * Calcolare il grado di impurità *P* del nodo genitore prima dello splitting.
 * Calcolare l'impurità pesata *M* dei nodi figli dopo lo splitting.
 * Scegliere la condizione di split che massimizza il guadagno, definito come $Gain=P-M$.
@@ -157,7 +157,8 @@ $Error(t)=1-max_{i}p(i|t)$
 * Non considerano le interazioni tra attributi. 
 
 ## Model Overfitting
-* Si verifica quando, nel tentativo di minimizzare l'errore sul training set, viene selezionato un modello eccessivamente complesso che non riesce ad apprendere la vera natura delle relazioni tra gli attributi.
+
+Si verifica quando, nel tentativo di minimizzare l'errore sul training set, viene selezionato un modello eccessivamente complesso che non riesce ad apprendere la vera natura delle relazioni tra gli attributi.
 * Questo accade perché l'errore di classificazione sul training set non fornisce stime accurate circa il comportamento dell'albero decisionale su record sconosciuti.
 * Se il training set non è sufficientemente rappresentativo, il *test error* cresce e il *training error* decresce con l'aumento del numero dei nodi.
 * _L'overfitting determina alberi decisionali più complessi del necessario._
@@ -171,11 +172,11 @@ Modelli più complessi hanno una migliore capacità di rappresentare dati comple
 
 ## Generalization error
 
-* Numero di errori commessi sul dataset reale e'(t).
+* Numero di errori commessi sul dataset reale $e'(t)$.
 
 ### Stimare gli errori di generalizzazione
 
-* **Approccio ottimistico:** Il training set è perfettamente rappresentativo di tutte le relazioni che caratterizzano il dataset.    e'(t)=e(t)
+* **Approccio ottimistico:** Il training set è perfettamente rappresentativo di tutte le relazioni che caratterizzano il dataset:  $e'(t)=e(t)$
 * **Approccio pessimistico:**
 	$err_{gen}(t)=err(t)+\Omega \cdot \frac{K}{N_{train}}$
 
@@ -198,16 +199,14 @@ dove:
 ## Pruning: strategie di selezione dei modelli
 
 * **Prepruning**
-
-    * Arresta prematuramente la costruzione dell'albero decisionale prima che diventi completamente sviluppato, implementando una condizione di arresto più restrittiva rispetto alle condizioni standard (tutte le istanze della stessa classe o tutti gli attributi uguali).
+    Arresta prematuramente la costruzione dell'albero decisionale prima che diventi completamente sviluppato, implementando una condizione di arresto più restrittiva rispetto alle condizioni standard (tutte le istanze della stessa classe o tutti gli attributi uguali).
     * La nuova condizione ferma l'espansione di un nodo foglia quando il guadagno osservato nella stima dell'errore di generalizzazione scende al di sotto di una certa soglia.
     * **Vantaggio:** _evita di generare sottoalberi eccessivamente complessi che potrebbero portare a overfitting._
     * **Svantaggio:** talvolta _espansioni successive potrebbero portare a migliori sottoalberi, che però non vengono raggiunti a causa dell'arresto prematuro._
     * Altre possibili condizioni di arresto restrittive sono: fermarsi se il numero di istanze è sotto una soglia, se la distribuzione delle classi è indipendente dagli attributi disponibili, o se l'espansione non migliora le misure di impurità.
 
 * **Postpruning**
-
-    * L'albero decisionale viene inizialmente sviluppato completamente fino alla sua massima dimensione. Successivamente, viene effettuata una fase di **potatura bottom-up** (dal basso verso l'alto) in cui si collassano i sottoalberi in nodi foglia, scegliendo di potare il sottoalbero che determina la massima riduzione dell'errore di generalizzazione stimato, se esiste.
+    L'albero decisionale viene inizialmente sviluppato completamente fino alla sua massima dimensione. Successivamente, viene effettuata una fase di **potatura bottom-up** (dal basso verso l'alto) in cui si collassano i sottoalberi in nodi foglia, scegliendo di potare il sottoalbero che determina la massima riduzione dell'errore di generalizzazione stimato, se esiste.
     * Le istanze della nuova foglia possono essere etichettate con la classe più frequente nel sottoalbero potato, oppure con la classe più frequente tra le istanze di training appartenenti a quel sottoalbero.
     * **Vantaggio:** _le decisioni di potatura si basano su un albero inizialmente completo, tendendo a restituire risultati migliori._
     * **Svantaggio:** _maggiore costo computazionale dovuto alla necessità di sviluppare inizialmente l'albero completo._
@@ -217,14 +216,12 @@ dove:
 * **Holdout:** Il set viene partizionato in due set disgiunti: test set (1/3) e training set (2/3). Lo svantaggio è che il training set potrebbe non essere sufficientemente grande.
 * **Random Subsampling:** Variante di Holdout, che consiste in un'esecuzione ripetuta di Holdout in cui il training set è scelto casualmente.
 * **Cross Validation:**
-
     * Metodo di valutazione dei modelli che mira a sfruttare in modo efficiente tutte le istanze etichettate del dataset, sia come training che come test set.
     * _Il dataset di dimensione N viene partizionato in k sottoinsiemi distinti di dimensioni uguali. Un sottoinsieme viene usato come test set, mentre i rimanenti k-1 sottoinsiemi formano il training set per addestrare il modello di classificazione. Questo processo viene ripetuto k volte, con k modelli diversi addestrati e validati._
     * Alla fine, viene calcolata una misura di performance media (ad es. l'accuratezza media) sui k modelli ottenuti. Questo indica quanto quel tipo di modello e le sue caratteristiche si adattano bene al problema specifico.
     * Nel caso di alberi decisionali, la cross validation genererebbe k alberi diversi, con attributi e condizioni di split differenti, in base alle caratteristiche dei rispettivi k training set.
 
 * **Bootstrap:**
-
     * Si effettua un ricampionamento con reinserimento (reimbussolamento) dei record già selezionati per costruire il training set. _Ogni record ha la stessa probabilità di essere estratto nuovamente._
     * Dato un dataset di dimensione N, Bootstrap crea un training set di N record dove ogni record ha circa il 63,2% di probabilità di essere incluso (con N sufficientemente grande). Infatti, la probabilità che un elemento non venga scelto tende a $\frac{1}{e} \approx 0,368$ per N molto grande, quindi la probabilità che venga scelto tende a $1-\frac{1}{e}\approx 0,632$.
     * Bootstrap non crea un nuovo dataset con più informazioni, ma permette di stabilizzare i risultati ottenibili dal dataset disponibile, risultando particolarmente utile per dataset di piccole dimensioni.
@@ -296,7 +293,7 @@ In molti dataset, le classi sono _distorte,_ ossia vi sono molti più record di 
 
 ### Tecniche di classificazione: Regole di decisione
 
-* Un classificatore basato su regole utilizza un insieme di regole if-then.
+Un classificatore basato su regole utilizza un insieme di regole if-then.
 * Una regola di classificazione appartenente al set può essere espressa come:
 
     * _(Condizione)_ -> _y_
@@ -374,7 +371,7 @@ Insieme, queste due proprietà assicurano che ogni istanza sia coperta da esatta
 
 * Inizialmente, l'accuratezza della regola potrebbe risultare scarsa perché alcuni record del training set potrebbero appartenere alla classe negativa.
 * Una coppia (Attributo, Valore) deve essere aggiunta all'antecedente della regola per migliorare l'accuratezza.
-$Accuracy(r)=\frac{nr}{n}$
+	$Accuracy(r)=\frac{nr}{n}$
 
 * Dove nr è il numero di istanze correttamente classificate da r.
 * n è il numero di istanze che soddisfano l'antecedente di r.
@@ -382,12 +379,12 @@ $Accuracy(r)=\frac{nr}{n}$
 ## Criteri di valutazione delle regole
 
 * **Likelihood Ratio:** Usato per potare le regole che hanno una copertura scarsa.
-$LikelihoodRatio(r) = 2\sum_{i=1}^k f_i \log_2(\frac{f_i}{e_i})$ 
+	$LikelihoodRatio(r) = 2\sum_{i=1}^k f_i \log_2(\frac{f_i}{e_i})$ 
 
 Dove k è il numero di classi, f_i è la frequenza osservata degli esempi di classe e che sono coperti dalla regola, e_i è la frequenza prevista di una regola che effettua previsioni a caso.
 
 * **Laplace:** Pesa l'accuracy in base alla Coverage.
-$Laplace(r)=\frac{f_{+}+1}{n+k}$
+	$Laplace(r)=\frac{f_{+}+1}{n+k}$
 Dove k è il numero di classi, $f_{+}$ è il numero di esempi positivi coperti dalla regola r ed n è il numero di esempi coperti dalla regola r.
 
 * _Copertura pari a zero e si assume una distribuzione uniforme dei dati ->_ l'indice si riduce alla probabilità a priori della classe.
@@ -434,7 +431,6 @@ Si osservi che per $p_+ = \frac{1}{k}$, $m$-estimate coincide con Laplace.
 Semplifica le regole di _learn one rule_ per migliorare l'errore di generalizzazione delle regole stesse. Ѐ utile perché l'approccio di costruzione è greedy.
 
 * **Reduced error pruning:** rimuove a turno un atomo dalla regola:
-
     * Determina l'atomo la cui rimozione comporta il massimo miglioramento dell'error rate sul validation set, altrimenti STOP.
     * Elimina l'atomo e riparti da (1).
 
@@ -445,24 +441,20 @@ Semplifica le regole di _learn one rule_ per migliorare l'errore di generalizzaz
 * Funziona bene anche con dati rumorosi poiché utilizza il validation set per evitare l'overfitting.
 
 * **Caso 1: problemi a 2 classi**
-
     * Sceglie una delle classi come classe positiva e apprende delle regole per determinare le istanze afferenti a tale classe.
     * L'altra classe sarà la classe di default.
 
 * **Caso 2: problemi multi-classe**
-
     * Le classi sono ordinate in base a un criterio di rilevanza delle stesse.
     * Si suppone un insieme di classi $\{y_1, y_2, ...y_c\}$, dove y1 è la classe meno rilevante e yc è la classe più diffusa.
     * Le regole vengono costruite partendo dalla classe più piccola e considerando gli esempi delle altre classi come negativi.
     * Questo processo viene ripetuto fino a quando rimane solo una classe yc, che viene considerata come classe di default secondo il criterio di stop.
 
 * **Costruzione del set di regole:** viene utilizzato l'algoritmo _sequential covering_:
-
     * Trovata la regola migliore, vengono eliminati tutti i record coperti dalla regola.
     * Se non viola la _Minimum description length principle_ (condizione di stop), la regola viene aggiunta al set di regole.
 
 * **Estensione di una regola:** Ripper utilizza _Learn-one-rule_:
-
     * Inizia con una regola vuota e aggiunge l'atomo che determina un miglioramento del _FOIL's Information Gain_.
     * L'operazione di aggiunta viene ripetuta finché la regola non copre più esempi negativi.
     * La nuova regola ottenuta è sottoposta a _pruning_: saranno rimossi dalla regola gli atomi che massimizzano la seguente metrica:
@@ -590,16 +582,13 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 
 **Problema:** Trovare il punto più vicino a un dato punto in un insieme di punti.
 
-**Tipi di Query:**
+| Tipo di Query                  | Descrizione                                                                                                             | Esempio                                                    |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Near neighbor range search** | Trova tutti i punti entro un raggio r da un punto q.                                                                    | Trova i ristoranti nel raggio di 400m dal mio albergo.     |
+| **Approximate Near neighbor**  | Trova tutti i punti con distanza massima da q pari a (1 + e) volte la distanza di q dal suo punto più vicino.           | Trova i ristoranti più vicini al mio albergo.              |
+| **K-Nearest-Neighbor**         | Trova i K punti più vicini a q.                                                                                         | Trova i 4 ristoranti più vicini al mio albergo.            |
+| **Spatial join**               | Trova tutte le coppie di punti (p, q) con distanza ≤ r, dove p appartiene a un insieme P e q appartiene a un insieme Q. | Coppie (albergo, ristorante) che distano al massimo 200 m. |
 
-* **Near neighbor range search:** Trova tutti i punti entro un raggio r da un punto q.
-    * Esempio: Trova i ristoranti nel raggio di 400m dal mio albergo.
-* **Approximate Near neighbor:** Trova tutti i punti con distanza massima da q pari a (1 + e) volte la distanza di q dal suo punto più vicino.
-    * Esempio: Trova i ristoranti più vicini al mio albergo.
-* **K-Nearest-Neighbor:** Trova i K punti più vicini a q.
-    * Esempio: Trova i 4 ristoranti più vicini al mio albergo.
-* **Spatial join:** Trova tutte le coppie di punti (p, q) con distanza ≤ r, dove p appartiene a un insieme P e q appartiene a un insieme Q.
-    * Esempio: Coppie (albergo, ristorante) che distano al massimo 200 m.
 
 **Approcci:**
 
@@ -698,7 +687,6 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
     3. Unire ricorsivamente i rettangoli minimi in nodi intermedi, fino ad ottenere un singolo nodo radice che racchiude tutti gli oggetti.
 
 **Pro:**
-
 * Supportano nearest neighbor search.
 * Funzionano per punti e per rettangoli.
 * Evitano gli spazi vuoti.
@@ -706,5 +694,4 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 * Funzionano bene per le dimensioni ridotte.
 
 **Contro:**
-
 * Non funzionano molto bene per dimensioni elevate.

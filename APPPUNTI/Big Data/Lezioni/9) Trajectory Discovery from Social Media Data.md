@@ -14,7 +14,6 @@
 | **Visualizzazione dei Risultati** | Rappresentazione grafica dei pattern di mobilità scoperti, per facilitarne la comprensione e l'interpretazione.          |
 | **Originale e Destinazione**      | Punti di partenza e di arrivo dei movimenti degli utenti.                                                                |
 
-
 ## Analisi dei social media
 L'analisi dei social media si concentra sull'uso di tecniche e strumenti per:
 - **Raccogliere** dati dai social network e dai media online.
@@ -28,6 +27,7 @@ I post sui social media sono spesso arricchiti con **coordinate geografiche** o 
 Quando gli utenti si spostano attraverso diversi luoghi, producono **dati geo-referenziati** che contengono informazioni rilevanti sui loro comportamenti di mobilità. Questi dati offrono grandi opportunità per il **mining delle traiettorie**.
 
 ## SMA4TD (Social Media Analysis for Trajectory Discovery)
+
 SMA4TD è una metodologia ideata per scoprire i **pattern di mobilità** degli utenti che partecipano a eventi pubblici su larga scala.
 
 ### Obiettivi di SMA4TD
@@ -37,6 +37,7 @@ SMA4TD è una metodologia ideata per scoprire i **pattern di mobilità** degli u
 4. **Scoperta di origine e destinazione** dei visitatori: Studio dei flussi di provenienza e destinazione per comprendere l'impatto turistico.
 
 ## Definizioni formali
+
 - **P = {p₁, p₂, ...}** è un insieme di **Luoghi di Interesse** (Points of Interest, Pols). Ciascun *pᵢ* rappresenta un'area di rilevanza per una comunità in un dato periodo di tempo. Esempi di Pols includono:
   - **Location commerciali** (es. centri commerciali),
   - **Attrazioni turistiche** (teatri, musei, parchi),
@@ -274,94 +275,3 @@ Il **PoI** di un post durante EXPO corrisponde a un padiglione, mentre prima o d
 - Picchi di visite durante i fine settimana (sabato).
 - Correlazione forte (Pearson 0,7) tra numeri ufficiali e utenti Instagram.
 - I visitatori stranieri provenivano principalmente da **Spagna** (19,3%) e **Francia** (19,1%), seguiti da **Regno Unito** (13,3%) e **USA** (10,9%).
-
-## 7. Conclusioni
-L'approccio SMA4TD è utile per pianificare eventi futuri, monitorare servizi essenziali (trasporti, sicurezza, logistica) e comprendere i movimenti delle persone tramite l'analisi di grandi quantità di dati provenienti dai social media.
-
----
-### Quiz
-
-1. **Quali sono i quattro obiettivi principali di SMA4TD?**
-2. **Cosa rappresentano gli insiemi P, E, G e U nella definizione formale di SMA4TD?**
-3. **Descrivi brevemente i sette passi della metodologia SMA4TD.**
-4. **Nel caso di studio della Coppa del Mondo FIFA 2014, cosa rappresenta l'insieme degli eventi E e come viene definito ciascun evento?**
-5. **Nel caso di studio di EXPO 2015, da quale piattaforma di social media sono stati raccolti i dati e quali informazioni sono state estratte da ogni post?**
-6. **Quali sono le principali differenze nella definizione degli eventi e dei luoghi di interesse tra i casi di studio della Coppa del Mondo e di EXPO?**
-7. **Quali sono i vantaggi di utilizzare i dati dei social media per l'analisi delle traiettorie?**
-8. **Quali sono le sfide che si possono incontrare nell'utilizzare i dati dei social media per l'analisi delle traiettorie?**
-9. **Oltre ai casi di studio presentati, in quali altri contesti potrebbe essere applicata la metodologia SMA4TD?**
-10. **Quali sono le implicazioni etiche da considerare nell'analisi dei dati dei social media per la scoperta delle traiettorie?**
-
-### Risposte al Quiz
-
-1. I quattro obiettivi principali di SMA4TD sono: scoprire i luoghi/eventi più visitati, scoprire insiemi di luoghi/eventi frequentati insieme, scoprire pattern di mobilità tra luoghi/eventi e scoprire l'origine e la destinazione dei visitatori.
-2. P rappresenta l'insieme dei Luoghi di Interesse (PoI), E l'insieme degli eventi, G l'insieme degli elementi geo-taggati (post sui social media) e U l'insieme degli utenti che hanno pubblicato tali elementi.
-3. I sette passi di SMA4TD sono: definire gli eventi, definire i luoghi di interesse, raccogliere e pre-elaborare i dati geo-taggati, identificare gli utenti, creare il dataset di input, eseguire il mining delle traiettorie e visualizzare i risultati.
-4. L'insieme E rappresenta le 64 partite della Coppa del Mondo. Ogni evento è definito da stadio, orario di inizio/fine, squadre partecipanti e fase della competizione.
-5. I dati sono stati raccolti da Instagram. Da ogni post sono stati estratti: userID, coordinate, timestamp, testo, hashtag.
-6. Nella Coppa del Mondo, gli eventi erano partite con durata limitata, mentre in EXPO erano mostre permanenti. I luoghi di interesse erano stadi nella Coppa del Mondo, padiglioni in EXPO.
-7. I dati dei social media sono abbondanti, aggiornati e permettono di analizzare comportamenti su larga scala a basso costo.
-8. Le sfide includono la gestione di dati rumorosi e incompleti, la tutela della privacy degli utenti e la corretta interpretazione dei risultati.
-9. SMA4TD potrebbe essere applicata ad altri eventi come concerti, festival, manifestazioni, ma anche per analizzare flussi turistici in una città.
-10. Bisogna garantire l'anonimato degli utenti, ottenere il consenso informato per l'utilizzo dei dati e evitare di generare discriminazioni o pregiudizi nell'analisi e interpretazione dei risultati.
----
-# FAQ: Analisi dei Social Media e Scoperta delle Traiettorie (SMA4TD)
-
-## 1. Cos'è l'analisi dei social media e come funziona?
-
-L'analisi dei social media utilizza tecniche e strumenti per raccogliere dati da social network e media online, analizzarli per estrarre informazioni implicite e conoscenze nascoste, e supportare decisioni basate sui risultati. Nel contesto della scoperta delle traiettorie, si concentra sui post geo-taggati per comprendere i movimenti e i comportamenti degli utenti.
-
-## 2. Cosa significa SMA4TD e quali sono i suoi obiettivi?
-
-SMA4TD sta per "Social Media Analysis for Trajectory Discovery" ed è una metodologia che analizza i dati dei social media per scoprire i pattern di mobilità degli utenti durante eventi su larga scala. I suoi obiettivi principali sono:
-
-- Identificare i luoghi e gli eventi più frequentati.
-- Scoprire insiemi di luoghi/eventi visitati insieme.
-- Identificare pattern di mobilità e sequenze di eventi frequentati.
-- Studiare i flussi di provenienza e destinazione dei visitatori.
-
-## 3. Quali tipi di dati vengono utilizzati in SMA4TD e come vengono definiti formalmente?
-
-SMA4TD utilizza principalmente post geo-taggati provenienti da piattaforme di social media. Formalmente, vengono definiti:
-
-- **P**: Insieme di Luoghi di Interesse (PoI), come attrazioni turistiche, centri commerciali e luoghi di eventi.
-- **E**: Insieme di eventi, ognuno caratterizzato da luogo, orario di inizio/fine e altre caratteristiche.
-- **G**: Insieme di elementi geo-taggati, come tweet o post di Instagram, contenenti ID utente, coordinate, timestamp, testo e tag.
-- **U**: Insieme di utenti che hanno pubblicato almeno un elemento geo-taggato in G.
-
-## 4. Quali sono le fasi principali della metodologia SMA4TD?
-
-SMA4TD si articola in sette fasi principali:
-
-1. **Definizione degli eventi (E)**: Identificazione degli eventi rilevanti, specificando luogo, orario e caratteristiche.
-2. **Definizione dei luoghi di interesse (P)**: Definizione dei confini geografici dei luoghi di interesse.
-3. **Raccolta e pre-elaborazione degli elementi geo-taggati (G)**: Raccolta dei dati dai social media e pulizia, selezione e trasformazione degli stessi.
-4. **Identificazione degli utenti (U)**: Identificazione degli utenti che hanno pubblicato elementi geo-taggati rilevanti.
-5. **Creazione del dataset di input (D)**: Creazione di un dataset strutturato contenente informazioni su utenti, eventi a cui hanno partecipato e altri dati opzionali.
-6. **Analisi dei dati e mining delle traiettorie**: Esecuzione di algoritmi di mining per scoprire pattern associativi e sequenziali nei dati.
-7. **Visualizzazione dei risultati**: Creazione di infografiche e visualizzazioni per presentare i risultati in modo chiaro e comprensibile.
-
-## 5. In che modo è stato applicato SMA4TD al caso di studio della Coppa del Mondo FIFA 2014?
-
-Per la Coppa del Mondo FIFA 2014, SMA4TD è stato utilizzato per analizzare i tweet geo-taggati pubblicati durante le partite. Sono stati definiti eventi (partite), luoghi di interesse (stadi) e raccolti dati sui tweet degli utenti presenti. L'analisi ha permesso di identificare i movimenti dei tifosi tra gli stadi, le sequenze di partite seguite e i pattern di mobilità durante la competizione.
-
-## 6. Quali sono state le principali conclusioni dell'applicazione di SMA4TD all'EXPO 2015?
-
-L'analisi dei dati Instagram per EXPO 2015 ha rivelato informazioni sulle tendenze di visita, i padiglioni più popolari e i pattern di visita. È stata evidenziata una forte correlazione tra i dati ufficiali sui visitatori e quelli raccolti da Instagram. L'analisi della provenienza geografica dei visitatori ha fornito informazioni utili per la pianificazione di eventi futuri e la promozione turistica.
-
-## 7. Quali sono i potenziali benefici e le applicazioni di SMA4TD?
-
-SMA4TD offre diversi benefici, tra cui:
-
-- Migliorare la pianificazione di eventi su larga scala.
-- Monitorare i servizi essenziali durante gli eventi (trasporti, sicurezza).
-- Comprendere i comportamenti e i movimenti delle persone in contesti specifici.
-- Ottimizzare le strategie di marketing e promozione turistica.
-
-## 8. Quali sono le sfide e le limitazioni di SMA4TD?
-
-Nonostante i suoi vantaggi, SMA4TD presenta anche alcune sfide:
-
-- **Privacy**: La raccolta e l'analisi dei dati dei social media sollevano preoccupazioni sulla privacy degli utenti.
-- **Distorsioni**: I dati dei social media potrebbero non essere rappresentativi dell'intera popolazione, portando a distorsioni nei risultati.
-- **Affidabilità**: La qualità e l'accuratezza dei dati raccolti possono variare a seconda della piattaforma e del tipo di dati.
