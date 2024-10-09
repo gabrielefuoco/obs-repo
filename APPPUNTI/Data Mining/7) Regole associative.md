@@ -538,7 +538,7 @@ L'analisi di regole associative in dataset con supporto non omogeneo presenta sf
 La presenza di itemset con supporto molto diverso tra loro può portare a conclusioni errate sull'interesse delle regole associative.
 
 **Esempio:**
-![[7) Regole associative-20241004204644292.png|564]]
+![[7) Regole associative-20241009102544967.png]]
 
 * La regola *q → p* ha una confidenza alta (4/5), ma il supporto di *q* è basso (5/30).
 * La regola *p → q* ha una confidenza bassa (4/25), ma il supporto di *p* è alto (25/30).

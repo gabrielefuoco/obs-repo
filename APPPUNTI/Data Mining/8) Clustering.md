@@ -11,6 +11,7 @@ La clusterizzazione può essere utilizzata anche come pre-processing per miglior
 Esistono diversi approcci al clustering, ognuno con le sue caratteristiche e applicazioni:
 
 * **Partitional:** Questo approccio divide i dati in insiemi non sovrapposti, assegnando ogni oggetto a un solo cluster.
+	* ![[8) Clustering-20241009095438105.png|249]]
 * **Hierarchical:** Questo approccio crea una struttura gerarchica di cluster, dove i cluster possono avere sotto-cluster. La struttura è rappresentata da un albero, con la radice che rappresenta l'intero dataset e le foglie che rappresentano cluster individuali.
 * **Partitioning:** Questo approccio genera diverse partizioni dei dati e le valuta in base a un criterio, come la somma degli errori al quadrato (SSE).
 * **Density Based:** Questo approccio identifica i cluster come regioni dense di oggetti, circondate da regioni meno dense.
@@ -32,15 +33,12 @@ Esistono diversi tipi di cluster, ognuno con una definizione specifica:
 
 * **Well Separated:** I cluster sono ben identificabili e separati tra loro, con oggetti coesi all'interno e ben distinti all'esterno.
 * **Center Based:** I cluster sono identificati dal loro centroide, che è la media dei valori degli oggetti che appartengono al cluster. I cluster hanno una forma convessa e possono non essere ben separati tra loro.
+	* ![[8) Clustering-20241009095503490.png|97]]
 * **Contiguous Cluster:** I cluster sono definiti in base alla distanza tra gli oggetti. Oggetti vicini tra loro, anche se appartenenti a regioni diverse, possono essere considerati parte dello stesso cluster.
+	* ![[8) Clustering-20241009095511754.png|170]]
 * **Density Based:** I cluster sono regioni dense di oggetti, circondate da regioni meno dense.
+	* ![[8) Clustering-20241009095522163.png|181]]
 * **Shared-Property (Conceptual Clusters):** I cluster sono identificati in base a proprietà condivise dagli oggetti.
-
-![image](image53.png)
-![image](image54.png)
-![image](image55.png)
-![image](image56.png)
-
 
 ## Funzione di Ottimizzazione
 
@@ -79,16 +77,15 @@ Due metodi importanti sono **K-means** e **K-medoid**:
 
 ## K-means
 
-L'algoritmo K-means funziona in questo modo:
-
-1. Scegliere *k* centroidi iniziali, dove *k* è il numero desiderato di cluster.
-2. Assegnare ogni punto al centroide più vicino.
-3. Aggiornare il centroide di ogni cluster in base ai punti assegnati.
-4. Ripetere i passaggi 2-3 fino a quando nessun punto cambia cluster o i centroidi rimangono gli stessi.
-
-![image](image57.png)
-
 L'algoritmo K-means è un metodo iterativo che cerca di minimizzare l'SSE. 
+
+##### Pseudocodice
+1. Seleziona K punti come centroidi iniziali.
+**Ripeti:**
+2. Forma K cluster assegnando ogni punto al suo centroide più vicino.
+3. Ricalcola il centroide di ogni cluster.
+**Fino a quando:** 
+4. I centroidi non cambiano. 
 
 ###  Dettagli K-means
 
@@ -123,16 +120,6 @@ La probabilità di selezionare un centroide da ogni cluster reale è bassa, sopr
 
 La scelta dei centroidi iniziali può influenzare significativamente il risultato finale.
 
-**Esempio:**
-
-Considerando un rettangolo con vertici:
-
-$A(1, 1), B(3, 1), C(1, 2), D(3, 2)$
-
-e due cluster, la scelta dei centroidi iniziali può portare a soluzioni con errori diversi.
-
-![image](image58.png)
-
 ## Varianti del K-means
 
 Esistono diverse varianti del K-means che differiscono per:
@@ -154,16 +141,23 @@ La scelta dei centroidi iniziali può influenzare il risultato del K-means. Esis
 ## Euristica dei centri più lontani (furthest centre)
 
 Questa euristica seleziona i centroidi iniziali per K-means in modo da massimizzare la distanza tra loro.
-
+![[8) Clustering-20241009100711064.png|311]]
 **Passaggi:**
 1. Si sceglie un punto *µ*1 a caso.
 2. Per *i* da 2 a *k*, si sceglie il punto *µi* più distante da qualsiasi centroide precedente.
 
 **Definizione matematica:**
 $$µ_{i} = \text{arg max }_x \min_{\mu_{j}:1<j<i} \ d(x,_{\mu_{j}})$$
+dove:
+• arg max
+x : indichiamo il punto che ha la maggior distanza dal centro precedente
+•
+min
+µj:1<j<i d(x, µj): la distanza minima da x a qualsiasi centro precedente
+
 **Svantaggi:**
 * Sensibile agli outliers.
-
+![[8) Clustering-20241009100723154.png|356]]
 **Riepilogo:**
 * Il primo punto è scelto a caso o come centroide di tutti i punti.
 * I centroidi successivi sono scelti come i punti più lontani da quelli già selezionati.
@@ -261,7 +255,7 @@ Le tecniche di clustering gerarchico generano una gerarchia di cluster.
 * **Dendrogramma:** Visualizza le relazioni cluster-subcluster e l'ordine di unione/divisione.
 * **Diagramma di cluster nidificato:** Per insiemi di punti bidimensionali.
 
-![image](image61.png)
+
 
 **Vantaggi:**
 
@@ -277,11 +271,12 @@ Le tecniche di clustering gerarchico generano una gerarchia di cluster.
 
 Molte tecniche di clustering gerarchico agglomerativo sono variazioni del seguente approccio: a partire dai singoli punti come cluster, si uniscono successivamente i due cluster più vicini fino a quando rimane un solo cluster. Questo approccio è espresso in modo più formale dal seguente algoritmo:
 
-1. **Inizializzare la matrice di prossimità tra tutti i punti.**
-2. **Trovare la coppia di cluster più vicina.**
-3. **Unire i due cluster più vicini in un unico cluster.**
-4. **Aggiornare la matrice di prossimità.**
-5. **Ripetere i passaggi 2-4 fino a quando non rimane un solo cluster.**
+**Passaggi:**
+1. **Calcola la matrice di prossimità:** Misura la distanza tra tutti i punti.
+2. **Ripeti:**
+    - **Unisci i cluster più vicini:** Basati sulla matrice di prossimità.
+    - **Aggiorna la matrice di prossimità:** Riflette la nuova prossimità tra il cluster appena formato e gli altri.
+3. **Fino a quando:** Rimane un solo cluster
 
 Dobbiamo aggiornare la matrice di prossimità poiché se uniamo due cluster, ci sarà un cluster in meno e di conseguenza una riga e una colonna in meno della matrice. L'operazione chiave è il calcolo della prossimità tra due cluster. A seconda della metodologia utilizzata per il calcolo della prossimità, si definiscono diversi approcci. 
 
@@ -336,7 +331,8 @@ _m_ rappresenta il centroide del cluster.
     * **Core point:** Punto con almeno *MinPts* punti entro una distanza *Eps*.
     * **Border point:** Non è un core point, ma è nelle vicinanze di un core point.
     * **Noise point:** Non è né un core point né un border point.
-* **Concetti di densità:**
+    * ![[8) Clustering-20241009101935275.png|391]]
+* **Suddivisione dei punti per densità:**
     * **Directly density-reachable:** Un punto *p* è direttamente raggiungibile da un core point *q* se *p* è nelle vicinanze di *q*.
     * **Density reachable:** Un punto *p* è raggiungibile da un core point *q* se esiste una catena di punti che lo collegano a *q*.
     * **Density connected:** Due punti sono density-connected se entrambi sono raggiungibili da uno stesso punto.
@@ -406,7 +402,8 @@ La correlazione tra queste due matrici può essere utilizzata per valutare la qu
 ## Valutare il Clustering tramite Grafici di Correlazione
 
 La visualizzazione dei dati tramite grafici di correlazione può essere un metodo efficace per valutare la qualità del clustering. 
-
+![[8) Clustering-20241009102033827.png|254]]
+![[8) Clustering-20241009102042362.png|282]]
 **Interpretazione dei Grafici:**
 
 * **Cluster ben definiti:** Se i dati sono ben raggruppati in cluster, il grafico di correlazione mostrerà blocchi distinti sulla diagonale, come nel primo esempio. Questi blocchi rappresentano i cluster identificati dall'algoritmo.
@@ -420,19 +417,9 @@ I grafici di correlazione possono essere utilizzati per:
 * **Confrontare diversi algoritmi di clustering:** Determinare quale algoritmo produce i cluster più definiti.
 * **Ottimizzare i parametri dell'algoritmo:** Adattare i parametri dell'algoritmo per ottenere un clustering migliore.
 
-**Conclusione:**
-
-La visualizzazione dei dati tramite grafici di correlazione è uno strumento utile per valutare la qualità del clustering e per comprendere la struttura dei dati. 
-
-
-![image](image71.png){
-![image](image72.png)
-
-
-![image](image73.png){
-![image](image74.png){
-
-![image](image75.png){
+![[8) Clustering-20241009102107326.png|443]]
+![[8) Clustering-20241009102116704.png|447]]
+![[8) Clustering-20241009102125172.png|444]]
 
 ## Misure Interne: SSE
 
@@ -442,11 +429,11 @@ Un'altra possibilità per valutare la qualità del clustering è quella di misur
 
 Consideriamo la seguente distribuzione di dati:
 
-![image](image76.png)
+![[8) Clustering-20241009102138687.png|322]]
 
 La curva seguente mostra l'SSE in funzione del numero di cluster:
 
-![image](image77.png)
+![[8) Clustering-20241009102146917.png|319]]
 
 **Interpretazione della Curva SSE:**
 
@@ -532,8 +519,8 @@ $$SSE = \sum_{j=1}^k \sum_{i=1}^m w_{ij} \cdot dist(x_i, c_j)²$$
 
 dove:
 
-* *xi* è il punto che stiamo considerando
-* *cj* è il centroide del cluster *j*
+* $x_i$ è il punto che stiamo considerando
+* $c_j$ è il centroide del cluster *j*
 
 **K-Means Fuzzy:**
 
@@ -542,6 +529,7 @@ Il K-Means fuzzy è una variante del K-Means che tiene conto dei pesi di apparte
 $$SSE = \sum_{j=1}^k \sum_{i=1}^m w_{ij}^p \cdot dist(x_i, c_j)^2$$
 
 Il parametro *p* controlla l'influenza dei pesi. Più *p* è elevato, meno peso viene dato ai pesi di appartenenza. In generale, *p >* 1.
+![[8) Clustering-20241009102336916.png|439]]
 
 **Algoritmo K-Means Fuzzy:**
 
@@ -558,10 +546,6 @@ $$w_{ij} =\frac{\left( \frac{1}{dist(x_{i}c_{j})}^2 \right)^{\frac{1}{p-1}}}{ \s
 
 **Rappresentazione Grafica:**
 
-![image](image78.png)
-
-![image](image79.png){width="3.44444in" height="2.175in"}
-
 ### Clustering Grid-Based
 
 Il clustering grid-based divide lo spazio dei dati in celle (rettangoli o iper-rettangoli) e conta il numero di punti in ogni cella. Le celle con un numero di punti superiore a una soglia vengono considerate come cluster.
@@ -574,9 +558,7 @@ Il clustering grid-based divide lo spazio dei dati in celle (rettangoli o iper-r
 4. Raggruppare le celle adiacenti con un numero di punti superiore alla soglia.
 
 **Rappresentazione Grafica:**
-
-![image](image80.png)
-
+![[8) Clustering-20241009093514470.png|485]]
 **Pseudocodice:**
 1. Definisci un insieme di celle di griglia.
 2. Assegna gli oggetti alle celle appropriate e calcola la densità di ciascuna cella.
@@ -599,10 +581,10 @@ Fino ad ora non abbiamo mai discusso della dimensionalità degli oggetti. Quando
 
 Ad esempio, consideriamo la seguente distribuzione di punti in tre dimensioni:
 
-![image](image82.png)
+![[8) Clustering-20241009093529428.png|306]]
 Con 3 attributi, non è detto che riusciamo ad identificare dei cluster. Tuttavia, se consideriamo gli stessi oggetti in due dimensioni (*x, y*), otteniamo la seguente distribuzione:
 
-![image](image83.png)
+![[8) Clustering-20241009093536222.png|346]]
 
 Se diminuiamo ulteriormente il numero di attributi, possiamo identificare 3 cluster (considerando come attributo *x*, possiamo vederli considerando solo l'asse *x* della figura precedente). Anche con *y* identifichiamo tre cluster, ma sono diversi rispetto a quelli individuati con *x*.
 
@@ -613,12 +595,12 @@ Il processo di clusterizzazione è quindi molto influenzato dal numero di attrib
 La clusterizzazione basata su grafi sfrutta la rappresentazione dei dati come grafi per identificare i cluster. Due tecniche principali sono:
 
 **1. Clustering Gerarchico Divisivo:**
-
+![[8) Clustering-20241009102407253.png|538]]
 * **Costruzione del Grafo:** Si crea un grafo completo non orientato, dove ogni nodo è collegato a tutti gli altri.
 * **Albero Ricoprente Minimo:** Si costruisce l'albero ricoprente minimo del grafo.
 * **Separazione dell'Albero:** Si separano i cluster rompendo l'arco con la distanza maggiore nell'albero ricoprente. Questo processo si ripete fino a ottenere solo cluster singole.
 
-**Complessità:** L'algoritmo ha una complessità di *O*(*n*^3) se si utilizza un algoritmo di costruzione dell'albero ricoprente con complessità *O*(*n*^2). Utilizzando una struttura ad heap, la complessità si riduce a *O*(*n*^2*logn*).
+**Complessità:** L'algoritmo ha una complessità di $O(n^3)$ se si utilizza un algoritmo di costruzione dell'albero ricoprente con complessità $O(n^2)$. Utilizzando una struttura ad heap, la complessità si riduce a $O(n^2\log n$).
 
 **2. Shared Nearest Neighbour (SNN):**
 

@@ -20,7 +20,7 @@ Un albero decisionale è composto da:
 
 ### Applicare il modello al data set
 Partendo dal nodo radice, applichiamo la condizione di test dell'attributo associato e seguiamo il percorso appropriato. Raggiunto un nodo foglia, assegniamo il valore dell'attributo di classe associato all'istanza del test.
-
+![[2) Classificazione-20241008170748929.png|387]]
 ### Tree Induction Algorithm
 A partire da un solo dataset è possibile costruire una moltitudine di alberi decisionali, ma alcuni saranno migliori di altri.  
 La strategia impiegata si basa su **tecniche greedy,** ovvero la costruzione dell'albero avviene dall'alto verso il basso, prendendo una serie di decisioni ottimali a livello locale. Questi algoritmi devono tenere conti di problemi come la scelta dei criteri di split e di stop, l'underfitting e l'overfitting.
@@ -52,7 +52,7 @@ Per gli **split a due vie sugli attributi ordinali**, si considerano tutti i pos
 
 Per gli **split a più vie**, si discretizzano i valori continui in intervalli disgiunti che coprono l'intera gamma di valori. La discretizzazione richiede di definire il numero di intervalli e la posizione dei punti di divisione. I valori di uno stesso intervallo vengono mappati alla stessa categoria ordinale.
 
-##@ Criterio di ottimizzazione dello split
+### Criterio di ottimizzazione dello split
 
 La scelta del criterio di split migliore si basa su misure di bontà che mirano a creare partizioni (nodi figli) il più pure possibile, associando istanze della stessa classe allo stesso nodo. Nodi impuri, con istanze di classi diverse, tendono ad aumentare la profondità dell'albero, richiedendo ulteriori partizionamenti.
 
@@ -139,8 +139,8 @@ Maggiore è il numero dei figli, maggiore è il valore assunto da splitinfo.
 
 $Error(t)=1-max_{i}p(i|t)$
 
-* **Max = $\left( 1-\frac{1}{n_{c}} \right)$**
-* **Min = (0)**
+* **Max = $\left( 1-\frac{1}{n_{c}} \right)=$** ottenuto quando i record sono equamente distribuiti 
+* **Min = (0)** = ottenuto quando tutti i record appartengono a una sola classe
 
 ### Criteri per interrompere lo split
 * Quando tutti i record appartengono alla stessa classe.
@@ -177,7 +177,7 @@ Modelli più complessi hanno una migliore capacità di rappresentare dati comple
 
 * **Approccio ottimistico:** Il training set è perfettamente rappresentativo di tutte le relazioni che caratterizzano il dataset.    e'(t)=e(t)
 * **Approccio pessimistico:**
-$err_{gen}(t)=err(t)+\Omega \cdot \frac{K}{N_{train}}$
+	$err_{gen}(t)=err(t)+\Omega \cdot \frac{K}{N_{train}}$
 
 dove:
 
@@ -189,7 +189,6 @@ dove:
    * Per gli alberi binari, una penalità di 0.5 implica che un nodo debba essere sempre espanso nei due nodi figli se migliora la classificazione di almeno un record.
 
 * **Minium Description Lenght**
-
     * Minimizza il costo per descrivere una classificazione. Il costo totale è dato dalla _somma del costo per codificare gli errori di classificazione del modello sui dati e del costo per codificare la complessità stessa del modello._
     * Per alberi decisionali, il costo del modello dipende dal numero di bit necessari per codificare i nodi interni (attributi) e le foglie (valori delle classi).
     $\text{Costo(Modello,Dati)=Costo(Dati|Modello)}+\alpha \cdot Costo(Modello)$
@@ -257,16 +256,16 @@ In molti dataset, le classi sono _distorte,_ ossia vi sono molti più record di 
 * **Precision:** usata per la corretta classificazione dei record della classe positiva/rara.
 
     * Misura quanti dei record positivi che ho classificato sono corretti.
-    $Precion(p)=\frac{TP}{TP+FP}$
+	    $Precion(p)=\frac{TP}{TP+FP}$
 
 * **Recall:** misura quanti record positivi ho correttamente classificato sul totale delle supposizioni del modello.
 
-    $recall(r)=\frac{TP}{TP+FN}$
+	    $recall(r)=\frac{TP}{TP+FN}$
 
 * **F-measure:** Combina precision e recall, rappresenta la media armonica tra questi due valori.
 
     * Se la media armonica è elevata, significa che sia precision che recall lo sono, dunque sono stati commessi pochi errori (pochi falsi, sia positivi che negativi).
-    $F-measure=\frac{2pr}{p+r}$
+	    $F-measure=\frac{2pr}{p+r}$
 
 
 
@@ -661,18 +660,16 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 ### Pro e Contro dei Kd-trees
 
 **Pro:**
-
 * Permettono una partizione efficiente dello spazio k-dimensionale minimizzando gli spazi vuoti.
 * Consentono query efficienti di ricerca dei k-nearest neighbor.
 * Possono essere usati anche per query di range/intervallo.
 
 **Contro:**
-
 * Possono diventare inefficienti ad alte dimensionalità a causa della "maledizione della dimensionalità".
 * Le prestazioni dipendono molto dalla scelta dell'asse di partizione e della strategia di selezione del punto di separazione.
 * Possono non funzionare bene su dati molto distorti o con distribuzioni complesse.
 
-### Calcolo Approssimato
+## Calcolo Approssimato
 
 * **Algoritmo di ricerca del vicino più vicino approssimativo:** Restituisce punti con una distanza dal punto dato q non superiore a c volte la distanza ai punti effettivamente più vicini.
 * **Vantaggio:** Può essere vantaggioso quando i risultati approssimati sono quasi buoni quanto quelli esatti, specialmente se la misura di distanza riflette bene la nozione di qualità dell'utente.
@@ -691,7 +688,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
     * **R-tree:** Approccio ottimistico, tende a rispondere alle query in tempo logaritmico.
     * **Vector Approximation File:** Approccio pessimistico, analizza l'intero dataset ma in modo molto veloce.
 
-### R-tree
+## R-tree
 
 * **Struttura dati:** Simile ai B+tree, ma estesa per spazi multidimensionali.
 * **Organizzazione:** Organizza gli oggetti in iperrettangoli multidimensionali che possono sovrapporsi.
