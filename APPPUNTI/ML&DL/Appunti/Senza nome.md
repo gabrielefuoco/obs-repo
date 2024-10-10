@@ -152,4 +152,50 @@ dimostra che non esiste un algoritmo di learning universale
 dato un dominio infito x e considerata la classe d'ipotesi formata da tutte le funzioni booleane.. questa classe non è pac-learnable
 
 ne esiste una seconda formulazione che ci dice sempre che non esiste un algoritmo di learning universale ma fornisce anche altro info agiuntive
-**enunciato**: Sia A un algoritmo di learning (combinazione di una classe d'ipotesi+minimizzazione rischio empirico) $A=ERM_H$, allora esistono un problema di learning 
+**enunciato**: Sia A un algoritmo di learning (combinazione di una classe d'ipotesi+minimizzazione rischio empirico) $A=ERM_H$, allora esistono un problema di learning P e un secondo algoritmo $A'\neq A(H'\neq H)$ tali che
+$$
+\begin{cases}
+\ 1) \ \text{ A fallisce su P (Overfitting)} \\
+\ 2) \ \text{ A' ha successo su P}
+\end{cases}
+$$
+anche se la 1) ci dice che la classe può fallire, la buona notizia è che esiste una classe d'ipotesi diversa che si comporta bene sul problema (2)
+
+ci dice che non esiste un algo di learning universale perchè: supponiamo che abbia una predilezione per la classe dei semispazi: il teorema dice che se usi sempre la stessa classe d'ipotesi prima o poi arriverà un problema che non riesci a risolvere
+dobbiamo quindi cambiare classe di'ipotesi
+
+quando abbiamo un probleam di learning, dobbiamo provare più classi d'ipotesi (model selection)
+
+## Model Selection
+
+(le ipotesi vengono da classi di ipotesi diverse, algoritmi diversi)
+
+Dato un insieme  di ipotesi $H^*=\{ h_1,h_2, \cdots , h_r \}$ la model solection consiste nello scegliere la migliore ipotesi $H^*$ 
+
+problema della regressione
+(grafico regressione)
+1 passo è scegliere la classe d iptoesi da usare
+se usiamo la regressione polinomiale, al variare del grado del polinomio cambia la classe d'ipotesi
+
+quando facciamo model selection consideriamo una famiglia di classi d ipotesi, e noi vogliamo scegliere la migliore
+
+quando usiamo famiglia di classi d ipotesi si introduce il concetto di iperparametro: per ogni val di iperparametero cambierà al forma della classe
+
+### Iperparametro
+Parametro di un algoritmo di Learning che viene fissato a priori (prima di vedere i dati)
+
+$y=p_n(x)$
+l'iperaparametro è il grado del polinomio $p_n$ (è la n)
+dobbiamo quindi provare diversi val di n
+$n=1$ è una retta
+$n=2$ genera $h_2$ che approssima meglio la funzione
+$n=3$ genera $h_3$,  approssima ancora meglio la funzione
+![[Senza nome-20241010122941471.png|436]]
+possiamo arrivare a una n che passa da tutti i punti $n=|S|$
+
+$H^*=\{h_1,h_2,\cdots , h_r \}$
+voglio estrarre l'ipotesi migliore $h^*$
+
+Supponiamo di  porre $h^*=\arg \ \min_{h\in H^*} \ L_S(h)$
+il rischio empirico si abbsassa perhcè la fun sono così complicate che si adattano troppo bene alla funzione, fino a diventare inutili nella predizione
+dunque questa funzione non va bene.
