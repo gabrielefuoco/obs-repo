@@ -14,6 +14,7 @@ $$
 \end{cases}$$
 
 Supponiamo di aver scelto i valori per le etichette. 
+
 Dobbiamo costruire il vettore $\vec{w}=(y_{1},y_{2},\dots,y_{d})$. 
 Il semispazio $\forall_{i}, \ h_{\vec{w}}(\vec{e}_{i})= <\vec{w},\vec{e}_{i}> =y_{i}$ sarà uguale alla $i$-esima componente.
 
@@ -199,3 +200,104 @@ voglio estrarre l'ipotesi migliore $h^*$
 Supponiamo di  porre $h^*=\arg \ \min_{h\in H^*} \ L_S(h)$
 il rischio empirico si abbsassa perhcè la fun sono così complicate che si adattano troppo bene alla funzione, fino a diventare inutili nella predizione
 dunque questa funzione non va bene.
+
+
+## Validation set
+stiamo confrondando ipotesi in generale, che provengono da classi d ipotesi con espressività diversa. 
+Validation set ha la stessa forma del training set ma non viene utilizzato durante l addestramento. lo usiamo solo per stiamre l'errore di generalzizazione
+
+$V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$
+*V è indipendentente da S*
+
+opzione 1 : ci creiamo sia s che V
+opzione 2: se abbiamo solo S, dobbiamo sacrificarne una parte e metterla nel validation (selezionare un sottoinsieme casuale di S e usarlo come Validation)
+
+$h^* = \arg \ \min_{h \in H^*} L_v(h)$
+dovrebbe funzionare perchè l'errore sul validation è una buona stima dell errore di generalizzazione
+
+$H^*=\{  h_1, h_{2},\cdots, h_r  \}$ è un insieme finito
+
+la regola di prima corrisponde a minimizzare il rischio empirico sul validation in corrispondenza di una classe d ipotesi finita (usiamo V e non S su una classe di potesi finita)
+essendo classe dipotesi finita val A-PAC-Learaability e convergenza uniforme
+questo problema ha una sample complexity $m=\frac{\log\left( \frac{2|H|}{S} \right)}{2\epsilon^2}$
+da qui deriva che  $\forall h \in H^*,| L_{D}(h)-L_{V}(h)|\leq\epsilon$
+
+dalla sample complexity deriva $\epsilon=\sqrt{ \frac{\frac{\log(2|H|)}{S}}{2m_{v}} }$
+
+dalla differenza tra gli errori deriva $L_{D}(h^*)\leq L_{V}(h^*)+  \sqrt{ \frac{\frac{\log(2|H|)}{S}}{2m_{v}}}$ 
+
+più è grande il validation set e più l'errore sul validation approssimerà l'errore vero
+$H^*$ invece ci dice che all aumentare del numero di ipotesi che confrontiamo, aumenta l'errore
+
+per garantire l indipendenza tra v e s non devono avere elementi in comune: per aumentare la qualita della stima devo incrementare V , ma cio significa prendere esempi da S e quindi la qualità del training dimuisce.
+nonostante ciò è la tecnica  più potente a livello teorico, pocihè abbiamo dei bound sull errore associato alla stima del rischio
+
+per alleviare questo problema esistono delle varianti:
+
+## K-fold Cross-Validation
+
+Partiziona il training set S in k gruppi (di solito k=10)
+
+Serve per cercare di massimizzare il numero di esempi usati nella fase di training
+
+Per k volte si creano k problemi distinti, in cui 1 gruppo diventa validation set e i restanti 9 training
+
+$$\forall_{i} 
+\begin{cases}
+V_{i}=S_{i} \\
+S'=S \setminus S' \to h_{i}=ERM_{H}(S'_{i})
+\end{cases}
+$$
+dalla seconda deriva
+$\to c_{i}=L_{Vi}(h_{i})$
+quindi calcoliamo l'errore come
+$err=\frac{1}{k} \sum_{i=1}^k e_{i}$
+
+questo processo lo ripetiamo per altre 9 volte(se k=10)
+alla fine si sceglie l'iperparametro che ha err minimo.
+prendiamo S e facciamo il learning con il valore dell iperparametro ottimo
+
+Il vantaggio è che si usano tutti i .. per fare learning
+
+nella pratica viene usata spesso e si preferisce all uso di un validation set separato
+dal punto di vista teorico, non ci sono garanzie sulla bontà di questa stima, poichè non vale la condizione di indipendenza tra gli errori
+
+## Model-Selection Curve
+
+grafico che rappresenta qualitativamente quello che accade agli errori in gioco quando facciamo model selection
+
+su x mettiamo iperparametro
+su y errori
+
+quando i val dell iperparametro sono bassi, l err empirico è più basso, fino a tendere a 0
+
+![[Senza nome-20241010131748606.png|998]]
+
+la parabola rappresenta l'errore di validazione
+
+il grafico può essere diviso in 3 regioni:
+1) regione di underfitting: associata ai val più bassi dell'iperparametro. l errore di validazione e quello empirico sono molto vicini, e entrambi tendono a essere alti. la classe d ipotesi è troppo semplice e non si adatta bene ai dati
+2) regione intermedia: regione in cui si colloca la soluzione. noi vogliamo isolare la regione in cui c'è il minimo del validation set
+3) regione di overfitting: associata ai val più alti dell iperparametri. l'errore empirico si abbassa di molto ma l'errore sul validation set è molto grande (la differenza tra i due errori è grande).
+
+al grafico si può aggiungere l errore bayesiano, che non dovrà scendere sotto una certa soglia: è l'errore ottimo, ma non possiamo raggiungerlo
+
+
+
+## Minimizzazione del rischio strutturale (SRM)
+
+tecnica di model selection che non fa uso del validation
+
+ipotesi ottima $h^*= \arg \min _{h\in H^*}L_S(h)+\epsilon(h)$
+$\epsilon(h)$ è una stima tra lerrore empirico e quello di generalizzazione
+
+possiamo sfruttare la vc_dim della sua classe d ipotesi
+
+dal teorema fondamentale della pac leaernable
+$m=\frac{d+\log\left( \frac{1}{\delta} \right)}{\epsilon^2}$
+$\epsilon=\sqrt{ \frac{d(h)+\log\left( \frac{1}{\delta} \right)}{m} }$
+
+dunque 
+$h^*= \arg \min _{h\in H^*}L_S(h)+\sqrt{ \frac{d(h)+\log\left( \frac{1}{\delta} \right)}{m} }$
+
+più è complicata la classe più cresce il termine $\epsilon(h)$ e aumenta il rischio strutturale. 

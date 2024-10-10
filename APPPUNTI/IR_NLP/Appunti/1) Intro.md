@@ -1347,6 +1347,8 @@ Un esempio di questo modello è la **legge di Pareto**, nota anche come principi
 * **Dimensione delle città:** Poche città hanno una popolazione molto elevata, mentre molte altre hanno una popolazione molto bassa.
 - **Frequenza delle parole in un documento**
 
+==poisson(legge degli eventi rari) e power law: una è una legge di potenza e una spaziale. sono entrambi distribuzioni skewed. dipende da come modelliamo il min rate nella poisson==
+
 ## Legge di Heaps e Legge di Zipf
 
 La legge di Heaps (prima legge di potenza) fornisce una stima della dimensione del vocabolario in un corpus di testo. Tuttavia, nel linguaggio naturale, si osserva una distribuzione non uniforme delle parole: alcuni termini sono molto frequenti, mentre molti altri sono molto rari.
@@ -1374,137 +1376,379 @@ Se il termine più frequente ("the") si verifica $cf1$ volte, allora il secondo 
 
 
 ![[1) Intro-20241007160144378.png|504]]
-In posizioni di rank basse (origine) abbiamo alta frequenza.  
-La frequenza scende linearmente con scala doppia logaritmica 
-
-
-# AAAAAAAAAAAAAAAAAA
-
+- In posizioni di rank basse (origine) abbiamo alta frequenza.  
+- La frequenza scende linearmente con scala doppia logaritmica 
 
 ## La legge di Zipf: le implicazioni di Luhn
 
-Luhn (1958):
+Luhn (1958) osservò che:
 
-* Sia le parole estremamente comuni che quelle estremamente rare non sono molto utili per l'indicizzazione.
-* I concetti più discriminanti hanno una frequenza da bassa a media.
+* **Le parole estremamente comuni non sono molto utili per l'indicizzazione.** Questo perché sono troppo generiche e non forniscono informazioni specifiche sul contenuto di un documento.
+* **Le parole estremamente rare non sono molto utili per l'indicizzazione.** Questo perché compaiono troppo raramente per essere significative.
 
-**Ponderazione della Rilevanza dei Termini**
+**I concetti più discriminanti hanno una frequenza da bassa a media.** Questo significa che le parole che compaiono con una frequenza intermedia sono le più utili per l'indicizzazione, perché forniscono informazioni specifiche sul contenuto di un documento senza essere troppo rare da essere insignificanti.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+La distribuzione delle parole in un corpus segue la legge di Zipf, che afferma che la frequenza di una parola è inversamente proporzionale al suo rango. Questo significa che le parole più frequenti sono molto più comuni delle parole meno frequenti.
 
-**Ricerca booleana: abbondanza o carestia**
+![[1) Intro-20241010152315456.png]]
 
-Fino ad ora, tutte le query sono state booleane.
+Il grafico mostra la distribuzione delle parole in un corpus. La maggior parte delle parole ha una frequenza medio-bassa, mentre poche parole hanno una frequenza molto alta.
+
+**In funzione del task specifico, non è immediato stabilire quando un termine è eccessivamente frequente e allo stesso modo quando è eccessivamente raro.** 
+
+Se fossimo capaci di stabilirlo, allora avremmo stabilito le due frequenze di taglio (superiore e inferiore). Ciò che è interno a queste frequenze di taglio è ciò che andrebbe mantenuto (vocabolario) nelle fasi successive.
+
+**Determinare la frequenza di taglio è difficile.** Oltre ad essere task-dependent, è data-driven, dipende dal linguaggio utilizzato dal corpus (dominio dei dati). 
+
+In teoria, potremmo individuare due frequenze di taglio per effettuare un pruning dell'insieme dei termini candidati a formare il vocabolario (index terms). 
+
+**Scopo delle frequenze di taglio:**
+L'obiettivo è escludere:
+
+* **Termini troppo frequenti:** presenti in molti documenti ma poco significativi per la caratterizzazione del contenuto (es. articoli, preposizioni).
+* **Termini troppo rari:** presenti in pochi documenti e quindi poco utili per l'analisi generale.
+
+**Vantaggi del pruning:**
+* Miglioramento dell'efficienza: riduzione della dimensionalità del vocabolario, con conseguente risparmio di memoria e risorse computazionali.
+* Maggiore accuratezza: eliminazione di termini poco significativi o fuorvianti.
+
+**Criticità:**
+* **Individuazione delle frequenze di taglio ottimali:** non esiste una regola universale, la scelta dipende dal task specifico e dal dominio di applicazione.
+* **Dipendenza dal dominio e dal linguaggio:**  la frequenza di un termine può variare significativamente a seconda del contesto.
+
+**Esempi di regole pratiche:**
+Nonostante la mancanza di regole universali, l'esperienza su diversi benchmark ha permesso di identificare alcune linee guida:
+* **Rimozione dei termini troppo frequenti:** escludere termini presenti in più del 50% dei documenti.
+* **Rimozione dei termini troppo rari:** escludere termini presenti in meno di 3-5 documenti.
+
+È preferibile un approccio conservativo, che mantenga un vocabolario relativamente ampio, soprattutto per modelli di rappresentazione del testo utilizzati in:
+* **Information Retrieval:** dove la rilevanza si basa principalmente sulla presenza dei termini.
+* **Data Mining tradizionale:** dove si utilizzano ancora modelli basati sulla frequenza dei termini.
+
+## Ponderazione della Rilevanza dei Termini
+
+Abbiamo a che fare con set di risultati ridotti o enormi. Quando il set di risultati deve essere processato direttamente dall'utente che ha posto la query, non è pensabile che esso possa ispezionare l'intero set. In numerosi scenari, c'è solo attenzione ai primi *k* risultati.
+
+#### Ricerca booleana: 
+
+Fino ad ora, tutte le query sono state booleane. Questo approccio presenta alcuni svantaggi:
 
 * Spesso si ottengono risultati troppo pochi (o addirittura vuoti) o troppi (>1K).
 * I documenti o corrispondono o no.
-* Buono per gli utenti esperti con una precisa comprensione delle loro esigenze e della collezione.
-* Buono anche per le applicazioni: le applicazioni possono facilmente consumare migliaia di risultati.
-* Non buono per la maggior parte degli utenti.
+* È un metodo adatto per gli utenti esperti con una precisa comprensione delle loro esigenze e della collezione.
+* È anche utile per le applicazioni che possono facilmente consumare migliaia di risultati.
+* Tuttavia, non è adatto per la maggior parte degli utenti.
 * La maggior parte degli utenti è incapace/non disposta a scrivere query booleane.
 * La maggior parte degli utenti non vuole scorrere migliaia di risultati.
 * Questo è particolarmente vero per la ricerca sul web.
 
+Dobbiamo proiettarci verso un approccio più generale, che è quello del **recupero classificato**
 
+## Ranked Retrival
 
-**Recupero classificato**
+Per risolvere i problemi della ricerca booleana, si introduce il **ranked retrival**, che restituisce un ordinamento sui (primi) documenti della collezione per una query.
 
-Restituire un ordinamento sui (primi) documenti della collezione per una query.
+Il recupero classificato si basa sull'idea di esprimere quantitativamente la pertinenza di un documento rispetto alla query. Si parla di **recupero** e non di **estrazione di informazioni**. 
+Ad esempio, se una pagina è complessa e funge anche da hub verso altre pagine, ci interessa che sia un'autorità e non un hub. In tal caso, sarebbe necessario eseguire l'estrazione di informazioni. Ci basta che la pagina abbia una percentuale di contenuti che corrispondono alla query, e in tal caso la restituiamo tra le prime. 
 
-**Query di testo libero:**
+#### Query di testo libero
 
-* La query dell'utente è semplicemente una o più parole in una lingua umana.
-* Piuttosto che un linguaggio di query di operatori ed espressioni.
+Le query di testo libero sono semplicemente una o più parole in una lingua umana, anziché un linguaggio di query di operatori ed espressioni.
 
-Il recupero classificato e le query di testo libero sono due scelte separate.
+*Il recupero classificato è normalmente stato associato alle query di testo libero, e viceversa*.
 
-* Ma in pratica, il recupero classificato è normalmente stato associato alle query di testo libero e viceversa.
-
-"Abbondanza o carestia" non è un problema.
-
-Un sistema produce un set di risultati classificati, i set di risultati di grandi dimensioni non sono un problema.
+Con il recupero classificato, il problema dell' "abbondanza o carestia" non è più un problema. Un sistema produce un set di risultati classificati, i set di risultati di grandi dimensioni non sono un problema.
 
 * La dimensione del set di risultati non è un problema.
 * Mostriamo solo i primi k (≈ 10) risultati.
 * Non sovraccarichiamo l'utente.
 
+Con una query free text ammettiamo ci sia un'esigenza informativa non netta al 100%. Dunque è utile presentare i risultati all'utente con una classifica
 
-**Punteggio come base del recupero classificato**
+### Punteggio come base del recupero classificato
 
 Desideriamo restituire in ordine i documenti più probabilmente utili per il ricercatore.
 
 Come possiamo classificare i documenti della collezione rispetto a una query?
 
-* Assegnare un punteggio (in [0, 1]) a ciascun documento.
-* Questo punteggio misura quanto bene il documento e la query "corrispondono".
+* *Assegnare un punteggio (in [0, 1]) a ciascun documento.*
+* Questo punteggio misura quanto bene il documento e la query *corrispondono*.
 
-Cosa ne pensi di usare misure di similarità per insiemi finiti?
-
-* Ad esempio, Jaccard, Sorensen-Dice, Overlap, Simple Matching, ecc.
+Un modo è quello di usare **misure di similarità** per insiemi finiti:
+* Ad esempio: *Jaccard, Sorensen-Dice, Overlap, Simple Matching, ecc.*
 * Sono efficienti e forniscono la normalizzazione della lunghezza.
     * Cioè, i documenti e le query non devono avere le stesse dimensioni.
 * Ma non considerano:
-    * La frequenza del termine (tf) nel documento.
+    * La frequenza del termine $(tf)$ nel documento.
         * Più frequente è il termine di query nel documento, più alto dovrebbe essere il punteggio.
     * La scarsità del termine nella collezione (frequenza di menzione del documento).
         * I termini rari in una collezione sono più informativi dei termini frequenti.
 
+## Misure di Similarità
 
+| Coefficiente        | Formula                                                                            | Descrizione                                                                                                                                                                                                                         |
+| ------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Jaccard**         | $J(A,B) = \frac{\|A \cap B\|}{\|A \cup B\|}$                                       | **Misura la similarità tra due insiemi come la dimensione della loro intersezione divisa per la dimensione della loro unione**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                  |
+| **Sørensen-Dice**   | $DSC(A,B) = \frac{2 \times \|A \cap B\|}{\|A\| + \|B\|}$                           | **Simile a Jaccard, ma pesa doppiamente gli elementi in comune**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                                                                                |
+| **Overlap**         | $O(A,B) = \frac{\|A \cap B\|}{min(\|A\|, \|B\|)}$                                  | **Misura la sovrapposizione tra due insiemi come la dimensione della loro intersezione divisa per la cardinalità dell'insieme più piccolo**. *Varia tra 0 (nessuna sovrapposizione) e 1 (un insieme è un sottoinsieme dell'altro).* |
+| **Simple Matching** | $SM(A,B) = \frac{\|A \cap B\| + \|\overline{A} \cap \overline{B}\|}{\|A \cup B\|}$ | **Misura la similarità tra due insiemi considerando sia le presenze che le assenze di elementi**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                                                |
 
-**Dalle matrici di incidenza alle matrici di conteggio**
+La cardinalità di X con Y include anche l'intersezione. Lo stesso vale per la cardinalità di Y e l'intersezione. Ovviamente, le due misure sono indipendenti, nel senso che conoscerne una non implica la conoscenza dell'altra. In che relazione si trovano? Si inseriscono nella relazione espressa dalla notazione con la J, vista prima applicata alle variabili di J e sottolineando "non J" più 1. 
 
+Se vogliamo dare maggior peso agli elementi in comune, quindi desideriamo una misura di similarità che non sia "generosa" in termini di intersezione, utilizziamo Dice. Dice è più generosa rispetto a Jaccard, ma manca di una proprietà importante. Per intenderci, Dice è sempre maggiore o uguale a Jaccard, ma in alcuni casi può essere utile, ad esempio nell'ambito dell'indexing, in particolare per l'Iris Neighbor Search.
 
-**Modello Bag-of-words (BoW)**
+Parlando di proprietà desiderabili, seppur non obbligatorie, per una misura di distanza, la **disuguaglianza triangolare** è fondamentale. È ciò che rende una distanza una metrica. A questo proposito, visto che siete persone precise, evitate di cadere nella trappola comune a molti, dagli informatici agli ingegneri: non tutto è una metrica. Usiamo termini come "misure" o "criteri" in senso generico, ma "metrica" è riservato a Jaccard e altre misure che soddisfano la disuguaglianza triangolare. Dice non la soddisfa.
 
-Ipotesi di indipendenza dei termini.
+### Esempio di non soddisfacimento della disuguaglianza triangolare con Dice
+
+Prendiamo due documenti:
+
+* Documento 1: AB
+* Documento 2: A
+* Documento 3: B
+
+Applicando la disuguaglianza triangolare, dovremmo avere:
+
+* Distanza(1,2) + Distanza(1,3) >= Distanza(2,3)
+
+Tuttavia, usando Dice (che misura la similarità, non la distanza), otteniamo:
+
+* Dice(1,2) = 2/3 
+* Dice(1,3) = 2/3
+* Dice(2,3) = 0
+
+La disuguaglianza non è rispettata, poiché 2/3 + 2/3 non è maggiore o uguale a 0.
+
+### Overlap Coefficient
+
+L'Overlap Coefficient, detto anche Simpson o con un altro nome difficile da ricordare, è definito come l'intersezione divisa per la minima cardinalità tra X e Y. 
+
+```
+Overlap(X,Y) = |X ∩ Y| / min(|X|, |Y|)
+```
+
+Calcolare il word overlap tra due porzioni di testo può essere utile, ad esempio per confrontare due summary, uno di riferimento e l'altro generato artificialmente.
+
+### Altre misure di similarità
+
+Un'altra misura di similarità, non direttamente legata al concetto di matching, è... (la trascrizione si interrompe qui).
+
+---
+#### Frequenza di Collezione (Collection Frequency)
+La **frequenza di collezione** (collection frequency) rappresenta il numero totale di occorrenze di una parola all'interno di un'intera collezione di documenti. È una proprietà globale, ovvero riguarda l'intera collezione e non un singolo documento. Rappresenta la somma delle Term Frequency su tutti i documenti della collezione
+
+#### Frequenza di Termine (Term Frequency)
+La **frequenza di termine** (term frequency) è la controparte della frequenza di collezione, ma a livello locale. Indica il numero di occorrenze di una parola all'interno di un singolo documento. 
+
+#### Document Frequency
+La **Document Frequency** è il numero di documenti in cui un termine compare.
+
+## Rappresentazione dei testi: calcolo dello score
+
+Ogni singola cella della matrice di rappresentazione dei testi dovrà contenere un valore reale che esprime il peso del termine all'interno di un documento (quanto contribuisce a rappresentare il contenuto del documento stesso).
+
+**Come calcoliamo lo score da assegnare a un documento?**
+
+![[1) Intro-20241010181339307.png]]
+
+Esistono diverse opzioni per modellare la rappresentazione dei testi:
+
+**1. Term Frequency e Collection Frequency:**
+
+Una prima opzione consiste nell'utilizzare direttamente la _term frequency_ (tf) e la _collection frequency_ (cf) per calcolare il peso di un termine in un documento:
+
+$$w_{t,d}=tf_{t,d} \frac{1}{cf_{t}}$$
+
+dove:
+
+*  $w_{t,d}$ è il peso del termine *t* nel documento *d*
+*  $tf_{t,d}$ è la frequenza del termine *t* nel documento *d*
+*  $cf_{t}$ è la frequenza del termine *t* nell'intera collezione di documenti
+
+Al momento, non ci preoccupiamo di normalizzare i valori.
+
+**2. Funzioni Separate per Term Frequency e Collection Frequency:**
+
+Un'altra opzione consiste nell'utilizzare due funzioni separate, *f* e *g*, per modellare l'influenza di tf e cf sul peso del termine:
+
+$$w_{t,d}^{(t)}=f(tf_{t,d})+g(cf_{t})=tf_{t,d}+ly(cf_{t})$$
+
+Tuttavia, in questo caso, il secondo addendo (relativo alla collection frequency) risulta troppo dominante.
+
+#### Considerazioni sulla Lunghezza dei Documenti
+Per semplicità, non facciamo assunzioni sulla lunghezza dei documenti e ci poniamo su una lunghezza media. Potrebbe esserci alternanza tra documenti lunghi e brevi.
+
+### Smorzamento della Term Frequency
+Smorzare in maniera lineare inversa la term frequency con la collection frequency appiattisce troppo verso il basso i valori.
+
+## La Rilevanza di un Termine in un Documento
+
+Come possiamo definire la rilevanza di un termine all'interno di un documento?
+
+* **Tempo di Inerzia:** Un'idea potrebbe essere quella di utilizzare il tempo di inerzia del termine nel documento come indicatore di rilevanza. Tuttavia, la _term frequency_ da sola non è sufficiente.
+
+* **Importanza di CF e DF:** Anche la _collection frequency_ (CF) e la _document frequency_ (DF) giocano un ruolo importante. La legge di Zipf ci ricorda che termini eccessivamente popolari tendono ad essere più intensi localmente.
+
+* **Funzione di Scoring:** Per definire la rilevanza, possiamo utilizzare una funzione che tenga conto sia di TF che di CF:
+
+```
+Rilevanza(termine) = F(TF) + G(CF)
+```
+
+* **Peso Relativo:** Se vogliamo dare maggior peso alla rilevanza locale, F dovrà crescere più rapidamente di G. Viceversa, se vogliamo dare maggior peso alla CF, G dovrà crescere più rapidamente di F.
+
+* **TF vs. CF:** La _term frequency_ sarà generalmente minore della _collection frequency_, soprattutto in corpus di grandi dimensioni.
+
+* **Lunghezza dei Documenti:** Non facciamo alcuna assunzione sulla lunghezza dei documenti nel corpus.
+
+* **Esempio Medico:** In un corpus di documenti medici, sia CF che TF avranno un significato rilevante.
+
+* **Problemi con la Moltiplicazione:** Moltiplicare TF e CF risulta troppo aggressivo nello smorzamento della rilevanza.
+
+## Coerenza con la legge di Zipf e analisi delle proposte
+
+Ci stiamo interrogando sulla coerenza di due idee (idea 1 e idea 2) con la legge di Zipf e la sua derivata. In particolare, stiamo analizzando l'importanza dei termini in un intervallo di frequenze medio-alte e medio-basse, escludendo gli estremi.
+
+**Analisi delle proposte:**
+
+**Caso 1: Termine nella testa della distribuzione**
+
+- **Proposta 1:** Il peso del termine è prossimo a 0 a prescindere dalla *term frequency* del documento, dato che la *collection frequency* è molto alta.
+- **Proposta 2:** Il logaritmo della *collection frequency* è alto, ma potrebbe essere smorzato. La *term frequency* potrebbe essere alta, ma non nel caso particolare di un unico documento molto lungo. Il fattore dominante è il secondo termine (logaritmo della *collection frequency*).
+
+**Caso 2: Termine non nella testa della distribuzione**
+
+- **Proposta 1:** La *term frequency* è divisa per la *collection frequency*.
+- **Proposta 2:** La *term frequency* è sommata al logaritmo della *collection frequency*. La *term frequency* è la stessa, ma nella prima proposta è smorzata, mentre nella seconda è enfatizzata.
+
+**Problemi:**
+
+- Nessuna delle due proposte sembra efficace, in quanto il comportamento varia in base al termine e alle caratteristiche del documento.
+- Non è possibile fare calcoli precisi senza conoscere le caratteristiche del documento.
+
+**Considerazioni aggiuntive:**
+
+- È importante considerare la *document frequency* al posto della *collection frequency*?
+- La *document frequency* potrebbe essere più discriminante della *collection frequency*, in quanto la sua distribuzione è potenzialmente più piatta.
+- L'obiettivo è valorizzare l'importanza dei termini in un documento rispetto a una query.
+- La combinazione lineare non è efficace, in quanto un termine potrebbe dominare l'altro.
+- La funzione reciproca lineare è troppo aggressiva, anche con la *document frequency*.
+
+**Soluzione proposta:**
+
+Per smorzare in modo *smooth*, si propone di utilizzare la seguente formula:
+
+```
+1 / log(document frequency)
+```
+
+**Spiegazione:**
+
+- Se la *document frequency* è prossima a *n* (numero totale di documenti), significa che il termine appare in quasi tutti i documenti.
+- In questo caso, il peso del termine sarà basso, in quanto poco discriminante. 
+
+## Smorzamento della Term Frequency e Inverse Document Frequency (IDF)
+
+Il testo discute l'importanza dello smorzamento della term frequency (tf) nel calcolo dell'informazione veicolata da un termine all'interno di un documento. 
+
+Viene spiegato che:
+
+* Numeri maggiori di 1 non sono un problema, poiché la document frequency massima di un termine è pari al numero di documenti nel corpus (n). 
+* La tf viene divisa per il logaritmo di n, ottenendo uno smorzamento.
+* Per termini rari, presenti in pochi documenti, lo smorzamento è maggiore. Ad esempio, se un termine compare in 3 documenti, la tf viene divisa per il logaritmo in base 2 di 3.
+
+## Funzione TF-IDF
+
+La funzione TF-IDF (Term Frequency - Inverse Document Frequency) è una misura statistica che valuta l'importanza di un termine all'interno di un documento, in relazione ad una collezione di documenti (corpus).  Combina la frequenza di un termine in un documento con la sua rarità nel corpus. 
+
+La formula per calcolare il peso TF-IDF di un termine *t* nel documento *d* è:
+
+$$w_{t,d}=\log(1+tf_{t,d}) \times \log_{10}\left( \frac{N}{df_{t}} \right)$$
+
+Dove:
+
+* **tf<sub>t,d</sub>**: Frequenza del termine *t* nel documento *d*. Misura quanto frequentemente un termine appare in un documento specifico.
+* **N**: Numero totale di documenti nel corpus.
+* **df<sub>t</sub>**: Numero di documenti in cui il termine *t* compare. Indica in quanti documenti del corpus appare un determinato termine.
+
+**Interpretazione della formula:**
+
+* **log(1+tf<sub>t,d</sub>):**  Rappresenta la frequenza del termine nel documento. Il logaritmo smorza l'influenza dei termini molto frequenti in un documento.
+* **log<sub>10</sub>(N/df<sub>t</sub>):** Rappresenta la frequenza inversa del documento (IDF).  Un valore di IDF elevato indica che il termine è raro nel corpus, quindi più informativo. Viceversa, un IDF basso indica un termine comune e poco informativo.
+
+**Vantaggi dell'utilizzo di TF-IDF:**
+
+* **Penalizza i termini comuni:** Termini frequenti in molti documenti (articoli, stop words) avranno un peso TF-IDF basso.
+* **Evidenzia i termini rari:** Termini che compaiono in pochi documenti avranno un peso TF-IDF alto, evidenziando la loro importanza per quei documenti specifici.
+* **Bilancia frequenza locale e globale:** TF-IDF considera sia la frequenza del termine in un documento specifico che la sua rarità nel corpus, fornendo una misura più accurata dell'importanza del termine.
+
+**Considerazioni importanti nell'utilizzo di TF-IDF:**
+
+* **Rimozione delle stop words:** È fondamentale rimuovere le stop words ("il", "la", "che", etc.) prima di calcolare TF-IDF, poiché non forniscono informazioni utili.
+* **Stemming e lemmatization:** Applicare tecniche di stemming (riduzione di una parola alla sua radice) e lemmatization (riduzione di una parola al suo lemma) può migliorare la precisione del calcolo TF-IDF, raggruppando parole con lo stesso significato.
+* **Soglie di taglio:** È possibile impostare soglie per escludere termini con frequenza troppo alta o troppo bassa, evitando che influenzino eccessivamente il calcolo.
+
+**Smorzamento e Legge di Zipf:**
+
+Lo smorzamento logaritmico nella formula TF-IDF aiuta a gestire la distribuzione dei termini descritta dalla legge di Zipf, che afferma che la frequenza di una parola è inversamente proporzionale al suo rango nella lista di frequenza. Lo smorzamento riduce l'influenza dei termini molto frequenti e aumenta l'importanza di quelli meno frequenti.
+
+**Vantaggi dello smorzamento:**
+
+* Evita di definire soglie di taglio arbitrarie per il vocabolario.
+* Permette di lavorare con matrici TF-IDF sparse, gestendo i valori prossimi allo zero.
+
+**Doppio logaritmo:**
+
+In caso di corpus molto grandi, si può utilizzare un doppio logaritmo per smorzare ulteriormente il peso del fattore di frequenza del termine (TF).
+
+**Normalizzazione e calcolo della similarità:**
+
+La normalizzazione dei vettori TF-IDF e il calcolo della similarità tra di essi sono aspetti cruciali per utilizzare questa metrica in compiti come il recupero delle informazioni o la classificazione dei documenti. 
+
+---
+# skippa fino a pag 123
+
+### Modello Bag-of-words (BoW)
+
+Il modello Bag-of-words (BoW) si basa sull'ipotesi di indipendenza dei termini.
 
 * L'ordinamento delle parole in un documento viene scartato.
     * In un certo senso, un passo indietro rispetto all'indice posizionale.
 
-Contro:
+**Contro:**
 
 * Informazioni sintattiche mancanti (ad esempio, struttura frasale, ordine delle parole, informazioni di prossimità).
 * Informazioni semantiche mancanti (ad esempio, senso delle parole).
 * Manca il controllo di un modello booleano (ad esempio, richiedere che un termine appaia in un documento).
     * Data una query a due termini "A B", si potrebbe preferire un documento che contiene A frequentemente ma non B, rispetto a un documento che contiene sia A che B, ma entrambi meno frequentemente.
 
-Pro:
+**Pro:**
 
 * Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica - non più booleana.
 * Tende a funzionare abbastanza bene nella pratica nonostante le ipotesi semplificative.
 * Consente un'implementazione efficiente per grandi collezioni di documenti.
 * La query diventa un vettore nello stesso spazio dei documenti -> Modello dello spazio vettoriale.
 
+## Tipi di frequenza
 
-
-**Tipi di frequenza**
-
-Vogliamo usare tf quando calcoliamo i punteggi di corrispondenza query-documento. Ma come?
+Vogliamo usare la frequenza del termine (tf) quando calcoliamo i punteggi di corrispondenza query-documento. Ma come?
 
 * La frequenza grezza del termine non è ciò che vogliamo:
     * Un documento con 10 occorrenze del termine è più rilevante di un documento con 1 occorrenza del termine.
     * Ma non 10 volte più rilevante.
 * La rilevanza non aumenta proporzionalmente alla frequenza del termine.
 
+### Peso di frequenza logaritmica del termine
 
-
-**Tipi di frequenza**
-
-Il peso di frequenza logaritmica del termine t in d:
+Il peso di frequenza logaritmica del termine *t* in *d*:
 
 * 0 → 0, 1 → 1, 2 → 1.3, 10 → 2, 1000 → 4, ecc.
 
-Punteggio per una coppia documento-query: somma sui termini t sia in q che in d:
+Punteggio per una coppia documento-query: somma sui termini *t* sia in *q* che in *d*:
 
 * Il punteggio è 0 se nessuno dei termini di query è presente nel documento. 
 
-
-## Tipi di frequenza
-
-
+## Frequenza inversa del documento (idf)
 
 I termini rari sono più informativi dei termini frequenti.
 
@@ -1522,18 +1766,13 @@ Pertanto, più raro è il termine, maggiore è il suo peso.
 * Ad esempio, "assicurazione": cf=10440, df=3997.
 * Ad esempio, "prova": cf=10422, df=8760.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
-
 **Frequenza inversa del documento**
 
-La frequenza del documento di un termine t:
+La frequenza del documento di un termine *t*:
 
-* Una misura inversa dell'informatività di t.
+* Una misura inversa dell'informatività di *t*.
 
-Definisci l'idf (frequenza inversa del documento) di t come:
+Definisci l'idf (frequenza inversa del documento) di *t* come:
 
 * log (N/dft) invece di N/dft
 per "smorzare" l'effetto dell'idf.
@@ -1541,14 +1780,9 @@ per "smorzare" l'effetto dell'idf.
 Nota che:
 
 * La df di un termine è unica.
-* Influisce sulla classificazione dei documenti solo per le query a k termini (k<1).
+* Influisce sulla classificazione dei documenti solo per le query a *k* termini (*k*<1).
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
-
-**Frequenza del termine - frequenza inversa del documento**
+## Frequenza del termine - frequenza inversa del documento (tf-idf)
 
 Schema di ponderazione più noto nella ricerca dell'informazione.
 
@@ -1557,16 +1791,9 @@ Il peso tf-idf di un termine è il prodotto del suo peso tf e del suo peso idf.
 * Aumenta con il numero di occorrenze all'interno di un documento.
 * Aumenta con la rarità del termine nella collezione.
 
-Punteggio per una coppia documento-query: somma sui termini t sia in q che in d.
+Punteggio per una coppia documento-query: somma sui termini *t* sia in *q* che in *d*.
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
-
-**Frequenza del termine - frequenza inversa del documento**
-
-Varianti:
+**Varianti:**
 
 * Come viene calcolato "tf" (con/senza logaritmi).
 * Se i termini nella query sono anche ponderati.
@@ -1578,10 +1805,7 @@ Varianti:
     * Le variazioni di lunghezza possono essere normalizzate.
     * Compensano i fattori tf (grandi per i testi lunghi, piccoli per quelli brevi).
 
-
-
-**Matrice di peso Tf.Idf**
-
+## Matrice di peso Tf.Idf
 
 **Documenti e query come vettori**
 
@@ -1604,6 +1828,13 @@ Classifica i documenti in base alla loro prossimità alla query in questo spazio
 
 * Prossimità = similarità dei vettori.
 * Prossimità ≈ inversa della distanza.
+
+
+
+
+
+
+
 
 **Prossimità dello spazio vettoriale**
 
