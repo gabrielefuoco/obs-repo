@@ -1509,13 +1509,13 @@ Prendiamo due documenti:
 
 Applicando la disuguaglianza triangolare, dovremmo avere:
 
-* Distanza(1,2) + Distanza(1,3) >= Distanza(2,3)
+* $Distanza(1,2) + Distanza(1,3) \geq Distanza(2,3)$
 
 Tuttavia, usando Dice (che misura la similarità, non la distanza), otteniamo:
 
-* Dice(1,2) = 2/3 
-* Dice(1,3) = 2/3
-* Dice(2,3) = 0
+* $Dice(1,2) = \frac{2}{3}$
+* $Dice(1,3) = \frac{2}{3}$
+* $Dice(2,3) = 0$
 
 La disuguaglianza non è rispettata, poiché 2/3 + 2/3 non è maggiore o uguale a 0.
 
@@ -1523,9 +1523,9 @@ La disuguaglianza non è rispettata, poiché 2/3 + 2/3 non è maggiore o uguale 
 
 L'Overlap Coefficient, detto anche Simpson o con un altro nome difficile da ricordare, è definito come l'intersezione divisa per la minima cardinalità tra X e Y. 
 
-```
-Overlap(X,Y) = |X ∩ Y| / min(|X|, |Y|)
-```
+
+$Overlap(X,Y) = \frac{{|X ∩ Y|}}{{min(|X|, |Y|)}}$
+
 
 Calcolare il word overlap tra due porzioni di testo può essere utile, ad esempio per confrontare due summary, uno di riferimento e l'altro generato artificialmente.
 
@@ -1591,9 +1591,7 @@ Come possiamo definire la rilevanza di un termine all'interno di un documento?
 
 * **Funzione di Scoring:** Per definire la rilevanza, possiamo utilizzare una funzione che tenga conto sia di TF che di CF:
 
-```
-Rilevanza(termine) = F(TF) + G(CF)
-```
+	$Rilevanza(termine) = F(TF) + G(CF)$
 
 * **Peso Relativo:** Se vogliamo dare maggior peso alla rilevanza locale, F dovrà crescere più rapidamente di G. Viceversa, se vogliamo dare maggior peso alla CF, G dovrà crescere più rapidamente di F.
 
@@ -1638,9 +1636,9 @@ Ci stiamo interrogando sulla coerenza di due idee (idea 1 e idea 2) con la legge
 
 Per smorzare in modo *smooth*, si propone di utilizzare la seguente formula:
 
-```
-1 / log(document frequency)
-```
+
+$\frac{1}{log(document frequency)}$
+
 
 **Spiegazione:**
 
@@ -1649,10 +1647,7 @@ Per smorzare in modo *smooth*, si propone di utilizzare la seguente formula:
 
 ## Smorzamento della Term Frequency e Inverse Document Frequency (IDF)
 
-Il testo discute l'importanza dello smorzamento della term frequency (tf) nel calcolo dell'informazione veicolata da un termine all'interno di un documento. 
-
-Viene spiegato che:
-
+Importanza dello smorzamento della term frequency (tf) nel calcolo dell'informazione veicolata da un termine all'interno di un documento:
 * Numeri maggiori di 1 non sono un problema, poiché la document frequency massima di un termine è pari al numero di documenti nel corpus (n). 
 * La tf viene divisa per il logaritmo di n, ottenendo uno smorzamento.
 * Per termini rari, presenti in pochi documenti, lo smorzamento è maggiore. Ad esempio, se un termine compare in 3 documenti, la tf viene divisa per il logaritmo in base 2 di 3.
@@ -1705,12 +1700,13 @@ In caso di corpus molto grandi, si può utilizzare un doppio logaritmo per smorz
 
 La normalizzazione dei vettori TF-IDF e il calcolo della similarità tra di essi sono aspetti cruciali per utilizzare questa metrica in compiti come il recupero delle informazioni o la classificazione dei documenti. 
 
----
-# skippa fino a pag 123
+# AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ### Modello Bag-of-words (BoW)
 
-Il modello Bag-of-words (BoW) si basa sull'ipotesi di indipendenza dei termini.
+Il modello Bag-of-words (BoW) si basa sull'ipotesi di indipendenza dei termini. 
+**Concetto alla base della Term Frequency:** bisogna tener conto del contesto globale. 
+Quando dobbiamo capire se una feature è significativa, dovremmo misurare quantitativamente quanto è il suo potere caratterizzante e discriminante.
 
 * L'ordinamento delle parole in un documento viene scartato.
     * In un certo senso, un passo indietro rispetto all'indice posizionale.
@@ -1727,7 +1723,7 @@ Il modello Bag-of-words (BoW) si basa sull'ipotesi di indipendenza dei termini.
 * Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica - non più booleana.
 * Tende a funzionare abbastanza bene nella pratica nonostante le ipotesi semplificative.
 * Consente un'implementazione efficiente per grandi collezioni di documenti.
-* La query diventa un vettore nello stesso spazio dei documenti -> Modello dello spazio vettoriale.
+* La query diventa un vettore nello stesso spazio dei documenti -> Modello dello spazio vettoriale. 
 
 ## Tipi di frequenza
 
@@ -1739,13 +1735,18 @@ Vogliamo usare la frequenza del termine (tf) quando calcoliamo i punteggi di cor
 * La rilevanza non aumenta proporzionalmente alla frequenza del termine.
 
 ### Peso di frequenza logaritmica del termine
+$$w_{t,d}
+\begin{cases}
+1+\log_{10}\text{tf}_{td} \ \text{  if tf}_{td} \ >0 \\
+0,\ \text{otherwise}
+\end{cases}$$ 
 
 Il peso di frequenza logaritmica del termine *t* in *d*:
 
 * 0 → 0, 1 → 1, 2 → 1.3, 10 → 2, 1000 → 4, ecc.
 
 Punteggio per una coppia documento-query: somma sui termini *t* sia in *q* che in *d*:
-
+$\sum_{t\in q \cap d}(1+\log(tf_{t,d}))$
 * Il punteggio è 0 se nessuno dei termini di query è presente nel documento. 
 
 ## Frequenza inversa del documento (idf)
@@ -1761,6 +1762,7 @@ I termini rari sono più informativi dei termini frequenti.
 Pertanto, più raro è il termine, maggiore è il suo peso.
 
 **Frequenza della collezione (cf) vs. Frequenza del documento (df)**
+Si sceglie la document frequency rispetto alla collection frequency perché quest'ultima rischia di avere correlazione con la maggior parte della tf di quel termine, ma nella pratica l'informazione di document frequency ci aiuta maggiormente nel discriminare tra un documento e un altro.
 
 * Quale è meglio per la ricerca?
 * Ad esempio, "assicurazione": cf=10440, df=3997.
@@ -1773,6 +1775,7 @@ La frequenza del documento di un termine *t*:
 * Una misura inversa dell'informatività di *t*.
 
 Definisci l'idf (frequenza inversa del documento) di *t* come:
+$idf_{t}=\log_{10}\left( \frac{N}{df_{t}} \right)$
 
 * log (N/dft) invece di N/dft
 per "smorzare" l'effetto dell'idf.
@@ -1784,142 +1787,209 @@ Nota che:
 
 ## Frequenza del termine - frequenza inversa del documento (tf-idf)
 
-Schema di ponderazione più noto nella ricerca dell'informazione.
+Il metodo tf-idf (term frequency-inverse document frequency) assegna un peso ai termini in un documento in base alla loro frequenza nel documento stesso e alla loro rarità nell'intero corpus di documenti. 
 
-Il peso tf-idf di un termine è il prodotto del suo peso tf e del suo peso idf.
+**Concretamente:**
 
-* Aumenta con il numero di occorrenze all'interno di un documento.
-* Aumenta con la rarità del termine nella collezione.
+* **tf (term frequency):** Maggiore è la frequenza di un termine in un documento, maggiore è il suo peso.
+* **idf (inverse document frequency):** Maggiore è la rarità di un termine nell'intero corpus, maggiore è il suo peso.
 
-Punteggio per una coppia documento-query: somma sui termini *t* sia in *q* che in *d*.
+Questo schema di ponderazione è in linea con la legge di distribuzione della probabilità, che prevede una distribuzione di tipo power-law nella frequenza dei termini. In altre parole, i termini comuni hanno una bassa probabilità di apparire, mentre i termini rari hanno una probabilità maggiore.
 
-**Varianti:**
+Il metodo tf-idf, quindi, **riduce il peso dei termini comuni e aumenta il peso dei termini rari**, riflettendo la distribuzione di probabilità osservata nella realtà. 
 
-* Come viene calcolato "tf" (con/senza logaritmi).
-* Se i termini nella query sono anche ponderati.
-* Normalizzazione della lunghezza.
-    * I documenti hanno dimensioni diverse.
-    * I testi lunghi e prolissi di solito:
-        * Usano gli stessi termini ripetutamente.
-        * Hanno numerosi termini diversi.
-    * Le variazioni di lunghezza possono essere normalizzate.
-    * Compensano i fattori tf (grandi per i testi lunghi, piccoli per quelli brevi).
+
+Il peso tf-idf di un termine è il prodotto del suo peso tf e del suo peso idf:
+
+$w_{t,d}=\log(1+tf_{t,d})\times\log_{10}\left( \frac{N}{df_{t}} \right)$
+
+* **Aumenta con il numero di occorrenze all'interno di un documento.**
+* **Aumenta con la rarità del termine nella collezione.**
+
+Il punteggio per una coppia documento-query è la somma sui termini *t* sia in *q* che in *d*. 
+
+
+## Varianti di Tf-Idf
+
+
+
+$$
+\frac{tf_{i,d}}{\max_{j}tf_{j,d}} ,\
+\frac{tf_{id}}{\sqrt{ \sum_{j}(tf_{j,d})^2 }} ,\
+\frac{tf_{id} \cdot idf_{i}}{\sqrt{ \sum_{j}(tf_{j,d} \cdot idf_{j})^2 }} 
+$$
+
+Esistono diverse varianti di questa tecnica, che si differenziano principalmente per il modo in cui viene calcolato il termine "tf" (frequenza del termine) e se i termini nella query sono anche ponderati.
+
+**Calcolo del termine "tf":**
+
+* **Con logaritmi:** Il logaritmo della frequenza del termine viene utilizzato per attenuare l'influenza dei termini che compaiono molto frequentemente in un documento.
+* **Senza logaritmi:** La frequenza del termine viene utilizzata direttamente, senza alcuna trasformazione.
+
+**Ponderazione dei termini nella query:**
+
+* **Ponderati:** I termini nella query vengono ponderati in base alla loro importanza, ad esempio utilizzando la loro frequenza nella query stessa.
+* **Non ponderati:** Tutti i termini nella query hanno lo stesso peso.
+
+**Assunzioni:**
+* La collezione di documenti è omogenea in termini di dominio dei dati, ovvero il dominio è fissato e il lessico è comune a tutti i documenti.
+* I pattern di frequenza dei termini sono molto simili tra i documenti.
+
+**Principi chiave:**
+
+* **Peso variabile:** Il peso di uno stesso termine cambia a seconda del documento su cui appare. Un termine che compare frequentemente in un documento avrà un peso elevato, mentre un termine raro avrà un peso basso.
+* **Normalizzazione della lunghezza:** I documenti hanno dimensioni diverse. Per compensare le variazioni di lunghezza, si può applicare una normalizzazione che tiene conto della lunghezza del documento.
+* **Smoothing:** Per evitare che i termini rari abbiano un peso eccessivo, si può applicare uno smoothing che attenua l'influenza dei termini che compaiono poche volte.
+
+## Normalizzazione della lunghezza
+
+**Obiettivo:** Capire l'impatto della normalizzazione dei vettori di parole sulla rappresentazione dei topic.
+
+**Problema:** La normalizzazione dei vettori di parole, in particolare la divisione per la norma L2, può influenzare la rappresentazione dei topic. 
+
+**Considerazioni:**
+* **Diluisce il segnale informativo:** La normalizzazione può diluire il segnale informativo dei topic, soprattutto quando si passa da un abstract breve a un testo lungo.
+* **Proprietà geometriche:** La normalizzazione L2 ha proprietà geometriche specifiche che possono differire da altri metodi di normalizzazione, come la normalizzazione al massimo.
+* **Influenza sulla costruzione della matrice dei dati:** La normalizzazione L2 interviene direttamente nella costruzione della matrice dei dati, modificando la rappresentazione dei vettori di parole.
+
+**Esempio:**
+Se si utilizza la matrice di peso Tf-Idf senza normalizzazione e la collezione di documenti contiene un mix di documenti lunghi e brevi, la distanza euclidea tenderà a favorire i documenti più lunghi.
+
+
 
 ## Matrice di peso Tf.Idf
+![[1) Intro-20241014151203327.png]]
 
-**Documenti e query come vettori**
+
+## Documenti e query come vettori
 
 Ci viene dato uno spazio vettoriale a |V| dimensioni.
 
 * I termini sono gli assi dello spazio.
 * I documenti sono punti o vettori in questo spazio.
 
-Molto alto-dimensionale.
+Questo spazio è:
 
-* Decine di milioni di dimensioni quando si applica questo a un motore di ricerca web.
+* **Molto alto-dimensionale:** Decine di milioni di dimensioni quando si applica questo a un motore di ricerca web.
+* **Molto sparso:** La maggior parte delle voci è zero.
 
-Molto sparso.
+Possiamo rappresentare anche le query come vettori nello spazio.
 
-* La maggior parte delle voci è zero.
+Classifichiamo i documenti in base alla loro prossimità alla query in questo spazio.
 
-Fai lo stesso per le query: rappresentale come vettori nello spazio.
+* **Prossimità = similarità dei vettori.**
+* **Prossimità ≈ inversa della distanza.**
 
-Classifica i documenti in base alla loro prossimità alla query in questo spazio.
+## Prossimità dello spazio vettoriale
+![[1) Intro-20241014153843176.png]]
+Potremmo decidere di utilizzare una misura di prossimità che sia **scale-invariant**, ovvero indipendente dalla lunghezza dei vettori. Invece di calcolare la distanza euclidea tra due vettori, possiamo calcolare la prossimità in termini di **angolo**.
 
-* Prossimità = similarità dei vettori.
-* Prossimità ≈ inversa della distanza.
-
-
-
-
-
+Questo approccio comporta una certa **normalizzazione implicita**.
 
 
 
-**Prossimità dello spazio vettoriale**
+### Perché la Distanza Euclidea non è una Buona Idea
 
-Primo taglio: distanza tra due punti.
-
-* Cioè, distanza tra i punti finali dei due vettori.
-
-Distanza euclidea?
-
-* Una cattiva idea.
-* Perché la distanza euclidea è grande per i vettori:
-    * Di lunghezze diverse.
-
-La distanza euclidea tra q e d2 è grande anche se la distribuzione dei termini nella query q e la distribuzione dei termini nel documento d2 sono molto simili.
-
-* Controesempio principale: la distanza euclidea è molto grande tra un documento e lo stesso concatenato con se stesso...
-
-
-**Prossimità dello spazio vettoriale**
+Le distanze di Minkowski soffrono maggiormente l'alta dimensionalità rispetto a misure di correlazione o similarità, come il coseno. 
+ La distanza euclidea, inoltre, ha i seguenti problemi:
+* **Sensibilità alla Lunghezza:** La distanza euclidea è grande per vettori di lunghezze diverse. Ad esempio, la distanza euclidea tra una query `q` e un documento `d2` è grande anche se la distribuzione dei termini in `q` e `d2` è molto simile.
+* **Controesempio Principale:** La distanza euclidea è molto grande tra un documento e lo stesso concatenato con se stesso.
 
 I documenti lunghi sarebbero più simili tra loro in virtù della lunghezza, non dell'argomento.
 
-Tuttavia, possiamo normalizzare implicitamente guardando gli angoli.
+### Normalizzazione Implicita con l'Angolo
 
-* Idea chiave: classifica i documenti in base all'angolo con la query.
+Possiamo normalizzare implicitamente guardando gli angoli.
+* **Idea chiave:** Classificare i documenti in base all'angolo con la query.
 
-Classifica i documenti in ordine decrescente dell'angolo tra query e documento.
+Classifichiamo i documenti in ordine decrescente dell'angolo tra query e documento. In alternativa, classifichiamo i documenti in ordine crescente di **coseno(query, documento)**.
+* Il coseno è una funzione monotona decrescente per l'intervallo [0°, 180°].
 
-In alternativa, classifica i documenti in ordine crescente di coseno(query,documento).
+La misura del **coseno** tra due vettori multidimensionali si ottiene dal prodotto scalare tra i due vettori diviso per il prodotto delle loro norme. Se i vettori fossero inclusi in una sfera di raggio unitario, non sarebbe necessario normalizzarli.
 
-* Il coseno è una funzione monotona decrescente per l'intervallo [0o, 180o].
+### Normalizzazione dei Vettori
 
 Un vettore può essere normalizzato (in lunghezza) dividendo ciascuna delle sue componenti per la sua lunghezza.
 
 * Dividere un vettore per la sua norma L2 lo rende un vettore unitario (di lunghezza) (sulla superficie dell'ipersfera unitaria).
-* I documenti lunghi e brevi hanno ora pesi comparabili.
+* I documenti lunghi e brevi hanno ora pesi comparabili. 
 
-**Prossimità dello spazio vettoriale**
+![[1) Intro-20241014155800632.png]]
+riduciamo a vettori di lunghezza unitaria
 
 Similarità del coseno = prodotto interno normalizzato.
 
 
+# aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+# registrazione 2 
 
 
-**Prossimità dello spazio vettoriale**
+[[1.2]]
 
+---
+
+
+
+---
 Quanto sono simili i romanzi:
 
-SaS: Ragione e Sentimento
-PaP: Orgoglio e Pregiudizio, e
-WH: Cime Tempestose?
+* SaS: Ragione e Sentimento
+* PaP: Orgoglio e Pregiudizio
+* WH: Cime Tempestose?
 
 
 
-**Prossimità dello spazio vettoriale**
+| term      | Sas  | PaP  | **WH** |
+| --------- | ---- | ---- | ------ |
+| affection | 3.06 | 2.76 | 2.30   |
+| jealous   | 2.00 | 1.85 | 2.04   |
+| gossip    | 1.30 | 0    | 1.78   |
+| wuthering | 0    | 2.58 | 2.58   |
 
-Quanto sono simili i romanzi:
-
-SaS: Ragione e Sentimento
-PaP: Orgoglio e Pregiudizio, e
-WH: Cime Tempestose?
-
-dot(SaS,PaP) ≈ 12.1
-dot(SaS,WH) ≈ 13.4
-dot(PaP,WH) ≈ 10.1
-cos(SaS,PaP) ≈ 0.94
-cos(SaS,WH) ≈ 0.79
-cos(PaP,WH) ≈ 0.69
-
-**Ponderazione di frequenza logaritmica**
-
-Dopo la normalizzazione della lunghezza.
+| term      | Sas   | PaP   | WH    |
+| --------- | ----- | ----- | ----- |
+| affection | 0.789 | 0.832 | 0-524 |
+| jealous   | 0.515 | 0.555 | 0.465 |
+| gossip    | 0,335 | 0     | 0.405 |
+| wuthering | 0     | 0     | 0.588 |
 
 
+| Log frequency weighting<br> |        |
+| --------------------------- | ------ |
+| dot(SaS,PaP)                | ≈ 12.1 |
+| dot(SaS,WH)                 | ≈ 13.4 |
+| dot(PaP,WH)                 | ≈ 10.1 |
 
-## Prossimità dello spazio vettoriale
+
+| After length normalization |        |     |
+| -------------------------- | ------ | --- |
+| cos(SaS,PaP)               | ≈ 0.94 |     |
+| cos(SaS,WH)                | ≈ 0.79 |     |
+| cos(PaP,WH)                | ≈ 0.69 |     |
+
+
+
+
+![[1) Intro-20241014155828682.png]]
+COSINESCORE(q)
+float Scores[Nl O
+float Length[Nl
+for each query term t
+do calculate wt.q and fetch postings list for t
+for each pair(d, tft,d) in postings list
+do Scores[dl+ = Wt.d X Wt,q]w
+Read the array Length
+for each d
+do Scores[dl
+return Top K components of Scores[]
 
 
 ## Varianti di ponderazione Tf-Idf
 
-Andrea Tagarelli
-Università della Calabria
-Ricerca dell'Informazione e
-Elaborazione del Linguaggio Naturale
+![[1) Intro-20241014155855431.png]]
 
+in rosso sono le soluzioni di default in alcuni sistemi di retrival
+sulle term frequency, è interessante la versione augmented, la troviamo in un conteso puramente di retrival e non di mining, dove dovevamo conforntare una query espansa con documenti. c'è una sorta di smoothing con quello che poi incontreremo nell information retrival probabilistico.
 ## Varianti di ponderazione Tf-Idf
 
 Molti motori di ricerca consentono ponderazioni diverse per le query rispetto ai documenti.
@@ -1935,13 +2005,13 @@ Uno schema di ponderazione molto standard è: lnc.ltc
 
 ## Varianti di ponderazione Tf-Idf
 
-| Termine | Query | Documento | Prod |
-|---|---|---|---|
-| tf-raw | tf-wt | df | idf | wt | n'lize | tf-raw | tf-wt | wt | n'lize |
-| auto | 0 | 0 | 5000 | 2.3 | 0 | 0 | 1 | 1 | 1 | 0.52 | 0 |
-| best | 1 | 1 | 50000 | 1.3 | 1.3 | 0.34 | 0 | 0 | 0 | 0 | 0 |
-| car | 1 | 1 | 10000 | 2.0 | 2.0 | 0.52 | 1 | 1 | 1 | 0.52 | 0.27 |
-| insurance | 1 | 1 | 1000 | 3.0 | 3.0 | 0.78 | 2 | 1.3 | 1.3 | 0.68 | 0.53 |
+| Termine   | Query | Documento | Prod  |     |        |        |       |     |        |      |      |
+| --------- | ----- | --------- | ----- | --- | ------ | ------ | ----- | --- | ------ | ---- | ---- |
+| tf-raw    | tf-wt | df        | idf   | wt  | n'lize | tf-raw | tf-wt | wt  | n'lize |      |      |
+| auto      | 0     | 0         | 5000  | 2.3 | 0      | 0      | 1     | 1   | 1      | 0.52 | 0    |
+| best      | 1     | 1         | 50000 | 1.3 | 1.3    | 0.34   | 0     | 0   | 0      | 0    | 0    |
+| car       | 1     | 1         | 10000 | 2.0 | 2.0    | 0.52   | 1     | 1   | 1      | 0.52 | 0.27 |
+| insurance | 1     | 1         | 1000  | 3.0 | 3.0    | 0.78   | 2     | 1.3 | 1.3    | 0.68 | 0.53 |
 
 **Documento:** assicurazione auto assicurazione auto
 **Query:** migliore assicurazione auto
