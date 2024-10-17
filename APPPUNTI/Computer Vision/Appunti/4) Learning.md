@@ -605,6 +605,7 @@ Le reti neurali *feed-forward* sono strutturate in livelli. Il primo livello è 
 
 **Calcolo del Gradiente**
 Per ottimizzare i parametri della rete, dobbiamo calcolare il gradiente della funzione di loss rispetto ai parametri. Questo viene fatto attraverso la propagazione all'indietro nel grafo di computazione.
+![[4) Learning-20241015115658489.png]]
 
 
 ## Reti Neurali e Funzioni di Attivazione
