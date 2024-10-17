@@ -25,7 +25,7 @@ import google.generativeai as genai
 genai.configure(api_key=os.getenv("Gemini"))
 
 MAX_WORDS = 500
-MIN_WORDS = 450
+MIN_WORDS = 400
 
 def read_prompt(prompt_file_path):
     """Leggi il prompt dal file."""
@@ -36,37 +36,61 @@ def read_prompt(prompt_file_path):
         print(f"Prompt file non trovato: {prompt_file_path}")
         return None
 
+
 def split_text_into_chunks(text, min_words=MIN_WORDS, max_words=MAX_WORDS):
-    """Dividi il testo in chunk fermandoti al primo punto dopo 450 parole."""
+    """Dividi il testo in chunk rispettando i limiti min_words e max_words."""
     words = text.split()
     chunks = []
     current_chunk = []
     
     for word in words:
         current_chunk.append(word)
-        if len(current_chunk) >= min_words and '.' in word:
-            if len(current_chunk) > max_words:
-                chunks.append(' '.join(current_chunk))
-                current_chunk = []
+        
+        # Controlla se il chunk ha raggiunto il limite massimo di parole
+        if len(current_chunk) >= max_words:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []  # Reset per iniziare un nuovo chunk
+        
+        # Chiude il chunk se ha raggiunto min_words e contiene un punto
+        elif len(current_chunk) >= min_words and '.' in word:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []  # Reset per iniziare un nuovo chunk
     
+    # Aggiungi le parole rimanenti se ci sono
     if current_chunk:
-        chunks.append(' '.join(current_chunk))  # Aggiungi le parole rimanenti come chunk finale
-
+        chunks.append(' '.join(current_chunk))
+    
     return chunks
 
-def call_gemini_api(text_chunk, prompt):
+
+
+
+def call_gemini_api(text_chunk, prompt, retries=3):
     """Chiama l'API Gemini 1.5 Flash con il chunk di testo e il prompt fornito."""
     model = genai.GenerativeModel("gemini-1.5-flash")
 
-    response = model.generate_content(f"{prompt}\n\n{str(text_chunk)}", generation_config=genai.types.GenerationConfig(
-        temperature=0.0,
-    ),)
+    for attempt in range(retries):
+        try:
+            response = model.generate_content(f"{prompt}\n\n{str(text_chunk)}", generation_config=genai.types.GenerationConfig(
+                temperature=0.0,
+            ),)
 
-    if response:
-        return response.text
-    else:
-        print("La chiamata API non ha restituito testo.")
-        return None
+            if response:
+                return response.text
+            else:
+                print("La chiamata API non ha restituito testo.")
+                return None
+        except Exception as e:
+            if "429" in str(e):  # Controlla se è un errore 429
+                wait_time = 2 ** attempt  # Raddoppia il tempo di attesa
+                print(f"Quota API superata. Aspetto {wait_time} secondi prima di riprovare...")
+                time.sleep(wait_time)  # Aspetta prima di riprovare
+            else:
+                print(f"Errore durante la chiamata API: {e}")
+                return None
+
+
+
 
 def process_text_file(file_path, prompt, output_folder):
     """Processa un file di testo, dividendolo in chunk e inviandoli all'API."""
@@ -139,3 +163,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
