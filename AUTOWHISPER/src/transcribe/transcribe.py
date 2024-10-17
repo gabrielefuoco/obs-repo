@@ -33,8 +33,8 @@ def split_audio(file_path, max_size_mb=25):
     duration_ms = len(audio)
 
     tmp_folder = create_tmp_folder()
-    num_chunks = math.ceil(file_size / (max_size_mb * 1024 * 1024))
-    chunk_duration_ms = math.ceil(duration_ms / num_chunks)
+    num_chunks = math.ceil(file_size / (max_size_mb * 1024 * 1024))+1
+    chunk_duration_ms = math.ceil(duration_ms / num_chunks) 
     
     chunks = []
     for i in range(num_chunks):
