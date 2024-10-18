@@ -17,7 +17,9 @@ except ImportError as e:
 # Configura l'API Groq
 client = Groq(api_key=os.getenv("Groq"))
 
-MAX_CHUNK_SIZE = 25 * 1024 * 1024  # 25 MB in bytes
+maxSize=25
+
+MAX_CHUNK_SIZE = maxSize * 1024 * 1024  # 25 MB in bytes
 
 
 def create_tmp_folder():
@@ -27,7 +29,7 @@ def create_tmp_folder():
     return tmp_folder
 
 
-def split_audio(file_path, max_size_mb=25):
+def split_audio(file_path, max_size_mb=maxSize):
     audio = AudioSegment.from_file(file_path)
     file_size = os.path.getsize(file_path)
     duration_ms = len(audio)
@@ -94,9 +96,9 @@ def process_audio_file(audio_file_path, output_folder):
         print(f"File {audio_file_path} is larger than 25 MB. Splitting into chunks...")
         chunks = split_audio(audio_file_path)
 
-        # Uso di ThreadPoolExecutor per trascrivere in parallelo
+        # Trascrizione in parallelo
         transcriptions = []
-        with ThreadPoolExecutor(max_workers=4) as executor:  # Puoi regolare max_workers in base al carico
+        with ThreadPoolExecutor(max_workers=4) as executor:  
             futures = [executor.submit(transcribe_audio, chunk, i) for i, chunk in enumerate(chunks)]
             
             for future in as_completed(futures):
