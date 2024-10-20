@@ -1,4 +1,4 @@
-Formatta la trascrizione di una lezione universitaria di Computer Vision fornita in input seguendo dettagliatamente le seguenti istruzioni:
+Formatta il testo fornito in input seguendo dettagliatamente le seguenti istruzioni:
 
 **Istruzioni per la formattazione:**
 - **Organizzazione e Formato:** Utilizza il formato Markdown per organizzare il testo in paragrafi chiari e schematizzati, assicurandoti che tutti i concetti rilevanti siano coperti senza aggiungere contenuti superflui.

@@ -53,14 +53,14 @@ def split_audio(file_path, max_size_mb=maxSize):
     return chunks
 
 
-def transcribe_audio(audio_file_path, chunk_index):
+def transcribe_audio(audio_file_path, chunk_index,lesson_topic):
     """Trascrive un singolo file audio e ritorna l'indice e la trascrizione."""
     try:
         with open(audio_file_path, "rb") as file:
             transcription = client.audio.transcriptions.create(
                 file=(os.path.basename(audio_file_path), file.read()),
                 model="whisper-large-v3-turbo",
-                prompt="""Questa è la registrazione di una lezione universitaria di Computer Vision. """,
+                prompt="""Questa è la registrazione di una lezione universitaria di  {lesson_topic}. """,
                 response_format="text",
                 language="it",
             )
@@ -79,7 +79,7 @@ def save_transcription_to_file(transcriptions, output_file):
                 f.write(transcription + "\n\n")
 
 
-def process_audio_file(audio_file_path, output_folder):
+def process_audio_file(audio_file_path, output_folder,lesson_topic):
     file_size = os.path.getsize(audio_file_path)
     base_name = os.path.splitext(os.path.basename(audio_file_path))[0]
     output_file = os.path.join(output_folder, f"{base_name}-transcripted.txt")
@@ -89,7 +89,7 @@ def process_audio_file(audio_file_path, output_folder):
 
     # Se il file è più piccolo del massimo chunk size, trascrivi direttamente
     if file_size <= MAX_CHUNK_SIZE:
-        transcription = transcribe_audio(audio_file_path, 0)
+        transcription = transcribe_audio(audio_file_path, 0,lesson_topic=lesson_topic)
         if transcription[1]:  # transcription is a tuple (index, result)
             save_transcription_to_file([transcription], output_file)
     else:
@@ -116,12 +116,13 @@ def main():
     parser = argparse.ArgumentParser(description="Processa file audio e salva trascrizioni.")
     parser.add_argument('input_folder', type=str, help='Cartella di partenza con i file audio')
     parser.add_argument('output_folder', type=str, help='Cartella di destinazione per le trascrizioni')
+    parser.add_argument('lesson_topic', type=str, help="L'argomento della lezione universitaria")
 
     args = parser.parse_args()
 
     input_folder = args.input_folder
     output_folder = args.output_folder
-
+    lesson_topic = args.lesson_topic
     if not os.path.isdir(input_folder):
         print(f"Errore: la cartella di partenza {input_folder} non esiste.")
         return
@@ -140,7 +141,7 @@ def main():
     for filename in audio_files:
         audio_file_path = os.path.join(input_folder, filename)
         print(f"Processing {filename}...")
-        process_audio_file(audio_file_path, output_folder)
+        process_audio_file(audio_file_path, output_folder,lesson_topic=lesson_topic)
         print(f"Transcription for {filename} saved to {output_folder}/{filename[:-4]}-transcripted.txt")
 
     print("Finished processing all audio files.")

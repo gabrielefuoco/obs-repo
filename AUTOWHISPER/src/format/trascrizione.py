@@ -5,7 +5,7 @@ import re
 import argparse
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='api-keys.env')  
+load_dotenv(dotenv_path='api-keys.env')
 
 # Funzione per controllare e installare pacchetti mancanti
 def check_and_install_package(package):
@@ -27,15 +27,16 @@ genai.configure(api_key=os.getenv("Gemini"))
 MAX_WORDS = 2200
 MIN_WORDS = 2000
 
-def read_prompt(prompt_file_path):
-    """Leggi il prompt dal file."""
+def read_prompt(prompt_file_path, lesson_topic):
+    """Leggi il prompt dal file e aggiungi l'argomento della lezione."""
     try:
         with open(prompt_file_path, "r", encoding="utf-8") as f:
-            return f.read().strip()
+            base_prompt = f.read().strip()
+            # Aggiungi l'argomento della lezione
+            return f"L'argomento è una lezione universitaria di {lesson_topic}.\n\n{base_prompt}"
     except FileNotFoundError:
         print(f"Prompt file non trovato: {prompt_file_path}")
         return None
-
 
 def split_text_into_chunks(text, min_words=MIN_WORDS, max_words=MAX_WORDS):
     """Dividi il testo in chunk rispettando i limiti min_words e max_words."""
@@ -62,7 +63,6 @@ def split_text_into_chunks(text, min_words=MIN_WORDS, max_words=MAX_WORDS):
     
     return chunks
 
-
 def call_gemini_api(text_chunk, prompt, retries=3):
     """Chiama l'API Gemini 1.5 Flash con il chunk di testo e il prompt fornito."""
     model = genai.GenerativeModel("gemini-1.5-pro")
@@ -86,7 +86,6 @@ def call_gemini_api(text_chunk, prompt, retries=3):
             else:
                 print(f"Errore durante la chiamata API: {e}")
                 return None
-
 
 def process_text_file(file_path, prompt, output_folder):
     """Processa un file di testo, dividendolo in chunk e inviandoli all'API."""
@@ -122,13 +121,13 @@ def process_text_file(file_path, prompt, output_folder):
     os.remove(file_path)
     return True
 
-
 def main():
     # Configura argparse per leggere i parametri da linea di comando
     parser = argparse.ArgumentParser(description="Processa file di testo e salva il risultato.")
     parser.add_argument('input_folder', type=str, help='Cartella sorgente con i file di testo')
     parser.add_argument('output_folder', type=str, help='Cartella di destinazione per i file elaborati')
     parser.add_argument('prompt_file', type=str, help='Percorso del file contenente il prompt')
+    parser.add_argument('lesson_topic', type=str, help="L'argomento della lezione universitaria")
 
     # Parse degli argomenti
     args = parser.parse_args()
@@ -136,6 +135,7 @@ def main():
     input_folder = args.input_folder
     output_folder = args.output_folder
     prompt_file_path = args.prompt_file
+    lesson_topic = args.lesson_topic
 
     # Verifica se le cartelle esistono
     if not os.path.isdir(input_folder):
@@ -146,7 +146,7 @@ def main():
         return
 
     # Leggi il prompt dal file specificato
-    prompt = read_prompt(prompt_file_path)
+    prompt = read_prompt(prompt_file_path, lesson_topic)
     
     if not prompt:
         print("Prompt mancante. Esco.")

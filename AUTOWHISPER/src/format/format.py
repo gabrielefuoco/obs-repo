@@ -29,16 +29,15 @@ MIN_WORDS = 400
 MAX_WORDS_2 = 500
 
 
-def read_prompt(prompt_file_path):
-    """Leggi il prompt dal file."""
+def read_prompt(prompt_file_path, subject):
+    """Leggi il prompt dal file e aggiungi l'argomento della lezione universitaria."""
     try:
         with open(prompt_file_path, "r", encoding="utf-8") as f:
-            return f.read().strip()
+            prompt_text = f.read().strip()
+            return f"L'argomento è una lezione universitaria di {subject}.\n\n{prompt_text}"
     except FileNotFoundError:
         print(f"Prompt file non trovato: {prompt_file_path}")
         return None
-
-
 
 
 def split_text_into_chunks(text, min_words=MIN_WORDS, max_words=MAX_WORDS):
@@ -102,8 +101,6 @@ def call_gemini_api(text_chunk, prompt, retries=3):
                 return None
 
 
-
-
 def process_text_file(file_path, prompt, output_folder):
     """Processa un file di testo, dividendolo in chunk e inviandoli all'API."""
     with open(file_path, "r", encoding="utf-8") as f:
@@ -132,12 +129,14 @@ def process_text_file(file_path, prompt, output_folder):
         else:
             print(f"Failed to process chunk {i}")
 
+
 def main():
     # Configura argparse per leggere i parametri da linea di comando
     parser = argparse.ArgumentParser(description="Processa file di testo e salva il risultato.")
     parser.add_argument('input_folder', type=str, help='Cartella sorgente con i file di testo')
     parser.add_argument('output_folder', type=str, help='Cartella di destinazione per i file elaborati')
     parser.add_argument('prompt_file', type=str, help='Percorso del file contenente il prompt')
+    parser.add_argument('subject', type=str, help='Argomento della lezione universitaria')
 
     # Parse degli argomenti
     args = parser.parse_args()
@@ -145,6 +144,7 @@ def main():
     input_folder = args.input_folder
     output_folder = args.output_folder
     prompt_file_path = args.prompt_file
+    subject = args.subject
 
     # Verifica se le cartelle esistono
     if not os.path.isdir(input_folder):
@@ -155,7 +155,7 @@ def main():
         return
 
     # Leggi il prompt dal file specificato
-    prompt = read_prompt(prompt_file_path)
+    prompt = read_prompt(prompt_file_path, subject)
     
     if not prompt:
         print("Prompt mancante. Esco.")
@@ -173,6 +173,6 @@ def main():
         file_path = os.path.join(input_folder, txt_file)
         process_text_file(file_path, prompt, output_folder)
 
+
 if __name__ == "__main__":
     main()
-
