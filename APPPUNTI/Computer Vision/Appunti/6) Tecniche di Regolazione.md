@@ -35,17 +35,17 @@ dove:
 * Esempi di queste strutture includono le **reti ricorrenti (RNN)** e le **reti convoluzionali ricorrenti (RCNN)**.
 
 
-## Tecniche per la Regolazione delle Reti Neurali
+# Tecniche per la Regolazione delle Reti Neurali
 
 Uno dei problemi che si possono incontrare nelle architetture di rete che gestiscono sequenze, come le reti ricorrenti, è l'**esplosione** del gradiente. L'esplosione del gradiente è il contrario dell'**annullamento**: nell'annullamento i valori dei pesi della rete tendono a zero, mentre nell'esplosione i valori dei pesi aumentano a dismisura.
 
-### Clipping
+## Clipping
 
 Il **clipping** è una strategia che nasce per mitigare il problema dell'esplosione, ma che si rivela utile anche come metodo di **regolarizzazione**. 
 
 Il clipping si basa sull'idea di "tagliare" i valori dei pesi che superano una certa soglia. In pratica, se un valore di peso supera la soglia, viene "tagliato" e riportato al valore massimo o minimo consentito.
 
-### Dropout
+## Dropout
 ![[1-processed-20241020171249127.png|476]]
 Un'altra strategia per gestire le reti neurali e ridurre l'overfitting è il **dropout**. Questa tecnica, proposta da Hinton, consiste nell'annullare in modo casuale i pesi di alcuni neuroni durante la fase di training.
 
@@ -174,7 +174,7 @@ La derivabilità degli indici nei vettori è fondamentale perché permette di ap
 
 La derivabilità della somma degli indici apre la possibilità di **apprendere direttamente i filtri** durante il processo di addestramento. Questo è un passo importante perché permette di **ottimizzare la rappresentazione dell'immagine** in base al compito specifico.
 
-**Condivisione dei Pesi e Kernel Multipli**
+## Condivisione dei Pesi e Kernel Multipli
 ![[1-processed-20241020173436878.png|538]]
 Un'ulteriore ottimizzazione si ottiene condividendo i pesi su più kernel. Questo consente di **ridurre il numero di parametri** necessari per l'addestramento. Inoltre, non c'è bisogno di limitarsi a un solo kernel. È possibile utilizzare **più kernel** con diverse caratteristiche, aumentando la capacità di estrarre informazioni dall'immagine.
 
@@ -289,7 +289,7 @@ La formula per la dimensione dell'output può essere interpretata geometricament
 
 L'output di una convoluzione è una mappa di attivazione, che rappresenta la risposta del kernel all'immagine di input. Se utilizziamo più kernel, otterremo una struttura di mappe di attivazione, ciascuna corrispondente a un kernel diverso.
 
-### Reti Neurali a Livelli
+## Reti Neurali a Livelli
 
 Le immagini, in Computer Vision, sono rappresentate come tensori. Un'immagine in scala di grigi è un tensore con un canale, altezza e larghezza. Un'immagine a colori ha tre canali (rosso, verde, blu), altezza e larghezza.
 
@@ -309,7 +309,7 @@ L'equazione fondamentale che descrive l'attivazione di un livello, ovvero il pro
 * **Tensori di pesi:** Ogni livello ha il proprio tensore di pesi, non una singola matrice.
 * **Trasformazione:** L'applicazione del tensore di pesi trasforma l'immagine di input, modificando il numero di canali e la dimensione.
 
-## Convoluzione in Reti Neurali Convoluzionali
+## Dimensione di un tensore
 
 La dimensione di un tensore di output in una rete neurale convoluzionale è definita da due parametri:
 
