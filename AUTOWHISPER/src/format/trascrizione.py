@@ -24,10 +24,8 @@ import google.generativeai as genai
 # Configurazione dell'API utilizzando la chiave API impostata come variabile d'ambiente
 genai.configure(api_key=os.getenv("Gemini"))
 
-MAX_WORDS = 750
-MIN_WORDS = 400
-MAX_WORDS_2 = 500
-
+MAX_WORDS = 2200
+MIN_WORDS = 2000
 
 def read_prompt(prompt_file_path):
     """Leggi il prompt dal file."""
@@ -39,47 +37,35 @@ def read_prompt(prompt_file_path):
         return None
 
 
-
-
 def split_text_into_chunks(text, min_words=MIN_WORDS, max_words=MAX_WORDS):
-    """Dividi il testo in chunk rispettando i nuovi criteri."""
+    """Dividi il testo in chunk rispettando i limiti min_words e max_words."""
     words = text.split()
     chunks = []
+    current_chunk = []
     
-    while words:
-        current_chunk = words[:max_words]
-        split_found = False
+    for word in words:
+        current_chunk.append(word)
         
-        # Cerca una newline o # tra min_words e max_words
-        for i in range(min_words - 1, len(current_chunk)):
-            if current_chunk[i] == '\n' or current_chunk[i].startswith('#'):
-                chunks.append(' '.join(current_chunk[:i+1]))
-                words = words[i+1:]
-                split_found = True
-                break
+        # Controlla se il chunk ha raggiunto il limite massimo di parole
+        if len(current_chunk) >= max_words:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []  # Reset per iniziare un nuovo chunk
         
-        if not split_found:
-            # Se non troviamo un punto di split naturale, usiamo split_text_no_newLine dall'inizio del chunk corrente
-            chunk_text = ' '.join(current_chunk)
-            result, remaining = split_text_no_newLine(chunk_text)
-            chunks.append(result)
-            words = remaining.split() + words[len(current_chunk):]
+        # Chiude il chunk se ha raggiunto min_words e contiene un punto
+        elif len(current_chunk) >= min_words and ('.' in word): 
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []  # Reset per iniziare un nuovo chunk
+    
+    # Aggiungi le parole rimanenti se ci sono
+    if current_chunk:
+        chunks.append(' '.join(current_chunk))
     
     return chunks
 
-def split_text_no_newLine(text, min_words=MIN_WORDS, max_words=MAX_WORDS_2):
-    """Dividi il testo in chunk rispettando i limiti min_words e max_words."""
-    words = text.split()
-    for i in range(min_words, min(len(words), max_words)):
-        if '.' in words[i]:
-            return ' '.join(words[:i+1]), ' '.join(words[i+1:])
-    return ' '.join(words[:max_words]), ' '.join(words[max_words:])  # Se non troviamo un punto, dividiamo al max_words
-
-    
 
 def call_gemini_api(text_chunk, prompt, retries=3):
     """Chiama l'API Gemini 1.5 Flash con il chunk di testo e il prompt fornito."""
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-1.5-pro")
 
     for attempt in range(retries):
         try:
@@ -102,8 +88,6 @@ def call_gemini_api(text_chunk, prompt, retries=3):
                 return None
 
 
-
-
 def process_text_file(file_path, prompt, output_folder):
     """Processa un file di testo, dividendolo in chunk e inviandoli all'API."""
     with open(file_path, "r", encoding="utf-8") as f:
@@ -114,7 +98,7 @@ def process_text_file(file_path, prompt, output_folder):
 
     # Prepara il file di output
     base_name = os.path.splitext(os.path.basename(file_path))[0]
-    output_file_path = os.path.join(output_folder, f"{base_name}-processed.md")
+    output_file_path = os.path.join(output_folder, f"{base_name}-processed.txt")
     
     # Cancella il file di output se esiste
     with open(output_file_path, "w", encoding="utf-8") as f:
@@ -131,6 +115,13 @@ def process_text_file(file_path, prompt, output_folder):
                 f.write(response + "\n\n")  # Aggiunge il risultato al file di output con due new line
         else:
             print(f"Failed to process chunk {i}")
+            return False  # Se un chunk fallisce, non procedere oltre
+    
+    # Rimuove il file originale solo se il processo è andato a buon fine
+    print(f"Process completed successfully. Removing original file: {file_path}")
+    os.remove(file_path)
+    return True
+
 
 def main():
     # Configura argparse per leggere i parametri da linea di comando
@@ -171,8 +162,11 @@ def main():
     # Processa ogni file di testo
     for txt_file in txt_files:
         file_path = os.path.join(input_folder, txt_file)
-        process_text_file(file_path, prompt, output_folder)
+        success = process_text_file(file_path, prompt, output_folder)
+        if success:
+            print(f"File {file_path} processato e rimosso con successo.")
+        else:
+            print(f"Processo fallito per il file {file_path}. Il file non sarà eliminato.")
 
 if __name__ == "__main__":
     main()
-

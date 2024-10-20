@@ -8,9 +8,7 @@ Se i dati sono linearmente separabili, l'obiettivo è trovare un iperpiano che l
 
 Il margine è la minima distanza tra l'iperpiano e uno dei punti del training set.
 
-#### Immagine SVM
-
-![Immagine SVM](immagine_svm.png)
+![[7) Support Vector Machines-20241018113902734.png|338]]
 
 La distanza tra un punto $\vec{x}$ e l'iperpiano definito da $(\vec{w}, b)$ è data dalla seguente formula:
 
@@ -30,7 +28,12 @@ dove $y_i$ è l'etichetta del punto $\vec{x_i}$.
 
 ## Hard SVM
 
-L'obiettivo dell'Hard SVM è trovare l'iperpiano che massimizza il margine. Questo si traduce nel seguente problema di ottimizzazione:
+L'obiettivo dell'Hard SVM è trovare l'iperpiano che massimizza il margine, poichè un margine più ampio rende l'iperpiano separatore più robusto. 
+Il training set è un campione casuale, quindi possiamo immaginare che i dati che non abbiamo visto possano essere approssimati perturbando il dominio dei dati. 
+In questo contesto, un ampio margine garantisce una maggiore robustezza rispetto a queste perturbazioni. 
+
+
+Questo si traduce nel seguente problema di ottimizzazione:
 
 $$(\vec{w}^*,b^*)=\arg \max_{(\vec{w},b)\in R^{d+1}}\text{Margin}_{S}((\vec{w},b))$$
 
@@ -130,5 +133,87 @@ La Soft SVM è l'algoritmo che cercavamo per il learning dei semispazi. Tuttavia
 $\rho=\| \nabla_{\vec{w}}l_{hinge}(\vec{w,(\vec{x},y)})\|= \| \vec{x_{i}}   \|$
 
 $\rho =\max_{1\leq i\leq m} \|\vec{x_{i}}\|$
+
+## SGD + RLM + SVM
+
+$\Theta^{(1)}=0$
+$\text{for t=1 to T do}$
+	$\vec{w}^{(t)}=\frac{1}{\delta t}\theta^{(t)}$
+	 $\text{seleziona casualmente }(\vec{x_{i}},y_{i})\  in \ S$
+	$\text{if }y_{i}<\vec{w}^{(t)},\vec{x}> \ <1$ 
+		$\vec{\theta}^{(t+1)}=\vec{\theta}^{(t)}+y_{i}\vec{x_{i}}$
+ $\text{return }\vec{w}^{(T+1)}$
+
+
+### Teorema di Rappresentazione
+
+Dato un problema di ottimizzazione della forma:
+
+$$
+\vec{w}^* =\arg\min_{\vec{w}\in R^d} f(<\vec{w},\vec{x}_{1}>,<\vec{w},\vec{x}_{2}>,\dots<\vec{w},\vec{x}_{m}>)+g(\|\vec{w}\|)
+$$
+
+con $f$ e $g$ funzioni reali, allora la soluzione ottima $\vec{w}^*$ può essere espressa come:
+
+$\vec{w}^*=\sum \alpha_{i} \vec{x_{i}}$
+
+Nel caso del SVM, vale la proprietà che i coefficienti $\alpha$, quelli non nulli, sono quelli associati ai punti $x_{i}$ che soddisfano i vincoli per uguaglianza, ovvero quelli sul margine o oltre il margine. La soluzione dipende solo da alcuni punti, che proprio per questa proprietà vengono chiamati **Vettori Di Supporto**.
+
+Questa proprietà può essere sfruttata per estendere l'applicabilità di questo algoritmo ai casi in cui i separatori lineari si comportano male.
+
+
+### Formulazione SVM in Termini del Teorema di Rappresentazione
+
+$$\vec{w}^*=\arg\min_{\vec{w\in R^{(d+1)}}} \ \lambda \|\vec{w}\|^2+\frac{1}{m}\max \{ 0,1-y_{i}<\vec{w},\vec{x_{i}} \}$$
+
+Cerchiamo il vettore dei pesi $\vec{\alpha}$:
+
+$\vec{\alpha}=(\alpha_{1},\alpha_{2},\dots,\alpha_{m})$
+
+$$
+<\vec{w},\vec{x_{i}}> \ = \ <\sum_{j=1}^m  \alpha_{j}\vec{x_{j}},\vec{x_{i}} >\ = \sum \alpha_{j}<\vec{x_{j}},\vec{x_{i}}>
+$$
+
+$\| \vec{w}\|^2= \ <\vec{w},\vec{w} > \ = \ <\sum_{i=1}^m \alpha_{i}\vec{x_{i}},\sum_{j=1}^m \alpha_{j}\vec{x}_{j}>=\sum_{i=1}^m \sum_{j=1}^m<\vec{x_{i}},\vec{x_{j}}>$.
+
+
+## SGD + RLM + SVM + Teorema di Rappresentazione
+
+$\alpha^{(t)} \in R^m \leftrightarrow \vec{w}^{(t)}$
+$\beta^{(t)} \in R^m \leftrightarrow \vec{\theta}^{(t)}$
+
+
+$\beta^{(1)=0}$
+
+$\text{for t=1 to T do}$
+	$\vec{\alpha}^{(t)}=\frac{1}{\delta t}\beta^{(t)}$
+	 $\text{seleziona casualmente }(\vec{x_{i}},y_{i})\  in \ S$
+	 $\text{if }y_{i} \sum_{j=1}^m \alpha_{j}<\vec{x_{j}},\vec{x_{i}}> \ <1$ 
+		$\vec{\beta_{i}}^{(t+1)}=\vec{\beta_{i}}^{(t)}+y_{i}$
+ $\text{return }\vec{w}^{(T+1)}=\sum_{i=1}^m \alpha_{i}\vec{x_{i}}$
+
+Il costo di questo algoritmo è più elevato rispetto ad altri. Tuttavia, permette di estendere l'applicabilità a problemi che sono quasi non linearmente separabili.
+
+Dal punto di vista tecnico, nella formulazione alternativa l'algoritmo accede ai dati solo tramite un prodotto scalare $\alpha_{j}<\vec{x_{j}},\vec{x_{i}}>$.
+
+
+### Caso Base: Dati su Retta Reale
+
+Una soglia è l'equivalente di un iperpiano nel caso unidimensionale. L'idea è quella di alzare la dimensionalità dei dati (Tecnica di embedding in uno spazio ad alta dimensionalità) passando da $R$ a $R^2$.
+
+$\phi(x)=(x,x^2)$, ($x^2$ diventa la nuova y)
+
+Questa tecnica pone alcuni problemi:
+
+1. **Learnability:** in generale non è mai buono aumentare la dimensionalità dei dati. Se aumentiamo il numero di feature ci aspettiamo che la qualità dei dati andrà a calare. 
+   SVM è un problema complex-lip..-bounded
+   $m=\frac{8p^2b^2}{\epsilon^2}$ sample complexity è indipendente dalla dimensione dello spazio
+
+2. **Problema computazionale:**
+   $\vec{x_{i}} \to \vec{x_{i}'=\phi(\vec{x_{i}})}$
+   $\phi:R^d\to R^{d_{2}}, d_{2}\gg d$
+   $<\vec{x}_{i},\vec{x_{j}}> \ \leftrightarrow \ <\phi(\vec{x_{i}}),\phi(\vec{x_{j}})>$
+   il primo termine costa $O(d)$ e il secondo costa $O(d_2)$
+
 
 

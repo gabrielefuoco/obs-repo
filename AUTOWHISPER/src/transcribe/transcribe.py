@@ -44,7 +44,7 @@ def split_audio(file_path, max_size_mb=maxSize):
         end = min((i + 1) * chunk_duration_ms, duration_ms)
         chunk = audio[start:end]
 
-        chunk_path = os.path.join(tmp_folder, f"{os.path.basename(file_path)[:-4]}_chunk_{i}.mp3")
+        chunk_path = os.path.join(tmp_folder, f"{os.path.basename(file_path)[:-4]}_chunk_{i+1}.mp3")
         chunk.export(chunk_path, format="mp3", bitrate="192k")
         chunks.append(chunk_path)
         
@@ -60,7 +60,7 @@ def transcribe_audio(audio_file_path, chunk_index):
             transcription = client.audio.transcriptions.create(
                 file=(os.path.basename(audio_file_path), file.read()),
                 model="whisper-large-v3-turbo",
-                prompt="""Questa è la registrazione di una lezione universitaria. """,
+                prompt="""Questa è la registrazione di una lezione universitaria di Computer Vision. """,
                 response_format="text",
                 language="it",
             )
