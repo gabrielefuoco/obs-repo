@@ -96,13 +96,14 @@ def process_audio_file(audio_file_path, output_folder,lesson_topic):
         print(f"File {audio_file_path} is larger than 25 MB. Splitting into chunks...")
         chunks = split_audio(audio_file_path)
 
-        # Trascrizione in parallelo
-        transcriptions = []
-        with ThreadPoolExecutor(max_workers=4) as executor:  
-            futures = [executor.submit(transcribe_audio, chunk, i) for i, chunk in enumerate(chunks)]
-            
-            for future in as_completed(futures):
-                transcriptions.append(future.result())
+    # Trascrizione in parallelo
+    transcriptions = []
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = [executor.submit(transcribe_audio, chunk, i, lesson_topic) for i, chunk in enumerate(chunks)]
+        
+        for future in as_completed(futures):
+            transcriptions.append(future.result())
+
 
         # Salva le trascrizioni nel file, assicurandosi che siano nell'ordine giusto
         save_transcription_to_file(transcriptions, output_file)

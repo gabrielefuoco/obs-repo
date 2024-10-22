@@ -186,8 +186,29 @@ L'utilizzo di più kernel offre diversi vantaggi:
 * **Addestramento automatico dei filtri:** L'algoritmo di apprendimento automatico determina automaticamente i filtri più efficaci per il compito specifico.
 * **Efficienza:** La condivisione dei pesi e l'utilizzo di più kernel riducono il numero di parametri da addestrare, rendendo il processo più efficiente.
 
-**Relazione tra Input, Output e Convoluzione**
-![[1-processed-20241020173504307.png|447]]
+## Relazione tra Input, Output e Convoluzione
+
+È la formula per calcolare la dimensione dell'output di una convoluzione su un'immagine, tenendo conto di vari parametri:
+### Parametri:
+- **Input \(I\)**: Dimensione dell'input (larghezza o altezza).
+- **Padding \(P\)**: Quantità di padding applicata sui bordi dell'immagine.
+- **Kernel size \(K\)**: Dimensione del kernel (finestra di convoluzione).
+- **Stride \(S\)**: Passo con cui si muove il kernel sull'immagine.
+- **Dilation \(D\)**: Fattore di dilatazione, che espande lo spazio tra gli elementi del kernel.
+
+### Formula per la dimensione dell'output:
+
+$$\left\lfloor \frac{I - K - (K - 1)(D - 1) + 2P}{S} \right\rfloor + 1$$
+
+
+### Spiegazione:
+1. **\(I - K\)**: Rimuove la parte dell'immagine coperta dalla dimensione del kernel.
+2. **\((K - 1)(D - 1)\)**: Aggiusta l'area coperta dal kernel in base alla dilatazione.
+3. **\(2P\)**: Aggiunge lo spazio introdotto dal padding, che aumenta la dimensione effettiva dell'input.
+4. **Divisione per \(S\)**: Considera il passo con cui si sposta il kernel sull'immagine, riducendo la dimensione dell'output.
+5. **Somma di 1**: Aggiunge un'unità per includere il primo elemento convoluto.
+
+Il risultato è la dimensione dell'output dopo l'operazione di convoluzione, tenendo conto del padding, della dilatazione e dello stride.
 
 ## Padding
 

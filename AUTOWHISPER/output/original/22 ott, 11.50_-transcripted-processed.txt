@@ -1,0 +1,114 @@
+## Adattamento di Architetture di Rete per la Classificazione di Immagini
+
+In questa lezione, analizzeremo come adattare le architetture di rete per risolvere problemi di classificazione di immagini. Prendiamo come esempio il caso in cui dobbiamo identificare un animale presente in un'immagine. Questo tipo di applicazione può essere risolta tramite un'architettura di rete neurale.
+
+Abbiamo già visto esempi di architetture come LeNet, piuttosto semplice, e GoogLeNet (o Inception), più sofisticata e probabilmente più interessante per noi.
+
+La domanda è: come adatteremmo l'architettura per risolvere questo specifico problema? Qual è la differenza tra l'identificare un solo animale e identificarne diversi nella stessa immagine?
+
+In entrambi i casi, l'output desiderato è un vettore che associa valori a diverse categorie. Ad esempio, se avessimo solo due categorie, "cane" e "gatto", il vettore di output potrebbe essere [1, 0] per un cane e [0, 1] per un gatto.
+
+Ma cosa succede se abbiamo 10 possibili animali? Non possiamo avere 1024 risposte diverse per ogni immagine. Come possiamo quindi risolvere questo problema?
+
+### Soluzione con Rete Fully Connected e Softmax
+
+La soluzione consiste nell'utilizzare una rete neurale con uno strato fully connected e una funzione di attivazione Softmax. Vediamo i passaggi:
+
+1. **Estrazione delle feature:** L'immagine di input viene passata al blocco di estrazione delle feature.
+2. **Linearizzazione:** Le feature estratte vengono linearizzate.
+3. **Strato Fully Connected:** Viene applicato uno strato fully connected alle feature linearizzate.
+4. **Output:** Otteniamo un vettore di output con la stessa dimensione del numero di categorie (ad esempio, 5 categorie: cane, gatto, gorilla, orso, toro).
+
+Ogni elemento del vettore di output rappresenta la probabilità che l'immagine appartenga a quella specifica categoria. La somma di tutte le probabilità deve essere uguale a 1.
+
+### Funzione Softmax e Stabilità Numerica
+
+Per ottenere le probabilità, utilizziamo la funzione Softmax. La formula della Softmax è la seguente:
+
+```
+P(classe i | x) = exp(f(x)_i) / Σ(j=1 a N) exp(f(x)_j)
+```
+
+Dove:
+
+* P(classe i | x) è la probabilità che l'input x appartenga alla classe i.
+* f(x)_i è l'output dello strato fully connected per la classe i.
+* N è il numero di classi.
+
+Tuttavia, la formula della Softmax può portare a problemi di stabilità numerica a causa degli esponenziali. Per evitarli, si utilizza il logaritmo della Softmax (log-softmax).
+
+La formula della log-softmax è:
+
+```
+log(P(classe i | x)) = f(x)_i - log(Σ(j=1 a N) exp(f(x)_j))
+```
+
+Il secondo termine della formula è il logaritmo della somma degli esponenziali (log-sum-exp). Per calcolare il log-sum-exp in modo stabile, si può utilizzare il seguente trucco matematico:
+
+```
+log(Σ(i=1 a N) exp(y_i)) = m + log(Σ(i=1 a N) exp(y_i - m))
+```
+
+Dove m è il valore massimo di y.
+
+### Implementazione in PyTorch
+
+In PyTorch, la funzione log-softmax è già implementata e viene utilizzata per calcolare la perdita durante l'addestramento.
+
+### Considerazioni sul Batch Size
+
+È importante ricordare che le reti neurali elaborano i dati in batch. Quindi, l'input della rete non sarà una singola immagine, ma un batch di immagini. Di conseguenza, la dimensione dell'input dovrà essere modificata per includere la dimensione del batch.
+
+Ad esempio, se il batch size è 64, la dimensione dell'input sarà [64, 1, 28, 28] per immagini in scala di grigio di dimensione 28x28.
+
+### Conclusione
+
+In questa lezione, abbiamo visto come adattare le architetture di rete per risolvere problemi di classificazione di immagini. Abbiamo analizzato l'utilizzo della funzione Softmax e le problematiche di stabilità numerica, introducendo la log-softmax come soluzione. Infine, abbiamo considerato l'importanza del batch size e come influisce sulla dimensione dell'input della rete. 
+
+
+## Lezione Universitaria di Computer Vision: Analisi di un Modello di Classificazione
+
+In questa linea di codice, stiamo appiattendo tutto tranne la prima dimensione. Il risultato finale sarà una matrice con la dimensione del batch come prima componente e 256 come seconda dimensione, ottenuta appiattendo il blocco. Vediamo meglio.
+
+L'immagine ha questa dimensione... ecco, l'errore era banale. Ora funziona. Cosa fa il codice? Prima di tutto, visualizziamo meglio la situazione.
+
+Partiamo con la variabile "x", che rappresenta le feature dell'immagine, e ne analizziamo la forma con "x.shape". Successivamente, modifichiamo "x" con "x.view" e infine definiamo "y" come l'output del modello applicato a "x" ("model.fc(x)").
+
+Cosa stiamo ottenendo? Analizziamo la parte del bacino, in particolare il blocco di un edificio. Cosa estraiamo da questo blocco? Un vettore di dimensione 1x16x4x4. Moltiplicando questi quattro elementi, otteniamo un blocco di 256 elementi. Appiattendo questo blocco, otteniamo una matrice 1x256. Ricordiamo che "1" rappresenta la dimensione del batch. Nel nostro esempio, avendo una sola immagine, l'abbiamo estesa per adattarla al modello.
+
+Ecco un'immagine che illustra il processo: partiamo da un'immagine di dimensione 1x1x28x28, dove la prima dimensione è la dimensione del batch, la seconda i canali, e le ultime due altezza e larghezza. Passando l'immagine al modello, otteniamo un vettore 1x16x4x4, dove 1 rappresenta la dimensione del batch, 16 i canali e 4x4 altezza e larghezza. Appiattiamo questo blocco per ogni elemento del batch, ottenendo una matrice di dimensione "dimensione del batch" x 256. Questa componente viene passata ai layer fully connected, che forniscono la risposta sulla quale calcolare la logica.
+
+Potremmo anche calcolare direttamente la softmax sul risultato, ottenendo le probabilità. Questo processo, svolto passo passo, è codificato nella funzione "forward". La funzione "forward" prende in input un'immagine "x" di dimensioni "dimensione del batch" x "numero di canali" x "altezza" x "larghezza", calcola le feature, le appiattisce e le passa ai layer fully connected, calcolando infine la log-softmax o la softmax.
+
+Il risultato finale, per questa immagine di classe 1, è un vettore di probabilità. La classe più probabile è la settima, con probabilità 0.9. Ovviamente, questo risultato è casuale perché non abbiamo ancora addestrato la rete. L'inizializzazione dei pesi è casuale, quindi questo è solo un controllo per verificare che il processo funzioni correttamente.
+
+Un aspetto fondamentale da considerare è che, indipendentemente dalla correttezza delle predizioni, le probabilità generate sono mutuamente esclusive, con la somma degli elementi nel vettore pari a 1.
+
+Per trasformare questa rete in un modello che fornisca risposte multiple, dovremmo utilizzare una funzione di attivazione diversa dalla softmax, che genera risposte univoche. Un'alternativa sarebbe quella di considerare tutte le possibili combinazioni, ma questo approccio non è efficiente, soprattutto con un numero elevato di classi.
+
+Una soluzione più semplice è trasformare il problema da classificazione mutuamente esclusiva a "n" problemi di classificazione binaria. In pratica, cerchiamo di rispondere a domande del tipo "c'è un cane?", "c'è un gatto?", etc. Questo semplifica il problema perché avremmo sempre lo stesso numero di possibili risposte, ognuna associata ad una funzione logistica che calcola la probabilità.
+
+Per modificare il codice e gestire la classificazione multipla, dovremmo cambiare la funzione di attivazione da softmax a sigmoid. La sigmoid, a differenza della softmax che opera sull'intero vettore, agisce elemento per elemento, restituendo un vettore con la stessa dimensione dell'input, dove ogni elemento rappresenta la probabilità associata.
+
+Ovviamente, cambiando la funzione di attivazione, dovremmo adattare anche la funzione di loss, passando da una cross-entropia su tutte le classi ad una somma di cross-entropie binarie. In questo caso, le etichette reali sarebbero rappresentate da un vettore binario con "1" in corrispondenza degli oggetti presenti nell'immagine.
+
+La lezione importante è che, sia nel caso di classificazione esclusiva che multipla, l'architettura della rete rimane invariata. Ciò che cambia è la funzione di attivazione e la funzione di loss.
+
+La prima parte della rete, quella che estrae le feature, rimane invariata perché il suo obiettivo è estrarre informazioni significative dall'immagine, indipendentemente dal tipo di classificazione. Questa componente cerca di catturare le caratteristiche salienti dell'immagine, eliminando le informazioni irrilevanti.
+
+La seconda parte della rete, quella che si occupa della classificazione, utilizza le informazioni estratte dalla prima parte per generare le predizioni. In sostanza, la prima parte "vede" l'immagine e ne estrae le caratteristiche, mentre la seconda parte "interpreta" queste caratteristiche per classificare l'immagine.
+
+Questa architettura, quindi, è in grado di risolvere sia problemi di classificazione esclusiva che multipla, adattando semplicemente la funzione di attivazione e la funzione di loss. 
+
+
+Non abbiamo ancora terminato di analizzare l'architettura. Se osserviamo, ad esempio, una parte del piccolo dimostratore che abbiamo visto ieri, la situazione appare diversa. In questo caso, infatti, abbiamo bisogno di qualcosa di più. Prendiamoci 5 minuti di pausa e poi iniziamo a discutere di questa situazione.
+
+Scusate, quindi il modo in cui strutturiamo l'output, che alla fine diventa un'operazione automatica, e il modo in cui adattiamo la rete (in particolare la seconda parte della rete), diventa anch'esso un'operazione automatica. Questo aspetto rimane bloccato, ma dobbiamo configurare il nostro campo. Il punto è che ciò che deve essere adattato è l'output. Nel caso della classificazione esclusiva useremo la softmax, mentre nel caso della classificazione multiclasse useremo la logistica.
+
+Potremmo anche adottare approcci diversi. Potremmo, ad esempio, utilizzare una soluzione proposta da un vostro collega, che riprende il concetto di combinazioni. Cosa dovremmo fare in questo caso? Dovremmo modificare la soluzione. Se osserviamo attentamente, dovremmo cambiare questo blocco. L'ultimo blocco non dovrebbe essere più 84x10, ma 84x2^10, che rappresenta le 2^10 possibili risposte.
+
+Questa soluzione, seppur funzionante, non è auspicabile perché risulta complessa. Costruire un layer di 84x1024 è impegnativo in termini di risorse. Tuttavia, è una soluzione fattibile per adattare il nostro problema. Cosa abbiamo fatto quindi? Abbiamo mantenuto invariata la parte iniziale della rete, che rimane praticamente identica. L'unica modifica riguarda la parte finale. Abbiamo cambiato l'ultimo layer, abbandonando la softmax a favore dell'alternativa che vi ho proposto, molto più efficiente. Possiamo lasciare invariata anche questa parte e modificarla solo se strettamente necessario.
+
+Bene, procediamo in questo modo. 
+
+
