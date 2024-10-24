@@ -27,7 +27,7 @@ La posizione del filtro è determinata dallo stride. Un filtro con stride 2 si s
 
 La formula per calcolare la dimensione dell'output del pooling è:
 
-$O=\left[ \frac{{I-K+2P}}{S} \right]+1$
+$$O=\left[ \frac{{I-K+2P}}{S} \right]+1$$
 
 Dove:
 

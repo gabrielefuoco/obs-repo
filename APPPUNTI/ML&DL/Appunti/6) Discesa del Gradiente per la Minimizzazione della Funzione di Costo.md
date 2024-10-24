@@ -1,4 +1,3 @@
-
 La minimizzazione dell'errore in machine learning si traduce in un problema di ottimizzazione. Questo tipo di problema è ben studiato e esistono algoritmi efficienti per risolverlo. L'obiettivo è trovare il minimo di una funzione convessa.
 $$\mathrm{ERM}_{H}(S) = \arg \min_{\substack{ \vec{\omega} \in H}} L_s(\vec{\omega})$$
 ### L'Algoritmo della Discesa del Gradiente
@@ -19,28 +18,31 @@ Un algoritmo efficiente per la minimizzazione di funzioni convesse è la **disce
 
 4. **Iterazione:** Si ripetono i passaggi 2 e 3 fino a raggiungere un punto di minimo o un criterio di arresto.
 
-$$\begin{aligned}
-  \vec{w} = \vec{0} \\
-\text{ for } t = 1 \text{ to } T \text{ do } \\
-  \vec{v}_t = \nabla_{\vec{w}} f(\vec{w}^{(t)}) \\
-\quad \vec{w}^{(t+1)} = \vec{w}^{(t)} - \eta \vec{v}_t \\
-\end{aligned}$$
+$$\begin{align*}
+&  \vec{w} = \vec{0} \\
+&\text{ for } t = 1 \text{ to } T \text{ do } \\
+&  \vec{v}_t = \nabla_{\vec{w}} f(\vec{w}^{(t)}) \\
+&\quad \vec{w}^{(t+1)} = \vec{w}^{(t)} - \eta \vec{v}_t \\
+&\operatorname{\mathrm{Return}} W^{(T+1)}
+\end{align*}$$
+
 $$\begin{equation}
 \displaystyle \begin{aligned}
-& \operatorname{\mathrm{Return}} W^{(T+1)} \\
+
 & \operatorname{In alternativa possiamo restituire:} \\
 \\
 & \qquad\left\{
 \begin{aligned}
 
 & \quad \quad\begin{aligned}
- & \operatorname{Return} \operatorname{\arg\min_{1\leq t\leq T+1} f(\vec{w}^ {(A)})}\\
- & \text{oppure, } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)}
+ & \operatorname{1) Return} \operatorname{\arg\min_{1\leq t\leq T+1} f(\vec{w}^ {(A)})}\\
+ & \text{2)  } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)} \\
+ & \operatorname{3)  } \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
 \end{aligned}
 \end{aligned}
 \right. \\
 & \quad \begin{aligned}
-& \operatorname{oppure} \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
+
 \end{aligned}
 \end{aligned}
 \qquad

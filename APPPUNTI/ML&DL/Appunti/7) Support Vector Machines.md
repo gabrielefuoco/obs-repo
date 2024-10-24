@@ -130,9 +130,9 @@ Questa formulazione è un esempio di Regularized Linear Model (RLM). $L_S^{hinge
 
 La Soft SVM è l'algoritmo che cercavamo per il learning dei semispazi. Tuttavia, abbiamo un errore di generalizzazione perché stiamo usando la funzione surrogata. La funzione hinge è Lipschitz-bounded, con Lipschitzness $\rho$:
 
-$\rho=\| \nabla_{\vec{w}}l_{hinge}(\vec{w,(\vec{x},y)})\|= \| \vec{x_{i}}   \|$
+$$\rho=\| \nabla_{\vec{w}}l_{hinge}(\vec{w,(\vec{x},y)})\|= \| \vec{x_{i}}   \|$$
 
-$\rho =\max_{1\leq i\leq m} \|\vec{x_{i}}\|$
+$$\rho =\max_{1\leq i\leq m} \|\vec{x_{i}}\|$$
 
 ## SGD + RLM + SVM
 
@@ -155,7 +155,7 @@ $$
 
 con $f$ e $g$ funzioni reali, allora la soluzione ottima $\vec{w}^*$ può essere espressa come:
 
-$\vec{w}^*=\sum \alpha_{i} \vec{x_{i}}$
+$$\vec{w}^*=\sum \alpha_{i} \vec{x_{i}}$$
 
 Nel caso del SVM, vale la proprietà che i coefficienti $\alpha$, quelli non nulli, sono quelli associati ai punti $x_{i}$ che soddisfano i vincoli per uguaglianza, ovvero quelli sul margine o oltre il margine. La soluzione dipende solo da alcuni punti, che proprio per questa proprietà vengono chiamati **Vettori Di Supporto**.
 
@@ -174,7 +174,7 @@ $$
 <\vec{w},\vec{x_{i}}> \ = \ <\sum_{j=1}^m  \alpha_{j}\vec{x_{j}},\vec{x_{i}} >\ = \sum \alpha_{j}<\vec{x_{j}},\vec{x_{i}}>
 $$
 
-$\| \vec{w}\|^2= \ <\vec{w},\vec{w} > \ = \ <\sum_{i=1}^m \alpha_{i}\vec{x_{i}},\sum_{j=1}^m \alpha_{j}\vec{x}_{j}>=\sum_{i=1}^m \sum_{j=1}^m<\vec{x_{i}},\vec{x_{j}}>$.
+$$\| \vec{w}\|^2= \ <\vec{w},\vec{w} > \ = \ <\sum_{i=1}^m \alpha_{i}\vec{x_{i}},\sum_{j=1}^m \alpha_{j}\vec{x}_{j}>=\sum_{i=1}^m \sum_{j=1}^m<\vec{x_{i}},\vec{x_{j}}>$$.
 
 
 ## SGD + RLM + SVM + Teorema di Rappresentazione
