@@ -215,5 +215,158 @@ Questa tecnica pone alcuni problemi:
    $<\vec{x}_{i},\vec{x_{j}}> \ \leftrightarrow \ <\phi(\vec{x_{i}}),\phi(\vec{x_{j}})>$
    il primo termine costa $O(d)$ e il secondo costa $O(d_2)$
 
+## Introduzione alle Funzioni Kernel
+
+In Machine Learning, l'aumento della dimensionalità è una tecnica che migliora la capacità dei modelli di apprendere relazioni complesse nei dati. Questo approccio è particolarmente utile per algoritmi come le Support Vector Machine (SVM).
+
+Le SVM sono classificate come problemi "sparse-bounded", il cui livello di complessità non dipende dalla dimensione dello spazio delle features, ma da parametri intrinseci come Rho e B. Questo permette di aumentare la dimensionalità senza incorrere in problemi di complessità.
+
+Tuttavia, l'aumento della dimensionalità comporta un aumento esponenziale delle dimensioni dello spazio dei dati, con conseguente aumento del costo computazionale.
+
+Per sfruttare i vantaggi di una maggiore dimensionalità senza pagarne il prezzo computazionale, si utilizza il "kernel trick". Questo strumento permette di applicare trasformazioni di dimensionalità senza dover calcolare esplicitamente le coordinate dei dati nello spazio trasformato. 
+
+In questo contesto, consideriamo:
+
+* **Vettori di input:** $\vec{x_{i}}$ nello spazio di input $\mathbb{R}^{d_{1}}$.
+* **Trasformazione non lineare:** $\phi(\vec{x_i})$ che mappa i vettori di input in uno spazio di output ad alta dimensione $\mathbb{R}^{d_{2}}$.
+* **Relazione tra dimensioni:** $d_{1} \ll d_{2}$, ovvero la dimensione dello spazio di input è molto minore della dimensione dello spazio di output.
+
+**Prodotto scalare:**
+
+* Nello spazio di input: $<\vec{x_i},\vec{x_{j}}>$.
+* Nello spazio di output: $<\phi (\vec{x_i}),\phi(\vec{x_{j})}>$.
+
+**Costo computazionale:**
+
+* $O(d_{1})$: indica un costo computazionale proporzionale alla dimensione dello spazio di input.
+* $O(d_{2})$: indica un costo computazionale proporzionale alla dimensione dello spazio di output.
+
+## Funzioni Kernel $K_{\phi}$
+Una funzione kernel è una funzione che, dati due punti nello spazio di input, restituisce direttamente il valore del loro prodotto scalare nello spazio trasformato, senza dover effettivamente calcolare le trasformazioni. Formalmente:
+
+Data una trasformazione $\phi: \mathbb{R}^{d_{1}} \to \mathbb{R}^{d_{2}}, (d_{2} \gg d_{1})$, una funzione kernel $K_{\phi}: \mathbb{R}^{d_{1}} \times \mathbb{R}^{d_{1}} \to \mathbb{R}$ è tale che:
+
+$$\forall \vec{x_{1}},\vec{x_{2}} \in \mathbb{R}^{d_{1}}, K_{\phi}(\vec{x_{1}},\vec{x_{2}})\ = \ <\phi (\vec{x_1}),\phi(\vec{x_{2})}>$$
+
+Le funzioni kernel interessanti hanno costo computazionale $O(d_{1})$. 
+Se troviamo una funzione avente questa proprietà, abbiamo risolto il nostro problema.
+
+**Nota:**
+
+* La notazione $<\cdot, \cdot>$ indica il prodotto scalare.
+* La condizione $d_{1} \ll d_{2}$ indica che la dimensione dello spazio di input $d_{1}$ è molto minore della dimensione dello spazio di output $d_{2}$.
+* Il costo computazionale $O(d_{1})$ indica che il tempo necessario per calcolare la funzione kernel è proporzionale alla dimensione dello spazio di input.
+
+## Kernel Polinomiale
+
+Il kernel polinomiale è un esempio di funzione kernel che permette di eseguire una trasformazione non lineare dei dati nello spazio di input, proiettandoli in uno spazio di output ad alta dimensione.
+
+**Definizione:**
+
+Dato un vettore di input $x \in \mathbb{R}$, il prodotto scalare tra il vettore dei pesi $\vec{w}$ e la trasformazione non lineare $\phi(x)$ è definito come:
+
+$<\vec{w},\phi(x)>\  = w_{0}+w_{1}x+w_{2}x^{2}+\dots+w_{n}x^n$
+
+dove il prodotto scalare rappresenta la normale al nostro iperpiano.
+
+**Trasformazione:**
+
+Possiamo riscrivere il prodotto scalare come:
+
+$=\ <w_{0}+w_{1}+\dots+w_{n}>,\ (1,x,x^2,\dots,x^n)>$
+
+Dove $(1,x,x^2,\dots,x^n)= \phi(x)$ è la trasformazione non lineare che mappa il vettore di input $x$ in uno spazio di output ad alta dimensione.
+
+**Forma del Kernel Polinomiale:**
+
+Il kernel polinomiale ha la seguente forma:
+
+$K_{\phi_{n}}(\vec{x_{1}},\vec{x_{2}})=(1+<\vec{x_{1}},\vec{x_{2}}>)^n$
+
+**Costo computazionale:**
+
+Il costo computazionale del kernel polinomiale è $O(d_{1})$, a causa del prodotto scalare tra i vettori di input.
+
+**Esempio:**
+
+Consideriamo il caso $d_1=1, \ n=2$:
+
+$$
+\begin{align*}
+&K_{\phi_{n}}({x_{1}},{x_{2}})=
+\\&(1+x_{1}x_{2})^2=x_{1}^2x_{2}^2+a+2x_{1}x_{2}=
+\\&(1,\sqrt{ 2 }x_{1},x_{1}^2),(1,\sqrt{ 2 }x_{2},x_{2}^2)=\\
+& \ <\phi_{2}(x_{1}),\phi_{2}(x_{2})>
+\end{align*}
+$$
+
+**Caso multidimensionale:**
+
+Per un vettore di input multidimensionale $\vec{x_{1}} = (x_{11}, x_{12})$ e $\vec{x_{2}} = (x_{21}, x_{22})$, il kernel polinomiale diventa:
+
+
+$$\begin{aligned} k_{\phi_{2}}(\vec{x_{1}},\vec{x_{2}})&=(1+<\vec{x_{1}},\vec{x_{2}}>)^n=\\ &=(1+<(x_{11},x_{12}),(x_{21},x_{22})>)^2\\ &=1+x_{11}^2x_{21}^2+x_{12}^2,x_{22}^2+2x_{11}x_{21}+2x_{12}x_{22}+2x_{11}x_{12}x_{21}x_{22}\\ &=<(1,\sqrt{ 2 }x_{11},\sqrt{ 2 }x_{12},\sqrt{ 2 }x_{11}x_{12},x_{11}^2,x_{12}^2),(1,\sqrt{ 2 }x_{21},\sqrt{ 2 }x_{22},\sqrt{ 2 }x_{21}x_{22},x_{21}^2,x_{22}^2)>\\ &=<\phi_{2}(\vec{x_{1}}),\phi_{2}(\vec{x_{2}})> \end{aligned}$$
+
+
+$d_{2}=\exp \ in \ d_{1}\in n$
+??????
+
+## Support Vector Machine + Kernel
+
+L'algoritmo può essere descritto come segue
+$$\begin{aligned}
+&\beta^{(1)}=\vec{0} \\
+&\text{for } T=1 \text{ to } T-1 \text{ do} \\
+&\qquad \vec{\alpha}^{(t)}=\frac{1}{\lambda t}\vec{\beta}^{(t)} \\
+&\qquad \text{seleziona casualmente } (\vec{x_{i}},y_{i}) \text{ in } S \\
+&\qquad \text{if } y_{1} \sum_{j=1}^m \alpha_{j} <\phi(\vec{x_{i}}),\phi(\vec{x_{j}})> \ <1 \\
+&\qquad \beta_{i}^{(t+1)}=\beta_{i}^{(t)}+y_{i} \\
+&\text{return } \ \vec{\alpha}
+\end{aligned}$$
+
+Se esiste una funzione kernel, possiamo sostituire il prodotto scalare nello spazio di destinazione con il valore della funzione kernel:
+$$y_{1} \sum_{j=1}^m \alpha_{j} K_{\phi}(\vec{x_{i}}\vec{x_{j}}) \ <1$$
+Questo permette di calcolare il prodotto scalare senza dover esplicitamente calcolare la proiezione dei dati nello spazio di caratteristiche, rendendo l'algoritmo più efficiente.
+
+
+## Kernel Gaussiano
+
+Il kernel gaussiano può essere visualizzato come una funzione che assegna un peso ai punti in base alla loro distanza. Punti vicini avranno un peso maggiore, mentre punti lontani avranno un peso minore.
+
+$$K(\vec{x},\vec{x}')=\exp\left[ -  \frac{\|\vec{x}-\vec{x}'\|^2}{2\sigma^2} \right]$$
+
+dove:
+
+- $\vec{x}$ e $\vec{x}'$ sono due punti nello spazio di input.
+- $\sigma$ è un parametro che controlla la larghezza del kernel.
+
+![[8)-20241024123135373.png|384]]
+
+
+Il kernel gaussiano è molto potente perché permette di utilizzare separatori lineari anche su problemi complessi, in cui i dati non sono linearmente separabili nello spazio originale.
+
+Ad esempio, immaginiamo un dataset composto da due spirali concentriche, una per ogni classe. Separare linearmente queste due classi nello spazio bidimensionale è impossibile. Tuttavia, utilizzando un kernel gaussiano, possiamo proiettare implicitamente i dati in uno spazio a dimensionalità superiore, dove le due spirali diventano linearmente separabili.
+![[8)-20241024123236760.png|183]]
+Da un punto di vista teorico, il kernel gaussiano proietta i dati in uno spazio a **infinite dimensioni**. Questo significa che, in linea di principio, possiamo separare qualsiasi dataset utilizzando un kernel gaussiano.
+
+Teoricamente, il kernel gaussiano effettua un mapping a infinite dimensioni. Per illustrare questo concetto, consideriamo il caso a una dimensione:
+
+$$K(x,x')=\exp\left[ - \frac{(x-x')^2}{2} \right]$$
+
+Utilizzando la proprietà della funzione esponenziale:
+
+$$\exp(x)=\sum_{n=0}^{\infty} \frac{x^n}{n!}$$
+
+possiamo riscrivere il kernel gaussiano come:
+
+$$\exp\left[ - \frac{x^2+x'^2-2xx'}{2} \right]$$
+$$=\exp\left( -\frac{x^2+x'^2}{2} \right) \exp(x x')$$
+$$=\exp\left( -\frac{x^2+x'^2}{2} \right)=\sum_{n=0}^{\infty}   \frac{(xx')^2}{n!}$$
+
+Espandendo l'ultima espressione, otteniamo:
+
+$$\sum_{n=0}^{\infty}  \left\{  \left[ {\frac{x^n}{n!}} \exp\left( -  \frac{x^{2}}{2} \right) \right] \cdot \left[ {\frac{x'^n}{n!}} \exp\left( -  \frac{x'^{2}}{2} \right) \right]  \right\}$$
+
+Questa espressione rappresenta un prodotto scalare infinito di due vettori $\phi(x)_{n}$ e $\phi(x')_{n}$.
 
 
