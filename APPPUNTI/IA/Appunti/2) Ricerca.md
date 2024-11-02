@@ -89,7 +89,7 @@ La ricerca in ampiezza è completa anche su spazi infiniti e, se le azioni hanno
 ### Ricerca in Profondità
 La ricerca in profondità esplora lo spazio degli stati espandendo sempre il nodo con la maggiore profondità. Può essere implementata come una ricerca Best-First con f(n) pari all'opposto della profondità. Un'implementazione più efficiente utilizza una coda LIFO.
 
-La ricerca in profondità è completa solo se la struttura è aciclica e non è ottimale. La complessità spaziale è $O(b · m) $e quella temporale è $O(bm)$, dove b è il branching factor e m è la massima profondità dell'albero. 
+La ricerca in profondità è completa solo se la struttura è aciclica e non è ottimale. La complessità spaziale è $O(b · m)$ e quella temporale è $O(bm)$, dove b è il branching factor e m è la massima profondità dell'albero. 
 
 ## Strategie di Ricerca Non Informata
 
@@ -181,7 +181,7 @@ Esistono due proprietà principali per le euristiche: **ammissibilità** e **con
   - - **Strategia**: best-first.
 - **Caratteristica**: L'euristica introduce un rilassamento del problema, migliorando i tempi di risoluzione ma riducendo la bontà della soluzione (trade-off).
 - **Caso senza euristica**: $f(n) = g(n)$, e l'algoritmo diventa una *Uniform Cost Search (UCS)*.
-- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.### Completezza di A* Tree Search
+- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.
 - **Completezza**: L'algoritmo A\* è completo, ovvero **trova sempre una soluzione** se esiste, a condizione che:
   - Lo spazio degli stati abbia una soluzione o sia finito.
   - I costi delle azioni siano **positivi** e maggiori di una soglia $\epsilon > 0$.

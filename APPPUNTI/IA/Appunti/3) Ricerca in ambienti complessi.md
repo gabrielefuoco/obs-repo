@@ -25,9 +25,9 @@ Le strategie di ricerca precedenti si focalizzavano sul trovare cammini attraver
 In sostanza, la soluzione era una sequenza di azioni, mentre ora ci interessa solo trovare un buon stato (non il relativo cammino), eventualmente rilassando anche le ipotesi di determinismo e di osservabilità. Un buon stato si intende come un ottimo locale.
 
 * **Ambiente non deterministico:** lo stato successivo non è completamente determinato dallo stato corrente e dall'azione compiuta dall'agente.
+	*  L'agente dovrà avere un piano condizionale ed eseguire azioni diverse a seconda di ciò che osserva.
 * **Ambiente non osservabile:** l'agente non ha accesso, in ogni momento, allo stato completo dell'ambiente.
-
-In un ambiente non deterministico, l'agente dovrà avere un piano condizionale ed eseguire azioni diverse a seconda di ciò che osserva. In caso di osservabilità parziale, l'agente dovrà anche tenere traccia dei possibili stati in cui potrebbe trovarsi.
+	* L'agente dovrà anche tenere traccia dei possibili stati in cui potrebbe trovarsi.
 
 ### Ricerca Hill Climbing
 
@@ -37,9 +37,9 @@ L'algoritmo di ricerca Hill Climbing tiene traccia solo dello stato corrente e, 
 
 È un algoritmo che permette di evitare di rimanere intrappolati in ottimi locali, combinando l'Hill Climbing con una esplorazione casuale. Intuitivamente, inizialmente si può scuotere molto lo stato corrente (alta temperatura) per poi ridurre gradualmente l'intensità dello scuotimento.
 
-Come per l'Hill Climbing, a partire dallo stato corrente viene scelto un vicino. Tuttavia, in questo algoritmo non viene scelta la mossa migliore ma una mossa casuale. Se la mossa migliora la situazione (∆E > 0), essa viene sempre accettata altrimenti la si accetta con probabilità e^(-∆E/T) dove T è la temperatura, che diminuisce ad ogni iterazione.
+Come per l'Hill Climbing, a partire dallo stato corrente viene scelto un vicino. Tuttavia, in questo algoritmo non viene scelta la mossa migliore ma una mossa casuale. Se la mossa migliora la situazione $(∆E > 0)$, essa viene sempre accettata altrimenti la si accetta con probabilità $e^\left( -∆ \frac{E}{T} \right)$ dove T è la temperatura, che diminuisce ad ogni iterazione.
 
-Si noti che la probabilità decresce esponenzialmente in funzione della cattiva qualità della mossa e della temperatura e, pertanto, alle prime iterazioni (dove T è alto) l'accettazione di mosse cattive sarà maggiore. Se la velocità di raffreddamento fa decrescere la temperatura da T a 0 molto lentamente, per una proprietà della distribuzione di Boltzmann (e^(-∆E/T)), tutta la probabilità è concentrata sui massimi locali, che l'algoritmo troverà con probabilità 1.
+Si noti che la probabilità decresce esponenzialmente in funzione della cattiva qualità della mossa e della temperatura e, pertanto, alle prime iterazioni (dove T è alto) l'accettazione di mosse cattive sarà maggiore. Se la velocità di raffreddamento fa decrescere la temperatura da T a 0 molto lentamente, per una proprietà della distribuzione di Boltzmann $\left( e^\left( -∆ \frac{E}{T} \right) \right)$, tutta la probabilità è concentrata sui massimi locali, che l'algoritmo troverà con probabilità 1.
 
 ### Ricerca con Azioni non Deterministiche
 
@@ -84,7 +84,7 @@ Un piano ciclico è una soluzione se:
 
 ### Ricerca con Osservazioni Parziali
 
-Non abbiamo una conoscenza completa dello stato. Esistono i belief states: una serie di stati possibili per quello che ne sappiamo.
+Se non abbiamo una conoscenza completa dello stato si parla di *Ricerca con Osservazioni Parziali*. In questo contesto esistono i **belief states**: una serie di stati possibili per quelle che sono le nostre conoscenze.
 
 Bisogna definire un piano mediante tre fasi:
 

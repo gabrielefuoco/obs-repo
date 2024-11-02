@@ -47,7 +47,6 @@ Per utilizzare Expectimax, è necessario avere un modello probabilistico del com
 ### Simulazione
 La simulazione è un metodo per stimare le probabilità di comportamento dell'avversario. Tuttavia, la simulazione può essere computazionalmente costosa, soprattutto se l'avversario sta anche simulando le nostre mosse.
 
-
 ### Incertezza e Strategia Ottima
 In alcuni giochi, non esiste una strategia ottima deterministica. L'introduzione di incertezza, come scelte casuali, può migliorare il valore atteso della strategia, rendendola più efficace.
 
@@ -60,16 +59,14 @@ Il Backgammon è un gioco che presenta sia un avversario che incertezza. Il gioc
 ### ExpectiMiniMax
 ExpectiMiniMax è un algoritmo che estende MiniMax per gestire l'incertezza. L'algoritmo include nodi Min, Max e Chance. Per i nodi Chance, si calcola il valore atteso, ovvero la somma dei valori dei figli ponderati in base alla probabilità di ogni azione.
 
-### Giochi con Più Agenti
+### Utilità nei Giochi con Più Agenti
 In giochi con più agenti, ogni nodo ha associata una tripla di valori che rappresenta l'utilità/stima per ogni giocatore in quello stato. Gli algoritmi possono far emergere forme di coalizione tra i giocatori, con ogni giocatore che cerca di massimizzare il proprio valore.
 
-### Utilità
 L'utilità è una funzione che misura la soddisfazione di un agente rispetto a un determinato stato o risultato. Un agente razionale dovrebbe massimizzare la propria utilità. Tuttavia, non sempre è facile definire una funzione di utilità che rifletta accuratamente le preferenze di un agente.
 
-### Insensibilità alle Trasformazioni Monotone
+### Importanza della Scala
 In alcuni contesti, la scala della funzione di utilità non è importante. Ad esempio, nel ragionamento MiniMax, la funzione di utilità può essere trasformata in modo monotono senza alterare il risultato della ricerca.
 
-### Importanza della Scala
 In altri contesti, la scala della funzione di utilità è importante. Ad esempio, quando si ha a che fare con l'incertezza, è necessario utilizzare le lotterie per modellare le preferenze dell'agente rispetto a risultati incerti.
 
 ### Lotterie e Preferenze

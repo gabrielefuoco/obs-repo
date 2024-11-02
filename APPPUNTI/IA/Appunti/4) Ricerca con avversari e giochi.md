@@ -1,23 +1,23 @@
 
-| Termine | Spiegazione |
-|---|---|
-| **Ambienti Competitivi** | Ambienti in cui due o più agenti hanno obiettivi in conflitto tra loro, generando problemi di ricerca con avversari. |
-| **Giochi Deterministici** | Giochi in cui l'esito di ogni mossa è completamente determinato dalle regole del gioco e dalle azioni dei giocatori. |
-| **Giochi Stocastici** | Giochi in cui l'esito di alcune mosse è influenzato da elementi casuali, come il lancio di un dado o l'estrazione di una carta. |
-| **Giochi a Somma Zero** | Giochi in cui la somma dei guadagni di tutti i giocatori è sempre zero. Un giocatore può vincere solo se un altro giocatore perde. |
-| **Giochi con Informazione Perfetta** | Giochi in cui tutti i giocatori hanno accesso a tutte le informazioni sullo stato del gioco in ogni momento. |
-| **Albero di Gioco** | Struttura ad albero che rappresenta tutte le possibili sequenze di mosse in un gioco, fino a raggiungere uno stato terminale. |
-| **Ricerca MiniMax** | Algoritmo di ricerca che determina la strategia ottima in un gioco a somma zero, assumendo che entrambi i giocatori giochino in modo ottimale. |
-| **Valore MiniMax** | L'utilità di trovarsi in uno stato specifico, calcolata ricorsivamente considerando le mosse ottimali di entrambi i giocatori. |
-| **Alpha-Beta Pruning** | Tecnica di potatura dell'albero di gioco che elimina rami irrilevanti per la ricerca MiniMax, migliorando l'efficienza. |
-| **Test di Taglio** | Test utilizzato nella ricerca a profondità limitata per decidere quando interrompere la ricerca, in base alla profondità dello stato o ad altre proprietà. |
-| **Valutazione Euristica** | Stima della bontà di uno stato in un gioco, utilizzata quando la ricerca a profondità limitata non raggiunge uno stato terminale. |
-| **Ricerca ad Albero Monte Carlo** | Tecnica di ricerca che utilizza simulazioni casuali per costruire un albero di gioco e stimare il valore di ogni stato. |
-| **Politica di Selezione** | Strategia utilizzata per scegliere il nodo da espandere nell'albero di gioco durante la ricerca ad Albero Monte Carlo. |
-| **Politica di Simulazione** | Strategia utilizzata per scegliere le mosse durante le simulazioni nella ricerca ad Albero Monte Carlo. |
-| **UCB1** | Una tipica politica di selezione che bilancia l'esplorazione di nuovi nodi con lo sfruttamento di nodi già esplorati. |
-| **Grafo di Gioco** | Rappresentazione grafica del gioco, dove i nodi rappresentano gli stati e gli archi rappresentano le mosse possibili. |
-| **Componente Connessa** | Insieme di nodi in un grafo che sono collegati tra loro da un cammino. |
+| Termine                              | Spiegazione                                                                                                                                                |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ambienti Competitivi**             | Ambienti in cui due o più agenti hanno obiettivi in conflitto tra loro, generando problemi di ricerca con avversari.                                       |
+| **Giochi Deterministici**            | Giochi in cui l'esito di ogni mossa è completamente determinato dalle regole del gioco e dalle azioni dei giocatori.                                       |
+| **Giochi Stocastici**                | Giochi in cui l'esito di alcune mosse è influenzato da elementi casuali, come il lancio di un dado o l'estrazione di una carta.                            |
+| **Giochi a Somma Zero**              | Giochi in cui la somma dei guadagni di tutti i giocatori è sempre zero. Un giocatore può vincere solo se un altro giocatore perde.                         |
+| **Giochi con Informazione Perfetta** | Giochi in cui tutti i giocatori hanno accesso a tutte le informazioni sullo stato del gioco in ogni momento.                                               |
+| **Albero di Gioco**                  | Struttura ad albero che rappresenta tutte le possibili sequenze di mosse in un gioco, fino a raggiungere uno stato terminale.                              |
+| **Ricerca MiniMax**                  | Algoritmo di ricerca che determina la strategia ottima in un gioco a somma zero, assumendo che entrambi i giocatori giochino in modo ottimale.             |
+| **Valore MiniMax**                   | L'utilità di trovarsi in uno stato specifico, calcolata ricorsivamente considerando le mosse ottimali di entrambi i giocatori.                             |
+| **Alpha-Beta Pruning**               | Tecnica di potatura dell'albero di gioco che elimina rami irrilevanti per la ricerca MiniMax, migliorando l'efficienza.                                    |
+| **Test di Taglio**                   | Test utilizzato nella ricerca a profondità limitata per decidere quando interrompere la ricerca, in base alla profondità dello stato o ad altre proprietà. |
+| **Valutazione Euristica**            | Stima della bontà di uno stato in un gioco, utilizzata quando la ricerca a profondità limitata non raggiunge uno stato terminale.                          |
+| **Ricerca ad Albero Monte Carlo**    | Tecnica di ricerca che utilizza simulazioni casuali per costruire un albero di gioco e stimare il valore di ogni stato.                                    |
+| **Politica di Selezione**            | Strategia utilizzata per scegliere il nodo da espandere nell'albero di gioco durante la ricerca ad Albero Monte Carlo.                                     |
+| **Politica di Simulazione**          | Strategia utilizzata per scegliere le mosse durante le simulazioni nella ricerca ad Albero Monte Carlo.                                                    |
+| **UCB1**                             | Una tipica politica di selezione che bilancia l'esplorazione di nuovi nodi con lo sfruttamento di nodi già esplorati.                                      |
+| **Grafo di Gioco**                   | Rappresentazione grafica del gioco, dove i nodi rappresentano gli stati e gli archi rappresentano le mosse possibili.                                      |
+| **Componente Connessa**              | Insieme di nodi in un grafo che sono collegati tra loro da un cammino.                                                                                     |
 
 ### Ambienti Competitivi
 Gli ambienti competitivi sono caratterizzati dalla presenza di due o più agenti con obiettivi in conflitto. Questo genera problemi di ricerca con avversari.
@@ -29,13 +29,13 @@ Esistono tre approcci principali per affrontare gli ambienti multi-agente nella 
 2. **Ambiente non deterministico:** Gli agenti avversari sono considerati un elemento che rende l'ambiente non deterministico, senza considerare che gli avversari tentano attivamente di vincere.
 3. **Alberi di gioco:** Gli avversari sono modellati esplicitamente con tecniche di ricerca basate su alberi di giochi.
 
-
 ### Tipi di Giochi
 I giochi possono essere classificati in base a diversi criteri:
 * **Deterministici vs Stocastici:** I giochi deterministici sono completamente prevedibili, mentre i giochi stocastici hanno una componente casuale.
 * **Numero di giocatori:** I giochi possono essere a uno, due o più giocatori.
 * **Somma zero:** In un gioco a somma zero, la vincita di un giocatore corrisponde alla perdita di un altro giocatore.
 * **Informazione perfetta:** Un gioco con informazione perfetta è completamente osservabile da tutti i giocatori.
+
 ### Formalizzazione di un Gioco Deterministico
 Un gioco deterministico può essere formalizzato nel seguente modo:
 
@@ -79,7 +79,7 @@ Ad esempio, consideriamo il seguente albero di gioco:
 
 Ad ogni turno, MAX preferirà muoversi verso uno stato di valore massimo mentre MIN preferirà muoversi verso uno stato di valore minimo. Nell'esempio, i nodi terminali prendono i loro valori dalla funzione di utilità; il primo nodo MIN, ovvero B, ha 3 successori con valori {3,12,8} quindi il suo valore MiniMax è pari a 3... per lo stesso motivo, il valore MiniMax dei nodi C,D è pari a 2; il nodo MAX ha 3 successori con valori {3,2,2}, quindi il suo valore MiniMax è 3.
 #### Efficienza
-Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è O(b · m) mentre quella temporale è O(bm) dove m è la profondità e b è il fattore di branching.
+Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è O(b · m) mentre quella temporale è O(b^m) dove m è la profondità e b è il fattore di branching.
 
 
 ## Alpha-Beta Pruning: 
@@ -130,7 +130,7 @@ La ricerca ad Albero Monte Carlo procede in quattro fasi:
 La politica di simulazione determina come vengono scelte le mosse durante le simulazioni. Idealmente, questa politica dovrebbe favorire le mosse più vincenti. La politica di selezione, invece, deve bilanciare l'esplorazione di nuovi nodi con lo sfruttamento di nodi già esplorati.
 
 ### UCB1
-Una politica di selezione comune è l'Upper Confidence Bounds applied to Trees (UCB1). Questa politica assegna un valore a ogni nodo, che è la somma del fattore di sfruttamento $(U(n)/N(n))$ e del fattore di esplorazione $(c · \sqrt{(log N\frac{(padre(n))}{N(n))}})$. Il fattore di sfruttamento rappresenta il valore medio delle simulazioni passate per il nodo, mentre il fattore di esplorazione incoraggia l'esplorazione di nodi meno esplorati.
+Una politica di selezione comune è l'Upper Confidence Bounds applied to Trees (UCB1). Questa politica assegna un valore a ogni nodo, che è la somma del fattore di sfruttamento $\left( \frac{U(n)}{N(n)} \right)$ e del fattore di esplorazione $\left(c \cdot \sqrt{(log N\frac{(padre(n))}{N(n))}}\right)$. Il fattore di sfruttamento rappresenta il valore medio delle simulazioni passate per il nodo, mentre il fattore di esplorazione incoraggia l'esplorazione di nodi meno esplorati.
 
 
 ## Pacman Veloce

@@ -1,4 +1,5 @@
 ## Neural Networks
+
 Le reti neurali sono modelli di apprendimento automatico ispirati alla struttura del cervello umano. L'unità fondamentale di questo modello è il **neurone artificiale**, un'unità computazionale che riceve input, li elabora e produce un output.
 
 Una rete neurale si ottiene collegando tra loro i neuroni artificiali secondo diversi schemi. Quando colleghiamo questi neuroni artificiali, diamo vita a quella che viene chiamata **architettura neurale**. Questa rappresenta la struttura della rete che si viene a formare.
@@ -385,7 +386,7 @@ $$\sum \delta _k w_{ij}o_{j}(1-o_{j})=o_{j}(1-o_{j})\sum \delta_{k}w_{jk}$$
 	$\text{for each unit j, compute}$
 		$o_j=\sigma(net_{j})=\sigma\left( \sum_{i}w_{ij}x_{ij} \right)$
 2) $\text{Propagate the gradient backward}$
-	$for the output unit k$
+	$\text{for the output unit k}$
 		$\delta_{k}=(o_{k}-y)o_{k}(1-o_{k})$
 	$\text{for each hidden unit j}$
 		$\delta_{j}=o_{j}(1-o_{j})\sum_{k\in\text{output}} w_{jk}\delta_{k}$

@@ -567,11 +567,11 @@ La formula di probabilità condizionale è la seguente: $$ P_{i}^{(h+1)} = \frac
 Lo smoothing introduce dei **fattori nascosti** che influenzano la probabilità di occorrenza di un termine. Questi fattori nascosti rappresentano la correlazione o la dipendenza tra i termini stessi. 
 
 
-## Stima di Iconi e Relevance Feedback
+## Stima di $p_{i}$ e Relevance Feedback
 
 ### Introduzione
 
-Dopo aver affrontato la stima di $r_{i}$, ci concentriamo ora su Iconi, la likelihood di incidenza del termine nei documenti rilevanti. La stima di Iconi presenta diverse sfide e richiede l'utilizzo di diversi approcci.
+Dopo aver affrontato la stima di $r_{i}$, ci concentriamo ora su $p_{i}$, la likelihood di incidenza del termine nei documenti rilevanti. La stima di $p_{i}$ presenta diverse sfide e richiede l'utilizzo di diversi approcci.
 
 ### Approcci per la Stima di $p_{i}$
 
@@ -626,9 +626,7 @@ In questo contesto, si cerca di approssimare la probabilità di rilevanza di un 
 
 **Formula:**
 
-```
-P(rilevanza | termine) ≈ |V| / |I|
-```
+$P(rilevanza | termine) ≈ |V| / |I|$
 
 **Problema:**
 - Se l'insieme V è troppo grande, diventa computazionalmente costoso calcolare la probabilità di rilevanza.

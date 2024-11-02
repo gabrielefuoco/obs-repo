@@ -45,6 +45,33 @@ La formula $O = \left\lfloor \frac{I - K + 2P}{S} \right\rfloor + 1$ è una vers
 - Aggiunge il termine $-(K-1)(D-1)$, che tiene conto dell'effetto della dilatazione. Quando $D = 1$, questo termine diventa zero, riportandoci alla formula semplificata.
 - La dilatazione fa sì che gli elementi del kernel si "espandano", separandosi e quindi coprendo un'area maggiore rispetto al caso standard, e questo deve essere tenuto in considerazione nella formula.
 
+## Relazione tra i Parametri nella Convoluzione 2D
+
+I parametri chiave sono:
+
+* **Dimensione del kernel (k):** Determina la dimensione dell'area su cui il kernel opera.
+* **Dimensione dell'output (o):** Determina la dimensione della feature map in uscita.
+* **Dimensione dell'input (i):** Determina la dimensione della feature map in ingresso.
+* **Stride (s):** Determina il passo con cui il kernel si sposta sulla feature map in ingresso.
+* **Dilation (d):** Determina la spaziatura tra i pesi del kernel.
+* **Padding (p):** Determina la quantità di padding aggiunta ai bordi della feature map in ingresso.
+
+Questa formula deve essere applicata sia per l'altezza che per la larghezza della feature map in uscita.
+
+**Nota:** La parte intera inferiore e superiore (rappresentata dalle parentesi quadre) indica che il risultato della formula viene arrotondato all'intero più vicino.
+
+**Padding:** Il padding viene aggiunto sia a destra che a sinistra, sia sopra che sotto la feature map in ingresso.
+
+**Dilation:** La dilation è il prodotto di k-1. Una dilation pari a 1 indica che non c'è dilation, e lo spostamento del kernel è di 1 pixel.
+
+**Esempio:** Se ignoriamo tutti gli altri parametri, la formula `i-k` ci dice che se l'input è un'immagine di dimensione `i` e il kernel ha dimensione `k`, la dimensione della feature map in uscita sarà `i-k`.
+
+**Pooling:** Il pooling è un'operazione che riduce la dimensione della feature map in ingresso. A differenza della convoluzione, il pooling non ha molti parametri. L'unico parametro principale è la dimensione del pooling. Ad esempio, un pooling 2x2 significa che 4 pixel in ingresso vengono ridotti a 1 pixel in uscita. Il pooling può avere una dilation in alcune implementazioni, ma nella sua versione base non ne ha.
+
+**Relazioni Inverse:** I layer di pooling, tramite lo stride, vengono tipicamente utilizzati per dimezzare la dimensione della feature map. Questo è dovuto alle relazioni inverse tra i parametri, che permettono di controllare la dimensione della feature map in uscita.
+
+**Conclusione:** La formula generale fornisce un modo per legare le dimensioni delle feature map in uscita a partire da un dato input. Comprendere queste relazioni è fondamentale per progettare e ottimizzare le architetture di reti neurali convoluzionali.
+
 #### Esempio
 
 Se l'input è un'immagine di dimensione 10x10, il filtro è di dimensione 3x3 e lo stride è 2, la dimensione dell'output sarà:
