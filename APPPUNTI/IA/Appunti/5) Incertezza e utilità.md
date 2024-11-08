@@ -84,8 +84,6 @@ Per poter parlare di preferenze razionali, è necessario introdurre alcuni assio
 
 L'assioma di transitività garantisce che le preferenze dell'agente siano coerenti. Se un agente preferisce A a B e B a C, allora deve preferire A a C.
 
-### Importanza della Transitività
-
 La transitività è importante perché evita cicli infiniti nelle preferenze dell'agente. Se un agente non avesse preferenze transitive, potrebbe essere coinvolto in un ciclo infinito di scambi, pagando sempre un centesimo per ottenere un premio che considera migliore, senza mai raggiungere un risultato finale.
 
 ## Assiomi di Razionalità per le Preferenze
@@ -120,17 +118,20 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 * **⪰:** Preferenza debole
 
 ## Teorema di Ramsey, von Neumann & Morgenstern
-Questo teorema dimostra che se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
+
+Se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
 
 * **Formulazione:**  $U(A) ≥ U(B) ⇐⇒ A ⪰ B$
     * U(A): Utilità del premio A
     * U(B): Utilità del premio B
     * A ⪰ B: A è preferito o indifferente a B
+Questa formulazione implica che le preferenze possono essere ordinate in base al valore di utilità, permettendo così all'agente di fare scelte razionali.
 
 * **Utilità di una lotteria:** $U([p_1, S_1; ... ; p_n, S_n]) = \sum_i \ p_i · U(S_i)$
     * Si: i-esimo stato
     * pi_: Probabilità dello stato Si
     * U(Si): Utilità dello stato Si
+Questa formula consente di calcolare l'utilità attesa di una lotteria, sommando le utilità pesate dalle rispettive probabilità.
 
 In sintesi, il teorema afferma che se le preferenze di un agente sono razionali, allora esiste una funzione di utilità che può essere utilizzata per ordinare le preferenze tra premi e lotterie.
 

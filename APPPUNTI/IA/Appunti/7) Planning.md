@@ -43,7 +43,7 @@
 | **Mutex** | Vincoli che escludono azioni o stati incompatibili. |
 | **Frame Actions** | Azioni che lasciano inalterati gli stati attuali, mantenendo il sistema stabile tra un'azione e l'altra. |
 
-Il *planning* (pianificazione) riguarda la progettazione di sequenze di azioni necessarie per raggiungere un obiettivo specifico. 
+Il *planning* (pianificazione) riguarda la progettazione di sequenze di azioni necessarie per raggiungere un obiettivo specifico.
 
 1. **Modello di Pianificazione**:
    - **Stati (S)**: Rappresentano le condizioni o situazioni del sistema.
@@ -73,7 +73,7 @@ Il *planning* (pianificazione) riguarda la progettazione di sequenze di azioni n
 
 **Classical Planning** è un tipo di pianificazione in cui si lavora con:
 
-1. **Stati, Azioni ed Eventi noti e finitei**. 
+1. **Stati, Azioni ed Eventi noti e finiti**. 
 2. **Sistema Completo e Deterministico**: Tutto ciò che accade è osservabile e prevedibile; non ci sono eventi esterni imprevisti.
 3. **Stati Goal**: Abbiamo uno stato finale desiderato (goal) e partiamo da uno stato iniziale.
 4. **Piani Sequenziali**: Le azioni sono eseguite in sequenza, senza sovrapposizioni temporali.
@@ -218,23 +218,23 @@ Nel **backward search**, si parte dal goal e si lavora all'indietro per determin
 
 1. **Definizione di Azioni Rilevanti**:
    - Un'azione $a$ è considerata rilevante per un goal $g$ se:
-     - **L'azione contribuisce al goal**: $( g ) ∧ ( \text{effects}(a) \neq \emptyset$
-       - Questo significa che l'effetto dell'azione *a* aiuta a soddisfare almeno uno dei letterali del goal $g$.
+     - **L'azione contribuisce al goal**: $( g ) \land ( \text{effects}(a) \neq \emptyset)$
+       - Questo significa che l'effetto dell'azione *a* aiuta a soddisfare almeno uno dei letterali del goal $g$. 
      - **L'azione non rende il goal falso**: 
-     - $(g^+ ) ∧ ( \text{effects}^-(a) = \emptyset )$ e $( g^- ) ∧ ( \text{effects}^+(a) = \emptyset$
+     - $(g^+ ) ∧ ( \text{effects}^-(a) = \emptyset )$ e $( g^- ) ∧ ( \text{effects}^+(a) = \emptyset)$
        - Questo significa che l'azione non elimina nessuno dei letterali positivi del goal e non aggiunge falsità ai letterali negativi.
-
-2. **Funzione Inversa della Transizione**:
+   
+1. **Funzione Inversa della Transizione**:
    - La funzione inversa della funzione di transizione, $γ$, è definita come:
-     - $$ \gamma^{-1}(g, a) = (g^- \text{effects}(a)) \lor \text{precond}(a) $$
+     $$ \gamma^{-1}(g, a) = (g^- \text{effects}(a)) \lor \text{precond}(a) $$
        - Questa funzione calcola nuovi obiettivi (finti goal) che devono essere raggiunti prima di applicare l'azione $a$.
 
-3. **Algoritmo**:
+2. **Algoritmo**:
    - Inizia dal goal e applica la funzione inversa per ottenere nuovi obiettivi.
    - Le azioni vengono aggiunte al piano in testa, non in coda.
    - Questo processo continua fino a quando non si raggiunge uno stato che può essere considerato come stato iniziale o uno stato che soddisfa tutte le condizioni necessarie.
 
-4. **Problemi**:
+3. **Problemi**:
    - Il branching factor può essere molto grande, proprio come nel forward search.
    - Questo significa che ci possono essere molte possibili azioni da considerare.
 

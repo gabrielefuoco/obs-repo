@@ -1,12 +1,13 @@
 Fornisci una spiegazione dettagliata e chiara dei concetti evidenziati nel testo seguente, ponendo enfasi sui punti critici e sulle informazioni chiave.
 
+**Testo da spiegare:** 
+{}
+
 **Istruzioni per la Spiegazione:**
 - **Organizzazione e Formato:** Utilizza il formato Markdown per organizzare il testo in sezioni chiare, coprendo tutti i concetti rilevanti senza aggiungere contenuti superflui.
-- **Correzione di errori:** Se noti errori di battitura o sezioni poco chiare, correggili per migliorarne la comprensibilità.
 - **Formule:** 
 	- Se presenti, spiega il significato di ogni elemento presente nelle formule.
 	- Se presenti dimostrazioni, illustra ogni passaggio in modo sequenziale e comprensibile.
-
 
 **Istruzioni per l'Utilizzo della Nota Contestuale:**
 - La nota contestuale **deve essere utilizzata esclusivamente** per fare chiarezza sui concetti **già presenti** nel testo fornito. Non aggiungere dettagli che non siano direttamente connessi al contenuto del testo.
@@ -18,9 +19,6 @@ Fornisci una spiegazione dettagliata e chiara dei concetti evidenziati nel testo
 
 
  **Obiettivo:** Fornire una spiegazione completa e accurata dei concetti complessi, limitata al contenuto fornito. Loutput finale deve essere limitato alla spiegazione del testo evidenziato, senza aggiungere nessuna sezione extra
-
-**Testo da spiegare:** 
-{}
 
 **Nota contestuale:** 
 {activeNote}

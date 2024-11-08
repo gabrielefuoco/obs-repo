@@ -167,7 +167,6 @@ I modelli di topic, come Latent Dirichlet Allocation (LDA) e Probabilistic Laten
 
 A differenza dei modelli linguistici neurali, la valutazione dei modelli di topic tradizionalmente non si concentra su aspetti come verbosità, fluency, affettività, confabulazione o bias. Storicamente, si misurano **coerenza** e **perplessità**.
 
-
 ## Coerenza
 
 Gli argomenti sono rappresentati dalle prime N parole con la probabilità più alta di appartenere a quell'argomento specifico. Questo N è relativamente grande rispetto al numero di topic che caratterizzano un documento.
@@ -242,7 +241,6 @@ $M = \frac{1}{2}(P + Q)$.
 ### Cross-entropia
 
 Quando si confrontano due distribuzioni di probabilità, si utilizza spesso la cross-entropia, che può essere relativizzata o normalizzata. La cross-entropia misura la differenza tra la distribuzione di probabilità prevista e la distribuzione di probabilità effettiva. 
-
 
 ## Perplessità
 

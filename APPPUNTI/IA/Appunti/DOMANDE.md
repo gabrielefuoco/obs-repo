@@ -306,3 +306,272 @@
 * Come influenza la ricchezza le scelte degli individui?
 * Cosa rappresenta il premio di assicurazione?
 * Fornisci un esempio di irrazionalità nelle scelte umane.
+
+# CSP
+
+### Soddisfacimento di Vincoli (CSP)
+
+* Quali sono i due modi principali per rappresentare i vincoli in un CSP?
+* Cosa rappresenta una soluzione a un CSP?
+* Come si relaziona la risoluzione di un CSP con le query congiuntive nei database?
+* Quali sono i tre tipi di complessità che possono essere considerati in un CSP?
+
+### Constraint Graph
+
+* Cosa rappresenta un Constraint Graph?
+* Cosa rappresentano i nodi e gli archi in un Constraint Graph?
+* Quali sono i limiti di un Constraint Graph per vincoli che coinvolgono più di due variabili?
+* Cosa è un ipergrafo e come viene utilizzato per rappresentare vincoli complessi?
+
+### Problema dell'Omomorfismo
+
+* Qual è l'obiettivo del Problema dell'Omomorfismo?
+* Cosa costituisce una struttura relazionale?
+* Spiega il concetto di arità in relazione ai simboli di relazione.
+* Cosa rappresenta un omomorfismo tra due strutture relazionali?
+* In che modo il problema dell'omomorfismo può essere interpretato in termini di "trasferimento" di struttura dei dati?
+
+### Core
+
+* Cosa rappresenta il core di un CSP?
+* Come viene ottenuto il core di un CSP?
+* Fornisci un esempio di come la ridondanza può essere eliminata per ottenere il core.
+* Cosa è un endomorfismo e come si relaziona al core?
+* Quali sono le proprietà chiave del core di un CSP?
+
+### Backtracking Search
+
+* Qual è l'algoritmo di base per la ricerca backtracking in un CSP?
+* Spiega come funziona l'algoritmo di base con un esempio.
+* Quali sono i due principali miglioramenti all'algoritmo di base?
+* Spiega il concetto di forward checking e come funziona.
+* Spiega il concetto di arc consistency e come funziona.
+* Come funziona la propagazione dei vincoli nel backtracking?
+
+### Tipi di consistenza
+
+* Spiega il concetto di 1-consistency (node-consistency).
+* Spiega il concetto di 2-consistency (arc-consistency).
+* Quali sono le conseguenze di forzare l'arc-consistency in una struttura aciclica?
+* Spiega il concetto di k-consistency.
+* Qual è il costo computazionale della k-consistency?
+
+### Euristiche per la Risoluzione dei CSP
+
+* Quali sono le due principali euristiche per l'ordinamento delle variabili?
+* Spiega l'euristica Minimum Remaining Values (MRV).
+* Spiega l'euristica Least Constraining Value.
+* Quali sono le tecniche di risoluzione con assegnamento completo?
+* Spiega l'euristica Minimo Conflitto.
+* Come possono essere utilizzate le tecniche di Hill Climbing o Simulated Annealing per risolvere i CSP?
+* Cosa rappresenta il problema del punto critico?
+
+### Omomorfismo su strutture acicliche
+
+* Cosa rappresenta il problema dell'omomorfismo su strutture acicliche?
+* Qual è la complessità di risolvere il problema dell'omomorfismo su strutture acicliche?
+* Qual è l'algoritmo di Yannakakis e come funziona?
+* Spiega le fasi di filtraggio verso l'alto e verso il basso nell'algoritmo di Yannakakis.
+* Qual è il costo computazionale del filtraggio nell'algoritmo di Yannakakis?
+
+### Soluzione Backtrack-free
+
+* Cosa si intende per soluzione backtrack-free?
+* Come si ottiene una soluzione backtrack-free utilizzando l'algoritmo di Yannakakis?
+* Quali sono i vantaggi di una soluzione backtrack-free?
+
+### Strutture quasi ad Albero
+
+* Qual è l'obiettivo delle strutture quasi ad albero?
+* Cosa rappresenta il cut set (feedback vertex number)?
+* Come viene risolto un problema aciclico dopo la rimozione di un nodo?
+* Qual è il costo computazionale della risoluzione di un problema quasi ad albero?
+* Come possono essere utilizzati gli ipergrafi per ottimizzare la risoluzione di problemi quasi ad albero?
+
+### Join Tree
+
+* Cosa rappresenta un Join-Tree?
+* Quali sono le regole chiave per la costruzione di un Join-Tree?
+* Cosa rappresenta l'ipergrafo H?
+* Cosa rappresenta l'insieme V'?
+* Cosa rappresenta l'albero T?
+
+### Ipergrafi Aciclici
+
+* Quando possiamo dire che un ipergrafo è aciclico?
+* Qual è la complessità di decidere se un ipergrafo è aciclico?
+
+### Tree Decomposition
+
+* Qual è l'obiettivo della tree decomposition?
+* Come viene costruita una tree decomposition?
+* Quali sono le proprietà chiave di una tree decomposition?
+* Cosa rappresenta la width di una decomposizione?
+* Cosa rappresenta la tree-width di un grafo?
+* Qual è la complessità di calcolare una tree decomposition di width ≤ k?
+* Come viene utilizzata la tree decomposition per risolvere i CSP?
+* Qual è il processo di risoluzione di un CSP tramite tree decomposition?
+* Qual è la complessità della risoluzione di un CSP tramite tree decomposition?
+* Cosa si intende per local consistency e global consistency?
+
+### Teorema di Grohe
+
+* Cosa afferma il Teorema di Grohe?
+* Qual è il contesto del Teorema di Grohe?
+* Cosa rappresenta la treewidth (tw) in relazione al Teorema di Grohe?
+* Cosa rappresenta il core in relazione al Teorema di Grohe?
+* Qual è l'algoritmo risolutivo per i problemi CSP appartenenti a S secondo il Teorema di Grohe?
+* Qual è la complessità dell'algoritmo risolutivo?
+
+# Planning 
+
+### Domande sul paragrafo "Modello di Pianificazione"
+
+1. Cosa rappresenta uno stato nel contesto della pianificazione?
+2. In che modo le azioni influenzano lo stato del sistema?
+3. Qual è la differenza tra eventi e azioni?
+4. Cosa fa la funzione di transizione di stato?
+5. Cosa significa che un sistema è non deterministico?
+6. Qual è l'obiettivo del processo di pianificazione?
+7. Qual è la differenza tra un planner e un controller?
+8. Quali sono i compiti principali di un planner?
+9. Quali sono i compiti principali di un controller?
+10. Qual è la differenza tra pianificazione offline e pianificazione dinamica?
+11. Qual è la differenza tra un planner domain-specific e un planner domain-independent?
+12. Cosa significa che un planner è configurabile?
+13. Qual è la differenza tra scheduling e planning?
+14. Qual è la complessità computazionale del problema di scheduling?
+15. Qual è la complessità computazionale del problema di planning?
+
+### Domande sul paragrafo "Classical Planning"
+
+1. Quali sono le cinque caratteristiche principali del Classical Planning?
+2. Cosa significa che il sistema è completo e deterministico?
+3. Cosa sono gli stati goal?
+4. Cosa significa che i piani sono sequenziali?
+5. Cosa significa che il tempo è implicito nel Classical Planning?
+6. Qual è il problema di pianificazione nel Classical Planning?
+7. Come viene rappresentato il problema di pianificazione come un grafo?
+8. Qual è il problema principale quando il numero di stati è molto grande?
+9. Perché i planner configurabili sono spesso usati nel Classical Planning?
+10. Quali sono i quattro passaggi principali del processo di planning?
+11. Perché è importante creare piani di riserva?
+
+### Domande sul paragrafo "Classical Representation"
+
+1. Qual è la differenza tra predicati e costanti?
+2. Cosa sono gli atomi nella Classical Representation?
+3. Qual è la differenza tra ground expressions e unground expressions?
+4. Cosa significa grounding?
+5. Cosa fa una sostituzione?
+6. Cosa rappresenta uno stato nella Classical Representation?
+7. Spiega l'esempio del predicato `top(pallet, shelf)` e delle sue ground expressions.
+
+### Domande sul paragrafo "Operatore"
+
+1. Quali sono le tre componenti di un operatore?
+2. Cosa rappresenta `name(o)`?
+3. Cosa rappresentano `preconditions(o)`?
+4. Cosa rappresentano `effects(o)`?
+
+### Domande sul paragrafo "Azione e Ground Instance"
+
+1. Cosa è un'azione?
+2. Come si ottiene una azione da un operatore?
+3. Cosa rappresentano `precond+(a)`, `precond−(a)`, `effects+(a)` e `effects−(a)`?
+
+### Domande sul paragrafo "Applicabilità delle Azioni"
+
+1. Quando un'azione è applicabile in uno stato?
+2. Cosa sono i letterali positivi e negativi?
+
+### Domande sul paragrafo "Dominio di Planning"
+
+1. Cosa è un dominio di planning?
+
+### Domande sul paragrafo "Piano e Soluzione"
+
+1. Cosa è un piano?
+2. Quando un piano è una soluzione per un problema di planning?
+3. Cosa significa che un piano è eseguibile?
+4. Cosa significa che uno stato finale soddisfa l'insieme degli obiettivi?
+5. Spiega la formulazione formale di una soluzione.
+
+### Domande sul paragrafo "Soluzioni Ridondanti"
+
+1. Perché si possono trovare più soluzioni per un problema di planning?
+2. Qual è il problema delle soluzioni ridondanti?
+3. Cosa significa trovare una soluzione minima o più breve?
+4. Cosa fa la rappresentazione set-theoretic?
+5. Qual è il problema principale della rappresentazione set-theoretic?
+
+### Domande sul paragrafo "Rappresentazione State-Variable"
+
+1. Cosa sono le proprietà statiche e dinamiche?
+2. Come si rappresentano le proprietà statiche e dinamiche nella rappresentazione state-variable?
+3. Spiega l'esempio di `top(p1) = c3`.
+
+# State-Space Planning
+
+### Domande sul paragrafo "State-Space Planning"
+
+1. Come viene rappresentato il problema di pianificazione nello state-space planning?
+2. Cosa rappresenta ogni nodo nello state-space planning?
+3. Cosa rappresenta un piano nello state-space planning?
+4. Come funziona il plan-space planning?
+5. Cosa rappresenta ogni nodo nel plan-space planning?
+
+### Domande sul paragrafo "Approcci e Tecniche"
+
+#### Domande sul paragrafo "Forward Search"
+
+1. Qual è l'idea principale del forward search?
+2. Quali sono i passaggi principali dell'algoritmo di forward search?
+3. Cosa significa che un algoritmo è sound?
+4. Cosa significa che un algoritmo è complete?
+5. Quali tecniche di ricerca possono essere utilizzate per implementare il forward search?
+6. Quali sono i vantaggi e gli svantaggi di BFS, DFS, Best-First Search, Greedy e A* Search?
+7. Quali sono i problemi principali del forward search?
+
+#### Domande sul paragrafo "Backward Search"
+
+1. Qual è l'idea principale del backward search?
+2. Come si definiscono le azioni rilevanti per un goal?
+3. Cosa fa la funzione inversa della transizione?
+4. Quali sono i passaggi principali dell'algoritmo di backward search?
+5. Quali sono i problemi principali del backward search?
+
+### Domande sul paragrafo "Lifting"
+
+1. Qual è l'obiettivo del lifting?
+2. Come si utilizzano le variabili nel lifting?
+3. Come il lifting riduce lo spazio di ricerca?
+4. Cosa è il maximum general unifier?
+5. Qual è il problema principale del lifting?
+
+### Domande sul paragrafo "STRIPS"
+
+1. Su cosa si basa l'algoritmo STRIPS?
+2. Quali sono le caratteristiche principali di STRIPS?
+3. Come risolve STRIPS i goal?
+4. Perché STRIPS non è completo?
+5. Cosa è l'anomalia di Sussman?
+6. Perché l'anomalia di Sussman dimostra il fallimento di STRIPS?
+7. Quali sono gli approcci alternativi per gestire i problemi come l'anomalia di Sussman?
+
+### Domande sul paragrafo "Tecniche del Planning-Graph"
+
+1. Qual è l'obiettivo del Planning-Graph?
+2. Come funziona il Planning-Graph?
+3. Cosa sono le azioni di maintenance/frame?
+4. Cosa significa mutex?
+5. Quali sono i tipi di mutex?
+6. Quali sono i vantaggi del Planning-Graph?
+7. Come si costruisce il Planning-Graph?
+8. Come si esegue la backward search nel Planning-Graph?
+9. Quali sono i vantaggi e gli svantaggi del Planning-Graph?
+10. Come si utilizzano le azioni di maintenance/frame nel Planning-Graph?
+11. Come si definiscono i mutex tra azioni e stati nel Planning-Graph?
+12. Quali sono i vantaggi e gli svantaggi del Planning-Graph rispetto ad altri approcci?
+
+

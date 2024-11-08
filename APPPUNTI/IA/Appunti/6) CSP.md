@@ -1,31 +1,31 @@
 
-| Termine | Spiegazione |
-|---|---|
-| **Soddisfacimento di vincoli (CSP)** | Un problema che consiste nel trovare un assegnamento di valori a variabili che soddisfi un insieme di vincoli. |
-| **Rappresentazione esplicita** | Un modo per rappresentare i vincoli in un CSP, dove ogni vincolo è definito come un insieme di variabili e un insieme di valori validi. |
-| **Rappresentazione implicita** | Un modo per rappresentare i vincoli in un CSP, dove i vincoli sono definiti implicitamente dalle relazioni tra le variabili. |
-| **Constraint Graph** | Una rappresentazione grafica dei vincoli di un CSP, dove i nodi rappresentano le variabili e gli archi collegano le variabili che condividono un vincolo. |
-| **Ipergrafo** | Una generalizzazione di un grafo, dove un iper-arco può collegare più di due nodi. |
-| **Problema dell'Omomorfismo** | Un problema che consiste nel decidere se esiste una corrispondenza tra due strutture relazionali che preserva le relazioni. |
-| **Struttura relazionale** | Un insieme di relazioni tra variabili, rappresentato da simboli di relazione e un database di tuple. |
-| **Omomorfismo** | Una mappatura tra due strutture relazionali che preserva le relazioni. |
-| **Core** | La versione più semplice e ridotta di un CSP, ottenuta attraverso un processo di semplificazione. |
-| **Endomorfismo** | Una funzione che mappa gli elementi di una struttura su se stessa. |
-| **Backtracking Search** | Un algoritmo di ricerca non informata utilizzato per risolvere problemi di CSP, che prova tutti i possibili assegnamenti di valori alle variabili. |
-| **Forward Checking** | Un'ottimizzazione del backtracking search che filtra i valori dei domini delle variabili non assegnate, eliminando i valori che violano i vincoli con gli assegnamenti futuri. |
-| **Arc Consistency** | Un'ottimizzazione del backtracking search che verifica la consistenza di tutti i vincoli tra coppie di variabili. |
-| **Propagazione** | Un processo che ottimizza il backtracking forzando l'arc consistency, estendendo la verifica dei vincoli agli altri vincoli collegati. |
-| **1-Consistency (Node-Consistency)** | Un tipo di consistenza che verifica se ogni valore nel dominio di una variabile soddisfa i vincoli unari associati a quella variabile. |
-| **2-Consistency (Arc-Consistency)** | Un tipo di consistenza che verifica se ogni assegnamento consistente a una variabile può essere esteso all'altra variabile in una coppia di variabili. |
-| **K-Consistency** | Un tipo di consistenza che verifica se ogni assegnamento consistente a k-1 variabili può essere esteso alla k-esima variabile. |
-| **Minimum Remaining Values (MRV)** | Un'euristica per la scelta delle variabili nel backtracking search, che seleziona la variabile con il minor numero di valori validi rimasti nel dominio. |
-| **Least Constraining Value** | Un'euristica per la scelta dei valori nel backtracking search, che seleziona il valore che restringe meno i domini delle variabili rimanenti. |
-| **Punto critico** | Un punto in cui gli algoritmi euristici possono fallire, in problemi bilanciati con lo stesso numero di variabili e vincoli. |
-| **Join-Tree** | Una struttura che organizza gli iperarchi di un ipergrafo in modo tale che ogni variabile si propaghi correttamente lungo l'albero. |
-| **Ipergrafo aciclico** | Un ipergrafo che ha un join-tree. |
-| **Tree Decomposition** | Un metodo che permette di semplificare un problema complesso rappresentato da un grafo, suddividendolo in sottoproblemi aciclici più facili da risolvere. |
-| **Tree-width** | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero. |
-| **Teorema di Grohe** | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
+| Termine                              | Spiegazione                                                                                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Soddisfacimento di vincoli (CSP)** | Un problema che consiste nel trovare un assegnamento di valori a variabili che soddisfi un insieme di vincoli.                                                                     |
+| **Rappresentazione esplicita**       | Un modo per rappresentare i vincoli in un CSP, dove ogni vincolo è definito come un insieme di variabili e un insieme di valori validi.                                            |
+| **Rappresentazione implicita**       | Un modo per rappresentare i vincoli in un CSP, dove i vincoli sono definiti implicitamente dalle relazioni tra le variabili.                                                       |
+| **Constraint Graph**                 | Una rappresentazione grafica dei vincoli di un CSP, dove i nodi rappresentano le variabili e gli archi collegano le variabili che condividono un vincolo.                          |
+| **Ipergrafo**                        | Una generalizzazione di un grafo, dove un iper-arco può collegare più di due nodi.                                                                                                 |
+| **Problema dell'Omomorfismo**        | Un problema che consiste nel decidere se esiste una corrispondenza tra due strutture relazionali che preserva le relazioni.                                                        |
+| **Struttura relazionale**            | Un insieme di relazioni tra variabili, rappresentato da simboli di relazione e un database di tuple.                                                                               |
+| **Omomorfismo**                      | Una mappatura tra due strutture relazionali che preserva le relazioni.                                                                                                             |
+| **Core**                             | La versione più semplice e ridotta di un CSP, ottenuta attraverso un processo di semplificazione.                                                                                  |
+| **Endomorfismo**                     | Una funzione che mappa gli elementi di una struttura su se stessa.                                                                                                                 |
+| **Backtracking Search**              | Un algoritmo di ricerca non informata utilizzato per risolvere problemi di CSP, che prova tutti i possibili assegnamenti di valori alle variabili.                                 |
+| **Forward Checking**                 | Un'ottimizzazione del backtracking search che filtra i valori dei domini delle variabili non assegnate, eliminando i valori che violano i vincoli con gli assegnamenti futuri.     |
+| **Arc Consistency**                  | Un'ottimizzazione del backtracking search che verifica la consistenza di tutti i vincoli tra coppie di variabili.                                                                  |
+| **Propagazione**                     | Un processo che ottimizza il backtracking forzando l'arc consistency, estendendo la verifica dei vincoli agli altri vincoli collegati.                                             |
+| **1-Consistency (Node-Consistency)** | Un tipo di consistenza che verifica se ogni valore nel dominio di una variabile soddisfa i vincoli unari associati a quella variabile.                                             |
+| **2-Consistency (Arc-Consistency)**  | Un tipo di consistenza che verifica se ogni assegnamento consistente a una variabile può essere esteso all'altra variabile in una coppia di variabili.                             |
+| **K-Consistency**                    | Un tipo di consistenza che verifica se ogni assegnamento consistente a k-1 variabili può essere esteso alla k-esima variabile.                                                     |
+| **Minimum Remaining Values (MRV)**   | Un'euristica per la scelta delle variabili nel backtracking search, che seleziona la variabile con il minor numero di valori validi rimasti nel dominio.                           |
+| **Least Constraining Value**         | Un'euristica per la scelta dei valori nel backtracking search, che seleziona il valore che restringe meno i domini delle variabili rimanenti.                                      |
+| **Punto critico**                    | Un punto in cui gli algoritmi euristici possono fallire, in problemi bilanciati con lo stesso numero di variabili e vincoli.                                                       |
+| **Join-Tree**                        | Una struttura che organizza gli iperarchi di un ipergrafo in modo tale che ogni variabile si propaghi correttamente lungo l'albero.                                                |
+| **Ipergrafo aciclico**               | Un ipergrafo che ha un join-tree.                                                                                                                                                  |
+| **Tree Decomposition**               | Un metodo che permette di semplificare un problema complesso rappresentato da un grafo, suddividendolo in sottoproblemi aciclici più facili da risolvere.                          |
+| **Tree-width**                       | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero.                                                                                                |
+| **Teorema di Grohe**                 | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
 
 
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
@@ -60,7 +60,7 @@ Tuttavia, se i vincoli coinvolgono **più di due variabili**, il **Constraint Gr
 ## Problema dell' Omomorfismo
 Il **Problema dell'Omomorfismo** (Hom) consiste nel decidere se esiste una corrispondenza tra due strutture relazionali. Una **struttura relazionale** è costituita da:
 
-1. **Simboli di relazione**: $r_1, r_2, ..., r_n$, ciascuno con una propria **arità** (cioè il numero di elementi che partecipano alla relazione).
+1. **Simboli di relazione**: $r_1, r_2, \dots, r_n$, ciascuno con una propria **arità** (cioè il numero di elementi che partecipano alla relazione).
 2. **Database (DB)**: un insieme di tuple che rappresentano i fatti o i dati per ogni relazione.
 
 Per ogni simbolo di relazione $r_i$, esiste una relazione associata $r_i^{DB}$ che contiene le tuple nel database. Ad esempio, se abbiamo lo schema di relazione $r_i(A, B, C)$ ciò indica che la relazione $r_i$ coinvolge tre variabili. Le tuple corrispondenti possono essere rappresentate come $<1, 2, 3>$, $<1, 4, 5>$, e così via.
@@ -112,7 +112,7 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
   - Ogni valore nel dominio di una variabile soddisfa i vincoli unari associati a quella variabile.
 
 - **2-Consistency (Arc-Consistency)**:
-  - Ogni assegnamento consistente a una variabile può essere esteso all'altra variabile in una coppia di variabili (arco).
+  - Ogni assegnamento consistente a una variabile può essere esteso all'altra variabile, sullo stesso arco.
 	  - Per due variabili legate da un vincolo (un "arco" tra di loro), se assegni un valore a una variabile, esiste almeno un valore nell'altra variabile che soddisfa il vincolo. In altre parole, un assegnamento è consistente se, dato un valore per la prima variabile, puoi sempre trovare un valore per la seconda variabile che rispetti il vincolo che le collega.
   - Se la struttura del problema è **aciclica**, forzare l'arc-consistency garantisce l'esistenza di una soluzione.
   - **Costo computazionale:** O(n²), dove *n* è il numero di variabili.
@@ -126,14 +126,14 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
 
 ## Euristiche per la Risoluzione dei CSP
 
-- **Variable Ordering**:
-  - **Minimum Remaining Values (MRV)**:
-    - Si sceglie la variabile con il minor numero di valori validi rimasti nel dominio.
-    - Questo approccio permette di fallire velocemente (fail-fast) se non ci sono valori consistenti, accelerando la ricerca.
-  
-- **Value Ordering**:
-  - **Least Constraining Value**:
-    - Si seleziona il valore che restringe meno i domini delle variabili rimanenti, riducendo il numero di vincoli che devono essere soddisfatti.
+Le due principali euristiche per l'ordinamento delle variabili sono Minimum Remaining Values e Least Constraining Value:
+
+- **Minimum Remaining Values (MRV)**:
+- Si sceglie la variabile con il minor numero di valori validi rimasti nel dominio.
+- Questo approccio permette di fallire velocemente (fail-fast) se non ci sono valori consistenti, accelerando la ricerca.
+
+- **Least Constraining Value**:
+- Si seleziona il valore che restringe meno i domini delle variabili rimanenti, riducendo il numero di vincoli che devono essere soddisfatti.
 #### Tecniche di Risoluzione con Assegnamento Completo
 - Invece di partire da un assegnamento vuoto, si parte da un **assegnamento completo** (anche se non consistente) e si cercano correzioni:
     - Seleziona una variabile in conflitto.
@@ -148,8 +148,10 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
 - Questo è un problema generale per molti algoritmi euristici, non solo per quelli basati su minimo conflitto.
 
 ## Omomorfismo su strutture acicliche
-Il problema dell'omomorfismo su strutture acicliche si riferisce alla decisione se esiste un **omomorfismo** (una mappa che preserva la struttura) tra due strutture relazionali, chiamate $A$ e $B$, che rappresentano vincoli e relazioni di un problema CSP (Constraint Satisfaction Problem). 
-La complessità di risolvere questo problema su strutture **acicliche** (che non contengono cicli) è **O(||A|| · ||B|| · log ||B||)**, dove $\|A\|$ e $\|B\|$ rappresentano la dimensione delle strutture.
+
+Il problema dell'omomorfismo su strutture acicliche si riferisce al decidere se esiste un **omomorfismo**, ovvero una mappatura che preserva la struttura di due strutture relazionali, chiamate $A$ e $B$, che rappresentano vincoli e relazioni di un problema CSP.
+
+La complessità di risolvere questo problema su strutture **acicliche** è $O(||A|| · ||B|| · log ||B||)$, dove $\|A\|$ e $\|B\|$ rappresentano la dimensione delle strutture.
 
 #### Procedura(algoritmo di Yannakakis)
 Per risolvere il problema su strutture acicliche, si utilizza un **algoritmo di programmazione dinamica**, in particolare l'algoritmo di **Yannakakis**. 
@@ -175,12 +177,12 @@ L'algoritmo di Yannakakis trasforma il problema su strutture acicliche in una se
 
 - Una volta effettuato il filtraggio, si ottiene una **struttura filtrata** che consente di trovare una soluzione senza la necessità di eseguire il backtracking (ovvero, senza dover tornare indietro per provare nuove soluzioni). Questo riduce enormemente la complessità della ricerca.
 - Anche se il numero di soluzioni può essere esponenziale, l'algoritmo offre un modo polinomiale per:
-  - Decidere se esiste una soluzione.
-  - Calcolare una soluzione.
-  - Trovare tutte le soluzioni.
+	- Decidere se esiste una soluzione.
+	- Calcolare una soluzione.
+	- Trovare tutte le soluzioni.
 
 ## Strutture quasi ad Albero
-Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione di un grafo che rappresenta un problema di soddisfacimento di vincoli in una forma aciclica, per sfruttare algoritmi efficienti applicabili ai grafi senza cicli. Questo avviene attraverso la rimozione di nodi dal grafo, rendendolo aciclico.
+Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione di un grafo che rappresenta un CSP in una forma *aciclica*, per sfruttare algoritmi efficienti applicabili ai grafi senza cicli. Questo avviene attraverso la rimozione di nodi dal grafo, rendendolo aciclico.
 
 ### Procedura e Concetti chiave
 
@@ -212,30 +214,31 @@ Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione d
    - Un'ulteriore **ottimizzazione** è possibile utilizzando un **approccio basato sugli ipergrafi**, che permette di fissare interi **vincoli** (un **gruppo** di variabili) anziché singole variabili. 
    - Questo può ridurre ulteriormente la complessità in certi casi, permettendo una risoluzione più efficiente del problema.
 
-### Riassunto
-- Le **Strutture quasi ad Albero** trasformano un problema ciclico in uno aciclico rimuovendo un minimo numero di nodi (cut set).
-- Questo permette di utilizzare metodi più efficienti per risolvere il problema, riducendo la complessità.
-- L'approccio può essere ulteriormente ottimizzato usando **ipergrafi**, fissando interi vincoli invece di singole variabili.
-
 ## Join Tree 
+ 
  Un **Join-Tree** è una struttura che organizza gli iperarchi in modo tale che ogni variabile si propaghi correttamente lungo l'albero e non venga "persa" o riutilizzata in modo errato. Questo permette una corretta gestione dei vincoli tra le variabili.
-* Sia l'**ipergrafo H** una struttura che rappresenta vincoli complessi tra gruppi di variabili, con ogni iper-arco collegando più di due variabili.
+ 
+* Sia l'**ipergrafo H** una struttura che rappresenta vincoli complessi tra gruppi di variabili, con ogni iper-arco che collega più di due variabili.
 	- **H** è un **ipergrafo** (con variabili $\{A, B, C, D, E\}$ e iperarchi $\{A, B, C\}, \{A, B, D\}, \{D, E\})$.Gli **iperarchi** rappresentano insiemi di variabili che sono collegate tra loro da vincoli.
 	- **V'**  è l'insieme degli **iperarchi** di $H$ (i gruppi di variabili collegati dai vincoli).
-	- **T** è un **Join-Tree**, una struttura che connette questi iperarchi in modo che la propagazione delle variabili segua determinate regole.
-
+	
 ### Regole chiave:
+
+Sia **T** un **Join-Tree**, ovvero una struttura che connette questi iperarchi in modo che la propagazione delle variabili segua determinate regole:
+
 1. Se due iperarchi p e q condividono delle variabili comuni, quelle variabili devono apparire in tutti i vertici lungo il percorso che connette p e q nell'albero T. Questo garantisce che le informazioni sulle variabili comuni si propaghino lungo l'albero in modo corretto.
 2. Una variabile che scompare in un certo punto dell'albero non può più riapparire successivamente nel percorso: una volta che la sua informazione è stata utilizzata o propagata, non la si ritrova in altre parti.
 
 ## Ipergrafi Aciclici: 
-Possiamo dire che H è un ipergrafo aciclico ⇐⇒ esso ha un join-tree. 
+
+$$\text{H è un ipergrafo aciclico}\iff\text{H ha un join-tree}$$
 La definizione di un ipergrafo aciclico è più potente di quella di un grafo aciclico. Mentre un grafo aciclico è un grafo senza cicli, in un ipergrafo avere dei cicli potrebbe non apportare problemi, quindi in alcuni casi si può considerare aciclico. 
 Decidere se un ipergrafo è aciclico è un problema log-space-completo ed è trattabile in tempo lineare. La stessa complessità per i grafi
 
-
 ## Tree Decomposition 
+
 La **tree decomposition** è un metodo che permette di semplificare un problema complesso rappresentato da un grafo, suddividendolo in sottoproblemi aciclici più facili da risolvere.
+
 - **Obiettivo**: Prendere un grafo con cicli e trasformarlo in una struttura che può essere trattata come un **albero**, eliminando i cicli.
 - **Metodo**: Raggruppiamo le variabili del problema in insiemi. Ogni insieme (o "nodo") contiene **k + 1** variabili, e questi insiemi formano gli **iperarchi** di un nuovo ipergrafo aciclico.
 - **Tree decomposition**: Viene costruito un **albero** T dove ogni nodo contiene un insieme di variabili del grafo originale. Ciascun nodo è etichettato con un insieme di variabili tramite una funzione $χ$.
@@ -247,27 +250,24 @@ La **tree decomposition** è un metodo che permette di semplificare un problema 
 ### Tree-width:
 - La **width** (larghezza) di una decomposizione è la dimensione massima dei nodi nell'albero meno uno.
 - La **tree-width** del grafo è la larghezza minima tra tutte le possibili decomposizioni.
+---
+-  **Teorema**
+	- Sia k una costante. Calcolare una tree-decomposition di width minore o uguale di k richiede tempo lineare. Se k non è fissato (è parte dell’input) il problema è NP-Hard.
 
-### Teorema
-Sia k una costante. Calcolare una tree-decomposition di width minore o uguale di k
-richiede tempo lineare. Se k non è fissato (è parte dell’input) il problema è NP-Hard.
-
-### Info aggiuntive 
 - **Tree Decomposition e CSP**:
-    - La tree decomposition è particolarmente utile per risolvere problemi di Constraint Satisfaction (CSP).
-    - Una struttura aciclica facilita la risoluzione dei CSP.
+    - La tree decomposition è particolarmente utile per risolvere problemi di Constraint Satisfaction (CSP), poichè una struttura aciclica facilita la risoluzione dei CSP.
 - **Processo di Risoluzione**:
-    - I bags della tree decomposition possono essere considerati come vincoli unici.
-    - Risolvendo i sottoproblemi per ciascun bag e combinando i risultati, si ottiene un problema aciclico.
+    - I nodi della tree decomposition possono essere considerati come vincoli unici.
+    - Risolvendo i sottoproblemi per ciascun nodi e combinando i risultati, si ottiene un problema aciclico.
 - **Risoluzione tramite Tree Decomposition**:
     - Aggiungere vincoli non restrittivi non altera il problema originale.
     - Con una tree decomposition, si ottiene la local consistency (equivalente ad arc consistency).
     - La local consistency implica la global consistency su istanze acicliche.
 - **Complessità**:
-    - Costruzione dei nuovi vincoli: $O(n · D^(k+1)),$ dove D è la dimensione del dominio e k è la width.
+    - Costruzione dei nuovi vincoli: $O(n · D^{(k+1)}),$ dove D è la dimensione del dominio e k è la width.
     - Risoluzione del problema con nuova struttura:
-        - Costo per ogni vincolo: $O(D^(k+1) log D^(k+1))$
-        - Costo totale: $O((D^(k+1) + log D^(k+1)) · (n + m))$
+        - Costo per ogni vincolo: $O(D^{(k+1)} \cdot log D^{(k+1)})$
+        - Costo totale: $O((D^{(k+1)} + log D^{(k+1)}) · (n + m))$
 - **Feasibility**:
     - Ogni problema CSP con tree-width ≤ k è risolvibile in tempo polinomiale, dove k è fissato.
 
