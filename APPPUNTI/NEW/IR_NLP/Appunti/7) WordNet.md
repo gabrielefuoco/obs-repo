@@ -467,3 +467,85 @@ La definizione di un concetto può essere astratta o specifica del dominio. In q
 
 Per affrontare i limiti di ciascun approccio, si possono utilizzare approcci ibridi che combinano elementi di entrambi. Un'altra possibilità interessante è l'utilizzo degli embedding in WordNet, in particolare i node embedding.
 
+## WordNet per più lingue 
+
+### EuroWordNet
+
+EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e relazioni semantiche per diverse lingue. 
+
+**Caratteristiche principali:**
+
+* **Lingue supportate:** Olandese, italiano, spagnolo, inglese (30.000 synsets), tedesco, francese, estone, ceco (10.000 synsets).
+* **Relazioni tra lingue:** L'insieme delle relazioni semantiche è esteso con relazioni tra lingue, come "near_synonym" (sinonimo vicino) e "xpos_" (relazione grammaticale).
+* **Indice linguistico (ILI):** Un sistema per gestire le relazioni tra lingue, utilizzando codici "eq_" per indicare l'equivalenza.
+* **Ontologia dei concetti condivisi:** Definisce i concetti di base condivisi tra le lingue.
+* **Gerarchia di etichette:** Organizza i concetti in una gerarchia di etichette per ogni dominio.
+
+**Struttura dei dati:**
+
+* **Indici interlingua:** Un elenco non strutturato di indici interlingua, ognuno composto da un synset e una gloss inglese.
+* **Collegamento dei codici ILI:** I codici ILI sono collegati a:
+    * Il significato specifico del synset per la lingua data.
+    * Uno o più termini generali di livello superiore.
+    * Possibili domini.
+
+**Relazioni di equivalenza:** I concetti di alto livello e i domini possono essere collegati con relazioni di equivalenza tra indici ILI e significati di una lingua specifica.
+
+
+![[8)-20241107110457034.png]]
+
+## MultiWordNet
+
+MultiWordNet, come EuroWordNet, è stato creato per affrontare le lingue più utilizzate:
+
+La principale differenza tra i due progetti risiede nella strategia per la creazione dell'indice interlingua. In MultiWordNet, i grafi delle diverse lingue sono costruiti sul grafo di WordNet inglese.
+
+**Pro:**
+
+* Meno lavoro manuale
+* Alta compatibilità tra i grafi delle diverse lingue
+* Procedure automatiche per la costruzione di nuove risorse
+
+**Contro:**
+
+* Forte dipendenza dalla struttura di WordNet inglese
+
+## WordNet italiano v1.4
+
+### Procedura di assegnazione
+
+La procedura di assegnazione in WordNet italiano v1.4 si basa sulla costruzione efficiente di synset a partire dal riferimento inglese. 
+
+Dato un senso italiano per una parola, il sistema fornisce un elenco ponderato di synset inglesi simili. Il lessicografo seleziona il synset corretto e scarta gli altri.
+
+La procedura di assegnazione prevede anche l'individuazione di lacune lessicali.
+
+Le risorse utilizzate per la creazione di WordNet italiano v1.4 includono:
+
+* Dizionario Collins
+* Princeton WordNet (PWN)
+* WordNet Domains
+* Dizionario italiano (DISC)
+
+### Gruppi di traduzione (TGR)
+
+I gruppi di traduzione (TGR) rappresentano diversi significati tradotti in entrambe le lingue.
+![[8)-20241111151711463.png|593]]
+* Parte inglese: 40.959 parole, 60.901 TGR
+* Parte italiana: 32.602 parole, 46.545 TGR
+
+
+### Selezione dei synset
+
+La selezione dei synset "migliori" avviene attraverso i seguenti passaggi:
+
+1. Trova synset per ogni senso.
+2. Elenca i synset in base ai seguenti criteri principali:
+    * Probabilità generica
+    * Traduzione
+    * Somiglianza delle gloss
+    * Intersezione tra synset
+3. Seleziona i synset "migliori". 
+
+![[8)-20241111151924702.png]]
+![[8)-20241111152109055.png]]

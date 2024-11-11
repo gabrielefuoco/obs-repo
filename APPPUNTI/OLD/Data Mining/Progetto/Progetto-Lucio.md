@@ -524,7 +524,7 @@ plt.show()
 
 
     
-![png](output_16_0.png)
+![png](Repo/APPPUNTI/OLD/Data%20Mining/Progetto/Allegati/output_16_0.png)
     
 
 

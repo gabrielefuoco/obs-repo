@@ -1,51 +1,51 @@
 
-| Termine | Spiegazione |
-|---|---|
-| **Teoria dei giochi** | Un campo di studio che modella situazioni in cui agenti (umani o artificiali) interagiscono, competono, collaborano o negoziano per raggiungere i propri obiettivi. |
-| **Giochi strategici** | Situazioni di competizione tra giocatori con obiettivi da raggiungere. |
-| **Giochi estensivi** | Giochi in cui le azioni e le strategie considerano tutto ciò che accade nel tempo. |
-| **Giochi ripetitivi** | Giochi in cui la stessa situazione si ripete più volte, influenzando le strategie. |
-| **Giochi cooperativi** | Giochi in cui i giocatori collaborano per ottenere vantaggi comuni. |
-| **Informazione perfetta** | I giocatori conoscono tutte le azioni e decisioni prese. |
-| **Informazione imperfetta** | Non tutti i giocatori conoscono l'intera situazione. |
-| **Informazione completa** | I giocatori conoscono le preferenze degli avversari. |
-| **Informazione incompleta** | I giocatori non conoscono le preferenze degli avversari. |
-| **Mechanism design** | Progettare le regole del gioco per massimizzare i propri obiettivi. |
-| **Giochi coalizionali** | Giochi cooperativi in cui gli agenti (giocatori) cooperano per ottenere benefici comuni, detti "worth", in base alla coalizione di cui fanno parte. |
-| **Solution concept** | Un modo per distribuire i benefici tra i giocatori in modo da soddisfare proprietà desiderabili (equità, razionalità). |
-| **Grand Coalition** | L'insieme totale dei giocatori. |
-| **Worth Function (v(s))** | Una funzione che restituisce il beneficio di ogni sottoinsieme di giocatori. |
-| **Ricchezza totale** | Il massimo beneficio ottenibile dalla grand coalition. |
-| **Transferable Utility (TU)** | La ricchezza può essere distribuita liberamente tra i membri. |
-| **Non-Transferable Utility (NTU)** | La ricchezza non è distribuibile in modo frazionato. |
-| **Imputazione** | Un assegnamento di valori ai giocatori. |
-| **Core** | L'insieme delle distribuzioni (o imputazioni) della ricchezza tra i giocatori che sono stabili, ovvero tali che nessuna coalizione abbia incentivi a "rompere" l'accordo. |
-| **Eccesso (excess)** | La differenza tra la worth di una coalizione e la somma dei valori assegnati ai giocatori in quella coalizione. |
-| **Shapley Value** | Una soluzione che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi contributi marginali a tutte le possibili coalizioni. |
-| **Nucleolo** | Un concetto di soluzione per i giochi coalizionali, che si concentra sulla riduzione dell'insoddisfazione massima tra i giocatori. |
-| **ε-core** | Una generalizzazione più debole del core, dove si permette una certa insoddisfazione. |
-| **Contested Garment Rule** | Un criterio per dividere un'eredità tra due creditori con debiti e un totale da dividere. |
-| **Aste** | Meccanismi per vendere beni o servizi attraverso offerte competitive. |
-| **Single good auction** | Aste in cui si offre su un unico oggetto. |
-| **Multiple goods auction** | Aste in cui si offre su insiemi di oggetti. |
-| **English auction** | Un'asta in cui i partecipanti fanno offerte crescenti e il bene viene assegnato al maggiore offerente. |
-| **Japanese auction** | Un'asta simile a quella inglese, ma con il gestore che fissa progressivamente le offerte. |
-| **Dutch auction** | Un'asta al ribasso in cui si parte da un prezzo alto e si scende. |
-| **Sealed-Bid Auctions** | Aste in cui le offerte sono segrete. |
-| **Independent Private Values (IPV)** | Ogni partecipante ha un valore attribuito al bene indipendente da quello degli altri. |
-| **Second-Price Auctions** | Aste in cui il vincitore paga il secondo prezzo più alto. |
-| **First-Price Auctions** | Aste in cui il vincitore paga l'importo offerto. |
-| **Equilibrio di Nash** | Un profilo di azione in cui nessun giocatore può migliorare la propria utilità cambiando unilateralmente la propria azione. |
-| **Dilemma del Prigioniero** | Un esempio classico di gioco strategico in cui entrambi i giocatori finiscono in una situazione subottimale anche se avrebbero ottenuto un risultato migliore cooperando. |
-| **Strategie Miste** | Distribuzioni di probabilità sulle azioni che un giocatore può scegliere. |
-| **Utilità Attesa** | La misura dell'aspettativa dei risultati di tutte le azioni possibili. |
-| **Funzione di Utilità di Von Neumann-Morgenstern** | Una funzione che rappresenta le preferenze dei giocatori in termini di utilità attesa. |
-| **Teorema di Nash** | Afferma che in ogni gioco non cooperativo con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. |
-| **Supporto di una Strategia Mista** | L'insieme delle azioni che hanno probabilità positiva nella strategia. |
-| **Giochi in forma estesa** | Giochi in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato. |
-| **Game tree** | Una struttura che mostra i nodi di decisione e i nodi terminali. |
-| **Subgame Perfect Equilibrium (SPE)** | Un equilibrio che è un equilibrio di Nash per il gioco completo e per ogni sottogioco. |
-| **Algoritmo Minimax** | Un algoritmo che cerca di minimizzare le perdite massime in situazioni di conflitto. |
+| Termine                                            | Spiegazione                                                                                                                                                               |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Teoria dei giochi**                              | Un campo di studio che modella situazioni in cui agenti (umani o artificiali) interagiscono, competono, collaborano o negoziano per raggiungere i propri obiettivi.       |
+| **Giochi strategici**                              | Situazioni di competizione tra giocatori con obiettivi da raggiungere.                                                                                                    |
+| **Giochi estensivi**                               | Giochi in cui le azioni e le strategie considerano tutto ciò che accade nel tempo.                                                                                        |
+| **Giochi ripetitivi**                              | Giochi in cui la stessa situazione si ripete più volte, influenzando le strategie.                                                                                        |
+| **Giochi cooperativi**                             | Giochi in cui i giocatori collaborano per ottenere vantaggi comuni.                                                                                                       |
+| **Informazione perfetta**                          | I giocatori conoscono tutte le azioni e decisioni prese.                                                                                                                  |
+| **Informazione imperfetta**                        | Non tutti i giocatori conoscono l'intera situazione.                                                                                                                      |
+| **Informazione completa**                          | I giocatori conoscono le preferenze degli avversari.                                                                                                                      |
+| **Informazione incompleta**                        | I giocatori non conoscono le preferenze degli avversari.                                                                                                                  |
+| **Mechanism design**                               | Progettare le regole del gioco per massimizzare i propri obiettivi.                                                                                                       |
+| **Giochi coalizionali**                            | Giochi cooperativi in cui gli agenti (giocatori) cooperano per ottenere benefici comuni, detti "worth", in base alla coalizione di cui fanno parte.                       |
+| **Solution concept**                               | Un modo per distribuire i benefici tra i giocatori in modo da soddisfare proprietà desiderabili (equità, razionalità).                                                    |
+| **Grand Coalition**                                | L'insieme totale dei giocatori.                                                                                                                                           |
+| **Worth Function (v(s))**                          | Una funzione che restituisce il beneficio di ogni sottoinsieme di giocatori.                                                                                              |
+| **Ricchezza totale**                               | Il massimo beneficio ottenibile dalla grand coalition.                                                                                                                    |
+| **Transferable Utility (TU)**                      | La ricchezza può essere distribuita liberamente tra i membri.                                                                                                             |
+| **Non-Transferable Utility (NTU)**                 | La ricchezza non è distribuibile in modo frazionato.                                                                                                                      |
+| **Imputazione**                                    | Un assegnamento di valori ai giocatori.                                                                                                                                   |
+| **Core**                                           | L'insieme delle distribuzioni (o imputazioni) della ricchezza tra i giocatori che sono stabili, ovvero tali che nessuna coalizione abbia incentivi a "rompere" l'accordo. |
+| **Eccesso (excess)**                               | La differenza tra la worth di una coalizione e la somma dei valori assegnati ai giocatori in quella coalizione.                                                           |
+| **Shapley Value**                                  | Una soluzione che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi contributi marginali a tutte le possibili coalizioni.                        |
+| **Nucleolo**                                       | Un concetto di soluzione per i giochi coalizionali, che si concentra sulla riduzione dell'insoddisfazione massima tra i giocatori.                                        |
+| **ε-core**                                         | Una generalizzazione più debole del core, dove si permette una certa insoddisfazione.                                                                                     |
+| **Contested Garment Rule**                         | Un criterio per dividere un'eredità tra due creditori con debiti e un totale da dividere.                                                                                 |
+| **Aste**                                           | Meccanismi per vendere beni o servizi attraverso offerte competitive.                                                                                                     |
+| **Single good auction**                            | Aste in cui si offre su un unico oggetto.                                                                                                                                 |
+| **Multiple goods auction**                         | Aste in cui si offre su insiemi di oggetti.                                                                                                                               |
+| **English auction**                                | Un'asta in cui i partecipanti fanno offerte crescenti e il bene viene assegnato al maggiore offerente.                                                                    |
+| **Japanese auction**                               | Un'asta simile a quella inglese, ma con il gestore che fissa progressivamente le offerte.                                                                                 |
+| **Dutch auction**                                  | Un'asta al ribasso in cui si parte da un prezzo alto e si scende.                                                                                                         |
+| **Sealed-Bid Auctions**                            | Aste in cui le offerte sono segrete.                                                                                                                                      |
+| **Independent Private Values (IPV)**               | Ogni partecipante ha un valore attribuito al bene indipendente da quello degli altri.                                                                                     |
+| **Second-Price Auctions**                          | Aste in cui il vincitore paga il secondo prezzo più alto.                                                                                                                 |
+| **First-Price Auctions**                           | Aste in cui il vincitore paga l'importo offerto.                                                                                                                          |
+| **Equilibrio di Nash**                             | Un profilo di azione in cui nessun giocatore può migliorare la propria utilità cambiando unilateralmente la propria azione.                                               |
+| **Dilemma del Prigioniero**                        | Un esempio classico di gioco strategico in cui entrambi i giocatori finiscono in una situazione subottimale anche se avrebbero ottenuto un risultato migliore cooperando. |
+| **Strategie Miste**                                | Distribuzioni di probabilità sulle azioni che un giocatore può scegliere.                                                                                                 |
+| **Utilità Attesa**                                 | La misura dell'aspettativa dei risultati di tutte le azioni possibili.                                                                                                    |
+| **Funzione di Utilità di Von Neumann-Morgenstern** | Una funzione che rappresenta le preferenze dei giocatori in termini di utilità attesa.                                                                                    |
+| **Teorema di Nash**                                | Afferma che in ogni gioco non cooperativo con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. |
+| **Supporto di una Strategia Mista**                | L'insieme delle azioni che hanno probabilità positiva nella strategia.                                                                                                    |
+| **Giochi in forma estesa**                         | Giochi in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato.                                                                 |
+| **Game tree**                                      | Una struttura che mostra i nodi di decisione e i nodi terminali.                                                                                                          |
+| **Subgame Perfect Equilibrium (SPE)**              | Un equilibrio che è un equilibrio di Nash per il gioco completo e per ogni sottogioco.                                                                                    |
+| **Algoritmo Minimax**                              | Un algoritmo che cerca di minimizzare le perdite massime in situazioni di conflitto.                                                                                      |
 
 
 Modella situazioni in cui agenti (umani o artificiali) interagiscono. Gli agenti possono competere, collaborare o negoziare per raggiungere i propri obiettivi.
@@ -75,35 +75,35 @@ Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco
 ## Giochi Coalizionali
    Sono giochi cooperativi dove gli agenti (giocatori) cooperano per ottenere benefici comuni, detti **worth**, in base alla coalizione di cui fanno parte. Gli agenti possono essere persone, aziende, partiti politici, ecc.
 
-2. **Obiettivo**:  
+**Obiettivo**:  
    Calcolare una **solution concept**, ovvero come distribuire i benefici tra i giocatori in modo da soddisfare proprietà desiderabili (equità, razionalità).
 
-3. **Struttura del Gioco**:
+**Struttura del Gioco**:
    - **Grand Coalition**: insieme totale dei giocatori.
    - **Worth Function (v(s))**: funzione che restituisce il beneficio di ogni sottoinsieme di giocatori.
    - **Ricchezza totale**: il massimo beneficio ottenibile dalla grand coalition, denotato come **v(N)**.
 
-4. Il gioco risponde a delle **Domande Fondamentali**:
+Il gioco risponde a delle **Domande Fondamentali**:
    - **Quale coalizione formare**?
    - **Come distribuire la ricchezza tra i membri della coalizione**?
 
-5. Si basa su due **Assunzioni**:
+Si basa su due **Assunzioni**:
    - **Transferable Utility (TU)**: la ricchezza può essere distribuita liberamente tra i membri (ad esempio, denaro).
    - **Non-Transferable Utility (NTU)**: se la ricchezza non è distribuibile in modo frazionato (ad esempio, oggetti indivisibili), la worth function non sarà un numero, ma un insieme di oggetti.
 
-6. **Formalmente**:
+**Formalmente**:
    - Un gioco è una coppia **G = (N, v)** dove **v** è la worth function.
    - **Outcome**: un assegnamento di valori ai giocatori, definito dall'imputation set **X(G)**, che contiene tutti i vettori possibili **x = (x₁, ..., xₙ)**.
 
-7. Un'**imputazione** (soluzione), per essere considerata ammissibile, deve soddisfare le seguenti **proprietà:**
+Un'**imputazione** (soluzione), per essere considerata ammissibile, deve soddisfare le seguenti **proprietà:**
    - **Efficiency**: la somma dei valori assegnati ai giocatori deve essere pari a **v(N)**.
    - **Individual Rationality**: il valore di ogni giocatore deve essere almeno quanto otterrebbe da solo, ovvero $xᵢ ≥ v({i})$ per ogni giocatore $i$
 
-8. **Solution Concepts**:
+**Solution Concepts**:
    - **Fairness**: distribuzione equa della ricchezza.
    - **Stability**: nessun giocatore ha incentivi a lasciare la coalizione.
 
-9. **Esempio**:
+**Esempio**:
    - Giocatori in una rete connessa formano una coalizione.
    - La ricchezza della coalizione dipende dai costi degli archi nel grafo che li collega.
    - **Eccesso**: misura l'insoddisfazione di una coalizione. Ad esempio, l'eccesso della coalizione $S$ è dato da $e(S, x) = v(S) - x(S)$.
@@ -125,9 +125,9 @@ Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco
 3. **Giochi a Somma Costante**:
    - La somma della **worth** di una coalizione **S** e quella dei giocatori fuori dalla coalizione **N \ S** è sempre pari alla worth totale **v(N)**.
    - Formula:  
-     $∀S ⊂ N$, allora  v(S) + v(N \\ S) = v(N)  
+     $∀S ⊂ N$, allora  $v(S) + v(N \setminus S) = v(N)$
      Questo implica che non importa come si distribuisce la ricchezza tra le coalizioni e i non membri, la somma sarà sempre costante.
-    * Dove v(N\\S) è il valore che può ottenere la coalizione formata da tutti i giocatori che non sono in S
+    * Dove $v(N\setminus S)$ è il valore che può ottenere la coalizione formata da tutti i giocatori che non sono in S
 
 4. **Giochi Convessi**:
    - La ricchezza combinata di due coalizioni è maggiore o uguale alla somma delle loro worth individuali meno la worth della loro intersezione.
@@ -156,7 +156,7 @@ Questo esempio riguarda la distribuzione della **ricchezza** (o "worth") in un g
   -  v(\{A, C\}) = 30\)
   -  v(\{B, C\}) = 40\)
 
-- La **worth** della coalizione **grand coalition** (tutti e tre i giocatori insieme) è  v(\{A, B, C\}) = 42\).
+- La **worth** della coalizione **grand coalition** (tutti e tre i giocatori insieme) è  $v(\{A, B, C\}) = 42$
 ### Obiettivo: Distribuire la ricchezza
 Il nostro obiettivo è distribuire la **worth totale**  v(\{A, B, C\}) = 42\) tra i tre giocatori  A\),  B\), e  C\), rispettando alcune condizioni.
 ### Imputazione iniziale:  x = [4, 14, 24]\)

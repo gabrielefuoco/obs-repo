@@ -280,7 +280,7 @@ Il **Planning-Graph** Ã¨ una struttura che cerca di risolvere il problema dellâ€
 
 #### Come funziona?
 1. **Relaxation Phase (Espansione del grafo)**:
-   - Si costruisce un grafo di pianificazione partendo da \( k = 0 \) e lo si espande per \( k \) livelli.
+   - Si costruisce un grafo di pianificazione partendo da \( k = 0 \) e lo si espande per k livelli.
    - Ogni livello del grafo alterna stati e azioni:
      - I **nodi al livello azione** \( i \) contengono le azioni eseguibili al tempo \( i \).
      - I **nodi al livello stato** \( i \) contengono i fatti che possono essere veri al livello \( i \).

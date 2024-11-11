@@ -277,21 +277,62 @@ s(Y) :- b(Y), X < Y.
 ```
   - In queste regole, ci sono variabili nella testa o nei letterali negati che non appaiono nel corpo.
 
-### Negazione Stratificata e Grafi di Dipendenze
-- La **negazione in una ricorsione** può creare problemi.
-- Si risolve con la **negazione stratificata**:
-  - Si costruisce un **grafo di dipendenze** dove ogni arco rappresenta una relazione tra predicati.
-  - Se c'è un **ciclo con negazione**, potrebbe esserci un problema.
-  - I **programmi stratificati** (senza cicli con negazione) sono **più semplici** da risolvere.
+- Esempio di una regola **safe**:
 
-### Esempio di Programma Stratificato:
+```
+s(X) :- b(X), r(X), X < Y, c(Y).
+```
+
+1. **Ogni variabile nella testa appare in un letterale positivo del corpo**:
+   - La variabile `X` è presente nella testa (`s(X)`) e compare in `b(X)` e `r(X)`, che sono letterali positivi nel corpo. Quindi, la prima condizione è soddisfatta.
+
+2. **Ogni variabile in un letterale negato appare nel corpo**:
+   - In questo caso, non ci sono letterali negati (come `not r(X)`), quindi la condizione è automaticamente soddisfatta.
+
+3. **Ogni variabile in un operatore di confronto appare in un letterale positivo**:
+   - Nell'operatore di confronto `X < Y`, entrambe le variabili `X` e `Y` compaiono in letterali positivi: `X` è presente in `b(X)` e `Y` in `c(Y)`. Anche questa condizione è soddisfatta.
+
+## Negazione Stratificata
+
+La **negazione stratificata** è una tecnica utilizzata per gestire la negazione nei programmi logici con ricorsione, evitando situazioni in cui la negazione causerebbe ambiguità o cicli logici non risolvibili. 
+### Grafi di Dipendenze e Cicli con Negazione
+1. **Grafo di Dipendenze**:
+   - Per costruire un grafo di dipendenze di un programma logico, si rappresentano i predicati come nodi.
+   - Ogni regola che usa un predicato per definirne un altro viene rappresentata con un arco direzionale dal predicato usato a quello definito.
+   - Se la regola contiene un **letterale negato** (`not P`), l'arco è considerato **negato**.
+
+2. **Ciclo con Negazione**:
+   - Se nel grafo esiste un ciclo che include un arco negato, significa che c'è una **dipendenza circolare con negazione**.
+   - Questo può creare ambiguità, poiché non si può stabilire chiaramente il valore di verità dei predicati coinvolti (ciascuno dipende dall'altro, direttamente o indirettamente, con negazione).
+
+3. **Programma Stratificato**:
+   - Un programma è **stratificato** se non contiene cicli con negazione.
+   - Questo tipo di programma permette di ordinare i predicati in livelli o *strati* in modo che i predicati in uno strato dipendano solo da predicati di strati precedenti.
+   - I programmi stratificati sono **più semplici** da risolvere poiché si può valutare ogni strato sequenzialmente, senza ambiguità derivanti dalla negazione.
+
+### Esempio di Programma Stratificato
+Consideriamo l’esempio:
 ```
 reach(X) :- source(X).
 reach(X) :- reach(Y), arc(Y, X).
 noReach(X) :- target(X), not reach(X).
 ```
-- **Programmi stratificati** sono valutati in **tempo polinomiale**.
 
+#### Analisi del Programma
+- **Predicati**:
+  - `reach(X)`: rappresenta i nodi raggiungibili.
+  - `noReach(X)`: rappresenta i nodi non raggiungibili.
+  - `source(X)` e `target(X)`: sono fatti che indicano i nodi di origine e destinazione.
+
+- **Grafo di Dipendenze**:
+  - `reach(X)` dipende da `source(X)` e da `reach(Y)`.
+  - `noReach(X)` dipende da `target(X)` e dalla negazione di `reach(X)` (`not reach(X)`).
+
+- **Stratificazione**:
+  - Primo strato: `reach(X)` può essere calcolato usando `source(X)` e `arc(Y, X)`.
+  - Secondo strato: `noReach(X)` viene calcolato dopo `reach(X)`, poiché dipende dal valore di `reach(X)` (con negazione).
+
+Questo programma è **stratificato** perché non ha cicli con negazione; `reach(X)` è calcolato prima e `noReach(X)` viene valutato successivamente, evitando dipendenze circolari.
 ### Semantica di Programmi con Disgiunzione e Negazione
 - **Teorema:** 
   - Se il programma è **positivo** (senza negazioni), esiste un **unico modello minimale**.
@@ -357,8 +398,12 @@ attendsDLP(john).
     ```
 
 ---
-### Esempio: Problema del Vertex Cover
-- Determinare un **vertex cover** minimale (insieme di nodi che coprono tutti gli archi di un grafo).
+### Vertex Cover
+
+Insieme di nodi che coprono tutti gli archi di un grafo.
+  
+**Problema del Vertex Cover:**
+- Determinare un **vertex cover** minimale.
 
 **Programma:**
 ```
@@ -370,7 +415,7 @@ node(y) :- edge(_, y).
 
 - **Interpretazione:**
   - Ogni nodo del grafo è **incluso** o **escluso** dal cover.
-  - Il vincolo (`:-`) assicura che ogni arco del grafo sia coperto da almeno un nodo.
+  - Il vincolo vuoto assicura che ogni arco del grafo sia coperto da almeno un nodo.
 
 ---
 ### Esempio: Problema del Dominating Set
@@ -402,12 +447,6 @@ dominated(x) :- inDS(x).
 
 - **Livello delle penalità:** I vincoli deboli possono avere livelli (`@i`), e si cerca di minimizzare la somma dei pesi dei vincoli violati, a partire dal livello 1.
 
----
-### Esempio di Weak Constraint
-```prolog
-:-~ inDS(x), [1@1, x].
-```
-- Penalizza la presenza di `inDS(x)`.
 - Gli **Answer Set** validi sono quelli che minimizzano le penalità associate ai vincoli violati.
 
 ---
@@ -423,10 +462,7 @@ La semantica di DLP si basa sulla ricerca di **Answer Set**, chiamati anche **mo
 #### Answer Set per Programmi Positivi
 - Per i programmi **positivi** (senza negazione), un **Answer Set** è un **modello minimale** del programma, simile alla semantica della logica classica.
   - Un modello minimale è un insieme di atomi veri che non può essere ridotto ulteriormente senza violare le regole del programma.
-
----
-#### Negazione e Complicazioni
-Quando viene introdotta la **negazione** nel programma, il calcolo degli **Answer Set** diventa più complesso. 
+  - Quando viene introdotta la **negazione** nel programma, il calcolo degli **Answer Set** diventa più complesso. 
 
 ---
 #### Riduzione di un Programma P rispetto a una Interpretazione I
@@ -472,13 +508,13 @@ d.
    - Se l'insieme dei fatti è un Answer Set per un programma P, allora è **l'unico Answer Set** per quel programma.
 
 4. **Condizione di Supporto per un Atomo**
-   - Un atomo \(a \in I\) è **supportato** in I se esiste una regola \(r \in P\) tale che:
+   - Un atomo $a \in I$ è **supportato** in $I$ se esiste una regola $r \in P$ tale che:
      - Il corpo di \(r\) è vero rispetto a I.
      - L'unico atomo vero rispetto a I nella testa di \(r\) è \(a\).
      - In altre parole, **head(r) = a**.
 
 5. **Condizione Necessaria e Sufficiente di Supporto**
-   - I è un Answer Set per P solo se **ogni atomo** \(a \in I\) è **supportato** in I.
+   - I è un Answer Set per P solo se **ogni atomo** $a \in I$ è **supportato** in $I$.
      - Questa condizione diventa **necessaria e sufficiente** se non ci sono **cicli** nel grafo delle dipendenze.
 
 ---
