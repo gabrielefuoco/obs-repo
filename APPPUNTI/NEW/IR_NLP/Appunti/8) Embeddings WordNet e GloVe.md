@@ -199,6 +199,7 @@ Calcoliamo il gradiente della funzione di costo rispetto al vettore del contesto
 $$\frac{\delta J}{\delta V_{c}}=\frac{\delta}{\delta V_{c}}\log e^{U_{0}^TV_c}-\log \sum_{w\in V} e^{U_{0}^TV_c}$$
 
 Il primo termine è semplicemente $U_{0}$. Il secondo termine diventa:
+# separare
 
 $$=\frac{1}{\sum_{w\in V} e^{U_{0}^TV_c}}  \frac{\delta}{\delta V_{c}}\sum_{x\in V} e^{U_{x}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} \frac{\delta}{\delta v_{c}}e^{U_{w}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} e^{U_{w}^TV_c} u_{x}=\sum \frac{e^{U_{w}^TV_c} }{\sum_{x\in V} e^{U_{w}^TV_c} } u_{x}$$
 
@@ -363,6 +364,24 @@ Dato un contesto di parole, ad esempio "cat" e "on", l'obiettivo è predire la p
 
 * $\hat{v}$ è la media delle codifiche degli *m* input, che per CBOW sono solo le parole di contesto. 
 
+### Estrazione di Embeddings
+
+L'embedding di una parola è ricavabile da una riga della matrice **W**.
+
+**In Skip-gram:**
+
+* L'input è una singola parola.
+* L'embedding della parola viene estratto dalla matrice **W** e rappresenta la rappresentazione della parola target nel task di Skip-gram.
+
+**In CBOW:**
+
+* L'input è costituito dalle parole di contesto.
+* Gli embedding delle parole di contesto vengono aggregati per ottenere una rappresentazione dell'input.
+* È possibile estrarre gli embedding delle parole di contesto sia dalla matrice **W** che dalla matrice **W'**.
+* Se si estraggono gli embedding dalla matrice **W**, si ottiene la rappresentazione delle parole di contesto come parole target nel task di Skip-gram.
+* Se si estraggono gli embedding dalla matrice **W'**, si ottiene la rappresentazione delle parole di contesto come parole di contesto nel task di CBOW.
+
+Per entrambi i task, se andiamo a prendere gli embeddings nella matrice di destra, significherebbe catturare la rappresentazione della parola come funzione che va a modellare il ruolo della parola per la predizione
 
 ### Softmax e Funzione di Costo in Word2Vec
 
@@ -547,7 +566,7 @@ $$ f(x)=
 \end{cases}
 $$
 
-$$\text{Loss } J=\sum_{i,j=1}^Vf(X_{ij})(w_{i}T \tilde{w}_{j}+b_{i}+\tilde{b_{j}}-\log X_{ij})^2$$
+$$\text{Loss } J=\sum_{i,j=1}^Vf(X_{ij})(w_{i}T \tilde{w}_{j}+b_{i}+\tilde{b}_{j}-\log X_{ij})^2$$
 
 Dove:
 
@@ -557,7 +576,7 @@ Dove:
 
 $p(i|j)$ è la probabilità di $w_i$ dato $w_j$.
 
-Nella funzione $f(x)$ del primo termine della loss, abbiamo la distribuzione unigram con esponente 3/4, che serve per smorzare l'effetto delle parole frequenti.
+Nella funzione $f(x)$ del primo termine della loss, abbiamo la distribuzione unigram con esponente $\frac{3}{4}$, che serve per smorzare l'effetto delle parole frequenti.
 
 La loss contiene due termini di bias e il $\log X_{ij}$ che rappresenta $P(i|j)= \frac{X_{ij}}{X_{i}}$ (numero di co-occorrenze).
 
@@ -585,27 +604,24 @@ Per catturare le relazioni tra parole, definiamo una funzione $F$ che confronta 
 
 **Condizione 1: Combinazione Lineare**
 
-$$F((w_{i}-w_{j})^Tw_{k})=\frac{P(i|k)}{P(j|k)}$$
+$$F((w_{i}-w_{j})^Tw_{k})=\frac{P(k|i)}{P(k|j)}$$
 
-**Simmetria**
+**Condizione 2: Simmetria**
 
 $$F((w_{i}-w_{j})^Tw_{k})=\frac{F(w_{i}^Tw_{k})}{F(w_{j}^Tw_{k})}$$
 
 **Definizione di F**
 
-$$F(w_{i}^Tw_{k})=e^{w_{i}^Tw_{k}}=P(i|k) \text{, definita come } \frac{x_{ik}}{x_{k}}$$
+$$F(w_{i}^Tw_{k})=e^{w_{i}^Tw_{k}}=P(k|i) \text{, definita come } \frac{x_{ik}}{x_{i}}$$
 
 **Derivazione**
 
 Dunque, possiamo scrivere:
 
-$$w_{i}^Tw_{k}=\log x_{ik}-\log x_{k}$$
+$$w_{i}^Tw_{k}=\log x_{ik}-\log x_{i}$$
 
-Il termine $\log x_{k}$ viene assorbito da un bias e otteniamo:
+Il termine $\log x_{i}$ viene assorbito da un bias $b_{i}$(inizializzato a 0) e otteniamo:
 
 $$w_{i}^Tw_{k}+b_{i}+b_{j}=\log X_{jk}$$
-Dove $b_i$ e $b_j$ sono i bias per le parole $w_i$ e $w_j$ rispettivamente.
 
-**Interpretazione**
-
-Questo termine confronta le co-occorrenze attese delle parole $w_i$ e $w_j$ con le loro co-occorrenze effettive. Il termine $b_i + b_j$ viene aggiunto per la simmetria.
+Questo termine confronta le co-occorrenze attese delle parole $w_i$ e $w_j$ con le loro co-occorrenze effettive. Il termine $b_j$ viene aggiunto per la simmetria.

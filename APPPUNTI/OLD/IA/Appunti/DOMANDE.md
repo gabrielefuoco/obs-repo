@@ -423,6 +423,164 @@
 * Qual è l'algoritmo risolutivo per i problemi CSP appartenenti a S secondo il Teorema di Grohe?
 * Qual è la complessità dell'algoritmo risolutivo?
 
+# Teoria dei Giochi
+
+### Tipi di giochi
+
+1. Quali sono le caratteristiche principali dei giochi strategici e quale esempio viene fornito?
+2. Cosa distingue i giochi estensivi dagli altri tipi di gioco e in quali contesti si applicano?
+3. Come influisce la ripetitività di una situazione sulle strategie dei giocatori nei giochi ripetitivi?
+4. Qual è l'obiettivo dei giochi cooperativi e quale esempio viene proposto?
+5. Cosa si intende per informazione perfetta, imperfetta, completa e incompleta in un gioco?
+6. Cos'è il Mechanism design e in quale contesto viene applicato?
+
+### Giochi Coalizionali
+
+1. Cosa sono i giochi coalizionali e qual è il loro obiettivo principale?
+2. Cosa rappresenta la "worth" in un gioco coalizionale?
+3. Cosa si intende per "solution concept" in un gioco coalizionale e quali proprietà dovrebbe soddisfare?
+4. Quali sono le componenti principali della struttura di un gioco coalizionale?
+5. Quali sono le domande fondamentali a cui un gioco coalizionale cerca di rispondere?
+6. Qual è la differenza tra Transferable Utility (TU) e Non-Transferable Utility (NTU)?
+7. Come viene formalmente definito un gioco coalizionale e cosa rappresenta l'outcome?
+8. Quali proprietà deve soddisfare un'imputazione per essere considerata ammissibile?
+9. Cosa rappresentano i concetti di Fairness e Stability in un gioco coalizionale?
+
+### Caratteristiche dei Giochi Coalizionali
+
+1. Cosa caratterizza un gioco superadditivo e qual è la sua formula?
+2. Cosa distingue un gioco additivo da un gioco superadditivo?
+3. Cosa si intende per gioco a somma costante e qual è la sua formula?
+4. Cosa caratterizza un gioco convesso e in che modo incentiva la collaborazione?
+5. Cosa sono i giochi semplici e quale esempio viene fornito?
+6. Cosa sono i "proper simple games"?
+
+### Core di un Gioco Coalizionale
+
+1. Cos'è il core di un gioco coalizionale e cosa rappresenta?
+2. Come viene definito formalmente il core?
+3. Perché il core è importante per la stabilità della coalizione?
+4. È possibile che il core sia vuoto?
+5. Cosa implica l'assioma di simmetria in un gioco coalizionale?
+6. Chi sono i giocatori nulli e come vengono definiti?
+7. Cosa significa che una soluzione è additiva in un gioco coalizionale?
+
+### Shapley Value
+
+1. Cos'è lo Shapley Value e su cosa si basa?
+2. Quali sono le caratteristiche chiave dello Shapley Value?
+3. Come si calcola lo Shapley Value per un giocatore i?
+4. Come si interpreta la formula dello Shapley Value?
+5. Puoi fornire un esempio di come si applica lo Shapley Value in un gioco a tre giocatori?
+
+### Nucleolo in un gioco coalizionale
+
+1. Cos'è il nucleolo in un gioco coalizionale e qual è l'idea alla base del suo funzionamento?
+2. Come si definisce l'eccesso di una coalizione rispetto a una imputazione?
+3. Cos'è il vettore degli eccessi e a cosa serve?
+4. Come viene definito formalmente il nucleolo di un gioco?
+5. Quali sono le proprietà del nucleolo?
+6. Qual è la relazione tra il nucleolo e l'ε-core?
+7. Come si trova il nucleolo attraverso una procedura iterativa?
+8. Qual è il problema lineare che si risolve al primo passo dell'iterazione?
+9. Cosa sono le coalizioni critiche e come vengono identificate?
+10. Come si procede nell'iterazione successiva per restringere l'insieme delle coalizioni critiche?
+
+### Contested Garment Rule
+
+1. Cos'è la Contested Garment Rule e in quale contesto si applica?
+2. Quali sono i passaggi per applicare la Contested Garment Rule?
+3. Qual è la relazione tra la Contested Garment Rule e il nucleolo del gioco associato?
+
+### Aste e Mechanism Design
+
+1. Di cosa si occupano le aste e il Mechanism Design?
+2. Quali sono le due principali categorie di aste?
+3. Quali sono le differenze tra asta inglese, giapponese e olandese?
+4. Cosa si intende per "mechanism design truthful"?
+
+### Sealed-Bid Auctions (Aste a busta chiusa)
+
+1. Cosa sono le aste a busta chiusa e su cosa si basano gli agenti per fare le offerte?
+2. Cosa sono le distribuzioni IPV (Independent Private Values)?
+
+### Second-Price Auctions (Aste al secondo prezzo)
+
+1. Come funzionano le aste al secondo prezzo?
+2. Perché le aste al secondo prezzo sono considerate "mechanism design truthful"?
+3. Qual è la strategia ottimale in un'asta al secondo prezzo e perché?
+4. In che modo l'asta giapponese si comporta in modo simile all'asta al secondo prezzo?
+
+### First-Price Auctions: Aste al Primo Prezzo
+
+1. Come funzionano le aste al primo prezzo?
+2. Qual è la strategia ottimale in un'asta al primo prezzo con due giocatori e distribuzioni uniformi?
+3. Come si calcola il valore atteso dell'utilità in un'asta al primo prezzo?
+4. Cos'è un equilibrio di Nash in questo contesto?
+5. Qual è la strategia ottimale in un'asta al primo prezzo con n giocatori?
+
+### Giochi Strategici
+
+1. Cosa sono i giochi strategici e qual è il loro obiettivo?
+2. In che modo il dilemma del prigioniero illustra i principi dei giochi strategici?
+3. Quali sono i payoff nel dilemma del prigioniero e cosa rappresentano?
+4. Cos'è l'equilibrio di Nash nel dilemma del prigioniero e perché si verifica?
+
+### Equilibrio di Nash
+
+1. Come viene definito formalmente un gioco strategico?
+2. Cos'è un profilo di azione e cosa rappresenta?
+3. Come viene definito l'equilibrio di Nash?
+4. Puoi fornire un esempio di equilibrio di Nash nel gioco dei Bach e Stravinsky?
+5. Cos'è la funzione di best response e come si relaziona all'equilibrio di Nash?
+
+### Strategie Miste
+
+1. Cosa sono le strategie miste e perché vengono utilizzate?
+2. Come si calcola l'utilità attesa di una strategia mista?
+3. Cos'è un equilibrio di Nash con strategie miste?
+4. Puoi fornire un esempio di utilità attesa in una lotteria?
+5. Cos'è la funzione di utilità di Von Neumann-Morgenstern e a cosa serve?
+
+### Strategie Miste nei Giochi Strategici
+
+1. Come si calcola l'utilità attesa di una strategia mista in un gioco strategico?
+2. Come viene definito l'equilibrio di Nash con strategie miste in un gioco strategico?
+
+### Teorema di Nash
+
+1. Cosa afferma il Teorema di Nash?
+2. Quali sono le due proprietà fondamentali dell'equilibrio di Nash in strategie miste?
+3. Cos'è il supporto di una strategia mista?
+4. Come si enuncia il Teorema di Nash in termini di best response e supporto?
+
+### Dimostrazione del Teorema di Nash
+
+1. Come si dimostra la prima parte del Teorema di Nash (implicazione $\Rightarrow$)?
+2. Come si dimostra la seconda parte del Teorema di Nash (implicazione $\Leftarrow$)?
+3. Cosa afferma il Corollario 1 della dimostrazione del Teorema di Nash?
+4. Cosa afferma il Corollario 2 della dimostrazione del Teorema di Nash?
+
+### Esempio di Equilibrio di Nash Misto: Bach e Stravinsky
+
+1. Come si calcola l'equilibrio di Nash misto nel gioco di Bach e Stravinsky?
+2. Quali sono le strategie dei giocatori e come si arriva all'equilibrio?
+
+### Giochi Strategici (Ripresa)
+
+1. Quali sono le modalità di gioco e le caratteristiche dell'informazione nei giochi strategici?
+
+### Giochi in forma estesa
+
+1. Cosa sono i giochi in forma estesa e come vengono rappresentati?
+2. Quali sono le caratteristiche dell'informazione e della memoria nei giochi in forma estesa?
+3. Quali sono le componenti principali della struttura di un gioco in forma estesa?
+4. Cosa si intende per informazione perfetta e imperfetta in un gioco in forma estesa?
+5. Cos'è un information set?
+6. Cos'è il Subgame Perfect Equilibrium (SPE) e come si differenzia dall'equilibrio di Nash?
+7. Cos'è l'algoritmo Minimax e come si relaziona alla dimostrazione dell'esistenza di un SPE?
+
+
 # Planning 
 
 ### Domande sul paragrafo "Modello di Pianificazione"

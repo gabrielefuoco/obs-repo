@@ -48,113 +48,112 @@
 | **Algoritmo Minimax**                              | Un algoritmo che cerca di minimizzare le perdite massime in situazioni di conflitto.                                                                                      |
 
 
-Modella situazioni in cui agenti (umani o artificiali) interagiscono. Gli agenti possono competere, collaborare o negoziare per raggiungere i propri obiettivi.
+La teoria dei Giochi modella situazioni in cui agenti (umani o artificiali) interagiscono. Gli agenti possono *competere, collaborare o negoziare* per raggiungere i propri obiettivi.
 
 ### Tipi di giochi:
 1. **Giochi strategici**:
-   - Situazioni di competizione tra giocatori con obiettivi da raggiungere.
-   - Esempio: competizione politica.
+- Situazioni di competizione tra giocatori con obiettivi da raggiungere.
+- Esempio: competizione politica.
 2. **Giochi estensivi**:
-   - Le azioni e le strategie considerano tutto ciò che accade nel tempo.
-   - Esempio: contrattazione, commercio.
+- Le azioni e le strategie considerano tutto ciò che accade nel tempo.
+- Esempio: contrattazione, commercio.
 3. **Giochi ripetitivi**:
-   - La stessa situazione si ripete più volte, influenzando le strategie.
-   - Esempio: dinamiche evolutive (predatore/preda).
+- La stessa situazione si ripete più volte, influenzando le strategie.
+- Esempio: dinamiche evolutive (predatore/preda).
 4. **Giochi cooperativi**:
-   - I giocatori collaborano per ottenere vantaggi comuni.
-   - Esempio: teoria politica dei voti.
+- I giocatori collaborano per ottenere vantaggi comuni.
+- Esempio: teoria politica dei voti.
 
-### Informazione nei giochi:
-- **Informazione perfetta**: I giocatori conoscono tutte le azioni e decisioni prese.
-- **Informazione imperfetta**: Non tutti i giocatori conoscono l'intera situazione.
-- **Informazione completa**: I giocatori conoscono le preferenze degli avversari.
-- **Informazione incompleta**: I giocatori non conoscono le preferenze degli avversari.
+| Tipo di informazione | Descrizione                                              |
+| -------------------- | -------------------------------------------------------- |
+| **Perfetta**         | I giocatori conoscono tutte le azioni e decisioni prese. |
+| **Imperfetta**       | Non tutti i giocatori conoscono l'intera situazione.     |
+| **Completa**         | I giocatori conoscono le preferenze degli avversari.     |
+| **Incompleta**       | I giocatori non conoscono le preferenze degli avversari. |
 
 Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco per massimizzare i propri obiettivi. Esempio: aste.
 
 ## Giochi Coalizionali
-   Sono giochi cooperativi dove gli agenti (giocatori) cooperano per ottenere benefici comuni, detti **worth**, in base alla coalizione di cui fanno parte. Gli agenti possono essere persone, aziende, partiti politici, ecc.
+Sono giochi cooperativi dove gli agenti (giocatori) cooperano per ottenere benefici comuni, detti **worth**, in base alla coalizione di cui fanno parte. Gli agenti possono essere persone, aziende, partiti politici, ecc.
 
 **Obiettivo**:  
-   Calcolare una **solution concept**, ovvero come distribuire i benefici tra i giocatori in modo da soddisfare proprietà desiderabili (equità, razionalità).
+Calcolare una **solution concept**, ovvero come distribuire i benefici tra i giocatori in modo da soddisfare proprietà desiderabili (equità, razionalità).
 
 **Struttura del Gioco**:
-   - **Grand Coalition**: insieme totale dei giocatori.
-   - **Worth Function (v(s))**: funzione che restituisce il beneficio di ogni sottoinsieme di giocatori.
-   - **Ricchezza totale**: il massimo beneficio ottenibile dalla grand coalition, denotato come **v(N)**.
+- **Grand Coalition**: insieme totale dei giocatori.
+- **Worth Function (v(s))**: funzione che restituisce il beneficio di ogni sottoinsieme di giocatori.
+- **Ricchezza totale**: il massimo beneficio ottenibile dalla grand coalition, denotato come **v(N)**.
 
 Il gioco risponde a delle **Domande Fondamentali**:
-   - **Quale coalizione formare**?
-   - **Come distribuire la ricchezza tra i membri della coalizione**?
+- **Quale coalizione formare**?
+- **Come distribuire la ricchezza tra i membri della coalizione**?
 
 Si basa su due **Assunzioni**:
-   - **Transferable Utility (TU)**: la ricchezza può essere distribuita liberamente tra i membri (ad esempio, denaro).
-   - **Non-Transferable Utility (NTU)**: se la ricchezza non è distribuibile in modo frazionato (ad esempio, oggetti indivisibili), la worth function non sarà un numero, ma un insieme di oggetti.
+- **Transferable Utility (TU)**: la ricchezza può essere distribuita liberamente tra i membri (ad esempio, denaro).
+- **Non-Transferable Utility (NTU)**: se la ricchezza non è distribuibile in modo frazionato (ad esempio, oggetti indivisibili), la worth function non sarà un numero, ma un insieme di oggetti.
 
 **Formalmente**:
-   - Un gioco è una coppia **G = (N, v)** dove **v** è la worth function.
-   - **Outcome**: un assegnamento di valori ai giocatori, definito dall'imputation set **X(G)**, che contiene tutti i vettori possibili **x = (x₁, ..., xₙ)**.
+- Un gioco è una coppia **G = (N, v)** dove **v** è la worth function.
+- **Outcome**: un assegnamento di valori ai giocatori, definito dall'imputation set **X(G)**, che contiene tutti i vettori possibili **x = (x₁, ..., xₙ)**.
 
 Un'**imputazione** (soluzione), per essere considerata ammissibile, deve soddisfare le seguenti **proprietà:**
-   - **Efficiency**: la somma dei valori assegnati ai giocatori deve essere pari a **v(N)**.
-   - **Individual Rationality**: il valore di ogni giocatore deve essere almeno quanto otterrebbe da solo, ovvero $xᵢ ≥ v({i})$ per ogni giocatore $i$
+- **Efficiency**: la somma dei valori assegnati ai giocatori deve essere pari a **v(N)**.
+- **Individual Rationality**: il valore di ogni giocatore deve essere almeno quanto otterrebbe da solo, ovvero $x_{i} ≥ v({i})$ per ogni giocatore $i$
 
 **Solution Concepts**:
-   - **Fairness**: distribuzione equa della ricchezza.
-   - **Stability**: nessun giocatore ha incentivi a lasciare la coalizione.
+- **Fairness**: distribuzione equa della ricchezza.
+- **Stability**: nessun giocatore ha incentivi a lasciare la coalizione.
 
-**Esempio**:
-   - Giocatori in una rete connessa formano una coalizione.
-   - La ricchezza della coalizione dipende dai costi degli archi nel grafo che li collega.
-   - **Eccesso**: misura l'insoddisfazione di una coalizione. Ad esempio, l'eccesso della coalizione $S$ è dato da $e(S, x) = v(S) - x(S)$.
+**Inoltre:**
+- Giocatori in una rete connessa formano una coalizione.
+- La ricchezza della coalizione dipende dai costi degli archi nel grafo che li collega.
+- **Eccesso**: misura l'insoddisfazione di una coalizione. Ad esempio, l'eccesso della coalizione $S$ è dato da $e(S, x) = v(S) - x(S)$.
 
 ### Caratteristiche dei Giochi Coalizionali
-
 1. **Giochi Superadditivi**:
-   - Se due coalizioni **S** e **T** (che non hanno membri in comune) si uniscono, il loro **worth** combinato è maggiore o uguale alla somma dei loro **worth** individuali.
-   - **Formula**:  
-     $∀S, T ⊂ N, se S ∧ T = ∅$ , allora $v(S ∨ T) ≥ v(S) + v(T)$
-     Significa che *conviene collaborare*, poiché la somma delle coalizioni è sempre maggiore o uguale alla somma delle singole worth.La **grand coalition** ha sempre il payoff massimo.
+- Se due coalizioni **S** e **T** (che non hanno membri in comune) si uniscono, il loro **worth** combinato è maggiore o uguale alla somma dei loro **worth** individuali.
+- **Formula**:  
+$\forall S, T \subset N, \text{ se } S \cap T = \emptyset$, allora $v(S \cup T) \geq v(S) + v(T)$  
+Significa che **conviene collaborare**, poiché la somma delle coalizioni è sempre maggiore o uguale alla somma delle singole worth. La **grand coalition** ha sempre il payoff massimo.
 
 2. **Giochi Additivi**:
-   - Non c'è alcun vantaggio aggiuntivo nel formare una coalizione: la worth combinata di due coalizioni è esattamente la somma delle loro worth individuali.
-   - **Formula**:  
-     $∀S, T ⊂ N, se S ∧ T = ∅$, allora $v(S ∨ T) = v(S) + v(T)$
-     Qui, formare una coalizione non apporta alcun valore aggiunto rispetto alla somma dei singoli benefici.
+- Non c'è alcun vantaggio aggiuntivo nel formare una coalizione: la worth combinata di due coalizioni è esattamente la somma delle loro worth individuali.
+- **Formula**:  
+$\forall S, T \subset N, \text{ se } S \cap T = \emptyset$, allora $v(S \cup T) = v(S) + v(T)$  
+Qui, formare una coalizione non apporta alcun valore aggiunto rispetto alla somma dei singoli benefici.
 
 3. **Giochi a Somma Costante**:
-   - La somma della **worth** di una coalizione **S** e quella dei giocatori fuori dalla coalizione **N \ S** è sempre pari alla worth totale **v(N)**.
-   - Formula:  
-     $∀S ⊂ N$, allora  $v(S) + v(N \setminus S) = v(N)$
-     Questo implica che non importa come si distribuisce la ricchezza tra le coalizioni e i non membri, la somma sarà sempre costante.
-    * Dove $v(N\setminus S)$ è il valore che può ottenere la coalizione formata da tutti i giocatori che non sono in S
+- La somma della **worth** di una coalizione **S** e quella dei giocatori fuori dalla coalizione $N \setminus S$ è sempre pari alla worth totale **v(N)**.
+- Formula:  
+$\forall S \subset N$, allora $v(S) + v(N \setminus S) = v(N)$  
+Questo implica che non importa come si distribuisce la ricchezza tra le coalizioni e i non membri, la somma sarà sempre costante.
+* Dove $v(N \setminus S)$ è il valore che può ottenere la coalizione formata da tutti i giocatori che non sono in $S$.
 
 4. **Giochi Convessi**:
-   - La ricchezza combinata di due coalizioni è maggiore o uguale alla somma delle loro worth individuali meno la worth della loro intersezione.
-   - Formula:  
-     $∀S, T ⊂ N, v(S ∨ T) ≥ v(S) + v(T) − v(S ∧ T)$  
-     Questo tipo di gioco incentiva la collaborazione, perché formare coalizioni conviene più che agire singolarmente o in piccoli gruppi.
-     *  Estende il concetto di superadditività anche a coalizioni non disgiunte, mediante la presenza dell'intersezione nella formula.
+- La ricchezza combinata di due coalizioni è maggiore o uguale alla somma delle loro worth individuali meno la worth della loro intersezione.
+- Formula:  
+$\forall S, T \subset N, \\ v(S \cup T) \geq v(S) + v(T) - v(S \cap T)$  
+Questo tipo di gioco incentiva la collaborazione, perché formare coalizioni conviene più che agire singolarmente o in piccoli gruppi.
+* Estende il concetto di superadditività anche a coalizioni non disgiunte, mediante la presenza dell'intersezione nella formula.
 
 5. **Giochi Semplici**:
-   - La worth è binaria, ovvero può essere solo 0 o 1. Un esempio tipico di questi giochi sono i sistemi di voto, dove una coalizione "vince" (worth = 1) o "perde" (worth = 0).
-   - Formula:  
-     $∀S ⊂ N, v(S) ∈ {0, 1}$  
-     Quando un gioco semplice è anche a somma costante, si parla di **proper simple games**, dove la somma delle worth delle coalizioni e dei non membri è costante.
-
+- La worth è binaria, ovvero può essere solo 0 o 1. Un esempio tipico di questi giochi sono i sistemi di voto, dove una coalizione "vince" (worth = 1) o "perde" (worth = 0).
+- Formula:  
+$\forall S \subset N, v(S) \in \{0, 1\}$  
+Quando un gioco semplice è anche a somma costante, si parla di **proper simple games**, dove la somma delle worth delle coalizioni e dei non membri è costante.
 ## Esempio
 Questo esempio riguarda la distribuzione della **ricchezza** (o "worth") in un gioco coalizionale tra tre giocatori  A, B, C. 
 ### Dati iniziali
 - Abbiamo tre giocatori:  A\),  B\), e  C\).
 - La **worth** di ogni singolo giocatore (da solo) è **0**:
-  -  v(A) = 0\)
-  -  v(B) = 0\)
-  -  v(C) = 0\)
+-  v(A) = 0\)
+-  v(B) = 0\)
+-  v(C) = 0\)
 
 - La **worth** delle coalizioni formate da due giocatori è la seguente:
-  -  v(\{A, B\}) = 20\)
-  -  v(\{A, C\}) = 30\)
-  -  v(\{B, C\}) = 40\)
+-  v(\{A, B\}) = 20\)
+-  v(\{A, C\}) = 30\)
+-  v(\{B, C\}) = 40\)
 
 - La **worth** della coalizione **grand coalition** (tutti e tre i giocatori insieme) è  $v(\{A, B, C\}) = 42$
 ### Obiettivo: Distribuire la ricchezza
@@ -166,12 +165,12 @@ In questo esempio, viene data una **imputazione** (una possibile distribuzione d
 -  C) riceve **24**.
 #### Condizioni da rispettare:
 1. **Efficienza**:
-   - La somma delle ricchezze assegnate deve essere uguale alla **worth totale**. In questo caso:
-     \[4 + 14 + 24 = 42\]
-     La condizione di **efficienza** è soddisfatta, perché la somma è 42.
+- La somma delle ricchezze assegnate deve essere uguale alla **worth totale**. In questo caso:
+\[4 + 14 + 24 = 42\]
+La condizione di **efficienza** è soddisfatta, perché la somma è 42.
 
 2. **Razionale individualmente**:
-   - Ogni giocatore deve ricevere almeno quanto otterrebbe se giocasse da solo, cioè il suo valore individuale  $v(\{i\}).$ Poiché  v(A) = v(B) = v(C) = 0\), tutti i giocatori ricevono più di **0**, quindi la condizione di **razionalità individuale** è soddisfatta.
+- Ogni giocatore deve ricevere almeno quanto otterrebbe se giocasse da solo, cioè il suo valore individuale  $v(\{i\}).$ Poiché  v(A) = v(B) = v(C) = 0\), tutti i giocatori ricevono più di **0**, quindi la condizione di **razionalità individuale** è soddisfatta.
 
 ### Problema: Insoddisfazione delle coalizioni
 Nonostante l'imputazione sia efficiente e razionalmente valida, le **coalizioni** non sono soddisfatte. Ad esempio:
@@ -187,7 +186,7 @@ Per cercare una distribuzione equa, possiamo impostare un **sistema di disequazi
 4. $x_A + x_B + x_C = 42$ (la somma totale deve essere uguale a 42)
 ### Contraddizione
 Semplificando queste disequazioni, otteniamo:
-	$x_A + x_B + x_C ≥ 45$
+$x_A + x_B + x_C ≥ 45$
 Questa disequazione va in **conflitto** con l'equazione ($x_A + x_B + x_C = 42$\), perché non è possibile avere contemporaneamente una somma che sia uguale a 42 e maggiore o uguale a 45.
 ### Conclusione
 Non esiste una **soluzione** che soddisfi contemporaneamente tutte le coalizioni e rispetti la condizione di efficienza.
@@ -200,18 +199,19 @@ Tuttavia, questo non è possibile nel contesto del problema, poiché la ricchezz
 
 
 ## Core di un Gioco Coalizionale
+
 Il **core** è un concetto fondamentale nella teoria dei giochi coalizionali e rappresenta l'insieme delle distribuzioni (o imputazioni) della **ricchezza** tra i giocatori che sono **stabili**, ovvero tali che nessuna coalizione abbia incentivi a "rompere" l'accordo e formare una coalizione separata.
 
 #### Definizione Formale
-Dato un gioco coalizionale G = (N, v) , dove:
+Dato un gioco coalizionale $G = (N, v)$ , dove:
 - N è l'insieme dei giocatori,
-- v(S) è la **worth** di una coalizione  S ⊆ N , ovvero il valore che quella coalizione può ottenere collaborando
-Il **core** è l'insieme delle imputazioni x ∈ X(G) tali che:
+- v(S) è la **worth** di una coalizione  $S ⊆ N$ , ovvero il valore che quella coalizione può ottenere collaborando
+Il **core** è l'insieme delle imputazioni $x \in X(G)$ tali che:
 $$
 x \in X(G):\ \ 
 \forall S \subseteq N, \quad v(S) \leq x(S)
 $$
-Ovvero, il valore assegnato a una coalizione S  (la somma delle ricchezze dei giocatori nella coalizione S) non deve **superare** la somma delle utilità allocate ai giocatori di **S**.
+Ovvero, il valore assegnato a una coalizione S (la somma delle ricchezze dei giocatori nella coalizione S) non deve **superare** la somma delle utilità allocate ai giocatori di **S**.
 
 #### Stabilità del Core
 Il core è importante perché garantisce la **stabilità** della coalizione. Se scegliamo una distribuzione che appartiene al core, allora:
@@ -237,18 +237,20 @@ $$
 Questo significa che, se il contributo di un giocatore i a una coalizione S è pari a ciò che otterrebbe giocando da solo, quel giocatore dovrebbe ricevere esattamente quella quantità.
 
 #### 3. Additivity (Additività)
-Se abbiamo due giochi   $G₁=(N, v₁) \ \ e \ \  G₂=(N, v₂)$  con la stessa serie di giocatori, possiamo combinare i due giochi sommandone le worth function:
+Se abbiamo due giochi   $G_{1}=(N, v_{1}) \ \ e \ \  G_{2}=(N, v_{2})$  con la stessa serie di giocatori, possiamo combinare i due giochi sommandone le worth function:
 $$
 (v_1 + v_2)(S) = v_1(S) + v_2(S) \quad \forall S \subseteq N
 $$
 Una soluzione $\Psi$ è **additiva** se la worth assegnata ai giocatori nella somma dei giochi è uguale alla somma delle worth assegnate nei giochi separati:
+
 $$
 \Psi_i(N, v_1 + v_2) = \Psi_i(N, v_1) + \Psi_i(N, v_2)
 $$
 In altre parole, un'imputazione è definita additiva se la soluzione per due giochi combinati è la somma delle soluzioni dei due giochi separati.
 
 ## Shapley Value
- Lo **Shapley Value** è una soluzione importante nella teoria dei giochi coalizionali, che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi **contributi marginali** a tutte le possibili coalizioni. Viene considerato una soluzione **meritocratica**, poiché si basa su quanto un giocatore contribuisce a una coalizione rispetto a quanto la coalizione ottiene senza di lui.
+
+Lo **Shapley Value** è una soluzione importante nella teoria dei giochi coalizionali, che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi **contributi marginali** a tutte le possibili coalizioni. Viene considerato una soluzione **meritocratica**, poiché si basa su quanto un giocatore contribuisce a una coalizione rispetto a quanto la coalizione ottiene senza di lui.
 - Lo Shapley Value è l'unica **pre-imputazione** (una distribuzione che non deve necessariamente rispettare la razionalità individuale) che soddisfa le 3 proprietà elencate prima.
 - Lo Shapley Value esiste **sempre** in qualsiasi gioco, anche se non sempre rispetta le condizioni di razionalità individuale.
 #### Caratteristiche chiave:
@@ -257,7 +259,7 @@ In altre parole, un'imputazione è definita additiva se la soluzione per due gio
 - **Meritocrazia**: Si basa sui contributi effettivi che un giocatore fornisce alle coalizioni.
 
 #### Formula dello Shapley Value
-Per calcolare lo Shapley Value per un giocatore i, si tiene conto del contributo marginale che  i apporta a tutte le possibili coalizioni S ⊆ N (dove i non fa parte di S).
+Per calcolare lo Shapley Value per un giocatore i, si tiene conto del contributo marginale che i apporta a tutte le possibili coalizioni S ⊆ N (dove i non fa parte di S).
 
 La formula è la seguente:
 
@@ -265,18 +267,12 @@ $$
 \phi_i(N, v) = \frac{1}{|N|!} \sum_{S \subseteq N \setminus \{i\}} |S|! \cdot (|N| - |S| - 1)! \cdot [v(S \cup \{i\}) - v(S)]
 $$
 
-Dove:
--   N  è l'insieme di tutti i giocatori.
--   v(S)  è la worth (il valore) della coalizione  S .
--   |N|!  è il numero di permutazioni dei giocatori.
--   |S|!  è il numero di modi per ordinare i giocatori in   S .
--   (|N| - |S| - 1)!  è il numero di modi per ordinare i giocatori rimanenti dopo aver aggiunto i alla coalizione S .
-
 #### Interpretazione
-Lo shapley value puo essere interpretato come una **media pesata** dei contributi marginali del giocatore $i$ in ogni possibile coalizione $s$ che non contiene $i$. In altre parole, si calcola il contributo di $i$ a ogni coalizione, misurato come la differenza tra la worth della coalizione con $i$ e la worth della coalizione senza $i$, e poi si fa una media considerando **tutti i possibili ordinamenti** in cui i puo essere aggiunto alla coalizione.
+
+Lo shapley value puo essere interpretato come una **media pesata** dei contributi marginali del giocatore $i$ in ogni possibile coalizione $s$ che non contiene $i$. In altre parole, si calcola il contributo di $i$ a ogni coalizione e si fa una media considerando **tutti i possibili ordinamenti** in cui i puo essere aggiunto alla coalizione.
 
 #### Esempio
-Immaginiamo tre giocatori   A ,   B , e   C . Se   A ,   B , e   C  formano coalizioni diverse, lo Shapley Value di un giocatore è la media dei suoi contributi marginali calcolati su tutte le coalizioni possibili. Per esempio, se aggiungere   A  a una coalizione   S  aumenta la worth di   S , il contributo marginale di   A  in quella coalizione sarà  $v(S ∪ \{A\}) - v(S)$ 
+Immaginiamo tre giocatori A, B, e C. Se A, B, e C formano coalizioni diverse, lo Shapley Value di un giocatore è la media dei suoi contributi marginali calcolati su tutte le coalizioni possibili. Per esempio, se aggiungere   A  a una coalizione   S  aumenta la worth di   S , il contributo marginale di   A  in quella coalizione sarà  $v(S ∪ \{A\}) - v(S)$ 
 
 ## Nucleolo in un gioco coalizionale
 
@@ -284,14 +280,12 @@ Il **nucleolo** è un concetto di soluzione per i giochi coalizionali, che si co
 
 #### Definizione
 - **Eccesso e(x, S)**: L'eccesso di una coalizione  S  rispetto a una imputazione  x è la differenza tra la worth v(S) della coalizione S  e la somma dei valori assegnati ai giocatori in S dalla distribuzione x :
-  
- $$ 
-  e(x, S) = v(S) - \sum_{i \in S} x_i
-  $$
+$$ 
+e(x, S) = v(S) - \sum_{i \in S} x_i
+$$
+Questo misura quanto la coalizione  S si sente insoddisfatta rispetto alla distribuzione   x .
 
-  Questo misura quanto la coalizione  S si sente insoddisfatta rispetto alla distribuzione   x .
-
-- **Vettore degli Eccessi**  θ(x) : È un vettore che contiene gli eccessi e(x, S)  per tutte le coalizioni S $\subseteq$ N , ordinati in modo **non crescente** (dal più grande al più piccolo). Questo vettore permette di confrontare le imputazioni in base all'insoddisfazione che creano nelle coalizioni.
+- **Vettore degli Eccessi**  $\Theta(x)$ : È un vettore che contiene gli eccessi $e(x, S)$  per tutte le coalizioni $S \subseteq N$ , ordinati in modo **non crescente** (dal più grande al più piccolo). Questo vettore permette di confrontare le imputazioni in base all'insoddisfazione che creano nelle coalizioni.
 
 #### Definizione del Nucleolo
 Il **nucleolo** è l'imputazione x che minimizza il vettore degli eccessi $( \Theta(x) )$. In altre parole, il nucleolo è la soluzione in cui la massima insoddisfazione è minimizzata, e in caso di parità su questa, si minimizza l'insoddisfazione successiva, e così via.
@@ -312,11 +306,11 @@ Il concetto di **ε-core** è una generalizzazione più debole del core, dove si
 
 $$\sum_{i \in S} x_i \geq v(S) - \epsilon, \quad \forall S \subseteq N
 $$
-All'aumentare di $\epsilon$ \, l'**ε-core** si espande e aumenta la probabilità di trovare una soluzione.
+All'aumentare di $\epsilon$ , l'**ε-core** si espande e aumenta la probabilità di trovare una soluzione.
 #### Iterazione verso il Nucleolo
 Il processo per trovare il nucleolo può essere visto come una procedura iterativa. 
 * Si parte risolvendo il problema di minimizzare $\epsilon$ in un sistema lineare, che descrive il **least core** (la versione più forte dell'ε-core). 
-* Una volta ottenuto un valore ottimale $( \epsilon_1 )$, si identifica un insieme di **coalizioni critiche**   $S_i$ , che sono quelle coalizioni per cui l'eccesso è esattamente pari a $\epsilon_1$ .
+* Una volta ottenuto un valore ottimale $( \epsilon_1 )$, si identifica un insieme di **coalizioni critiche**  $S_i$ , che sono quelle coalizioni per cui l'eccesso è esattamente pari a $\epsilon_1$ .
 * Il passo successivo è ripetere il processo considerando solo le coalizioni non critiche, minimizzando di nuovo *ε*, e così via, finché non si converge al **nucleolo**.
 
 Il problema lineare al passo 1 è:
@@ -342,8 +336,8 @@ $$
 \begin{array}{rl}
 \text{minimize} & \epsilon \\
 \text{subject to} & \sum_{i \in S} x_i \geq v(S) - \epsilon, \quad \forall S \in 2^N - F_1 \\
-                  & x(S) = v(S) - \epsilon_1, \quad \forall S \in F_1 \\
-                  & x(N) = v(N)
+& x(S) = v(S) - \epsilon_1, \quad \forall S \in F_1 \\
+& x(N) = v(N)
 \end{array} 
 
 $$
@@ -367,9 +361,9 @@ Si occupano di stabilire regole per le aste in modo da incentivare comportamenti
 Ci concentriamo sulle aste *single good*, in particolare:
 
 - **English auction**: i partecipanti fanno offerte crescenti e il bene viene assegnato al maggiore offerente. L'obiettivo è vendere al prezzo più alto possibile. L'utilità di un partecipante  i è $u_i = v_i - S_i$ se vince, altrimenti è 0, dove $v_i$ è il valore segreto che attribuisce all'oggetto e $S_i$ l'offerta fatta.
-  
+
 - **Japanese auction**: simile a quella inglese, ma con il gestore che fissa progressivamente le offerte. I giocatori scelgono se uscire o continuare fino a quando rimane un solo vincitore.
-  
+
 - **Dutch auction**: un'asta al ribasso in cui si parte da un prezzo alto e si scende. Vince chi fa la prima offerta.
 
 Il **Mechanism Design** mira a creare regole che inducano gli agenti a seguire strategie ottimali, garantendo un *mechanism design truthful*, ovvero rendendo conveniente rivelare le proprie vere preferenze o valori.
@@ -377,17 +371,17 @@ Il **Mechanism Design** mira a creare regole che inducano gli agenti a seguire s
 ## Sealed-Bid Auctions (Aste a busta chiusa)
 In questo tipo di asta, le offerte sono **segrete** e il vincitore è colui che offre la cifra più alta.
 Gli agenti devono basarsi su:
-  - Il valore che attribuiscono al bene.
-  - Il numero di partecipanti.
-  - Le caratteristiche dei partecipanti (budget, tendenze nelle offerte).
-  - Potrebbero avere informazioni sulle distribuzioni di probabilità che descrivono come gli altri agenti valutano il bene.
+- Il valore che attribuiscono al bene.
+- Il numero di partecipanti.
+- Le caratteristiche dei partecipanti (budget, tendenze nelle offerte).
+- Potrebbero avere informazioni sulle distribuzioni di probabilità che descrivono come gli altri agenti valutano il bene.
 
 **Distribuzioni IPV (Independent Private Values)**
 - Ogni partecipante ha un valore attribuito al bene indipendente da quello degli altri.
 - Ciascun giocatore conosce la distribuzione di probabilità da cui vengono estratti i valori degli altri partecipanti, ma non conosce i valori esatti.
 Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere influenzata dalla distribuzione di probabilità delle valutazioni altrui, rendendo complessa la scelta di una strategia ottimale.
 ## Second-Price Auctions (Aste al secondo prezzo)
- Ogni partecipante fa la propria offerta e vince chi ha offerto di più, ma paga il secondo prezzo più alto, non la propria offerta.
+Ogni partecipante fa la propria offerta e vince chi ha offerto di più, ma paga il secondo prezzo più alto, non la propria offerta.
 - **Mechanism Design truthful**: l'asta al secondo prezzo incoraggia i partecipanti a fare offerte corrispondenti al reale valore che attribuiscono al bene. Questa strategia è ottimale indipendentemente dalle strategie degli altri.
 
 **CASO 1: Gli altri agenti offrono meno del valore $v_i$ che attribuisco al bene**
@@ -395,15 +389,15 @@ Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere i
 - Se offro $s_i = v_i$, vinco e la mia utilità è $u_i = v_i - s_{\text{max}}$ dove $s_{\text{max}}$ è l’offerta più alta tra gli altri agenti).
 - Se offro $s_i > v_i$, vinco, ma la mia utilità resta $u_i = v_i - s_{\text{max}}$, identica al caso precedente.
 
-	**Conclusione**: Offrire  $s_i = v_i$ è la scelta ottimale. Offrire più o meno del valore che attribuisco al bene non cambia l'utilità, quindi mi conviene essere veritiero.
+**Conclusione**: Offrire  $s_i = v_i$ è la scelta ottimale. Offrire più o meno del valore che attribuisco al bene non cambia l'utilità, quindi mi conviene essere veritiero.
 
-**CASO 2: Altri agenti offrono più del valore  $v_i$ **
+**CASO 2: Altri agenti offrono più del valore  $v_i$ 
 
 - Se   $s_{\text{max}} > v_i$ :
-  - Se offro  $s_i < v_i$   o  $s_i = v_i$, perdo e guadagno   $u_i = 0$ .
-  - Se offro   $s_i > v_i$ , potrei vincere ma la mia utilità sarebbe negativa   $u_i = v_i - s_{\text{max}} < 0$ .
+- Se offro  $s_i < v_i$   o  $s_i = v_i$, perdo e guadagno   $u_i = 0$ .
+- Se offro   $s_i > v_i$ , potrei vincere ma la mia utilità sarebbe negativa   $u_i = v_i - s_{\text{max}} < 0$ .
 
-	**Conclusione**: Offrire più del valore che attribuisco al bene mi può portare a un guadagno negativo. Poiché non posso prevedere esattamente come si comporteranno gli altri, la strategia migliore resta offrire $s_i = v_i$, cioè il valore esatto che attribuisco al bene.
+**Conclusione**: Offrire più del valore che attribuisco al bene mi può portare a un guadagno negativo. Poiché non posso prevedere esattamente come si comporteranno gli altri, la strategia migliore resta offrire $s_i = v_i$, cioè il valore esatto che attribuisco al bene.
 
 - Il meccanismo dell’asta giapponese si comporta in modo simile all'asta al secondo prezzo: anch’esso è **truthful** e incoraggia i partecipanti a fare offerte veritiere.
 ## First-Price Auctions: Aste al Primo Prezzo
@@ -416,24 +410,24 @@ Nelle **aste al primo prezzo**, i partecipanti presentano offerte segrete e chi 
 3. **Strategia ottimale**: I partecipanti devono considerare le offerte degli altri e ragionare su come massimizzare il proprio guadagno.
 #### Esempio con 2 Giocatori:
 - **Assunzioni**:
-  - Giocatore 2 offre metà del valore che attribuisce al bene:   $s_2 = \frac{1}{2} v_2$ .
-  - I valori sono distribuiti uniformemente tra 0 e 1.
+- Giocatore 2 offre metà del valore che attribuisce al bene:   $s_2 = \frac{1}{2} v_2$ .
+- I valori sono distribuiti uniformemente tra 0 e 1.
 - **Domanda**: Qual è la miglior strategia per il giocatore 1?
-  
+
 ### Calcolo del Valore Atteso dell'Utilità
 1. **Utilità del Giocatore 1**   $u_1$ : Guadagno che ottiene se vince, meno l'offerta fatta   $s_1$ .
 $$   
-   E[u_1] = \int_0^{2s_1} u_1 dv_2
-   $$
-   Questo perché se l'offerta del giocatore 2   $s_2 = \frac{1}{2} v_2$  è inferiore a   $2s_1$ , il giocatore 1 vince.
+E[u_1] = \int_0^{2s_1} u_1 dv_2
+$$
+Questo perché se l'offerta del giocatore 2   $s_2 = \frac{1}{2} v_2$  è inferiore a   $2s_1$ , il giocatore 1 vince.
 
 2. **Condizioni al contorno**:
-   - Se   $v_2 > 2s_1$ , il giocatore 2 offre più di   $s_1$ , quindi l'utilità del giocatore 1 è zero (secondo integrale).
-  
+- Se   $v_2 > 2s_1$ , il giocatore 2 offre più di   $s_1$ , quindi l'utilità del giocatore 1 è zero (secondo integrale).
+
 3. **Calcolo dell'integrale**:
-   $$
-   E[u_1] = \int_0^{2s_1} (v_1 - s_1) dv_2 = 2v_1s_1 - 2s_1^2
-   $$
+$$
+E[u_1] = \int_0^{2s_1} (v_1 - s_1) dv_2 = 2v_1s_1 - 2s_1^2
+$$
 
 ### Massimizzazione dell'Utilità
 Per trovare l'**offerta ottimale**   $s_1$ , si calcola la derivata dell'utilità attesa rispetto a   $s_1$ :
@@ -450,7 +444,7 @@ $$
 Se entrambi i giocatori offrono metà del proprio valore, nessuno ha incentivo a cambiare strategia. Questo è un **equilibrio di Nash**.
 
 ### Caso Generale con $n$ Giocatori
-Esiste un **teorema generale** che afferma che in un'asta al primo prezzo con $ n$ agenti **risk-neutral** (neutri al rischio) e distribuzioni uniformi, l'unico **equilibrio simmetrico** ha la forma:
+Esiste un **teorema generale** che afferma che in un'asta al primo prezzo con $n$ agenti **risk-neutral** (neutri al rischio) e distribuzioni uniformi, l'unico **equilibrio simmetrico** ha la forma:
 $$
 \left( \frac{n-1}{n} v_1, \frac{n-1}{n} v_2, \dots, \frac{n-1}{n} v_n \right)
 $$
@@ -486,22 +480,22 @@ Se il **Prigioniero 1** decide di non confessare e il **Prigioniero 2** confessa
 I  Prigioniero 1 subisce una pena più severa (-4) mentre il Prigioniero 2 riceve una pena ridotta (0.4).
 
 - **Equilibrio di Nash**:
-  - **Situazione**: Entrambi i prigionieri confessano.
-  - **Motivazione**: Anche se non confessare sarebbe più vantaggioso se l’altro non confessa, confessare diventa la scelta migliore se si sospetta che l’altro confessi.
-  - **Risultato**: L’equilibrio di Nash si verifica quando entrambi i giocatori scelgono di confessare, poiché nessuno ha incentivo a deviare dalla propria scelta data la scelta dell’altro.
+- **Situazione**: Entrambi i prigionieri confessano.
+- **Motivazione**: Anche se non confessare sarebbe più vantaggioso se l’altro non confessa, confessare diventa la scelta migliore se si sospetta che l’altro confessi.
+- **Risultato**: L’equilibrio di Nash si verifica quando entrambi i giocatori scelgono di confessare, poiché nessuno ha incentivo a deviare dalla propria scelta data la scelta dell’altro.
 
 # Equilibrio di Nash
 
 #### Definizione Formale di Gioco Strategico
 1. **Giocatori**: Un insieme di $N$ giocatori.
 2. **Azioni/Strategie**:
-   - Per ogni giocatore $i \in N$, esiste un insieme di azioni ammissibili $S_i$.
-   - Le azioni di ciascun giocatore sono indicate con $s_i$.
+- Per ogni giocatore $i \in N$, esiste un insieme di azioni ammissibili $S_i$.
+- Le azioni di ciascun giocatore sono indicate con $s_i$.
 3. **Profili di Azione**:
-   - L'insieme dei profili di azione è $S = \times_{j \in N} \ S_j = S_1 \times \cdots \times S_N$.
-   - Un profilo di azione è una $N$-upla di azioni ammissibili $(s_1, ..., s_N)$.
+- L'insieme dei profili di azione è $S = \times_{j \in N} \ S_j = S_1 \times \cdots \times S_N$.
+- Un **profilo di azione** è una combinazione delle azioni scelte da tutti i giocatori, rappresentato come una $N$-upla di azioni ammissibili $(s_1, ..., s_N)$.
 4. **Utilità**:
-   - Per ogni giocatore $i \in N$, esiste una funzione di utilità $u_i : S \rightarrow \mathbb{R}$ che assegna un valore reale a ciascun profilo di azione.
+- Per ogni giocatore $i \in N$, esiste una funzione di utilità $u_i : S \rightarrow \mathbb{R}$ che assegna un valore reale a ciascun profilo di azione.
 
 #### Definizione di Equilibrio di Nash
 Un profilo di azione $S^*$ è un equilibrio di Nash se:
@@ -520,9 +514,9 @@ Due persone devono decidere a quale concerto andare (Bach o Stravinsky). Le pref
 | **Stravinsky**                   | (0, 0)    | (1, 1)         |
 
 - **Payoff**:
-  - Se entrambi vanno a **Bach**, ottengono (2.1, 2.1).
-  - Se entrambi vanno a **Stravinsky**, ottengono (1, 1).
-  - Se uno va a **Bach** e l'altro a **Stravinsky**, entrambi ricevono (0, 0).
+- Se entrambi vanno a **Bach**, ottengono (2.1, 2.1).
+- Se entrambi vanno a **Stravinsky**, ottengono (1, 1).
+- Se uno va a **Bach** e l'altro a **Stravinsky**, entrambi ricevono (0, 0).
 
 **Equilibri di Nash**:
 - (Bach, Bach) è un equilibrio di Nash: Se entrambi vanno a Bach, nessuno ha incentivo a cambiare, dato che preferiscono stare insieme piuttosto che andare separatamente.
@@ -547,10 +541,10 @@ Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, intro
 - Immagina di avere una lotteria con vari premi. Ogni premio ha una probabilità associata. Le strategie miste possono essere viste come la scelta di un biglietto della lotteria, dove ogni biglietto rappresenta una combinazione di probabilità per i vari premi.
 #### Utilità Attesa:
 - L’utilità attesa di una lotteria è calcolata come:
- $$
- U(p) = \sum_{z \in Z} p(z) \cdot v(z)
- $$
- Dove $p(z)$ è la probabilità di ottenere il premio $z$ e $v(z)$ è il valore dell’utilità associato a $z$.
+$$
+U(p) = \sum_{z \in Z} p(z) \cdot v(z)
+$$
+Dove $p(z)$ è la probabilità di ottenere il premio $z$ e $v(z)$ è il valore dell’utilità associato a $z$.
 
 **Funzione di Utilità di Von Neumann-Morgenstern**:
 - La funzione di utilità di Von Neumann-Morgenstern $v(\cdot)$ rappresenta le preferenze sui premi di una lotteria. L'utilità della lotteria $U(p)$ è calcolata come la somma ponderata dei valori $v(z)$ dei premi, con i pesi dati dalle probabilità. Questa funzione soddisfa gli assiomi di indipendenza e continuità, garantendo valori unici e consistenti per rappresentare le preferenze tra diverse lotterie.
@@ -559,20 +553,20 @@ Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, intro
 ## Strategie Miste nei Giochi Strategici
 
 1. **Utilità Attesa di una Strategia Mista**:
-   - La **utilità attesa** di una strategia mista $\sigma$ per un giocatore $i$ è:
-     $$
-     U_i(\sigma) = \sum_{s_i \in S_i} \sigma_i(s_i) \cdot U_i(e(s_i), \sigma_{-i})
-     $$
-     Dove:
-     - $\sigma_i(s_i)$ è la probabilità con cui il giocatore $i$ sceglie l'azione $s_i$.
-     - $e(s_i)$ è la strategia pura in cui il giocatore $i$ gioca $s_i$ con probabilità 1 mentre gli altri giocatori seguono le loro strategie miste $\sigma_{-i}$.
+- La **utilità attesa** di una strategia mista $\sigma$ per un giocatore $i$ è:
+$$
+U_i(\sigma) = \sum_{s_i \in S_i} \sigma_i(s_i) \cdot U_i(e(s_i), \sigma_{-i})
+$$
+Dove:
+- $\sigma_i(s_i)$ è la probabilità con cui il giocatore $i$ sceglie l'azione $s_i$.
+- $e(s_i)$ è la strategia pura in cui il giocatore $i$ gioca $s_i$ con probabilità 1 mentre gli altri giocatori seguono le loro strategie miste $\sigma_{-i}$.
 
 2. **Equilibrio di Nash con Strategie Miste**:
-   - Un profilo di strategie miste $\sigma^*$ è un equilibrio di Nash se:
-     $$
-     U_i(\sigma^*) \geq U_i(\sigma'_i, \sigma^*_{-i}) \quad \forall i \in N, \quad \forall \sigma'_i
-     $$
-     Dove $\sigma'_i$ è qualsiasi strategia mista alternativa per il giocatore $i$.
+- Un profilo di strategie miste $\sigma^*$ è un equilibrio di Nash se:
+$$
+U_i(\sigma^*) \geq U_i(\sigma'_i, \sigma^*_{-i}) \quad \forall i \in N, \quad \forall \sigma'_i
+$$
+Dove $\sigma'_i$ è qualsiasi strategia mista alternativa per il giocatore $i$.
 
 #### Riassunto
 - **Strategie Miste**: 
@@ -601,11 +595,11 @@ Un profilo di strategie miste $\sigma^* = (\sigma^*_i)_{i \in N}$ è un equilibr
 
 #### Spiegazione
 1. **Equilibrio di Nash con Strategie Miste**:
-   - In questo equilibrio, nessun giocatore può migliorare la propria utilità attesa cambiando unilateralmente la propria strategia.
+- In questo equilibrio, nessun giocatore può migliorare la propria utilità attesa cambiando unilateralmente la propria strategia.
 2. **Best Response e Supporto**:
-   - Ogni strategia pura nel supporto di $σ*i$ deve essere una best response alle strategie degli altri giocatori. Se non lo fosse, il giocatore potrebbe migliorare la sua utilità attesa spostando la probabilità verso strategie migliori.
+- Ogni strategia pura nel supporto di $σ*i$ deve essere una best response alle strategie degli altri giocatori. Se non lo fosse, il giocatore potrebbe migliorare la sua utilità attesa spostando la probabilità verso strategie migliori.
 3. **Implicazioni della Degenerazione**:
-   - Se una strategia mista in equilibrio include più azioni nel suo supporto, non può degenerare in una strategia pura senza rischiare di alterare l'equilibrio.
+- Se una strategia mista in equilibrio include più azioni nel suo supporto, non può degenerare in una strategia pura senza rischiare di alterare l'equilibrio.
 
 ## Dimostrazione del Teorema di Nash
 #### Teorema: 
@@ -616,36 +610,36 @@ Esiste sempre un equilibrio misto di Nash.
 Se $\sigma^*$ è un equilibrio di Nash, allora tutte le azioni nel supporto di $\sigma^*$ sono best response.
 
 1. **Assunzione per Assurdo**:
-   - Supponiamo che $\sigma^*$ non sia un equilibrio di Nash. Allora, esiste almeno un giocatore $i$ per il quale una delle sue azioni $s_i$ nel supporto di $\sigma^*_i$ non è una **best response** rispetto alle strategie degli avversari $\sigma^*_{-i}$.
+- Supponiamo che $\sigma^*$ non sia un equilibrio di Nash. Allora, esiste almeno un giocatore $i$ per il quale una delle sue azioni $s_i$ nel supporto di $\sigma^*_i$ non è una **best response** rispetto alle strategie degli avversari $\sigma^*_{-i}$.
 
 2. **Conseguenza**:
-   - Ciò significa che esiste una strategia alternativa $s_j \in B(\sigma^*_{-i})$ che offre una migliore utilità per il giocatore $i$ rispetto a $s_i$.
+- Ciò significa che esiste una strategia alternativa $s_j \in B(\sigma^*_{-i})$ che offre una migliore utilità per il giocatore $i$ rispetto a $s_i$.
 
 3. **Aggiustamento delle Probabilità**:
-   - Se $s_j$ appartiene già al supporto, si può aumentare la sua probabilità e ridurre quella di $s_i$ per migliorare l'utilità del giocatore $i$.
-   - Se $s_j$ non appartiene al supporto, la probabilità di $s_j$ può essere introdotta riducendo quella di $s_i$.
-   - Il giocatore *i* potrebbe aumentare la sua utilità spostando la probabilità da $s_i$ a $s_j$.
+- Se $s_j$ appartiene già al supporto, si può aumentare la sua probabilità e ridurre quella di $s_i$ per migliorare l'utilità del giocatore $i$.
+- Se $s_j$ non appartiene al supporto, la probabilità di $s_j$ può essere introdotta riducendo quella di $s_i$.
+- Il giocatore *i* potrebbe aumentare la sua utilità spostando la probabilità da $s_i$ a $s_j$.
 
 4. **Contraddizione**:
-   - In entrambi i casi, l'utilità del giocatore *i* aumenta, quindi otteniamo che:
-     $$
-     U_i(\sigma'_i, \sigma^*_{-i}) > U_i(\sigma^*, \sigma^*_{-i})
-     $$
-   - Questo contraddice l'assunzione che $\sigma^*$ sia un equilibrio di Nash, perché $\sigma'_i$ sarebbe una strategia migliore.
+- In entrambi i casi, l'utilità del giocatore *i* aumenta, quindi otteniamo che:
+$$
+U_i(\sigma'_i, \sigma^*_{-i}) > U_i(\sigma^*, \sigma^*_{-i})
+$$
+- Questo contraddice l'assunzione che $\sigma^*$ sia un equilibrio di Nash, perché $\sigma'_i$ sarebbe una strategia migliore.
 
 ### Seconda Parte: Dimostrazione $\Leftarrow$
 
 1. **Assunzione Iniziale**:
-   - Supponiamo che $\sigma^*$ non sia un equilibrio misto di Nash. Esiste quindi una strategia $\sigma'_i$ per il giocatore $i$ tale che:
-     $$
-     U_i(\sigma'_i, \sigma^*_{-i}) > U_i(\sigma^*)
-     $$
+- Supponiamo che $\sigma^*$ non sia un equilibrio misto di Nash. Esiste quindi una strategia $\sigma'_i$ per il giocatore $i$ tale che:
+$$
+U_i(\sigma'_i, \sigma^*_{-i}) > U_i(\sigma^*)
+$$
 
 2. **Conseguenza**:
-   - Questo implica che esiste una strategia nel supporto di $\sigma'_i$ che dà un'utilità maggiore rispetto ad almeno una delle azioni nel supporto di $\sigma^*_i$ in risposta alle strategie degli avversari $\sigma^*_{-i}$.
+- Questo implica che esiste una strategia nel supporto di $\sigma'_i$ che dà un'utilità maggiore rispetto ad almeno una delle azioni nel supporto di $\sigma^*_i$ in risposta alle strategie degli avversari $\sigma^*_{-i}$.
 
 3. **Contraddizione**:
-   - Se non tutte le azioni nel supporto di $\sigma^*_i$ sono best response a $\sigma^*_{-i}$, ciò contraddice la definizione di equilibrio di Nash.
+- Se non tutte le azioni nel supporto di $\sigma^*_i$ sono best response a $\sigma^*_{-i}$, ciò contraddice la definizione di equilibrio di Nash.
 
 ### Corollario 1:
 Per ogni giocatore $i$ e per tutte le azioni $s'_i$ e $s''_i$ nel supporto di $\sigma^*_i$, vale che:
@@ -667,40 +661,40 @@ Dove $B(σ^*_{-i})$ è l'insieme delle best response alle strategie degli altri 
 - **Scenario**: Due giocatori devono scegliere tra andare a un concerto di Bach o di Stravinsky. Le preferenze sono diverse, ma entrambi preferiscono essere insieme.
 
 - **Probabilità**:
-  - Il giocatore 2 sceglie Bach con probabilità $\sigma_2(B)$ e Stravinsky con $1 - \sigma_2(B)$.
-  
+- Il giocatore 2 sceglie Bach con probabilità $\sigma_2(B)$ e Stravinsky con $1 - \sigma_2(B)$.
+
 - **Calcolo per il Giocatore 1**:
-  - Utilità se gioca **Bach**: $U_1(B, \sigma_2) = 2\sigma_2(B)$
-  - Utilità se gioca **Stravinsky**: $U_1(S, \sigma_2) = 1 - \sigma_2(B)$
+- Utilità se gioca **Bach**: $U_1(B, \sigma_2) = 2\sigma_2(B)$
+- Utilità se gioca **Stravinsky**: $U_1(S, \sigma_2) = 1 - \sigma_2(B)$
 
 - **Condizione per Giocare Bach**:
-  - Il giocatore 1 preferisce Bach se $2\sigma_2(B) > 1 - \sigma_2(B)$, cioè quando $\sigma_2(B) > \frac{1}{3}$.
+- Il giocatore 1 preferisce Bach se $2\sigma_2(B) > 1 - \sigma_2(B)$, cioè quando $\sigma_2(B) > \frac{1}{3}$.
 
 - **Strategia del Giocatore 1**:
-  - $\sigma_1(B) = 1$ se $\sigma_2(B) > \frac{1}{3}$
-  - $\sigma_1(B) = 0$ se $\sigma_2(B) < \frac{1}{3}$
-  - $\sigma_1(B) \in [0, 1]$ se $\sigma_2(B) = \frac{1}{3}$
+- $\sigma_1(B) = 1$ se $\sigma_2(B) > \frac{1}{3}$
+- $\sigma_1(B) = 0$ se $\sigma_2(B) < \frac{1}{3}$
+- $\sigma_1(B) \in [0, 1]$ se $\sigma_2(B) = \frac{1}{3}$
 
 - **Strategia del Giocatore 2**: 
-  - Simile per il giocatore 2, che preferisce Bach se $\sigma_1(B) > \frac{2}{3}$.
+- Simile per il giocatore 2, che preferisce Bach se $\sigma_1(B) > \frac{2}{3}$.
 
 - **Equilibrio di Nash Misto**: 
-  - L'unico equilibrio non puro si verifica quando $\sigma_1(B) = \frac{2}{3}$ e $\sigma_2(B) = \frac{1}{3}$.
+- L'unico equilibrio non puro si verifica quando $\sigma_1(B) = \frac{2}{3}$ e $\sigma_2(B) = \frac{1}{3}$.
 ---
 ### Giochi Strategici:
 - **Modalità di gioco**: I giocatori scelgono simultaneamente.
 - **Informazione**:
-  - **Informazione completa**: Conosci le preferenze e utilità dell'avversario.
-  - **Informazione incompleta**: Non sai cosa sceglierà l'avversario e viceversa.
+- **Informazione completa**: Conosci le preferenze e utilità dell'avversario.
+- **Informazione incompleta**: Non sai cosa sceglierà l'avversario e viceversa.
 
 ## Giochi in forma estesa
 I giochi in forma estesa rappresentano situazioni in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato. Questa rappresentazione si basa su un **game tree,** una struttura che mostra i nodi di decisione (dove un giocatore sceglie un'azione) e i nodi terminali (dove si determinano i risultati e le utilità).
 - **Modalità di gioco**: Giocati in sequenza, tenendo conto degli eventi passati.
 - **Informazione e Memoria**:
-  - **Informazione perfetta**: Conosci tutto (dove ti trovi, cosa è successo, ecc.).
-  - **Informazione imperfetta**: Non hai informazioni complete.
-  - **Memoria perfetta**: Ricordi tutto ciò che è successo.
-  - **Memoria imperfetta**: Hai una memoria parziale degli eventi.
+- **Informazione perfetta**: Conosci tutto (dove ti trovi, cosa è successo, ecc.).
+- **Informazione imperfetta**: Non hai informazioni complete.
+- **Memoria perfetta**: Ricordi tutto ciò che è successo.
+- **Memoria imperfetta**: Hai una memoria parziale degli eventi.
 ### Struttura:
 1. **Nodi di decisione**: Partizionati per ciascun giocatore. Ogni giocatore sceglie un'azione da un insieme di azioni disponibili, rappresentate dagli archi tra i nodi.
 2. **Nodi terminali**: Qui si indicano le utilità per ciascun giocatore, determinate dalle azioni intraprese.
