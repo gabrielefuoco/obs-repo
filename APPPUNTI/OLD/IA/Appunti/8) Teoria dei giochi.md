@@ -489,13 +489,14 @@ I  Prigioniero 1 subisce una pena più severa (-4) mentre il Prigioniero 2 ricev
 #### Definizione Formale di Gioco Strategico
 1. **Giocatori**: Un insieme di $N$ giocatori.
 2. **Azioni/Strategie**:
-- Per ogni giocatore $i \in N$, esiste un insieme di azioni ammissibili $S_i$.
-- Le azioni di ciascun giocatore sono indicate con $s_i$.
-3. **Profili di Azione**:
-- L'insieme dei profili di azione è $S = \times_{j \in N} \ S_j = S_1 \times \cdots \times S_N$.
-- Un **profilo di azione** è una combinazione delle azioni scelte da tutti i giocatori, rappresentato come una $N$-upla di azioni ammissibili $(s_1, ..., s_N)$.
-4. **Utilità**:
-- Per ogni giocatore $i \in N$, esiste una funzione di utilità $u_i : S \rightarrow \mathbb{R}$ che assegna un valore reale a ciascun profilo di azione.
+	- Per ogni giocatore $i \in N$, esiste un insieme di azioni ammissibili $S_i$.
+	- Le azioni di ciascun giocatore sono indicate con $s_i$.
+1. **Profili di Azione**:
+	- L'insieme dei profili di azione è $S = \times_{j \in N} \ S_j = S_1 \times \cdots \times S_N$.
+		- $S$ rappresenta il prodotto cartesiano delle azioni ammissibili.
+	- Un **profilo di azione** è una combinazione delle azioni scelte da tutti i giocatori, rappresentato come una $N$-upla di azioni ammissibili $(s_1, ..., s_N)$.
+1. **Utilità**:
+	- Per ogni giocatore $i \in N$, esiste una funzione di utilità $u_i : S \rightarrow \mathbb{R}$ che assegna un valore reale a ciascun profilo di azione.
 
 #### Definizione di Equilibrio di Nash
 Un profilo di azione $S^*$ è un equilibrio di Nash se:
@@ -504,8 +505,9 @@ u_i(S^*) \geq u_i(s_i, S^*_{-i}) \quad \forall i \in N, \quad \forall s_i \in S_
 $$
 dove $S^*_{-i}$ rappresenta le scelte degli altri giocatori. In altre parole, dato un profilo di azione $S^*$, nessun giocatore può migliorare la propria utilità cambiando unilateralmente la propria azione, dato che le azioni degli altri giocatori rimangono costanti.
 
----
-#### Esempio: Gioco dei Bach e Stravinsky
+==Per ogni giocatore i, il valore reale del profilo d'azione S* è minore o uguale del valore reale del profilo d'azione che rappresenta le scelte degli altri giocatori. ==
+
+## Esempio: Gioco dei Bach e Stravinsky
 Due persone devono decidere a quale concerto andare (Bach o Stravinsky). Le preferenze e i payoff sono i seguenti:
 
 | **Giocatore 2** \ **Giocatore 1** | **Bach** | **Stravinsky** |
@@ -521,90 +523,83 @@ Due persone devono decidere a quale concerto andare (Bach o Stravinsky). Le pref
 **Equilibri di Nash**:
 - (Bach, Bach) è un equilibrio di Nash: Se entrambi vanno a Bach, nessuno ha incentivo a cambiare, dato che preferiscono stare insieme piuttosto che andare separatamente.
 - (Stravinsky, Stravinsky) è un altro equilibrio di Nash per lo stesso motivo.
----
-#### Funzione di Best Response
+
+## Funzione di Best Response
+
 La funzione di best response per un giocatore $i$ dato un profilo di azioni degli altri giocatori $s_{-i}$ è:
 $$
 B_i(s_{-i}) = \{s_i \in S_i : u_i(s_i, s_{-i}) \geq u_i(s'_i, s_{-i}), \forall s'_i \in S_i\}
 $$
+Rappresenta l'insieme delle strategie $s_i \in S_{i}$ tali che l'utilità $u_i$ ottenuta, dato il profilo di strategie $s_{-i}$ degli altri giocatori, è maggiore o uguale all'utilità ottenuta con qualsiasi altra strategia alternativa $s'_i \in S_i$.
+
 Un profilo di azione $s^*$ è un equilibrio di Nash se e solo se ogni azione $s^*_i$ è una best response alle azioni degli altri giocatori, ovvero:
 $$
 s^*_i \in B_i(s^*_{-i}) \quad \forall i \in N
 $$
 ## Strategie Miste
+
 Una **strategia mista** è una distribuzione di probabilità sulle azioni che un giocatore può scegliere. In altre parole, ogni giocatore sceglie un’azione non in modo deterministico, ma con una certa probabilità.
 Questo approccio garantisce sempre l’esistenza di un equilibrio di Nash, anche in giochi complessi con strategie non deterministiche.
-Riassumendo, consentono ai giocatori di scegliere azioni con probabilità, introducendo un elemento di casualità e permettendo di gestire situazioni stocastiche.
+
 **Motivazione**:
 - In molti giochi, le scelte possono non portare a risultati certi (sono stocastiche). Invece di optare per una scelta deterministica,i giocatori possono decidere di mescolare le loro scelte per massimizzare l’utilità attesa, che è una misura dell'aspettativa dei risultati di tutte le azioni possibili.
-**Esempio:
-- Immagina di avere una lotteria con vari premi. Ogni premio ha una probabilità associata. Le strategie miste possono essere viste come la scelta di un biglietto della lotteria, dove ogni biglietto rappresenta una combinazione di probabilità per i vari premi.
-#### Utilità Attesa:
-- L’utilità attesa di una lotteria è calcolata come:
+
+**Riassumendo**: Una strategia mista è quando un giocatore sceglie le sue azioni assegnando *probabilità* a ciascuna di esse.
+
+### Utilità Attesa:
+
+L’utilità attesa di una lotteria è calcolata come:
 $$
 U(p) = \sum_{z \in Z} p(z) \cdot v(z)
 $$
-Dove $p(z)$ è la probabilità di ottenere il premio $z$ e $v(z)$ è il valore dell’utilità associato a $z$.
+ L'utilità della lotteria $U(p)$ è calcolata come la somma ponderata dei valori $v(z)$ dei premi, con i pesi dati dalle probabilità. 
+ 
+- La funzione di utilità di Von Neumann-Morgenstern $v(\cdot)$ rappresenta le preferenze sui premi di una lotteria.
+ - Questa funzione rappresenta le preferenze dei giocatori in termini di utilità attesa e soddisfa gli assiomi di indipendenza e continuità, garantendo valori unici e consistenti per rappresentare le preferenze tra diverse lotterie.
 
-**Funzione di Utilità di Von Neumann-Morgenstern**:
-- La funzione di utilità di Von Neumann-Morgenstern $v(\cdot)$ rappresenta le preferenze sui premi di una lotteria. L'utilità della lotteria $U(p)$ è calcolata come la somma ponderata dei valori $v(z)$ dei premi, con i pesi dati dalle probabilità. Questa funzione soddisfa gli assiomi di indipendenza e continuità, garantendo valori unici e consistenti per rappresentare le preferenze tra diverse lotterie.
-- Questa funzione rappresenta le preferenze dei giocatori in termini di utilità attesa.
 
-## Strategie Miste nei Giochi Strategici
+### Utilità Attesa di una Strategia Mista:
 
-1. **Utilità Attesa di una Strategia Mista**:
+L'obiettivo è calcolare quanto guadagno (o utilità) ci si aspetta da una strategia mista.
 - La **utilità attesa** di una strategia mista $\sigma$ per un giocatore $i$ è:
 $$
 U_i(\sigma) = \sum_{s_i \in S_i} \sigma_i(s_i) \cdot U_i(e(s_i), \sigma_{-i})
 $$
 Dove:
 - $\sigma_i(s_i)$ è la probabilità con cui il giocatore $i$ sceglie l'azione $s_i$.
-- $e(s_i)$ è la strategia pura in cui il giocatore $i$ gioca $s_i$ con probabilità 1 mentre gli altri giocatori seguono le loro strategie miste $\sigma_{-i}$.
+- $U_i(e(s_i), \sigma_{-i})$: guadagno del giocatore $i$ quando:
+   - Gioca **solo** $s_i$ (con probabilità 1) 
+   - Gli altri giocatori seguono la loro strategia mista $\sigma_{-i}$.
 
-2. **Equilibrio di Nash con Strategie Miste**:
+Rappresenta la somma dei prodotti tra le probabilità con cui il giocatore $i$ sceglie l'azione $s_i$ e il guadagno quando gioca solo l'azione $s_i$ e gli altri giocatori scelgono la loro strategia mista.
+
+### Equilibrio di Nash con Strategie Miste:
 - Un profilo di strategie miste $\sigma^*$ è un equilibrio di Nash se:
 $$
 U_i(\sigma^*) \geq U_i(\sigma'_i, \sigma^*_{-i}) \quad \forall i \in N, \quad \forall \sigma'_i
 $$
 Dove $\sigma'_i$ è qualsiasi strategia mista alternativa per il giocatore $i$.
 
-#### Riassunto
-- **Strategie Miste**: 
-- **Utilità Attesa**: Calcolata come la somma ponderata dei valori degli esiti possibili, con i pesi dati dalle probabilità degli esiti stessi.
-- **Equilibrio di Nash**: In presenza di strategie miste, è un profilo in cui nessun giocatore può migliorare la propria utilità attesa cambiando unilateralmente la propria strategia mista.
 
 # Teorema di Nash:
 
-Il **Teorema di Nash** afferma che in ogni gioco non cooperativo con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. Questo equilibrio ha due proprietà fondamentali:
+Il **Teorema di Nash** afferma che in ogni *gioco non cooperativo* con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. Questo equilibrio ha due proprietà fondamentali:
 * Garantisce l'esistenza di un equilibrio anche quando non esiste un equilibrio in strategie pure. 
 * In questo equilibrio, tutte le azioni che hanno una probabilità positiva nella strategia mista di un giocatore sono le migliori risposte alle strategie degli altri giocatori.
 
-
 #### Definizione di Supporto di una Strategia Mista
-Il **supporto** di una strategia mista $\sigma_i$ per il giocatore $i$ è l'insieme delle azioni che hanno probabilità σ positiva nella strategia:
+Il **supporto** di una strategia mista $\sigma_i$ per il giocatore $i$ è l'insieme delle azioni che hanno probabilità $\sigma$ positiva nella strategia:
 $$
 \text{supp}(\sigma_i) = \{ s_i \in S_i : \sigma_i(s_i) > 0 \}
 $$
-In altre parole, è l'insieme delle azioni che il giocatore $i$ sceglie con una probabilità non nulla.
+In altre parole, ==il supporto è l'insieme delle azioni che il giocatore $i$ sceglie con una probabilità non nulla.==
 
-#### Teorema di Nash
+#### Definizione Formale **Teorema di Nash**
 Esiste sempre un equilibrio di Nash con strategie miste. 
 Un profilo di strategie miste $\sigma^* = (\sigma^*_i)_{i \in N}$ è un equilibrio di Nash se e solo se:
 
 - Per ogni giocatore $i \in N$, tutte le strategie pure nel supporto di $\sigma^*_i$ sono **best response** alle strategie miste degli altri giocatori $\sigma^*_{-i}$.
 
-#### Spiegazione
-1. **Equilibrio di Nash con Strategie Miste**:
-- In questo equilibrio, nessun giocatore può migliorare la propria utilità attesa cambiando unilateralmente la propria strategia.
-2. **Best Response e Supporto**:
-- Ogni strategia pura nel supporto di $σ*i$ deve essere una best response alle strategie degli altri giocatori. Se non lo fosse, il giocatore potrebbe migliorare la sua utilità attesa spostando la probabilità verso strategie migliori.
-3. **Implicazioni della Degenerazione**:
-- Se una strategia mista in equilibrio include più azioni nel suo supporto, non può degenerare in una strategia pura senza rischiare di alterare l'equilibrio.
-
-## Dimostrazione del Teorema di Nash
-#### Teorema: 
-Esiste sempre un equilibrio misto di Nash. 
-* Il teorema dimostra che esiste sempre un equilibrio misto di Nash e che tutte le azioni nel supporto di una strategia mista in equilibrio sono best response rispetto alle strategie degli altri giocatori.
 ### Prima Parte: Dimostrazione $\Rightarrow$
 
 Se $\sigma^*$ è un equilibrio di Nash, allora tutte le azioni nel supporto di $\sigma^*$ sono best response.
@@ -691,18 +686,14 @@ Dove $B(σ^*_{-i})$ è l'insieme delle best response alle strategie degli altri 
 I giochi in forma estesa rappresentano situazioni in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato. Questa rappresentazione si basa su un **game tree,** una struttura che mostra i nodi di decisione (dove un giocatore sceglie un'azione) e i nodi terminali (dove si determinano i risultati e le utilità).
 - **Modalità di gioco**: Giocati in sequenza, tenendo conto degli eventi passati.
 - **Informazione e Memoria**:
-- **Informazione perfetta**: Conosci tutto (dove ti trovi, cosa è successo, ecc.).
-- **Informazione imperfetta**: Non hai informazioni complete.
-- **Memoria perfetta**: Ricordi tutto ciò che è successo.
-- **Memoria imperfetta**: Hai una memoria parziale degli eventi.
+	- **Informazione perfetta**: Conosci tutto (dove ti trovi, cosa è successo, ecc.).
+	- **Informazione imperfetta**: Non hai informazioni complete. I nodi indistinguibili per il giocatore sono raggruppati in un **information set**, e il giocatore deve scegliere una strategia basata su questo insieme, non sul singolo nodo.
+	- **Memoria perfetta**: Ricordi tutto ciò che è successo.
+	- **Memoria imperfetta**: Hai una memoria parziale degli eventi.
 ### Struttura:
 1. **Nodi di decisione**: Partizionati per ciascun giocatore. Ogni giocatore sceglie un'azione da un insieme di azioni disponibili, rappresentate dagli archi tra i nodi.
 2. **Nodi terminali**: Qui si indicano le utilità per ciascun giocatore, determinate dalle azioni intraprese.
 3. **Strategia**: È una funzione che, per ogni nodo in cui il giocatore si trova, restituisce un'azione da eseguire. Le strategie possono essere deterministiche o randomizzate.
-
-### Informazione Perfetta e Imperfetta:
-- **Informazione perfetta**: Il giocatore conosce tutto quello che è accaduto fino al momento della sua decisione, quindi sa esattamente dove si trova nel game tree.
-- **Informazione imperfetta**: Il giocatore non ha informazioni complete; potrebbe non sapere esattamente in quale nodo si trova. In questo caso, i nodi indistinguibili per il giocatore sono raggruppati in un **information set**, e il giocatore deve scegliere una strategia basata su questo insieme, non sul singolo nodo.
 
 ### Subgame Perfect Equilibrium (SPE):
 È un concetto fondamentale nei giochi estensivi. Un equilibrio di Nash è definito per l'intero gioco, ma l'SPE rafforza questo concetto:
