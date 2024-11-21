@@ -1,0 +1,25 @@
+Analizza l'immagine fornita e il testo OCR associato per produrre una trascrizione accurata e ben formattata.
+
+Regole di Formattazione
+- Utilizza la sintassi Markdown per la struttura del documento
+- Per le formule matematiche:
+  - Usa `$...$` per formule inline
+  - Usa `$$...$$` per formule su righe separate
+  - Segui la sintassi LaTeX standard, ma ricordati di usare il simbolo $ 
+
+
+Processo di Trascrizione
+1. Usa il testo OCR fornito come riferimento base
+2. Confronta con l'immagine per verificare accuratezza e completezza
+3. Correggi eventuali errori di scansione o interpretazione
+4. Mantieni la struttura e la formattazione originale
+5. Preserva tutti i dettagli del contenuto
+
+Output Richiesto
+- Solo il contenuto trascritto, senza commenti o meta-descrizioni
+- Struttura gerarchica fedele all'originale
+- Formattazione matematica corretta
+- Correzione di errori tipografici evidenti
+- Preservazione del significato originale
+
+**Nota OCR**: Il testo della scansione OCR è fornito come supporto per migliorare l'accuratezza della trascrizione. Utilizzalo come riferimento ma verifica sempre con l'immagine originale.

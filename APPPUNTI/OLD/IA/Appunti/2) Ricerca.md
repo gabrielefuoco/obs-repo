@@ -67,7 +67,8 @@ La frontiera è l'insieme dei nodi che sono stati generati ma non ancora esplora
 * **Coda FIFO (First In First Out):** I nodi vengono inseriti e estratti dalla frontiera in ordine di arrivo.
 * **Coda LIFO (Last In First Out):** I nodi vengono inseriti e estratti dalla frontiera in ordine inverso di arrivo.
 
-### Strategie di Ricerca Non Informata
+## Strategie di Ricerca Non Informata
+
 Le strategie di ricerca non informata non utilizzano informazioni sulla distanza dal goal per guidare la ricerca. Le prestazioni di queste strategie possono essere valutate in base a:
 
 * **Completezza:** Se esiste una soluzione, l'algoritmo la trova.
@@ -90,8 +91,6 @@ La ricerca in ampiezza è completa anche su spazi infiniti e, se le azioni hanno
 La ricerca in profondità esplora lo spazio degli stati espandendo sempre il nodo con la maggiore profondità. Può essere implementata come una ricerca Best-First con f(n) pari all'opposto della profondità. Un'implementazione più efficiente utilizza una coda LIFO.
 
 La ricerca in profondità è completa solo se la struttura è aciclica e non è ottimale. La complessità spaziale è $O(b · m)$ e quella temporale è $O(bm)$, dove b è il branching factor e m è la massima profondità dell'albero. 
-
-## Strategie di Ricerca Non Informata
 
 ### Iterative Deepening
 
@@ -134,15 +133,17 @@ L'algoritmo è completo e può essere ottimale a seconda della strategia utilizz
   - Completo solo in spazi di ricerca finiti.
   - Complessità spaziale e temporale: $O(|v|)$, dove $|v|$ è il numero di nodi, ma può migliorare a $O(b \cdot m)$, con $b$ il branching factor e $m$ la profondità massima dell'albero.
 
----
-### Riepilogo delle Funzioni di Valutazione
-- **Greedy Best-First Search**: $f(n) = h(n)$ (solo euristica, non ottimale).
-- **Uniform Cost Search (UCS)**: $f(n) = g(n)$ (solo costo passato, ottimale).
-- **A\***: $f(n) = g(n) + h(n)$ (costo accumulato + stima futura, ottimale se $h(n)$ è ammissibile).
-#### Confronto delle Strategie:
-- **Greedy Best-First**: Veloce ma non garantisce la soluzione ottima.
-- **UCS**: Lenta ma garantisce l'ottimalità.
-- **A***: Unisce i vantaggi di entrambe, garantendo l'ottimalità in modo più efficiente (se l'euristica è ben scelta).
+## A* Tree Search
+- **Funzione di costo**: $f(n) = g(n) + h(n)$  (combina UCS e Greedy Search).
+  - $g(n)$: costo del percorso dal nodo iniziale a $n$ (guarda al passato).
+  - $h(n)$: euristica, stima del costo dal nodo $n$ all'obiettivo (guarda al futuro).
+  - **Strategia**: best-first.
+- **Caratteristica**: L'euristica introduce un rilassamento del problema, migliorando i tempi di risoluzione ma riducendo la bontà della soluzione (trade-off).
+- **Caso senza euristica**: $f(n) = g(n)$, e l'algoritmo diventa una *Uniform Cost Search (UCS)*.
+- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.
+- **Completezza**: L'algoritmo A\* è completo, ovvero **trova sempre una soluzione** se esiste, a condizione che:
+  - Lo spazio degli stati abbia una soluzione o sia finito.
+  - I costi delle azioni siano **positivi** e maggiori di una soglia $\epsilon > 0$.
 
 ## Proprietà delle Euristiche
 Esistono due proprietà principali per le euristiche: **ammissibilità** e **consistenza**.
@@ -173,19 +174,6 @@ Esistono due proprietà principali per le euristiche: **ammissibilità** e **con
 - **Motivo**:
   - **Ricerca Best-First**: La valutazione qualitativa può essere sufficiente (confronto tra stati).
   - **Ricerca A∗**: Necessita di una combinazione di criteri numerici per quantificare quanto uno stato sia preferibile rispetto a un altro.
-
-# A* Tree Search
-- **Funzione di costo**: $f(n) = g(n) + h(n)$  (combina UCS e Greedy Search).
-  - $g(n)$: costo del percorso dal nodo iniziale a $n$ (guarda al passato).
-  - $h(n)$: euristica, stima del costo dal nodo $n$ all'obiettivo (guarda al futuro).
-  - - **Strategia**: best-first.
-- **Caratteristica**: L'euristica introduce un rilassamento del problema, migliorando i tempi di risoluzione ma riducendo la bontà della soluzione (trade-off).
-- **Caso senza euristica**: $f(n) = g(n)$, e l'algoritmo diventa una *Uniform Cost Search (UCS)*.
-- **Caratteristica chiave**: come nella UCS, un nodo viene espanso prima di verificare se soddisfa il goal, per gestire potenziali cammini con costo minore.
-- **Completezza**: L'algoritmo A\* è completo, ovvero **trova sempre una soluzione** se esiste, a condizione che:
-  - Lo spazio degli stati abbia una soluzione o sia finito.
-  - I costi delle azioni siano **positivi** e maggiori di una soglia $\epsilon > 0$.
-
 
 ## Ottimalità di A* Tree Search
 - **Premessa**: Se l'euristica $h(n)$ è **ammissibile**, l'algoritmo A\* è **ottimale** in termini di costo. Vediamo come dimostrarlo.
@@ -297,7 +285,7 @@ Da cui segue che:
      $$
      h(n) = h(n')
      $$
-  3. Poiché $n$ è sul cammino ottimo e $n'$ è su un cammino non ottimo, sappiamo che $g(n') > g(n)$, ma abbiamo anche che $h(n) = h(n')$. Ne consegue che $f(n) < f(n')$, e dunque:
+  3. Poiché $n$ è sul cammino ottimo e $n'$ è su un cammino non ottimo, sappiamo che $g(n) < g(n')$, ma abbiamo anche che $h(n) = h(n')$. Ne consegue che $f(n) < f(n')$, e dunque:
      $$
      f(p) \leq f(n) < f(n')
      $$
@@ -336,7 +324,7 @@ Da cui segue che:
   - In altre parole, l'euristica è ammissibile per gli stati a distanza $k$ dal goal.
 
 #### Passo induttivo (stato $n$ a distanza $k+1$ dal goal):
-1. Dall'ipotesi di**Consistenza** deriva che: 
+1. Dall'ipotesi di **Consistenza** deriva che: 
    $$
    \forall a, \quad h(n) \leq costo(n, a, n') + h(n')
    $$
@@ -347,7 +335,7 @@ Da cui segue che:
    h(n) \leq costo(n, a^*, n'^*) + h(n'^*)
    $$
    
-3. **Applicando l'ipotesi induttiva**: Poiché l'euristica è ammissibile per gli stati che distano k passi dal goal, come $n'^*$, possiamo utilizzare l'ipotesi induttiva per sostituire $h(n'*)$ con $h^*(n'*)$, ovvero il costo effettivo minimo per raggiungere il goal partendo da $n'^*$:
+3. **Applicando l'ipotesi induttiva**: Poiché l'euristica è ammissibile per gli stati che distano k passi dal goal, come $n'^*$, possiamo utilizzare l'ipotesi induttiva per sostituire $h(n'^*)$ con $h^*(n'^*)$, ovvero il costo effettivo minimo per raggiungere il goal partendo da $n'^*$:
    $$
    h(n'^*) \leq h^*(n'^*)
    $$

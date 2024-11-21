@@ -27,7 +27,6 @@
 | **Tree-width**                       | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero.                                                                                                |
 | **Teorema di Grohe**                 | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
 
-
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
 
 - Con una **rappresentazione esplicita**, i vincoli sono trattati come un database, dove per ogni vincolo si definisce un insieme di variabili e un insieme di valori validi. Ad esempio, se abbiamo tre vincoli $C1(WA,NT), C2(WA,SA), C3(NT,SA)$, questi rappresentano restrizioni sui valori ammissibili tra le variabili $WA, NT, SA$.

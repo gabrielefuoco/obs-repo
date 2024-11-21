@@ -135,7 +135,7 @@ m\mu=\sum_{i=1}^mx_{i} \\
 \implies \mu=\frac{1}{m}\sum_{i=1}^mx_{i}
 \end{cases}$$
 
-$$\text{Deviazione Standard}
+$$\text{Deviazione Standard:}
 \begin{cases}
 -\frac{m}{\sigma}+\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2=0 \\
 \frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2  =\frac{m}{\sigma} \\

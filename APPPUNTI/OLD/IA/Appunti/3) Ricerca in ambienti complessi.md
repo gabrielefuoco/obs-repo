@@ -1,4 +1,5 @@
 
+
 | Termine | Spiegazione |
 |---|---|
 | **Ricerca di Stati Finali** | Strategia di ricerca che si focalizza sul trovare uno stato finale desiderabile, senza considerare il cammino percorso per raggiungerlo. |

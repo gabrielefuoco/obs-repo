@@ -167,7 +167,7 @@ definizione di h^{(t)}: applicazione di una funzione di attivazione (solitamente
 
 diagonalizzazione della derivata della funzione di attivazione per w_h
 
-# registrazione 2 
+# registrazione 2 Lunedì
 
 spiegazione della derivata di J
 
@@ -214,10 +214,211 @@ vettori della stessa dimensionalità, ad ogni timestep il vettore dei gates sar�
 i loro valori sono dinamici e cambiano a seconda di input e contesto
 
 ![[10)-20241118164929500.png]]
-partendo dal basso, bogliamo calcolare gli hidden h^{(t)} e le celle c^{(t)}
-h^{(t)} è una combinazioone element wise tra l'attivazione dello stato della cella (tangente iperbloica) per o^{(t)}, che è l output gate(filtro), controlla quali parte della cella di memoria vanno a contribuire allo stato hidden al passo t
+partendo dal basso, bogliamo calcolare gli hidden $h^{(t)}$ e le celle $c^{(t)}$
+$h^{(t)}$ è una combinazioone element wise tra l'attivazione dello stato della cella (tangente iperbloica) per $o^{(t)}$, che è l output gate(filtro), controlla quali parte della cella di memoria vanno a contribuire allo stato hidden al passo t
 
 c^t è la combinazione tra c al passo precedente per lo stato al passo corrente di quella che il nuovo contenuto da inserire in memoria
 la combinazioneè controllata da due gate f(forget) e i(input)
 lo stato di memoria al passo t è la combinazione tra una parte dello stato di memoria al passo precedente e la combinazione del nuovo contenuto, determinato dal nostro input trasformato combinandolo linearmente con l'hidden state al passo precedente
 il risultato è $\tilde{c}^{(t)}$
+
+ciascun gate è ottenuto come trasformazione della regressione dell input x al passo t  con la codifica intermedia al passo t+1
+ogni gate ha associato dei parametri distinti
+
+
+![[10)-20241119095018808.png]]
+nell'immagine precedente vengono messi in evidenza i flussi
+![[10)-20241119095044205.png]]
+
+How does LSTM solve vanishing gradients?
+• The LSTM architecture makes it much easier for an RNN to
+preserve information over many timesteps
+• e.g., if the forget gate is set to 1 for a cell dimension and the input gate
+set to O, then the information of that cell is preserved indefinitely.
+• In contrast, it's harder for a vanilla RNN to learn a recurrent weight
+matrix Wh that preserves info in the hidden State
+• In practice, you get about 100 timesteps rather than about 7
+
+forget gate impostato a 1 per una dimensione della cella e input gate a 0, allora l'info della cella è preservata
+esistono dei modi alternativi di creare delle connessioni all'interno della rete per preservare le dipendenze a lunga distanza: l'aggiunta di connessioni dirette è un'esigenza nelle rnn, che fanno passare il gradiente direttamente senza trasformazioni
+l'input per un layer subisce una trasformazione per cui la funzione è quella d'identità
+l'input di un layer si combina con l output di quel layer:il gradiente può passare da un timestep a uno precedente, evitando il problema del vanishing gradient
+sono chiamati skip connection o connessioni residue (resnet)
+
+connsessioni dense: connettere ogni layer a ogni altro layer che lo segue (densenet)
+
+highway connections (highwayNet): invece di avere funzione di attivazione identiotà vi è un meccanismo di gating che determina quale parte far passare direttamente
+
+
+## estensione con bidirezionalità
+
+abbiamo una certa frase e immaginiamo un task di sentiment analisys: 
+![[10)-20241119100108956.png]]
+l ambiguità dell'aggettivo terribly in esempio ci porta a pensare che sia necessario aggiungere bidirezionalità
+
+l input entra in due layer paralleli, uno che mantine la direzionalità classica da sinistra a destra e uno al contrario
+![[10)-20241119100151634.png]]
+la bidirezionalità è ottenuta combinando la rnn con una rnn che è il reverse
+verranno dunque combinati i due output
+per fare predizione della parola questa cosa non è utile
+se il task non è autoregressivo, possiamo intervenire con la bidirezionalità per migliorare la rappresentazione contestuale
+$h^{(t)}$ è la combinazione di due stati: $h^{(t)}$ della forward e $h^{(t)}$ della backward, ciascuno coi propri parametri
+
+
+![[10)-20241119100621466.png]]
+
+la seconda estensione è quella di rendere "deep" la rete, aggiungendo più dimensioni
+
+![[10)-20241119100629530.png]]
+
+![[10)-20241119100706568.png]]una rappresentazione di questo tipo serve a catturare rappresentazioni che corrispondono a relazioni di diverso ordine tra le parole: facendo leva sull effetto della prossimità di località o globalità tra le parole, la rete rende piu efficace la rnn per catturare proprieta grammaticali o sintattiche, coi layer piu vicini all input, e man mano che aggiungiamo layer, le rappresentazioni finali servono per ottenere embeddings che catturano relazioni di alto livello (di carattere semantico)
+anche questa idea sarà parte integrante dei transformers
+
+per language modelling, con una rete del genere potremmo ottenere testi generati non solo grammaticalmente coerenti ma tali da avere una maggiore coerenza linguistica
+
+tipicamente non andiamo oltre i 3 layer per catturare al meglio sia le proprietà grammaticali che semantiche (4 è il massimo, ma può non valerne la pena rispetto a 3)
+
+con skip connections si può arrivare a 8 layer,12 per bert e 24 per i transformer specifici per l'encoding
+
+## Machine Translation
+
+task considerato particoalrmente difficile fino al 2015.
+non è language modelling perchè non è next word predictions, è un caso rappresentativo in cui abbiamo un input e un contesto di riferimento che svolgono due ruoli completamente diversi
+un task simile è la summarization
+la dimensione deve essere comparabile sia per risorse per il target
+![[10)-20241119101809788.png]]
+l'idea centrale è quella di apprendere un modello probabilistico dai dati: supponiamo di voler tradurre da francese a inglese
+data la frase in francese x vogliamo generare la migliore frase nel linguaggio target, y, e vogliamo massimizzare questa probabilità 
+dunque vogliamo massimizzare quella y da generare che massimizza la joint probability tra la probabilità a priori della frase da generare e la likelihood x|y
+dobbiamo dunque apprendere due componenti, il modello di traduzione, che deve apprendere come parole costituenti delle frase devono essere tradotte, e l'approccio è usare dati paralleli, ovvero dati formati da coppie di traduzioni letterali (linguaggio sorgente, linguaggio target).
+i modelli non vanno addestrati separatamente: il task di language modelling non fa leva sulle proprieta intrinseche del modello decoder addestrato su grandi corpus ma deve essere condizionato all'input, ci serve uno spazio di rappresentazione comune in cui l input è codificato in uno spazio di rappresentazione denso(produciamo l embedding della frase) e ce ne serviamo per condizionare parola per parola la frase prodotta
+
+## Seq2Seq Model
+
+![[10)-20241119102537146.png]]
+frase in input in francese, vogliamo fare tutto con due architetture rnn, questa cosa può essere anche fatta con lstm multi layer
+abbiamo bisogno di codificare la frase in input e ce ne serviamo per inizializzare lo stato iniziale $h^{(0)}$ della seconda rnn, che ad ogni passo predice la prossima parola
+il primo input per l'rnn decoder è un token speciale, indicato genericamente con "START", che rappresenta l'inizio della frase. con una cross entropy diventa la possibilità di predire la parola che meglio si avvicina alla parola successiva nella sequenza.
+
+la seconda rnn è autoregressiva 
+
+nella parte di encoding potremmo avere una rete bidirezionale
+
+![[10)-20241119103053527.png]]
+
+![[10)-20241119103147192.png]]
+
+come si addestra su un task di conditional language model?
+i pesi diversi di encoder e decoder vengono aggiornati ad ogni step di backpropagation insieme
+ci aspettiamo una convergenza del training lenta e complicata, ma è inevitabile se vogliamo condizionare il decoder all'encoder
+![[10)-20241119104448084.png]]
+il condizionamento sul decoder emerge come un collo di bottiglia: il decoder è condizionato dall'output globale dell encoder. ci chiediamo dunque se non sarebbe meglio che in ogni passo dell decoding ci sia un riferimento non solo globale ma relativo a ciascun elemnto della frase in input
+
+## greedy decoding
+![[10)-20241119104913791.png]]
+produci in output la parola che ha massimizzato la probabilità
+in quanto greedy non possiamo valutare a ogni step la decisione che va a condizionare gli step successivi
+
+possiamo pensare a un decoding basato su scelta esaustiva:
+$$P(y|x)=\prod_{t=1}^TP(y_{t}|y_{1},\dots,y_{t-1},x)$$
+![[10)-20241119105100890.png]]
+
+il tradeoff prende il nome di beam search
+![[10)-20241119105336897.png]]
+teniamo conto dell k traduzioni più probabili a ogni step
+
+l'espressione ipotesi si riferisce a una frase candidata: abbiamo k ipotesi ad ogni step, k è un parametro
+ogni ipotesi al passo t ha uno score associato che tiene conto delle probabilità cumulate ad ognuno dei passi precedenti
+la frase tradotta migliore corrisponderà all'ipotesi che ha accumulato il miglior score
+non cerchiamo l'ottimo globale ma non è una ricerca esaustiva perchè dobbiamo esplorare un albero
+
+![[10)-20241119105722368.png]]
+
+## BLEU
+si occupa di confrontare l output di un machine traslator con l output di una traduzione umana
+
+calcola uno score di matching tra la traduzione e il riferimento alla stessa
+calcolato con una combinazione di valori di precisione basati su n gram(n varia da 1 a 4)
+questa misura è un accumulo di precisioni di n gram con un coefficiente di penality per traduzioni molto brevi(potrei ingannare l accuracy con traduzioni di lunghezza 1)
+ssues with Precision
+● repetition
+● multiple target sentences
+Clipped Precision
+● Compare each word from the predicted sentence with all of the target sentences
+○ If the word matches any target sentence, it is considered to be correct
+● Limit the count for each correct word to the maximum number of times that word occurs in
+the target sentence
+
+![[10)-20241119110907996.png]]
+
+BLEU score as a product of the geometric average precision and brevity penalty
+
+Pros:
+● Quick to calculate and easy to understand
+● Corresponds to the way a human would evaluate the same text
+● Language-independent
+● Can be used when you have more than one ground truth sentence
+Cons:
+● Does not consider the meaning of words
+● Looks only for exact word matches
+● Ignores the importance of words
+● Ignores the order of words
+○ e.g., “The guard arrived late because of the rain” and “The rain arrived late because of the
+guard” would get the same (unigram) Bleu Score
+
+volendo fare qualcosa di diverso avremmo bisongo di un modello multilingua che funge da "oracolo", abile nel codificare embeddings di sentence e non singole parole
+
+## Attention
+
+piuttosto che affidarci alla codifica finale del contesto in input per l'encoder e quindi scontrarci col conditioning bottleneck, vogliamo che ogni passo di generazione del decoder sia guidato da un aggregazione pesata dei contributi di ogni topic che possano condizionare la generazione del decoder a ogni step:
+
+![[10)-20241119111802849.png]]
+introdotto per risolvere il conditioning bottleneck, il decoder è condizionato dall'output globale dell'encoder
+
+vogliamo introdurre delle connessioni dirette dal decoder all'encoder in modo tale che il decoder possa svolgere il suo ruolo sapendo su quali pezzi dell'encoder concentrarsi di volta in volta
+si dice anche che il decoder attende all'encoder
+si parte con il simbolo di start e c'è un attention, vengono calcolati i score e vengono poi aggregati. il risultato viene concatenato con l output del decoder al passo t e entrambi supportano la generazione della paraole.
+attention output fa da summary per l'info codificata dal decoder che ha ricevuto maggior attenzione
+
+![[10)-20241119112324451.png]]
+![[10)-20241119112330390.png]]
+![[10)-20241119112338437.png]]
+![[10)-20241119112402479.png]]
+![[10)-20241119112206826.png]]
+
+vogliamo prendere una scelta che deriva dai vari contributi che ciascun pezzo dell'encoder fornisce in quel passo al decoder
+
+![[10)-20241119112412234.png]]
+**Notazione:** 
+$h_1,...,h_N$ è il vettore che indica la codifica del layer nascosto, 
+$N$ è la lunghezza della frase in input, 
+$e^{(t)}$ è l'attention score$e^{(t)}=[s_{t}^Th_{1},\dots,s_{t}^Th_{n}] \in \mathbb{R}^N$
+$s_{t}$ è lo stato hidden del decoder ad ogni passo $t$ abbiamo
+ $a$ e $\alpha$ sono i coefficenti di attenzione, in particolare:
+$\alpha^{(t)}$ è la probabilità ottenuta con la softmax di $e^{(t)}$
+$a$ è la combinazione degli stati nascosti degli encoder
+
+![[10)-20241119112420126.png]]
+L'attenzione migliora le performance di Neural Machine Traslation (NMT)
+Fornisce un modello human like del modello machine traslation, perchè possiamo guardare alla frase sorgente durante il processo piuttosto che doverla ricordare
+risolve il problema di bottleneck
+aiuta col problema del vanishing gradient
+fornisce interpretabilità, ispezionando i pesi di attenzione possiamo sapere su quali parti il decoder si è concentrato step by step
+![[10)-20241119112426025.png]]
+si può utilizzare una dimensionalità nello stato nascosto diversa per l'encoder  e il decoder, anche se in pratica le due dimensionalità coincidono. per architetture encoding only può essere più basso
+i valori di h(stato dell'encoder)
+gli stati del decoder fanno da query a coppie chiave-valore che corrispondono ai stati dell'encoder
+abbiamo tante query quante la lunghezza della seguenza generata dal decoder ($T$) e abbiamo $N$ chiavi, tante quando la lunghezza della parola  in input
+![[10)-20241119112430591.png]]
+
+
+### Attention as a general DL technique
+![[10)-20241119112436419.png]]
+Possiamo generalizzare il meccanismo di attenzione: noi abbiamo visto la cross attention
+l'attenzione non è da utilizzare solo per architetture sequence to sequence
+intendiamo l'attenzione come una tecnica generale per calcolare una somma pesata di valori condizionatamente a una certa query
+questa somma è un summary selettivo dell'informazione contenuta nei valori (stati codifica), mentre la query determina su quali valori concentrarsi durante la generazione
+
+
+![[Pasted image 20241119112446.png]]
+

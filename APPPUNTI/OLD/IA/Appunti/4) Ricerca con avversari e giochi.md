@@ -39,7 +39,7 @@ I giochi possono essere classificati in base a diversi criteri:
 ### Formalizzazione di un Gioco Deterministico
 Un gioco deterministico può essere formalizzato nel seguente modo:
 
-* **Insieme di stati S:** dove S0 è lo stato iniziale.
+* **Insieme di stati S:** dove $S_0$ è lo stato iniziale.
 * **Insieme di player P = {1, ..., N}:** che, solitamente, giocano a turni.
 * **Insieme di mosse/azioni A:** legali nello stato s ∈ S.
 * **Modello di transizione (s, a) → S:** che definisce lo stato risultante dall'esecuzione dell'azione a ∈ A nello stato s ∈ S.
@@ -79,7 +79,7 @@ Ad esempio, consideriamo il seguente albero di gioco:
 
 Ad ogni turno, MAX preferirà muoversi verso uno stato di valore massimo mentre MIN preferirà muoversi verso uno stato di valore minimo. Nell'esempio, i nodi terminali prendono i loro valori dalla funzione di utilità; il primo nodo MIN, ovvero B, ha 3 successori con valori {3,12,8} quindi il suo valore MiniMax è pari a 3... per lo stesso motivo, il valore MiniMax dei nodi C,D è pari a 2; il nodo MAX ha 3 successori con valori {3,2,2}, quindi il suo valore MiniMax è 3.
 #### Efficienza
-Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è O(b · m) mentre quella temporale è O(b^m) dove m è la profondità e b è il fattore di branching.
+Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è $O(b · m)$ mentre quella temporale è $O(b^m)$ dove m è la profondità e b è il fattore di branching.
 
 
 ## Alpha-Beta Pruning: 
