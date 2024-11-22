@@ -1,0 +1,14 @@
+implementare:
+- logica di retry:
+	- in caso di errore lato api (superamento quota massima)
+	- in caso di connessione persa
+	- in caso di tempi di attesa superiori ai 10 sec a immagine
+	- in caso di output troppo breve(in tal caso riprovare 1 volta normalmente e 1 volta senza includere ocr)
+		- riprovare aumentando la temperatura?
+- togliere l'api in chiaro
+- salvare i file con nomi diversi
+- eliminare i file temporanei
+- **refactoring del codice e pulizia**
+- ocr migliore
+- estrazioni di testo dal pdf tramite altri metodi (metadati?)
+- 
