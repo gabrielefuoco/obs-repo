@@ -40,13 +40,14 @@ L'autoeconder non rispetta queste proprietà, dunque c'è bisogno di modificare 
 
 ### Variational Autoencoder (VAE)
 
-il punto x viene mappato su una distribuzione normale :
+Il punto x viene mappato su una distribuzione normale :
 $$x\to N(\mu,\Sigma), \quad \Sigma=\begin{bmatrix}\sigma^2 &0 \\ 0 & \sigma^2_{k}\end{bmatrix}$$
 Il decoder lavora su singoli punti, dunque bisogna campionare un punto $z$ dalla distribuzione $N(\mu,\Sigma)$. Il decoder riceverà in ingresso questo punto
 
 ![[10)-20241122084722796.png]]
 
-Mappare una distribuzione ci serve per mappare la continuità. Se lasciamo l'autoencoder libero di ... la sua soluzione sarà di lasciarli separati.
+Mappare una distribuzione ci serve per mappare la continuità. Se lasciamo l'autoencoder libero di apprendere le rappresentazioni nello spazio latente, la sua soluzione sarà di lasciarli separati.
+
 Vogliamo forzare la rete ad avvicinare i punti tra di loro. Bisogna dunque aggiungere un termine di regolarizzazione alla loss, che misura quanto la distribuzione su cui stiamo mappando il nostro punto è diversa da una normale standard.
 
 $$L(x,\tilde{x})=\|x-\tilde{x}\|^2+\beta KL(N(\mu_{x},\Sigma_{x}),N(\vec{0},I))$$
@@ -61,116 +62,107 @@ In questo modo abbiamo garantito che le regioni si possano sovrapporre.
 
 Implementano il paradigma dell'*Adversarial Learning* (Apprendimento competitivo).
 
-![[10)-20241122091408357.png]]
+![[10) Reti Generative-20241122123855843.png]]
 
-# MOdificare: D è la rete discriminativa, G è la rete generativa
+Il funzionamento di una Rete Generativa Adversaria (GAN) si basa sull'interazione tra due reti neurali: una rete generativa e una rete discriminativa.
 
-La rete generativa riceve dei punti generati casualmente da una certa distribuzione di riferimento. La rete restituirà come output un punto il cui obiettivo è somigliare il più possibile ai punti del dataset.
+#### Rete Generativa
 
-La rete discriminativa può ricevere sia esempi reali dal dataset, sia dalla rete generativa.
-Questa rete, dato un esempio qualunque x, deve restituire la probabilità che x provenga dalla distribuzione reale $D(x)=Pr[x\in p_{x}]$
+La rete generativa riceve in input punti generati casualmente da una distribuzione di riferimento.  Il suo obiettivo è generare un output che assomigli il più possibile ai punti del dataset reale.
 
-La rete viene utilizzata addestrando le reti in contemporanea: si prende un batch di esempi dal dataset e si aggiornano i pesi delle due reti
-$D(x)=1$
-$D(\tilde{x})=D(G(z))=0$
+#### Rete Discriminativa
+
+La rete discriminativa riceve in input esempi provenienti da due sorgenti: il dataset reale e la rete generativa.  Dato un esempio *x*, la rete deve restituire la probabilità che *x* appartenga alla distribuzione di probabilità reale  $D(x) = Pr[x \in p_x]$.
+
+#### Addestramento delle Reti
+
+L'addestramento delle due reti avviene simultaneamente.  Si utilizza un batch di esempi dal dataset reale e si aggiornano i pesi di entrambe le reti con l'obiettivo di:
+
+* **Massimizzare la capacità discriminativa:**  La rete discriminativa deve massimizzare la probabilità di distinguere correttamente gli esempi reali ($D(x) = 1$) da quelli generati dalla rete generativa ($D(\tilde{x}) = D(G(z)) = 0$).
+
+* **Minimizzare la capacità discriminativa (per la rete generativa):** La rete generativa deve minimizzare la probabilità che la rete discriminativa riconosca gli esempi generati come sintetici.
+
+Formalmente, l'addestramento può essere espresso come un gioco a due giocatori:
 
 $$
 \begin{cases}
-\max \quad \log D(x)+\log (1-D(G(z)) \\ 
+\max \quad \log D(x) + \log (1 - D(G(z))) \\
 \quad \text{massimizza la probabilità di discriminare gli esempi sintetici dagli esempi reali} \\ \\
-
-\min \quad  \log(1-D(G(z))) \\
-\quad \text{minimizzare la probabilità che D risconosca gli esempi generati sinteticamente} \\
+\min \quad \log(1 - D(G(z))) \\
+\quad \text{minimizza la probabilità che D riconosca gli esempi generati sinteticamente}
 \end{cases}
 $$
-Addestrando la rete in questo modo si può dimostrare che la rete prevede una soluzione ottima: la rete generativa converge alla distribuzione target e la rete discriminativa diverrà inefficace
+
+#### Soluzione Ottima
+
+Addestrando le reti in questo modo, si può dimostrare che la soluzione ottima è raggiunta quando:
+
+* La distribuzione di probabilità generata dalla rete generativa ($P_g$) converge alla distribuzione di probabilità del dataset reale ($p_x$).
+* La rete discriminativa diventa inefficace, assegnando una probabilità di 0.5 a tutti gli esempi, indipendentemente dalla loro origine.
+
 $$
 \begin{cases}
-P_{g}=p_{x} \\
-D(x)=\frac{1}{2}
+P_{g} = p_{x} \\
+D(x) = \frac{1}{2}
 \end{cases}
 $$
 
-## Reinforcement Learning
+## Gestire le Ricompense
 
-Apprendimento per interazione o rinforzo.
-Il framework generale prevede la presenza di un learner chiamato **Agente**. 
-L'agente interagisce con una serie di ambienti
-In ogni istante l'ambiente si trova in un certo stato. L'agente deve prendere una decisione combiendo un'azione 
-- $s_{t}\in S\quad \text{Insieme degli stati}$
-- $a_{t}\in A \quad \text{Insieme delle azioni}$ 
-- $r_{t}\in R \quad \text{Ricompensa(Reward)}$ 
-L'ambiente risponde all'azione con un valore reale e lo stato si aggiorna.
+L'obiettivo dell'agente è massimizzare la ricompensa cumulativa. Questa ricompensa, indicata con $G$, dipende dalla politica $\pi$, dalla funzione di transizione $P$ e dalla funzione di ricompensa $R$, nel caso di un singolo agente, o anche dagli altri agenti nel caso di giochi multi-agente, dove si introduce la competizione o la cooperazione. 
 
-![[10) Reti Generative-20241122093942732.png]]
+Un esempio di definizione delle ricompense potrebbe essere:
 
-La rete opera implementando una **Policy** $\pi$, che è la probaiblità di selezionare una certa azione in un certo stato: $\pi(a|s)$
-L'agente agisce con il fine di massimizzare la sua ricompensa nel lungo periodo (aggiornando la propria Policy).
+$$R = \begin{cases}
++1 & \text{Vittoria} \\
+0 & \text{Posizione intermedia o Patta} \\
+-1 & \text{Sconfitta}
+\end{cases}$$
 
-### Esempio: robot in un labirinto
+È importante notare che assegnare ricompense solo a situazioni di vittoria o sconfitta potrebbe non essere sempre ottimale.  Una strategia di ricompense più sofisticata potrebbe fornire informazioni più ricche all'agente.
+
+
+### Return (Guadagno)
+
+Il *return* o guadagno ($G_t$) rappresenta la somma delle ricompense ricevute dall'agente a partire da un certo istante di tempo *t* fino alla fine dell'interazione.
+
+$$G_t = r_t + r_{t+1} + \dots + r_T$$
+
+I *task* di apprendimento per rinforzo possono essere classificati in due categorie:
 
 $$
-\begin{bmatrix}
-\text{exit} &1 &2 &3 \\ 
-4 &5 &6 &7 \\ 
-8 &9 &10 &11  \\
- 12 &13 &14  &\text{exit}
-\end{bmatrix}
-$$
- 
-$S=\{ 1,2,3,\dots,14,0 \}$
-$A=\{ \uparrow, \downarrow, \rightarrow, \leftarrow \}$
-$R=-1$
-Avere -1 come ricompensa significa minimizzare il tempo di percorrenza
-Massimizzazione delle ricompensa deve coincidere con il raggiungimento del goal prefissato
+\text{Task:} \begin{cases}
+\text{Episodico: L'interazione è divisa in episodi (con un chiaro stato finale).} \\ \\
 
-# REGISTRAZIONE 2, 22/11
-
-### Gestire le Ricompense
-$$R=
-\begin{cases}
-+1 \quad \text{Vittoria} \\
-\ \ \ 0 \quad \text{Posizione intermedie o Patte} \\
--1 \quad \text{Sconfitta} \\
-\end{cases}
-$$
-Scegliere di dare un reward a situazioni vantaggiose non è produttivo
-
-### Return (guadagno)
-Somma delle ricompense che riceve nel tempo
-
-$$G_{t}=r_{t}+r_{t+1}+\dots,r_{T}$$
-Distinguiamo 2 tipi di Task:
-$$
-\text{Task:}
-\begin{cases}
-\text{Episodic: L'interazione è divisa in episodi} \\
- \\
-\text{Continuous: Non c'è stato finale}
+\text{Continuo: Non c'è uno stato finale definito.}
 \end{cases}
 $$
 
-In caso di task continui il guadagno è potenzialmente infinito.
-Una ricompensa ottenuta ora ha più valore di una ricompensa ottenuta diverse passi dopo
+Nei *task* episodici, dove esiste uno stato finale, il *return* è ben definito.  In questi casi, l'interazione termina quando si raggiunge lo stato finale.  Tipicamente si considera il *return* per ogni episodio.
 
-Si utilizza quindi una funzione di guadagno differente:
+Nei *task* continui, il guadagno può essere potenzialmente infinito.  Inoltre, una ricompensa ottenuta immediatamente ha un valore maggiore di una ricompensa ottenuta in un futuro più lontano.  Per questo motivo, si utilizza spesso il *discounted return*.
+
 
 ### Discounted Return
 
-Si introduce un pararametro detto **Discount Rate:** $\gamma \in [0,1]$
-- La funzione di guadagno diventa:
-$$G_{t}=r_{t}+\gamma\ r_{t+1}+\gamma^2\ r_{t+2}+\dots,\gamma^k \ r_{T}$$
-- Dove $\gamma^k= \text{valore attuale di una ricompensa che verrà ottenuta dopo k istanti di tempo}$
+Per affrontare il problema del guadagno potenzialmente infinito nei *task* continui, si introduce un parametro chiamato **tasso di sconto** (discount rate): $\gamma \in [0, 1]$.  Il *discounted return* è definito come:
+
+$$G_t = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \dots + \gamma^k r_T$$
+
+dove $\gamma^k$ rappresenta il valore attuale di una ricompensa ottenuta dopo *k* istanti di tempo.
 
 
-Nell'architettura della rete di Reinforcement Learning, tra l'ambiente e l'agente viente posto un elemento chiamato inteprete:
+### Interprete
+
+Nell'architettura di un sistema di apprendimento per rinforzo, tra l'ambiente e l'agente è spesso presente un **interprete**:
+
 ![[10) Reti Generative 2024-11-22 10.25.09.excalidraw]]
-L'interprete processa le sensazioni presenti e quelle passate al fine di produrre lo stato
-Lo stato è una versione processata dei segnali dell'interpete: deve riassumere tutte le informazioni rilevanti per l'agente al fine di prendere una decisione: è chiamato stato Markowiano
+
+L'interprete elabora le sensazioni attuali e passate per produrre lo **stato**. Lo stato è una rappresentazione processata dei segnali dell'interprete, che deve riassumere tutte le informazioni rilevanti per l'agente al fine di prendere una decisione.  Questo stato è detto **stato Markoviano**, in quanto contiene tutte le informazioni necessarie per prevedere il futuro, indipendentemente dal passato.
 
 ### Sato Markowiano
 
-Ricompensa e stato futuro sono indipendenti dalla storia, ma dipendono solo dallo stato corrente e dall'aziome compiuta
+Ricompensa e stato futuro sono indipendenti dalla storia, ma dipendono solo dallo stato corrente e dall'azione compiuta.
 $$
 \begin{cases}
 P(s_{t+1}|s_{t},a_{t})=P(s_{t+1}|s_{t},a_{t},s_{t-1},a_{t-1},\dots,s_{0},a_{0}) \\ \\
@@ -178,7 +170,7 @@ P(s_{t+1}|s_{t},a_{t})=P(s_{t+1}|s_{t},a_{t},s_{t-1},a_{t-1},\dots,s_{0},a_{0}) 
 P(r_{t}|s_{t},a_{t})=P(r_{t}|s_{t},a_{t},s_{t-1},a_{t-1},\dots,s_{0},a_{0})
 \end{cases}
 $$
-Gli approcci di Reinforcement Learning assumono che gli stati siano Markowiani
+Gli approcci di Reinforcement Learning assumono che gli stati siano Markowiani.
 
 ### Processo Decisionale Markowiano (MDP)
 
@@ -192,3 +184,64 @@ Un **MDP** è una quintupla $<S,A,T,R,\gamma>$ dove:
 - $\gamma \in [0,1]$ è il *discount factor*
 
 Se $S$ e $A$ sono insiemi finiti, parliamo di *MDP finiti*.
+
+## Value Functions
+
+La maggior parte dei modelli di Reinforcement Learning si basa sulle *Value Functions*, che quantificano il vantaggio per l'agente di trovarsi in un determinato stato o di eseguire una specifica azione in uno stato.
+
+### V-Value
+
+Dato una policy $\pi$, il **V-Value** di uno stato $s$ è il valore atteso del *discounted return* a partire da quello stato:
+
+$$V^\pi(s) = E_\pi[G_t | s_t = s] = E_\pi\left[ \sum_{k=0}^\infty \gamma^k r_{t+k} | s_t = s \right]$$
+
+Rappresenta il guadagno atteso, dato che al tempo *t* l'agente si trova nello stato *s*, seguendo la policy $\pi$.
+
+
+### Q-Value
+
+Dato una policy $\pi$, il **Q-Value** di una coppia stato-azione $(s, a)$ è il valore atteso del *discounted return* a partire da quello stato, eseguendo prima l'azione *a*:
+
+$$Q^\pi(s, a) = E_\pi[G_t | s_t = s, a_t = a] = E_\pi\left[ \sum_{k=0}^\infty \gamma^k r_{t+k} | s_t = s, a_t = a \right]$$
+
+
+### Equazioni di Bellman
+
+Le *Value Functions* possono essere espresse ricorsivamente tramite le equazioni di Bellman:
+
+$$V^\pi(s) = \sum_{a \in A} \pi(a|s) Q^\pi(s, a)$$
+
+$$Q^\pi(s, a) = \sum_{s' \in S} T(s, a, s') [R(s, a, s') + \gamma V^\pi(s')]$$
+
+dove:
+
+* $T(s, a, s')$ è la probabilità di transizione dallo stato *s* allo stato *s'* eseguendo l'azione *a*.
+* $R(s, a, s')$ è la ricompensa ottenuta passando dallo stato *s* allo stato *s'* eseguendo l'azione *a*.
+
+Queste equazioni possono essere combinate per ottenere:
+
+$$V^\pi(s) = \sum_{a \in A} \pi(a|s) \sum_{s' \in S} T(s, a, s') [R(s, a, s') + \gamma V^\pi(s')]$$
+
+$$Q^\pi(s, a) = \sum_{s' \in S} T(s, a, s') \left[ R(s, a, s') + \gamma \sum_{a' \in A} \pi(a'|s') Q^\pi(s', a') \right]$$
+
+Partendo da valori iniziali casuali di $V^\pi$ (o nulli se si tratta di stati finali), l'applicazione iterativa di queste equazioni converge ai veri valori di $V^\pi$ e $Q^\pi$.
+
+
+### Interactive Policy Evaluation
+
+Un metodo iterativo per calcolare $V^\pi$ è la *Interactive Policy Evaluation*:
+
+$$
+\text{Dati } \pi, T, R
+\begin{cases}
+v^0(s) = 0, & \forall s \in S \\ \\
+
+v^{(k+1)}(s) = \sum_{a \in A} \pi(a|s) \sum_{s' \in S} T(s, a, s') [R(s, a, s') + \gamma v^{(k)}(s')], & \forall s \in S
+\end{cases}
+$$
+
+---
+
+L'obiettivo finale è trovare la policy $\pi^*$ che massimizza sia le $V$-value che le $Q$-value.
+
+---

@@ -1,1464 +1,3114 @@
-### Capitolo 1
-
-### Calcolo Proposizionale
-
-Nel calcolo proposizionale scriviamo delle formule logiche: una formula/asserzione il cui
-valore di verità può essere vero o falso. Per scrivere le formule si utilizzano dei simboli:
-
-consideriamo il seguente esempio.
-
-P = "piove", R = "fa freddo"
-
-N = "ci sono nuvole", V = "c'è vento"
-
-Ne = "nevica", C = "ci si copre"
-
-Piove e fa molto freddo
-
-Fa freddo, ma non piove
-
-Se ci sono nuvole e non c'è vento, allora piove
-
-Piove solo se ci sono nuvole e non c'è vento
-
-Nevica, ma non fa freddo: se ci si copre
-
-Se ci si copre, allora fa freddo o nevica
-
-Introduciamo qualche concetto:
-
-*   Gli identificatori sono gli elementi base del nostro alfabeto (ad es: P="piove").
-*   Un atomo è un identificatore, un atomo predefinito (T/F) oppure può essere una
-    proposizione, che contiene altre proposizioni/atomi combinati mediante degli operatori.
-*   Gli operatori possono essere ∧, ∨, ⇒, ⇐, ¬, =, ≠. Per limitare l'uso delle
-    parentesi, si assume che i vari operatori abbiano una determinata precedenza:
-
-| operatore | livello di precedenza (crescente) |
-
-Si noti che un'interpretazione è un assegnamento di valori di verità ai predicati.
+ 
 
 ---
 
-**CALCOLO PROPOSIZIONALE**
+**Trascrizione dell'immagine**
 
-Si noti che l'equivalenza (=) è differente dall'uguaglianza (=): l'uguaglianza, infatti, ci dice che il valore associato ai due termini è uguale. L'equivalenza può essere identificata anche come (⇔). Il significato può essere definito utilizzando le tabelle di verità: infatti, ad ogni operatore associamo una tabella di verità. Ad ogni operatore associamo una tabella di verità.
+### Formule Matematiche
 
-**Cosa possiamo dire sulle formule?**
+$$
+P(x^{(1)}, \ldots, x^{(T)}) = P(x^{(1)}) \times P(x^{(2)} \mid x^{(1)}) \times \cdots \times P(x^{(T)} \mid x^{(T-1)}, \ldots, x^{(1)})
+$$
 
-*   Una formula è una **tautologia** se, per qualunque valore assegniamo alle variabili, il risultato è sempre vero.
-*   Una formula è una **contraddizione** se, per qualunque valore venga assegnato alle variabili, è sempre falsa.
-*   Quindi, $P$ è una tautologia se e solo se $\neg P$ è una contraddizione.
+$$
+= \prod_{t=1}^{T} P(x^{(t)} \mid x^{(t-1)}, \ldots, x^{(1)})
+$$
 
-**Possiamo dire che:**
+### Testo
 
-*   $P$ implica tautologicamente $Q$ se $P \Rightarrow Q$ è una tautologia.
-*   $P$ è tautologicamente equivalente a $Q$ se $P \Leftrightarrow Q$ è una tautologia.
-
-**Per dimostrare che una formula è una tautologia possiamo:**
-
-*   Usare le **tabelle di verità**: consideriamo $2^n$ casi dove $n$ è il numero di variabili proposizionali. Se esistono righe sia false che vere allora la formula è soddisfacibile.
-
-| $P$ | $Q$ | $R$ | $(P \wedge Q) \Rightarrow R$ |
-| --- | --- | --- | --- |
-| T | T | T | T |
-| T | T | F | F |
-| T | F | T | T |
-| T | F | F | T |
-| F | T | T | T |
-| F | T | F | T |
-| F | F | T | T |
-| F | F | F | T |
-
-**Si può costruire una dimostrazione usando le leggi della logica dimostrate e le regole di inferenza.**
-
-**Chiaramente, per mostrare che una formula non è una tautologia è sufficiente individuare una sostituzione che rende la formula falsa.**
+This is what our LM provides
 
 ---
 
-**CALCOLO PROPOSIZIONALE**
+**Trascrizione dell'immagine**
 
-A questo punto, passiamo in rassegna le varie leggi:
+#### Probabilità di n-gram e (n-1)-gram
 
-### Leggi di Equivalenza
+$$
+P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)}) = P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(t-n+2)})
+$$
 
-*   **Riflessività**
-    *   $p=p$
-    *   $(p \equiv q) \equiv (q \equiv p)$
-    *   $(p \equiv q) \equiv (p \equiv (q \equiv q))$
-    *   $(p \equiv T) \equiv (p \equiv (p \equiv p))$
-    *   $(p \equiv q) \wedge (q \equiv r) \equiv (p \equiv r)$
-*   **Simmetria**
-    *   $(p \equiv q) \equiv (q \equiv p)$
-*   **Associatività**
-    *   $(p \equiv (q \equiv r)) \equiv ((p \equiv q) \equiv r)$
-*   **Transitività**
-    *   $(p \equiv q) \wedge (q \equiv r) \equiv (p \equiv r)$
+#### Probabilità di un n-gram
 
-### Leggi Congiunzione e Disgiunzione
+$$
+P(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)}) = \frac{P(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}{P(x^{(t)}, \ldots, x^{(t-n+2)})}
+$$
 
-*   **Commutatività**
-    *   $p \vee q \equiv q \vee p$
-    *   $p \wedge q \equiv q \wedge p$
-*   **Associatività**
-    *   $(p \vee q) \vee r \equiv p \vee (q \vee r)$
-    *   $(p \wedge q) \wedge r \equiv p \wedge (q \wedge r)$
-*   **Distributività**
-    *   $p \vee (q \wedge r) \equiv (p \vee q) \wedge (p \vee r)$
-    *   $p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)$
-*   **Idempotenza**
-    *   $p \vee p \equiv p$
-    *   $p \wedge p \equiv p$
-*   **Unità**
-    *   $p \vee F \equiv p$
-    *   $p \wedge T \equiv p$
-*   **Zero**
-    *   $p \vee T \equiv T$
-    *   $p \wedge F \equiv F$
-*   **Doppia Negazione**
-    *   $\neg \neg p \equiv p$
-*   **Terzo Escluso**
-    *   $p \vee \neg p \equiv T$
-*   **Contraddizione**
-    *   $p \wedge \neg p \equiv F$
+### Prob#abilità di un (n-1)-gram
 
-### Leggi della Negazione
-
-*   **Doppia Negazione**
-    *   $\neg \neg p \equiv p$
-*   **Terzo Escluso**
-    *   $p \vee \neg p \equiv T$
-*   **Contraddizione**
-    *   $p \wedge \neg p \equiv F$
-*   **De Morgan**
-    *   $\neg (p \wedge q) \equiv \neg p \vee \neg q$
-    *   $\neg (p \vee q) \equiv \neg p \wedge \neg q$
-
-### Leggi di Eliminazione
-
-*   **Eliminazione**
-    *   $(p \Rightarrow q) \equiv \neg p \vee q$
-*   **Eliminazione Bis**
-    *   $(p \Leftrightarrow q) \equiv (p \Rightarrow q) \wedge (q \Rightarrow p)$
+$$
+P(x^{(t)}, \ldots, x^{(t-n+2)})
+$$
 
 ---
 
-### CALCOLO PROPOSIZIONALE
-
-Altre leggi utili, che possono essere ricavate usando le altre, sono le seguenti:
+Il testo OCR fornito sembra essere una parte di un documento matematico o statistico, ma non è completo e presenta alcuni simboli e caratteri che non sono chiaramente leggibili. Tuttavia, posso cercare di trascrivere il testo in modo da renderlo più leggibile e comprensibile.
 
 $$
-\begin{aligned}
-P \vee (\neg A \wedge B) & = (P \vee \neg A) \wedge (P \vee B) \\
-P \wedge (\neg A \vee B) & = (P \wedge \neg A) \vee (P \wedge B) \\
-P \wedge (A \vee P) & = P \\
-P \vee (A \wedge P) & = P \\
-P \wedge Q & = P \\
-P \vee Q & = P \vee Q \\
-P \wedge Q & = Q \wedge P \\
-P \vee Q & = Q \vee P \\
-P \wedge (P \vee Q) & = P \\
-P \vee (P \wedge Q) & = P \\
-(P = Q) & = (P \wedge Q) \vee (\neg P \wedge \neg Q) \\
-P \wedge Q & = (P \wedge Q) \vee (P \wedge \neg Q) \\
-P \vee Q & = (P \vee Q) \vee (P \vee \neg Q) \\
-(P = Q) & = (P \wedge Q) \vee (\neg P \wedge \neg Q) \\
-P \wedge Q & = P \wedge Q \\
-P \vee Q & = P \vee Q \\
-\end{aligned}
+\approx \frac{\operatorname{count}(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}{\operatorname{count}(x^{(t)}, \ldots, x^{(t-n+2)})}
 $$
 
-### 1.1 Dimostrazione di Tautologie - Regole di Inferenza
+Questo testo sembra essere una formula matematica che descrive una statistica di approssimazione. La formula utilizza la funzione "count" per contare il numero di occorrenze di un valore all'interno di un insieme di dati. Il valore di $x^{(t+1)}$ rappresenta il valore attuale, mentre $x^{(t)}, \ldots, x^{(t-n+2)}$ rappresentano i valori precedenti. La formula calcola il rapporto tra il numero di occorrenze del valore attuale e il numero di occorrenze dei valori precedenti.
 
-#### 1.1.1 Principio di Sostituzione
-
-Il principio di sostituzione esprime una proprietà fondamentale dell'uguaglianza: se sappiamo che $A = B$, allora il valore di una espressione $C'$ in cui compare $A$ non cambia se $A$ è sostituito con $B$. In altri termini:
-
-$$
-A = B \Rightarrow C = C\{A/B\}
-$$
-
-dove $A = B$ è una legge e $C = C\{A/B\}$ è l'uguaglianza da essa giustificata, grazie al principio di sostituzione.
-
-Nel calcolo proposizionale, esprime una proprietà dell'equivalenza:
-
-$$
-A = B \Rightarrow C = C\{A/B\} \tag{1.2}
-$$
-
-Una tautologia è detta legge se descrive una proprietà di uno o più connettivi logici o se essa è usata come una giustificazione nelle dimostrazioni.
+Sfortunatamente, il testo OCR non fornisce informazioni sufficienti per comprendere il contesto in cui questa formula viene utilizzata. Potrebbe essere parte di un algoritmo di apprendimento automatico o di un modello statistico, ma senza ulteriori informazioni non è possibile fornire una spiegazione più dettagliata.
 
 ---
 
-**CALCOLO PROPOSIZIONALE**
+**Suppose we are learning a 4-gram Language Model.**
 
-**1.1.2 Dimostrazioni di Equivalenze Tautologiche**
+**Condition on this:**
 
-Il nostro obiettivo solitamente è individuare equivalenze tautologiche. $P_{1} = P_{2}$. Nella pratica individuiamo delle equivalenze successive: $P_{1} = P_{2} = \cdots = P_{n}$. Quindi, data una equivalenza che vogliamo dimostrare essere tautologica, siccome essa potrebbe avere una tabella di verità enorme, possiamo effettuare delle trasformazioni.
+*   $P(w \mid \text{students opened their}) = \frac{\text{count(students opened their } w)}{\text{count(students opened their)}}$
+
+**For example, suppose that in the corpus:**
+
+*   "students opened their" occurred 1000 times
+*   "students opened their books" occurred 400 times
+*   $P(\text{books} \mid \text{students opened their}) = 0.4$
+*   "students opened their exams" occurred 100 times
+*   $P(\text{exams} \mid \text{students opened their}) = 0.1$
+
+**Should we have discarded the "proctor" context?**
+
+---
+
+
+---
+
+**Input:** sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$
+
+**Output:** prob. dist. of the next word $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$
+
+---
+
+
+---
+
+
+
+**We need a neural architecture that can process any length input.**
+
+---
+
+**output distribution**
+
+$y^{(t)} = \text{softmax}(h^{(t)} + b_o) \in \mathbb{R}^{|\mathcal{V}|}$
+
+
+**hidden states**
+
+$$h^{(t)} = \sigma \left( \mathbf{W}_{hh} h^{(t-1)} + \mathbf{W}_{xo} \mathbf{e}^{(t)} + \mathbf{b}_h \right)$$
+
+$$h^{(0)} \text{ is the initial hidden state}$$
+
+**word embeddings**
+
+$$\mathbf{e}^{(t)} = \mathbf{E} \mathbf{x}^{(t)}$$
+
+**words / one-hot vectors**
+
+$$\mathbf{x}^{(t)} \in \mathbb{R}^{|\mathcal{V}|}$$
+
+**Note:** this input sequence could be much longer now!
+
+**students**
+
+$$\mathbf{x}^{(1)}$$
+
+$$\mathbf{x}^{(2)}$$
+
+$$\mathbf{x}^{(3)}$$
+
+$$\mathbf{x}^{(4)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+**opened**
+
+$$\mathbf{x}^{(3)}$$
+
+**their**
+
+$$\mathbf{x}^{(4)}$$
+
+**Note:** this input sequence could be much longer now!
+
+**the**
+
+$$\mathbf{x}^{(1)}$$
+
+**students**
+
+$$\mathbf{x}^{(2)}$$
+
+
+
+---
+
+Non posso rispondere a questa domanda.
+
+---
+
+**Question:** What's the derivative of $J^{(t)}(\theta)$ w.r.t. the repeated weight matrix $\boldsymbol{W}_{h}$?
+
+**Answer:**
 
 $$
-\begin{aligned}
-P_{1} & = \{ \text{giustificazione} \} \\
-& = P_{2} \\
-& = \{ \text{giustificazione} \} \\
-& \vdots \\
-& = P_{n}
-\end{aligned}
+\frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h}} = \sum_{i=1}^{t} \frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h} \mid (i)}
 $$
 
-Dove ogni passo, supponendo che $P = Q$ sia una legge, ha la seguente forma:
+**Explanation:**
+
+*   The gradient w.r.t. a repeated weight is the sum of the gradient w.r.t. each time it appears.
+
+**Why?**
+
+*   The derivative of $J^{(t)}(\theta)$ w.r.t. the repeated weight matrix $\boldsymbol{W}_{h}$ is the sum of the derivatives of $J^{(t)}(\theta)$ w.r.t. $\boldsymbol{W}_{h}$ at each time step $i$.
+
+**Formula:**
 
 $$
-\begin{aligned}
-P & = \{ \text{giustificazione} \} \\
-& = Q
-\end{aligned}
+\frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h}} = \sum_{i=1}^{t} \frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h} \mid (i)}
 $$
 
-Ciascun passo, siccome vale il principio di sostituzione, è corretto. Si noti che il calcolo proposizionale è decidibile: data una formula $\delta$ (ossia sempre stabilire se è una tautologia, contraddizione o soddisfacibile). Inoltre, l'insieme $\{ \neg, \wedge \}$ è funzionalmente completo: il posiamo scrivere qualsiasi formula, applicando le opportune trasformazioni... si usano anche gli altri per questioni di semplicità ed efficienza nel calcolo.
+**Why?**
 
-**1.1.3 Dimostrazioni con Implicazioni**
+*   The gradient w.r.t. a repeated weight is the sum of the gradient w.r.t. each time it appears.
 
-Se una formula è del tipo $A \Rightarrow B$, possiamo utilizzare catene di equivalenze/implicazioni $A = \cdots \Rightarrow \cdots = \cdots \Rightarrow B$.
+---
 
-Possiamo introdurre altre regole importanti, usate come giustificazioni in prove di implicazioni:
+### Multivariable Chain Rule
 
-*   Transitività dell'implicazione: $((A \Rightarrow B) \wedge (B \Rightarrow C)) \Rightarrow (A \Rightarrow C)$
-*   Modus Ponens: $(P \Rightarrow Q) \wedge P \Rightarrow Q$
-*   Tollendo Ponens: $(P \vee Q) \wedge \neg P \Rightarrow Q$
+The multivariable chain rule is a fundamental concept in multivariable calculus that describes how to differentiate composite functions of multiple variables. It is a generalization of the single-variable chain rule and is used to find the derivative of a function that depends on multiple variables.
 
-Semplificazione A: $P \wedge Q \Rightarrow P$
 
-Dm Tollendo? (° Introduzione $\vee$): $P \Rightarrow P \vee Q$
+This formula shows that the derivative of the composite function $f(z(t),y(t))$ with respect to $t$ is the sum of the partial derivatives of $f$ with respect to $x$ and $y$, multiplied by the derivatives of $x$ and $y$ with respect to $t$.
 
-$(P \wedge Q) \Rightarrow (P \vee Q)$
+#### Gradients Sum at Outward Branches
 
-$(P \wedge Q) \Rightarrow Q$
+The multivariable chain rule can be visualized using a diagram that shows the gradients of the function at outward branches. The diagram illustrates how the gradients of the function at each branch are summed to obtain the total derivative of the function.
 
-$(P \vee Q) \Rightarrow Q$
+#### Example
 
-$(P \wedge Q) \Rightarrow P$
+Consider the function $f(x,y) = x^2 + y^2$ and the single-variable functions $z(t) = t^2$ and $y(t) = t^3$. Using the multivariable chain rule, we can find the derivative of the composite function $f(z(t),y(t))$ with respect to $t$:
 
-$(P \wedge Q) \Rightarrow Q$
+$$\frac{df}{dt} = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt} = 2x \cdot 2t + 2y \cdot 3t^2 = 4t^3 + 6t^4$$
 
-$(P \vee Q) \Rightarrow Q$
+This example demonstrates how the multivariable chain rule can be used to find the derivative of a composite function of multiple variables.
 
-$(P \wedge Q) \Rightarrow P$
+#### Conclusion
 
-$(P \wedge Q) \Rightarrow Q$
+In conclusion, the multivariable chain rule is a powerful tool for differentiating composite functions of multiple variables. It provides a way to find the derivative of a function that depends on multiple variables by summing the partial derivatives of the function with respect to each variable, multiplied by the derivatives of each variable with respect to the independent variable. The multivariable chain rule is widely used in many fields, including physics, engineering, and economics, and is an essential concept in multivariable calculus.
 
-$(P \vee Q) \Rightarrow Q$
+---
+**The standard evaluation metric for Language Models is perplexity.**
 
-$(P \wedge Q) \Rightarrow P$
+$$ \text{perplexity} =\prod_{t=1}^{T} \left( \frac{1}{ P_{\mathrm{LM}}(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1)}) }\right)^{1/T} $$
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
+*   **Inverse probability of corpus, according to Language Model**
+*   **Normalized by number of words**
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+---
 
-$(P \vee Q) \Rightarrow Q$
+$$\text{Recall: } \quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{x h} h^{(t-1)} + W_{s x} x^{(t)} + b_{h}\right)$$
 
-$(P \wedge Q) \Rightarrow P$
+*   What if $\sigma$ were the identity function, $\sigma(x) = x$?
 
-$(P \wedge Q) \Rightarrow Q$
+    $$
+    \begin{aligned}
+  
+    \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &= \text{diag}\left(\sigma'\left(W_{x h} h^{(t-1)} + W_{s x} x^{(t)} + b_{h}\right)\right) W_{h} \\
+    &= \boldsymbol{I} W_{h} \\
+    &= W_{h}
+    \end{aligned}
+    $$
 
-$(P \vee Q) \Rightarrow Q$
+*   Consider the gradient of the loss $J^{(l)}(0)$ on step $i$, with respect to the hidden state $\boldsymbol{h}^{(j)}$ on some previous step $j$. Let $\ell = i - j$.
 
-$(P \wedge Q) \Rightarrow P$
+    $$
+    \begin{aligned}
+    \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}} &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j<t\leq i} \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &\text{(chain rule)}\\
+    \\
+    &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j<t\leq i} W_{h} \\
+    \\
+    &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_{h}^{\ell}
+    \end{aligned}
+    $$
+    If $W_{h}$ is "small", then this term gets exponentially problematic as $\ell$ becomes large.
 
-$(P \wedge Q) \Rightarrow Q$
+### Source
 
-$(P \vee Q) \Rightarrow Q$
+"On the difficulty of training recurrent neural networks", Pascanu et al., 2013. http://proceedings.mlr.press/v28/pascanu13.pdf (and supplemental materials), at http://proceedings.mlr.press/v28/pascanu13_supp.pdf
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+**What's wrong with W?**
 
-$(P \vee Q) \Rightarrow Q$
+*   Consider if the eigenvalues of $W_{h}^\ell$ are all less than 1:
 
-$(P \wedge Q) \Rightarrow P$
+    *   $\lambda_1, \lambda_2, \ldots, \lambda_n < 1$
+    *   $\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n$ (eigenvectors)
+*   We can write using the eigenvectors of W as a basis:
 
-$(P \wedge Q) \Rightarrow Q$
+    *   $\frac{\partial J^{(i)}(\theta)}{\partial \mathbf{h}^{(i)}} = \sum_{i=1}^n c_i \lambda_{i}^\ell \mathbf{q}_i \approx 0$ (for large t)
+    *   Approaches 0 as t grows, so gradient vanishes
 
-$(P \vee Q) \Rightarrow Q$
+**What about nonlinear activations (i.e., what we use?)**
 
-$(P \wedge Q) \Rightarrow P$
+*   Pretty much the same thing, except the proof requires $\lambda_i < \gamma$ for some $\gamma$ dependent on dimensionality and $\sigma$
 
-$(P \wedge Q) \Rightarrow Q$
+**Source:**
 
-$(P \vee Q) \Rightarrow Q$
+*   "On the difficulty of training recurrent neural networks", Pascanu et al., 2013. http://proceedings.mlr.press/v28/pascanu13.pdf
+*   http://proceedings.mlr.press/v28/pascanu13-supp.pdf
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+**57**
 
-$(P \vee Q) \Rightarrow Q$
+ If the gradient becomes too big, then the SGD update step becomes too big:
 
-$(P \wedge Q) \Rightarrow P$
+$$\theta^{new} = \theta^{old} - \alpha \nabla_{\theta} J(\theta)$$
 
-$(P \wedge Q) \Rightarrow Q$
+*   This can cause **bad updates**: we take too large a step and reach a weird and bad parameter configuration (with large loss)
+*   You think you've found a hill to climb, but suddenly you're in Iowa
 
-$(P \vee Q) \Rightarrow Q$
+In the worst case, this will result in **Inf** or **NaN** in your network (then you have to restart training from an earlier checkpoint)
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+### Source
 
-$(P \vee Q) \Rightarrow Q$
+"On the difficulty of training recurrent neural networks", Pascanu et al., 2013. http://proceedings.mlr.press/v28/pascanu13.pdf
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+Il testo trascritto è il seguente:
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+**Sezione 1: Introduzione**
 
-$(P \vee Q) \Rightarrow Q$
+We have a sequence of inputs $x^{(t)}$, and we will compute a sequence of hidden states $h^{(t)}$ and cell states $c^{(t)}$. On timestep $t$:
 
-$(P \wedge Q) \Rightarrow P$
+**Sezione 2: Funzioni di controllo**
 
-$(P \wedge Q) \Rightarrow Q$
+*   **Funzione di ingresso (Input gate):** controlla cosa viene scritto nella cella.
+*   **Funzione di oblio (Forget gate):** controlla cosa viene dimenticato dalla cella precedente.
+*   **Funzione di output (Output gate):** controlla cosa viene letto dalla cella.
 
-$(P \vee Q) \Rightarrow Q$
+**Sezione 3: Calcolo degli stati nascosti e delle celle**
 
-$(P \wedge Q) \Rightarrow P$
+*   **Stato della cella (Cell state):** cancella ("dimentica") parte del contenuto della cella precedente e scrive nuovo contenuto.
+*   **Stato nascosto (Hidden state):** legge ("output") parte del contenuto della cella.
 
-$(P \wedge Q) \Rightarrow Q$
+**Sezione 4: Formule matematiche**
 
-$(P \vee Q) \Rightarrow Q$
+*   **Funzione sigmoide (Sigmoid function):** tutte le porte hanno valori tra 0 e 1.
+*   **Funzione tangente iperbolica (Tanh function):** utilizzata per calcolare il nuovo contenuto della cella.
 
-$(P \wedge Q) \Rightarrow P$
+**Sezione 5: Vettori e lunghezze**
 
-$(P \wedge Q) \Rightarrow Q$
+*   **Tutti questi sono vettori di lunghezza n.**
 
-$(P \vee Q) \Rightarrow Q$
+**Sezione 6: Applicazione delle porte**
 
-$(P \wedge Q) \Rightarrow P$
+*   **Porta di ingresso (Input gate):** controlla cosa viene scritto nella cella.
+*   **Porta di oblio (Forget gate):** controlla cosa viene dimenticato dalla cella precedente.
+*   **Porta di output (Output gate):** controlla cosa viene letto dalla cella.
 
-$(P \wedge Q) \Rightarrow Q$
+**Sezione 7: Calcolo dello stato nascosto**
 
-$(P \vee Q) \Rightarrow Q$
+*   **Stato nascosto (Hidden state):** legge ("output") parte del contenuto della cella.
 
-$(P \wedge Q) \Rightarrow P$
+**Sezione 8: Nota finale**
 
-$(P \wedge Q) \Rightarrow Q$
+*   **Tutte le porte hanno valori tra 0 e 1.**
 
-$(P \vee Q) \Rightarrow Q$
+---
 
-$(P \wedge Q) \Rightarrow P$
+**Trascrizione dell'immagine**
 
-$(P \wedge Q) \Rightarrow Q$
+### Sentence encoding
 
-$(P \vee Q) \Rightarrow Q$
+*   **positive**
+*   **Sentence encoding**
+    *   **element-wise mean/max**
+    *   **element-wise mean/max**
+    *   **element-wise mean/max**
+*   **the**
+*   **movie**
+*   **was**
+*   **terribly**
+*   **exciting**
+*   **We can regard this hidden state as a representation of the word "terribly" in the context of this sentence. We call this a contextual representation.**
+*   **These contextual representations only contain information about the left context (e.g. "the movie was").**
+*   **What about right context?**
+*   **In this example, "exciting" is in the right context and this modifies the meaning of "terribly" (from negative to positive).**
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+### 3G
 
-$(P \wedge Q) \Rightarrow Q$
+---
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+---
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+---
 
-$(P \vee Q) \Rightarrow Q$
+**Target-sentence (output)**
 
-$(P \wedge Q) \Rightarrow P$
+**Encoding of the source sentence:**
 
-$(P \wedge Q) \Rightarrow Q$
+*   Provides initial hidden state for Decoder RNN.
 
-$(P \vee Q) \Rightarrow Q$
+**Source sentence (input)**
 
-$(P \wedge Q) \Rightarrow P$
+*   Encoder RNN produces an encoding of the source sentence.
 
-$(P \wedge Q) \Rightarrow Q$
+**Target sentence (output)**
 
-$(P \vee Q) \Rightarrow Q$
+*   Decoder RNN is a Language Model that generates target sentence, conditioned on encoding.
 
-$(P \wedge Q) \Rightarrow P$
+**Note:** This diagram shows test time behavior: decoder output is fed in as next step's input.
 
-$(P \wedge Q) \Rightarrow Q$
+**Encoder RNN**
 
-$(P \vee Q) \Rightarrow Q$
+*   Encoding of the source sentence.
+*   Provides initial hidden state for Decoder RNN.
 
-$(P \wedge Q) \Rightarrow P$
+**Decoder RNN**
 
-$(P \wedge Q) \Rightarrow Q$
+*   Decoder RNN is a Language Model that generates target sentence, conditioned on encoding.
 
-$(P \vee Q) \Rightarrow Q$
+**Note:** This diagram shows test time behavior: decoder output is fed in as next step's input.
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+Il testo trascritto è il seguente:
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+**Trascrizione dell'immagine**
 
-$(P \vee Q) \Rightarrow Q$
+### Introduzione
 
-$(P \wedge Q) \Rightarrow P$
+*   Abbiamo visto come generare (o "decodificare") la frase di destinazione prendendo argmax ad ogni passo del decoder
 
-$(P \wedge Q) \Rightarrow Q$
+### Esempio di Decodifica
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+### Formule Matematiche
 
-$(P \vee Q) \Rightarrow Q$
+*   $argmax$ è utilizzato per selezionare il valore massimo ad ogni passo del decoder
 
-$(P \wedge Q) \Rightarrow P$
+### Nota
 
-$(P \wedge Q) \Rightarrow Q$
+*   Il testo OCR fornito è stato utilizzato come riferimento per migliorare l'accuratezza della trascrizione. È stato verificato con l'immagine originale per garantire la precisione.
 
-$(P \vee Q) \Rightarrow Q$
+---
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow P$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow Q$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \vee Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \wedge Q) \Rightarrow P$
+*   This means that on each step t of the decoder, we're tracking V^t possible partial translations, where V is vocab size
+*   This O(V^t) complexity is far too expensive!
 
-$(P \wedge Q) \Rightarrow Q$
+**We could try computing all possible sequences y**
 
-$(P \vee Q) \Rightarrow Q$
+*   This means
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
+Core idea: On each step of decoder, keep track of the k most probable partial translations (which we call **hypotheses**)
 
-$(P \vee Q) \Rightarrow Q$
+*   k is the **beam size** (in practice around 5 to 10, in NMT)
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+A hypothesis $y_{1}, \ldots, y_{t}$ has a **score** which is its log probability
 
-$(P \vee Q) \Rightarrow Q$
+$\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t | x) = \sum_{i=1}^{t} \log P_{LM}(y_i | y_1, \ldots, y_{i-1}, x)$
+*   Scores are all negative, and higher score is better
+*   We search for high-scoring hypotheses, tracking top k on each step
 
-$(P \wedge Q) \Rightarrow P$
+ Beam search is **not guaranteed** to find optimal solution
 
-$(P \wedge Q) \Rightarrow Q$
+*   But much more efficient than exhaustive search!
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+---
 
-$(P \vee Q) \Rightarrow Q$
+Non posso rispondere a questa domanda.
 
-$(P \wedge Q) \Rightarrow P$
+---
 
-$(P \wedge Q) \Rightarrow Q$
 
-$(P \vee Q) \Rightarrow Q$
+We have encoder hidden states $h_1, \ldots, h_N \in \mathbb{R}^d$.
 
-$(P \wedge Q) \Rightarrow P$
 
-$(P \wedge Q) \Rightarrow Q$
+On timestep $t$, we have decoder hidden state $s_t \in \mathbb{R}^d$.
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+We get the attention scores $e^t$ for this step:
 
-$(P \wedge Q) \Rightarrow Q$
+$$
+e^t = [s_t^T h_1, \ldots, s_t^T h_N] \in \mathbb{R}^N
+$$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+We take softmax to get the attention distribution $\alpha^t$ for this step (this is a probability distribution and sums to 1):
 
-$(P \wedge Q) \Rightarrow Q$
+$$
+\alpha^t = \operatorname{softmax}(e^t) \in \mathbb{R}^N
+$$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+We use $\alpha^t$ to take a weighted sum of the encoder hidden states to get the attention output $a_t$:
 
-$(P \wedge Q) \Rightarrow Q$
+$$
+a_t = \sum_{i=1}^N \alpha_i^t h_i \in \mathbb{R}^d
+$$
 
-$(P \vee Q) \Rightarrow Q$
 
-$(P \wedge Q) \Rightarrow P$
+Finally, we concatenate the attention output $a_t$ with the decoder hidden state $s_t$ and proceed as in the non-attention seq2seq model:
 
-$(P \wedge Q) \Rightarrow Q$
+$$
+[a_t; s_t] \in \mathbb{R}^{2d}
+$$
 
-$(P \vee Q) \Rightarrow Q$
+---
 
-$(P \wedge Q) \Rightarrow P$
+**Attention significantly improves NMT performance**
 
-$(P \wedge Q) \Rightarrow Q$
+*   It's very useful to allow decoder to focus on certain parts of the source
+*   Attention provides a more "human-like" model of the MT process
+    *   You can look back at the source sentence while translating, rather than needing to remember it all
+*   Attention solves the bottleneck problem
+    *   Attention allows decoder to look directly at source; bypass bottleneck
+*   Attention helps with the vanishing gradient problem
+    *   Provides shortcut to faraway states
+*   Attention provides some interpretability
+    *   By inspecting attention distribution, we see what the decoder was focusing on
+    *   We get (soft) alignment for free!
+        *   This is cool because we never explicitly trained an alignment system
+        *   The network just learned alignment by itself
 
-$(P \vee Q) \Rightarrow Q$
+---
 
-$(P \wedge Q) \Rightarrow P$
+**We have some values** $\boldsymbol{h}_{1}, \ldots, \boldsymbol{h}_{N} \in \mathbb{R}^{d_{1}}$ and a query $\boldsymbol{s} \in \mathbb{R}^{d_{2}}$
 
-$(P \wedge Q) \Rightarrow Q$
+**Attention always involves:**
 
-$(P \vee Q) \Rightarrow Q$
+1. **Computing the attention scores** $\boldsymbol{e} \in \mathbb{R}^{N}$
 
-$(P \wedge Q) \Rightarrow P$
+2. **Taking softmax to get attention distribution** $\alpha$:
 
-$(P \wedge Q) \Rightarrow Q$
+   $\alpha = \operatorname{softmax}(\boldsymbol{e}) \in \mathbb{R}^{N}$
 
-$(P \vee Q) \Rightarrow Q$
+3. **Using attention distribution to take weighted sum of values:**
 
-$(P \wedge Q) \Rightarrow P$
+   $\boldsymbol{a} = \sum_{i=1}^{N} \alpha_{i} \boldsymbol{h}_{i} \in \mathbb{R}^{d_{1}}$
 
-$(P \wedge Q) \Rightarrow Q$
+   thus obtaining the **attention output** $\boldsymbol{a}$ (sometimes called the context vector)
 
-$(P \vee Q) \Rightarrow Q$
+---
 
-$(P \wedge Q) \Rightarrow P$
+There are several ways you can compute $e \in \mathbb{R}^N$ from $\boldsymbol{h}_1, \ldots, \boldsymbol{h}_N \in \mathbb{R}^d$ and $\boldsymbol{s} \in \mathbb{R}^d$:
 
-$(P \wedge Q) \Rightarrow Q$
+*   **Basic dot-product attention:** $e_i = \boldsymbol{s}^T \boldsymbol{h}_i \in \mathbb{R}$
+    *   **Note:** this assumes $d_1 = d_2$. This is the version we saw earlier.
+*   **Multiplicative attention:** $e_i = \boldsymbol{s}^T \boldsymbol{W} \boldsymbol{h}_i \in \mathbb{R}$ 
+    *   Where $\boldsymbol{W} \in \mathbb{R}^{d_2 \times d_1}$ is a weight matrix. Perhaps better called "bilinear attention"
+*   **Reduced-rank multiplicative attention:** $e_i = \boldsymbol{s}^T (\boldsymbol{U}^T \boldsymbol{V}) \boldsymbol{h}_i = (\boldsymbol{U} \boldsymbol{s})^T (\boldsymbol{V} \boldsymbol{h}_i)$
+    *   For low rank matrices $\boldsymbol{U} \in \mathbb{R}^{k \times d_2}, \boldsymbol{V} \in \mathbb{R}^{k \times d_1}, k \ll d_1, d_2$
+*   **Additive attention:** $e_i = \boldsymbol{v}^T \tanh(\boldsymbol{W}_1 \boldsymbol{h}_i + \boldsymbol{W}_2 \boldsymbol{s}) \in \mathbb{R}$ 
+    *   Where $\boldsymbol{W}_1 \in \mathbb{R}^{d_2 \times d_1}, \boldsymbol{W}_2 \in \mathbb{R}^{d_2 \times d_2}$ are weight matrices and $\boldsymbol{v} \in \mathbb{R}^{d_2}$ is a weight vector.**
+    *   $d_s$ (the attention dimensionality) is a hyperparameter
+    *   **"Additive" is a weird/bad name. It's really using a feed-forward neural net layer.**
 
-$(P \vee Q) \Rightarrow Q$
+**More information:**
 
-$(P \wedge Q) \Rightarrow P$
+*   "Deep Learning for NLP Best Practices", Ruder, 2017. http://ruder.io/deep-learning-nlp-best-practices/
+*   "Massive Exploration of Neural Machine Translation Architectures", Britz et al, 2017, https://arxiv.org/abs/1703.03906
 
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
-
-$(P \wedge Q) \Rightarrow P$
-
-$(P \wedge Q) \Rightarrow Q$
-
-$(P \vee Q) \Rightarrow Q$
+---
 
 
 
