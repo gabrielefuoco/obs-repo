@@ -275,13 +275,25 @@ $$B=\left( (1-b)+b \frac{dl}{avdl} \right), 0\leq b\leq1$$
 
 Il modello Okapi BM25 è un'estensione del modello BIM che tiene conto della lunghezza dei documenti. 
 
-![[4)-20241028164314130.png]]
+Normalize tf using document length
+
+$tf_i' = \frac{tf_i}{B}$
+
+$c_i^{BM25}(tf_i) = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'}$  
+$= \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$
+
+BM25 ranking function
+
+$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$
+
+
+
 
 Rispetto al modello BIM, BM25 valuta la term frequency normalizzata rispetto alla lunghezza dei documenti. La seconda espressione del modello BM25 è la versione 2 vista in precedenza, che è stata ulteriormente sviluppata per normalizzare la term frequency.
 
 ### Parametri del modello BM25
 
-![[4)-20241030095807332.png]]
+$$RSV^{BM25} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$$
 
 Il modello BM25 utilizza due parametri principali:
 
@@ -338,16 +350,60 @@ Tuttavia, questo sembra implicare che le proprietà di eliteness delle diverse z
 * Quindi combinare le prove tra i termini.
 
 
-![[4)-20241028164958153.png]]
+**Calculate a weighted variant of total term frequency, and**
+**Calculate a weighted variant of document length**
+
+$$
+\begin{aligned}
+\tilde{t} f_{i} &= \sum_{z=1}^{Z} v_{z} t f_{z i} \\
+\tilde{dl} &= \sum_{z=1}^{Z} v_{z} l e n_{z}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+a v d l &= \frac{\text{average } d \tilde{l}}{\text{across all docs}}
+\end{aligned}
+$$
+**where**
+
+*   $v_z$ is zone weight
+*   $t f_{z i}$ is term frequency in zone $z$
+*   $l e n_z$ is length of zone $z$
+*   $Z$ is the number of zones
+
 **Metodo:**
 
 1. **Calcolo della TF per zona:** La TF viene calcolata separatamente per ogni zona del documento.
 2. **Normalizzazione per zona:** La TF viene normalizzata in base alla lunghezza della zona.
 3. **Peso della zona:** Viene assegnato un peso a ciascuna zona, riflettente la sua importanza nel contesto del documento. Questo peso è un parametro predefinito e non è apprendibile.
 
-![[4)-20241028165052167.png]]
+### Simple BM25F with zones
 
-![[4)-20241028165205003.png]]
+Simple interpretation: zone z is "replicated" y times
+
+$$RSV^{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_{i}} \cdot \frac{(k_1 + 1)tf_i}{k_1((1-b) + b \frac{dl}{avdl}) + tf_i} $$
+
+ But we may want zone-specific parameters (k, b, IDF)
+
+ **Zone-specific length normalization**
+
+Empirically, zone-specific length normalization (i.e., zone-specific b) has been found to be useful.
+
+
+
+
+$$
+\tilde{tf}_i = \sum_{z=1}^Z v_z \frac{f_{z i}}{B_z}
+$$
+
+$$
+B_z = \left( (1-b_z) + b_z \frac{\text{len}_z}{\text{avlen}_z} \right), \quad 0 \leq b_z \leq 1
+$$
+
+$$
+\text{RSV}^{BM25F} = \sum_{i \in q} \log \frac{N }{df_{i}} \cdot \frac{(k_1 + 1)tf_i}{k_{1}+tf_{i}}
+$$
+
 
 ## Classifica con caratteristiche non testuali
 

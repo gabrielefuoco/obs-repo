@@ -50,7 +50,7 @@ Mappare una distribuzione ci serve per mappare la continuità. Se lasciamo l'aut
 
 Vogliamo forzare la rete ad avvicinare i punti tra di loro. Bisogna dunque aggiungere un termine di regolarizzazione alla loss, che misura quanto la distribuzione su cui stiamo mappando il nostro punto è diversa da una normale standard.
 
-$$L(x,\tilde{x})=\|x-\tilde{x}\|^2+\beta KL(N(\mu_{x},\Sigma_{x}),N(\vec{0},I))$$
+$$L(x,\tilde{x})=\|x-\tilde{x}\|^2+\beta \cdot KL(N(\mu_{x},\Sigma_{x}),N(\vec{0},I))$$
 
 KL è L'entropia relativa, vale 0 se le due distribuzioni sono uguali: $KL(p,q)=E_{P}[\log  \frac{p}{q} ]$
 
@@ -62,7 +62,7 @@ In questo modo abbiamo garantito che le regioni si possano sovrapporre.
 
 Implementano il paradigma dell'*Adversarial Learning* (Apprendimento competitivo).
 
-![[10) Reti Generative-20241122123855843.png]]
+![[10) Reti Generative-20241122123855843.png|621]]
 
 Il funzionamento di una Rete Generativa Adversaria (GAN) si basa sull'interazione tra due reti neurali: una rete generativa e una rete discriminativa.
 
@@ -86,9 +86,9 @@ Formalmente, l'addestramento può essere espresso come un gioco a due giocatori:
 
 $$
 \begin{cases}
-\max \quad \log D(x) + \log (1 - D(G(z))) \\
+\max: \quad \log D(x) + \log (1 - D(G(z))) \\
 \quad \text{massimizza la probabilità di discriminare gli esempi sintetici dagli esempi reali} \\ \\
-\min \quad \log(1 - D(G(z))) \\
+\min: \quad \log(1 - D(G(z))) \\
 \quad \text{minimizza la probabilità che D riconosca gli esempi generati sinteticamente}
 \end{cases}
 $$
@@ -115,7 +115,7 @@ Un esempio di definizione delle ricompense potrebbe essere:
 
 $$R = \begin{cases}
 +1 & \text{Vittoria} \\
-0 & \text{Posizione intermedia o Patta} \\
+\ \ \ 0 & \text{Posizione intermedia o Patta} \\
 -1 & \text{Sconfitta}
 \end{cases}$$
 
@@ -240,8 +240,255 @@ v^{(k+1)}(s) = \sum_{a \in A} \pi(a|s) \sum_{s' \in S} T(s, a, s') [R(s, a, s') 
 \end{cases}
 $$
 
----
-
 L'obiettivo finale è trovare la policy $\pi^*$ che massimizza sia le $V$-value che le $Q$-value.
 
----
+## Funzione di Valore Ottimale
+
+Una policy $\pi$ è migliore o uguale a una policy $\pi'$ se e solo se, per ogni stato $s \in S$, $V^\pi(s) \geq V^{\pi'}(s)$. Esiste una policy ottimale $\pi^*$ tale che, per ogni $\pi'$, $V^{\pi^*}(s) \geq V^{\pi'}(s)$.
+
+Possiamo definire la funzione di valore ottimale $V^*(s)$ e la funzione Q ottimale $Q^*(s,a)$ indipendentemente dalla policy:
+
+$$V^*(s) = \max_{\pi \in \Pi} V^\pi(s), \quad \forall s \in S$$
+$$Q^*(s,a) = \max_{\pi \in \Pi} Q^\pi(s,a), \quad \forall s \in S, \forall a \in A$$
+
+La funzione di valore ottimale può essere espressa in termini della funzione Q ottimale:
+
+$$V^*(s) = \max_{a \in A} Q^*(s,a)$$
+
+Questa equazione indica che il valore ottimale di uno stato è il valore Q massimo ottenibile eseguendo l'azione che massimizza la coppia (stato, azione).
+
+La funzione Q ottimale è definita come:
+
+$$Q^*(s,a) = \sum_{s' \in S} T(s,a,s') \cdot [R(s,a,s') + \gamma \cdot V^*(s')]$$
+
+Per ottenere la funzione di valore ottimale, dobbiamo trovare il valore $V^*(s)$ che massimizza questa funzione. La differenza rispetto alle funzioni di valore non ottimali è che qui appare il *return* atteso ottimale.
+
+Eliminando le ricorsioni indirette, otteniamo le equazioni di Bellman ottimali:
+
+$$
+\begin{cases}
+V^*(s) = \max_{a \in A} \sum_{s' \in S} T(s,a,s') \cdot [R(s,a,s') + \gamma \cdot V^*(s')] \\ \\
+
+Q^*(s,a) = \sum_{s' \in S} T(s,a,s') \cdot [R(s,a,s') + \gamma \cdot \max_{a' \in A} Q^*(s',a')]
+\end{cases}
+$$
+
+Questi sono processi di Markov: il futuro è indipendente dalla storia passata. In ogni stato, abbiamo la possibilità di prendere sempre l'azione migliore perché il percorso effettuato per arrivare a quello stato non influisce sul guadagno futuro.
+
+Se conosciamo **T** e **R** possiamo calcolare i valori ottimi per le Value Function: con questi valori possiamo costruire la **Policy ottima**
+
+$$
+\pi^*(a|s)=
+\begin{cases}
+1, \quad \text{Se }a=\arg\max_{a'\in A} \ Q^*(s,a') \\
+0,\quad \text{Altrimenti}
+\end{cases}
+$$
+Nella pratica, però, non conosciamo questi valori.
+
+# Q-Learning
+
+L'obiettivo del Q-learning è stimare la funzione Q ottimale, $Q^*(s,a)$.  Si costruisce un *training set* $T = \{ \langle s, a, r, s' \rangle \}$, che accumula l'esperienza dell'agente, dove:
+
+*   `s`: stato corrente
+*   `a`: azione eseguita
+*   `r`: ricompensa ricevuta
+*   `s'`: stato successivo
+
+Si costruisce inoltre una *lookup table* $Q(s,a)$, una matrice con numero di righe pari al numero di stati e numero di colonne pari al numero di azioni possibili $(|S|\times|A|)$.
+
+Si applica il *Temporal Difference Learning* per aggiornare gli elementi della matrice $Q(s,a)$ con la seguente regola:
+
+$$Q(s,a) = (1-\alpha) \cdot Q(s,a) + \alpha \cdot [r + \gamma \cdot \max_{a' \in A} Q(s',a')], \quad \forall \langle s, a, r, s' \rangle \in T$$
+
+dove:
+
+*   $\alpha$ è il *learning rate* (0 < α ≤ 1).  Il termine $(1-\alpha)$ preserva una frazione del vecchio valore.
+*   $\gamma$ è il *discount factor* (0 ≤ γ ≤ 1).
+
+Il Q-learning converge al valore ottimo $Q^*$ se il *training set* garantisce una sufficiente *Exploration* dello spazio degli stati e delle azioni.  In altre parole, l'agente deve interagire con l'ambiente in modo da visitare tutti gli stati e provare tutte le azioni possibili.
+
+## Fitted Q-Learning
+
+Se la *lookup table* per la funzione Q è troppo grande (dimensione dello spazio degli stati-azioni troppo elevata),  è necessario approssimarla con una funzione parametrizzata: $Q(s, a; \theta)$.  L'obiettivo diventa quello di trovare i parametri $\theta$ che meglio approssimano la funzione Q ottimale, $Q^*$.
+
+Per ogni tupla $\langle s, a, r, s' \rangle \in T$ (dove T è il training set), si definisce un target $Y_k^Q$:
+
+$$\forall <s,a,r,s'>\ \in T,\ \ Q(s,a;\theta_{k})\approx Y_{K}^Q=r+\gamma\max_{a'\in A}Q(s',a',\theta_{k})$$
+
+dove $\theta_k$ rappresenta i parametri correnti all'iterazione *k*.  Si vuole quindi minimizzare la differenza tra la funzione approssimata e il target:
+
+$$Q(s, a; \theta_k) \approx Y_k^Q$$
+
+Questo problema può essere formulato come un problema di regressione classico, dove ogni tupla $\langle s, a, r, s' \rangle$ rappresenta un esempio di training $\vec{x}_i$, e il corrispondente valore target $Y_k^Q$ rappresenta l'output desiderato $y_i$.  Si utilizzano quindi tecniche di regressione per aggiornare i parametri $\theta$ e migliorare l'approssimazione della funzione Q ottimale.
+
+## Neural Fitted Q-Learning (NFQ)
+
+![[10) Reti Generative-20241129093216919.png|604]]
+
+NFQ utilizza una rete neurale per approssimare la funzione Q.  Il processo di apprendimento prevede i seguenti passi:
+
+1. **Determinazione del massimo Q-value:** Per ogni stato successivo `s'`, la rete neurale fornisce i valori Q per tutte le azioni possibili, $Q(s', a'; \theta_k)$.  Si determina quindi il massimo di questi valori: $M = \max_{a' \in A} Q(s', a'; \theta_k)$.
+
+2. **Costruzione del target:**  Si costruisce il target $Y_k^Q$ utilizzando la ricompensa ricevuta `r` e il massimo Q-value calcolato al passo precedente:
+
+   $$Y_k^Q = r + \gamma \cdot M$$
+
+3. **Minimizzazione della loss function:** Si utilizza una loss function, tipicamente il Mean Squared Error (MSE), per minimizzare la differenza tra il valore Q predetto dalla rete neurale e il target:
+
+   $$l_{NFQ} = \frac{1}{2} (Q(s, a; \theta_k) - Y_k^Q)^2$$
+
+   I parametri $\theta_k$ della rete neurale vengono aggiornati iterativamente per minimizzare questa loss function, migliorando così l'approssimazione della funzione Q ottimale.
+
+
+**Problema:** a volta la convergenza può essere lenta o diventare instabile. Inoltre, tende a sovrastimare i valori. Per evitare queste problematiche sono state sviluppate delle euristiche.
+
+## Deep Q-Network (DQN)
+
+DQN utilizza due reti neurali separate per stimare la funzione Q:
+
+1.  **Rete aggiornata:** $Q(s, a; \theta_k)$  – utilizzata per selezionare le azioni e per calcolare la loss function.
+2.  **Rete target:** $Q(s, a; \theta_k^-)$ – utilizzata per calcolare il valore target.
+
+Entrambe le reti hanno la stessa struttura, ma pesi ($\theta$) differenti.  Questo disaccoppiamento tra il calcolo del valore target e l'aggiornamento dei pesi migliora la stabilità dell'apprendimento.
+
+Il valore target è calcolato utilizzando la rete target:
+
+$$Y_k^Q = r + \gamma \cdot \max_{a' \in A} Q(s', a'; \theta_k^-)$$
+
+I pesi della rete target ($\theta_k^-$) rimangono fissi per un certo numero di iterazioni (*c*), dopodiché vengono aggiornati con i pesi della rete aggiornata: $\theta_k^- = \theta_k$.
+
+A differenza di NFQ, DQN opera in un ambiente *online*, interagendo direttamente con l'ambiente.  Per gestire l'esperienza, si utilizza una *replay memory* che memorizza le ultime $N_{Replay}$ quadruple $<s, a, r, s' >$ raccolte dall'agente.  L'aggiornamento dei parametri $\theta_k$ avviene selezionando un mini-batch casuale di esempi $<s, a, r, s' >$ dalla *replay memory*.
+
+Per la selezione delle azioni, si utilizza una politica $\epsilon$-greedy, con $\epsilon \in [0, 1]$:
+
+*   Con probabilità $\epsilon$, si sceglie un'azione casuale.
+*   Con probabilità $1 - \epsilon$, si sceglie l'azione ottimale secondo la rete aggiornata: $a^* = \arg \max_{a \in A} Q(s, a; \theta_k)$.
+
+Questa politica aiuta a mitigare il problema dell' **exploration vs exploitation dilemma**.
+
+#### Variante: Double Deep Q-Network (DDQN)
+
+Varia il modo in cui il valore target è calcolato utilizzando la rete target:
+$$Y_{k}^{\text{DDQN}}=r+\gamma \cdot Q(s',\arg\max_{a'\in A}Q(s',a';\theta_{k});\theta_{k}^-)$$
+L'idea è quella di disaccoppiare la scelta dell'azione su cui valutiamo il massimo dal calcolo del valore massimo stesso.
+
+## Stima di Densità Non Parametrica
+
+Queste tecniche non assumono alcuna forma specifica per la densità di probabilità, ma la stimano direttamente dai dati. Sono tecniche *instance-based* (o *memory-based*) perché richiedono l'intero training set per la stima.
+
+![[10) Reti Generative-20241129104242903.png|576]]
+
+Consideriamo una regione $R(x)$ centrata in un punto $x$.  La probabilità di osservare un punto in questa regione è data da:
+
+$$P = \int_{R(x)} p(x') dx'$$
+
+Se la regione è sufficientemente piccola, possiamo approssimare la densità di probabilità come costante all'interno di $R(x)$:
+
+$$P \approx \int_{R(x)} p(x) dx' = p(x) \int_{R(x)} dx' = p(x)V$$
+
+dove $V$ è il volume della regione $R(x)$.  Quindi:
+
+$$p(x) \approx \frac{P}{V}$$
+
+Se $n$ è sufficientemente grande, la probabilità $P$ può essere approssimata dalla proporzione di punti nel training set che cadono in $R(x)$: $P \approx \frac{k}{n}$, dove $k$ è il numero di punti in $R(x)$.  Pertanto:
+
+$$p(x) \approx \frac{k/n}{V}$$
+
+
+Due metodi principali per la stima di densità non parametrica sono:
+
+1.  Stima di densità con *K-Nearest Neighbor* (KNN)
+2.  Stima di densità con *Kernel* (KDE)
+
+## K-Nearest Neighbor Density Estimation (KNN)
+
+In KNN, si fissa un valore $k$ e si determina la più piccola regione $R(x)$ centrata in $x$ che contiene esattamente $k$ punti del training set.  Il raggio di questa regione è dato dalla distanza tra $x$ e il k-esimo vicino più prossimo ($nn_k(x)$):
+
+$r = \text{dist}(x, nn_k(x))$
+
+Il volume di questa regione dipende dalla dimensionalità dello spazio e dalla metrica utilizzata per calcolare la distanza.  La stima della densità è quindi:
+
+$$p(x) = \frac{k/n}{V(\text{dist}(x, nn_k(x)))} $$
+
+dove $V(\text{dist}(x, nn_k(x)))$ rappresenta il volume della regione di raggio $r$.
+
+La densità è inversamente proporzionale alla distanza dal k-esimo oggetto
+
+##### Nearest Neighbor Classification (K-NN):
+
+Restituisce la classe più rappresentata tra quelle dei *K-Nearest Neighbor*  di $x$
+
+##### Anomaly Detection
+
+Le tecniche di rilevamento di anomalie assegnano un punteggio (*score*) a ciascun oggetto, indicando quanto è anomalo.  Un punteggio alto indica un'alta probabilità di anomalia.
+
+Una tecnica *distance-based* utilizza la distanza dal k-esimo vicino più prossimo come punteggio:
+
+$$\text{Score}(x) = \text{dist}(x, nn_k(x))$$
+
+Le anomalie sono i punti $x$ che massimizzano questo punteggio.  Questa è una tecnica di tipo *globale*.
+
+Una variante più generale considera la somma delle distanze dai primi $k$ vicini più prossimi:
+
+$$\text{Score}(x) = \sum_{i=1}^k \text{dist}(x, nn_i(x))$$
+
+Anche questa è una tecnica *globale*.
+
+
+Le tecniche *locali*, invece, normalizzano il punteggio globale in base ai punteggi dei vicini:
+
+$$\text{Score}_{local}(x) = \frac{\text{Score}_{glob}(x)}{\sum_{i=1}^k \text{Score}_{glob}(nn_i(x))}$$
+
+dove $\text{Score}_{glob}(x)$ rappresenta il punteggio globale (distance-based) del punto $x$.  Questo approccio considera il contesto locale per determinare l'anomalia.
+
+## Kernel Density Estimation (KDE)
+
+In KDE, si fissa la dimensione della regione $R(x)$ attorno a un punto $x$ e si conta il numero di punti del training set che cadono in questa regione.  Questa regione è definita tramite una *funzione finestra* (window function) o *kernel*.  Un esempio semplice di funzione finestra è la funzione indicatrice di un ipercubo:
+
+$$\phi(\vec{u}) = \begin{cases} 1, & \forall i, |u_i| \leq \frac{1}{2} \\ 0, & \text{altrimenti} \end{cases}$$
+
+dove $\vec{u} = (u_1, u_2, \dots, u_d)$ è un vettore di dimensione $d$.  Questa funzione vale 1 se tutte le componenti di $\vec{u}$ sono in valore assoluto minori o uguali a 1/2, e 0 altrimenti.  In pratica, si considera un ipercubo di lato 1 centrato nell'origine.
+
+![[10) Reti Generative-20241129110450366.png|600]]
+
+Nel caso unidimensionale ($d=1$), la regione $R(x)$ è un intervallo di ampiezza $h$ centrato in $x$.  La funzione finestra indica se un punto $x_i$ del training set si trova all'interno di questo intervallo:
+
+$$
+\phi\left( \frac{x-x_{i}}{h} \right)=
+\begin{cases}
+1,\quad \text{Se x si trova nell'intorno di raggio h/2 centrato in }x_{i} \\
+1,\quad \text{Se }x_{i}\text{ si trova nell'intorno di raggio h/2 centrato in x} \\
+0,\quad \text{Altrimenti}
+\end{cases}
+$$
+
+Questa funzione $\phi$ è chiamata *Parzen window*.
+
+Il numero di punti $k$ che cadono nella regione $R(x)$ è dato da:
+
+$$k = \sum_{i=1}^n \phi\left( \frac{x - x_i}{h} \right)$$
+
+La stima della densità di probabilità in $x$ è quindi:
+
+$$p(x) = \frac{k/n}{V} = \frac{1}{nh^d} \sum_{i=1}^n \phi\left( \frac{x - x_i}{h} \right)$$
+
+dove $V = h^d$ è il volume della regione $R(x)$.
+
+![[10) Reti Generative-20241129110436366.png|484]]
+
+La *Parzen window* può esssere sostituita con una generica *funzione kernel* $k(u)$
+
+$$
+k(u)=
+\begin{cases}
+\text{Funzione di Densità Simmetrica (es: Gaussiana)}
+\end{cases}
+$$
+
+$$KDE: p(x)=\frac{1}{nh^d}\sum_{i=1}^n K\left( \frac{\vec{x}-\vec{x}_{i}}{h} \right)$$
+Problema: costo computazionale elevato, perchè devo guardare tutti i punti del dataset. 
+Soluzione 1: ignorare i punti oltre una certa distanza, ma questo potrebbe portare ad errori.
+Soluzione 2: utilizzare kernel con area sottea 1 e che sono simmetrici (ad es Tricube)
+
+Scelta dell'iperparametro $h=1.06 \cdot \hat{\sigma}^{1/j}$ (empirica)

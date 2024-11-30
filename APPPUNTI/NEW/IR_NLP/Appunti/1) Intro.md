@@ -1113,8 +1113,24 @@ Idee chiave: sono complementari
     * In pratica, è una struttura che conserviamo in memoria e che viene riallocata all'occorrenza.
     * Evitiamo di tenere traccia dei term-id, l'algoritmo lavora direttamente con i termini
 
+### SPIML-Invert(token_stream)
 
-![[1) Intro-20241003093740166.png]]
+1.  **output_file** = NEWFILE()
+2.  **dictionary** = NEWHASH()
+3.  **while** (free memory available)
+4.      **do** token ← next(token_stream)
+5.      **if** term(token) ∉ dictionary
+6.          **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
+7.      **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
+8.      **if** full(postings_list)
+9.          **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
+10.     ADDToPOSTINGSLIST(postings_list, docID(token))
+11.     sorted_terms ← SORTTERMS(dictionary)
+12.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
+13.     **return** output_file
+
+
+
 Linea 5) il token raw viene pre-processato: riconduciamo il token a quello che è un index-term.
 Linea 10) rendiamo immediatamente disponibile il posting (occorrenza del termine) nel documento dove è stato osservato.
 Linee 8-9) se ha raggiunto la dimensione limite,
@@ -1569,7 +1585,28 @@ Ogni singola cella della matrice di rappresentazione dei testi dovrà contenere 
 
 **Come calcoliamo lo score da assegnare a un documento?**
 
-![[1) Intro-20241010181339307.png]]
+### Tabella dei personaggi e delle opere
+
+| Personaggio | Antony and Cleopatra | Julius Caesar | The Tempest | Hamlet | Othello | Macbeth |
+| --- | --- | --- | --- | --- | --- | --- |
+| Antony | 1 | 1 | 0 | 0 | 0 | 1 |
+| Brutus | 1 | 1 | 0 | 1 | 0 | 0 |
+| Caesar | 1 | 1 | 0 | 1 | 1 | 1 |
+| Calpurnia | 0 | 1 | 0 | 0 | 0 | 0 |
+| Cleopatra | 1 | 0 | 0 | 0 | 0 | 0 |
+| mercy | 1 | 0 | 0 | 1 | 1 | 0 |
+| worser | 1 | 0 | 0 | 1 | 1 | 0 |
+
+| Personaggio | Antony and Cleopatra | Julius Caesar | The Tempest | Hamlet | Othello | Macbeth |
+| --- | --- | --- | --- | --- | --- | --- |
+| Antony | 157 | 73 | 0 | 0 | 0 | 1 |
+| Brutus | 4 | 157 | 0 | 0 | 1 | 0 |
+| Caesar | 232 | 227 | 0 | 0 | 1 | 1 |
+| Calpurnia | 0 | 10 | 0 | 0 | 0 | 0 |
+| Cleopatra | 57 | 0 | 0 | 0 | 0 | 0 |
+| mercy | 2 | 0 | 0 | 1 | 1 | 0 |
+| worser | 2 | 0 | 0 | 1 | 0 | 0 |
+
 
 Esistono diverse opzioni per modellare la rappresentazione dei testi:
 
@@ -1927,7 +1964,11 @@ Un vettore può essere normalizzato (in lunghezza) dividendo ciascuna delle sue 
 * Dividere un vettore per la sua norma L2 lo rende un vettore unitario (di lunghezza) (sulla superficie dell'ipersfera unitaria).
 * I documenti lunghi e brevi hanno ora pesi comparabili. 
 
-![[1) Intro-20241014155800632.png]]
+$$
+\text{sim}(d_1, d_2) = \frac{d_1 \cdot d_2}{\|d_1\| \cdot \|d_2\|} = \frac{\sum_{i=1}^{n} w_{i,j} \cdot w_{i,k}}{\sqrt{\sum_{i=1}^{n} w_{i,j}^2} \cdot \sqrt{\sum_{i=1}^{n} w_{i,k}^2}}
+$$
+
+![[1) Intro-20241123122258468.png]]
 riduciamo a vettori di lunghezza unitaria
 
 Similarità del coseno = prodotto interno normalizzato.
@@ -1973,13 +2014,45 @@ Quanto sono simili i romanzi:
 
 ---
 
-![[1) Intro-20241014155828682.png]]
+**Vector space proximity**
+
+**CosineScore(q)**
+
+1. float Scores[N] = 0
+2. float Length[N]
+3. for each query term t
+4. do calculate w<sub>t,q</sub> and fetch postings list for t
+	1. for each pair(d, tf<sub>t,d</sub>, w<sub>t,q</sub>) in postings list
+	2. do Scores[d] += w<sub>t,d</sub> × w<sub>t,q</sub>
+5. Read the array Length
+6. for each d
+7. do Scores[d] = Scores[d]/Length[d]
+8. return Top K components of Scores
 
 ## Varianti di ponderazione Tf-Idf
 
-![[1) Intro-20241014155855431.png]]
+**Term Frequency**
 
-- **Soluzioni di default:** Le soluzioni di default in alcuni sistemi di retrieval sono quelle evidenziate in rosso.
+*   **n (natural)**: $tf_{r, d}$
+*   **l (logarithm)**: $1 + \log(tf_{r, d})$
+*   **a (augmented)**: $0.5 + \frac{0.5 \cdot tf_{r, d}}{\max_{r} (tf_{r, d})}$
+*   **b (boolean)**: $\begin{cases} 1 & \text{if } tf_{r, d} > 0 \\ 0 & \text{otherwise} \end{cases}$
+
+**Document Frequency**
+
+*   **n (no)**: $1$
+*   **t (idf)**: $\log \frac{N}{df_r}$
+*   **p (prob idf)**: $\max \{ 0, \log \frac{N - df_r}{df_r} \}$
+
+**Normalization**
+
+*   **n (none)**: $1$
+*   **c (cosine)**: $\frac{1}{\sqrt{w_1^2 + w_2^2 + \dots + w_n^2}}$
+*   **u (pivoted unique)**: $\frac{1}{u}$
+*   **b (byte size)**: $\frac{1}{\text{CharLength}^{\alpha}}, \alpha < 1$
+
+
+- **Soluzioni di default:** Le soluzioni di default in alcuni sistemi di retrieval sono le seconde di ogni tipo
 - **Term frequency aumentata:** La versione aumentata della term frequency è interessante in contesti di retrieval puro, dove si confrontano query espanse con documenti.
 - **Smoothing:** La term frequency aumentata prevede una sorta di smoothing, simile a quello che si incontra nel retrieval probabilistico.
 

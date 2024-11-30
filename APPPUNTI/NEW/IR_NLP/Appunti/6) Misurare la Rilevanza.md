@@ -381,6 +381,18 @@ In sostanza, la Kappa measure confronta la probabilità di accordo osservata (P(
 
 ![[Senza nome-20241104132249727.png]]
 
+
+Observed proportion of the times the judges agreed  
+$P(A) = (300 + 70)/400 = 370/400 = 0.925$
+
+Pooled marginals  
+$P(nonrelevant) = (80 + 90)/(400 + 400) = 170/800 = 0.2125$  
+$P(relevant) = (320 + 310)/(400 + 400) = 630/800 = 0.7878$  
+Probability that the two judges agreed by chance $P(E) = $  
+$P(nonrelevant)^2 + P(relevant)^2 = 0.2125^2 + 0.7878^2 = 0.665$  
+Kappa statistic $\kappa = (P(A) - P(E))/(1 - P(E)) = $  
+$(0.925 - 0.665)/(1 - 0.665) = 0.776$ (still in acceptable range)
+
 La matrice ci fornisce informazioni su quanto due giudici siano d'accordo sulla rilevanza di un determinato elemento. In questo caso, i giudici sono stati d'accordo 300 volte sulla rilevanza dell'elemento e 70 volte sulla non rilevanza.
 
 **Probabilità di Accordo (p(A))**

@@ -65,44 +65,46 @@ La funzione decision stump vale +1 a sinistra di 𝜃 e -1 a destra.
 
 $t_{d}=d \cdot m \cdot \log(m)$
 
-## Ada-Boost
+## AdaBoost
 
-l'ada-boost(adaptive-boosting) è una tecnica che costruisce un classificatore strong come composizione di classificatori più deboli
-**input:**
-- $S=\{(x_{1},y_{1},(x_{2},y_{2},\dots,(x_{n},y_{n}))\}$
-- $WL:\text{ Week Learner}$
-- $Y:\text{Numero di Iterazioni}$
+AdaBoost (Adaptive Boosting) è un algoritmo di apprendimento che crea un classificatore forte combinando diversi classificatori deboli.
 
-$D=(D_{1},D_{2},\dots,D_{m})$
-$D_{i}=\frac{1}{m}$, ovvero ogni oggetto avrà il suo peso
+**Input:**
 
-quando si calcolerà l'errore empirico, lo si fa assumendo che una misclassification non costi 1 ma un valore proporzionale al peso dell'oggetto. 
+*   $S = \{(x_1, y_1), (x_2, y_2), \dots, (x_m, y_m)\}$: insieme di dati di addestramento, dove $x_i$ è un esempio e $y_i \in \{-1, +1\}$ è la sua etichetta.
+*  $WL$: algoritmo di apprendimento debole (weak learner).
+*   $T$: numero di iterazioni.
 
-$L_{s}(h)= \sum_{i=1}^m D_{i}\cdot 1[h(x_{i}\neq y_{i})]$
-il calcolo di questo può essere fatto in tempo costante
-l'algo all'inizio da il suo peso a tutti gli esempi, poi man mano che procede troverà esempi più difficili da catturare. La stratregia sarà quella di aumentare il peso degli esempi più difficili, per spingere l'algoritmo a non sbagliare su qeusti esempi
+Inizialmente, si assegna un peso uniforme a ciascun esempio:
 
-**Output:** Strong Learner, ottenuto come combinazione dei week learner ottenuti a ogni iterazione
-$h(x)=sign\left( \sum_{t=1}^T w_{t}h_{t}(x) \right)$
-dove $h_{t}(x)$ è il week learner restituiti al passo t, ha  valore +-1
-abbiamo la somma dei valori pesata e quindi anche h(x) sarà +-1
+$D^{(1)} = (D_1^{(1)}, D_2^{(1)}, \dots, D_m^{(1)})$, con $D_i^{(1)} = \frac{1}{m}$
 
-**metodo**
-$d_{1}=\left( \frac{1}{m},\dots ,\frac{1}{m} \right)$
-$\text{for t=1 to T do}$
-	$h_{t}=WL(S,D^{(t)})$
-	$\epsilon_{t}=\sum_{i=1}^m D_{i} 1[h_{t}(x_{i})\neq y_{i}]$
-	$\omega_{t}=\frac{1}{2}\log\left( \frac{1}{\epsilon}-1 \right)$
-	il peso dipende dall'errore, più è basso più il peso è grande
+L'errore empirico di un classificatore debole $h_t$ è calcolato pesando gli errori di classificazione in base al peso degli esempi:
 
-aggiornamento:
-$$D_{i}^{t+1}=\frac{D_{i}^{(t)}\exp(- \omega_{t}y_{i}h_{t}(x_{i}) )}{ \sum_{j=1}^m D_{j}^{(t)} \exp(-\omega_{t}y_{j}h_{t(x_{j})} )}$$
-$x_i \text{ vale } \pm1$
-$y_i \text{ vale } \pm1$
-$D_i^{(t)}$ è il vecchio peso e lo moltiplichiamo per $exp(\pm\omega)$
+$L_s(h) = \sum_{i=1}^m D_i^{(t)} \cdot \mathbb{1}[h(x_i) \neq y_i]$
 
-l'effetto è quello di abbassare il peso di quelli classificati correttamente e aumentare quello di quelli mis-classified, ma questo dipende da $\omega$, se è negativo si inverte la logica
+dove $\mathbb{1}[h(x_i) \neq y_i]$ è la funzione indicatrice che vale 1 se $h(x_i) \neq y_i$ e 0 altrimenti.  Questo calcolo può essere effettuato in tempo costante.  L'algoritmo aumenta iterativamente il peso degli esempi erroneamente classificati, forzando i classificatori successivi a focalizzarsi su questi esempi più difficili.
 
+**Output:**
+
+Un classificatore forte $H(x)$ ottenuto come combinazione pesata dei classificatori deboli:
+
+$H(x) = \text{sign}\left( \sum_{t=1}^T \omega_t h_t(x) \right)$
+
+dove $h_t(x)$ è il classificatore debole ottenuto all'iterazione *t*, con output $\pm 1$, e $\omega_t$ è il suo peso.
+
+**Metodo:**
+
+1.  Inizializza $D^{(1)} = (\frac{1}{m}, \dots, \frac{1}{m})$.
+2.  **For** $t = 1$ **to** $T$ **do**:
+    *   $h_t = WL(S, D^{(t)})$: addestra un classificatore debole sull'insieme di dati $S$ con distribuzione di pesi $D^{(t)}$.
+    *   $\epsilon_t = \sum_{i=1}^m D_i^{(t)} \mathbb{1}[h_t(x_i) \neq y_i]$: calcola l'errore pesato del classificatore debole.
+    *   $\omega_t = \frac{1}{2} \log(\frac{1 - \epsilon_t}{\epsilon_t})$: calcola il peso del classificatore debole.  Un errore minore implica un peso maggiore.
+    *   Aggiorna la distribuzione dei pesi:
+
+       $$D_i^{(t+1)} = \frac{D_i^{(t)} \exp(-\omega_t y_i h_t(x_i))}{\sum_{j=1}^m D_j^{(t)} \exp(-\omega_t y_j h_t(x_j))}$$
+
+Questo aggiornamento riduce il peso degli esempi classificati correttamente e aumenta il peso di quelli classificati erroneamente.
 
 ## Teorema
 
@@ -117,13 +119,15 @@ Esempio
 le linee rappresentano le nuove soglie durante le varie iterazioni
 
 ### Proprietà
+
 $VC_{dim}(\text{AdaBoost(B,T)})= T \cdot VC_{dim}(B)$
 
 
-# Problemi di Learning Convessi
+## Problemi di Learning Convessi
 
-### Insieme convesso
-se comunque prendiamo due punti all'interno dell'insieme, il segmento che li unisce è contenuto all'interno dell'insieme
+#### Insieme convesso
+
+Se comunque prendiamo due punti all'interno dell'insieme, il segmento che li unisce è contenuto all'interno dell'insieme
 ![[5) Boosting-20241011100428505.png]]
 
 $$
@@ -135,16 +139,18 @@ $$
 $\forall\alpha\in[0,1],\alpha \vec{u}+(1-\alpha)\vec{v}\in C$
 
 ### Funzione convessa
-comunque prendiamo due punti sulla curva della funzione, il segmento che li unisce si trova sopra il grafico della funzione
+
+Comunque prendiamo due punti sulla curva della funzione, il segmento che li unisce si trova sopra il grafico della funzione
 ![[5) Boosting-20241011100739017.png]]
 
 $\forall\alpha\in[0,1],f(\alpha \vec{w}+(1-\alpha)\vec{v})\leq\alpha f(\vec{w})+(1-\alpha)f\vec{w}$
 
-### epifrafico di f
+### Epigrafico di f
+
 $\{(x,\beta):f(x)\leq \beta \}$
 ![[5) Boosting-20241011101042946.png]]
 
-una funzione è convessa se e solo se il suo epigrafo è una funzione convessa
+Una funzione è convessa se e solo se il suo epigrafo è una funzione convessa
 
 
 ### Proprietà

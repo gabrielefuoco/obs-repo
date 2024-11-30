@@ -308,7 +308,7 @@ La perplexity rappresenta l'inverso della probabilità geometrica media di predi
 Nel calcolo ricorsivo delle derivate durante la backpropagation through time (BPTT), si possono incontrare probabilità molto piccole.  Questo porta ad un problema di *vanishing gradient*: i gradienti diventano sempre più piccoli man mano che si procede indietro nel tempo, rendendo difficile l'addestramento di RNN su sequenze lunghe.
 
 
-$$\text{Ricorda: } \quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{xh} h^{(t-1)} + W_{sx} x^{(t)} + b_{h}\right)$$
+$$\quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{xh} h^{(t-1)} + W_{sx} x^{(t)} + b_{h}\right)$$
 
 * Cosa succede se σ fosse la funzione identità, σ(x) = x?
 
@@ -404,10 +404,11 @@ Si necessita di un intervento architetturale: invece di riscrivere lo stato corr
 
 ## Long Short-Term Memory (LSTM)
 
-Le LSTM sono un tipo di RNN proposto da Hochreiter e Schmidhuber nel 1997 come soluzione al problema del *vanishing gradient*.  Sebbene l'articolo originale sia ampiamente citato, un contributo cruciale alle LSTM moderne proviene da Gers et al. (2000).  Le LSTM hanno iniziato ad essere riconosciute come promettenti grazie al lavoro di Alex Graves (studente di Schmidhuber) intorno al 2006, lavoro in cui ha anche inventato la CTC (Connectionist Temporal Classification) per il riconoscimento vocale.  Tuttavia, sono diventate veramente famose dopo che Hinton le ha introdotte in Google nel 2013, dopo che Graves ha svolto un post-dottorato con lui.
+Le LSTM sono un tipo di RNN proposto come soluzione al problema del *vanishing gradient*.  
+Sono diventate veramente famose dopo che Hinton le ha introdotte in Google nel 2013.
 
-
-L'obiettivo è riprogettare una RNN con una sorta di memoria per migliorare la backpropagation.  Introduciamo la notazione `c`, che rappresenta la cella di memoria, utilizzata per gestire le informazioni a lungo termine.  Abilitiamo operazioni di lettura, scrittura e cancellazione di informazioni. La selezione di quali informazioni gestire è controllata da specifici *gate*.  Questi *gate* sono vettori della stessa dimensionalità dello stato della cella; ad ogni *timestep*, il vettore dei *gate* sarà aperto o chiuso. I loro valori sono dinamici e cambiano in base all'input e al contesto.
+L'obiettivo è riprogettare una RNN con una sorta di memoria per migliorare la backpropagation.  Introduciamo la notazione `c`, che rappresenta la cella di memoria, utilizzata per gestire le informazioni a lungo termine.  
+Abilitiamo operazioni di lettura, scrittura e cancellazione di informazioni. La selezione di quali informazioni gestire è controllata da specifici *gate*.  Questi *gate* sono vettori della stessa dimensionalità dello stato della cella; ad ogni *timestep*, il vettore dei *gate* sarà aperto o chiuso. I loro valori sono dinamici e cambiano in base all'input e al contesto.
 
 ![[10)-20241118164929500.png]]
 
@@ -419,7 +420,6 @@ Ogni *gate* è ottenuto come trasformazione non lineare (sigmoide) della combina
 
 ![[10)-20241119095018808.png]]
 ![[10)-20241119095044205.png]]
-
 
 **Come le LSTM risolvono il *vanishing gradient*?**
 
@@ -482,8 +482,7 @@ La traduzione automatica è un task considerato particolarmente difficile fino a
 * Supponiamo di voler tradurre dal francese all'inglese.
 * Vogliamo trovare la migliore frase inglese `y`, data la frase francese `x`.
 * Questo equivale a trovare:  $\arg\max_y P(y|x)$
-* Utilizzando la regola di Bayes, possiamo scomporre questo problema in due componenti da apprendere separatamente:
-$= \arg\max_y P(x|y)P(y)$
+* Utilizzando la regola di Bayes, possiamo scomporre questo problema in due componenti da apprendere separatamente $= \arg\max_y P(x|y)P(y)$
 
 **Modello di Traduzione:** Modella come le parole e le frasi dovrebbero essere tradotte (fedeltà). Viene appreso da dati paralleli (coppie di frasi tradotte).
 
@@ -529,15 +528,10 @@ $$
 P(y|x) = P(y_1|x) P(y_2|y_1, x) P(y_3|y_1, y_2, x) \ldots P(y_T|y_1, \ldots, y_{T-1}, x)
 $$
 
-**Probabilità della prossima parola target, date le parole target precedenti e la frase sorgente `x`.**
+Probabilità della prossima parola target, date le parole target precedenti e la frase sorgente `x`.
 
 
-**Domanda: Come addestrare un sistema NMT?**
-
-**Risposta (semplice): Ottenere un grande corpus parallelo...**
-
-* Tuttavia, esistono ricerche interessanti su "NMT non supervisionato", aumento dei dati, ecc.
-
+Si può addestrare un sistema NMT per ottenere un grande corpus parallelo. Tuttavia, esistono ricerche interessanti su "NMT non supervisionato", aumento dei dati, ecc.
 
 Come si addestra un modello linguistico condizionale? I pesi dell'encoder e del decoder vengono aggiornati ad ogni step di backpropagation. Ci si aspetta una convergenza lenta e complessa, ma è inevitabile se si vuole condizionare il decoder all'encoder.
 
@@ -566,8 +560,7 @@ $$
 = \prod_{t=1}^{T} P(y_t|y_1, \dots, y_{t-1}, x)
 $$
 
-**Potremmo provare a calcolare tutte le possibili sequenze `y`, ma questo ha una complessità computazionale di $O(V^T)$, dove V è la dimensione del vocabolario e T è la lunghezza della sequenza. Questa complessità è proibitiva.**
-
+Potremmo provare a calcolare tutte le possibili sequenze `y`, ma questo ha una complessità computazionale di $O(V^T)$, dove V è la dimensione del vocabolario e T è la lunghezza della sequenza. Questa complessità è proibitiva.**
 
 ## Beam Search
 
@@ -612,7 +605,6 @@ Calcola uno score di corrispondenza tra la traduzione generata e le traduzioni d
 ![[10)-20241119110907996.png]]
 
 Il punteggio BLEU è il prodotto della precisione geometrica media e di una penalità di brevità.
-
 
 **Vantaggi:**
 

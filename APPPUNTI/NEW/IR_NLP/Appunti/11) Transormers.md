@@ -322,7 +322,6 @@ Combinando encoder e decoder, abbiamo tre tipi di attenzione:
 
 `h` rappresenta la codifica finale dell'encoder.
 
-
-## Tokenizzazione Subword
+### Tokenizzazione Subword
 
 L'unica preoccupazione a livello di pre-processing da tenere in considerazione per la preparazione dell'input.

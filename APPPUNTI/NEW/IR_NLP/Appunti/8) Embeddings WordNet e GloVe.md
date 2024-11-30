@@ -96,7 +96,7 @@ Il risultato è una rappresentazione sparsa ed è ancora troppo costosa.
 
 ### Problemi con la co-occorrenza a livello di documento
 
-![[8) NLP-20241111154837159.png|532]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111154837159.png|532]]
 La co-occorrenza a livello di documento presenta alcuni problemi:
 
 * **Nozioni ampie di co-occorrenza:**  Se si utilizzano finestre o documenti di grandi dimensioni, la matrice di co-occorrenza può catturare informazioni semantiche o di argomento, ma perdere informazioni di livello sintattico. 
@@ -108,7 +108,7 @@ La co-occorrenza a livello di documento presenta alcuni problemi:
 ## Vettori di parole
 
 Tenendo conto degli aspetti chiave, ovvero principio della località per determinare i vari concetti di ogni parola, l'informazione di co-occorrenza, etc, vogliamo costruiremo un vettore denso per ogni parola, scelto in modo che sia simile ai vettori di parole che appaiono in contesti simili. Misureremo la similarità come il prodotto scalare (vettoriale) dei vettori.
-![[8) NLP-20241111160315051.png|475]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111160315051.png|475]]
 Nota: i vettori di parole sono anche chiamati *embedding* (di parole) o rappresentazioni (neurali) di parole. Sono una rappresentazione distribuita. 
 Molte di queste rappresentazioni sono neurali.
 
@@ -126,9 +126,9 @@ Word2vec (Mikolov et al. 2013) è un framework per l'apprendimento di vettori di
 	* Data una parola target predire la probabilità rispetto le sue parole di contesto, avendo fissato l'estensione del contesto (quante parole devo considerare come contesto per ogni parola target).
 * Continuiamo ad aggiustare i vettori di parole per massimizzare questa probabilità. 
 
-![[8) NLP-20241111162802037.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162802037.png]]
 Fissiamo estensione del contesto a 2, consideriamo "into" come parola centrale, dobbiamo calcolare la probabilità delle due parole a destra e a sinistra
-![[8) NLP-20241111162829597.png|614]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162829597.png|614]]
 ## Word2vec: Funzione Obiettivo
 
 Per ogni posizione $t=1,\dots,T$, vogliamo predire le parole di contesto in una certa finestra di taglia fissata **m**, data una parola centrale $w_{t}$. 
@@ -180,7 +180,7 @@ Seleziona iterativamente una parola centrale e la sua finestra di dimensione fis
     * "Dato una parola specifica all'interno di una frase (parola centrale), scegliendo casualmente una parola nella finestra, restituisci una probabilità per ogni parola nel vocabolario di essere effettivamente la parola scelta casualmente".
 
 * Utilizza l'ottimizzatore SGD per aggiornare i parametri del modello. 
-![[8) NLP-20241112100823370.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112100823370.png]]
 
 Dato un insieme di parole di contesto, vogliamo predire la parola target. Per fare ciò, addestriamo una rete neurale con un solo layer nascosto, la cui dimensione è molto minore del vocabolario ($v$). I parametri della rete vengono ottimizzati tramite la discesa del gradiente stocastica.
 
@@ -285,7 +285,7 @@ Ricordiamo che $O$ rappresenta tutti i parametri del modello, in un unico lungo 
 
 Nel nostro caso, con vettori di dimensione $d$ e $V$ parole, abbiamo:
 
-![[8) NLP-20241112100203656.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112100203656.png]]
 
 Ricordiamo che ogni parola ha due vettori:
 
@@ -336,15 +336,15 @@ Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un
 
 ## Esempio in CBOW
 
-![[8) NLP-20241112101025711.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101025711.png]]
 
-![[8) NLP-20241112101035268.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101035268.png]]
 
 specifichiamo il one hot, abbiamo l'outoput layer con la parola da predire
 dobbiamo apprendere i pesi di collegamento tra input e outout (sull hiddenb layer)
 
 cbow fa una media tra i vettori tra le parole di contesto
-![[8) NLP-20241112101140496.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101140496.png]]
 
 Dato un contesto di parole, ad esempio "cat" e "on", l'obiettivo è predire la parola centrale "sat".
 
@@ -585,7 +585,7 @@ L'errore è valutato come la differenza tra la co-occorrenza reale e la co-occor
 L'idea è quella di catturare le proprietà tra i rapporti di co-occorrenza. 
 
 
-![[8) NLP-20241112111853927.png|582]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112111853927.png|582]]
 
 Consideriamo tre parole: $i$, $j$ e $k$, dove $k$ è una parola di confronto utilizzata per il confronto. Ad esempio, se $k$ è "solid", possiamo valutare il rapporto tra la probabilità di $k$ dato $i$ ("ice") e la probabilità di $k$ dato $j$ ("steam").
 

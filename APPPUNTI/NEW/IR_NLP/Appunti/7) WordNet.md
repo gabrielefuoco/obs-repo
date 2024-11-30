@@ -369,7 +369,7 @@ Esistono due metodi principali per accedere agli entailment di un verbo:
 **Esempio:** "Comprare" (Jackendoff 1983): 
 
 
-![[8)-20241107110336756.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110336756.png]]
 
 ## Postulato di significato (Fodor)
 
@@ -402,7 +402,7 @@ Il significato di una parola è definito dalle relazioni con altre parole.
 
 **Esempio:**  buy è un troponimo di get
 
-![[8)-20241107110514312.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110514312.png]]
 
 ## Valutazione delle Relazioni Semantiche in WordNet
 
@@ -492,7 +492,7 @@ EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e
 **Relazioni di equivalenza:** I concetti di alto livello e i domini possono essere collegati con relazioni di equivalenza tra indici ILI e significati di una lingua specifica.
 
 
-![[8)-20241107110457034.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110457034.png]]
 
 ## MultiWordNet
 
@@ -530,7 +530,7 @@ Le risorse utilizzate per la creazione di WordNet italiano v1.4 includono:
 ### Gruppi di traduzione (TGR)
 
 I gruppi di traduzione (TGR) rappresentano diversi significati tradotti in entrambe le lingue.
-![[8)-20241111151711463.png|593]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241111151711463.png|593]]
 * Parte inglese: 40.959 parole, 60.901 TGR
 * Parte italiana: 32.602 parole, 46.545 TGR
 
@@ -547,5 +547,5 @@ La selezione dei synset "migliori" avviene attraverso i seguenti passaggi:
     * Intersezione tra synset
 3. Seleziona i synset "migliori". 
 
-![[8)-20241111151924702.png]]
-![[8)-20241111152109055.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241111151924702.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241111152109055.png]]

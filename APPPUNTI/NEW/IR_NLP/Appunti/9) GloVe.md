@@ -40,14 +40,14 @@ Relativamente alla valutazione generale in NLP: **intrinseca vs. estrinseca**
 ## Analogie di vettori di parole
 
 **uomo:donna :: re:?**
-![[9)-20241114093845201.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114093845201.png]]
 un termine sta ad un altro come un terzo termine c(probe) sta a un termine d
 
 Valutare i vettori di parole in base a quanto bene la loro distanza coseno dopo l'addizione cattura domande intuitive di analogia semantica e sintattica.
 
 vogliamo massimizzare la differenza tra l'addizione b a c e confrontarlo con un candidato i e normalizzare 
 
-![[9)-20241114093852413.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114093852413.png]]
 
 Se faccio king-man otterrei lo stesso risulato di fare queen-woman
 **Escludere le parole di input dalla ricerca**
@@ -57,12 +57,12 @@ Se faccio king-man otterrei lo stesso risulato di fare queen-woman
 ### Similarità del significato
 
 Questi metodi vengono valutati confrontando il risultato della prossimità nello spazio della rappresentazione con alcuni riferimenti.
-![[9)-20241114101143315.png]]
-![[9)-20241114101307393.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114101143315.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114101307393.png]]
 GloVe performa meglio degli altri modelli, anche di CBOW che ha dimensionalità doppia.
 
 **Valutazione dei modelli su determinati task:**
-![[9)-20241114101431436.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114101431436.png]]
 
 ## La polisemia delle parole
 
@@ -82,20 +82,6 @@ Un singolo vettore riesce a catturare tutti questi significati o abbiamo un past
 Contesto globale e contesto locale delle parole per catturare tutti i significati. Per ogni parola, eseguire un clustering K-means per clusterizzare i contesti di occorrenza. rappresentazione densa attraverso compressione matrice LSA e questo diventa input del k-means. 
 Costruiamo questi cluster di vettori di contesto e all iterazione successiva li utilizziamo per aggiornare i pesi. Invece di avere un unico vettore di embeddings per parola, ne abbiamo tanti quanti sono i contesti della parola
 
-
-### Linear Algebraic Structure of Word Senses, with Applications to Polysemy [NO]
-
-Different senses of a word reside in a linear superposition (weighted
-sum) in standard word embeddings like word2vec
-$v_{pike}=\alpha_{1}v_{pike_{1}}+\alpha_{2}v_{pike_{2}}+\alpha_{3}v_{pike_{3}}$
-dove
-$\alpha_{i}=\frac{f_{1}}{f_{1}+f_{2}+f_{3}}$ per ogmi frequenza f
-
-Surprising result:
-• Because of ideas from sparse coding you can actually separate out
-the senses (providing they are relatively common)!
-
-
 ## Named Entity Recognition
 Il task è trovare e classificare nomi nei testi, etichettando toker di parole
 categorie lessicali. è importante fare alcuni step di pre processing: Come trattiamo le compound word e gli acronimi (sigle) 
@@ -105,7 +91,7 @@ si risolve con classificazione binaria
 addestriamo un classificatore logistico su dati annotati (ci serve la y) per poter classificare una parola centrale per ogni classe (entity type)
 potremmo anche trattare il problema come classificazione multiclasse
 esempio:
-![[9)-20241114113859881.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114113859881.png]]
 nel caso binario: decisa una dimensione di contesto(nell'esempio 2), per la parola target (nell'esempio Paris), si costruisce il vettore x_{windows} con associata la classe Paris
 
 potremmo servircene per risolvere altri problemi (Ad esempio sentyment analisys)
@@ -117,19 +103,19 @@ or equivalently we can minimize the negative log probability of that class
 Now restated in terms of cross entropv
 Let the true probability distribution be p; Iet our computed model probability be q
 
-![[9)-20241114105648796.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114105648796.png]]
 in questo caso y può assumere uno dei valori di c.
 la funzione di costo è binary cross entropy: i valori che può assumere y sono {0,1}. per ogni input abbiamo quindi solo 1 dei due termini attivati. 
 
 
-![[9)-20241114110129948.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110129948.png]]
 
 softmax in questo caso ègeneralizzazione del regressore logistico a più classi
 La predizione, dato x di y, è una funzione softmax in cui vogliamo massimizzare l'allineamento dell'iostanza x con la matrice dei pesi per la predizione della classe y e poi normalizziamo per la somma sulle varie classi per avere un valore pari a 1
 w è parte di $\theta$ 
 una classificazione di rete neurale apprende sia la rappresentazione delle parole sia la matrice dei pesi che è ciò che guida il classificatore softmax
 
-![[9)-20241114110412410.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110412410.png]]
 per ogni esempio di training, massimizzare la probabilità della classe y o minimizzare la negative log likehood di quella stessa classe
 
 
@@ -137,8 +123,8 @@ per ogni esempio di training, massimizzare la probabilità della classe y o mini
 
 è un regressore logistico, dati input x utilizziamo una funzione di trasformazione (di attivazione) sigmoide. gli input x sono trasformati in accordo ai parametri da apprednere (pesi che regolano la pendenza della superficie di boundary e la sua traslazione nello spazio (bias))
 
-![[9)-20241114110524210.png]]
-![[9)-20241114110636182.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110524210.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110636182.png]]
 abbiamo input (istanza di training che data una parola centrale di lunghezza contesto più 1), trasformazione in accordo a una funzione f per riconoscere non linearità (sigmoide, logistica, tangente iperbolica, ReLU o altre). il risultato è indicato con h
 poi si allinea la trasformazione con il vettore su cui viene calcolata la logistica per il calcolo delle probabilità 
 
@@ -151,7 +137,7 @@ più pronda è la rete maggiore è l'abilità del modello di catturare non linea
 layer più vicini all'input riescono a catturare relazioni non lineari a livello sintattico tra le parole (determinato da un focus relativo al contesto)
 quando ci allonaniamo dall input catturiamo relazioni non lineari tra contesti, dunque allondanandoci dal target catturiamo relazioni semantiche tra una parola e altre distanti dal contesto
 
-![[9)-20241114111604129.png|542]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114111604129.png|542]]
 
 REgolarizzazione
 legata alla complessità del modello.  vogliamo evitare overfitting
@@ -166,7 +152,7 @@ nota: utilizzare trasformazioni matriciali
 
 
 inizializzazione dei paramtri:
-![[9)-20241114112627802.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114112627802.png]]
 inizializzazione di xavier: come alternativa all inizializzazione dei param da una distribuzione uniforme su range troppo piccoli per favorire medie intorno allo 0.
 ha una varianza proporzionale al fan-in(numero di neuroni del layer precedente) e al fan-out(numero di neuroni del layer successivo)
 $$var(W_{i})=\frac{2}{n_{in}+n_{out}}$$

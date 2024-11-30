@@ -14,7 +14,7 @@ LDA può essere utilizzato per modellare, oltre ai topic, anche un profilo di au
 
 Si sfrutta una proprietà importante: **coniugate prior tra le distribuzioni** (tra Dirichlet e polinomiale).
 
-![[5)-20241031095017801.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/5)-20241031095017801.png]]
 $\alpha$ e $\eta$  sono parametri di dispersione che influenzano la distribuzione di probabilità sui topic e sulle parole. $\alpha$ controlla la dispersione della distribuzione di probabilità sui topic, mentre $\eta$ controlla la dispersione della distribuzione di probabilità sulle parole.
 
 Ciò che importa è mantenere la differenza in ordine di grandezza, con l'obiettivo di essere più inclusivi nel modellare la distribuzione di probabilità per topic (grana fine nel modellare ogni topic), e meno dispersivi per modellare la distribuzione di probabilità sui topic per ogni documento (assumiamo che ogni documento contenga dati caratteristici di pochi topic). 
@@ -59,7 +59,7 @@ Per catturare la struttura dei micro-topic, si può utilizzare l'overclustering,
 L'obiettivo di questo lavoro è di integrare la segmentazione del testo nei topic model, creando un modello a grana più fine che tenga conto della variabile dei segmenti. 
 
 
-![[5)-20241031100023606.png|394]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/5)-20241031100023606.png|394]]
 
 Questa immagine rappresenta una rete probabilistica, spesso usata nei modelli di generazione del linguaggio, in cui:
 - **D** rappresenta i documenti,

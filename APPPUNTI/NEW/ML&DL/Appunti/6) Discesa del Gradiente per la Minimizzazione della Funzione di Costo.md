@@ -91,6 +91,7 @@ $$\begin{aligned}
 &= \frac{1}{2} \cdot 2(\langle \vec{w}, \vec{x}\rangle-y)\vec{x} 
 \end{aligned}$$
 
+
 ## GD+ Linear Regression
 
 
@@ -114,11 +115,13 @@ $$\frac{1}{m} \sum_{i=1}^m l(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))$$
 Il problema principale della discesa del gradiente standard è che il calcolo del gradiente richiede di visitare tutti gli esempi di training, il che può essere molto lento per dataset di grandi dimensioni.
 
 SGD risolve questo problema utilizzando un sottoinsieme casuale degli esempi di training per calcolare il gradiente ad ogni iterazione. Questo approccio riduce significativamente il tempo di calcolo, soprattutto per dataset di grandi dimensioni.
+
 ## Discesa stocastica del gradiente
 
 Invece di utilizzare il gradiente calcolato su tutto il dataset come direzione di discesa, la SGD utilizza un vettore il cui **valore atteso** coincide con il valore atteso del gradiente. Questo vettore direzione è una variabile casuale che punta in media nella direzione del gradiente "vero".
 $$E[\vec{V}_{t}]=\nabla_{\vec{w}}f(\vec{w}^{(t)})$$
 Durante l'ottimizzazione, la SGD si muove in una direzione che, in ogni singola iterazione, potrebbe non essere quella di massima discesa. Questo significa che potremmo non muoverci esattamente nella direzione del gradiente, ma in modo casuale, e potremmo anche "salire" un pochino nella funzione di costo. Tuttavia, poiché il valore atteso del vettore direzione coincide con il gradiente, in media ci sposteremo verso il minimo.
+
 ### Vettore direzione
 
 Il vettore direzione si ottiene calcolando il gradiente della funzione di costo in un **campione casuale** della popolazione. In pratica, questo significa selezionare casualmente una coppia (x,y) dal dataset e calcolare il gradiente in quel punto.
@@ -151,7 +154,7 @@ $$\begin{align*}
 \end{align*}$$
 ### Grafico
 La funzione ora è convessa, dunque ho delle curve di livello.
-![[6)-20241021161630266.png]]
+![[6)-20241021161630266.png|612]]
 
 Un grafico qualitativo della SGD mostra che la traiettoria non è dritta verso il minimo, ma va a zig-zag. La discesa del gradiente standard, invece, ha una traiettoria dritta verso il minimo.
 Chiaramente si puo rallentare la convergenza poichè si fanno piu passi.
@@ -227,7 +230,6 @@ $$l_{hinge}(\vec{w},(\vec{x},y))=\max \{ 0,1-y_{i}<\vec{w},\vec{x_{i}}> \}$$
 
 #### Applicazione ai Semispazi
 Nel caso dei semispazi, la loss 0-1 porta ad un problema di ottimizzazione NP-hard, quindi intrattabile in pratica. Utilizzando la hinge loss come surrogata, possiamo invece risolvere un problema di ottimizzazione convesso, quindi trattabile in modo efficiente.
-
 
 ## Funzioni di Lipschitz
 
