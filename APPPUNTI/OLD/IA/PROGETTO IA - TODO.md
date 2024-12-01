@@ -1,0 +1,6 @@
+- **Installare la Virtual-Machine**
+	- https://drive.google.com/file/d/1vLDJ6FjVWOnu6-LQrjoa7vzptlK1W1L7/view?usp=sharing
+- **Runnare il progetto:**
+	- **Comandi:**
+	- boh
+	- 

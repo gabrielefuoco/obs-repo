@@ -12,11 +12,6 @@ Ecco i passaggi effettuati nel progetto, presentati come una lista con una breve
 
 6. **Ottimizzare il modello:** Valutare il modello utilizzando la cross-validation e confrontare le sue prestazioni con altri modelli come DecisionTreeRegressor e RandomForestRegressor.  Utilizzare GridSearchCV o RandomizedSearchCV per trovare la migliore combinazione di iperparametri per il modello selezionato (RandomForestRegressor in questo caso).  Analizzare l'importanza delle caratteristiche per migliorare ulteriormente il modello.
 
-7. **Presentare la soluzione:**  (Non esplicitamente mostrato nel codice fornito, ma implicito).  Questo passaggio includerebbe la presentazione dei risultati, la visualizzazione delle prestazioni del modello e la discussione delle intuizioni ottenute.
-
-8. **Avviare, monitorare e mantenere il sistema:** (Non mostrato nel codice fornito). Questo passaggio riguarderebbe la distribuzione del modello, il monitoraggio delle sue prestazioni nel tempo e l'aggiornamento del modello se necessario.  Include anche il salvataggio del modello addestrato utilizzando joblib.
-
-Il codice include anche materiale extra che esplora ulteriormente l'ottimizzazione del modello con SVR, RandomizedSearchCV, la selezione delle caratteristiche e la creazione di una pipeline completa che include la preparazione, la selezione delle caratteristiche e l'addestramento del modello.
 
 
 ---

@@ -1,27 +1,48 @@
-# CALENDARIO ESAMI
+# CALENDARIO **ESAMI**
 
-- Intelligenza Artificiale
-	- Data: Gennaio 2025
-- Data Mining
-	- Data: Gennaio 2025
-- Computer Vision
-	- Data: Febbraio 2025
-- IR & NPL
-	- Data: Marzo 2025
+| Materia                    | Gennaio 2025 | Febbraio 2025 | Marzo 2025 |
+| -------------------------- | ------------ | ------------- | ---------- |
+| *Intelligenza Artificiale* | X            |               |            |
+| *Data Mining*              | X            |               |            |
+| *Computer Vision*          | 17/01        | **19/02**     |            |
+| *IR & NPL*                 |              |               | X          |
 
-# CALENDARIO STUDIO
+# CALENDARIO **STUDIO**
 
 ## Data Mining
 
-**Pagine: 114- 16 al giorno**
-28/11) Pagine studiate:
+**Progetto:** Gennaio
+- [[PROGETTO DM - TODO]]
+
+**Orale:** Gennaio
+
+**Pagine: 114 - 16 al giorno**
+
 
 ## Intelligenza Artificiale
 
-**Pagine: 103- 16 al giorno**
+**Progetto:** Gennaio
+- [[PROGETTO IA - TODO]]
+
+**Orale:** Gennaio
+
+**Pagine: 103 - 16 al giorno**
+
 
 ## Computer Vision
-**Appello:** 19/02 – 9:00 – Studio Docente
-- Consegna entro «4gg prima dell’esame». Domenica 16 ore 20
+
+**Progetto:**
+- [[PROGETTO CV- TODO]]
+
+**Appello:** *17/01 – 9:00* – Studio Docente
+- *Consegna*: Lunedì 13 ore 12
+
+**Appello:** *19/02 – 9:00* – Studio Docente
+- *Consegna*: Domenica 16 ore 20
 
 ## IR & NPL
+
+**Progetto:** Febbraio
+- [[PROGETTO IR - TODO]]
+
+**Orale:** Marzo
