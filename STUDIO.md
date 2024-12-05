@@ -7,7 +7,7 @@
 | *Computer Vision*          | 17/01        | **19/02**     |            |
 | *IR & NPL*                 |              |               | X          |
 
-# CALENDARIO **STUDIO**
+
 
 ## Data Mining
 

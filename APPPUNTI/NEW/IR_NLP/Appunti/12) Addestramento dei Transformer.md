@@ -276,3 +276,74 @@ Queste tecniche non modificano l'architettura del modello pre-addestrato.  Agisc
 **Vantaggio:**  Ogni elemento di un batch durante l'inferenza potrebbe utilizzare un modello finetuned in modo diverso.
 
 ![[12) Addestramento dei Transformer-20241126103509506.png|491]]
+
+
+## Pretraining di Encoder-Decoder
+
+Per gli encoder-decoder, possiamo fare qualcosa di simile al language modelling, ma dove un prefisso di ogni input è fornito all'encoder e non è predetto
+$$h_{1},\dots,h_{r}=\text{Encoder}(w_{1},\dots,w_{r})$$
+$$h_{r+1},\dots,h_{r}=\text{Decoder}(w_{1},\dots,w_{t}),h_{1},\dots,h_{r}$$
+$$y_{i}\approx Ah_{i}+b,i>T$$
+La porzione di encoder beneficia di un contesto bidirezionale, mentre la porzione di decoder è usata per allenare l'intero modello.
+
+Le architetture encoder-decoder vengono pre-trainate utilizzando un approccio che generalizza l'idea del **masked language modeling** di BERT.  Questo approccio si basa su tecniche di *denoising* e *span corruption*.  Invece di mascherare semplicemente token individuali, si mascherano *span* di testo, generalizzando il processo di mascheramento.  L'obiettivo del pre-training diventa un task di generazione di testo, incluso il ripristino degli *span* mascherati.
+
+Viene introdotto il concetto di **token sentinella**.  Ogni *span* mascherato viene sostituito non con un generico token `<MASK>`, ma con un token sentinella unico, identificato da un ID specifico.  Il target del pre-training consiste nell'associare a ciascun token sentinella il suo *bound*, ovvero nel predire il testo corretto per riempire lo *span* mascherato.
+
+
+### Modello T5
+
+T5 (Text-to-Text Transfer Transformer) rappresenta un modello di riferimento per le architetture encoder-decoder.  
+Il metodo di addestramento di T5 permette al trasformer di apprendere molteplici task contemporaneamente.  Questo approccio, chiamato **instruction training**, è fondamentale per la generazione del linguaggio.
+
+L'instruction training consiste nel fornire al modello esempi di diversi task, formulati come problemi di testo-a-testo.  Ogni modello che deve svolgere attività di text-to-text necessita di questo tipo di addestramento per imparare a riconoscere e risolvere esempi corrispondenti a task indipendenti.
+
+Il singolo token sentinella viene ricostruito non in ottica di masked language modelling, ma viene visto come una sequenza di testo(quindi come un problema di Text-To-Text).
+Ogni maschera ha una sua identità particolare, senza essere ancorato a una specifica posizione del testo.
+
+## Generative Pre-trained Transformer (GPT)
+
+Essendo un modello *decoder-only*, GPT è stato progettato per diversi task di generazione del testo.
+
+* **Architettura:** Decoder Transformer con 12 layer (come BERT), 117 milioni di parametri. Stati nascosti a 768 dimensioni e layer feed-forward nascosti a 3072 dimensioni.
+* **Tokenizzazione:** Codifica Byte-Pair con 40.000 merges.
+* **Dataset:** Addestrato su BooksCorpus: un corpus contenente oltre 7000 libri unici.  La presenza di lunghi span di testo contiguo ha permesso di apprendere dipendenze a lunga distanza.
+
+ Tra i benchmark utilizzati per la valutazione del modello c'è la *Natural Language Inference* (NLI).  Questo benchmark permette di addestrare modelli per il task di *entailment*, fornendo in input coppie di frasi etichettate con una delle tre seguenti classi: Entailment (conseguenza logica), Contraddittorio, Neutrale.
+
+L'**input** al decoder è formattato come una sequenza di token. È presente un token di inizio frase e un token di inizio per il decoder, che funge anche da fine frase per il primo token.
+
+### GPT-2
+
+* **Architettura:** Decoder Transformer.
+* **Dimensione del dataset di addestramento:** 40 GB di testo.
+* **Numero di parametri:** 1.5 miliardi.
+
+Una novità significativa di GPT-2 è l'emergere di capacità di *zero-shot learning*.
+
+
+### Zero-shot Learning
+
+Lo *zero-shot learning* è la capacità di un modello di eseguire diversi task senza aver mai visto esempi positivi per quei task durante l'addestramento. Questa abilità emerge senza la necessità di aggiornamenti del gradiente durante l'inferenza (fase di utilizzo del modello).  Si rivela particolarmente utile per diversi problemi di tipo text-to-text, come la risposta a domande.
+
+La possibilità di sfruttare lo *zero-shot learning* offre un'alternativa al fine-tuning, particolarmente vantaggiosa in due scenari:
+
+* **Limitazione dei dati:** quando la quantità di dati disponibili per un determinato task è insufficiente per un efficace fine-tuning.
+* **Definizione del contesto:** quando è difficile definire con precisione il contesto appropriato per un determinato task.
+
+In questi casi, invece di effettuare il fine-tuning, si può intervenire direttamente sul *prompt* (l'input iniziale) per guidare la generazione della risposta desiderata.
+
+### GPT-3
+
+GPT-3 rappresenta un significativo aumento di scala sia per le dimensioni del modello che per la quantità di dati utilizzati durante l'addestramento:
+
+* **Parametri:** 175 miliardi.
+* **Dati:** Da 40 GB a oltre 600 GB.
+
+L'aumento di scala ha portato all'emergere di una nuova capacità: il *few-shot learning*.
+
+### Few-shot Learning (In-context Learning)
+
+Il *few-shot learning*, o *in-context learning*, consiste nel fornire esempi all'interno del contesto dell'input (o prompt).  Questi esempi permettono al modello di comprendere il tipo di task che deve eseguire.
+
+Le prestazioni del modello migliorano all'aumentare del numero di esempi nel contesto.  Si osserva tuttavia un rendimento decrescente (*diminishing returns*) a partire da 3-4 esempi.

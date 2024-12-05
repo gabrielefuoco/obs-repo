@@ -18,7 +18,7 @@ Fornisci una spiegazione dettagliata e chiara dei concetti evidenziati nel testo
 - Evita di aggiungere sezioni di contorno, sintesi extra o commenti generici. Ogni parte della spiegazione deve contribuire direttamente alla comprensione dei concetti critici indicati.
 
 
- **Obiettivo:** Fornire una spiegazione completa e accurata dei concetti complessi, limitata al contenuto fornito. Loutput finale deve essere limitato alla spiegazione del testo evidenziato, senza aggiungere nessuna sezione extra
+ **Obiettivo:** Fornire una spiegazione completa e accurata dei concetti complessi, limitata al contenuto fornito. L'output finale deve essere limitato alla spiegazione del testo evidenziato, senza aggiungere nessuna sezione extra
 
 **Nota contestuale:** 
 {activeNote}
