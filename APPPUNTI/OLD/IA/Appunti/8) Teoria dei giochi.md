@@ -74,6 +74,8 @@ La teoria dei Giochi modella situazioni in cui agenti (umani o artificiali) inte
 Un ulteriore concetto è il **Mechanism design**: Progettare le regole del gioco per massimizzare i propri obiettivi. Esempio: aste.
 
 ## Giochi Coalizionali
+
+![[Giochi colazionali.excalidraw]]
 Sono giochi cooperativi dove gli agenti (giocatori) cooperano per ottenere benefici comuni, detti **worth**, in base alla coalizione di cui fanno parte. Gli agenti possono essere persone, aziende, partiti politici, ecc.
 
 **Obiettivo**:  
@@ -200,6 +202,7 @@ Tuttavia, questo non è possibile nel contesto del problema, poiché la ricchezz
 
 ## Core di un Gioco Coalizionale
 
+![[Core.excalidraw]]
 Il **core** è un concetto fondamentale nella teoria dei giochi coalizionali e rappresenta l'insieme delle distribuzioni (o imputazioni) della **ricchezza** tra i giocatori che sono **stabili**, ovvero tali che nessuna coalizione abbia incentivi a "rompere" l'accordo e formare una coalizione separata.
 
 #### Definizione Formale
@@ -250,6 +253,7 @@ In altre parole, un'imputazione è definita additiva se la soluzione per due gio
 
 ## Shapley Value
 
+![[Shapley Value]]
 Lo **Shapley Value** è una soluzione importante nella teoria dei giochi coalizionali, che assegna a ogni giocatore una quota della ricchezza totale, basata sui suoi **contributi marginali** a tutte le possibili coalizioni. Viene considerato una soluzione **meritocratica**, poiché si basa su quanto un giocatore contribuisce a una coalizione rispetto a quanto la coalizione ottiene senza di lui.
 - Lo Shapley Value è l'unica **pre-imputazione** (una distribuzione che non deve necessariamente rispettare la razionalità individuale) che soddisfa le 3 proprietà elencate prima.
 - Lo Shapley Value esiste **sempre** in qualsiasi gioco, anche se non sempre rispetta le condizioni di razionalità individuale.
@@ -275,7 +279,7 @@ Lo shapley value puo essere interpretato come una **media pesata** dei contribut
 Immaginiamo tre giocatori A, B, e C. Se A, B, e C formano coalizioni diverse, lo Shapley Value di un giocatore è la media dei suoi contributi marginali calcolati su tutte le coalizioni possibili. Per esempio, se aggiungere   A  a una coalizione   S  aumenta la worth di   S , il contributo marginale di   A  in quella coalizione sarà  $v(S ∪ \{A\}) - v(S)$ 
 
 ## Nucleolo in un gioco coalizionale
-
+![[8) Teoria dei giochi 2024-12-16 16.26.00.excalidraw]]
 Il **nucleolo** è un concetto di soluzione per i giochi coalizionali, che si concentra sulla riduzione dell'insoddisfazione massima tra i giocatori. L'idea alla base del nucleolo è quella di minimizzare l'insoddisfazione, o **eccesso** (excess), delle coalizioni in modo gerarchico: prima si riduce l'insoddisfazione massima, poi quella successiva e così via, fino ad ottenere una distribuzione delle risorse più equa e stabile possibile.
 
 #### Definizione
@@ -353,6 +357,7 @@ La **Contested Garment Rule** è un criterio per dividere un'eredità tra due cr
 Questa regola combina linearmente il criterio di divisione eguale dei guadagni e delle perdite. È stato dimostrato che esiste una sola divisione dell'eredità che segue questa regola e che tale divisione corrisponde esattamente al nucleolo del gioco associato, dove ogni coalizione pretende il massimo tra 0 e ciò che le è concesso da chi non fa parte della coalizione.
 
 ## Aste e Mechanism Design
+![[8) Teoria dei giochi 2024-12-16 16.31.29.excalidraw]]
 Si occupano di stabilire regole per le aste in modo da incentivare comportamenti strategici da parte degli agenti. Esistono due principali categorie di aste:
 
 1. **Single good**: offerte su un unico oggetto.
@@ -485,17 +490,17 @@ I  Prigioniero 1 subisce una pena più severa (-4) mentre il Prigioniero 2 ricev
 - **Risultato**: L’equilibrio di Nash si verifica quando entrambi i giocatori scelgono di confessare, poiché nessuno ha incentivo a deviare dalla propria scelta data la scelta dell’altro.
 
 # Equilibrio di Nash
-
+![[8) Teoria dei giochi 2024-12-16 16.39.30.excalidraw]]
 #### Definizione Formale di Gioco Strategico
 1. **Giocatori**: Un insieme di $N$ giocatori.
 2. **Azioni/Strategie**:
 	- Per ogni giocatore $i \in N$, esiste un insieme di azioni ammissibili $S_i$.
 	- Le azioni di ciascun giocatore sono indicate con $s_i$.
-1. **Profili di Azione**:
+3. **Profili di Azione**:
 	- L'insieme dei profili di azione è $S = \times_{j \in N} \ S_j = S_1 \times \cdots \times S_N$.
 		- $S$ rappresenta il prodotto cartesiano delle azioni ammissibili.
 	- Un **profilo di azione** è una combinazione delle azioni scelte da tutti i giocatori, rappresentato come una $N$-upla di azioni ammissibili $(s_1, ..., s_N)$.
-1. **Utilità**:
+4. **Utilità**:
 	- Per ogni giocatore $i \in N$, esiste una funzione di utilità $u_i : S \rightarrow \mathbb{R}$ che assegna un valore reale a ciascun profilo di azione.
 
 #### Definizione di Equilibrio di Nash
@@ -505,7 +510,7 @@ u_i(S^*) \geq u_i(s_i, S^*_{-i}) \quad \forall i \in N, \quad \forall s_i \in S_
 $$
 dove $S^*_{-i}$ rappresenta le scelte degli altri giocatori. In altre parole, dato un profilo di azione $S^*$, nessun giocatore può migliorare la propria utilità cambiando unilateralmente la propria azione, dato che le azioni degli altri giocatori rimangono costanti.
 
-==Per ogni giocatore i, il valore reale del profilo d'azione S* è minore o uguale del valore reale del profilo d'azione che rappresenta le scelte degli altri giocatori. ==
+==Per ogni giocatore i, il valore reale del profilo d'azione S* è maggiore o uguale del valore reale del profilo d'azione che rappresenta le scelte degli altri giocatori. ==
 
 ## Esempio: Gioco dei Bach e Stravinsky
 Due persone devono decidere a quale concerto andare (Bach o Stravinsky). Le preferenze e i payoff sono i seguenti:
@@ -525,7 +530,7 @@ Due persone devono decidere a quale concerto andare (Bach o Stravinsky). Le pref
 - (Stravinsky, Stravinsky) è un altro equilibrio di Nash per lo stesso motivo.
 
 ## Funzione di Best Response
-
+![[8) Teoria dei giochi 2024-12-16 16.44.00.excalidraw]]
 La funzione di best response per un giocatore $i$ dato un profilo di azioni degli altri giocatori $s_{-i}$ è:
 $$
 B_i(s_{-i}) = \{s_i \in S_i : u_i(s_i, s_{-i}) \geq u_i(s'_i, s_{-i}), \forall s'_i \in S_i\}
@@ -536,18 +541,9 @@ Un profilo di azione $s^*$ è un equilibrio di Nash se e solo se ogni azione $s^
 $$
 s^*_i \in B_i(s^*_{-i}) \quad \forall i \in N
 $$
-## Strategie Miste
-
-Una **strategia mista** è una distribuzione di probabilità sulle azioni che un giocatore può scegliere. In altre parole, ogni giocatore sceglie un’azione non in modo deterministico, ma con una certa probabilità.
-Questo approccio garantisce sempre l’esistenza di un equilibrio di Nash, anche in giochi complessi con strategie non deterministiche.
-
-**Motivazione**:
-- In molti giochi, le scelte possono non portare a risultati certi (sono stocastiche). Invece di optare per una scelta deterministica,i giocatori possono decidere di mescolare le loro scelte per massimizzare l’utilità attesa, che è una misura dell'aspettativa dei risultati di tutte le azioni possibili.
-
-**Riassumendo**: Una strategia mista è quando un giocatore sceglie le sue azioni assegnando *probabilità* a ciascuna di esse.
 
 ### Utilità Attesa:
-
+![[8) Teoria dei giochi 2024-12-17 10.39.40.excalidraw]]
 L’utilità attesa di una lotteria è calcolata come:
 $$
 U(p) = \sum_{z \in Z} p(z) \cdot v(z)
@@ -556,6 +552,15 @@ $$
  
 - La funzione di utilità di Von Neumann-Morgenstern $v(\cdot)$ rappresenta le preferenze sui premi di una lotteria.
  - Questa funzione rappresenta le preferenze dei giocatori in termini di utilità attesa e soddisfa gli assiomi di indipendenza e continuità, garantendo valori unici e consistenti per rappresentare le preferenze tra diverse lotterie.
+### Strategie Miste
+
+Una **strategia mista** è una distribuzione di probabilità sulle azioni che un giocatore può scegliere. In altre parole, ogni giocatore sceglie un’azione non in modo deterministico, ma con una certa probabilità.
+Questo approccio garantisce sempre l’esistenza di un equilibrio di Nash, anche in giochi complessi con strategie non deterministiche.
+
+**Motivazione**:
+- In molti giochi, le scelte possono non portare a risultati certi (sono stocastiche). Invece di optare per una scelta deterministica,i giocatori possono decidere di mescolare le loro scelte per massimizzare l’utilità attesa, che è una misura dell'aspettativa dei risultati di tutte le azioni possibili.
+
+**Riassumendo**: Una strategia mista è quando un giocatore sceglie le sue azioni assegnando *probabilità* a ciascuna di esse.
 
 
 ### Utilità Attesa di una Strategia Mista:
@@ -582,7 +587,7 @@ Dove $\sigma'_i$ è qualsiasi strategia mista alternativa per il giocatore $i$.
 
 
 # Teorema di Nash:
-
+![[8) Teoria dei giochi 2024-12-17 10.53.29.excalidraw]]
 Il **Teorema di Nash** afferma che in ogni *gioco non cooperativo* con un numero finito di giocatori e un numero finito di strategie pure, esiste almeno un equilibrio di Nash in strategie miste. Questo equilibrio ha due proprietà fondamentali:
 * Garantisce l'esistenza di un equilibrio anche quando non esiste un equilibrio in strategie pure. 
 * In questo equilibrio, tutte le azioni che hanno una probabilità positiva nella strategia mista di un giocatore sono le migliori risposte alle strategie degli altri giocatori.
@@ -683,6 +688,7 @@ Dove $B(σ^*_{-i})$ è l'insieme delle best response alle strategie degli altri 
 - **Informazione incompleta**: Non sai cosa sceglierà l'avversario e viceversa.
 
 ## Giochi in forma estesa
+![[8) Teoria dei giochi 2024-12-17 10.59.47.excalidraw]]
 I giochi in forma estesa rappresentano situazioni in cui i giocatori prendono decisioni in momenti diversi, considerando cosa è successo in passato. Questa rappresentazione si basa su un **game tree,** una struttura che mostra i nodi di decisione (dove un giocatore sceglie un'azione) e i nodi terminali (dove si determinano i risultati e le utilità).
 - **Modalità di gioco**: Giocati in sequenza, tenendo conto degli eventi passati.
 - **Informazione e Memoria**:

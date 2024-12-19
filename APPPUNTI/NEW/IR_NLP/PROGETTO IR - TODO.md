@@ -4,4 +4,4 @@
 
 - chain of tought su lettura immagini
 
-[[Sentiment Analisys + RAG]]
+[[Progetto IR&NLP]]

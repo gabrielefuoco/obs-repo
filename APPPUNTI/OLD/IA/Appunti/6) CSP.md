@@ -27,6 +27,7 @@
 | **Tree-width**                       | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero.                                                                                                |
 | **Teorema di Grohe**                 | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
 
+![[6) CSP 2024-12-17 12.09.35.excalidraw]]
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
 
 - Con una **rappresentazione esplicita**, i vincoli sono trattati come un database, dove per ogni vincolo si definisce un insieme di variabili e un insieme di valori validi. Ad esempio, se abbiamo tre vincoli $C1(WA,NT), C2(WA,SA), C3(NT,SA)$, questi rappresentano restrizioni sui valori ammissibili tra le variabili $WA, NT, SA$.
@@ -69,8 +70,10 @@ Un **omomorfismo** tra due strutture relazionali è una **mappatura** che preser
 Il problema consiste nel verificare se è possibile "trasferire" la struttura dei dati di un database a un altro in modo che le relazioni tra gli elementi siano mantenute.
 
 ## Core
+
 Il **core** di un CSP (Constraint Satisfaction Problem) è la *versione più semplice* e ridotta del problema originale, ottenuta attraverso un processo di semplificazione. 
-Immagina le variabili e le relazioni di un CSP come un database di fatti (tuple). Quando troviamo una struttura ridondante o relazioni tra variabili che possono essere "compresse", possiamo ridurre il numero di vincoli senza perdere informazioni importanti.
+
+Quando troviamo una struttura ridondante o relazioni tra variabili che possono essere "compresse", possiamo ridurre il numero di vincoli senza perdere informazioni importanti.
 
 Per esempio, se in un database ho le relazioni *a -> b* e *b -> d*, posso ridurre queste a *a -> d*, semplificando il problema. Se applico una mappatura (*endomorfismo*) che collega due variabili, posso ottenere un sottoproblema più piccolo e più semplice da risolvere.
 
@@ -98,7 +101,7 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
   
   - **Arc Consistency**: 
     - Verifica la consistenza di tutti i vincoli tra coppie di variabili.
-    - Un arco $x -> y$ è consistente se, per ogni valore di $x$, esiste un valore di $y$ che soddisfa il vincolo.
+    - Un arco $x \to y$ è consistente se, per ogni valore di $x$, esiste un valore di $y$ che soddisfa il vincolo.
     - Se un valore $x$ non ha un corrispondente $y$ valido, viene eliminato dal dominio di $x$.
 
 - **Propagazione**:
@@ -120,7 +123,7 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
   - Estensione della 2-consistency a k variabili.
   - Ogni assegnamento consistente a *k - 1* variabili può essere esteso alla *k-esima* variabile.
   - Utilizzato per risolvere problemi in maniera efficiente.
-  - **Costo computazionale:** O(n · d^k), dove *n* è il numero di variabili e *d* è la dimensione massima dei domini.
+  - **Costo computazionale:** $O(n · d^k)$, dove *n* è il numero di variabili e *d* è la dimensione massima dei domini.
   - Se *k* è fissato, il costo è polinomiale.
 
 ## Euristiche per la Risoluzione dei CSP
@@ -158,7 +161,8 @@ L'algoritmo di Yannakakis trasforma il problema su strutture acicliche in una se
 
 1. **Filtraggio verso l'alto**: 
    - Si parte da una relazione inferiore (chiamiamola **t**) e si verifica che tutte le tuple di una relazione superiore (chiamiamola **r**) siano compatibili con quelle di **t**.
-   - Se alcune tuple di **r** non sono compatibili con le tuple di **t**, vengono eliminate.
+   - Se alcune tuple di **r** non so
+   - no compatibili con le tuple di **t**, vengono eliminate.
    - Una volta fatto questo, si ripete lo stesso processo con la relazione successiva in basso, procedendo verso l’alto fino a completare il filtraggio.
 
 2. **Verifica dell'esistenza di una soluzione**: 
@@ -223,9 +227,9 @@ Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione d
 	
 ### Regole chiave:
 
-Sia **T** un **Join-Tree**, ovvero una struttura che connette questi iperarchi in modo che la propagazione delle variabili segua determinate regole:
+Un **Join-Tree T**, è una struttura che connette degli iperarchi in modo che la propagazione delle variabili segua determinate regole:
 
-1. Se due iperarchi p e q condividono delle variabili comuni, quelle variabili devono apparire in tutti i vertici lungo il percorso che connette p e q nell'albero T. Questo garantisce che le informazioni sulle variabili comuni si propaghino lungo l'albero in modo corretto.
+1. Se due iperarchi **p** e **q** condividono delle variabili comuni, quelle variabili devono apparire in tutti i vertici lungo il percorso che connette **p** e **q** nell'albero **T**. Questo garantisce che le informazioni sulle variabili comuni si propaghino lungo l'albero in modo corretto.
 2. Una variabile che scompare in un certo punto dell'albero non può più riapparire successivamente nel percorso: una volta che la sua informazione è stata utilizzata o propagata, non la si ritrova in altre parti.
 
 ## Ipergrafi Aciclici: 
@@ -277,7 +281,7 @@ Il **Teorema di Grohe** afferma che risolvere problemi CSP appartenenti a S è *
 - **Strutture relazionali**: Abbiamo una classe $S$ di strutture relazionali (insiemi di vincoli) con arità fissata (cioè ogni vincolo ha un numero fisso di variabili).
 - **CSP (S, -)**: Si riferisce a problemi CSP dove i vincoli appartengono a $S$, ma non c'è alcuna restrizione sul database (DB) che contiene le possibili assegnazioni dei valori.
 
-1. **Treewidth (tw)**: Misura la "complessità" ciclica di un grafo. Più piccola è la treewidth, più facile è risolvere il problema CSP associato a quel grafo. Se la treewidth è fissata, il problema si può risolvere in modo efficiente($≤ k$ -> tempo polinomiale).
+1. **Treewidth (tw)**: Misura la "complessità" ciclica di un grafo. Più piccola è la treewidth, più facile è risolvere il problema CSP associato a quel grafo. Se la treewidth è fissata, il problema si può risolvere in modo efficiente($≤ k \to \text{ tempo polinomiale}$ ).
 2. **Core**: È la parte "essenziale" di una struttura CSP, ovvero la versione semplificata del problema che mantiene la stessa soluzione ma con meno ridondanze.
 3. **Se la treewidth del core è limitata (≤ k)**: Vuol dire che la struttura è abbastanza semplice da essere risolta in tempo polinomiale.
 
