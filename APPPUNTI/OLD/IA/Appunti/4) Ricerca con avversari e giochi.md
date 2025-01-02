@@ -61,12 +61,13 @@ Anzitutto, con mossa si intende che entrambi i giocatori abbiano compiuto un'azi
 
 Il valore MiniMax di uno stato è l'utilità (per MAX) di trovarsi nello stato corrispondente, è calcolato ricorsivamente ed è definito come:
 
-```
-MiniMax(s) = 
-    se s è uno stato terminale allora utilità(s, MAX)
-    altrimenti max_{a ∈ A(s)} MiniMax(Successore(s, a)) se MAX deve muovere
-    altrimenti min_{a ∈ A(s)} MiniMax(Successore(s, a)) se MIN deve muovere
-```
+
+$MiniMax(s) =$ 
+    se s è uno stato terminale allora $utilità(s, MAX)$
+    altrimenti $max_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MAX deve muovere
+    altrimenti $min_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MIN deve muovere
+
+
 
 Ad esempio, consideriamo il seguente albero di gioco:
 

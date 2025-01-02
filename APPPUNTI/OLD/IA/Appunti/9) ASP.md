@@ -225,7 +225,7 @@ b :- not(c).
 - **Logica Monotona:**
   - Nuove informazioni **non influenzano** i modelli esistenti.
   - **Regole:** La negazione può essere interpretata come una disgiunzione.
-    - Esempio: `b :- not(c)` equivale a `b ∨ c :- true`.
+    - Esempio: `b :- not(c)` equivale a `b ∨ c :- true`. 
   - Modelli **fissi**: anche con nuova conoscenza, i modelli non cambiano.
   
 - **Logica Non Monotona:**
@@ -556,7 +556,7 @@ Se voglio contare il numero di impiegati maschili, posso utilizzare:
 Questo vincolo richiede che il numero di impiegati maschili sia compreso tra 5 e 10.
 
 ---
-#### Esempio di Aggregazione con #sum
+#### Esempio di Aggregazione con \#sum
 Supponiamo di avere una base di dati con le seguenti istanze:
 ```prolog
 emp(1, male, s1, 1000).

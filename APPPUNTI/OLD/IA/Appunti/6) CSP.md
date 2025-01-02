@@ -27,7 +27,7 @@
 | **Tree-width**                       | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero.                                                                                                |
 | **Teorema di Grohe**                 | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
 
-![[6) CSP 2024-12-17 12.09.35.excalidraw]]
+
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
 
 - Con una **rappresentazione esplicita**, i vincoli sono trattati come un database, dove per ogni vincolo si definisce un insieme di variabili e un insieme di valori validi. Ad esempio, se abbiamo tre vincoli $C1(WA,NT), C2(WA,SA), C3(NT,SA)$, questi rappresentano restrizioni sui valori ammissibili tra le variabili $WA, NT, SA$.
@@ -161,8 +161,7 @@ L'algoritmo di Yannakakis trasforma il problema su strutture acicliche in una se
 
 1. **Filtraggio verso l'alto**: 
    - Si parte da una relazione inferiore (chiamiamola **t**) e si verifica che tutte le tuple di una relazione superiore (chiamiamola **r**) siano compatibili con quelle di **t**.
-   - Se alcune tuple di **r** non so
-   - no compatibili con le tuple di **t**, vengono eliminate.
+   - Se alcune tuple di **r** non sono compatibili con le tuple di **t**, vengono eliminate.
    - Una volta fatto questo, si ripete lo stesso processo con la relazione successiva in basso, procedendo verso l’alto fino a completare il filtraggio.
 
 2. **Verifica dell'esistenza di una soluzione**: 
@@ -191,8 +190,7 @@ Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione d
 
 1. **Cut Set (Feedback Vertex Number)**: 
    - Il **Cut Set** è il numero minimo di nodi da rimuovere per rendere un grafo aciclico.
-   - Ad esempio, se abbiamo un grafo che rappresenta un CSP, possiamo scegliere di rimuovere un nodo per eliminare i cicli. 
-   
+
 2. **Risoluzione del problema aciclico**:
    - Una volta eliminato il nodo, si sceglie un valore specifico per quella variabile dal suo dominio.
 	   - Fissare un valore riduce la complessità perché il problema diventa meno "flessibile".
@@ -203,7 +201,7 @@ Il concetto di **Strutture quasi ad Albero di CSP** riguarda la trasformazione d
 3. **Costo computazionale**:
    - Nel caso peggiore, il costo di questa procedura dipende dal **dominio** della variabile rimossa, moltiplicato per il costo della risoluzione del problema aciclico risultante. 
    - Il costo è approssimato come:  
-     **dominio(SA) × costo del problema aciclico**.
+     **dominio(var) × costo del problema aciclico**.
    
    - Se il numero minimo di nodi da rimuovere è $c$, allora il problema può essere risolto con complessità:
     $$ 

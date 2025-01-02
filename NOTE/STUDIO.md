@@ -22,7 +22,7 @@
 ## Intelligenza Artificiale
 
 **Progetto:** Gennaio
-- [[PROGETTO IA - TODO]]
+- [[Relazione/PROGETTO IA - TODO]]
 
 **Orale:** Gennaio
 

@@ -1,3 +1,4 @@
+
 Sviluppo di un agente conversazionale in grado di analizzare contenuti politici provenienti da social network, integrando tecniche di Sentiment Analysis e Retrieval-Augmented Generation (RAG).
 
 Il sistema prevede diverse fasi:
@@ -15,19 +16,20 @@ Il sistema prevede diverse fasi:
     
     - **Catena Procedurale**: Questa catena si occupa di eseguire azioni specifiche, come l'interazione con strumenti esterni o l'elaborazione di task concreti, come l'analisi del sentiment o la selezione di post rilevanti. Ogni azione è definita per rispondere a una query o a una richiesta da parte dell'utente, ottimizzando la gestione del flusso di lavoro.
         
-    - **Catena di Memoria**: Questa catena è responsabile per il recupero e l'elaborazione dei contesti rilevanti dalle memorie dichiarative ed episodiche. La memoria dichiarativa contiene fatti generali o conoscenze di base, mentre la memoria episodica conserva informazioni specifiche basate su interazioni precedenti o esperienze passate. Se la catena procedurale non riesce a generare una risposta adeguata o se la query richiede una risposta basata su esperienze passate, la catena di memoria entra in gioco, attingendo dai contesti recuperati per costruire una risposta pertinente.
+    - **Catena di Memoria**: Questa catena è responsabile per il recupero e l'elaborazione dei contesti rilevanti dalle memorie dichiarative ed episodiche. La memoria dichiarativa contiene fatti generali o conoscenze di base, mentre la memoria episodica conserva informazioni specifiche basate su interazioni precedenti o esperienze passate. 
         
-    Il framework è pre-configurato per interagire anche con **Ollama** come backend, consentendo di eseguire i modelli di linguaggio localmente, senza la necessità di dipendere da server esterni, garantendo così una maggiore efficienza e privacy. 
-    
-    L'architettura complessiva del sistema segue un flusso di esecuzione ben definito: a partire dalla query dell'utente, il sistema cerca contesti rilevanti nelle diverse memorie. Se la memoria procedurale fornisce una risposta adeguata, questa viene utilizzata; se non è sufficiente, si attiva la catena di memoria per generare una risposta basata su conoscenze recuperate. Questo approccio consente al sistema di rispondere in modo dinamico e pertinente, attingendo a una varietà di fonti di informazioni.
-    
+    Il framework è pre-configurato per interagire anche con **Ollama** come backend, consentendo di eseguire i modelli di linguaggio localmente, senza la necessità di dipendere da server esterni.
+
     **Cheshire Cat AI** integra diverse funzionalità provenienti da **Langchain**, . Le principali funzionalità  utilizzate includono:
     
     1. **Gestione delle Chains**: Cheshire Cat adotta il concetto di *LLM chains* per combinare modelli linguistici e processi in pipeline, permettendo l'elaborazione sequenziale dei dati.
         
     2. **Agent Framework**: Incorporando l'architettura degli *agenti* di Langchain, Cheshire Cat consente agli agenti di prendere decisioni basate sul contesto su quale catena eseguire, migliorando la flessibilità nell'interazione.
         
-    3. **Memoria (Memory)**: Sia Langchain che Cheshire Cat utilizzano sistemi di memoria avanzati per mantenere il contesto delle conversazioni, con Langchain che supporta memorie vettoriali (vector memory) e Cheshire Cat che gestisce memorie procedurali, episodiche e dichiarative.
+    3. **Memoria (Memory)**: Sia Langchain che Cheshire Cat utilizzano sistemi di memoria avanzati per mantenere il contesto delle conversazioni, con Langchain che supporta memorie vettoriali (vector memory) e Cheshire Cat che gestisce memorie procedurali(funzioni python), episodiche(conversazioni passate dell'utente) e dichiarative(documenti caricati).
         
     4. **Integrazione con Modelli e Strumenti Esterni**: Cheshire Cat sfrutta le capacità di Langchain di integrare modelli di linguaggio e strumenti esterni come database vettoriali (Qdrant) e API REST. Inoltre, Langchain permette di integrare facilmente altre risorse esterne, rendendo il framework estremamente versatile.
         
+
+
+https://medium.com/@rslavanyageetha/vader-a-comprehensive-guide-to-sentiment-analysis-in-python-c4f1868b0d2e
