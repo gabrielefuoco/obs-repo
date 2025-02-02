@@ -63,7 +63,7 @@ Dato un training set, siamo interessati all'apprendimento dei parametri $w$ e $b
 
 2. **Iterazioni:**
     - Ripeti fino a quando l'errore medio sul training set non scende sotto una soglia $\gamma$:
-    - $\frac{\sum_{i=1}^n|y_{i}-f(\tilde{w}^{(k)},x_{i})|}{n}$
+$$\frac{\sum_{i=1}^n|y_{i}-f(\tilde{w}^{(k)},x_{i})|}{n}$$
         - **Per ogni esempio (x, y) nel training set:**
             - Calcola l'output stimato $f(\tilde{w}^{(k)},x_{i})$ con i pesi correnti.
             - **Per ogni peso $w_j$:**
@@ -178,15 +178,14 @@ $$gradino(x) = \begin{cases}
 ### Funzione sigmoidea:
 
 $$sigmoid(x) = \sigma(x) = \frac{1}{1 + e^{-x}}$$
-	![[5) Artificial Neural Network-20241004155837855.png|197]]
+![[5) Artificial Neural Network-20241004155837855.png|197]]
 - Si tratta di una funzione derivabile
 - Non è usata negli hidden layer della rete
 - Utile in caso di classificazione binaria
 ### Funzione tang. Iperbolica:
 
 $$tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
-
-	![[5) Artificial Neural Network-20241004155903346.png|218]]
+![[5) Artificial Neural Network-20241004155903346.png|218]]
 - Quando deriviamo abbiamo un update del peso più elevato rispetto alla funzione sigmoidea
 - I dati sono centrati verso lo 0, rendendo l'apprendimento più facile
 - Usata nel livello di output

@@ -401,7 +401,7 @@ Queste misure sono **oggettive**, ma spesso vengono utilizzate anche misure **so
 * **Supporto non omogeneo:** La scelta della soglia di supporto può essere difficile, poiché un supporto troppo basso può generare un numero elevato di itemset frequenti, mentre un supporto troppo alto può far perdere regole importanti.
 * **Pattern cross support:** Le regole possono contenere item con supporto molto diverso, rendendo la regola poco interessante per l'analisi.
 
-## 15.2.1 Tabella di Contingenza
+## Tabella di Contingenza
 
 La tabella di contingenza è uno strumento utile per valutare le regole associative del tipo _X → Y_. La tabella contiene quattro valori che rappresentano il supporto di diverse combinazioni di X e Y
 
@@ -594,10 +594,9 @@ L'H-confidence è una misura che aiuta a identificare regole associative signifi
 * Questo aiuta a identificare itemset con una forte relazione tra tutti gli elementi, indipendentemente dal loro supporto individuale.
 
 **Definizione:**
-
 Dato un itemset $X = \{x_1, x_2, ..., x_n\}$, l'H-confidence è definita come:
 
-$$H = min\{c(X_1 \to X_2) | X_1 \subset X \wedge X_2 = X - X_1\}$$
+$$H = min\{c(X_1 \to X_2) | X_1 \subset X \land X_2 = X - X_1\}$$
 
 dove $c(X_1 \to X_2)$ è la confidenza della regola $X_1 \to X_2$, definita come:
 

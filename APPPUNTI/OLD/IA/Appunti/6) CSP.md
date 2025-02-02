@@ -1,33 +1,4 @@
 
-| Termine                              | Spiegazione                                                                                                                                                                        |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Soddisfacimento di vincoli (CSP)** | Un problema che consiste nel trovare un assegnamento di valori a variabili che soddisfi un insieme di vincoli.                                                                     |
-| **Rappresentazione esplicita**       | Un modo per rappresentare i vincoli in un CSP, dove ogni vincolo è definito come un insieme di variabili e un insieme di valori validi.                                            |
-| **Rappresentazione implicita**       | Un modo per rappresentare i vincoli in un CSP, dove i vincoli sono definiti implicitamente dalle relazioni tra le variabili.                                                       |
-| **Constraint Graph**                 | Una rappresentazione grafica dei vincoli di un CSP, dove i nodi rappresentano le variabili e gli archi collegano le variabili che condividono un vincolo.                          |
-| **Ipergrafo**                        | Una generalizzazione di un grafo, dove un iper-arco può collegare più di due nodi.                                                                                                 |
-| **Problema dell'Omomorfismo**        | Un problema che consiste nel decidere se esiste una corrispondenza tra due strutture relazionali che preserva le relazioni.                                                        |
-| **Struttura relazionale**            | Un insieme di relazioni tra variabili, rappresentato da simboli di relazione e un database di tuple.                                                                               |
-| **Omomorfismo**                      | Una mappatura tra due strutture relazionali che preserva le relazioni.                                                                                                             |
-| **Core**                             | La versione più semplice e ridotta di un CSP, ottenuta attraverso un processo di semplificazione.                                                                                  |
-| **Endomorfismo**                     | Una funzione che mappa gli elementi di una struttura su se stessa.                                                                                                                 |
-| **Backtracking Search**              | Un algoritmo di ricerca non informata utilizzato per risolvere problemi di CSP, che prova tutti i possibili assegnamenti di valori alle variabili.                                 |
-| **Forward Checking**                 | Un'ottimizzazione del backtracking search che filtra i valori dei domini delle variabili non assegnate, eliminando i valori che violano i vincoli con gli assegnamenti futuri.     |
-| **Arc Consistency**                  | Un'ottimizzazione del backtracking search che verifica la consistenza di tutti i vincoli tra coppie di variabili.                                                                  |
-| **Propagazione**                     | Un processo che ottimizza il backtracking forzando l'arc consistency, estendendo la verifica dei vincoli agli altri vincoli collegati.                                             |
-| **1-Consistency (Node-Consistency)** | Un tipo di consistenza che verifica se ogni valore nel dominio di una variabile soddisfa i vincoli unari associati a quella variabile.                                             |
-| **2-Consistency (Arc-Consistency)**  | Un tipo di consistenza che verifica se ogni assegnamento consistente a una variabile può essere esteso all'altra variabile in una coppia di variabili.                             |
-| **K-Consistency**                    | Un tipo di consistenza che verifica se ogni assegnamento consistente a k-1 variabili può essere esteso alla k-esima variabile.                                                     |
-| **Minimum Remaining Values (MRV)**   | Un'euristica per la scelta delle variabili nel backtracking search, che seleziona la variabile con il minor numero di valori validi rimasti nel dominio.                           |
-| **Least Constraining Value**         | Un'euristica per la scelta dei valori nel backtracking search, che seleziona il valore che restringe meno i domini delle variabili rimanenti.                                      |
-| **Punto critico**                    | Un punto in cui gli algoritmi euristici possono fallire, in problemi bilanciati con lo stesso numero di variabili e vincoli.                                                       |
-| **Join-Tree**                        | Una struttura che organizza gli iperarchi di un ipergrafo in modo tale che ogni variabile si propaghi correttamente lungo l'albero.                                                |
-| **Ipergrafo aciclico**               | Un ipergrafo che ha un join-tree.                                                                                                                                                  |
-| **Tree Decomposition**               | Un metodo che permette di semplificare un problema complesso rappresentato da un grafo, suddividendolo in sottoproblemi aciclici più facili da risolvere.                          |
-| **Tree-width**                       | La larghezza minima tra tutte le possibili decomposizioni di un grafo in un albero.                                                                                                |
-| **Teorema di Grohe**                 | Un teorema che afferma che risolvere problemi CSP appartenenti a una classe S è fattibile in tempo polinomiale se e solo se il core delle strutture in S ha una treewidth fissata. |
-
-
 Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli possono essere rappresentati in modo **esplicito** o **implicito**. 
 
 - Con una **rappresentazione esplicita**, i vincoli sono trattati come un database, dove per ogni vincolo si definisce un insieme di variabili e un insieme di valori validi. Ad esempio, se abbiamo tre vincoli $C1(WA,NT), C2(WA,SA), C3(NT,SA)$, questi rappresentano restrizioni sui valori ammissibili tra le variabili $WA, NT, SA$.
@@ -109,6 +80,13 @@ La soluzione del problema semplificato può essere usata per risolvere il proble
 
 ## Tipi di consistenza
 
+Un CSP è detto **globalmente consistente** se, per ogni sottoinsieme di variabili del problema, qualsiasi assegnazione parziale coerente di valori a queste variabili può essere estesa a un'assegnazione coerente dell'intero insieme di variabili.
+
+In altre parole:
+
+- Non ci sono conflitti locali che potrebbero impedire un'estensione valida delle assegnazioni parziali.
+- Ogni assegnazione parziale che soddisfa i vincoli può essere completata.
+### Consistenza locale
 - **1-Consistency (Node-Consistency)**:
   - Consistenza a livello di singola variabile.
   - Ogni valore nel dominio di una variabile soddisfa i vincoli unari associati a quella variabile.
@@ -288,5 +266,16 @@ Il **Teorema di Grohe** afferma che risolvere problemi CSP appartenenti a S è *
 2. Filtra i valori non compatibili tra i vincoli, eliminandoli man mano, fino a quando non è possibile fare ulteriori riduzioni.
 3. Se nessuna relazione è vuota, significa che abbiamo trovato una soluzione.
 
-### Complessità:
-Il costo computazionale dipende dal numero di variabili $n$, dal numero di vincoli $m$ e dal numero di possibili valori nel DB $d$. Nel caso peggiore, il costo può essere esponenziale in base al valore di $k$, ma grazie alla limitazione sulla **treewidth** possiamo esprimere questo costo come una funzione polinomiale rispetto ai parametri $d$, $n$, e $k$.
+## Dimostrazione Teorema 
+La dimostrazione prova che i problemi CSP con core di treewidth limitata sono risolvibili in tempo polinomiale.  Data una istanza CSP:
+
+1. **Riduzione al Core:** Si trova il core dell'istanza, preservando l'equivalenza.
+
+2. **Vincoli Aggiuntivi:**  Poiché la treewidth del core è limitata da *k*, si aggiungono nuovi vincoli che impongono la consistenza su ogni sottoinsieme di *k*+1 variabili.  Il numero di questi vincoli è polinomiale nel numero di variabili.  Ogni nuovo vincolo ha dimensione polinomiale nel dominio.
+
+3. **Consistenza Locale:** Si applica un algoritmo di consistenza locale (es. arc consistency, k-consistency) per rimuovere assegnazioni inconsistenti.  Questo passo è polinomiale nel numero di vincoli e nella dimensione dei vincoli.
+
+4. **Verifica:** Se dopo l'applicazione della consistenza locale rimangono assegnazioni, si ha una soluzione; altrimenti no.
+
+La complessità complessiva è polinomiale perché ogni passo è polinomiale e il numero di nuovi vincoli è polinomiale grazie alla limitazione della treewidth.  La dimensione dei nuovi vincoli è anch'essa polinomiale.
+

@@ -1,7 +1,9 @@
 
+
 Il progetto si pone come obiettivo la modellazione e risoluzione di un problema di pianificazione classica utilizzando il linguaggio PDDL, insieme all'integrazione di un modello temporale all'interno di un'architettura robotica. Lo scenario è ispirato al contesto della produzione industriale, dove più agenti robotici collaborano per consegnare scatole contenenti rifornimenti a diverse stazioni di lavoro. Le principali assunzioni del problema includono la posizione fissa delle stazioni e delle scatole, la capacità degli agenti robotici di manipolare le scatole (riempirle, svuotarle, trasportarle e consegnarle) e i vincoli relativi agli spostamenti degli agenti all'interno dell'ambiente.
 
 Il lavoro si articola in due fasi principali: **pianificazione classica** e **pianificazione temporale**.
+
 
 ### Istanza 1:
 
@@ -28,11 +30,10 @@ Il lavoro si articola in due fasi principali: **pianificazione classica** e **pi
 - Analoghi a quelli dell'istanza 1, ma con l'introduzione della gestione del carico massimo che ogni agente può trasportare.
 
 **Risultati ottenuti:**
-- Analisi del carico trasportato dai robot.
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante il processo.
 
-### Fasi di modellazione  
+## Task 1: Fase di modellazione 
 
 Dopo aver definito chiaramente le condizioni iniziali e gli obiettivi per entrambe le istanze, il passo successivo consiste nella traduzione del problema in un linguaggio di pianificazione formale, nel nostro caso il **PDDL** (Planning Domain Definition Language). Questo linguaggio è ampiamente utilizzato nell'intelligenza artificiale per rappresentare problemi di pianificazione.
 
@@ -80,6 +81,7 @@ La modellazione degli oggetti del dominio è stata realizzata attraverso l'uso d
 - **carrierSlot**: rappresenta uno spazio all'interno di un carrier dove può essere caricato un box.
 
 ### Predicati
+
 I predicati sono stati progettati per riflettere lo stato degli oggetti e facilitare la gestione delle operazioni. Alcuni predicati chiave includono:
 
 - **filled(box, content)**: vero se una scatola contiene uno specifico contenuto.
@@ -93,7 +95,6 @@ I predicati sono stati progettati per riflettere lo stato degli oggetti e facili
 - **needContent(workstation, content)**: vero se una stazione di lavoro ha bisogno di un certo contenuto.
 - **connected(location1, location2)**: vero se due posizioni sono connesse e quindi percorribili dall’agente.
 
-### Utilizzo dei Predicati
 L'uso di predicati come **carrierSlotOccupied/carrierSlotAvailable** e **noContent/gotContent** è stato adottato per rendere il dominio più leggibile e gestire in maniera efficace sia la capacità massima del carrier che la distribuzione dei contenuti tra le stazioni di lavoro. In questo modo, la logica di caricamento e scaricamento dei box risulta più chiara e strutturata, migliorando l'efficienza della pianificazione.
 
 ### Azioni
@@ -107,7 +108,6 @@ In PDDL, un'azione rappresenta una trasformazione da uno stato a un altro e si c
 Nel progetto, sono state implementate le seguenti azioni:
 
 #### 1. fill  
-
 L'azione di riempimento di una scatola con un contenuto specifico eseguita da un agente. Le precondizioni verificano che:
 - Il contenuto, la scatola e l'agente si trovino nella stessa posizione. 
 - La scatola sia vuota.
@@ -127,7 +127,6 @@ L'azione di riempimento di una scatola con un contenuto specifico eseguita da un
 ```
 
 #### 2. charge  
-
 L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verificano che:
 - Il mezzo abbia uno spazio disponibile (**carrierSlot**) per la scatola.
 - Lo spazio libero appartenga al mezzo.
@@ -152,7 +151,6 @@ L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verifi
 ```
 
 #### 3. discharge  
-
 L'azione di scarico della scatola da un veicolo. Questa azione è applicabile solo se la scatola è vuota. Le precondizioni verificano che:
 - Lo slot del veicolo sia effettivamente occupato dalla scatola.
 - L'agente, il mezzo e la scatola siano nella posizione corretta.
@@ -177,7 +175,6 @@ L'azione di scarico della scatola da un veicolo. Questa azione è applicabile so
 ```
 
 #### 4. moveRobot  
-
 L'azione di movimento di un robot privo di carrier, verso una nuova posizione. Le precondizioni verificano che:
 - Il robot si trovi nella posizione di partenza specificata.
 - Le due posizioni siano connesse.
@@ -195,7 +192,6 @@ L'azione di movimento di un robot privo di carrier, verso una nuova posizione. L
 ```
 
 #### 5. moveCarrier  
-
 L'azione di movimento di un carrier da parte di un robot verso una nuova posizione. Le precondizioni verificano che:
 - Il robot e il carrier si trovino nella posizione di partenza.
 - Le posizioni siano connesse.
@@ -216,7 +212,6 @@ L'azione di movimento di un carrier da parte di un robot verso una nuova posizio
 ```
 
 #### 6. contentDelivered  
-
 Questo predicato viene introdotto per gestire il vincolo OR richiesto nelle istanze successive della pianificazione classica. Si tratta di un'azione fittizia che rappresenta la condizione in cui una workstation ha ricevuto il contenuto necessario. Le **precondizioni** verificano che:
 - La workstation abbia ricevuto almeno uno dei due contenuti richiesti.
 - La workstation non abbia già ricevuto uno dei contenuti in precedenza.

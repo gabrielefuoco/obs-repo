@@ -128,14 +128,13 @@ if "%task_choice%"=="3" (
 goto :format_final_only
 
 :format_final_only
-REM Esegui lo script format.py e passa l'argomento
-python "%ROOT_DIR%src\format\format.py" "%ROOT_DIR%output\original" "%ROOT_DIR%output\formatted" "%ROOT_DIR%src\format\prompt.txt" "%lesson_topic%"
+REM Esegui lo script format.py e passa l'argomento con il metodo di split predefinito (headers)
+python "%ROOT_DIR%src\format\main-script.py" "%ROOT_DIR%output\original" "%ROOT_DIR%output\formatted" "%ROOT_DIR%src\format\prompt.txt" "%lesson_topic%" --split_method headers
 
 REM Controlla se il terzo script è stato eseguito con successo
 IF ERRORLEVEL 1 (
     echo "Final formatting script failed. Exiting..."
     exit /b 1
 )
-
 echo "All scripts executed successfully."
 exit /b 0

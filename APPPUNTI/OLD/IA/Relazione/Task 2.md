@@ -1,10 +1,9 @@
-# Task 2
+## Task 2: Classical Planning
 
-### CLASSICAL PLANNING
 
 La pianificazione automatica si occupa della creazione di strategie o sequenze di azioni per risolvere problemi complessi. Nel progetto, abbiamo adottato un approccio che comprende la modellazione del problema e la creazione di una funzione euristica personalizzata per il dominio in esame. Questo ci ha permesso di generare piani d'azione efficienti in tempi ragionevoli.
 
-### Primo Problema
+### Istanza 1
 
 Gli oggetti coinvolti nel problema sono i seguenti:
 - **Scatole**: b1, b2, b3, b4
@@ -117,9 +116,9 @@ L'obiettivo del problema è garantire che ogni stazione di lavoro riceva il cont
 
 ```
 
-### Secondo Problema
+### Istanza 2
 
-Nel secondo problema, ci sono alcune differenze rispetto al primo:
+Nella seconda istanza del problema, ci sono alcune differenze rispetto alla prima:
 - Ogni robot ha un **carrier** con una capacità massima.
 - I robot possono caricare scatole sui carrier fino a raggiungere la loro capacità massima.
 - I robot, le scatole e i carrier devono essere **nella stessa posizione** per effettuare il caricamento.
@@ -251,10 +250,9 @@ Il funzionamento generale di EHC si articola nei seguenti passi:
 3. **Gestione dei plateau:** Se non è possibile trovare un miglioramento locale immediato, viene avviata una **ricerca completa** (ad esempio, una BFS limitata) per individuare un nuovo stato migliore.
 4. **Ripetizione del processo:** I passi vengono ripetuti finché non viene raggiunto uno stato che soddisfa le condizioni dell'obiettivo.
 
-Grazie a questa combinazione, EHC è più robusto rispetto a una pura ricerca greedy e riesce a gestire meglio le regioni dello spazio di ricerca con pochi miglioramenti evidenti.
 ### Funzionamento dell'euristica Fast Forward (FF)
 
-La **FF euristica** è una funzione che stima il costo per raggiungere lo stato obiettivo da uno stato corrente. È basata su un rilassamento del problema originale, nel quale vengono ignorati gli effetti negativi delle azioni (ad esempio, rimuovere una precondizione soddisfatta da un'altra azione).
+L'euristica **Fast Forward** è una funzione che stima il costo per raggiungere lo stato obiettivo da uno stato corrente. È basata su un rilassamento del problema originale, nel quale vengono ignorati gli effetti negativi delle azioni (ad esempio, rimuovere una precondizione soddisfatta da un'altra azione).
 
 1. **Costruzione di un piano rilassato:** L'euristica calcola un piano rilassato che considera solo gli effetti positivi delle azioni.
 2. **Stima del costo:** Il costo del piano rilassato è utilizzato come stima del costo reale per raggiungere l'obiettivo.
@@ -262,6 +260,7 @@ La **FF euristica** è una funzione che stima il costo per raggiungere lo stato 
 Questo approccio permette di ottenere stime rapide e generalmente accurate, risultando molto efficiente nei problemi di pianificazione automatica.
 
 Nel nostro caso, la scelta dell'euristica **Fast Forward** bilancia ottimamente la qualità della soluzione con il tempo di esecuzione della ricerca. 
+
 
 Dopo aver definito il planner e l'euristica, il sistema è stato eseguito utilizzando **PDDL4J**, che offre un framework flessibile per eseguire esperimenti di pianificazione automatica. I risultati mostrano che l'algoritmo **Enforced Hill-Climbing** con l'euristica **Fast Forward** ha permesso di ottenere soluzioni di qualità ottimale con tempi di elaborazione ragionevoli:
 
@@ -273,7 +272,7 @@ java -cp build/libs/pddl4j-4.0.0.jar fr.uga.pddl4j.planners.statespace.FF \
    src/pddl/problemTask1.pddl
 ```
 
-## Analisi Prima istanza
+## Analisi prima Istanza
 
 L'algoritmo **Enforced Hill-Climbing** con l'euristica **Fast Forward** è riuscito a risolvere efficacemente il problema di pianificazione, trovando una soluzione in un tempo ragionevole.
 
@@ -295,7 +294,7 @@ Il piano si compone di 32 step temporali (da 00 a 31). Ogni step contiene una o 
 
 ![[Task 2-20241230172141511.png|600]]
 
-## Analisi Seconda istanza
+## Analisi seconda Istanza
 
 Come nel caso precedente, è stato utilizzato l'algoritmo **Enforced Hill-Climbing**, mentre l'euristica rimane **Fast Forward**. Il secondo problema risulta più complesso da risolvere rispetto al primo, richiedendo più elaborazione nonostante produca un piano di lunghezza simile (38 stati). Questo è dovuto al maggior numero di oggetti e alle loro interazioni.
 In particolare:
