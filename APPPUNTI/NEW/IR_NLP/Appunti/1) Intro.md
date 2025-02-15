@@ -846,17 +846,17 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 ## Passaggi dell'indexer
 
-1. **Sequenza di coppie (Termine, docID):**  L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
+4. **Sequenza di coppie (Termine, docID):**  L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
 
-2. **Ordina per Termine:** La sequenza di coppie viene ordinata in base al termine.
+5. **Ordina per Termine:** La sequenza di coppie viene ordinata in base al termine.
 
-3. **Ordina per docID:**  Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
+6. **Ordina per docID:**  Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
 
-4. **Unisci voci multiple:** Se un termine appare più volte nello stesso documento, le voci vengono unite in un'unica voce, mantenendo la frequenza del termine nel documento.
+7. **Unisci voci multiple:** Se un termine appare più volte nello stesso documento, le voci vengono unite in un'unica voce, mantenendo la frequenza del termine nel documento.
 
-5. **Aggiungi frequenza del documento:**  Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
+8. **Aggiungi frequenza del documento:**  Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
 
-6. **Dividi in:**
+9. **Dividi in:**
 
     * **Dizionario:**  Contiene tutti i termini distinti trovati nei documenti, con il loro corrispondente termID.
     * **Postings:**  Contiene le liste di postings per ogni termine, ovvero l'insieme di documenti in cui il termine appare, con la loro frequenza. 
@@ -867,11 +867,11 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 **Passaggi:**
 
-1. **Individua Brutus nel Dizionario:**
+10. **Individua Brutus nel Dizionario:**
     * Recupera i suoi postings (lista di documenti in cui compare Brutus).
-2. **Individua Caesar nel Dizionario:**
+11. **Individua Caesar nel Dizionario:**
     * Recupera i suoi postings (lista di documenti in cui compare Caesar).
-3. **Unisci i due postings (interseca gli insiemi di documenti):**
+12. **Unisci i due postings (interseca gli insiemi di documenti):**
     * Attraversa i due postings simultaneamente, in tempo lineare nel numero totale di voci di postings. 
 	    * Garantito dal fatto che manteniamo le due liste ordinate
     * Questo significa che l'algoritmo impiega un tempo proporzionale al numero di documenti in cui compare Brutus più il numero di documenti in cui compare Caesar.
@@ -1115,19 +1115,19 @@ Idee chiave: sono complementari
 
 ### SPIML-Invert(token_stream)
 
-1.  **output_file** = NEWFILE()
-2.  **dictionary** = NEWHASH()
-3.  **while** (free memory available)
-4.      **do** token ← next(token_stream)
-5.      **if** term(token) ∉ dictionary
-6.          **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
-7.      **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
-8.      **if** full(postings_list)
-9.          **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
-10.     ADDToPOSTINGSLIST(postings_list, docID(token))
-11.     sorted_terms ← SORTTERMS(dictionary)
-12.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
-13.     **return** output_file
+4.  **output_file** = NEWFILE()
+5.  **dictionary** = NEWHASH()
+6.  **while** (free memory available)
+7.      **do** token ← next(token_stream)
+8.      **if** term(token) ∉ dictionary
+9.          **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
+10.      **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
+11.      **if** full(postings_list)
+12.          **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
+13.     ADDToPOSTINGSLIST(postings_list, docID(token))
+14.     sorted_terms ← SORTTERMS(dictionary)
+15.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
+16.     **return** output_file
 
 
 
@@ -2018,16 +2018,16 @@ Quanto sono simili i romanzi:
 
 **CosineScore(q)**
 
-1. float Scores[N] = 0
-2. float Length[N]
-3. for each query term t
-4. do calculate w<sub>t,q</sub> and fetch postings list for t
+6. float Scores[N] = 0
+7. float Length[N]
+8. for each query term t
+9. do calculate w<sub>t,q</sub> and fetch postings list for t
 	1. for each pair(d, tf<sub>t,d</sub>, w<sub>t,q</sub>) in postings list
 	2. do Scores[d] += w<sub>t,d</sub> × w<sub>t,q</sub>
-5. Read the array Length
-6. for each d
-7. do Scores[d] = Scores[d]/Length[d]
-8. return Top K components of Scores
+10. Read the array Length
+11. for each d
+12. do Scores[d] = Scores[d]/Length[d]
+13. return Top K components of Scores
 
 ## Varianti di ponderazione Tf-Idf
 

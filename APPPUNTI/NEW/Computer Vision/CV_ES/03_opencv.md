@@ -261,7 +261,7 @@ plt.imshow(dst, cmap='gray')
 
 Rotation
 
-Rotation of an image for an angle \theta is achieved by the transformation matrix of the form
+Rotation of an image for an angle $\theta$ is achieved by the transformation matrix of the form
 
 $$M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta \end{bmatrix}
 $$

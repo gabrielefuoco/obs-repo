@@ -42,7 +42,7 @@ plt.imshow(gray_image, cmap='gray');
 cv2.Canny?
 ```
 
-.   @brief Finds edges in an image using the Canny algorithm @cite Canny86 .
+.   Finds edges in an image using the Canny algorithm  .
 .   
 .   The function finds edges in the input image and marks them in the output map edges using the
 .   Canny algorithm. The smallest value between threshold1 and threshold2 is used for edge linking. The
