@@ -39,8 +39,9 @@ Relativamente alla valutazione generale in NLP: **intrinseca vs. estrinseca**
 
 ## Analogie di vettori di parole
 
-**uomo:donna :: re:?**
-![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114093845201.png]]
+$$uomo:donna :: re:?$$
+$$a:b::c? \to d=\arg\max_{i} \frac{(x_{b}-x_{a}+x_{c})^T x_{i}}{\|x_{b}-x_{a}+x_{c}\|}$$
+
 un termine sta ad un altro come un terzo termine c(probe) sta a un termine d
 
 Valutare i vettori di parole in base a quanto bene la loro distanza coseno dopo l'addizione cattura domande intuitive di analogia semantica e sintattica.

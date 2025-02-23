@@ -6,7 +6,7 @@
 
 * **Gensim:** Una libreria Python per l'analisi di argomenti e la modellazione di argomenti. Fornisce implementazioni di modelli di argomenti stocastici, come LDA (Latent Dirichlet Allocation), che possono essere utilizzati per scoprire argomenti latenti in grandi set di dati di testo.
 
-## Latent Dirichlet Allocation (pag 288)
+## Latent Dirichlet Allocation 
 
 Latent Dirichlet Allocation (LDA) è un modello di topic modeling di riferimento. Esistono diverse tecniche matematicamente eleganti che si basano su LDA, per coprire oltre ai tre aspetti di base anche aspetti riguardo il ruolo di autori o categorie speciali per i documenti.
 

@@ -1,0 +1,4 @@
+$env:GOOGLE_API_KEY = "AIzaSyCXSO-sdZOixiwf7HwcDN0n-m1hoSPSw7Y"; New-Item -ItemType Directory -Force -Path .\output | Out-Null; marker_single @@@@@@@@@@input --output_dir "$PWD\output" --output_format markdown  --languages it --workers 8 
+
+
+$env:GOOGLE_API_KEY = "AIzaSyCXSO-sdZOixiwf7HwcDN0n-m1hoSPSw7Y"; marker_single "C:\Users\gabri\Documents\Obsidian Vault\Repo\APP\Marker\input\06-StormHandsOn.pdf" --use_llm
