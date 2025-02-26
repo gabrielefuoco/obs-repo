@@ -13,7 +13,7 @@ Entrambi sono campi della scienza e dell'ingegneria.
 
 ###### Enunciato del problema di base:
 * **Dato:**
-    * **Documenti:**  (si presume che sia una collezione statica).
+    * **Documenti:**  si presume che sia una collezione statica.
     * **Bisogno informativo (query):** Un singolo termine di ricerca, una stringa di termini, una frase in linguaggio naturale o un'espressione stilizzata che utilizza simboli speciali.
     * **Modello di recupero:** Un meccanismo per determinare se un documento corrisponde alla query.
 * **Obiettivo:** Recuperare documenti con informazioni rilevanti per il bisogno informativo dell'utente e che aiutino l'utente a completare un'attività.
@@ -68,12 +68,12 @@ Entrambi sono campi della scienza e dell'ingegneria.
 * **Capacità limitate:** La fase di tracking richiede risorse computazionali limitate.
 * **Definizione di topic:** Un topic è un insieme di termini, anche se non è l'unica definizione possibile.
 * **Segnale:** Il sistema deve tenere traccia del segnale, ovvero dei dati in ingresso, per identificare i topic.
-### modellazione di topic stocastica
+### Modellazione di topic stocastica
 
-È una tecnica che utilizza modelli probabilistici per analizzare grandi quantità di testo e identificare i temi principali (topic) presenti nei documenti.  
+- È una tecnica che utilizza modelli probabilistici per analizzare grandi quantità di testo e identificare i temi principali (topic) presenti nei documenti.  
 - Si basa sull'idea che ogni documento sia una combinazione di diversi topic, e che ogni parola abbia una probabilità di appartenere a un determinato topic.
-Questo approccio permette di scoprire i temi principali, analizzare la loro distribuzione nei documenti e classificare i documenti in base ai topic che contengono. 
-- Un esempio di modello di topic stocastico è il Latent Dirichlet Allocation (LDA). 
+- Questo approccio permette di scoprire i temi principali, analizzare la loro distribuzione nei documenti e classificare i documenti in base ai topic che contengono. 
+- Un esempio di modello di topic stocastico è il **Latent Dirichlet Allocation (LDA).** 
 
 ### Relation Extraction
 
@@ -88,9 +88,9 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 
 ## KDD Pipeline in NLP
 
-* **Fasi:** I task di NLP si svolgono attraverso una sequenza di fasi (unfolding).
+* **Fasi:** I task di NLP si svolgono attraverso una sequenza di fasi (*unfolding*).
 * **Rappresentazione:** Prima di poter rappresentare i contenuti informativi, è necessario indicizzare gli elementi costitutivi.
-* **Apprendimento:** L'apprendimento avviene a valle del set di risultati (result set).
+* **Apprendimento:** L'apprendimento avviene a valle del set di risultati (*result set*).
 * **Feature Selection:** Il machine learning può essere utilizzato anche in fase di selezione delle features.
 
 ### Valutazione
@@ -100,7 +100,7 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 
 # Funzioni Principali
 
-* **Funzione principale:**  Il compito principale di un sistema di elaborazione del linguaggio naturale (NLP) è quello di **estrarre informazioni** da testi.
+* **Funzione principale:**  Il compito principale di un sistema di elaborazione del linguaggio naturale (*NLP*) è quello di **estrarre informazioni** da testi.
 * **Macro categorie:** Le funzioni principali possono essere suddivise in due macro categorie:
     * **Indicativa:** Questa funzione serve a rivelare gli elementi dei contenuti in modo da consentire la determinazione della rilevanza del testo rispetto alle query. È fondamentale per l'esplorazione dei corpus e per il retrieval.
     * **Informativa:** Questa funzione consente di ottenere un surrogato del testo (o di una sua porzione) senza fare necessariamente riferimento al testo originale. Questo concetto è ancora valido per il retrieval, che consiste nel condensare i dati originali in un formato surrogato.
@@ -110,7 +110,7 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 * **Definizione:** La navigazione (browsing) è solitamente parte di sistemi di ipertesto e ipermedia.
 * **Scopo:** Permette agli utenti di scorrere collezioni di testo alla ricerca di informazioni utili.
 * **Vantaggi:** Gli utenti non hanno bisogno di:
-    * generare descrizioni di ciò che desiderano, o
+    * generare descrizioni di ciò che desiderano
     * specificare in anticipo gli argomenti di interesse.
 * **Funzionamento:** Gli utenti possono semplicemente indicare i documenti che trovano rilevanti.
 * **Utilizzo:** La navigazione è utile quando un utente:
@@ -144,11 +144,10 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 **Tipi di template:**
 * **Slot:** Gli slot nel template sono tipicamente riempiti da una sottostringa del documento.
 * **Riempitivi pre-specificati:** Alcuni slot possono avere un set fisso di riempitivi pre-specificati che potrebbero non apparire nel testo stesso.
-* **Multipli riempitivi(filler):** Alcuni slot possono consentire più filler .
+* **Multipli riempitivi(filler):** Alcuni slot possono consentire più filler.
 * **Ordine fisso:** Si assume che gli slot siano sempre in un ordine fisso.
 
 **Modelli di estrazione:**
-
 * **Specificare un elemento:** Specificare un elemento da estrarre per uno slot, ad esempio, utilizzando un modello di regex.
 * **Modelli precedenti e successivi:** Potrebbe essere necessario un modello precedente (pre-filler) per identificare il contesto appropriato e un modello successivo (post-filler) per identificare la fine del riempitivo. 
 	* **Es**: *Estrazione di termini da un modello*. Definiziamo il template a priori e per ogni slot creiamo dei pattern.
@@ -180,19 +179,13 @@ Le principali aree di applicazione coprono due aspetti:
     * **Estrazione basata su struttura:**  l'estrazione di informazioni basata su una struttura predefinita di documenti, per identificare i documenti rilevanti per un'informazione target.
 
 **Utilizzi tipici:**
-* Estrarre informazioni rilevanti dai documenti.
-* Classificare e gestire i documenti in base al loro contenuto.
-* Organizzare repository di meta-informazioni relative ai documenti per la ricerca e il recupero.
-
-
 * **Categorizzazione gerarchica:**  Usare il retrival per organizzare i documenti in una struttura gerarchica basata su categorie (Seguendo l'esempio delle web directory).
 * **Riassunto del testo:**  Creare un riassunto conciso di un documento, mantenendo le informazioni più importanti.
 * **Disambiguazione del senso delle parole:**  Determinare il significato corretto di una parola in un contesto specifico.
 - **Filtraggio del Testo (o dell'Informazione)**: Rimuovere il testo non rilevante da un documento. Inizialmente accoppiato alla web personalization, da cui nascono gli attuali sistemi di raccomandazione.
-	- **Approcci alla** **Web Personalization**
-		* **Selezionare l'informazione per un gruppo di utenti target in base alle loro specifiche esigenze.**
-		* **Collaborative based:** il sistema continua a proporre non solo i prodotti in base alle specifiche esigenze, ma anche cose spesso acquistate da utenti con un profilo simile, per un discorso anche di diversificazione e serendipità.
-		* **Per gli utenti cold start:** i più popolari. 
+- **Approcci alla** **Web Personalization:**
+	* Selezionare l'informazione per un gruppo di utenti target in base alle loro specifiche esigenze.
+	* **Collaborative based:** il sistema continua a proporre non solo i prodotti in base alle specifiche esigenze, ma anche cose spesso acquistate da utenti con un profilo simile, per un discorso anche di diversificazione e serendipità.
 
 **Altri esempi di applicazioni:**
 
@@ -205,87 +198,68 @@ Le principali aree di applicazione coprono due aspetti:
 
 ### Categorizzazione Gerarchica
 
-Sotto strutture gerarchiche (ad esempio, tassonomie), un ricercatore può:
-
-* Navigare prima nella gerarchia delle categorie
-* E poi restringere la sua ricerca a una particolare categoria di interesse
-
-La categorizzazione basata su categorie dovrebbe consentire l'aggiunta di nuove categorie e l'eliminazione di quelle obsolete.
+La categorizzazione gerarchica, tipicamente implementata tramite tassonomie, permette ai ricercatori di esplorare un insieme di dati in modo strutturato.  
+Inizialmente, si naviga attraverso la gerarchia delle categorie per poi focalizzarsi su una specifica categoria di interesse, affinando così la ricerca.  Questo sistema dovrebbe essere flessibile, consentendo l'aggiunta di nuove categorie e la rimozione di quelle obsolete.
 
 **Caratteristiche:**
-* Natura ipertestuale dei documenti:
-    * Analisi degli hyperlink
+* Natura ipertestuale dei documenti: Analisi degli hyperlink
 * Struttura gerarchica dell'insieme di categorie
-* Decomposizione della classificazione come decisione ramificata:
-    * A un nodo interno
+* Decomposizione della classificazione come decisione ramificata (A un nodo interno)
 
-### Riassunto
+### Summarization
 
-Generare un riassunto del contenuto di un testo:
+La summarization consiste nel generare un riassunto del contenuto di un testo.  Per testi brevi, il riassunto deve essere essenziale e coerente.  L'utilizzo di profili aiuta a strutturare le informazioni importanti in campi semanticamente ben definiti.  La tecnica di summarization dipende dalla natura dei documenti; ad esempio, per la summarization di recensioni, è possibile addestrare il modello per analizzare aspetti specifici, evitando un riassunto trasversale e generando invece riassunti per ogni aspetto elencato.
 
-* **Testo breve:** essenziale e coerente
-* Utilizzare profili per strutturare il contenuto importante in campi semanticamente ben definiti
-* dipende dalla natura dei documenti: ad esempio, per *summarization di recensioni* possiamo a monte decidere di addestrare il summarizer affinchè lavori per aspetti: non deve fare summary in maniera trasversale ma farlo per ognuno degli aspetti elencati.
+La summarization facilita principalmente l'accesso alle informazioni, come mostrato nei seguenti esempi:
 
-Applicato principalmente per facilitare l'accesso alle informazioni, ad esempio:
+* Estrazione delle parole chiave più utili da un insieme di documenti (es. un cluster) per descriverlo.
+* Astrazione dei documenti in una collezione per evitare la lettura del contenuto completo.
+* Riassunto dei documenti recuperati da una ricerca per consentire all'utente un'identificazione più rapida di quelli pertinenti alla query.
 
-* Le parole chiave più utili vengono estratte da un insieme di documenti (ad esempio, un cluster) per descriverlo
-* I documenti in una collezione vengono astratti per evitare di leggere il contenuto completo
-* I documenti recuperati dalla ricerca vengono riassunti per consentire all'utente un'identificazione più rapida di quelli pertinenti alla query
+Un riassunto può essere di alto livello, fornendo una panoramica di tutti i punti principali, oppure più dettagliato.  Gli approcci alla summarization possono essere classificati in base alla dimensione dell'unità di testo utilizzata:
 
-Riassunto di alto livello o panoramica di tutti i punti principali?
-Approcci basati sulla dimensione dell'unità di testo utilizzata nel riassunto:
+* **Riassunti di parole chiave:**  Utilizzano parole chiave per rappresentare il contenuto principale.
+* **Riassunti di frasi:**  Utilizzano frasi per rappresentare il contenuto principale.
 
-* Riassunti di parole chiave
-* Riassunti di frasi
+### Disambiguazione del Senso delle Parole (WSD)
 
-### Disambiguazione del Senso delle Parole
+La disambiguazione del senso delle parole (WSD) consiste nell'assegnare a una parola il significato corretto in base al contesto in cui appare.  È importante notare che, pur mirando alla disambiguazione di ogni parola singolarmente, è necessario considerare l'intero contesto per una corretta interpretazione.  Questo richiede un'analisi simultanea di tutti i termini nel contesto (aspetto da ampliare per supportare strumenti automatici).
 
-Assegnare una parola con il senso corretto rispetto al contesto in cui la parola appare.
-attenzione: l'obiettivo è disambiguare il significato di ogni parola ma dobbiamo tenere conto necessariamente dell'intero contesto(da ampliare per supportare lo strumento automatico. lavoro da fare simultaneamente per ogni termnine del contesto)
-**Un approccio efficace:**
+**Un approccio efficace:** Prevede di sfruttare un inventario di sensi esistenti e misure di correlazione semantica per scegliere il significato più appropriato per ogni parola.
 
-* Scegliere i significati delle parole da un inventario di sensi esistente sfruttando misure di correlazione semantica
+La WSD è un esempio del problema più generale di risoluzione delle ambiguità del linguaggio naturale.
 
-La WSD è un esempio del problema più generale di risolvere le ambiguità del linguaggio naturale.
+**Esempio:**
 
-**Ad esempio:**
-* "Bank" può avere (almeno) due sensi in inglese:
-    * "The Bank of England" (un istituto finanziario)
-    * "The bank of river Thames" (un manufatto di ingegneria idraulica)
-* Quale dei sensi di cui sopra ha l'occorrenza di "bank" in:
-    * "Last week I borrowed some money from the bank"
+* La parola inglese "bank" può avere (almeno) due significati:
+    * "The Bank of England" (istituto finanziario)
+    * "The bank of the river Thames" (argine fluviale)
+* Per disambiguare l'occorrenza di "bank" in "Last week I borrowed some money from the bank", è necessario considerare il contesto per determinare il significato corretto (istituto finanziario).
 
-approcci knowledge based: questa task ha avbuto nuova vita quando si è iniziato a poter accedere a risorse linguistiche in maniera elettronica e, grazie al web, wikipedia(la tassnomia di wikipedia può essere assimilata a quella di un tesauro)
+**Approcci Knowledge-Based:**  Questa task ha conosciuto un rinnovato interesse con la disponibilità di risorse linguistiche elettroniche e, grazie al web, di risorse come Wikipedia (la cui tassonomia può essere assimilata a quella di un thesaurus).
+
 
 ## Filtraggio nel Text Mining
 
 **Definizione:**
 Il filtraggio nel text mining consiste nel classificare un flusso di documenti inviati da un produttore di informazioni a un consumatore di informazioni, bloccando la consegna di quelli irrilevanti per il consumatore.
 
-**Esempio:**
-
-Un feed di notizie dove l'agenzia di stampa è il produttore e il giornale è il consumatore.
+**Esempio:** Un feed di notizie dove l'agenzia di stampa è il produttore e il giornale è il consumatore.
 
 **Caratteristiche:**
-
-* Considerabile come un caso di Text Classification con una singola etichetta (rilevante o irrilevante).
-* Implementabile sia lato produttore (instradamento selettivo) che lato consumatore (blocco).
-* Richiede la creazione e l'aggiornamento di un "profilo" per ogni consumatore (lato produttore) o un singolo profilo generale (lato consumatore).
+* Considerabile come un caso di Text Classification con una singola etichetta (*rilevante o irrilevante*).
+* Implementabile sia lato produttore (*instradamento selettivo*) che lato consumatore (*blocco*).
+* Richiede la creazione e l'aggiornamento di un "*profilo*" per ogni consumatore (*lato produttore*) o un singolo profilo generale (*lato consumatore*).
 
 **Filtraggio Adattivo:**
-
 * Il profilo iniziale è definito dall'utente.
 * Il profilo viene aggiornato in base al feedback dell'utente sulla pertinenza dei documenti consegnati.
 
 ### Filtraggio - CRM (Customer Relationship Management)
 
-**Obiettivo:**
-
-Aiutare le aziende a comprendere le opinioni dei clienti.
+**Obiettivo:** Aiutare le aziende a comprendere le opinioni dei clienti.
 
 **Processo:**
-
 1. **Standardizzazione:** I dati di feedback vengono convertiti in un formato uniforme.
 2. **Raggruppamento:** I dati standardizzati vengono raggruppati in base alla similarità del contenuto.
 3. **Assegnazione:** I nuovi feedback vengono assegnati alle categorie predefinite.
@@ -301,98 +275,86 @@ Aiutare le aziende a comprendere le opinioni dei clienti.
 
 ### Rilevamento dello Spam
 
-**Applicazione:**
-
-Classificare le email come spam o legittime utilizzando il text mining.
+**Applicazione:** Classificare le email come spam o legittime utilizzando il text mining.
 
 **Sfide:**
 
 * La valutazione del modello è complessa a causa dei costi asimmetrici degli errori (falsi positivi vs. falsi negativi).
 * La distribuzione non uniforme delle classi (molto più spam che email legittime) complica l'apprendimento del classificatore. 
 
-
-
-## Vocabolario(modello di rappresentazione dei testi)
+## Vocabolario: Modello di Rappresentazione dei Testi
 
 ### Definizione di Termine
 
-**Domanda:** Quali termini in un documento indicizziamo?
+**Problema:** Quali termini di un documento indicizzare?  Dobbiamo considerare tutte le parole o solo quelle ritenute "importanti"?  Come gestire la frequenza delle parole, considerando che alcune sono molto comuni mentre la maggior parte è rara?
 
-* **Tutte le parole o solo quelle "importanti"?**
-* **Cosa ne pensiamo della presenza o della frequenza?**
-    * Alcune parole sono molto comuni.
-    * La maggior parte delle parole sono molto rare.
+**Contesto:** I testi sono composti da parole.  La selezione dei termini per l'indicizzazione (es. indice analitico di un libro) è fondamentale. L'indice è uno strumento per raggiungere un obiettivo specifico.
 
-**Contesto:** I testi sono fatti da parole. Ci stiamo ponendo il problema di una selezione dei termini ai fini di indicizzazione (es. indice analitico di un libro, ovvero parole ritenute più importanti con una lista di numeri di pagine). L'indice è il mezzo per raggiungere un obiettivo.
-
-**Risposta:** Dobbiamo mettere in relazione le parole tra di loro, creare dei pattern relazionali. L'importanza delle parole passa tra vari concetti.
+**Risposta:**  È necessario mettere in relazione le parole tra loro, creando pattern relazionali. L'importanza di una parola dipende da diversi concetti.
 
 **Cosa è un termine?**
 
-* Parola, coppia di parole, frase, ...?
-* Radice della parola (word stem), n-gramma (sequenza di n caratteri), ...?
-* Tipo di parola?
+La definizione di "termine" è flessibile: può essere una parola singola, una coppia di parole, una frase, la radice di una parola (word stem), un n-gramma (sequenza di n caratteri), o un tipo di parola.
 
-**Possiamo modellare le relazioni tra i termini?**
+**Modellazione delle relazioni tra termini:**
 
-* Paragrafo, frase, ordine delle parole (non utilizzati perché complicano i modelli)
-* Strutture sintattiche più complesse (es: ellissi, anafore)
-* Relazioni semantiche (relazioni is-a, part-of)
+Possiamo considerare diverse relazioni tra termini, ma per semplificare i modelli, si evitano generalmente:
 
-**Ricerca di termini che catturano la semantica del testo**
+* Paragrafi, frasi e ordine delle parole.
+* Strutture sintattiche complesse come ellissi e anafore.
 
-* Evitando un'intensa elaborazione manuale (codifica manuale)
+Si preferiscono invece le relazioni semantiche (es. relazioni "is-a", "part-of").
 
-**Altri argomenti:**
+**Obiettivo:** Identificare termini che catturano la semantica del testo, evitando un'intensa elaborazione manuale (codifica manuale).
 
-* **Analisi lessicale e morfologica**
-    * Elaborazione di punteggiatura, numeri, conversione in minuscolo, ecc.
-    * Rimozione di stopwords
-    * Stemming, lemmatizzazione
-    * Tagging delle parti del discorso
-* **Analisi della semantica del discorso: Anafora**
-    * Anafora letterale/anafora pronominale
-    * Ellissi testuale
-    * Meronomia referenziale
-* **Pragmatica**
-* **Semiotica**
-* **Morfologia** 
 
-## Tokenizzazione: Problemi lessicali e morfologici
-* Un token è un termine candidato.
-* Come organizziamo un testo?
-* Rappresenta una fase di pre-processing nella pipeline di analisi dei testi
+**Altri argomenti correlati:**
+
+* **Analisi lessicale e morfologica:**  Include elaborazione della punteggiatura, conversione in minuscolo, rimozione di stopwords, stemming, lemmatizzazione e tagging delle parti del discorso.
+* **Analisi della semantica del discorso (Anafora):**  Considera l'anafora letterale/pronominale, l'ellissi testuale e la meronomia referenziale.
+* **Pragmatica, Semiotica e Morfologia:**  Questi campi forniscono ulteriori prospettive per una comprensione più completa del linguaggio.
+
+## Tokenizzazione: Problemi Lessicali e Morfologici
+
+Un token rappresenta un termine candidato durante la fase di pre-processing nell'analisi del testo.  La tokenizzazione, quindi, si occupa di come organizzare un testo in unità significative.
+
 ### Punteggiatura
 
-* **Sequenza con trattino:**
-    * Ad esempio, *state-of-the-art*, *co-education*, *lowercase*, *lower-case*, *lower case*.
-    * Potremmo decidere di tenere distinte le due parole, sarebbe una scelta onesta perché trattiamo le parole allo stesso modo. **Problema**: in alcuni casi rompiamo la semantica. Nel nostro caso vogliamo regolarci senza considerare la semantica. Comunque questo approccio non è scalabile.
-* **Apostrofi:**
-    * Ad esempio, *Italy’s capital* → *Italy AND s*? *Italys*? *Italy’s*?
-* **Acronimi:**
-    * Ad esempio, *U.S.A*, *USA*.
-* **Entità nominate:**
-    * Ad esempio, *San Francisco*, *Hewlett-Packard*.
+La gestione della punteggiatura presenta diverse sfide:
+
+* **Sequenze con trattino:**  Termini come *state-of-the-art*, *co-education*, *lowercase*, *lower-case*, *lower case* pongono il problema di come trattarli.  Mantenere le parole separate è una soluzione semplice ma può compromettere la semantica.  Un approccio più sofisticato è necessario, ma non sempre scalabile.
+
+* **Apostrofi:**  La gestione di apostrofi in termini come *Italy’s capital* richiede una decisione su come rappresentarli (*Italy AND s*, *Italys*, *Italy’s*?).
+
+* **Acronimi:**  Acronimi come *U.S.A* e *USA* possono essere trattati in modo diverso a seconda del contesto.
+
+* **Entità nominate:**  Entità come *San Francisco* e *Hewlett-Packard* richiedono un trattamento specifico per evitare di frammentarle in unità non semantiche.
+
 
 ### Numeri
-* **Rimozione:** Se abbiamo una stringa numerica la rimuoviamo, se abbiamo una stringa alfanumerica la teniamo.
-* **Motivi per tenere i numeri:**
-    * Permettere ai contenuti informativi di tenere conto dei dati.
-    * Utili quando si cercano codici di errore, si controlla l'intervallo di tempo, ecc.
-* **Metadati:** Spesso si indicizzeranno i "metadati" separatamente:
-    * Data di creazione, formato, ecc.
-    * La complessità dell'intreccio tra numeri e testo rende difficile prendere una decisione valida per tutti i casi.
-* **Varietà di tipi:**
-    * **Date:** *3/20/91*, *Mar. 12, 1991*, *20/3/91*.
-    * **Tempo:** *55 B.C.*.
-    * **Codici:** *B-52*.
-    * **Identificatori:** *My PGP key is 324a3df234cb23e*.
-    * **Numeri di telefono:** *(800) 234-2333*. 
 
-* **Case delle lettere:** il case delle lettere diventa lowercase. 
+La gestione dei numeri richiede una scelta tra rimozione e mantenimento.  Generalmente, si rimuovono le stringhe puramente numeriche, mentre si mantengono quelle alfanumeriche.
+
+**Motivazioni per il mantenimento dei numeri:**
+
+* Preservazione delle informazioni numeriche contenute nel testo.
+* Necessità di individuare codici di errore, intervalli temporali, ecc.
+
+**Metadati:** I metadati (data di creazione, formato, ecc.) sono spesso indicizzati separatamente.  La complessità dell'interazione tra numeri e testo rende difficile una soluzione universale.
+
+**Varietà di tipi numerici:**  I numeri possono assumere diverse forme:
+
+* **Date:** *3/20/91*, *Mar. 12, 1991*, *20/3/91*.
+* **Tempo:** *55 B.C.*
+* **Codici:** *B-52*.
+* **Identificatori:** *My PGP key is 324a3df234cb23e*.
+* **Numeri di telefono:** *(800) 234-2333*.
+
+**Case delle lettere:**  Generalmente, si converte tutto il testo in minuscolo (lowercase).
 
 
 ## Stopwords
+
 È una fase banale, ma risulta fondamentale perchè è quella con l'impatto maggiore.
 * **Definizione:** Parole grammaticali che servono a scopi grammaticali ma con scarso potere informativo. Sono specifiche della lingua.
 
@@ -417,9 +379,9 @@ Classificare le email come spam o legittime utilizzando il text mining.
 ## Personalizzazione della Stop-List
 
 **Obiettivo:** Non solo ridurre la stop-list, ma arricchirla.
+* La stop-list deve contenere termini che si aspettano di essere molto frequenti all'interno della collezione. 
 
 **Come e con cosa?**
-
 * **Rimozione di termini comuni al corpus:** 
     * Se un termine è frequente nel corpus di documenti, è poco esplicativo per la distinzione tra i documenti stessi.
     * La rimozione di questi termini è giustificata quando si analizzano i documenti nel contesto del corpus.
@@ -433,63 +395,46 @@ Classificare le email come spam o legittime utilizzando il text mining.
 	    * La decisione di escluderli dipende dal tipo di termine.
 	    * Non esiste una regola fissa.
 
-**Conclusione:**
-
-* La stop-list deve contenere termini che si aspettano di essere molto frequenti all'interno della collezione. 
-
 ## Normalizzazione
 
-**Obiettivo:** Uniformizzare le parole nel testo indicizzato e nelle parole di query nella stessa forma.
+L'obiettivo della normalizzazione è uniformare la forma delle parole nel testo indicizzato e nelle query di ricerca.  Questo permette di trovare corrispondenze tra termini che, pur avendo forme diverse, rappresentano lo stesso concetto.  
+Ad esempio, "U.S.A." e "USA" dovrebbero essere trattati come equivalenti.
+È fondamentale normalizzare in modo coerente il testo indicizzato e i termini delle query per garantire l'efficacia della ricerca.
 
-**Esempi:**
-
-* Corrispondenza tra "U.S.A." e "USA".
 
 **Risultato:**
 
-* **Termine:** Un tipo di parola (normalizzato).
-* **Voce nel dizionario IR:** Ogni termine rappresenta una voce nel dizionario di Information Retrieval.
+* **Termine:** Un tipo di parola, dopo la normalizzazione.
+* **Voce nel dizionario IR:** Ogni termine normalizzato rappresenta una voce nel dizionario di Information Retrieval (IR).
 
 **Classi di equivalenza:**
 
-* Definiscono implicitamente gruppi di termini equivalenti.
-* Esempi:
-    * Eliminazione di punti: "U.S.A.", "USA" -> "USA"
-    * Eliminazione di trattini: "anti-discriminatory", "antidiscriminatory" -> "antidiscriminatory"
-    * Eliminazione di accenti: "French résumé" vs. "resume"
-    * Eliminazione di umlaut: "German Tuebingen" vs. "Tübingen"
+La normalizzazione spesso si basa sulla creazione di classi di equivalenza, raggruppando termini considerati equivalenti.  Esempi di operazioni di normalizzazione includono:
 
-L'obiettivo è ridurre le varianti lessicali a una sola parola, sacrificando parte dell'informazione per ottenere una rappresentazione dei testi focalizzata sulla sintassi e non sulla semantica.
+* **Eliminazione di punti:** "U.S.A.", "USA" → "USA"
+* **Eliminazione di trattini:** "anti-discriminatory", "antidiscriminatory" → "antidiscriminatory"
+* **Eliminazione di accenti:** "French résumé" vs. "resume"
+* **Eliminazione di umlaut:** "German Tuebingen" vs. "Tübingen"
 
-Questo processo di semplificazione permette di concentrarsi sulla struttura grammaticale del testo, ignorando le sfumature di significato che potrebbero essere introdotte da diverse parole con significati simili.
+Questo processo semplifica la rappresentazione del testo, focalizzandosi sulla struttura sintattica a discapito di alcune sfumature semantiche.  Diverse parole con significati simili vengono ridotte a una sola forma.
 
 **Espansione asimmetrica:**
 
-* Un'alternativa alla classificazione per classi di equivalenza.
-* Esempi:
-    * Inserire: "window"
-        * Ricerca: "window", "windows"
-    * Inserire: "windows"
-        * Ricerca: "Windows", "windows", "window"
-    * Inserire: "Windows"
-        * Ricerca: "Windows"
-* Potenzialmente più potente, ma meno efficiente.
+Un'alternativa alle classi di equivalenza è l'espansione asimmetrica.  In questo caso, l'inserimento di un termine porta all'inclusione di diverse varianti durante la ricerca:
+
+* Inserire: "window"  → Ricerca: "window", "windows"
+* Inserire: "windows" → Ricerca: "Windows", "windows", "window"
+* Inserire: "Windows" → Ricerca: "Windows"
+
+Questo approccio può essere più potente, ma meno efficiente.
 
 **Criterio più importante: uso della lingua**
 
-* Come gli utenti scrivono le loro query?
-* Anche nelle lingue che standardmente hanno accenti, trattini, ecc., gli utenti spesso potrebbero non digitarli.
-* È meglio normalizzare a un termine senza accenti/trattini.
+La scelta del metodo di normalizzazione dipende fortemente dall'uso della lingua.  Considerando che gli utenti spesso omettono accenti e trattini nelle query, è spesso preferibile normalizzare a una forma senza questi elementi.
 
 **Tokenizzazione e normalizzazione:**
 
-* Possono dipendere dalla lingua e quindi sono intrecciate con il rilevamento della lingua.
-* Ad esempio, formati di data: "3/10/2000" (US) vs. "10/3/2000" (UE).
-
-**Conclusione:**
-
-* È necessario "normalizzare" il testo indicizzato e i termini di query in modo identico. 
-
+Tokenizzazione e normalizzazione sono processi interdipendenti e spesso dipendono dalla lingua.  Ad esempio, i formati di data "3/10/2000" (US) e "10/3/2000" (UE) richiedono un trattamento diverso.
 
 ## Case Folding
 
@@ -526,51 +471,53 @@ L'obiettivo è ridurre questi sinonimi a una sola dimensione, concentrandosi sui
 
 
 ## Tesauri
-Generalizza termini che hanno significato correlato, ma forme superficiali non correlate, in termini di indice più uniformi.
 
-* Gestiamo sinonimi e omonimi?
-* **Esempio:** tramite classi di equivalenza costruite a mano
+I tesauri generalizzano termini con significato correlato ma forme superficiali diverse, creando un indice più uniforme.  Questo approccio affronta il problema di sinonimi e omonimi.
+
+* **Gestione di sinonimi e omonimi:** I tesauri permettono di gestire sia i sinonimi (parole con significato simile ma forma diversa) che gli omonimi (parole con forma uguale ma significato diverso).
+
+* **Esempio:**  Classi di equivalenza possono essere costruite manualmente, ad esempio:
     * car = automobile
     * color = colour
-* Possiamo riscrivere per formare termini di classe di equivalenza.
-    * Quando il documento contiene "automobile", indicizzarlo sotto "car-automobile" (e viceversa).
-* Oppure possiamo espandere una query.
-    * Quando la query contiene "automobile", cercare anche sotto "car".
 
-### Errori di ortografia
-* Un approccio è Soundex che forma classi di equivalenza di parole basate su euristiche fonetiche.
+* **Implementazione:**  Ci sono due approcci principali:
+
+    * **Indicizzazione multipla:** Quando un documento contiene "automobile", viene indicizzato anche sotto "car-automobile" (e viceversa).  Questo crea una classe di equivalenza esplicita nell'indice.
+
+    * **Espansione della query:** Quando una query contiene "automobile", la ricerca viene estesa anche al termine "car".  Questo approccio espande lo spazio di ricerca per includere termini correlati.
+
+
+### Errori di Ortografia
+
+Un approccio per gestire gli errori di ortografia è l'utilizzo di algoritmi come Soundex.  Soundex crea classi di equivalenza di parole basate su euristiche fonetiche, raggruppando parole che suonano in modo simile anche se scritte diversamente.
 
 ## Lemmatizzazione
 
-"Normalizza per ricondurre al lemma"
+La lemmattizzazione è un processo di normalizzazione che riduce le forme flessionali di una parola alla sua forma base, o lemma.  Questo si applica in particolare a verbi (riducendoli all'infinito) e sostantivi (riducendoli al singolare).
 
-Riduce le forme flessionali/varianti alla forma base. Si applica in particolare ai verbi (li riduce all'infinito) e ai sostantivi (al singolare).
+* **Esempio:** La frase "the boy's cars are different colors" potrebbe essere lemmattizzata in "the boy car be different color".  Si noti che i concetti principali vengono preservati.  In questo caso, la lemmattizzazione è un effetto collaterale dell'analisi sintattica, non l'obiettivo principale.
 
-* **Esempio:** "the boy's cars are different colors" → "the boy car be different color": preserviamo i concetti. In questo caso è un effetto secondario dell'elaborazione sintattica, non l'obiettivo principale.
+La lemmattizzazione richiede un'analisi morfologica completa per identificare correttamente il lemma di ogni parola nel dizionario.
 
-La lemmattizzazione implica l'esecuzione di una riduzione "corretta" alla forma del lemma del dizionario.
+* **Benefici per il retrieval:**  I benefici della lemmattizzazione per il retrieval di informazioni sono generalmente modesti.
 
-Supporto per l'analisi morfologica completa.
-
-* Al massimo benefici modesti per il retrieval. 
 
 
 ## Stemming
 
-Chiamato anche "suffissif stripping": intuitivo per i sostantivi, ma il problema è sui verbi.
+Lo stemming, o "suffisso stripping", è un processo che riduce le parole alle loro radici prima dell'indicizzazione.  La radice è considerata il prefisso della parola.  Questo processo è intuitivo per i sostantivi, ma più complesso per i verbi.
 
-Riduce i termini alle loro "radici" prima dell'indicizzazione. Radice intesa come prefisso.
+È importante notare che lo stemming **distrugge informazioni lessicali**.  Dovrebbe essere utilizzato solo quando non è necessaria un'elaborazione semantica dei testi.  È spesso combinato con la rimozione delle *stop words*.  Non ha senso combinarlo con la lemmattizzazione, in quanto lo stemming è un processo più aggressivo.
 
-Questa fase distrugge il lessico: va fatta solo se non vogliamo elaborare semanticamente i testi. La combiniamo alla rimozione delle stop word: non ha senso farla con la lemmatizzazione, lo stemming è più aggressivo. "Stemming" suggerisce un grossolano taglio degli affissi.
+* **Dipendenza dalla lingua:** Gli algoritmi di stemming sono specifici per ogni lingua.
 
-* Dipendente dalla lingua.
-* **Esempio:** automate(s), automatic, automation **tutti ridotti a** automat.
+* **Esempio:** Le parole "automate(s)", "automatic" e "automation" potrebbero essere tutte ridotte a "automat".
 
-**Per esempio:**
+**Esempi di equivalenze create dallo stemming:**
 
-* compressed and compression are both accepted as equivalent to compress.
-* Implica
-* compress and compress are both accepted as equivalent to compress.
+* "compressed" e "compression" sono entrambe considerate equivalenti a "compress".
+* "compress" e "compress" sono entrambe considerate equivalenti a "compress".  (Questo evidenzia la natura semplicistica dello stemming).
+
 
 ### Stemming di Porter
 
@@ -636,43 +583,54 @@ Tutti questi algoritmi hanno lo stesso impatto, ma presentano diverse peculiarit
 
 ## Modello Booleano
 
-Il modello booleano confronta l'istruzione di query booleana con gli insiemi di termini utilizzati per identificare il contenuto testuale (termini di indice). 
+Il modello booleano di ricerca confronta una query booleana con gli insiemi di termini utilizzati per indicizzare il contenuto testuale.
 
-**Query booleana:**
-* **Espressione:** Combina termini di indice con operatori booleani.
+**Query Booleana:**
+
+* **Espressione:** Combinazione di termini di indice tramite operatori booleani.
 * **Struttura:** L'espressione contiene:
-    * **Termini di indice:** Termini selezionati dal documento indicizzato.
-    * **Operatori booleani:** AND, OR e NOT, definiti sui termini. Il modello è rigido e il concetto di corrispondenza è binario: il documento corrisponde alla condizione o meno.
+    * **Termini di indice:** Parole chiave estratte dai documenti indicizzati.
+    * **Operatori booleani:** `AND`, `OR`, e `NOT`, applicati ai termini. Il modello è rigido e la corrispondenza è binaria: un documento soddisfa la condizione o no.
 
 **Applicazioni:**
-* Molti sistemi di ricerca ancora oggi utilizzano il modello booleano:
-    * Email, cataloghi di biblioteche, macOS Spotlight.
+
+Molti sistemi di ricerca utilizzano ancora il modello booleano, tra cui:
+
+* Sistemi di posta elettronica
+* Cataloghi di biblioteche
+* macOS Spotlight
+
 
 ### Esempio: WestLaw
-* Il più grande servizio di ricerca legale commerciale (a pagamento) (iniziato nel 1975; classificazione aggiunta nel 1992; nuova ricerca federata aggiunta nel 2010).
-* Decine di terabyte di dati; ~700.000 utenti.
-* La maggior parte degli utenti utilizza ancora query booleane.
 
-**Esempi di query:**
+WestLaw è il più grande servizio commerciale di ricerca legale a pagamento.  Iniziato nel 1975, ha aggiunto la classificazione nel 1992 e una nuova ricerca federata nel 2010.  Gestisce decine di terabyte di dati e conta circa 700.000 utenti.  La maggior parte degli utenti utilizza ancora query booleane.
+
+
+**Esempi di Query:**
 
 * **Query 1:** Qual è il termine di prescrizione nei casi che coinvolgono il Federal Tort Claims Act?
-    * **Espressione:** LIMIT! /3 STATUTE ACTION /S FEDERAL /2 TORT /3 CLAIM
-    * **Spiegazione:**
-        * `/3` = entro 3 parole, `/S` = nella stessa frase.
-        * Questi dati aggiungono informazioni di contesto.
+
+    * **Espressione:** `LIMIT! /3 STATUTE ACTION /S FEDERAL /2 TORT /3 CLAIM`
+
+    * **Spiegazione:** `/3` indica "entro 3 parole", `/S` indica "nella stessa frase".  Questi operatori di prossimità aggiungono informazioni contestuali.
+
 
 * **Query 2:** Requisiti per le persone disabili per poter accedere a un luogo di lavoro.
-    * **Espressione:** disabl! /p access! /s work-site work-place (employment /3 place
-    * **Nota:** Lo SPAZIO è disgiunzione, non congiunzione!
 
-### Vantaggi del modello booleano
+    * **Espressione:** `disabl! /p access! /s work-site work-place (employment /3 place`
 
-* **Query lunghe e precise:** Consentono di specificare con precisione i criteri di ricerca.
+    * **Nota:** Lo spazio tra i termini indica una disgiunzione (OR), non una congiunzione (AND).
+
+
+### Vantaggi del Modello Booleano
+
+* **Query precise e lunghe:** Consentono di specificare con precisione i criteri di ricerca.
 * **Operatori di prossimità:** Permettono di definire la relazione spaziale tra i termini.
-* **Sviluppo incrementale:** Le query possono essere sviluppate in modo graduale, aggiungendo termini e operatori.
-* **Differenze dalla ricerca sul web:** Le query booleane sono più precise e controllate rispetto alle ricerche sul web. 
+* **Sviluppo incrementale:** Le query possono essere raffinate gradualmente, aggiungendo termini e operatori.
+* **Differenze dalla ricerca sul web:** Le query booleane sono più precise e controllate rispetto alle ricerche sul web.
 
 ## Esempio di query
+
 Quali opere di Shakespeare contengono le parole "Brutus" e "Caesar" ma NON "Calpurnia"?
 - Si potrebbe cercare "Brutus" e "Caesar" in tutte le opere di Shakespeare, quindi eliminare le righe che contengono "Calpurnia"?
 Perché questa non è la risposta?
@@ -686,30 +644,25 @@ Perché questa non è la risposta?
 ![[Pasted image 20241001111231.png|663]]
 ==come funziona?==
 
-### Limitazioni
+### Limitazioni del Modello Booleano
 
-Molto rigido: AND significa tutti; OR significa qualsiasi.
+Il modello booleano è molto rigido: l'operatore `AND` richiede la presenza di tutti i termini, mentre `OR` richiede la presenza di almeno uno.  Questa rigidità presenta diverse limitazioni:
 
-* Incoraggia query brevi.
-* Richiede una scelta precisa dei termini di indice -> potremmo avere risultati controintuitivi perché il modello non prevede né espansione della query (in line o a runtime) con termini equivalenti dal punto di vista semantico.
-    * Ogni termine indice è considerato in maniera isolata.
+* **Query brevi:** Il modello incoraggia l'utilizzo di query brevi e semplici.
+* **Scarsa flessibilità:** Richiede una scelta precisa dei termini di indice, portando a risultati potenzialmente controintuitivi.  Non prevede l'espansione della query (né in linea né a runtime) con termini semanticamente equivalenti. Ogni termine di indice è considerato in modo isolato.
 
-Difficile controllare il numero di documenti recuperati.
-* Tutti i documenti corrispondenti saranno restituiti.
+**Difficoltà nel controllo dei risultati:**
 
-Difficile classificare l'output.
-* Tutti i documenti corrispondenti soddisfano logicamente la query.
+* **Numero di documenti recuperati:** Tutti i documenti corrispondenti alla query vengono restituiti, senza possibilità di controllo sulla quantità.
+* **Classificazione dei risultati:** Tutti i documenti corrispondenti soddisfano la query logicamente, senza possibilità di ordinamento in base alla rilevanza.
+* **Feedback di rilevanza:**  È difficile utilizzare il feedback dell'utente (indicazione di rilevanza o irrilevanza di un documento) per migliorare la query.  Non essendo possibile un ranking dei risultati, non è possibile migliorare il processo di retrieval tramite il feedback di rilevanza.
 
-Difficile eseguire il feedback di rilevanza.
-* Se un documento viene identificato dall'utente come rilevante o irrilevante, come dovrebbe essere modificata la query?
-* Non possiamo fare il retrieval in termini di ranking, ma solo di match, dunque non possiamo migliorare il processo di retrieval attraverso il principio di trattamento del feedback di rilevanza che esprime il grado di soddisfazione dell'utente per aver avuto il result-set desiderato.
+**Espressività limitata:**
 
-Difficile esprimere richieste complesse dell'utente.
-* Nessuna incertezza nell'assegnare termini di indice ai documenti.
-* Nessuna disposizione per regolare l'importanza dei termini di query.
-**Sparsità**: legato alla rappresentazione dei dati, problema comune con altri modelli.
+* **Complessi requisiti dell'utente:** Il modello ha difficoltà nell'esprimere richieste complesse. Non permette di regolare l'importanza dei termini nella query.
+* **Sparsità:** La rappresentazione dei dati soffre del problema della sparsità, comune anche ad altri modelli di retrieval.
 
-**Conclusioni:** da utilizzare solo quando le esigenze degli utenti sono esprimibili tramite query corte e semplici e necessitiamo di sapere solo se un item c'è o non c'è. 
+**Conclusioni:** Il modello booleano è adatto solo quando le esigenze dell'utente sono esprimibili tramite query corte e semplici, e l'obiettivo è solo determinare la presenza o l'assenza di un elemento.
 
 
 ## Estensione del modello booleano
@@ -737,23 +690,23 @@ Difficile esprimere richieste complesse dell'utente.
     * **Fuzzy:** d è più o meno in A.
 * **Grado di appartenenza:** wA è il grado di appartenenza di un elemento all'insieme A.
 * **Operazioni:**
-    * **Intersezione (and):** $wA∩B = min(wA, wB)$
-    * **Unione (or):** $wA∪B = max(wA, wB)$
+    * **Intersezione (and):** $w(A∩B) = min(wA, wB)$
+    * **Unione (or):** $w(A∪B )= max(wA, wB)$
 
 ### MMM: Mixed Min and Max Model
 
 * **Termini:** t1, t2, ..., tn
 * **Documento:** d, con pesi dei termini di indice: w1, w2, ..., wn
-* **Query disgiuntiva:** $q_{or}$ = (t1 or t2 or ... or tn)
+* **Query disgiuntiva:** $q_{or} = (t1 \lor t2 \lor \dots \lor tn)$
 * **Somiglianza query-documento:**
-    * $S(q_{or}, d) = λ_{or} * max(w1,.. ,wn) + (1 - λ_{or}) * min(w1,.. , wn)$
+    * $S(q_{or}, d) = λ_{or}  max(w1,.. ,wn) + (1 - λ_{or})  min(w1,.. , wn)$
     * $λ_{or}$ è un parametro che controlla il peso relativo del massimo e del minimo.
     * Con la logica booleana regolare, $λ_{or} = 1$.
     * Se la query è puramente disgiuntiva, si considera solo il primo termine.
 
 * **Query congiuntiva:**
-    * $q_{and}$ = (t1 and t2 and ... and tn)
-    * $S(q_{and}, d) = λ_{and} * min(w1,.. , wn) + (1 - λ_{and}) * max(w1,.. , wn)$
+    * $q_{and} = (t1 \land t2 \land ... \land tn)$
+    * $S(q_{and}, d) = λ_{and} min(w1,.. , wn) + (1 - λ_{and})  max(w1,.. , wn)$
     * $λ_{and}$ è un parametro che controlla il peso relativo del minimo e del massimo.
     * Con la logica booleana regolare, $λ_{and} = 1$.
 
@@ -773,11 +726,10 @@ Difficile esprimere richieste complesse dell'utente.
     * Considera ogni documento e query come punti multidimensionali (considerando due schemi di pesatura).
 
 ## Sparsità
-#### Rappresentazione di matrici termine-documento
-- Adottando un modello di rappresentazione di questo un modello poco sparso è irrealistico.
+
+**Rappresentazione di matrici termine-documento:** Adottando un modello di rappresentazione di questo un modello poco sparso è irrealistico.
 	
-**Esempio:** Considera un insieme di **N = 1 milione di documenti**, ognuno con circa **1000 parole.**
-- Un esempio simile è la market-basket-analisys
+**Esempio:** Considera un insieme di **N = 1 milione di documenti**, ognuno con circa **1000 parole.**(Un esempio simile è la market-basket-analisys)
 Assumiamo una media di **6 byte/parola**, inclusi spazi e punteggiatura.
 * Questo corrisponde a **6 GB di dati** nei documenti.
 Supponiamo che ci siano **M = 500K termini distinti** tra questi documenti.
@@ -824,7 +776,7 @@ Desiderata per una struttura dati:
     * La scelta della struttura dati per l'indice inverso dipende dalle esigenze specifiche dell'applicazione.
     * È importante considerare i compromessi tra efficienza di memorizzazione, velocità di accesso e facilità di aggiornamento.
 
-Il core di un indice è composto da due elementi principali:
+###### Il **core di un indice** è composto da due elementi principali:
 
 * **Dizionario:** Contiene le parole del corpus, ciascuna associata a un puntatore alla lista di posting corrispondente.
 * **Liste di posting:** Ogni lista contiene i documenti in cui la parola corrispondente compare, insieme alla sua frequenza nel documento.
@@ -843,17 +795,17 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 ## Passaggi dell'indexer
 
-4. **Sequenza di coppie (Termine, docID):**  L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
+1. **Sequenza di coppie (Termine, docID):**  L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
 
-5. **Ordina per Termine:** La sequenza di coppie viene ordinata in base al termine.
+2. **Ordina per Termine:** La sequenza di coppie viene ordinata in base al termine.
 
-6. **Ordina per docID:**  Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
+3. **Ordina per docID:**  Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
 
-7. **Unisci voci multiple:** Se un termine appare più volte nello stesso documento, le voci vengono unite in un'unica voce, mantenendo la frequenza del termine nel documento.
+4. **Unisci voci multiple:** Se un termine appare più volte nello stesso documento, le voci vengono unite in un'unica voce, mantenendo la frequenza del termine nel documento.
 
-8. **Aggiungi frequenza del documento:**  Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
+5. **Aggiungi frequenza del documento:**  Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
 
-9. **Dividi in:**
+6. **Dividi in:**
 
     * **Dizionario:**  Contiene tutti i termini distinti trovati nei documenti, con il loro corrispondente termID.
     * **Postings:**  Contiene le liste di postings per ogni termine, ovvero l'insieme di documenti in cui il termine appare, con la loro frequenza. 
@@ -864,11 +816,11 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 **Passaggi:**
 
-10. **Individua Brutus nel Dizionario:**
+1. **Individua Brutus nel Dizionario:**
     * Recupera i suoi postings (lista di documenti in cui compare Brutus).
-11. **Individua Caesar nel Dizionario:**
+2. **Individua Caesar nel Dizionario:**
     * Recupera i suoi postings (lista di documenti in cui compare Caesar).
-12. **Unisci i due postings (interseca gli insiemi di documenti):**
+3. **Unisci i due postings (interseca gli insiemi di documenti):**
     * Attraversa i due postings simultaneamente, in tempo lineare nel numero totale di voci di postings. 
 	    * Garantito dal fatto che manteniamo le due liste ordinate
     * Questo significa che l'algoritmo impiega un tempo proporzionale al numero di documenti in cui compare Brutus più il numero di documenti in cui compare Caesar.
@@ -927,13 +879,13 @@ INTERSECT(p1, p2)
 * Le query di frase sono un elemento chiave per la "ricerca avanzata".
 * Sono facilmente comprensibili dagli utenti.
 * L'obiettivo è rispondere a query come "Dipartimenti Unical" come una frase completa.
-* La frase "Ci sono 14 dipartimenti presso Unical" non è una corrispondenza, poiché non corrisponde alla query di frase.
+* La frase "*Ci sono 14 dipartimenti presso Unical*" non è una corrispondenza, poiché non corrisponde alla query di frase.
 * Per questo tipo di query, non è sufficiente memorizzare solo coppie (Termine, docID).
 
 **Approcci:**
 
 * **Indici biword:**
-    * Indizza ogni coppia consecutiva di termini nel testo come una frase ( come se avvessimo un *n-gram* che preserva le parole con *n=2*).
+    * Indizza ogni coppia consecutiva di termini nel testo come una frase (come se avvessimo un *n-gram* che preserva le parole con $n=2$).
     * **Esempio**: "*Amici, Romani, Concittadini*" genera i biword "*amici romani*" e "*romani concittadini*".
     * Ogni biword diventa un termine del dizionario.
     * L'elaborazione delle query di frase a due parole è immediata.
@@ -992,23 +944,21 @@ doc2: posizione1, posizione2 … ;
 
 ## Dimensione dell'indice posizionale
 
-* Un indice posizionale espande in modo sostanziale l'archiviazione dei postings.
-    * Bisogna avere una voce per ogni occorrenza, non solo una per documento.
-    * La dimensione dell'indice dipende dalla dimensione media del documento. (Anche se gli indici possono essere compressi.)
-* **Regola empirica:**
-    * Un indice posizionale è 2-4 volte più grande di un indice non posizionale.
-    * La dimensione dell'indice posizionale è il 35-50% del volume del testo originale.
-* Tuttavia, un indice posizionale è ora utilizzato standardmente a causa della potenza e dell'utilità delle query di frase e prossimità, sia utilizzate esplicitamente che implicitamente in un sistema di recupero di ranking. 
+Un indice posizionale espande in modo sostanziale l'archiviazione dei postings.
+* Bisogna avere una voce per ogni occorrenza, non solo una per documento.
+* La dimensione dell'indice dipende dalla dimensione media del documento. (Anche se gli indici possono essere compressi)
+  
+**Regola empirica:**
+  * Un indice posizionale è 2-4 volte più grande di un indice non posizionale.
+  * La dimensione dell'indice posizionale è il 35-50% del volume del testo originale.
+Tuttavia, un indice posizionale è lo standard di utilizzo a causa della potenza e dell'utilità delle query di frase e prossimità, sia utilizzate esplicitamente che implicitamente in un sistema di recupero di ranking. 
 
 ## Costruzione dell'indice basata sull'ordinamento
-* Mentre costruiamo l'indice, analizziamo i documenti uno alla volta.
-    * I postings finali per qualsiasi termine sono incompleti fino alla fine.
-* Richiede molto spazio per collezioni di grandi dimensioni:
-    * ad esempio, a 8 byte per (termID, docID) e 100 milioni(valore realistico per un anno di pubblicazioni) #postings non posizionali (cioè, RCV1(corpus), un anno di notizie di Reuters) ->
-        * in linea di principio, è possibile indicizzare questo in memoria oggi, ma
-        * le collezioni tipiche sono molto più grandi
-            * ad esempio, il New York Times fornisce un indice di >150 anni di notizie
-* **Dobbiamo memorizzare i risultati intermedi su disco**.
+
+Mentre costruiamo l'indice, analizziamo i documenti uno alla volta. I postings finali per qualsiasi termine sono incompleti fino alla fine del processo. Questo approccio richiede molto spazio per collezioni di grandi dimensioni. 
+- Ad esempio, con 8 byte per ogni coppia (termID, docID) e considerando 100 milioni di postings (un valore realistico per un anno di pubblicazioni), in linea di principio sarebbe possibile indicizzarlo in memoria oggi. 
+- Tuttavia, le *collezioni tipiche sono molto più grandi*: il New York Times, ad esempio, fornisce un indice di oltre 150 anni di notizie. 
+**Pertanto, dobbiamo memorizzare i risultati intermedi su disco.**
 
 ### Scalabilità della costruzione dell'indice
 * La costruzione dell'indice in memoria non è scalabile.
@@ -1028,8 +978,7 @@ doc2: posizione1, posizione2 … ;
     * Dimensioni dei blocchi: da 8 KB a 256 KB(dipende dal task, per il retrival si arriva a 64, 256 è il massimo).
 
 #### Ordinamento usando il disco come "memoria"?
-* Possiamo usare lo stesso algoritmo di costruzione dell'indice per collezioni più grandi, ma usando il disco invece della memoria?
-    * No: Ordinare 100 milioni di record su disco è troppo lento, poichè implica troppe ricerche su disco.
+* Non possiamo usare lo stesso algoritmo di costruzione dell'indice per collezioni più grandi, usando il disco invece della memoria, perchè ordinare 100 milioni di record su disco è troppo lento, poichè implica troppe ricerche su disco.
 * Abbiamo bisogno di un algoritmo di ordinamento esterno.
 
 ## BSBI: Indicizzazione basata sull'ordinamento a blocchi
@@ -1060,46 +1009,56 @@ BSBIndexConstruction()
 
 
 #### Ordinamento di 10 blocchi di 10 milioni di record.
-* Innanzitutto, leggiamo ogni blocco e ordiniamo al suo interno:
-    * Quicksort richiede $O(N \cdot ln (N))$ passaggi in media.
-    * Nel nostro caso N=10 milioni.
-* 10 volte questa stima
-    * ci fornisce 10 run ordinate di 10 milioni di record ciascuna.
-* Fatto in modo semplice, abbiamo bisogno di 2 copie dei dati su disco.
-    * Ma possiamo ottimizzare questo. 
+L'ordinamento di 10 blocchi da 10 milioni di record ciascuno avviene in due fasi:  ordinamento interno di ogni blocco (usando ad esempio Quicksort con complessità $O(N \log N)$) e successiva fusione delle run ordinate tramite un algoritmo di ordinamento esterno (come un merge sort esterno).  
+L'utilizzo dello spazio su disco può essere ottimizzato evitando la necessità di due copie complete dei dati.
 
 
-## Come unire le run ordinate?
+## Come Unire le Run Ordinate?
 
-* Possiamo fare delle **merge binarie**, con un albero di merge di $log_2(10) = 4$ livelli.
-    * Durante ogni livello, leggiamo in memoria le run a blocchi di 10 milioni, le uniamo e le riscriviamo.
-Invece di eseguire un unico merge finale, si può adottare una struttura ad albero, dove ogni livello (layer) del processo prevede un merge parziale.
-1. **Partizionamento:** I dati vengono suddivisi in partizioni.
-2. **Merge parziale:** Ogni partizione viene caricata in memoria e sottoposta a un merge, generando un nuovo indice.
-3. **Aggiornamento dell'indice:** L'indice aggiornato viene utilizzato per il merge del livello successivo
+Esistono due approcci principali per unire run ordinate: il *merge binario* e il *multi-way merge*.
+
+**Merge Binario:**
+
+Si possono effettuare merge binari, utilizzando un albero di merge con  $\log_2(n)$ livelli, dove *n* è il numero di run.  Ad esempio, con 10 run, si avrebbero 4 livelli ($\log_2(10) \approx 4$).  Ad ogni livello, si leggono blocchi di run (es. 10 milioni di elementi per blocco), si uniscono e si riscrivono su disco.  Invece di un unico merge finale, si adotta una struttura ad albero con merge parziali a ogni livello:
+
+1. **Partizionamento:** I dati vengono suddivisi in partizioni.
+2. **Merge parziale:** Ogni partizione viene caricata in memoria e sottoposta a merge, generando un nuovo indice.
+3. **Aggiornamento dell'indice:** L'indice aggiornato viene utilizzato per il merge del livello successivo.
 
 ![[1) Intro-20241003112202805.png]]
-* Ma è più efficiente fare un **multi-way merge**, dove si legge da tutti i blocchi simultaneamente.
-    * Apriamo tutti i file di blocco simultaneamente, manteniamo un **buffer di lettura** per ciascuno e un **buffer di scrittura** per il file di output.
-    * In ogni iterazione, scegliamo il termID più basso che non è stato elaborato usando una coda di priorità.
-    * Uniamo tutte le liste di postings (una o più) per quel termID, che derivano dai vari blocchi, e lo scriviamo.
-* A condizione che si leggano blocchi di dimensioni decenti da ogni blocco in memoria e poi si scriva un blocco di output di dimensioni decenti.
-- **Assunzione:**  Vi è una condivisione solo parziale del lessico tra i vari documenti.
 
-**Problema della crescita del lessico**:
-- **Gestione dei termini:** È fondamentale gestire correttamente i termini (token precessati) e i loro identificativi (ID).
-- **Compressione con perdita:** La compressione con perdita può essere applicata solo a quei termini che non sono essenziali per la comprensione del testo.
-- **Valutazione dei token:** Sono necessarie soluzioni intermedie per valutare l'importanza dei token e decidere quali possono essere compressi con perdita.
+**Multi-way Merge:**
+
+Un approccio più efficiente è il multi-way merge, che legge simultaneamente da tutti i blocchi.  Questo richiede:
+
+* L'apertura simultanea di tutti i file di blocco.
+* Un buffer di lettura per ogni blocco e un buffer di scrittura per il file di output.
+* L'utilizzo di una coda di priorità per selezionare, ad ogni iterazione, il `termID` più basso non ancora elaborato.
+* L'unione delle liste di postings corrispondenti a quel `termID` (provenienti dai vari blocchi) e la scrittura del risultato.
+
+Questo metodo è efficiente a condizione che si leggano e si scrivano blocchi di dimensioni adeguate.
+
+**Assunzione:** Si assume una condivisione solo parziale del lessico tra i vari documenti.
+
+
+**Problema della Crescita del Lessico:**
+
+La gestione del lessico durante il merge presenta sfide:
+
+* **Gestione dei termini e degli ID:** È fondamentale gestire correttamente i termini (token pre-processati) e i loro identificativi (ID).
+* **Compressione con perdita:** La compressione con perdita può essere applicata solo a termini non essenziali per la comprensione del testo.
+* **Valutazione dei token:** Sono necessarie strategie per valutare l'importanza dei token e decidere quali possono essere compressi con perdita.
+
 
 ## SPIMI: Indicizzazione in memoria a passaggio singolo (approccio lazy)
 
-* **Problema rimanente con l'algoritmo basato sull'ordinamento:**
+* **Problema con l'algoritmo basato sull'ordinamento:**
     * La mappatura (termine, termID) potrebbe non entrare in memoria.
     * Abbiamo bisogno del dizionario (che cresce dinamicamente) per implementare una mappatura termine-termID.
 
 Idee chiave: sono complementari
-* **Idea chiave 1:** Generare dizionari separati per ogni blocco - non c'è bisogno di mantenere la mappatura termine-termID tra i blocchi (mapping across block).
-* **Idea chiave 2:** Non ordinare. Accumulare i postings nelle liste di postings man mano che si verificano.
+* **Idea chiave 1:** *Generare dizionari separati per ogni blocco*. Non c'è bisogno di mantenere la mappatura termine-termID tra i blocchi (mapping across block).
+* **Idea chiave 2:** *Non ordinare*. Accumulare i postings nelle liste di postings man mano che si verificano.
 
 * Sulla base di queste due idee, generiamo un indice invertito completo per ogni blocco.
 * Questi indici separati possono quindi essere uniti in un unico grande indice.
@@ -1110,28 +1069,30 @@ Idee chiave: sono complementari
     * In pratica, è una struttura che conserviamo in memoria e che viene riallocata all'occorrenza.
     * Evitiamo di tenere traccia dei term-id, l'algoritmo lavora direttamente con i termini
 
-### SPIML-Invert(token_stream)
+### SPIML-Invert (token_stream)
 
-4.  **output_file** = NEWFILE()
-5.  **dictionary** = NEWHASH()
-6.  **while** (free memory available)
-7.      **do** token ← next(token_stream)
-8.      **if** term(token) ∉ dictionary
-9.          **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
-10.      **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
-11.      **if** full(postings_list)
-12.          **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
-13.     ADDToPOSTINGSLIST(postings_list, docID(token))
-14.     sorted_terms ← SORTTERMS(dictionary)
-15.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
-16.     **return** output_file
+```python
+
+1.  output_file = NEWFILE()
+2.  dictionary = NEWHASH()
+3.  while (free memory available)
+4.      do token ← next(token_stream)
+5.      if term(token) ∉ dictionary
+6.          then postings_list = ADDToDICTIONARY(dictionary, term(token))
+7.      else postings_list = GETPOSTINGSLIST(dictionary, term(token))
+8.      if full(postings_list)
+9.          then postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
+10.     ADDToPOSTINGSLIST(postings_list, docID(token))
+11.     sorted_terms ← SORTTERMS(dictionary)
+12.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
+13.     return output_file
 
 
-
-Linea 5) il token raw viene pre-processato: riconduciamo il token a quello che è un index-term.
-Linea 10) rendiamo immediatamente disponibile il posting (occorrenza del termine) nel documento dove è stato osservato.
-Linee 8-9) se ha raggiunto la dimensione limite,
-Linea 11)L'ordinamento è rimandato alla fase successiva, quando tutti i postings per un blocco sono stati raccolti. 
+# Linea 5: il token raw viene pre-processato; viene ricondotto a un index-term.
+# Linea 10: il posting (occorrenza del termine) nel documento viene aggiunto immediatamente.
+# Linee 8-9: se la lista di postings raggiunge la dimensione limite, viene raddoppiata.
+# Linea 11: L'ordinamento dei termini avviene dopo aver raccolto tutti i postings per un blocco.
+```
 
 ## Indicizzazione Distribuita
 
@@ -1169,7 +1130,7 @@ La figura mostra come l'indicizzazione distribuita possa essere vista come un'is
 ![[1) Intro-20241003093804693.png]]
 ## Indicizzazione Distribuita
 
-L'algoritmo di costruzione dell'indice è un'istanza di MapReduce (Dean e Ghemawat 2004).
+L'algoritmo di costruzione dell'indice è un'istanza di MapReduce.
 
 * **MapReduce:** Un framework robusto e concettualmente semplice per il calcolo distribuito, che permette di eseguire calcoli complessi senza dover scrivere codice per la parte di distribuzione.
 * **Sistema di indicizzazione di Google (circa 2002):** Composto da una serie di fasi, ciascuna implementata in MapReduce.
@@ -1188,10 +1149,7 @@ Fino ad ora, abbiamo ipotizzato che le collezioni siano statiche, ma:
 * **Documenti in arrivo:** I documenti arrivano nel tempo e devono essere inseriti.
 * **Documenti eliminati e modificati:** I documenti vengono eliminati e modificati (ad esempio, quando l'entità dell'editing è tale da toccare la maggior parte dei termini, come upgrade, motivi di privacy o cambio di normativa).
 
-Questo significa che il dizionario e le liste di postings devono essere modificati:
-
-* **Aggiornamenti dei postings:** Per i termini già presenti nel dizionario.
-* **Nuovi termini:** Aggiunti al dizionario.
+La gestione degli aggiornamenti richiede modifiche al dizionario e alle liste di postings:  i *termini già presenti* nel dizionario necessitano di aggiornamenti alle liste di postings, mentre i *nuovi termini* devono essere aggiunti al dizionario stesso.
 
 ### Approccio più semplice
 
@@ -1204,8 +1162,8 @@ Questo significa che il dizionario e le liste di postings devono essere modifica
 
 ### Problemi con gli indici principali e ausiliari
 
-* **Merge frequenti:** Il problema delle merge frequenti.
-* **Scarsa performance:** Scarsa performance durante le merge.
+* **Merge frequenti.**
+* **Scarsa performance durante i merge.**
 * **Efficienza della fusione:** La fusione dell'indice ausiliario nell'indice principale è efficiente se si mantiene un file separato per ogni lista di postings.
     * La fusione è la stessa di una semplice append.
     * Ma poi avremmo bisogno di molti file - inefficiente per il sistema operativo.
@@ -1224,19 +1182,19 @@ La fusione logaritmica è una tecnica di ordinamento che utilizza una serie di i
 4. **Iterazione:** Se $Z_1$ non è ancora troppo grande, viene mantenuto in memoria. Altrimenti, viene scritto sul disco come $I_1$. Se $I_1$ esiste già, $Z_1$ viene unito con $I_1$ per formare $Z_2$.
 5. **Ripetizione:** Questo processo di fusione e scrittura viene ripetuto fino a quando tutti i dati non sono stati ordinati.
 
-![[1) Intro-20241007154640070.png|551]]
+![[1) Intro-20241007154640070.png|436]]
 
-![[1) Intro-20241007154611506.png|637]]
+![[1) Intro-20241007154611506.png|450]]
 ## Indicizzazione Dinamica
 
-### Indice Ausiliario e Principale
+#### Indice Ausiliario e Principale
 
 * **Fusione T/n:**
     * Si utilizzano indici ausiliari di dimensione $n$ e un indice principale con $T$ postings.
     * Il tempo di costruzione dell'indice è $O\left( \frac{T^2}{n} \right)$ 
  nel caso peggiore, poiché un posting potrebbe essere toccato $\frac{T}{n}$ volte.
 
-### Fusione Logaritmica
+#### Fusione Logaritmica
 
 * **Efficienza:** Ogni posting viene fuso al massimo $O\left( log\left( \frac{T}{n} \right) \right)$ volte, con una complessità di $O\left( T \cdot log\left( \frac{T}{n} \right) \right)$
 * **Vantaggi:** La fusione logaritmica è molto più efficiente per la costruzione dell'indice rispetto alla fusione $\frac{T}{n}$.
@@ -1274,7 +1232,7 @@ La ricerca in tempo reale richiede:
 
 Esistono diverse tecniche di indicizzazione basata sull'ordinamento:
 
-* **Inversione in memoria ingenua.**
+* **Inversione in memoria naive.**
 * **Indicizzazione basata sull'ordinamento bloccato (BSBI).**
 * **L'ordinamento per fusione è efficace per l'ordinamento basato su disco rigido (evita le ricerche!).**
 
@@ -1287,35 +1245,42 @@ Esistono diverse tecniche di indicizzazione basata sull'ordinamento:
 
 ## Compressione
 
-La compressione è fondamentale per:
+La compressione dei dati è fondamentale in Information Retrieval per diversi motivi:
 
-* **Ridurre lo spazio su disco.**
-* **Mantenere più cose in memoria.**
-* **Aumentare la velocità di trasferimento dei dati dal disco alla memoria.**
-* **[leggi dati compressi | decomprimi] è più veloce di [leggi dati non compressi].**
+* **Ridurre lo spazio di archiviazione su disco:**  Minore spazio occupato significa costi di storage ridotti.
+* **Aumentare la capacità di memoria:** Permette di mantenere in memoria principale una maggiore quantità di dati.
+* **Accelerare il trasferimento dati:**  Il trasferimento di dati compressi da disco a memoria è più veloce.
+* **Migliorare le prestazioni di lettura:** La lettura e decompressione di dati compressi può essere più veloce rispetto alla lettura di dati non compressi, a patto di utilizzare algoritmi di compressione e decompressione efficienti.
 
-**Premessa:** Gli algoritmi di decompressione sono veloci.
-* **Vero per gli algoritmi di decompressione che utilizziamo.**
+**Nota:** Gli algoritmi di decompressione utilizzati nei sistemi di Information Retrieval sono generalmente molto veloci.
 
-### Compressione del dizionario
 
-* **Renderlo abbastanza piccolo da tenerlo nella memoria principale.**
-* **Renderlo così piccolo da poter tenere anche alcune liste di postings nella memoria principale.**
+### Compressione del Dizionario
 
-### Compressione del/dei file di postings
+La compressione del dizionario è cruciale per:
 
-* **Ridurre lo spazio su disco necessario.**
-* **Diminuire il tempo necessario per leggere le liste di postings dal disco.**
-* **I grandi motori di ricerca mantengono una parte significativa dei postings in memoria.**
+* **Memorizzazione in memoria principale:**  Permette di mantenere l'intero dizionario in memoria RAM, accelerando le operazioni di ricerca.
+* **Collocazione di liste di postings in memoria:** Consente di mantenere in memoria anche alcune liste di postings, migliorando ulteriormente le prestazioni.
 
-### Compressione senza perdita vs. con perdita
 
-* **Compressione senza perdita:** tutte le informazioni vengono preservate.
-    * Ciò che facciamo principalmente in IR.
-* **Compressione con perdita:** scarta alcune informazioni.
-    * Diversi passaggi di pre-elaborazione possono essere visti come compressione con perdita: conversione in minuscolo, stop words, stemming, eliminazione dei numeri.
-    * Potare le voci di postings che hanno poche probabilità di apparire nella lista dei primi k per qualsiasi query.
-        * Quasi nessuna perdita di qualità nella lista dei primi k.
+### Compressione dei File di Postings
+
+La compressione dei file di postings è importante per:
+
+* **Ridurre lo spazio su disco:**  Minimizza lo spazio di archiviazione necessario.
+* **Accelerare la lettura:** Riduce il tempo necessario per leggere le liste di postings dal disco.
+* **Migliorare l'accesso in memoria:** I grandi motori di ricerca spesso mantengono una parte significativa dei postings in memoria principale per prestazioni ottimali.
+
+
+### Compressione Senza Perdita vs. Con Perdita
+
+Esistono due tipi principali di compressione:
+
+* **Compressione senza perdita:**  Preserva tutte le informazioni originali. Questo è l'approccio prevalentemente utilizzato in Information Retrieval.
+* **Compressione con perdita:**  Scarta alcune informazioni per ottenere un maggiore livello di compressione.  Esempi di compressione con perdita in IR includono:
+    * **Pre-elaborazione del testo:** Conversione in minuscolo, rimozione di stop words, stemming, eliminazione di numeri.
+    * **Poda delle liste di postings:** Rimozione di voci con bassa probabilità di apparire nei primi *k* risultati per qualsiasi query.  Questa tecnica introduce una minima perdita di qualità nei risultati di ricerca.
+
 
 ## Dimensione del vocabolario vs. dimensione della collezione
 
@@ -1329,7 +1294,7 @@ La compressione è fondamentale per:
 
 ### Legge di Heaps: $M = kT^b$
 
-* **M** è la dimensione del vocabolario (cresce seguento una **power law**: funzione lineare in scala doppia logaritmica con offset k), **T** è il numero di token nella collezione.
+* **M** è la dimensione del vocabolario (cresce seguento una **power law**: *funzione lineare in scala doppia logaritmica con offset k),* **T** è il numero di token nella collezione.
 * Valori tipici: $30 ≤ k ≤ 100$ e $b ≈ 0.5$.
 * In un grafico log-log della dimensione del vocabolario M vs. T, la legge di Heaps prevede una linea con pendenza di circa ½.
 * È la relazione più semplice possibile (lineare) tra i due in spazio log-log.
@@ -1338,10 +1303,12 @@ La compressione è fondamentale per:
 
 ### Legge di Heaps per Reuters RCV1:
 
-$log_{10}M = 0.49 log_{10}T + 1.64$
-$\to$
-$M = 10^{1.64}T^{0.49}$
-cioè, $k=10^{1.64}≈ 44$ e $b = 0.49$.
+$$log_{10}M = 0.49  \log_{10}T + 1.64
+\to
+M = 10^{1.64}T^{0.49}$$
+cioè: 
+- $k=10^{1.64}≈ 44$  
+- $b = 0.49$.
 
 Buona aderenza empirica per Reuters RCV1:
 
