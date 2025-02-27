@@ -46,6 +46,7 @@
 **Nota:** Da quest'anno il programma è cambiato, non si fa più Hama e si studiano GraphX e Apache Airflow (slide su Teams)
 
 ### Obiettivi
+
 • Conoscenza delle problematiche relative all’analisi dei Big Data
 • Conoscenza della programmazione funzionale e delle JAVA Stream API
 	- Possono essere definiti come una sequenza di elementi da una sorgente su cui è possibile eseguire operazioni aggregate.

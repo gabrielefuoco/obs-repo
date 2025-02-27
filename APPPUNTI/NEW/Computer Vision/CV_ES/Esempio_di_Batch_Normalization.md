@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 # Batch Normalization
 
-Batch normalization was introduced in Sergey Ioffe's and Christian Szegedy's 2015 paper [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/pdf/1502.03167.pdf). The idea is that, instead of just normalizing the inputs to the network, we normalize the inputs to _layers within_ the network. It's called "batch" normalization because during training, we normalize each layer's inputs by using the mean and variance of the values in the current mini-batch.
+Batch normalization was introduced in Sergey Ioffe's and Christian Szegedy's 2015 paper [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/pdf/1502.03167.pdf). The idea is that, instead of just normalizing the inputs to the network, we normalize the inputs to *layers within* the network. It's called "batch" normalization because during training, we normalize each layer's inputs by using the mean and variance of the values in the current mini-batch.
 
 ![image.png](47ca0f0c-ffc0-468c-b01f-5a1f43fa2ab8.png)
 
@@ -28,21 +28,18 @@ A.shape, A
 
 ```python
 def describe_batch(image_bn, ax1, titleprefix='Batch'):
-    
+
     title=f'{titleprefix}\nMin {image_bn.min():.4f} - Max {image_bn.max():.4f}' \
           f'\nMean {image_bn.mean():.4f} - Var {image_bn.var():.4f}'
-    
+
     ax1.hist(image_bn.flatten().numpy(), bins='auto')
     ax1.set_title(title)
-    
-    
+
 fig, ax = plt.subplots(1, 1, figsize=(10, 6))
 describe_batch(A, ax)
 ```
 
-    
 ![png](Esempio_di_Batch_Normalization_4_0.png)
-    
 
 # Stima dei parametri gamma e beta
 
@@ -56,14 +53,12 @@ fig, axes_plot = plt.subplots(3, 3, figsize=(20, 20))
 axes = axes_plot.ravel()
 
 for (gamma, beta), ax in zip(itertools.product(values_gamma, values_beta), axes):
-    
+
     correctedA = gamma * (A - A.mean()) / (torch.sqrt(A.var() + eps)) + beta
     describe_batch(correctedA, ax, f'gamma = {gamma}, beta ${beta}')
 
 fig.tight_layout()    
 ```
 
-    
 ![png](Esempio_di_Batch_Normalization_6_0.png)
-    
 

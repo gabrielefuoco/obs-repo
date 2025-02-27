@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 s ^jXDQ3ZsO
 
 pesi della 
@@ -17,6 +18,7 @@ rete ^81gzvqSA
 MAX ^L4GpFr68
 
 ## Embedded Files
+
 1b812bb975735190afc4fc5f799286b98f13fe85: $$Q(s,a;\theta_k)$$
 
 2fd13ba918484beca0bc4c7bd36b65b1679626f6: $$a=\{ a_{1},a_{2},\dots a_{n} \}$$
@@ -34,6 +36,7 @@ $$
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4IAGsOeIAWABkYADFiKHqACWIeDkqKQgBJNnwAKVSSyFhECsDsKI5lYLHSzG5n
 

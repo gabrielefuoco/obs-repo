@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Giochi in forma estesa ^RzMtfNYx
 
 Rappresentano situazioni in cui i giocatori 
@@ -32,13 +33,14 @@ di Nash ^jiz2OQim
 
 - Sottogiochi
 - SPE: equilibrio anche per il sottogioco
-    - Assicura hce le strategie siano razionali
-      in ogni possibile sottosituazione ^RSQia8vT
+ - Assicura hce le strategie siano razionali
+ in ogni possibile sottosituazione ^RSQia8vT
 
  { ^XWeYAnKZ
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4IACUjAFkoADMAOQBNTFSSyFhECqgsKHbStrRnAE4AZmSkngB2cYAGAA548en4
 

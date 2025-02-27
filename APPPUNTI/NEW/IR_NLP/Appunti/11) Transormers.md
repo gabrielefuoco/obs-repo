@@ -1,6 +1,6 @@
 ## Reti Ricorrenti Stacked e Meccanismo di Attenzione
 
-Si utilizzano reti ricorrenti stacked (multi-layer) e un meccanismo di attenzione.  Il passo forward di una RNN standard legge l'input da sinistra a destra, codificando ogni località da un punto di vista lineare. L'impatto di una parola sulla rappresentazione è determinato dalle parole adiacenti, ovvero dal suo contesto.  Una RNN richiede un numero elevato di step per codificare testi lunghi, permettendo l'interazione tra parti distanti del testo.  Questo presenta un problema significativo:
+Si utilizzano reti ricorrenti stacked (multi-layer) e un meccanismo di attenzione. Il passo forward di una RNN standard legge l'input da sinistra a destra, codificando ogni località da un punto di vista lineare. L'impatto di una parola sulla rappresentazione è determinato dalle parole adiacenti, ovvero dal suo contesto. Una RNN richiede un numero elevato di step per codificare testi lunghi, permettendo l'interazione tra parti distanti del testo. Questo presenta un problema significativo:
 
 **Il passo di forward e quello di backward hanno O (Lunghezza della sequenza) operazioni non parallelizzabili**
 
@@ -26,7 +26,7 @@ L'attenzione tratta la rappresentazione di ogni parola come una query per accede
 
 **All words attend to all words in previous layer; most arrows here are omitted**
 
-Con l'attenzione, è possibile generalizzare con più layer.  Richiede uno step di trasformazione perché ogni stato viene confrontato con ogni altro stato. Il meccanismo di attenzione richiede un numero quadratico di confronti.
+Con l'attenzione, è possibile generalizzare con più layer. Richiede uno step di trasformazione perché ogni stato viene confrontato con ogni altro stato. Il meccanismo di attenzione richiede un numero quadratico di confronti.
 
 ## Self-Attention
 
@@ -41,7 +41,6 @@ Nell'attenzione, la query corrisponde a tutte le chiavi "softly", con un peso co
 ![[11) Transormers-20241122130454760.png]]
 
 È una sorta di lookup "soft". Nel lookup tradizionale abbiamo query e indice, con le proprie chiavi. Con il meccanismo di attenzione è simile, solo che data la query valutiamo la rilevanza di ogni chiave e ne facciamo una somma pesata che agisce come un riassunto selettivo.
-
 
 Sia $\mathbf{w}_{1:n}$ una sequenza di parole nel vocabolario $V$, ad esempio "Zuko preparò il tè per suo zio".
 
@@ -74,7 +73,6 @@ $$
 
 $w_{i}$ è l'i-esima parola; $x_{i}$ è l'embedding della parola, ottenuto tramite una matrice di embedding di dimensione $d \times |V|$, dove $d$ è la dimensionalità e $|V|$ la dimensione del vocabolario. Questo viene trasformato in tre modi: rispetto alla matrice delle query $Q$, rispetto alla matrice delle chiavi $K$ e rispetto alla matrice dei valori $V$. È chiamata self-attention perché ogni stato "attende" a tutti gli altri. Le similarità sono calcolate a coppie tra query e chiave ($e_{ij}$ è il prodotto scalare tra l'i-esima query e la j-esima chiave). L'i-esima parola target funge da query e viene confrontata con tutte le altre, che hanno il ruolo di chiave. Otteniamo la probabilità con la softmax e facciamo la somma pesata.
 
-
 ### Barriere e Soluzioni della Self-Attention
 
 La self-attention non tiene conto intrinsecamente dell'ordine delle parole; quindi, dobbiamo codificare l'ordine delle parole nelle chiavi, query e valori.
@@ -92,12 +90,11 @@ $p_i$ è un vettore posizionale di dimensione $d$; vogliamo incorporare questo v
 
 Se adottiamo la **rappresentazione posizionale sinusoidale**, quello che conta non è la posizione assoluta ma quella relativa tra le parole. Questa tecnica è difficilmente apprendibile.
 
-
 **Barriere:**
 
-* **Ordine delle parole:** Non ha una nozione intrinseca di ordine!  *Soluzioni:* Aggiungere rappresentazioni posizionali agli input.
-* **Non linearità:** Non ci sono non linearità per la "magia" del deep learning. Sono solo medie pesate.  *Soluzioni:* Applicare la stessa rete feedforward a ciascun output della self-attention.
-* **Futuro:** Bisogna assicurarsi di non "guardare al futuro" quando si prevede una sequenza (come nella traduzione automatica o nel language modeling).  *Soluzioni:* Mascherare il futuro impostando artificialmente i pesi dell'attenzione a 0.
+* **Ordine delle parole:** Non ha una nozione intrinseca di ordine! *Soluzioni:* Aggiungere rappresentazioni posizionali agli input.
+* **Non linearità:** Non ci sono non linearità per la "magia" del deep learning. Sono solo medie pesate. *Soluzioni:* Applicare la stessa rete feedforward a ciascun output della self-attention.
+* **Futuro:** Bisogna assicurarsi di non "guardare al futuro" quando si prevede una sequenza (come nella traduzione automatica o nel language modeling). *Soluzioni:* Mascherare il futuro impostando artificialmente i pesi dell'attenzione a 0.
 
 ## Componenti della Self-Attention come Blocco Costruttivo
 
@@ -122,16 +119,15 @@ Le connessioni residuali sono un trucco per migliorare l'addestramento dei model
 
 * Invece di $X^{(i)} = \text{Layer}(X^{(i-1)})$ (dove $i$ rappresenta il layer):
 
-   $X^{(i-1)} \xrightarrow{\text{Layer}} X^{(i)}$
+$$X^{(i-1)} \xrightarrow{\text{Layer}} X^{(i)}$$
 
 * Si usa $X^{(i)} = X^{(i-1)} + \text{Layer}(X^{(i-1)})$ (quindi si deve imparare solo "il residuo" dal layer precedente):
 
-   $X^{(i-1)} \xrightarrow{\text{Layer}} X^{(i)}$
+$$X^{(i-1)} \xrightarrow{\text{Layer}} X^{(i)}$$
 
 * Il gradiente è elevato attraverso la connessione residuale; è 1!
 
 * Bias verso la funzione identità!
-
 
 ### Normalizzazione per Layer (Layer Normalization)
 
@@ -159,7 +155,7 @@ $$
 \text{output} = \frac{x - \mu}{\sigma + \epsilon} \cdot \gamma + \beta
 $$
 
-dove $\gamma$ e $\beta$ sono parametri di "guadagno" e "bias" appresi.  $\epsilon$ è un piccolo valore aggiunto per evitare divisioni per zero.
+dove $\gamma$ e $\beta$ sono parametri di "guadagno" e "bias" appresi. $\epsilon$ è un piccolo valore aggiunto per evitare divisioni per zero.
 
 **Processo di Normalizzazione:**
 
@@ -172,7 +168,7 @@ dove $\gamma$ e $\beta$ sono parametri di "guadagno" e "bias" appresi.  $\epsilo
 
 ### Definizione delle Variabili
 
-* $X = [x_1; x_2; ...; x_n] \in \mathbb{R}^{n \times d}$: concatenazione dei vettori di input, dove  `n` è il numero di elementi nella sequenza e `d` la dimensione di ogni vettore.
+* $X = [x_1; x_2; ...; x_n] \in \mathbb{R}^{n \times d}$: concatenazione dei vettori di input, dove `n` è il numero di elementi nella sequenza e `d` la dimensione di ogni vettore.
 * $X_K \in \mathbb{R}^{n \times d}$, $X_Q \in \mathbb{R}^{n \times d}$, $X_V \in \mathbb{R}^{n \times d}$: matrici ottenute trasformando X tramite le matrici di trasformazione per le chiavi (K), le query (Q) e i valori (V) rispettivamente.
 
 ### Calcolo dell'Output
@@ -189,27 +185,24 @@ $$\text{output} = \text{softmax}(XQ(XK)^T)XV \in \mathbb{R}^{n \times d}$$
 
 3. **Calcolo della media pesata:** $\text{softmax}(XQ(XK)^T)XV$ calcola la media pesata dei valori, utilizzando i pesi di attenzione calcolati nel passaggio precedente.
 
-
 ![[11) Transormers-20241122125849498.png]]
 
 Questo approccio fa coesistere la profondità della rete con il concetto di molteplicità delle teste. Un Transformer è un'evoluzione delle RNN: è una rete multi-layer ma anche multi-head. Avere più teste significa avere più matrici query-valore. Ogni testa lavora in parallelo con le altre, senza impatto sul tempo di calcolo. Aggiungere complessità a ogni layer offre più interpretazioni di come si combinano le chiavi con le query. Questo è sensato dato che gli input sono parole, intrinsecamente polisemiche. I layer stabiliscono un controllo sulla tipologia di relazione tra le parole.
 
-Introduciamo un iperparametro, il numero di teste, valido per ogni layer. Date le matrici K, Q, V di dimensione $d \times d$, possiamo riscrivere il calcolo usando la matrice X.  Avviene la trasformazione con le matrici delle query e delle chiavi, la softmax e poi la combinazione con la somma pesata. Se invece di avere una matrice abbiamo un tensore, il cui spessore rappresenta il numero di teste, il calcolo si estende naturalmente.
-
+Introduciamo un iperparametro, il numero di teste, valido per ogni layer. Date le matrici K, Q, V di dimensione $d \times d$, possiamo riscrivere il calcolo usando la matrice X. Avviene la trasformazione con le matrici delle query e delle chiavi, la softmax e poi la combinazione con la somma pesata. Se invece di avere una matrice abbiamo un tensore, il cui spessore rappresenta il numero di teste, il calcolo si estende naturalmente.
 
 * Anche calcolando molte teste di attenzione, il costo computazionale non aumenta significativamente.
 * Calcoliamo $XQ \in \mathbb{R}^{n \times d}$ e poi riformatiamo a $\mathbb{R}^{n \times h \times d / h}$ (allo stesso modo per $XK$, $XV$), dove `h` è il numero di teste.
 * Quindi trasponiamo a $\mathbb{R}^{h \times n \times d / h}$: ora l'asse della testa è come un asse batch.
 * Quasi tutto il resto è identico e le matrici hanno le stesse dimensioni.
 
-
 ### Calcolo dei Prodotti Scalari Query-Key
 
-Prima, prendiamo i prodotti scalari query-key con una moltiplicazione di matrice: $XQ(XK)^T$.  Calcoliamo così tutti i set di coppie di punteggi di attenzione.
+Prima, prendiamo i prodotti scalari query-key con una moltiplicazione di matrice: $XQ(XK)^T$. Calcoliamo così tutti i set di coppie di punteggi di attenzione.
 
 ### Calcolo della Media Ponderata
 
-Successivamente, calcoliamo la media ponderata con un'altra moltiplicazione di matrice: $\text{softmax}\left(\frac{XQ(XK)^T}{\sqrt{d}}\right) XV$.  Il termine $\sqrt{d}$ è un fattore di scala per stabilizzare il gradiente.
+Successivamente, calcoliamo la media ponderata con un'altra moltiplicazione di matrice: $\text{softmax}\left(\frac{XQ(XK)^T}{\sqrt{d}}\right) XV$. Il termine $\sqrt{d}$ è un fattore di scala per stabilizzare il gradiente.
 
 ### Output
 
@@ -231,14 +224,13 @@ Possiamo distribuire la multidimensionalità sulle h teste. Ogni matrice di tras
 
 **Ogni testa di attenzione esegue l'attenzione in modo indipendente:**
 
-* $\text{output}_\ell = \text{softmax}(X Q_\ell K_\ell^T X^T) \times X V_\ell$, dove $\text{output}_\ell \in \mathbb{R}^{n \times d/h}$  (si noti che l'output ha dimensione n x d/h, dove n è il numero di parole nella sequenza).
+* $\text{output}_\ell = \text{softmax}(X Q_\ell K_\ell^T X^T) \times X V_\ell$, dove $\text{output}_\ell \in \mathbb{R}^{n \times d/h}$ (si noti che l'output ha dimensione n x d/h, dove n è il numero di parole nella sequenza).
 
 **Quindi gli output di tutte le teste vengono combinati:**
 
 * $\text{output} = [\text{output}_1; ...;\text{output}_h]Y$, dove $Y \in \mathbb{R}^{d \times d}$ è una matrice di trasformazione che combina gli output delle diverse teste.
 
-**Ogni testa può "guardare" cose diverse e costruire vettori di valori in modo diverso.**  Il risultato è un tensore con ogni slice di dimensione $d \times d/h$, che poi vengono combinate.
-
+**Ogni testa può "guardare" cose diverse e costruire vettori di valori in modo diverso.** Il risultato è un tensore con ogni slice di dimensione $d \times d/h$, che poi vengono combinate.
 
 ### Attenzione Scalata con Prodotto Scalare (Scaled Dot Product Attention)
 
@@ -270,12 +262,11 @@ Dopo aver sostituito la self-attention con la multi-head self-attention, analizz
 
 Nella maggior parte dei diagrammi dei Transformer, queste sono spesso scritte insieme come "Add & Norm".
 
-
 ### Struttura del Transformer Decoder
 
 Il Transformer Decoder è costituito da una pila di blocchi di decodifica. Ogni blocco contiene:
 
-* **Self-Attention:** Permette al modello di focalizzarsi su diverse parti dell'input, assegnando pesi diversi alle parole in base alla loro importanza.  Nel decoder, questa è una *masked self-attention*, che impedisce al modello di "vedere" le parole future durante la generazione sequenziale.
+* **Self-Attention:** Permette al modello di focalizzarsi su diverse parti dell'input, assegnando pesi diversi alle parole in base alla loro importanza. Nel decoder, questa è una *masked self-attention*, che impedisce al modello di "vedere" le parole future durante la generazione sequenziale.
 * **Add & Norm:** Aggiunge l'output della self-attention all'input e normalizza il risultato.
 * **Feed-Forward:** Rete neurale feed-forward che trasforma l'input.
 * **Add & Norm:** Aggiunge l'output della rete feed-forward all'input e normalizza il risultato.
@@ -293,7 +284,6 @@ Il Transformer Decoder è costituito da una pila di blocchi di decodifica. Ogni 
 
 Il modulo di self-attention è mascherato (masked) e multi-head. Se il Transformer esegue classificazione o analisi del sentiment (e non predizione di parole), non è più necessario mascherare la self-attention.
 
-
 ### Il Transformer Encoder-Decoder
 
 * Nella traduzione automatica, la frase sorgente viene elaborata con un modello bidirezionale e la frase target viene generata con un modello unidirezionale.
@@ -308,7 +298,6 @@ Combinando encoder e decoder, abbiamo tre tipi di attenzione:
 * Multi-head self-attention nell'encoder.
 * Masked multi-head self-attention nel decoder.
 * Cross-attention dal decoder all'output dell'encoder. L'output di questa attenzione passa attraverso un ulteriore blocco Add & Norm.
-
 
 ### Cross-Attention
 

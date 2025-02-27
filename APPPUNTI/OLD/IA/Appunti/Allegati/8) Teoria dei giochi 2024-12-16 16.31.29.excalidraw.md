@@ -4,14 +4,15 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Aste ^K556d5lk
 
-Single Good  ^HYxSFNbW
+Single Good ^HYxSFNbW
 
 Multiple Goods
  ^vS3FLbVw
@@ -43,13 +44,15 @@ First-Price ^HbL6KLnR
 
 - Busta chiusa
 - Equilibrio: ognuno offre una 
-  frazione del proprio valore ^ouflvOmI
+ frazione del proprio valore ^ouflvOmI
 
 ## Embedded Files
+
 c1cdf4a97e735ce933f563f40f6ef608f4ca64b8: $$\frac{n-1}{n}$$
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4IAGl4+IA2Ynj8AGtUkshYRAqoLChW0sxuZySAFm1agAZ4gE54gHZxgGYknnj+
 

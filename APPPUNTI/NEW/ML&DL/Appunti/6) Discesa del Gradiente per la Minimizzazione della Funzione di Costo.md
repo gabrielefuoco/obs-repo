@@ -10,18 +10,18 @@ Un algoritmo efficiente per la minimizzazione di funzioni convesse è la **disce
 2. **Calcolo del gradiente:** Ad ogni iterazione, si calcola il gradiente della funzione `F(w)` nel punto corrente `w`. Il gradiente rappresenta la derivata della funzione in caso di funzione monodimensionale, mentre in caso di funzione multidimensionale è un vettore che indica la direzione di massima pendenza.
 3. **Aggiornamento della soluzione:** Si aggiorna la soluzione `w` muovendosi nella direzione opposta al gradiente. Questo perché si vuole minimizzare la funzione, quindi ci si sposta nella direzione di discesa. L'aggiornamento è dato da:
 
-   $w(t+1) = w(t) - η * ∇f(w(t))$
+$$w(t+1) = w(t) - η * ∇f(w(t))$$
 
-   dove:
-   - `w(t)` è la soluzione corrente all'iterazione `t`.
-   - `η` è il **learning rate**, che determina l'ampiezza dello spostamento ad ogni iterazione. Un valore di `η` troppo grande può portare a oscillazioni e difficoltà nel trovare il minimo, mentre un valore troppo piccolo può rallentare la convergenza.
+ dove:
+ - `w(t)` è la soluzione corrente all'iterazione `t`.
+ - `η` è il **learning rate**, che determina l'ampiezza dello spostamento ad ogni iterazione. Un valore di `η` troppo grande può portare a oscillazioni e difficoltà nel trovare il minimo, mentre un valore troppo piccolo può rallentare la convergenza.
 
 4. **Iterazione:** Si ripetono i passaggi 2 e 3 fino a raggiungere un punto di minimo o un criterio di arresto.
 
 $$\begin{align*}
-&  \vec{w} = \vec{0} \\
+& \vec{w} = \vec{0} \\
 &\text{ for } t = 1 \text{ to } T \text{ do } \\
-&  \vec{v}_t = \nabla_{\vec{w}} f(\vec{w}^{(t)}) \\
+& \vec{v}_t = \nabla_{\vec{w}} f(\vec{w}^{(t)}) \\
 &\quad \vec{w}^{(t+1)} = \vec{w}^{(t)} - \eta \vec{v}_t \\
 &\operatorname{\mathrm{Return}} W^{(T+1)}
 \end{align*}$$
@@ -36,8 +36,8 @@ $$\begin{equation}
 
 & \quad \quad\begin{aligned}
  & \operatorname{1) Return} \operatorname{\arg\min_{1\leq t\leq T+1} f(\vec{w}^ {(A)})}\\
- & \text{2)  } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)} \\
- & \operatorname{3)  } \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
+ & \text{2) } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)} \\
+ & \operatorname{3) } \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
 \end{aligned}
 \end{aligned}
 \right. \\
@@ -48,7 +48,6 @@ $$\begin{equation}
 \qquad
 \end{equation}$$
 
-
 ![[6)-20241021123828656.png]]
 
 Sappiamo che se ci si sposta nel verso del gradiente la funzione cresce , quindi ci
@@ -57,7 +56,7 @@ si muove nella direzione opposta del gradiente.
 La nostra funzione da minimizzare è l'errore empirico quindi:
 
 $$\begin{equation*}
-ERM_H{(S)} = \arg  \min_{\vec{w}\in H} L_{S}(\vec{w}) \equiv f \left( \vec{w} \right) \equiv f(\vec{w})
+ERM_H{(S)} = \arg \min_{\vec{w}\in H} L_{S}(\vec{w}) \equiv f \left( \vec{w} \right) \equiv f(\vec{w})
 \end{equation*}
 $$
 Quindi possiamo personalizzare l'algoritmo come
@@ -91,9 +90,7 @@ $$\begin{aligned}
 &= \frac{1}{2} \cdot 2(\langle \vec{w}, \vec{x}\rangle-y)\vec{x} 
 \end{aligned}$$
 
-
 ## GD+ Linear Regression
-
 
 $$\begin{aligned}
 & \vec{\omega}^{(0)} = \vec{0}\\
@@ -103,7 +100,7 @@ $$\begin{aligned}
 & = \nabla_{\vec{\omega}} [ \frac{1}{m} \sum_{i=1}^{m} l(\vec{\omega}^{(t)}, (\vec{x_{i}}, y_{i}))]\\
 & = \frac{1}{m} \sum_{i=1}^{m} \nabla_{\vec{w}} \ l(\vec{\omega}^{(t)}, (\vec{x_{i}}, y_{i}))\\
 
-&  \vec{\omega}^{(t+1)} = \vec{w}^{(t)}-\eta  \vec{v}_{t} \\
+& \vec{\omega}^{(t+1)} = \vec{w}^{(t)}-\eta \vec{v}_{t} \\
 & \text{return } \vec{w}^{(t+1)}
 \end{aligned}
 \end{aligned}$$
@@ -134,31 +131,31 @@ Quindi si lavora su sottoinsieme e non intero dataset alle singole iterazioni
 
 La proprietà che il valore atteso del vettore direzione coincide con il gradiente può essere dimostrata matematicamente. Il valore atteso $E[\cdot]$ del gradiente della funzione di costo, immaginando che i valori siano campionati dalla distribuzione dei dati, può essere scritto come:
 
-$E[\vec{V}_{t}]=E[\nabla_{\vec{w}}l(\vec{w},(\vec{x},y))]$
+$$E[\vec{V}_{t}]=E[\nabla_{\vec{w}}l(\vec{w},(\vec{x},y))]$$
 
 Visto che è una variabile casuale, allora il valore atteso sarà il valore atteso del gradiente della loss, assumendo che x e y siano scelti casualmente da S.
 
 $E$ e $\vec{\nabla}w$ sono operatori invertibili, ovvero
-$$=\nabla_\vec{w} \{E[l(\vec{w},(x,y))]  \}=\nabla_{\vec{w}}L_{D}(\vec{W})\equiv \nabla_{\vec{w}}L_{s}(\vec{w})$$
+$$=\nabla_\vec{w} \{E[l(\vec{w},(x,y))] \}=\nabla_{\vec{w}}L_{D}(\vec{W})\equiv \nabla_{\vec{w}}L_{s}(\vec{w})$$
 Quindi
 $$E[\vec{V}_{t}]=\nabla_{\vec{w}}f(\vec{w}^{(t)})\equiv \nabla_{\vec{w}}L_{S}(\vec{w})$$
 
 Dobbiamo fare una selezione casuale, dunque l'algoritmo diventa:
 $$\begin{align*}
-&\vec{w}^{(0)}  = \vec{0} \\
+&\vec{w}^{(0)} = \vec{0} \\
 &\text{for t to T do} \\
 &\text{Seleziona Casualmente }(\vec{x}_{i}, y_{i}\text{) in S} \\
-&\vec{V}_{t}  = \nabla_{\vec{w}} l\left(\vec{w}^{(t)},(\vec{x}_{i}, y_{i})\right) \\
-&\vec{w}^{(t+1)}  =\vec{w}^{(t)} - \eta \vec{V}_{t}\\
+&\vec{V}_{t} = \nabla_{\vec{w}} l\left(\vec{w}^{(t)},(\vec{x}_{i}, y_{i})\right) \\
+&\vec{w}^{(t+1)} =\vec{w}^{(t)} - \eta \vec{V}_{t}\\
 &\text{return } \vec{w}^{(t+1)}
 \end{align*}$$
 ### Grafico
+
 La funzione ora è convessa, dunque ho delle curve di livello.
 ![[6)-20241021161630266.png|612]]
 
 Un grafico qualitativo della SGD mostra che la traiettoria non è dritta verso il minimo, ma va a zig-zag. La discesa del gradiente standard, invece, ha una traiettoria dritta verso il minimo.
 Chiaramente si puo rallentare la convergenza poichè si fanno piu passi.
-
 
 Nella pratica, non si usa direttamente la versione della SGD basata su un solo esempio, perché è abbastanza instabile. Si utilizza invece un algoritmo intermedio chiamato **mini-batch SGD**.
 
@@ -168,12 +165,10 @@ $$
 &\text{for } t \text{ to } T \text{ do} \\
 &\text{SEZIONA CASUALMENTE UN BATCH DI } b \text{ ESEMPI } \\
 &\vec{V}_t = \frac{1}{b} \sum_{i=1}^b \nabla_{\vec{w}} (l(\vec{w}(x_i,\vec{y}))\\
-&\vec{w}^{(t+1)} = \vec{w}^{(t)} - \eta  \vec{V}_{t} \\
+&\vec{w}^{(t+1)} = \vec{w}^{(t)} - \eta \vec{V}_{t} \\
 &\text{return } \vec{w}^{(t+1)}
 \end{aligned}
 $$
-
-
 
 ### Learning Rate
 
@@ -198,6 +193,7 @@ Esistono diverse politiche di aggiornamento del learning rate, come le **epoche 
 $$\eta^{(t)}=\frac{\eta_{0}}{\sqrt{ t }}$$
 
 ## Funzione di loss surrogata
+
 ![[6)-20241021162107675.png]]
 La **loss surrogata** è una funzione di costo che viene utilizzata al posto della funzione di costo originale, quando quest'ultima è computazionalmente complessa o non convessa.
 
@@ -222,13 +218,16 @@ $$l_{hinge}(\vec{w},(\vec{x},y))=\max \{ 0,1-y_{i}<\vec{w},\vec{x_{i}}> \}$$
 * **Convessità**: la hinge loss è una funzione convessa, quindi può essere utilizzata con la discesa del gradiente.
 
 #### Vantaggi dell'utilizzo di una Loss Surrogata
+
 * **Ottimizzazione più semplice**: la loss surrogata permette di risolvere un problema di ottimizzazione più semplice e trattabile rispetto al problema originale.
 * **Efficienza**: la convessità della loss surrogata consente l'utilizzo di algoritmi di ottimizzazione efficienti come la discesa del gradiente.
 
 #### Svantaggi dell'utilizzo di una Loss Surrogata
+
 * **Perdita di accuratezza**: la soluzione trovata con la loss surrogata non sarà ottimale rispetto alla loss originale, ma sarà comunque una buona approssimazione.
 
 #### Applicazione ai Semispazi
+
 Nel caso dei semispazi, la loss 0-1 porta ad un problema di ottimizzazione NP-hard, quindi intrattabile in pratica. Utilizzando la hinge loss come surrogata, possiamo invece risolvere un problema di ottimizzazione convesso, quindi trattabile in modo efficiente.
 
 ## Funzioni di Lipschitz
@@ -238,14 +237,15 @@ Nel caso dei semispazi, la loss 0-1 porta ad un problema di ottimizzazione NP-ha
 Una funzione è detta di Lipschitz se la norma della differenza tra le immagini della funzione calcolata in due punti è limitata da una costante (detta costante di Lipschitz) moltiplicata per la distanza tra i due punti. In altre parole, la variazione della funzione è controllata dalla distanza tra i punti nel suo dominio.
 
 **Formalmente:**
-Una funzione $f:R^d \to R^k$ si dice $\rho\text{-lipschitz}$ se $\forall w_{1},w_{2} \in R^d,$  $\| f(\vec{w_{1}})-f(\vec{w_{2}}) \| \leq \rho \| \vec{w_{1}}-\vec{w_{2}} \|$
 
+Una funzione $f:R^d \to R^k$ si dice $\rho\text{-lipschitz}$ se $\forall w_{1},w_{2} \in R^d,$ $\| f(\vec{w_{1}})-f(\vec{w_{2}}) \| \leq \rho \| \vec{w_{1}}-\vec{w_{2}} \|$
 
 La definizione di funzione $\rho\text{-lipschitz}$ implica che il gradiente è limitato superiormente. 
 
 L'introduzione di questo concetto è fondamentale per caratterizzare i problemi di apprendimento convessi
 
 ## Problema di Learning Convex-Lipschitz-Bounded
+
 Un problema di learning si dice convex-lipschitz-bounded se
 1) La classe d'ipotesi H è un insieme convesso e $\vec{\forall}w\in H, \| \vec{w}\|\leq B$ (bound) 
 2) La funzione di Loss è convessa e $\rho\text{-lipschitz}$
@@ -280,10 +280,10 @@ Questo termine ha due funzioni principali:
 $$R(\vec{w})=\lambda \| \vec{w}\|^2$$
 
 #### Proprietà
+
 Un problema di learning Convex-Lipschitz-Bounded è learnable tramite RLM (Regularized Loss Minimization)
 
 Essendo learnable, la sample complexity è data da $m=\frac{8\rho^2B^2}{Ɛ^2}$
-
 
 Avendo stabilito che abbiamo la learnability minimizzando $\arg\min_{\vec{w \in H}} L_{S}(\vec{w})+R(\vec{w})$, resta da modificare l'algoritmo di discesa del gradiente per includere il termine di regolarizzazione R
 
@@ -300,12 +300,12 @@ $L_{S}$ la rende convessa e $L_{S}(\vec{w})+ \lambda \|\vec{w} \|^2$ la rende fo
 
 La disuguaglianza di convessità per una funzione convessa $f$ afferma che:
 
-$$f(\alpha  \vec{w_{1}}+(1-\alpha) \vec{w_{2}})\leq\alpha f(w_{1})+\left( (-\alpha)f(w_{2})-\frac{1}{2}\alpha(1-\alpha)\|\vec{w_{1}}-\vec{w_{2}}\|^2 \right)$$
+$$f(\alpha \vec{w_{1}}+(1-\alpha) \vec{w_{2}})\leq\alpha f(w_{1})+\left( (-\alpha)f(w_{2})-\frac{1}{2}\alpha(1-\alpha)\|\vec{w_{1}}-\vec{w_{2}}\|^2 \right)$$
 
 La direzione per aumentare la funzione è data da:
 
 $$
-\vec{V_{t}}=\nabla_{\vec{w}}\left[ l(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))    +\frac{1}{2}\|\vec{w}^{(t)}\|^2 \right]=\nabla_{\vec{w}}l(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))+ \lambda \vec{w}^{(t)}
+\vec{V_{t}}=\nabla_{\vec{w}}\left[ l(\vec{w}^{(t)},(\vec{x_{i}},y_{i})) +\frac{1}{2}\|\vec{w}^{(t)}\|^2 \right]=\nabla_{\vec{w}}l(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))+ \lambda \vec{w}^{(t)}
 $$
 
 ### Batch SGD e Epoche
@@ -325,8 +325,8 @@ $$
 &\text{for } t \geq t_{0} \text{ to } T \text{ do}: \\
 &\text{SELEZIONA CASUALMENTE } (\vec{x_i},Y_i) \text{ in } S \\
 &\vec{v}_t = \nabla_{\vec{w}} l(\vec{w}, (\vec{x}_i,y_i)) \\
-&\vec{w}^{(t+1)}  = \vec{w}-\eta(\vec{v}_t + \lambda \vec{w}^{(t)}) \\
-&\text{return }  \ \vec{w}^{\text{(t+1)}}
+&\vec{w}^{(t+1)} = \vec{w}-\eta(\vec{v}_t + \lambda \vec{w}^{(t)}) \\
+&\text{return } \ \vec{w}^{\text{(t+1)}}
 \end{aligned}
 $$
 
@@ -340,13 +340,13 @@ $$
 
 Nel caso di funzioni strettamente convesse, il learning rate $\eta$ è definito come:
 
-$\eta=\frac{1}{\lambda t}$
+$$\eta=\frac{1}{\lambda t}$$
 
 L'aggiornamento può essere riscritto come:
 
-$$\vec{w}^{(t+1)}  = \vec{w}-\frac{1}{\lambda t}(\vec{v}_t + \lambda \vec{w}^{(t)})$$
+$$\vec{w}^{(t+1)} = \vec{w}-\frac{1}{\lambda t}(\vec{v}_t + \lambda \vec{w}^{(t)})$$
 
-$$\vec{w}^{(t+1)}  = \left( 1-\frac{1}{t} \right)\vec{w}^{(t)}-\frac{1}{\lambda t}\vec{v_{t}}$$
+$$\vec{w}^{(t+1)} = \left( 1-\frac{1}{t} \right)\vec{w}^{(t)}-\frac{1}{\lambda t}\vec{v_{t}}$$
 
 Usando ricorsivamente questa relazione, si ottiene:
 
@@ -355,7 +355,7 @@ $$
 $$
 
 $$
-=-\frac{1}{\lambda t}\sum_{h=1}^t \  \vec{V_{j}}\ \theta^{(t)}
+=-\frac{1}{\lambda t}\sum_{h=1}^t \ \vec{V_{j}}\ \theta^{(t)}
 $$
 
 ## SGD + RLM
@@ -369,7 +369,7 @@ $$
 
 \vec{w}^{(a)} &= \frac{1}{\lambda_t} \cdot \vec{\theta}^{(t)} \\
 
-&\text{seleziona casualmente }  (\vec{x_i}, y_i)~ \text{in}~ S \\
+&\text{seleziona casualmente } (\vec{x_i}, y_i)~ \text{in}~ S \\
 
 \vec{v}_t &= \nabla_{\vec{w}} \ell\left( \vec{w}^{(t)}, (\vec{x_i}, y_i) \right) \\
 

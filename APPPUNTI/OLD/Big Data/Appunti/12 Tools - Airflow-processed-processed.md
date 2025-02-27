@@ -1,20 +1,14 @@
 
-
-
-Apache Airflow è una piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio di workflow.  Progetto di primo livello della Apache Software Foundation dal 2019, permette di creare applicazioni di elaborazione dati come DAG (Directed Acyclic Graph) di task. I DAG sono definiti in Python, offrendo vantaggi quali:
+Apache Airflow è una piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio di workflow. Progetto di primo livello della Apache Software Foundation dal 2019, permette di creare applicazioni di elaborazione dati come DAG (Directed Acyclic Graph) di task. I DAG sono definiti in Python, offrendo vantaggi quali:
 
 * Archiviazione dei workflow nel controllo di versione, permettendo il ritorno a versioni precedenti.
 * Sviluppo collaborativo di workflow da più persone contemporaneamente.
 * Scrittura di test per la convalida delle funzionalità.
 
-
-
 Airflow offre un alto livello di astrazione, semplificando la costruzione di workflow combinando task e specificando le dipendenze tra essi. Lo scheduler esegue i task su worker, considerando le dipendenze definite nel DAG. Il runtime supporta due tipi di parallelismo:
 
 * **Parallelismo dei dati:** molti task eseguono in parallelo lo stesso codice su diversi chunk di dati.
 * **Parallelismo dei task:** task (o operatori) diversi vengono eseguiti in parallelo.
-
-
 
 ### Principi principali di Apache Airflow
 
@@ -22,12 +16,9 @@ Airflow offre un alto livello di astrazione, semplificando la costruzione di wor
 * **Estensibilità:** Airflow include operatori per connettersi a molte tecnologie e tutti i componenti sono estensibili.
 * **Flessibilità:** Airflow facilita la parametrizzazione dei workflow usando il motore di templating Jinja2.
 
-
-
 #### Architettura di Apache Airflow
 
 ![[Pasted image 20250223174242.png|438]]
-
 
 #### Componenti di Apache Airflow
 
@@ -37,23 +28,15 @@ Airflow offre un alto livello di astrazione, semplificando la costruzione di wor
 * **DAG Directory:** contiene i file DAG letti dallo Scheduler, dall'Executor e dai Worker.
 * **Database dei metadati:** usato dallo Scheduler, dall'Executor e dal Webserver per memorizzare lo stato.
 
-
-
-
 ## Nozioni di programmazione di base in Apache Airflow
 
-Un DAG definisce le dipendenze tra i task, il loro ordine di esecuzione e il comportamento di ripetizione. I task descrivono le azioni da intraprendere (recuperare dati, eseguire analisi, attivare sistemi, etc.).  L'esempio seguente definisce un DAG "backup giornaliero" (inizio 1° gennaio 2023, esecuzione giornaliera) con quattro task (script bash), usando `>>` per indicare le dipendenze.
-
-
+Un DAG definisce le dipendenze tra i task, il loro ordine di esecuzione e il comportamento di ripetizione. I task descrivono le azioni da intraprendere (recuperare dati, eseguire analisi, attivare sistemi, etc.). L'esempio seguente definisce un DAG "backup giornaliero" (inizio 1° gennaio 2023, esecuzione giornaliera) con quattro task (script bash), usando `>>` per indicare le dipendenze.
 
 ### Tipi di task in Apache Airflow
 
 * **Operatori:** task predefiniti per costruire rapidamente un DAG.
 * **Sensori:** operatori che attendono il verificarsi di un evento esterno.
 * **TaskFlow:** funzioni Python personalizzate come task.
-
-
-
 
 #### Operatori Airflow
 
@@ -67,8 +50,6 @@ Alcuni operatori core popolari includono:
 * **PythonOperator:** chiama una funzione Python.
 * **EmailOperator:** invia un'email.
 
-
-
 #### Esempio di utilizzo degli operatori
 
 Un esempio utilizza:
@@ -76,8 +57,6 @@ Un esempio utilizza:
 * **SimpleHttpOperator:** esegue una richiesta GET per ottenere informazioni meteo.
 * **PythonOperator:** formatta la risposta HTTP.
 * **EmailOperator:** invia un'email con le informazioni formattate.
-
-
 
 ## Sensori in Apache Airflow
 
@@ -88,10 +67,7 @@ I sensori attendono il verificarsi di un evento. Hanno due modalità:
 
 La scelta tra `poke` e `reschedule` dipende dalla frequenza di controllo (es. `poke` per controlli al secondo, `reschedule` per controlli al minuto).
 
-
-
-**TaskFlow:**  Per programmatori che usano codice Python semplice, l'API TaskFlow semplifica la creazione di DAG usando il decoratore `@task`.  
-
+**TaskFlow:** Per programmatori che usano codice Python semplice, l'API TaskFlow semplifica la creazione di DAG usando il decoratore `@task`. 
 
 ## Esempio di Applicazione Ensemble Learning con TaskFlow
 
@@ -100,7 +76,6 @@ Questo esempio mostra come implementare un'applicazione di ensemble learning usa
 1. Il dataset viene suddiviso in set di training e test.
 2. *n* algoritmi di classificazione vengono eseguiti in parallelo sul set di training.
 3. Un meccanismo di voto esegue la classificazione dell'ensemble sul set di test.
-
 
 ![[|400](_page_17_Figure_2.jpeg)
 

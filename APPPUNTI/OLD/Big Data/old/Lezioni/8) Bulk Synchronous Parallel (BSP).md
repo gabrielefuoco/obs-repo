@@ -14,6 +14,7 @@ Tre elementi fondamentali:
 - È presente anche un blocco responsabile della sincronizzazione, collegato ad un router.
 
 ### Rappresentazione interna di un PE
+
 - Ogni PE è munita di un processore che opera su una memoria locale .
 - La memoria globale è distribuita secondo una funzione di hash degli indirizzi.
 - Per migliorare le prestazioni, l'operazione di hashing può essere effettuata in hardware a livello dell'interfaccia del router.
@@ -21,6 +22,7 @@ Tre elementi fondamentali:
 **Modello alternativo:** Un'alternativa al modello precedente distingue le unità di elaborazione (CE) da quelle di memorizzazione (ME).
 
 ## Modello di programmazione
+
 L'elaborazione è composta da iterazioni successive, dette superstep.
 Ogni superstep si compone di tre fasi:
 1. **Computation**: Un insieme di elaborazioni locali su ciascun processore, effettuate ognuna sulla propria memoria locale.
@@ -28,6 +30,7 @@ Ogni superstep si compone di tre fasi:
 3. **Synchronization**: Consiste nell'attendere la conclusione di tutte le operazioni di comunicazione; dopo la sincronizzazione, i dati sono visibili ai destinatari per l'inizio del superstep successivo.
 
 ## Modello di comunicazione
+
 - Il numero massimo di messaggi in ingresso o in uscita per un superstep è indicato con h.
 - La capacità di una rete di comunicazione di consegnare dati è caratterizzata da un parametro g, definito in modo tale che è necessario un tempo hg ad un processore per inviare h messaggi di dimensione 1.
 - Il modello BSP non fa distinzione, in termini di costo, tra l'invio di 1 messaggio di lunghezza m o l'invio di m messaggi di lunghezza 1 (in entrambi i casi il costo è uguale a mg).
@@ -39,6 +42,7 @@ Il parametro g dipende da diversi fattori:
 - Il sistema di runtime BSP.
 
 ## Costo di un superstep
+
 Il costo di un superstep è la somma di tre termini:
 1. Il costo dell'elaborazione locale di maggior durata
 2. Il costo della comunicazione globale tra i processori

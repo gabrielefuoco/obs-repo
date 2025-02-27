@@ -1,4 +1,5 @@
 ## Convertire ipynb in markdown
+
 ``` bash
 @echo off
 setlocal enabledelayedexpansion
@@ -17,6 +18,7 @@ pause
 ```
 
 ## Rimozione newline
+
 ``` python
 import os
 import re

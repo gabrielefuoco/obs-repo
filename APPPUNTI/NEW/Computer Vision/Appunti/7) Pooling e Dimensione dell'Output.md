@@ -35,13 +35,14 @@ Dove:
 * **Filter Size:** Dimensione del filtro.
 * **Padding:** Quantità di padding applicata all'immagine.
 * **Stride:** Passo del filtro.
-  
+
 La formula $O = \left\lfloor \frac{I - K + 2P}{S} \right\rfloor + 1$ è una versione semplificata della formula che tiene conto di meno parametri, e rappresenta il calcolo della dimensione dell'output di una convoluzione quando **non c'è dilatazione** del kernel.
 
 **Formula generale (con dilatazione)**:
-   $$
-   O = \left\lfloor \frac{I - K - (K-1)(D-1) + 2P}{S} \right\rfloor + 1
-   $$
+
+ $$
+ O = \left\lfloor \frac{I - K - (K-1)(D-1) + 2P}{S} \right\rfloor + 1
+ $$
 - Aggiunge il termine $-(K-1)(D-1)$, che tiene conto dell'effetto della dilatazione. Quando $D = 1$, questo termine diventa zero, riportandoci alla formula semplificata.
 - La dilatazione fa sì che gli elementi del kernel si "espandano", separandosi e quindi coprendo un'area maggiore rispetto al caso standard, e questo deve essere tenuto in considerazione nella formula.
 
@@ -76,14 +77,13 @@ Questa formula deve essere applicata sia per l'altezza che per la larghezza dell
 
 Se l'input è un'immagine di dimensione 10x10, il filtro è di dimensione 3x3 e lo stride è 2, la dimensione dell'output sarà:
 
-$Output Size = \frac{10 - 3 + 2 * 0}{2} + 1 = 4$
+$$Output Size = \frac{10 - 3 + 2 * 0}{2} + 1 = 4$$
 
 Quindi l'output sarà un'immagine di dimensione 4x4.
 
 ### GPU
 
 Le GPU (Graphics Processing Units) sono unità di elaborazione specializzate per l'elaborazione grafica. Sono particolarmente adatte per le operazioni di Computer Vision, come le convoluzioni, grazie alla loro capacità di eseguire calcoli paralleli su grandi quantità di dati.
-
 
 ### Calcolo della Dimensione dell'Output
 
@@ -94,32 +94,31 @@ Per calcolare la dimensione dell'output di un layer convoluzionale, è necessari
 * **Padding:** La quantità di padding applicata all'immagine di input, in questo caso 2.
 * **Stride:** Il passo con cui il kernel si sposta sull'immagine di input, in questo caso 1.
 
-
 ### Esempio Pratico
 
 Consideriamo un esempio con un input di 28x28, un kernel di 5x5, un padding di 2 e uno stride di 1.
 
 1. **Calcolo della dimensione dell'output dopo il primo layer convoluzionale:**
 
- $Output_{size} = \frac{28 + 2 * 2 - 5}{1} + 1 = 24$
+$$Output_{size} = \frac{28 + 2 * 2 - 5}{1} + 1 = 24$$
 
-   Quindi, la dimensione dell'output del primo layer convoluzionale è 24x24.
+ Quindi, la dimensione dell'output del primo layer convoluzionale è 24x24.
 
 2. **Calcolo della dimensione dell'output dopo il secondo layer convoluzionale:**
 
-   Assumiamo che il secondo layer convoluzionale abbia un kernel di 3x3, un padding di 1 e uno stride di 2.
+ Assumiamo che il secondo layer convoluzionale abbia un kernel di 3x3, un padding di 1 e uno stride di 2.
 
-   $Output_{size} = \frac{24 + 2 * 1 - 3}{2} + 1 = 12$
+$$Output_{size} = \frac{24 + 2 * 1 - 3}{2} + 1 = 12$$
 
-   Quindi, la dimensione dell'output del secondo layer convoluzionale è 12x12.
+ Quindi, la dimensione dell'output del secondo layer convoluzionale è 12x12.
 
 3. **Calcolo della dimensione dell'output dopo il terzo layer convoluzionale:**
 
-   Assumiamo che il terzo layer convoluzionale abbia un kernel di 3x3, un padding di 0 e uno stride di 2.
+ Assumiamo che il terzo layer convoluzionale abbia un kernel di 3x3, un padding di 0 e uno stride di 2.
 
-   $Output_{size} = \frac{12 + 2 * 0 - 3}{2} + 1 = 6$
+$$Output_{size} = \frac{12 + 2 * 0 - 3}{2} + 1 = 6$$
 
-   Quindi, la dimensione dell'output del terzo layer convoluzionale è 6x6.
+ Quindi, la dimensione dell'output del terzo layer convoluzionale è 6x6.
 
 ### Dimensione del Fully-Connected Layer
 
@@ -142,15 +141,15 @@ L'obiettivo è comprendere come la dimensione dell'output di una convoluzione è
 Consideriamo un esempio con un input di dimensione 6,5 e un passo (stride) di 2. Il numero di filtri è 3.
 
 1. **Calcolo della dimensione dell'output:**
-    - Dividiamo la dimensione dell'input per il passo: 6,5 / 2 = 3,25
-    - Arrotondando per difetto, otteniamo 3.
-    - Aggiungiamo il numero di filtri: 3 + 3 = 6
-    - La dimensione finale dell'output è quindi 6.
+ - Dividiamo la dimensione dell'input per il passo: 6,5 / 2 = 3,25
+ - Arrotondando per difetto, otteniamo 3.
+ - Aggiungiamo il numero di filtri: 3 + 3 = 6
+ - La dimensione finale dell'output è quindi 6.
 
 2. **Spiegazione:**
-    - Il passo (stride) determina quanti pixel vengono saltati durante la convoluzione.
-    - Il numero di filtri determina il numero di operazioni di convoluzione eseguite.
-    - La dimensione finale dell'output è determinata dal numero di operazioni di convoluzione e dalla dimensione dell'input dopo l'arrotondamento per difetto.
+ - Il passo (stride) determina quanti pixel vengono saltati durante la convoluzione.
+ - Il numero di filtri determina il numero di operazioni di convoluzione eseguite.
+ - La dimensione finale dell'output è determinata dal numero di operazioni di convoluzione e dalla dimensione dell'input dopo l'arrotondamento per difetto.
 
 **Applicazione:**
 
@@ -360,7 +359,6 @@ La parte successiva della rete, definita dalla configurazione, corrisponde al cl
 ## Varianti della VGG
 
 Esistono cinque configurazioni della VGG, che si differenziano per il numero di layer e quindi per il numero di composizioni possibili.
-
 
 Le reti VGG rappresentano un'evoluzione significativa rispetto a reti come LeNet, caratterizzate da un numero di layer convoluzionali molto più elevato. 
 

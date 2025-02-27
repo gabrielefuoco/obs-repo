@@ -1,5 +1,6 @@
 
 ### **Equilibrio di Nash e Giochi**
+
 1. Equilibrio di Nash (5)
 2. Equilibrio di Nash con strategie miste (1)
 3. Formalizzazione di un gioco strategico (1)
@@ -16,6 +17,7 @@
 14. Proprietà di truthful (1)
 
 ### **A* e Algoritmi di Ricerca**
+
 1. A* in generale e perché calcola la soluzione ottima (2)
 2. Ottimalità di A* (3)
 3. Teoremi su A* ottimalità (2)
@@ -25,12 +27,14 @@
 7. Euristica ammissibile (1)
 
 ### **ASP (Answer Set Programming)**
+
 1. Definizione di answer set (3)
 2. Esercizio di ASP (5)
 3. Modello minimo (1)
 4. ASP: come funziona? Un esempio di un programma (1)
 
 ### **CSP (Constraint Satisfaction Problems)**
+
 1. CSP (4)
 2. Tipi di consistenza (2)
 3. Strutture ad albero nei CSP e costo di risoluzione (1)
@@ -40,4 +44,5 @@
 7. Join tree (1)
 
 ### **Altri Concetti e Algoritmi**
+
 1. Alfa-Beta pruning (1)

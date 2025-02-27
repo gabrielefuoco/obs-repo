@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Giochi colazionali ^gxqwOTob
 
 Solution concept
@@ -23,7 +24,7 @@ Worth Fun ^TBR3dVSC
 Worth tot
  ^FEsDIQbY
 
-      Assunzioni
+ Assunzioni
 - Trasferable utility
 -Non TU ^DO12lVMF
 
@@ -37,7 +38,7 @@ Efficiency ^38EHQjqT
 Individual Rationality
  ^4Gtik6lk
 
-Fairness  ^Q5xLF2zs
+Fairness ^Q5xLF2zs
 
 Stability ^SBFzMn6i
 
@@ -53,6 +54,7 @@ Caratteristiche ^BtDTQpxL
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBLoeHF0KCwoVJLIRhZ2LjR4gAZ+UobWTgA5TjFuJIAWAA4AZgmAdiGANniOyEIOYixu
 

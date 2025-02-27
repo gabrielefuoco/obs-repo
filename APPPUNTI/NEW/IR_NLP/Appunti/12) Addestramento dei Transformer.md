@@ -8,10 +8,9 @@ La pre-tokenizzazione tratta il dato grezzo, distinguendo parole e delimitatori 
 
 ## Tokenizzazione
 
-Il tokenizzatore è un modulo estremamente importante che prepara i dati. Apprende un vocabolario i cui elementi sono *sub-word token* (semplicemente, *token*).  Non ci interessa identificare a priori le parole che compongono il vocabolario, ma *apprenderlo*. Il tokenizzatore deve apprendere una particolare strategia di sub-wording ed è un *learner* che ottimizza una funzione obiettivo. Il vocabolario è composto da caratteri, simboli non alfabetici, parole intere e parti di parole. A tempo di inferenza, ogni parola è splittata in una sequenza di token noti (presenti nel vocabolario); eventualmente, un token può coincidere con la parola intera.
+Il tokenizzatore è un modulo estremamente importante che prepara i dati. Apprende un vocabolario i cui elementi sono *sub-word token* (semplicemente, *token*). Non ci interessa identificare a priori le parole che compongono il vocabolario, ma *apprenderlo*. Il tokenizzatore deve apprendere una particolare strategia di sub-wording ed è un *learner* che ottimizza una funzione obiettivo. Il vocabolario è composto da caratteri, simboli non alfabetici, parole intere e parti di parole. A tempo di inferenza, ogni parola è splittata in una sequenza di token noti (presenti nel vocabolario); eventualmente, un token può coincidere con la parola intera.
 
 Esistono diversi metodi per identificare questa struttura a livello di sub-word: metodi che trattano i sub-word come sequenze di parole, caratteri o byte. Alcune strategie preservano gli spazi (identificati con token speciali). Bisogna capire se la gestione degli spazi è reversibile (es: spazi ripetuti vengono mantenuti?).
-
 
 ## Principali Approcci
 
@@ -19,7 +18,7 @@ Tutti i Language Model, indipendentemente dalla dimensione, utilizzano uno di qu
 
 ### Byte-Pair Encoding (BPE)
 
-L'addestramento parte trovando le parole uniche in un corpus, che sono token candidati.  Oltre a queste, aggiungiamo i caratteri ASCII. Il vocabolario viene appreso effettuando un merging iterativo a partire dalle unità (simboli). L'algoritmo BPE apprende regole di merge: ad ogni step, cerca la coppia di token che appare con più frequenza e li unisce.
+L'addestramento parte trovando le parole uniche in un corpus, che sono token candidati. Oltre a queste, aggiungiamo i caratteri ASCII. Il vocabolario viene appreso effettuando un merging iterativo a partire dalle unità (simboli). L'algoritmo BPE apprende regole di merge: ad ogni step, cerca la coppia di token che appare con più frequenza e li unisce.
 
 Una variante del BPE è il **byte-level encoding**, usato da GPT e BERT. I simboli sono trattati direttamente come byte.
 
@@ -33,28 +32,27 @@ WordPiece non preserva gli spazi.
 
 **Differenze con BPE:**
 
-- **Criterio di selezione:** Invece di selezionare la coppia di token più frequenti, WordPiece calcola uno score:  frequenza di occorrenza della coppia / frequenza di occorrenza dei singoli token.  Nel fare il merge, dà priorità alle coppie le cui parti individuali sono meno frequenti nel vocabolario.
+- **Criterio di selezione:** Invece di selezionare la coppia di token più frequenti, WordPiece calcola uno score: frequenza di occorrenza della coppia / frequenza di occorrenza dei singoli token. Nel fare il merge, dà priorità alle coppie le cui parti individuali sono meno frequenti nel vocabolario.
 
-- **Lunghezza dei sub-word:** WordPiece tende a identificare sub-word più lunghe e decide lo split su queste. Quando non è possibile, alla parola viene associato un token speciale "unknown".  BPE, invece, classificherebbe come "unknown" solo i singoli caratteri non presenti nel vocabolario.
+- **Lunghezza dei sub-word:** WordPiece tende a identificare sub-word più lunghe e decide lo split su queste. Quando non è possibile, alla parola viene associato un token speciale "unknown". BPE, invece, classificherebbe come "unknown" solo i singoli caratteri non presenti nel vocabolario.
 
 ### Unigram
 
 L'approccio Unigram è inverso rispetto a BPE e WordPiece: parte da un ampio vocabolario di parole ed effettua split ripetuti durante la fase di training (nota: in fase di inferenza tutte le parole vengono comunque splittate). È un algoritmo di tokenizzazione probabilistico, in quanto deve minimizzare la *likelihood loss* del corpus.
 
-L'algoritmo, ad ogni passo del training, calcola la *likelihood loss* rispetto al vocabolario corrente. Per ogni simbolo nel vocabolario, calcola quanto varia la loss nel momento in cui il simbolo viene rimosso.  L'algoritmo cerca quindi i simboli che portano al minor incremento della loss: i simboli meno informativi vengono rimossi.
+L'algoritmo, ad ogni passo del training, calcola la *likelihood loss* rispetto al vocabolario corrente. Per ogni simbolo nel vocabolario, calcola quanto varia la loss nel momento in cui il simbolo viene rimosso. L'algoritmo cerca quindi i simboli che portano al minor incremento della loss: i simboli meno informativi vengono rimossi.
 
 Data una parola da tokenizzare, l'algoritmo considera tutti i possibili split e sceglie quello con la massima *negative log likelihood*.
 
 Unigram non preserva gli spazi multipli, ma riesce a catturare simboli particolari (emoji).
 
-
-| Modello                    | BPE                                                                                | WordPiece                                                                                                                                                                        | Unigram                                                                                         |
+| Modello | BPE | WordPiece | Unigram |
 | :------------------------- | :--------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| **Addestramento**          | Inizia con un vocabolario piccolo e apprende regole per unire i token              | Inizia con un vocabolario piccolo e apprende regole per unire i token                                                                                                            | Inizia con un vocabolario grande e apprende regole per rimuovere i token                        |
-| **Passo di addestramento** | Unisce i token corrispondenti alla coppia più frequente                            | Unisce i token corrispondenti alla coppia con il punteggio migliore, basato sulla frequenza della coppia, privilegiando coppie in cui ciascun token individuale è meno frequente | Rimuove tutti i token nel vocabolario che minimizzano la perdita calcolata sull'intero corpus   |
-| **Apprende**               | Regole di unione e un vocabolario                                                  | Solo un vocabolario                                                                                                                                                              | Un vocabolario con un punteggio per ogni token                                                  |
-| **Codifica**               | Divide una parola in caratteri e applica le unioni apprese durante l'addestramento | Trova la sottoparola più lunga a partire dall'inizio che è nel vocabolario, quindi fa lo stesso per il resto della parola                                                        | Trova la suddivisione più probabile in token, usando i punteggi appresi durante l'addestramento |
-| **Esempi**                 | Gpt-2, RoBERTa,BART                                                                | BERT                                                                                                                                                                             | ALBERT                                                                                          |
+| **Addestramento** | Inizia con un vocabolario piccolo e apprende regole per unire i token | Inizia con un vocabolario piccolo e apprende regole per unire i token | Inizia con un vocabolario grande e apprende regole per rimuovere i token |
+| **Passo di addestramento** | Unisce i token corrispondenti alla coppia più frequente | Unisce i token corrispondenti alla coppia con il punteggio migliore, basato sulla frequenza della coppia, privilegiando coppie in cui ciascun token individuale è meno frequente | Rimuove tutti i token nel vocabolario che minimizzano la perdita calcolata sull'intero corpus |
+| **Apprende** | Regole di unione e un vocabolario | Solo un vocabolario | Un vocabolario con un punteggio per ogni token |
+| **Codifica** | Divide una parola in caratteri e applica le unioni apprese durante l'addestramento | Trova la sottoparola più lunga a partire dall'inizio che è nel vocabolario, quindi fa lo stesso per il resto della parola | Trova la suddivisione più probabile in token, usando i punteggi appresi durante l'addestramento |
+| **Esempi** | Gpt-2, RoBERTa,BART | BERT | ALBERT |
 
 ## Model Pretraining
 
@@ -67,9 +65,9 @@ Nell'NLP moderno:
 * Quasi tutti i parametri nelle reti neurali NLP sono inizializzati tramite pre-addestramento.
 * I metodi di pre-addestramento nascondono parti dell'input al modello, addestrandolo a ricostruire tali parti.
 * Questo approccio si è dimostrato eccezionalmente efficace per costruire:
-    * Rappresentazioni robuste del linguaggio.
-    * Inizializzazioni dei parametri per modelli NLP performanti.
-    * Distribuzioni di probabilità sul linguaggio da cui campionare.
+ * Rappresentazioni robuste del linguaggio.
+ * Inizializzazioni dei parametri per modelli NLP performanti.
+ * Distribuzioni di probabilità sul linguaggio da cui campionare.
 
 Il pre-addestramento contestualizzato serve per la rappresentazione del linguaggio, ma anche per l'inizializzazione di un modello che, appoggiandosi su questa rappresentazione, viene poi specializzato su task specifici, come la classificazione.
 
@@ -79,10 +77,9 @@ ogni token avrà, alla fine dell'addestramento, avrà tante versioni di embeddin
 Con un modello *Pretrainined* siamo in grado di risolvere una serie di task come ricostruzione della sintassi, semantica lessicale, sentiment analisys, e altri.
 In comune hanno che o c'è da predire un token successivo, o da "riempire" un vuoto nel testo (completare frasi).
 
-
 ## Paradigma Pretrain-Finetune
 
-I modelli linguistici sono *word-models*, ovvero modelli che possiedono una certa conoscenza del mondo.  Questa conoscenza dipende dalla dimensione del modello (*model size*) e dalla quantità di dati elaborati durante la fase di addestramento.  Utilizzando modelli pre-addestrati, otteniamo numerosi modelli di AI ristretta (*Narrow AI*), specializzati per un compito specifico tramite *fine-tuning*.  L'obiettivo finale è l'AGI (Intelligenza Artificiale Generale), il punto di arrivo prima della singolarità tecnologica, ovvero il momento irreversibile in cui l'IA supera le capacità intellettive umane.
+I modelli linguistici sono *word-models*, ovvero modelli che possiedono una certa conoscenza del mondo. Questa conoscenza dipende dalla dimensione del modello (*model size*) e dalla quantità di dati elaborati durante la fase di addestramento. Utilizzando modelli pre-addestrati, otteniamo numerosi modelli di AI ristretta (*Narrow AI*), specializzati per un compito specifico tramite *fine-tuning*. L'obiettivo finale è l'AGI (Intelligenza Artificiale Generale), il punto di arrivo prima della singolarità tecnologica, ovvero il momento irreversibile in cui l'IA supera le capacità intellettive umane.
 
 Un **Transformer** è un'architettura che permette di generare modelli pre-addestrati, utilizzati come punto di partenza per la creazione di modelli specializzati in compiti specifici.
 ![[12) Addestramento dei Transformer-20241125164038232.png]]
@@ -103,7 +100,7 @@ Vengono aggiunti termini di perdita solo dalle parole che sono state "mascherate
 
 ## BERT: Bidirectional Encoder Representations from Transformers
 
-BERT utilizza una rappresentazione bidirezionale profonda di testo non etichettato nella fase di pre-addestramento tramite *Masked Language Modeling* (MLM).  In altre parole, predice le parole in input mascherate condizionando congiuntamente le parole di contesto a sinistra e a destra in tutti gli strati dell'encoder.  
+BERT utilizza una rappresentazione bidirezionale profonda di testo non etichettato nella fase di pre-addestramento tramite *Masked Language Modeling* (MLM). In altre parole, predice le parole in input mascherate condizionando congiuntamente le parole di contesto a sinistra e a destra in tutti gli strati dell'encoder. 
 
 Predice casualmente il **15%** dei token (sub-word):
 
@@ -121,7 +118,7 @@ Un ulteriore compito di pre-addestramento è la **Next Sentence Prediction** (*N
 
 ### Tokenizzazione e Rappresentazione dell'Input
 
-BERT utilizza WordPiece per la tokenizzazione.  BERT base è configurato con un vocabolario di 30.000 token predefiniti.
+BERT utilizza WordPiece per la tokenizzazione. BERT base è configurato con un vocabolario di 30.000 token predefiniti.
 Bert ha come lunghezza di embeddings 768.
 
 La rappresentazione dell'input è la somma di *positional embeddings* e *segment embeddings*:
@@ -131,14 +128,14 @@ La rappresentazione dell'input è la somma di *positional embeddings* e *segment
 
 **Token Speciali:**
 
-* **`[CLS]`:** Il primo token della sequenza è sempre un token speciale chiamato `[CLS]`. La rappresentazione di output di questo token è considerata rappresentativa dell'intera sequenza di input.  Per default, `[CLS]` codifica l'intera frase data in input a BERT. In alternativa, si possono utilizzare gli embedding in output all'ultimo livello, token per token.
+* **`[CLS]`:** Il primo token della sequenza è sempre un token speciale chiamato `[CLS]`. La rappresentazione di output di questo token è considerata rappresentativa dell'intera sequenza di input. Per default, `[CLS]` codifica l'intera frase data in input a BERT. In alternativa, si possono utilizzare gli embedding in output all'ultimo livello, token per token.
 * **`[SEP]`:** Due frasi in input sono separate tra loro da un altro token speciale chiamato `[SEP]`.
 
 ## Applicazione di BERT a diversi task
 
-L'utilizzo di BERT inizia con la classificazione del testo.  Questo richiede l'aggiunta di una struttura da apprendere al modello pre-addestrato, specifica per il task.  Si aggiunge, all'ultimo layer, una *testa di classificazione*. I parametri da apprendere utilizzano come input l'embedding **CLS** (una codifica compatta dell'intera sequenza di input). 
+L'utilizzo di BERT inizia con la classificazione del testo. Questo richiede l'aggiunta di una struttura da apprendere al modello pre-addestrato, specifica per il task. Si aggiunge, all'ultimo layer, una *testa di classificazione*. I parametri da apprendere utilizzano come input l'embedding **CLS** (una codifica compatta dell'intera sequenza di input). 
 
-In alternativa, si possono utilizzare tutti gli embedding di output di tutti i token, applicando un *average pooling*.  Sono disponibili due varianti di BERT: una con 12 layer e una con 24 layer, con dimensionalità rispettivamente di 764 e 1024.  
+In alternativa, si possono utilizzare tutti gli embedding di output di tutti i token, applicando un *average pooling*. Sono disponibili due varianti di BERT: una con 12 layer e una con 24 layer, con dimensionalità rispettivamente di 764 e 1024. 
 
 Come per le reti multilayer in generale, i layer più vicini all'input apprendono relazioni a corto raggio, mentre quelli più vicini all'output apprendono relazioni semantiche (a lungo raggio).
 
@@ -152,7 +149,7 @@ Per specializzare un modello pre-addestrato come BERT, si parte dagli embedding 
 
 ### Utilizzo degli embedding di BERT in modelli basati su features
 
-* **Integrazione con altri modelli:** Gli embedding di BERT possono essere utilizzati come input per modelli come un BiLSTM a due layer randomicamente inizializzato.  Le prestazioni migliorano combinando gli output di diversi layer di BERT, in particolare gli ultimi quattro.
+* **Integrazione con altri modelli:** Gli embedding di BERT possono essere utilizzati come input per modelli come un BiLSTM a due layer randomicamente inizializzato. Le prestazioni migliorano combinando gli output di diversi layer di BERT, in particolare gli ultimi quattro.
 
 ### Conoscenza codificata nelle rappresentazioni ponderate di BERT
 
@@ -177,7 +174,7 @@ BERT ha riscosso un enorme successo ed è estremamente versatile; il fine-tuning
 
 ## Estensioni di BERT
 
-Esistono molte varianti di BERT, come RoBERTa, SpanBERT, e altre.  Alcuni miglioramenti generalmente accettati alla formula di pre-addestramento di BERT includono:
+Esistono molte varianti di BERT, come RoBERTa, SpanBERT, e altre. Alcuni miglioramenti generalmente accettati alla formula di pre-addestramento di BERT includono:
 
 * **RoBERTa:** principalmente addestra BERT per più tempo e rimuove la predizione della successiva frase (NSP).
 * **SpanBERT:** mascherare sequenze contigue di parole rende il pre-addestramento più difficile e utile.
@@ -187,18 +184,18 @@ Esistono molte varianti di BERT, come RoBERTa, SpanBERT, e altre.  Alcuni miglio
 La differenza principale è che si sceglie come task di pretraning il **masked language modelling**:
 
 * **Maggiori dati di addestramento:** Oltre a Book Corpus e Wikipedia inglese, sono stati utilizzati:
-    * CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
-    * Stories (31 GB)
-    * OpenWebText (38 GB)
+ * CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
+ * Stories (31 GB)
+ * OpenWebText (38 GB)
 * **Addestramento molto più lungo:**
-    * Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori, a parità di costo computazionale.
-    * NSP è rimosso.
-    * MLM è **dinamico**, ovvero evita l'utilizzo della stessa maschera e il sampling viene ripetuto non solo per ogni epoca, ma anche per ogni istanza.
+ * Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori, a parità di costo computazionale.
+ * NSP è rimosso.
+ * MLM è **dinamico**, ovvero evita l'utilizzo della stessa maschera e il sampling viene ripetuto non solo per ogni epoca, ma anche per ogni istanza.
 * **Sequenze di pre-addestramento:** Hanno una lunghezza di 512 token (in BERT, il 90% degli step di pre-addestramento coinvolge sequenze di lunghezza 128 token).
 * **Tokenizzazione BPE:** Con 50.000 sub-word (in BERT, vocabolario a livello di carattere di 30.000 token).
 * **Due dimensioni:**
-    * RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
-    * RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
+ * RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
+ * RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
 * **Supera BERT:** Nei benchmark classici come GLUE, SQuAD v2.0 e RACE.
 
 Un insegnamento del paper su RoBERTa: maggiore potenza di calcolo e più dati possono migliorare il pre-addestramento anche senza modificare l'encoder Transformer sottostante.
@@ -212,24 +209,24 @@ Il modello deve imparare a prendire ciascun token presente nello span mascherato
 
 * **Nuovo approccio di pre-addestramento:** Con schema di mascheramento, obiettivo di addestramento e procedura di addestramento delle sequenze differenti.
 * **Mascheramento di span adiacenti:** Invece di mascherare singoli token casuali, maschera span casuali adiacenti.
-    * Il mascheramento dello span viene eseguito campionando span di testo.
-    * La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce la selezione di lunghezze brevi, con il punto di partenza del mascheramento dello span selezionato casualmente.
-    * Vengono mascherate solo parole complete (invece di sotto-parole).
+ * Il mascheramento dello span viene eseguito campionando span di testo.
+ * La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce la selezione di lunghezze brevi, con il punto di partenza del mascheramento dello span selezionato casualmente.
+ * Vengono mascherate solo parole complete (invece di sotto-parole).
 * **Obiettivo di confine dello span (SBO - Span-Boundary Objective):**
 	* Nel definire uno span si evita di mascherare parzialmente una parola.
-    * Predire ogni token dello span usando solo i token osservati ai confini, ovvero il primo token prima dell'inizio e il primo token dopo la fine dello span.
-    * Ragionamento: incoraggiare il modello a registrare quante più informazioni possibili sullo span nelle codifiche di output dei confini.
-    * Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
-    * Come in MLM, SBO minimizza la perdita di cross-entropia.
-    * La perdita complessiva è la somma degli obiettivi MLM e SBO per ogni token nello span.
+ * Predire ogni token dello span usando solo i token osservati ai confini, ovvero il primo token prima dell'inizio e il primo token dopo la fine dello span.
+ * Ragionamento: incoraggiare il modello a registrare quante più informazioni possibili sullo span nelle codifiche di output dei confini.
+ * Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
+ * Come in MLM, SBO minimizza la perdita di cross-entropia.
+ * La perdita complessiva è la somma degli obiettivi MLM e SBO per ogni token nello span.
 
 ## S-BERT: BERT per la similarità di frasi
 
-S-BERT è un *sentence transformer*.  Mentre è possibile utilizzare gli embedding di output prodotti da un modello pre-addestrato come BERT, o l'embedding del token CLS,  questi sono un sottoprodotto e non l'obiettivo principale di BERT, che codifica le sequenze di input token per token.
+S-BERT è un *sentence transformer*. Mentre è possibile utilizzare gli embedding di output prodotti da un modello pre-addestrato come BERT, o l'embedding del token CLS, questi sono un sottoprodotto e non l'obiettivo principale di BERT, che codifica le sequenze di input token per token.
 
-Per ottimizzare la codifica di intere frasi e migliorare l'apprendimento di task diversi dalla classificazione (come la similarità tra frasi), si può modificare il pre-addestramento.  Invece di utilizzare singole frasi come input (come in *single-sentence encoding*), si utilizzano coppie di frasi ( *cross-encoding*).  Il modello viene quindi pre-addestrato per riconoscere la similarità tra le frasi.
+Per ottimizzare la codifica di intere frasi e migliorare l'apprendimento di task diversi dalla classificazione (come la similarità tra frasi), si può modificare il pre-addestramento. Invece di utilizzare singole frasi come input (come in *single-sentence encoding*), si utilizzano coppie di frasi ( *cross-encoding*). Il modello viene quindi pre-addestrato per riconoscere la similarità tra le frasi.
 
-Date due frasi in input, separate da un token `[SEP]`, si aggiunge una testa di classificazione a BERT. L'output di questa testa viene utilizzato per calcolare uno score di similarità.  Tutte le frasi vengono processate sulla stessa sequenza di input.
+Date due frasi in input, separate da un token `[SEP]`, si aggiunge una testa di classificazione a BERT. L'output di questa testa viene utilizzato per calcolare uno score di similarità. Tutte le frasi vengono processate sulla stessa sequenza di input.
 
 **Non si tratta di Finetuning ma di Further Pretraining:** il modello pre-addestrato potrà essere poi fine-tunizzato su un nuovo dataset.
 
@@ -239,13 +236,13 @@ Il **Similarity-Learning** è un tipico problema di apprendimento che si esprime
 
 Esistono due approcci principali per estendere un modello BERT a un task di *similarity learning*:
 
-1. **Cross-encoding:**  Si utilizza un singolo modello BERT, passando come input una coppia di frasi. La similarità viene poi valutata tramite una funzione obiettivo appropriata.
-2. **Rete Siamese:** L'approccio della rete siamese utilizza due istanze dello stesso modello BERT (condivisione dei pesi).  Ogni istanza riceve una delle due frasi in input.  La similarità tra le frasi viene quindi calcolata tramite una funzione obiettivo applicata agli output delle due istanze di BERT. Questo metodo genera *sentence embeddings* ottimizzati per la misurazione della similarità.
+1. **Cross-encoding:** Si utilizza un singolo modello BERT, passando come input una coppia di frasi. La similarità viene poi valutata tramite una funzione obiettivo appropriata.
+2. **Rete Siamese:** L'approccio della rete siamese utilizza due istanze dello stesso modello BERT (condivisione dei pesi). Ogni istanza riceve una delle due frasi in input. La similarità tra le frasi viene quindi calcolata tramite una funzione obiettivo applicata agli output delle due istanze di BERT. Questo metodo genera *sentence embeddings* ottimizzati per la misurazione della similarità.
 
 Il processo della rete siamese prevede:
 
 1. **Generazione degli embedding:** Ogni istanza di BERT genera un embedding per la frase corrispondente, tipicamente tramite un meccanismo di pooling (es. average pooling).
-2. **Aggiunta di residui:**  Possono essere aggiunti residui agli embedding per migliorare la rappresentazione.
+2. **Aggiunta di residui:** Possono essere aggiunti residui agli embedding per migliorare la rappresentazione.
 3. **Feed-forward:** Gli embedding vengono passati attraverso una rete feed-forward.
 4. **Calcolo della similarità:** La similarità viene calcolata utilizzando una funzione softmax o una loss basata sull'apprendimento contrastivo.
 
@@ -255,28 +252,29 @@ In entrambi i casi, l'obiettivo è ottenere rappresentazioni vettoriali (sentenc
 
 Due funzioni obiettivo comunemente utilizzate per l'apprendimento della similarità semantica sono la *Triplet Loss* e la *Multiple Negative Ranking Loss*.
 
-**Triplet Loss:** In questo caso, un'istanza target viene confrontata con un'istanza positiva (semanticamente simile) e un'istanza negativa (semanticamente diversa).  L'obiettivo è imparare a distinguere tra similarità e dissimilarità.
+**Triplet Loss:** In questo caso, un'istanza target viene confrontata con un'istanza positiva (semanticamente simile) e un'istanza negativa (semanticamente diversa). L'obiettivo è imparare a distinguere tra similarità e dissimilarità.
 
-**Multiple Negative Ranking Loss:**  Questa funzione obiettivo spinge il modello ad apprendere una similarità tra istanze positive maggiore della similarità tra istanze negative, di almeno un certo margine.  Un margine più piccolo rende il modello più robusto.
-
+**Multiple Negative Ranking Loss:** Questa funzione obiettivo spinge il modello ad apprendere una similarità tra istanze positive maggiore della similarità tra istanze negative, di almeno un certo margine. Un margine più piccolo rende il modello più robusto.
 
 ## Fine-tuning di modelli: Full Fine-tuning vs. Parameter-Efficient Fine-tuning
 
-Il fine-tuning di un modello pre-addestrato come BERT richiede meno dati e converge in meno epoche rispetto all'addestramento *from scratch*.  Tuttavia, se si desidera un approccio più efficiente dal punto di vista computazionale e dei parametri, si possono adottare tecniche di *parameter-efficient fine-tuning*.
+Il fine-tuning di un modello pre-addestrato come BERT richiede meno dati e converge in meno epoche rispetto all'addestramento *from scratch*. Tuttavia, se si desidera un approccio più efficiente dal punto di vista computazionale e dei parametri, si possono adottare tecniche di *parameter-efficient fine-tuning*.
 
 #### Lightweight Fine-tuning
-Questa tecnica consiste nel congelare (freezare) alcuni pesi del modello pre-addestrato e aggiungere nuovi layer da apprendere.  I pesi del modello pre-addestrato rimangono inalterati.
+
+Questa tecnica consiste nel congelare (freezare) alcuni pesi del modello pre-addestrato e aggiungere nuovi layer da apprendere. I pesi del modello pre-addestrato rimangono inalterati.
 
 #### Adapted Tuning
-In questa tecnica, si aggiungono degli *adapter* (moduli aggiuntivi) sopra il modello pre-addestrato.  Tutti i pesi del modello pre-addestrato sono congelati, e solo i pesi degli *adapter* vengono aggiornati durante il fine-tuning.
+
+In questa tecnica, si aggiungono degli *adapter* (moduli aggiuntivi) sopra il modello pre-addestrato. Tutti i pesi del modello pre-addestrato sono congelati, e solo i pesi degli *adapter* vengono aggiornati durante il fine-tuning.
 
 #### Prefix-Tuning e Prompt Tuning
-Queste tecniche non modificano l'architettura del modello pre-addestrato.  Agiscono o direttamente sull'input, aggiungendo token speciali che guidano la specializzazione del modello per specifici task, oppure aggiungendo parametri di prefisso in alcuni layer vicini all'input.
 
-**Vantaggio:**  Ogni elemento di un batch durante l'inferenza potrebbe utilizzare un modello finetuned in modo diverso.
+Queste tecniche non modificano l'architettura del modello pre-addestrato. Agiscono o direttamente sull'input, aggiungendo token speciali che guidano la specializzazione del modello per specifici task, oppure aggiungendo parametri di prefisso in alcuni layer vicini all'input.
+
+**Vantaggio:** Ogni elemento di un batch durante l'inferenza potrebbe utilizzare un modello finetuned in modo diverso.
 
 ![[12) Addestramento dei Transformer-20241126103509506.png|491]]
-
 
 ## Pretraining di Encoder-Decoder
 
@@ -286,17 +284,16 @@ $$h_{r+1},\dots,h_{r}=\text{Decoder}(w_{1},\dots,w_{t}),h_{1},\dots,h_{r}$$
 $$y_{i}\approx Ah_{i}+b,i>T$$
 La porzione di encoder beneficia di un contesto bidirezionale, mentre la porzione di decoder è usata per allenare l'intero modello.
 
-Le architetture encoder-decoder vengono pre-trainate utilizzando un approccio che generalizza l'idea del **masked language modeling** di BERT.  Questo approccio si basa su tecniche di *denoising* e *span corruption*.  Invece di mascherare semplicemente token individuali, si mascherano *span* di testo, generalizzando il processo di mascheramento.  L'obiettivo del pre-training diventa un task di generazione di testo, incluso il ripristino degli *span* mascherati.
+Le architetture encoder-decoder vengono pre-trainate utilizzando un approccio che generalizza l'idea del **masked language modeling** di BERT. Questo approccio si basa su tecniche di *denoising* e *span corruption*. Invece di mascherare semplicemente token individuali, si mascherano *span* di testo, generalizzando il processo di mascheramento. L'obiettivo del pre-training diventa un task di generazione di testo, incluso il ripristino degli *span* mascherati.
 
-Viene introdotto il concetto di **token sentinella**.  Ogni *span* mascherato viene sostituito non con un generico token `<MASK>`, ma con un token sentinella unico, identificato da un ID specifico.  Il target del pre-training consiste nell'associare a ciascun token sentinella il suo *bound*, ovvero nel predire il testo corretto per riempire lo *span* mascherato.
-
+Viene introdotto il concetto di **token sentinella**. Ogni *span* mascherato viene sostituito non con un generico token `<MASK>`, ma con un token sentinella unico, identificato da un ID specifico. Il target del pre-training consiste nell'associare a ciascun token sentinella il suo *bound*, ovvero nel predire il testo corretto per riempire lo *span* mascherato.
 
 ### Modello T5
 
-T5 (Text-to-Text Transfer Transformer) rappresenta un modello di riferimento per le architetture encoder-decoder.  
-Il metodo di addestramento di T5 permette al trasformer di apprendere molteplici task contemporaneamente.  Questo approccio, chiamato **instruction training**, è fondamentale per la generazione del linguaggio.
+T5 (Text-to-Text Transfer Transformer) rappresenta un modello di riferimento per le architetture encoder-decoder. 
+Il metodo di addestramento di T5 permette al trasformer di apprendere molteplici task contemporaneamente. Questo approccio, chiamato **instruction training**, è fondamentale per la generazione del linguaggio.
 
-L'instruction training consiste nel fornire al modello esempi di diversi task, formulati come problemi di testo-a-testo.  Ogni modello che deve svolgere attività di text-to-text necessita di questo tipo di addestramento per imparare a riconoscere e risolvere esempi corrispondenti a task indipendenti.
+L'instruction training consiste nel fornire al modello esempi di diversi task, formulati come problemi di testo-a-testo. Ogni modello che deve svolgere attività di text-to-text necessita di questo tipo di addestramento per imparare a riconoscere e risolvere esempi corrispondenti a task indipendenti.
 
 Il singolo token sentinella viene ricostruito non in ottica di masked language modelling, ma viene visto come una sequenza di testo(quindi come un problema di Text-To-Text).
 Ogni maschera ha una sua identità particolare, senza essere ancorato a una specifica posizione del testo.
@@ -307,9 +304,9 @@ Essendo un modello *decoder-only*, GPT è stato progettato per diversi task di g
 
 * **Architettura:** Decoder Transformer con 12 layer (come BERT), 117 milioni di parametri. Stati nascosti a 768 dimensioni e layer feed-forward nascosti a 3072 dimensioni.
 * **Tokenizzazione:** Codifica Byte-Pair con 40.000 merges.
-* **Dataset:** Addestrato su BooksCorpus: un corpus contenente oltre 7000 libri unici.  La presenza di lunghi span di testo contiguo ha permesso di apprendere dipendenze a lunga distanza.
+* **Dataset:** Addestrato su BooksCorpus: un corpus contenente oltre 7000 libri unici. La presenza di lunghi span di testo contiguo ha permesso di apprendere dipendenze a lunga distanza.
 
- Tra i benchmark utilizzati per la valutazione del modello c'è la *Natural Language Inference* (NLI).  Questo benchmark permette di addestrare modelli per il task di *entailment*, fornendo in input coppie di frasi etichettate con una delle tre seguenti classi: Entailment (conseguenza logica), Contraddittorio, Neutrale.
+ Tra i benchmark utilizzati per la valutazione del modello c'è la *Natural Language Inference* (NLI). Questo benchmark permette di addestrare modelli per il task di *entailment*, fornendo in input coppie di frasi etichettate con una delle tre seguenti classi: Entailment (conseguenza logica), Contraddittorio, Neutrale.
 
 L'**input** al decoder è formattato come una sequenza di token. È presente un token di inizio frase e un token di inizio per il decoder, che funge anche da fine frase per il primo token.
 
@@ -321,10 +318,9 @@ L'**input** al decoder è formattato come una sequenza di token. È presente un 
 
 Una novità significativa di GPT-2 è l'emergere di capacità di *zero-shot learning*.
 
-
 ### Zero-shot Learning
 
-Lo *zero-shot learning* è la capacità di un modello di eseguire diversi task senza aver mai visto esempi positivi per quei task durante l'addestramento. Questa abilità emerge senza la necessità di aggiornamenti del gradiente durante l'inferenza (fase di utilizzo del modello).  Si rivela particolarmente utile per diversi problemi di tipo text-to-text, come la risposta a domande.
+Lo *zero-shot learning* è la capacità di un modello di eseguire diversi task senza aver mai visto esempi positivi per quei task durante l'addestramento. Questa abilità emerge senza la necessità di aggiornamenti del gradiente durante l'inferenza (fase di utilizzo del modello). Si rivela particolarmente utile per diversi problemi di tipo text-to-text, come la risposta a domande.
 
 La possibilità di sfruttare lo *zero-shot learning* offre un'alternativa al fine-tuning, particolarmente vantaggiosa in due scenari:
 
@@ -344,6 +340,6 @@ L'aumento di scala ha portato all'emergere di una nuova capacità: il *few-shot 
 
 ### Few-shot Learning (In-context Learning)
 
-Il *few-shot learning*, o *in-context learning*, consiste nel fornire esempi all'interno del contesto dell'input (o prompt).  Questi esempi permettono al modello di comprendere il tipo di task che deve eseguire.
+Il *few-shot learning*, o *in-context learning*, consiste nel fornire esempi all'interno del contesto dell'input (o prompt). Questi esempi permettono al modello di comprendere il tipo di task che deve eseguire.
 
-Le prestazioni del modello migliorano all'aumentare del numero di esempi nel contesto.  Si osserva tuttavia un rendimento decrescente (*diminishing returns*) a partire da 3-4 esempi.
+Le prestazioni del modello migliorano all'aumentare del numero di esempi nel contesto. Si osserva tuttavia un rendimento decrescente (*diminishing returns*) a partire da 3-4 esempi.

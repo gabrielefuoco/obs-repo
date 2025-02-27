@@ -43,14 +43,13 @@ $$p_{\lambda}(k)=\frac{\lambda^k}{k!}e^{-\lambda}$$
 * Dove **k è il numero di occorrenze**
 Questa formula mostra che per k grande, la probabilità di k eventi è approssimativamente proporzionale a una funzione gaussiana con media t e deviazione standard √t.
 
-
 Per affermare che la possion vale come approssimazione di binomiale dobbiamo avere che:
 - T deve essere molto grande.
 - La probabilità di successo deve essere molto bassa (i termini devono stare nella coda della curva di Zipf).
 * **Media = Varianza = λ = cf/T**
-    * Se T è grande e p è piccolo, possiamo approssimare una distribuzione binomiale con una Poisson dove λ = Tp
+ * Se T è grande e p è piccolo, possiamo approssimare una distribuzione binomiale con una Poisson dove λ = Tp
 * **"Intervallo fisso" implica una lunghezza di documento fissa**
-    * Ad esempio, abstract di documenti di dimensioni costanti
+ * Ad esempio, abstract di documenti di dimensioni costanti
 
 La frequenza globale dei termini segue una legge di Zipf, prescinde dalla variabile documento.
 
@@ -84,13 +83,14 @@ k
 
 * *r* è il parametro di dispersione (numero di successi), *k* è il numero di failures da osservare, *p* è la probabilità di successo.
 
-A seconda di come si interpreta il supporto, *k* e *r* assumono significato diverso. Noi stiamo osservando la probabilità di osservare *k* insuccessi. La controparte di questa è quella in cui facciamo uno switch tra *k* e *r*: *r* diventa il numero di insuccessi e *k* di successi. 
+A seconda di come si interpreta il supporto, *k* e *r* assumono significato diverso. Noi stiamo osservando la probabilità di osservare *k* insuccessi. 
+La controparte di questa è quella in cui facciamo uno switch tra *k* e *r* **->** *r* diventa il numero di insuccessi e *k* di successi. 
 
 ### Parametrizzazione della Binomiale Negativa
 
 La media della distribuzione binomiale negativa è data da:
 
-$\mu=\frac{rp}{1-p}$
+$$\mu=\frac{rp}{1-p}$$
 
 dove *r* è il parametro di dispersione per l'evento successo e *p* è la probabilità di successo.
 
@@ -131,7 +131,6 @@ L'eliteness di un termine, ovvero la sua capacità di essere informativo per un 
 
 **Esempio:** un documento su football americano potrebbe contenere termini "elite" relativi ad altri sport, come il baseball. Se non si tiene conto di questo "topic drift", il documento potrebbe essere erroneamente classificato come rilevante per il baseball.
 
-
 ![[4)-20241028152840027.png|227]]
 
 ### Retrieval Status Value (RSV) con termini "elite"
@@ -152,44 +151,42 @@ Vogliamo personalizzare il RSV tenendo conto dei termini "elite". Nel termine i-
 
 Data l'assunzione di rilevanza o meno, la probabilità di osservare una TF=tf è espressa come unione di due eventi che si verificano congiuntamente: la probabilità data l'assunzione che il termine i-esimo sia "elite" per la probabilità che, se vale l'assunzione di rilevanza, il termine sia "elite", più l'evento in cui il termine non è "elite", con la probabilità di osservare il termine, dato R, e E_i "elite".
 
-### Modello a due Poisson
+### Modello a Due Poisson
 
-I problemi con il modello a 1-Poisson suggeriscono di adattare due distribuzioni di Poisson:
+I problemi riscontrati con il modello a 1-Poisson suggeriscono l'utilizzo di due distribuzioni di Poisson: la distribuzione varia a seconda che il termine sia "elite" o meno.  La probabilità di osservare una term frequency (TF) pari a *k*, dato uno stato di rilevanza *R*, è data da:
 
-* La distribuzione è diversa a seconda che il termine sia "elite" o meno.
+$$p(TF_{i}=k|R)=\pi \frac{\lambda^k}{k!}e^{-\lambda}+(1-\pi) \frac{\mu^k}{k!}e^{-\mu}$$
 
-$$p(TF_{i}=k|R)=\pi  \frac{\lambda^k}{k!}e^{-\lambda}+(1-\pi) \frac{\mu^k}{k!}e^{-\mu}$$
+dove:
 
 * **π** è la probabilità che un documento sia "elite" per un termine.
-* **π, λ, μ** sono parametri sconosciuti.
-* **λ** e **μ** sono i tassi minimi della distribuzione di Poisson.
+* **λ** e **μ** sono i tassi delle due distribuzioni di Poisson (λ per i termini "elite", μ per gli altri).  Questi sono parametri sconosciuti, così come π.
 
-Avendo intenzionalmente fatto attenzione all'esistenza di termini che non si adattano bene a una distribuzione di Poisson, possiamo risolvere il problema specificando due distribuzioni, a seconda che il termine sia "elite" o meno. Dato un certo stato di rilevanza, il termine i-esimo con una TF=k_i viene modellato come una combinazione lineare di due distribuzioni di Poisson:
+Considerando l'esistenza di termini che non si adattano bene a una singola distribuzione di Poisson, si utilizzano due distribuzioni per modellare il termine *i*-esimo con  $TF=k_i$, come combinazione lineare di due distribuzioni di Poisson, a seconda che il termine sia "elite" o meno.
 
-**Modello di Poisson**
 
-* **Proprietà:**
-    * Aumenta monotonicamente con tfi.
-    * Ma asintoticamente si avvicina a un valore massimo quando:
-        *  
-        * Con il limite asintotico che è:
-            *  
-            * Ovvero, il peso della caratteristica di "eliteness".
+### Modello di Poisson (semplificato)
 
-Stimare i parametri per il modello a due Poisson non è facile. Possiamo approssimarlo con una semplice curva parametrica che ha le stesse proprietà qualitative. 
+Il modello di Poisson presenta le seguenti proprietà:
 
-### Modello di Poisson
+* Aumenta monotonicamente con la term frequency (tf<sub>i</sub>).
+* Asintoticamente si avvicina a un valore massimo.  
+* Il limite asintotico rappresenta il peso della caratteristica di "eliteness". *
 
-Il costo $c_i^{elite}$ per il termine i-esimo, tenendo conto della term frequency, è definito come segue:
+La stima dei parametri per il modello a due Poisson è complessa.  Si può approssimare con una semplice curva parametrica che possiede le stesse proprietà qualitative.
+
+### Modello di Costo per Termini "Elite"
+
+Il costo $c_i^{elite}$ per il termine *i*-esimo, considerando la term frequency, è definito come segue:
 
 * $c_i^{elite}(0) = 0$
-* $c_i^{elite}(tf_i)$ cresce in maniera monotona, ma va in saturazione, che si raggiunge quando $\lambda$ è alto.
+* $c_i^{elite}(tf_i)$ cresce monotonicamente, ma satura per valori alti di λ.
 
-La stima dei parametri si preferisce farla passando una funzione che abbia le stesse qualità.
+La stima dei parametri è preferibilmente effettuata tramite una funzione che presenti le stesse caratteristiche qualitative.
 
 ![[4)-20241028163529554.png|294]]
 
-La funzione $c_i^{elite}$ cresce in maniera monotona con la term frequency, ma va in saturazione per valori alti di $\lambda$.
+La figura mostra graficamente come la funzione $c_i^{elite}$ cresce monotonicamente con la term frequency, saturando per valori elevati di λ.
 
 ### Approssimazione della Poisson
 
@@ -214,7 +211,7 @@ Per valori più alti di $k_1$, l'approssimazione della funzione è peggiore.
 
 La prima versione di BM25 utilizza la funzione di saturazione per calcolare il costo $c_i^{BM25v_1}$ del termine i-esimo:
 
-$$c_{i}^{BM25v_{1}}(tf_{i})=c_{i}^{BIM}  \frac{tf_{i}}{k_{1}+tf_{i}}$$
+$$c_{i}^{BM25v_{1}}(tf_{i})=c_{i}^{BIM} \frac{tf_{i}}{k_{1}+tf_{i}}$$
 
 dove $c_i^{BIM}$ è il costo del termine i-esimo calcolato con il modello BIM.
 
@@ -229,7 +226,7 @@ dove:
 * $N$ è il numero totale di documenti nella collezione.
 * $df_i$ è il numero di documenti che contengono il termine i-esimo.
 
-### Estensioni del modello BM25
+## Estensioni del modello BM25
 
 #### Prima estensione: funzione di saturazione
 
@@ -273,23 +270,32 @@ $$B=\left( (1-b)+b \frac{dl}{avdl} \right), 0\leq b\leq1$$
 
 ## Okapi BM25
 
-Il modello Okapi BM25 è un'estensione del modello BIM che tiene conto della lunghezza dei documenti. 
+Il modello Okapi BM25 è un'estensione del modello BIM (Best Match) che tiene conto della lunghezza dei documenti, normalizzando la term frequency (tf) in base ad essa.
 
-Normalize tf using document length
+La normalizzazione della term frequency rispetto alla lunghezza del documento è effettuata come segue:
 
-$tf_i' = \frac{tf_i}{B}$
+$$tf_i' = \frac{tf_i}{B}$$
 
-$c_i^{BM25}(tf_i) = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'}$  
-$= \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$
+dove tf<sub>i</sub> è la term frequency del termine *i* e *B* è un parametro.  La formula completa per il punteggio BM25 del termine *i* è:
 
-BM25 ranking function
+$$c_i^{BM25}(tf_i) = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'} = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$$
 
-$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$
+dove:
+
+* `N` è il numero totale di documenti nella collezione.
+* df<sub>i</sub> è il numero di documenti che contengono il termine *i*.
+* k<sub>1</sub> e `b` sono parametri.
+* `dl` è la lunghezza del documento.
+* `avdl` è la lunghezza media dei documenti nella collezione.
 
 
+La funzione di ranking BM25 è data dalla somma dei punteggi BM25 per ogni termine nella query:
 
+$$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$$
 
-Rispetto al modello BIM, BM25 valuta la term frequency normalizzata rispetto alla lunghezza dei documenti. La seconda espressione del modello BM25 è la versione 2 vista in precedenza, che è stata ulteriormente sviluppata per normalizzare la term frequency.
+dove `q` rappresenta l'insieme dei termini nella query.
+
+Rispetto al modello BIM, BM25 migliora la valutazione della term frequency normalizzandola in base alla lunghezza dei documenti. La seconda formula presentata rappresenta una versione più sviluppata del modello, che include esplicitamente la normalizzazione della term frequency.
 
 ### Parametri del modello BM25
 
@@ -298,11 +304,11 @@ $$RSV^{BM25} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1+1)tf_i}{k_1((
 Il modello BM25 utilizza due parametri principali:
 
 * **k1:** gestisce la pendenza della funzione di saturazione. Controlla lo scaling della term frequency.
-    * **k1 = 0:** modello binario.
-    * **k1 grande:** term frequency grezza.
+ * **k1 = 0:** modello binario.
+ * **k1 grande:** term frequency grezza.
 * **b:** controlla la normalizzazione della lunghezza del documento.
-    * **b = 0:** nessuna normalizzazione della lunghezza.
-    * **b = 1:** frequenza relativa (scala completamente in base alla lunghezza del documento).
+ * **b = 0:** nessuna normalizzazione della lunghezza.
+ * **b = 1:** frequenza relativa (scala completamente in base alla lunghezza del documento).
 
 Tipicamente, k1 è impostato intorno a 1.2-2 e b intorno a 0.75. È possibile incorporare la ponderazione dei termini di query e il feedback di rilevanza (pseudo).
 
@@ -317,15 +323,15 @@ Supponiamo di avere 2 documenti con i seguenti conteggi di termini:
 
 Calcoliamo il punteggio tf-idf e BM25 per entrambi i documenti:
 
-**tf-idf:** log2 tf * log2 (N/df)
+**tf-idf:** $log_2 (tf) \cdot \ log_{2} \left( \frac{N}{df} \right)$
 
-* **doc1:** 11 * 7 + 1 * 10 = 87
-* **doc2:** 5 * 7 + 4 * 10 = 75
+* **doc1:** $11 * 7 + 1 * 10 = 87$
+* **doc2:** $5 \cdot 7 + 4 \cdot 10 = 75$
 
-**BM25:** k1 = 2
+**BM25:** $k_{1} = 2$
 
-* **doc1:** 7 * 3 + 10 * 1 = 31
-* **doc2:** 7 * 2.67 + 10 * 2.4 = 42.7
+* **doc1:** $7 \cdot 3 + 10 \cdot 1 = 31$
+* **doc2:** $7 \cdot 2.67 + 10 \cdot 2.4 = 42.7$
 
 ### Ranking con zone
 
@@ -342,16 +348,16 @@ Tuttavia, questo sembra implicare che le proprietà di eliteness delle diverse z
 
 * Assumere che l'eliteness sia una proprietà del termine/documento condivisa tra le zone.
 * Ma la relazione tra eliteness e frequenze dei termini è dipendente dalla zona.
-    * Ad esempio, un uso più denso di parole di argomento elite nel titolo.
+ * Ad esempio, un uso più denso di parole di argomento elite nel titolo.
 
 #### Conseguenza
 
 * Combinare prima le prove tra le zone per ciascun termine.
 * Quindi combinare le prove tra i termini.
 
+### Calcolo di varianti pesate di frequenza dei termini totali e lunghezza del documento
 
-**Calculate a weighted variant of total term frequency, and**
-**Calculate a weighted variant of document length**
+Si calcolano varianti pesate della frequenza dei termini totali e della lunghezza del documento come segue:
 
 $$
 \begin{aligned}
@@ -359,50 +365,68 @@ $$
 \tilde{dl} &= \sum_{z=1}^{Z} v_{z} l e n_{z}
 \end{aligned}
 $$
+
+dove:
+
+* $v_z$ è il peso della zona;
+* $tf_{zi}$ è la frequenza del termine nella zona $z$;
+* $len_z$ è la lunghezza della zona $z$;
+* $Z$ è il numero di zone.
+
+
+Si calcola anche la lunghezza del documento media ponderata:
+
 $$
 \begin{aligned}
-a v d l &= \frac{\text{average } d \tilde{l}}{\text{across all docs}}
+avdl &= \frac{\text{average } d\tilde{l}}{\text{across all docs}}
 \end{aligned}
 $$
-**where**
 
-*   $v_z$ is zone weight
-*   $t f_{z i}$ is term frequency in zone $z$
-*   $l e n_z$ is length of zone $z$
-*   $Z$ is the number of zones
 
-**Metodo:**
+## Metodo per il calcolo delle varianti pesate
 
-1. **Calcolo della TF per zona:** La TF viene calcolata separatamente per ogni zona del documento.
+Il metodo per il calcolo delle varianti pesate si articola in tre fasi:
+
+1. **Calcolo della TF per zona:** La frequenza dei termini (TF) viene calcolata separatamente per ogni zona del documento.
+
 2. **Normalizzazione per zona:** La TF viene normalizzata in base alla lunghezza della zona.
-3. **Peso della zona:** Viene assegnato un peso a ciascuna zona, riflettente la sua importanza nel contesto del documento. Questo peso è un parametro predefinito e non è apprendibile.
 
-### Simple BM25F with zones
+3. **Peso della zona:** A ciascuna zona viene assegnato un peso ($v_z$), che riflette la sua importanza nel contesto del documento. Questo peso è un parametro predefinito e non è apprendibile dal modello.
 
-Simple interpretation: zone z is "replicated" y times
+### Simple BM25F con zone
+
+Interpretazione semplificata: la zona *z* è "replicata" *y* volte.
+
+La formula per il punteggio RSV (Retrieval Status Value) nel modello Simple BM25F è:
 
 $$RSV^{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_{i}} \cdot \frac{(k_1 + 1)tf_i}{k_1((1-b) + b \frac{dl}{avdl}) + tf_i} $$
 
- But we may want zone-specific parameters (k, b, IDF)
-
- **Zone-specific length normalization**
-
-Empirically, zone-specific length normalization (i.e., zone-specific b) has been found to be useful.
+Tuttavia, si potrebbero voler utilizzare parametri specifici per ogni zona (k, b, IDF).
 
 
+## Normalizzazione della lunghezza specifica per zona
 
+Empiricamente, si è riscontrato che la normalizzazione della lunghezza specifica per zona (ovvero, *b* specifico per zona) è utile.  La frequenza del termine modificata ($\tilde{tf}_i$) viene calcolata come:
 
 $$
 \tilde{tf}_i = \sum_{z=1}^Z v_z \frac{f_{z i}}{B_z}
 $$
 
+dove:
+
 $$
 B_z = \left( (1-b_z) + b_z \frac{\text{len}_z}{\text{avlen}_z} \right), \quad 0 \leq b_z \leq 1
 $$
 
+e  `len_z` rappresenta la lunghezza della zona z e `avlen_z` la lunghezza media delle zone z.
+
+La formula per il punteggio RSV nel modello BM25F, considerando la normalizzazione specifica per zona, è:
+
 $$
 \text{RSV}^{BM25F} = \sum_{i \in q} \log \frac{N }{df_{i}} \cdot \frac{(k_1 + 1)tf_i}{k_{1}+tf_{i}}
 $$
+
+Si noti che questa formula differisce leggermente dalla formula del Simple BM25F, semplificando il denominatore.  La differenza principale risiede nell'utilizzo di una normalizzazione della lunghezza specifica per zona, rappresentata da $B_z$.
 
 
 ## Classifica con caratteristiche non testuali
@@ -410,20 +434,20 @@ $$
 ### Assunzioni
 
 * **Assunzione di indipendenza usuale:**
-    * Le caratteristiche non testuali sono indipendenti l'una dall'altra e dalle caratteristiche testuali.
-    * Questa assunzione consente di separare il fattore nella derivazione in stile BIM:
+ * Le caratteristiche non testuali sono indipendenti l'una dall'altra e dalle caratteristiche testuali.
+ * Questa assunzione consente di separare il fattore nella derivazione in stile BIM:
 
-    $\frac{p(F_{j}=f_{j}|R=1)}{p(F_{j}=f_{j}|R=0)}$
+$$\frac{p(F_{j}=f_{j}|R=1)}{p(F_{j}=f_{j}|R=0)}$$
 
 * **Le informazioni di rilevanza sono indipendenti dalla query:**
-    * Questa assunzione è generalmente vera per caratteristiche come PageRank, età, tipo, ecc.
-    * Consente di mantenere tutte le caratteristiche non testuali nella derivazione in stile BIM, dove vengono eliminati i termini non relativi alla query. 
+ * Questa assunzione è generalmente vera per caratteristiche come PageRank, età, tipo, ecc.
+ * Consente di mantenere tutte le caratteristiche non testuali nella derivazione in stile BIM, dove vengono eliminati i termini non relativi alla query. 
 
 ### Formulazione del RSV
 
 Il RSV (Ranking Score Value) può essere calcolato come segue:
 
-$RSV=\sum_{i\in q}c_{i}(tf_{i})+\sum_{j=1}^f\lambda_{j}V_{j}(f_{j})$
+$$RSV=\sum_{i\in q}c_{i}(tf_{i})+\sum_{j=1}^f\lambda_{j}V_{j}(f_{j})$$
 
 dove:
 
@@ -432,4 +456,4 @@ dove:
 
 ### Considerazioni sulla selezione di $V_j$
 
-È necessario prestare attenzione nella selezione di $V_j$ a seconda di $f_j$. Ad esempio, la scelta di $V_j$ può spiegare perché $Rsv\_bm25 + log(pagerank)$ funziona bene. 
+È necessario prestare attenzione nella selezione di $V_j$ a seconda di $f_j$. Ad esempio, la scelta di $V_j$ può spiegare perché $Rsv_{bm25} + log(\text{pagerank})$ funziona bene. 

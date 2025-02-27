@@ -10,6 +10,7 @@ Per illustrare le reti neurali, partiamo dalle architetture più semplici che po
 
 Il flusso dell'informazione va solo in una direzione (dall'input all'output)
 #### Struttura generale:
+
 Queste reti possono essere descritte attraverso un grafo diretto aciclico. La rete può essere rappresentata come un grafo $𝐺 = (𝑉, 𝐸,\vec{w},\phi)$ dove:
 
 ![[8)-20241024130024790.jpg|537]]
@@ -29,30 +30,31 @@ Ogni neurone applica una **funzione di attivazione** al suo input per produrre u
 
 Quando ogni neurone del livello i-esimo è collegato a ogni neurone del livello i+1-esimo, la rete è detta **densa**. 
 
-
 ![[8)-20241024130054817.png|354]]
-
-
 
 ## Funzioni di attivazione
 
 **Segno:**
+
 ![[8)-20241024130744776.png|402]]
 $\phi$ sulle ordinate e $<\vec{w},\vec{x}>$ sulle ascisse.
 Quando usiamo questa funzione il neruone corrisponde a un semispazio.
 
 **Gradino:**
+
 ![[8)-20241024130804304.png|423]]
 
 Il problema di queste funzioni è legato al fatto che la loro derivata non è utile ai fini dell'algoritmo di minimizzazione, poichè è sempre prossima allo zero.
 Una soluzione è data dalla funzione Sigmoide:
 
 **Sigmoide**:
+
 ![[8)-20241024130821929.png|455]]
 Gode della seguente prorpietà:
 $$\sigma'(x)=\sigma(x)(1-\sigma (x))$$
 
 **Tangente iperbolica:**
+
 ![[8)-20241024131749391.png|445]]
 
 $$\text{tanh}(x)=\tau(x)=2\sigma(2x)-1$$
@@ -61,6 +63,7 @@ $$\tau'(x)=1-\tau(x)^2$$
 Se ci allontaniamo dall'origine, il gradiente tende ad azzerarsi e la funzione non cresce(Regioni saturanti). Per risolvere questo problema vengono in gioco altre funzioni di attivazione:
 
 **ReLU:**
+
 ![[8)-20241024131933828.png|446]]
 $$\mathrm{ReLU}=\max(0,x)$$
 $$ \mathrm{ReLU}'
@@ -75,7 +78,7 @@ $$
 $$ \mathrm{Leaky \ ReLU}
 \begin{cases}
 x, \ x>0 \\
-\alpha x, \  x\leq 0
+\alpha x, \ x\leq 0
 \end{cases}
 $$
 
@@ -128,17 +131,15 @@ $$\sum_{i}x_{i}>(+1)+(-1)(d-1)=-d+2-0.5$$
 
 $$h_{OR}(\vec{x})=\text{sign}\left( \sum_{i}x_{i}+d-1.5 \right)$$
 
-
-
 ## Funzione NOT
 
 La funzione NOT è definita come:
 
-$h_{NOT}(x)=-x$
+$$h_{NOT}(x)=-x$$
 
 Questa funzione può essere espressa anche come:
 
-$-sign(x)=sign(-x)$
+$$-sign(x)=sign(-x)$$
 
 ### NAND
 
@@ -182,25 +183,23 @@ Problema XOR: non è linearmente separabile
 
 La funzione XOR (Exclusive OR) restituisce +1 se solo uno dei due input è +1, altrimenti -1. 
 $$x_1 \oplus x_2 = x_1 \overline{x_2} + \overline{x_1} x_2$$
- 
+
 A differenza delle funzioni booleane elementari come AND, OR e NOT, la funzione XOR non è linearmente separabile. Ciò significa che non è possibile tracciare un singolo iperpiano (una retta nel caso bidimensionale) in grado di separare correttamente i punti corrispondenti a +1 da quelli corrispondenti a -1.
 
 Lo XOR corrisponde alla seguente regione
 ![[9)-20241025090701456.png|480]]
 Equivale all'intersezione del semispazio dell'OR e del NAND.
 
-$h_{XOR}(\vec{x})=h_{AND}(h_{OR}(\vec{x}),h_{NAND}(\vec{x}))$
-
+$$h_{XOR}(\vec{x})=h_{AND}(h_{OR}(\vec{x}),h_{NAND}(\vec{x}))$$
 
 ![[9)-20241025090912178.png]]
-
 
 un altro modo di rappresentarlo è
 
 ![[9)-20241025091123687.png]]
 Con due funzioni di uguaglianza: funzione di uguaglianza sopra(-1,+1), uguaglianza sotto (+1-1) 
 
-$h_{XOR}(\vec{x})=h_{OR}(h_{(-1+1)}^{EQ}(\vec{x}),h_{(+1-1)}^{EQ}(\vec{x}))$
+$$h_{XOR}(\vec{x})=h_{OR}(h_{(-1+1)}^{EQ}(\vec{x}),h_{(+1-1)}^{EQ}(\vec{x}))$$
 
 ## Proprietà delle Reti Neurali a Due Livelli
 
@@ -214,7 +213,7 @@ $$f(\vec{x})=h_{OR}(h^{EQ}_{w_{1}}(\vec{x}),\dots,h^{EQ}_{w_{n}}(\vec{x}))$$
 
 **Esempio:**
 
-$g_{i}(\vec{x}) = (x_{1} \land \neg x_{2} \land x_{4})$
+$$g_{i}(\vec{x}) = (x_{1} \land \neg x_{2} \land x_{4})$$
 
 Il numero di neuroni potrebbe essere esponenziale nel numero di variabili. Dunque, si preferisce usare più livelli perché sono necessari meno neuroni.
 
@@ -234,7 +233,7 @@ Se invece ragioniamo in termini di funzioni arbitrarie (e non solo booleane), ch
 
 Data la funzione:
 
-$f:[-1+1]^d\to[-1+1]$
+$$f:[-1+1]^d\to[-1+1]$$
 
 con $f$ Lipschitz, allora per ogni $\epsilon>0$ posso costruire una rete neurale che approssimi la mia funzione con un errore al massimo pari ad $\epsilon$. 
 $$\forall x\in D,f(x)-\epsilon\leq h(x)\leq f(x)+\epsilon$$
@@ -299,14 +298,14 @@ x_{2} \\
 
 In generale, la funzione di attivazione della rete neurale può essere espressa come:
 
-$h(\vec{x})=\phi(w_{j}\phi(w_{2}\phi(w_{1}\vec{x})))$
+$$h(\vec{x})=\phi(w_{j}\phi(w_{2}\phi(w_{1}\vec{x})))$$
 
 dove $\phi$ rappresenta la funzione di attivazione e $w_i$ sono le matrici dei pesi per ogni livello.
 
 ## Proprietà
 
 $$\vec{w}=ERM(S)=\arg\min_{\vec{w\in \mathbb{R}^{|E|}}}L_{S}(\vec{w})$$
-dove  $L_{S}(\vec{w})=\frac{1}{m}\sum_{i=1}^ml(h,(\vec{x_{i}},y_{i}))$
+dove $L_{S}(\vec{w})=\frac{1}{m}\sum_{i=1}^ml(h,(\vec{x_{i}},y_{i}))$
 
 **Proprietà**: Implementare la regola ERM rispetto alla classe delle reti neurali è un problema *NP-Hard*.
 
@@ -314,13 +313,12 @@ dove  $L_{S}(\vec{w})=\frac{1}{m}\sum_{i=1}^ml(h,(\vec{x_{i}},y_{i}))$
 
 supponiamo di utilizzare loss quadratica $l_{SQ}(h(x,y))=\frac{1}{2}(h(x)-y)^2$
 
-$\vec{w}^{(1)}=\text{ Inizializzazione}$
-$\text{for t=1 to T-1 do}$
-	 $\text{seleziona casualmente }(\vec{x_{i}},y_{i})\text{ in S}$
-	$\vec{v}_{t=}\nabla_{\vec{w}}l(h_{\vec{w}^{(t)}},(\vec{x_{i}},y_{i}))=\nabla_{\vec{w}}\left[ \frac{1}{2}   \{ \phi(w_{t}\phi(w_{t-1}\phi(\dots w_{2}\phi(w_{1}\phi (w \vec{x_{i}}))))) \}-y \right]^2$
-	$\vec{w}^{(t+1)}=\vec{w}^{(1)}+\vec{\eta}v_{t}$
-$\text{return }\vec{w}^{(t)}$
-
+$$\vec{w}^{(1)}=\text{ Inizializzazione}$$
+$$\text{for t=1 to T-1 do}$$
+$$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\text{ in S}$$
+$$\vec{v}_{t=}\nabla_{\vec{w}}l(h_{\vec{w}^{(t)}},(\vec{x_{i}},y_{i}))=\nabla_{\vec{w}}\left[ \frac{1}{2}   \{ \phi(w_{t}\phi(w_{t-1}\phi(\dots w_{2}\phi(w_{1}\phi (w \vec{x_{i}}))))) \}-y \right]^2$$
+$$\vec{w}^{(t+1)}=\vec{w}^{(1)}+\vec{\eta}v_{t}$$
+$$\text{return }\vec{w}^{(t)}$$
 
 ## Algoritmo di Backpropagation
 
@@ -351,12 +349,12 @@ per calcolare la derivata della loss rispetto allo stimo di ogni neurone dobbiam
 ### Caso 1: $j$ è un Neurone di output
 
 Partiamo dal caso più semplice, in cui il neurone è quello di output. In questo caso, l'uscita della rete coincide con l'output del neurone stesso. Utilizzando la notazione $\delta_{j}$ per indicare la derivata della funzione di costo rispetto allo stimolo del neurone j-esimo, possiamo scrivere:
-$$\delta_{j}=\frac{\partial l}{\partial \ net_{j}}=\frac{\partial l}{\partial o_{j}}\cdot  \frac{\partial o_{j}}{\partial \ net_{j}}$$
+$$\delta_{j}=\frac{\partial l}{\partial \ net_{j}}=\frac{\partial l}{\partial o_{j}}\cdot \frac{\partial o_{j}}{\partial \ net_{j}}$$
 
 $$\frac{\partial l}{\partial o_{j}}=\frac{\partial}{\partial o_{j}}\left[ \frac{1}{2}(h(\vec{x})-y)^2 \right]=\frac{\partial}{\partial o_{j}}\left[ \frac{1}{2}(o_{j}-y)^2 \right]=o_{j}-y$$
-$$\frac{\partial o_{j}}{\partial \ net_{j}}=\frac{\partial \sigma  (net_{j}) }{\partial \ net_{j}}=\sigma(net_{j})(1-\sigma(net_{j}))=o_{j}(1-o_{j})$$
+$$\frac{\partial o_{j}}{\partial \ net_{j}}=\frac{\partial \sigma (net_{j}) }{\partial \ net_{j}}=\sigma(net_{j})(1-\sigma(net_{j}))=o_{j}(1-o_{j})$$
 Abbiamo che questo:
-$$\delta_{j}=\frac{\partial l}{\partial \ net_{j}}=\frac{\partial l}{\partial o_{j}}\cdot  \frac{\partial o_{j}}{\partial \ net_{j}}$$
+$$\delta_{j}=\frac{\partial l}{\partial \ net_{j}}=\frac{\partial l}{\partial o_{j}}\cdot \frac{\partial o_{j}}{\partial \ net_{j}}$$
 Diventa:
 $$(o_{j}-y) \cdot o_{j}(1-o_{j})$$
 
@@ -379,30 +377,28 @@ $$\frac{\partial net_{k}}{\partial o_{j}}=\frac{\partial}{\partial o_{j}}\sum w_
 La precedente diventa
 $$\sum \delta _k w_{ij}o_{j}(1-o_{j})=o_{j}(1-o_{j})\sum \delta_{k}w_{jk}$$
 
-
 ## Backpropagation Algorithm
 
 1) $\text{Propagate the inpuit forward:}$
-	$\text{for each unit j, compute}$
-		$o_j=\sigma(net_{j})=\sigma\left( \sum_{i}w_{ij}x_{ij} \right)$
+$$\text{for each unit j, compute}$$
+$$o_j=\sigma(net_{j})=\sigma\left( \sum_{i}w_{ij}x_{ij} \right)$$
 2) $\text{Propagate the gradient backward}$
-	$\text{for the output unit k}$
-		$\delta_{k}=(o_{k}-y)o_{k}(1-o_{k})$
-	$\text{for each hidden unit j}$
-		$\delta_{j}=o_{j}(1-o_{j})\sum_{k\in\text{output}} w_{jk}\delta_{k}$
+$$\text{for the output unit k}$$
+$$\delta_{k}=(o_{k}-y)o_{k}(1-o_{k})$$
+$$\text{for each hidden unit j}$$
+$$\delta_{j}=o_{j}(1-o_{j})\sum_{k\in\text{output}} w_{jk}\delta_{k}$$
 3) $\text{for each network wheight}$
-	$v_{ij}=\frac{\delta l}{\delta w_{ij}}\delta_{j}\cdot x_{ij}$
-
+$$v_{ij}=\frac{\delta l}{\delta w_{ij}}\delta_{j}\cdot x_{ij}$$
 
 ## SGD + NN
 
-$\vec{w}^{(1)}=\text{Inizializzazione}$
-$\text{for t=1 to T-1 do}$
-	$\text{Seleziona casualmente }(\vec{x_{i}},y_{i})\text{ in S}$
-	$\vec{v_{t}}=\text{Backpropagation}(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))$
-	$\nabla \vec{w}^{(t)}=-\eta \vec{v_{t}}$
-	$\vec{w}^{(t+1)}=\vec{w}^{(t)}+\nabla \vec{w}^{(t)}$
-$\text{return } \vec{w}^{(t)}$
+$$\vec{w}^{(1)}=\text{Inizializzazione}$$
+$$\text{for t=1 to T-1 do}$$
+$$\text{Seleziona casualmente }(\vec{x_{i}},y_{i})\text{ in S}$$
+$$\vec{v_{t}}=\text{Backpropagation}(\vec{w}^{(t)},(\vec{x_{i}},y_{i}))$$
+$$\nabla \vec{w}^{(t)}=-\eta \vec{v_{t}}$$
+$$\vec{w}^{(t+1)}=\vec{w}^{(t)}+\nabla \vec{w}^{(t)}$$
+$$\text{return } \vec{w}^{(t)}$$
 
 #### Regolarizzazione
 
@@ -418,7 +414,7 @@ Un problema che si può incontrare con la discesa del gradiente è quello di rim
 **Come evitare i minimi locali:**
 
 * **Momentum:** Si aggiunge al termine di aggiornamento del gradiente una certa porzione del passo precedente. Questo aiuta a mantenere una certa velocità nella direzione corretta, evitando che l'algoritmo si blocchi in un minimo locale.
-$$\nabla  \vec{w}^{(t)}=\mu \nabla  \vec{w}^{(t-1)}- \eta(\vec{v_{t}}+\lambda \vec{w}^{(t)})$$
+$$\nabla \vec{w}^{(t)}=\mu \nabla \vec{w}^{(t-1)}- \eta(\vec{v_{t}}+\lambda \vec{w}^{(t)})$$
 	Dove $\mu$ rappresenta il momento
 
 * **Tecniche di ottimizzazione stocastica:** Queste tecniche, che saranno trattate successivamente, permettono di esplorare lo spazio dei parametri in modo più efficiente, riducendo il rischio di rimanere intrappolati in un minimo locale.

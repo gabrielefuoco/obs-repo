@@ -90,7 +90,7 @@ for i, batch in enumerate(dataloader):
 preds.shape
 ```
 
-    (50000, 1000)
+ (50000, 1000)
 
 # Calcolo dello score
 
@@ -114,5 +114,5 @@ score, devstd = np.mean(split_scores), np.std(split_scores)
 print(f'Inception Score is {score} with devstd {devstd}')
 ```
 
-    Inception Score is 9.672773924506332 with devstd 0.14991434268517465
-    
+ Inception Score is 9.672773924506332 with devstd 0.14991434268517465
+

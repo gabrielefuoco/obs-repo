@@ -57,7 +57,6 @@ KL è L'entropia relativa, vale 0 se le due distribuzioni sono uguali: $KL(p,q)=
 ![[10)-20241122091125417.png]]
 In questo modo abbiamo garantito che le regioni si possano sovrapporre.
 
-
 ## Generative Adversarial Network (GAN)
 
 Implementano il paradigma dell'*Adversarial Learning* (Apprendimento competitivo).
@@ -68,17 +67,17 @@ Il funzionamento di una Rete Generativa Adversaria (GAN) si basa sull'interazion
 
 #### Rete Generativa
 
-La rete generativa riceve in input punti generati casualmente da una distribuzione di riferimento.  Il suo obiettivo è generare un output che assomigli il più possibile ai punti del dataset reale.
+La rete generativa riceve in input punti generati casualmente da una distribuzione di riferimento. Il suo obiettivo è generare un output che assomigli il più possibile ai punti del dataset reale.
 
 #### Rete Discriminativa
 
-La rete discriminativa riceve in input esempi provenienti da due sorgenti: il dataset reale e la rete generativa.  Dato un esempio *x*, la rete deve restituire la probabilità che *x* appartenga alla distribuzione di probabilità reale  $D(x) = Pr[x \in p_x]$.
+La rete discriminativa riceve in input esempi provenienti da due sorgenti: il dataset reale e la rete generativa. Dato un esempio *x*, la rete deve restituire la probabilità che *x* appartenga alla distribuzione di probabilità reale $D(x) = Pr[x \in p_x]$.
 
 #### Addestramento delle Reti
 
-L'addestramento delle due reti avviene simultaneamente.  Si utilizza un batch di esempi dal dataset reale e si aggiornano i pesi di entrambe le reti con l'obiettivo di:
+L'addestramento delle due reti avviene simultaneamente. Si utilizza un batch di esempi dal dataset reale e si aggiornano i pesi di entrambe le reti con l'obiettivo di:
 
-* **Massimizzare la capacità discriminativa:**  La rete discriminativa deve massimizzare la probabilità di distinguere correttamente gli esempi reali ($D(x) = 1$) da quelli generati dalla rete generativa ($D(\tilde{x}) = D(G(z)) = 0$).
+* **Massimizzare la capacità discriminativa:** La rete discriminativa deve massimizzare la probabilità di distinguere correttamente gli esempi reali ($D(x) = 1$) da quelli generati dalla rete generativa ($D(\tilde{x}) = D(G(z)) = 0$).
 
 * **Minimizzare la capacità discriminativa (per la rete generativa):** La rete generativa deve minimizzare la probabilità che la rete discriminativa riconosca gli esempi generati come sintetici.
 
@@ -119,8 +118,7 @@ $$R = \begin{cases}
 -1 & \text{Sconfitta}
 \end{cases}$$
 
-È importante notare che assegnare ricompense solo a situazioni di vittoria o sconfitta potrebbe non essere sempre ottimale.  Una strategia di ricompense più sofisticata potrebbe fornire informazioni più ricche all'agente.
-
+È importante notare che assegnare ricompense solo a situazioni di vittoria o sconfitta potrebbe non essere sempre ottimale. Una strategia di ricompense più sofisticata potrebbe fornire informazioni più ricche all'agente.
 
 ### Return (Guadagno)
 
@@ -138,19 +136,17 @@ $$
 \end{cases}
 $$
 
-Nei *task* episodici, dove esiste uno stato finale, il *return* è ben definito.  In questi casi, l'interazione termina quando si raggiunge lo stato finale.  Tipicamente si considera il *return* per ogni episodio.
+Nei *task* episodici, dove esiste uno stato finale, il *return* è ben definito. In questi casi, l'interazione termina quando si raggiunge lo stato finale. Tipicamente si considera il *return* per ogni episodio.
 
-Nei *task* continui, il guadagno può essere potenzialmente infinito.  Inoltre, una ricompensa ottenuta immediatamente ha un valore maggiore di una ricompensa ottenuta in un futuro più lontano.  Per questo motivo, si utilizza spesso il *discounted return*.
-
+Nei *task* continui, il guadagno può essere potenzialmente infinito. Inoltre, una ricompensa ottenuta immediatamente ha un valore maggiore di una ricompensa ottenuta in un futuro più lontano. Per questo motivo, si utilizza spesso il *discounted return*.
 
 ### Discounted Return
 
-Per affrontare il problema del guadagno potenzialmente infinito nei *task* continui, si introduce un parametro chiamato **tasso di sconto** (discount rate): $\gamma \in [0, 1]$.  Il *discounted return* è definito come:
+Per affrontare il problema del guadagno potenzialmente infinito nei *task* continui, si introduce un parametro chiamato **tasso di sconto** (discount rate): $\gamma \in [0, 1]$. Il *discounted return* è definito come:
 
 $$G_t = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \dots + \gamma^k r_T$$
 
 dove $\gamma^k$ rappresenta il valore attuale di una ricompensa ottenuta dopo *k* istanti di tempo.
-
 
 ### Interprete
 
@@ -158,7 +154,7 @@ Nell'architettura di un sistema di apprendimento per rinforzo, tra l'ambiente e 
 
 ![[10) Reti Generative 2024-11-22 10.25.09.excalidraw]]
 
-L'interprete elabora le sensazioni attuali e passate per produrre lo **stato**. Lo stato è una rappresentazione processata dei segnali dell'interprete, che deve riassumere tutte le informazioni rilevanti per l'agente al fine di prendere una decisione.  Questo stato è detto **stato Markoviano**, in quanto contiene tutte le informazioni necessarie per prevedere il futuro, indipendentemente dal passato.
+L'interprete elabora le sensazioni attuali e passate per produrre lo **stato**. Lo stato è una rappresentazione processata dei segnali dell'interprete, che deve riassumere tutte le informazioni rilevanti per l'agente al fine di prendere una decisione. Questo stato è detto **stato Markoviano**, in quanto contiene tutte le informazioni necessarie per prevedere il futuro, indipendentemente dal passato.
 
 ### Sato Markowiano
 
@@ -178,7 +174,7 @@ Un **MDP** è una quintupla $<S,A,T,R,\gamma>$ dove:
 - $S$ è lo spazio degli stati
 - $A$ è l'insieme delle azioni
 - $T:S \times A \times S \to[0,1]: T(s,a,s')$ 
-	- È una funzione di transizione che restituisce la probabilità di passare in $s'$ dato che siamo in $S$ e eseguiamo $A$  
+	- È una funzione di transizione che restituisce la probabilità di passare in $s'$ dato che siamo in $S$ e eseguiamo $A$ 
 - $R: S \times A \times S \to R'$ , dove $R'$ è l'insieme delle ricompense 
 	- $R(s,a,s')$ ricompensa ottenuta quando da $s$ passiamo a $s'$ eseguendo l'azione $a$
 - $\gamma \in [0,1]$ è il *discount factor*
@@ -197,13 +193,11 @@ $$V^\pi(s) = E_\pi[G_t | s_t = s] = E_\pi\left[ \sum_{k=0}^\infty \gamma^k r_{t+
 
 Rappresenta il guadagno atteso, dato che al tempo *t* l'agente si trova nello stato *s*, seguendo la policy $\pi$.
 
-
 ### Q-Value
 
 Dato una policy $\pi$, il **Q-Value** di una coppia stato-azione $(s, a)$ è il valore atteso del *discounted return* a partire da quello stato, eseguendo prima l'azione *a*:
 
 $$Q^\pi(s, a) = E_\pi[G_t | s_t = s, a_t = a] = E_\pi\left[ \sum_{k=0}^\infty \gamma^k r_{t+k} | s_t = s, a_t = a \right]$$
-
 
 ### Equazioni di Bellman
 
@@ -225,7 +219,6 @@ $$V^\pi(s) = \sum_{a \in A} \pi(a|s) \sum_{s' \in S} T(s, a, s') [R(s, a, s') + 
 $$Q^\pi(s, a) = \sum_{s' \in S} T(s, a, s') \left[ R(s, a, s') + \gamma \sum_{a' \in A} \pi(a'|s') Q^\pi(s', a') \right]$$
 
 Partendo da valori iniziali casuali di $V^\pi$ (o nulli se si tratta di stati finali), l'applicazione iterativa di queste equazioni converge ai veri valori di $V^\pi$ e $Q^\pi$.
-
 
 ### Interactive Policy Evaluation
 
@@ -288,12 +281,12 @@ Nella pratica, però, non conosciamo questi valori.
 
 # Q-Learning
 
-L'obiettivo del Q-learning è stimare la funzione Q ottimale, $Q^*(s,a)$.  Si costruisce un *training set* $T = \{ \langle s, a, r, s' \rangle \}$, che accumula l'esperienza dell'agente, dove:
+L'obiettivo del Q-learning è stimare la funzione Q ottimale, $Q^*(s,a)$. Si costruisce un *training set* $T = \{ \langle s, a, r, s' \rangle \}$, che accumula l'esperienza dell'agente, dove:
 
-*   `s`: stato corrente
-*   `a`: azione eseguita
-*   `r`: ricompensa ricevuta
-*   `s'`: stato successivo
+* `s`: stato corrente
+* `a`: azione eseguita
+* `r`: ricompensa ricevuta
+* `s'`: stato successivo
 
 Si costruisce inoltre una *lookup table* $Q(s,a)$, una matrice con numero di righe pari al numero di stati e numero di colonne pari al numero di azioni possibili $(|S|\times|A|)$.
 
@@ -303,43 +296,42 @@ $$Q(s,a) = (1-\alpha) \cdot Q(s,a) + \alpha \cdot [r + \gamma \cdot \max_{a' \in
 
 dove:
 
-*   $\alpha$ è il *learning rate* (0 < α ≤ 1).  Il termine $(1-\alpha)$ preserva una frazione del vecchio valore.
-*   $\gamma$ è il *discount factor* (0 ≤ γ ≤ 1).
+* $\alpha$ è il *learning rate* (0 < α ≤ 1). Il termine $(1-\alpha)$ preserva una frazione del vecchio valore.
+* $\gamma$ è il *discount factor* (0 ≤ γ ≤ 1).
 
-Il Q-learning converge al valore ottimo $Q^*$ se il *training set* garantisce una sufficiente *Exploration* dello spazio degli stati e delle azioni.  In altre parole, l'agente deve interagire con l'ambiente in modo da visitare tutti gli stati e provare tutte le azioni possibili.
+Il Q-learning converge al valore ottimo $Q^*$ se il *training set* garantisce una sufficiente *Exploration* dello spazio degli stati e delle azioni. In altre parole, l'agente deve interagire con l'ambiente in modo da visitare tutti gli stati e provare tutte le azioni possibili.
 
 ## Fitted Q-Learning
 
-Se la *lookup table* per la funzione Q è troppo grande (dimensione dello spazio degli stati-azioni troppo elevata),  è necessario approssimarla con una funzione parametrizzata: $Q(s, a; \theta)$.  L'obiettivo diventa quello di trovare i parametri $\theta$ che meglio approssimano la funzione Q ottimale, $Q^*$.
+Se la *lookup table* per la funzione Q è troppo grande (dimensione dello spazio degli stati-azioni troppo elevata), è necessario approssimarla con una funzione parametrizzata: $Q(s, a; \theta)$. L'obiettivo diventa quello di trovare i parametri $\theta$ che meglio approssimano la funzione Q ottimale, $Q^*$.
 
 Per ogni tupla $\langle s, a, r, s' \rangle \in T$ (dove T è il training set), si definisce un target $Y_k^Q$:
 
 $$\forall <s,a,r,s'>\ \in T,\ \ Q(s,a;\theta_{k})\approx Y_{K}^Q=r+\gamma\max_{a'\in A}Q(s',a',\theta_{k})$$
 
-dove $\theta_k$ rappresenta i parametri correnti all'iterazione *k*.  Si vuole quindi minimizzare la differenza tra la funzione approssimata e il target:
+dove $\theta_k$ rappresenta i parametri correnti all'iterazione *k*. Si vuole quindi minimizzare la differenza tra la funzione approssimata e il target:
 
 $$Q(s, a; \theta_k) \approx Y_k^Q$$
 
-Questo problema può essere formulato come un problema di regressione classico, dove ogni tupla $\langle s, a, r, s' \rangle$ rappresenta un esempio di training $\vec{x}_i$, e il corrispondente valore target $Y_k^Q$ rappresenta l'output desiderato $y_i$.  Si utilizzano quindi tecniche di regressione per aggiornare i parametri $\theta$ e migliorare l'approssimazione della funzione Q ottimale.
+Questo problema può essere formulato come un problema di regressione classico, dove ogni tupla $\langle s, a, r, s' \rangle$ rappresenta un esempio di training $\vec{x}_i$, e il corrispondente valore target $Y_k^Q$ rappresenta l'output desiderato $y_i$. Si utilizzano quindi tecniche di regressione per aggiornare i parametri $\theta$ e migliorare l'approssimazione della funzione Q ottimale.
 
 ## Neural Fitted Q-Learning (NFQ)
 
 ![[10) Reti Generative-20241129093216919.png|604]]
 
-NFQ utilizza una rete neurale per approssimare la funzione Q.  Il processo di apprendimento prevede i seguenti passi:
+NFQ utilizza una rete neurale per approssimare la funzione Q. Il processo di apprendimento prevede i seguenti passi:
 
-1. **Determinazione del massimo Q-value:** Per ogni stato successivo `s'`, la rete neurale fornisce i valori Q per tutte le azioni possibili, $Q(s', a'; \theta_k)$.  Si determina quindi il massimo di questi valori: $M = \max_{a' \in A} Q(s', a'; \theta_k)$.
+1. **Determinazione del massimo Q-value:** Per ogni stato successivo `s'`, la rete neurale fornisce i valori Q per tutte le azioni possibili, $Q(s', a'; \theta_k)$. Si determina quindi il massimo di questi valori: $M = \max_{a' \in A} Q(s', a'; \theta_k)$.
 
-2. **Costruzione del target:**  Si costruisce il target $Y_k^Q$ utilizzando la ricompensa ricevuta `r` e il massimo Q-value calcolato al passo precedente:
+2. **Costruzione del target:** Si costruisce il target $Y_k^Q$ utilizzando la ricompensa ricevuta `r` e il massimo Q-value calcolato al passo precedente:
 
-   $$Y_k^Q = r + \gamma \cdot M$$
+ $$Y_k^Q = r + \gamma \cdot M$$
 
 3. **Minimizzazione della loss function:** Si utilizza una loss function, tipicamente il Mean Squared Error (MSE), per minimizzare la differenza tra il valore Q predetto dalla rete neurale e il target:
 
-   $$l_{NFQ} = \frac{1}{2} (Q(s, a; \theta_k) - Y_k^Q)^2$$
+ $$l_{NFQ} = \frac{1}{2} (Q(s, a; \theta_k) - Y_k^Q)^2$$
 
-   I parametri $\theta_k$ della rete neurale vengono aggiornati iterativamente per minimizzare questa loss function, migliorando così l'approssimazione della funzione Q ottimale.
-
+ I parametri $\theta_k$ della rete neurale vengono aggiornati iterativamente per minimizzare questa loss function, migliorando così l'approssimazione della funzione Q ottimale.
 
 **Problema:** a volta la convergenza può essere lenta o diventare instabile. Inoltre, tende a sovrastimare i valori. Per evitare queste problematiche sono state sviluppate delle euristiche.
 
@@ -347,10 +339,10 @@ NFQ utilizza una rete neurale per approssimare la funzione Q.  Il processo di ap
 
 DQN utilizza due reti neurali separate per stimare la funzione Q:
 
-1.  **Rete aggiornata:** $Q(s, a; \theta_k)$  – utilizzata per selezionare le azioni e per calcolare la loss function.
-2.  **Rete target:** $Q(s, a; \theta_k^-)$ – utilizzata per calcolare il valore target.
+1. **Rete aggiornata:** $Q(s, a; \theta_k)$ – utilizzata per selezionare le azioni e per calcolare la loss function.
+2. **Rete target:** $Q(s, a; \theta_k^-)$ – utilizzata per calcolare il valore target.
 
-Entrambe le reti hanno la stessa struttura, ma pesi ($\theta$) differenti.  Questo disaccoppiamento tra il calcolo del valore target e l'aggiornamento dei pesi migliora la stabilità dell'apprendimento.
+Entrambe le reti hanno la stessa struttura, ma pesi ($\theta$) differenti. Questo disaccoppiamento tra il calcolo del valore target e l'aggiornamento dei pesi migliora la stabilità dell'apprendimento.
 
 Il valore target è calcolato utilizzando la rete target:
 
@@ -358,12 +350,12 @@ $$Y_k^Q = r + \gamma \cdot \max_{a' \in A} Q(s', a'; \theta_k^-)$$
 
 I pesi della rete target ($\theta_k^-$) rimangono fissi per un certo numero di iterazioni (*c*), dopodiché vengono aggiornati con i pesi della rete aggiornata: $\theta_k^- = \theta_k$.
 
-A differenza di NFQ, DQN opera in un ambiente *online*, interagendo direttamente con l'ambiente.  Per gestire l'esperienza, si utilizza una *replay memory* che memorizza le ultime $N_{Replay}$ quadruple $<s, a, r, s' >$ raccolte dall'agente.  L'aggiornamento dei parametri $\theta_k$ avviene selezionando un mini-batch casuale di esempi $<s, a, r, s' >$ dalla *replay memory*.
+A differenza di NFQ, DQN opera in un ambiente *online*, interagendo direttamente con l'ambiente. Per gestire l'esperienza, si utilizza una *replay memory* che memorizza le ultime $N_{Replay}$ quadruple $<s, a, r, s' >$ raccolte dall'agente. L'aggiornamento dei parametri $\theta_k$ avviene selezionando un mini-batch casuale di esempi $<s, a, r, s' >$ dalla *replay memory*.
 
 Per la selezione delle azioni, si utilizza una politica $\epsilon$-greedy, con $\epsilon \in [0, 1]$:
 
-*   Con probabilità $\epsilon$, si sceglie un'azione casuale.
-*   Con probabilità $1 - \epsilon$, si sceglie l'azione ottimale secondo la rete aggiornata: $a^* = \arg \max_{a \in A} Q(s, a; \theta_k)$.
+* Con probabilità $\epsilon$, si sceglie un'azione casuale.
+* Con probabilità $1 - \epsilon$, si sceglie l'azione ottimale secondo la rete aggiornata: $a^* = \arg \max_{a \in A} Q(s, a; \theta_k)$.
 
 Questa politica aiuta a mitigare il problema dell' **exploration vs exploitation dilemma**.
 
@@ -379,7 +371,7 @@ Queste tecniche non assumono alcuna forma specifica per la densità di probabili
 
 ![[10) Reti Generative-20241129104242903.png|576]]
 
-Consideriamo una regione $R(x)$ centrata in un punto $x$.  La probabilità di osservare un punto in questa regione è data da:
+Consideriamo una regione $R(x)$ centrata in un punto $x$. La probabilità di osservare un punto in questa regione è data da:
 
 $$P = \int_{R(x)} p(x') dx'$$
 
@@ -387,27 +379,26 @@ Se la regione è sufficientemente piccola, possiamo approssimare la densità di 
 
 $$P \approx \int_{R(x)} p(x) dx' = p(x) \int_{R(x)} dx' = p(x)V$$
 
-dove $V$ è il volume della regione $R(x)$.  Quindi:
+dove $V$ è il volume della regione $R(x)$. Quindi:
 
 $$p(x) \approx \frac{P}{V}$$
 
-Se $n$ è sufficientemente grande, la probabilità $P$ può essere approssimata dalla proporzione di punti nel training set che cadono in $R(x)$: $P \approx \frac{k}{n}$, dove $k$ è il numero di punti in $R(x)$.  Pertanto:
+Se $n$ è sufficientemente grande, la probabilità $P$ può essere approssimata dalla proporzione di punti nel training set che cadono in $R(x)$: $P \approx \frac{k}{n}$, dove $k$ è il numero di punti in $R(x)$. Pertanto:
 
 $$p(x) \approx \frac{k/n}{V}$$
 
-
 Due metodi principali per la stima di densità non parametrica sono:
 
-1.  Stima di densità con *K-Nearest Neighbor* (KNN)
-2.  Stima di densità con *Kernel* (KDE)
+1. Stima di densità con *K-Nearest Neighbor* (KNN)
+2. Stima di densità con *Kernel* (KDE)
 
 ## K-Nearest Neighbor Density Estimation (KNN)
 
-In KNN, si fissa un valore $k$ e si determina la più piccola regione $R(x)$ centrata in $x$ che contiene esattamente $k$ punti del training set.  Il raggio di questa regione è dato dalla distanza tra $x$ e il k-esimo vicino più prossimo ($nn_k(x)$):
+In KNN, si fissa un valore $k$ e si determina la più piccola regione $R(x)$ centrata in $x$ che contiene esattamente $k$ punti del training set. Il raggio di questa regione è dato dalla distanza tra $x$ e il k-esimo vicino più prossimo ($nn_k(x)$):
 
-$r = \text{dist}(x, nn_k(x))$
+$$r = \text{dist}(x, nn_k(x))$$
 
-Il volume di questa regione dipende dalla dimensionalità dello spazio e dalla metrica utilizzata per calcolare la distanza.  La stima della densità è quindi:
+Il volume di questa regione dipende dalla dimensionalità dello spazio e dalla metrica utilizzata per calcolare la distanza. La stima della densità è quindi:
 
 $$p(x) = \frac{k/n}{V(\text{dist}(x, nn_k(x)))} $$
 
@@ -417,17 +408,17 @@ La densità è inversamente proporzionale alla distanza dal k-esimo oggetto
 
 ##### Nearest Neighbor Classification (K-NN):
 
-Restituisce la classe più rappresentata tra quelle dei *K-Nearest Neighbor*  di $x$
+Restituisce la classe più rappresentata tra quelle dei *K-Nearest Neighbor* di $x$
 
 ##### Anomaly Detection
 
-Le tecniche di rilevamento di anomalie assegnano un punteggio (*score*) a ciascun oggetto, indicando quanto è anomalo.  Un punteggio alto indica un'alta probabilità di anomalia.
+Le tecniche di rilevamento di anomalie assegnano un punteggio (*score*) a ciascun oggetto, indicando quanto è anomalo. Un punteggio alto indica un'alta probabilità di anomalia.
 
 Una tecnica *distance-based* utilizza la distanza dal k-esimo vicino più prossimo come punteggio:
 
 $$\text{Score}(x) = \text{dist}(x, nn_k(x))$$
 
-Le anomalie sono i punti $x$ che massimizzano questo punteggio.  Questa è una tecnica di tipo *globale*.
+Le anomalie sono i punti $x$ che massimizzano questo punteggio. Questa è una tecnica di tipo *globale*.
 
 Una variante più generale considera la somma delle distanze dai primi $k$ vicini più prossimi:
 
@@ -435,24 +426,23 @@ $$\text{Score}(x) = \sum_{i=1}^k \text{dist}(x, nn_i(x))$$
 
 Anche questa è una tecnica *globale*.
 
-
 Le tecniche *locali*, invece, normalizzano il punteggio globale in base ai punteggi dei vicini:
 
 $$\text{Score}_{local}(x) = \frac{\text{Score}_{glob}(x)}{\sum_{i=1}^k \text{Score}_{glob}(nn_i(x))}$$
 
-dove $\text{Score}_{glob}(x)$ rappresenta il punteggio globale (distance-based) del punto $x$.  Questo approccio considera il contesto locale per determinare l'anomalia.
+dove $\text{Score}_{glob}(x)$ rappresenta il punteggio globale (distance-based) del punto $x$. Questo approccio considera il contesto locale per determinare l'anomalia.
 
 ## Kernel Density Estimation (KDE)
 
-In KDE, si fissa la dimensione della regione $R(x)$ attorno a un punto $x$ e si conta il numero di punti del training set che cadono in questa regione.  Questa regione è definita tramite una *funzione finestra* (window function) o *kernel*.  Un esempio semplice di funzione finestra è la funzione indicatrice di un ipercubo:
+In KDE, si fissa la dimensione della regione $R(x)$ attorno a un punto $x$ e si conta il numero di punti del training set che cadono in questa regione. Questa regione è definita tramite una *funzione finestra* (window function) o *kernel*. Un esempio semplice di funzione finestra è la funzione indicatrice di un ipercubo:
 
 $$\phi(\vec{u}) = \begin{cases} 1, & \forall i, |u_i| \leq \frac{1}{2} \\ 0, & \text{altrimenti} \end{cases}$$
 
-dove $\vec{u} = (u_1, u_2, \dots, u_d)$ è un vettore di dimensione $d$.  Questa funzione vale 1 se tutte le componenti di $\vec{u}$ sono in valore assoluto minori o uguali a 1/2, e 0 altrimenti.  In pratica, si considera un ipercubo di lato 1 centrato nell'origine.
+dove $\vec{u} = (u_1, u_2, \dots, u_d)$ è un vettore di dimensione $d$. Questa funzione vale 1 se tutte le componenti di $\vec{u}$ sono in valore assoluto minori o uguali a 1/2, e 0 altrimenti. In pratica, si considera un ipercubo di lato 1 centrato nell'origine.
 
 ![[10) Reti Generative-20241129110450366.png|600]]
 
-Nel caso unidimensionale ($d=1$), la regione $R(x)$ è un intervallo di ampiezza $h$ centrato in $x$.  La funzione finestra indica se un punto $x_i$ del training set si trova all'interno di questo intervallo:
+Nel caso unidimensionale ($d=1$), la regione $R(x)$ è un intervallo di ampiezza $h$ centrato in $x$. La funzione finestra indica se un punto $x_i$ del training set si trova all'interno di questo intervallo:
 
 $$
 \phi\left( \frac{x-x_{i}}{h} \right)=

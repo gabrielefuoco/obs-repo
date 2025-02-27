@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Shapley Value ^NqEc6oGO
 
 - Soluzione basata sui contributi marginali
@@ -18,7 +19,7 @@ Shapley Value ^NqEc6oGO
 - ∃ Sempre
 
 - Unica pre-imputazione a soddisfare i 3 
-  assiomi ^nKufmW4U
+ assiomi ^nKufmW4U
 
 Caratteristiche ^4uMdwTVr
 
@@ -31,10 +32,12 @@ Caratteristiche ^4uMdwTVr
 Formula ^us8zDWPB
 
 ## Embedded Files
+
 4b68c4638e72f05190336de00b8c5f76dc41948a: $$\phi_i(N, v) = \frac{1}{|N|!} \sum_{S \subseteq N \setminus \{i\}} |S|! \cdot (|N| - |S| - 1)! \cdot [v(S \cup \{i\}) - v(S)]$$
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4IADkARwBRbAA2NgBxAHlUkshYRAqoLCgO0sxuZySGhu0AFgBmeMmATgB2Hh55
 

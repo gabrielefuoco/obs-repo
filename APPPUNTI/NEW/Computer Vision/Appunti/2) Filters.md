@@ -2,7 +2,7 @@
 
 Le operazioni point-to-point sono operazioni di pre-processing che agiscono su ogni singolo punto di un'immagine. La formula generale è:
 
-$G(x) = h(f(x))$
+$$G(x) = h(f(x))$$
 
 dove:
 
@@ -18,7 +18,7 @@ Le operazioni di filtro sono un'estensione delle operazioni point-to-point. Data
 
 La formula generale per le operazioni di filtro è:
 
-$G(x) = h(f(\text{neighbour}(x)))$
+$$G(x) = h(f(\text{neighbour}(x)))$$
 
 Le operazioni di filtro hanno un corrispettivo nell'analisi del segnale. Le immagini possono essere interpretate come segnali bidimensionali (x e y). Su queste due dimensioni, abbiamo la funzione di intensità (o valore).
 
@@ -28,7 +28,7 @@ La convoluzione è un'operazione di filtro che consiste nell'applicare una funzi
 
 La formula per il filtraggio spaziale lineare è:
 
-$\sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$
+$$\sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$$
 
 **Cosa significa applicare questa funzione su una qualsiasi immagine?**
 
@@ -36,13 +36,11 @@ Applicare questa funzione ad un'immagine significa scorrere il filtro **f** su t
 [[3.Filters.pdf#page=8|3.Filters, p.8]]
 ==spiegazione da inserire==
 
-
-
 ## Gestione dei Bordi nelle Operazioni sulle Immagini
 
 Quando si applicano operazioni su immagini, come filtri o trasformazioni, è necessario gestire i bordi dell'immagine. Esistono diverse strategie per farlo:
 
-* **Ignorare i bordi:**  Si può semplicemente ignorare il calcolo dei valori dei pixel che si trovano ai bordi dell'immagine. Questo può portare a risultati non desiderati, soprattutto se l'operazione richiede informazioni dai pixel vicini.
+* **Ignorare i bordi:** Si può semplicemente ignorare il calcolo dei valori dei pixel che si trovano ai bordi dell'immagine. Questo può portare a risultati non desiderati, soprattutto se l'operazione richiede informazioni dai pixel vicini.
 * **Estensione con zeri:** Si può estendere l'immagine con una cornice di zeri attorno ai bordi. Questo permette di calcolare i valori dei pixel ai bordi, ma può introdurre artefatti nell'immagine.
 
 **Quali sono le potenzialità di queste operazioni?**
@@ -54,18 +52,15 @@ Le potenzialità di queste operazioni dipendono dall'applicazione specifica. In 
 * **Trasformazione dei valori:** Le operazioni sui bordi permettono di trasformare i valori dei pixel in modo controllato, ad esempio per calcolare la media dei pixel vicini.
 * **Semantica delle immagini:** La gestione dei bordi può influenzare la semantica dell'immagine, ad esempio, estendendo l'immagine con zeri si può creare un effetto di "sfocatura" ai bordi.
 
-
 #### Smoothing mediante filtraggio spaziale
 
 * **Filtro Media (Average Filter):**
-    * Sostituisce l'intensità del pixel con il valore medio dei suoi vicini.
-    * **Smoothing:** Attenua le transizioni brusche (sharp) d'intensità.
+ * Sostituisce l'intensità del pixel con il valore medio dei suoi vicini.
+ * **Smoothing:** Attenua le transizioni brusche (sharp) d'intensità.
 
 **Applicazione:**
 
 Applicare un filtro che moltiplica per $k = \frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ (calcola la media dei pixel) può essere utilizzato per sfumare l'immagine (filtro di smoothing o average). Questo attenua le transizioni brusche. 
-
-
 
 ## Convoluzione 2D
 
@@ -78,12 +73,12 @@ def convolve2d(image, kernel):
     :param kernel: un array numpy di dimensione [altezza_kernel, larghezza_kernel].
     :return: un array numpy di dimensione [altezza_immagine, larghezza_immagine] (output della convoluzione).
     """
-    
+
     kernel_height, kernel_width = kernel.shape
-    
+
     a = kernel_width // 2
     b = kernel_height // 2
-    
+
     # Flip the kernel
     kernel = np.flipud(np.fliplr(kernel))
     # convolution output
@@ -115,7 +110,7 @@ def convolve2d(image, kernel):
 
 La funzione del filtro gaussiano è definita come:
 
-$f(i,j)=\frac{1}{2 \pi \sigma^2 }e^{- \frac{i^2+j^2}{2 \sigma^2}}$
+$$f(i,j)=\frac{1}{2 \pi \sigma^2 }e^{- \frac{i^2+j^2}{2 \sigma^2}}$$
 
 **Caratteristiche:**
 
@@ -135,42 +130,40 @@ Il filtro gaussiano rappresenta il peso che possiamo assegnare alla matrice.
 
 **Esempi:**
 
-* **$\sigma = 1$**:  il filtro diventa un filtro 3x3 con forma kernel $k = \frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$.
-* **$\sigma = 3$**:  il filtro diventa un filtro 5x5.
-* **$\sigma = 5$**:  il filtro diventa un filtro 20x20.
+* **$\sigma = 1$**: il filtro diventa un filtro 3x3 con forma kernel $k = \frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$.
+* **$\sigma = 3$**: il filtro diventa un filtro 5x5.
+* **$\sigma = 5$**: il filtro diventa un filtro 20x20.
 
 **Osservazioni:**
 
 * Passato un certo range, i valori del filtro diventano poco significativi.
 
-
-
 ## Filtraggio Spaziale Lineare
 
 **Formula:**
 
-$h[i,j]= \sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$
+$$h[i,j]= \sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$$
 
 **Importanza:**
 
 * **Fondamentale!**
 * **Migliora l'immagine:**
-    * Denoise (riduzione del rumore)
-    * Ridimensionamento
-    * Aumento del contrasto
-    * ...
+ * Denoise (riduzione del rumore)
+ * Ridimensionamento
+ * Aumento del contrasto
+ * ...
 * **Estrae informazioni dall'immagine:**
-    * Texture
-    * Bordi (edges)
-    * Punti distintivi
-    * ...
+ * Texture
+ * Bordi (edges)
+ * Punti distintivi
+ * ...
 * **Trova patterns:**
-    * Template matching (ricerca di modelli)
-
+ * Template matching (ricerca di modelli)
 
 ## Esempi di Filtri
 
 ### 1) Filtro Identità
+
 ![[2) Filters-20241001190420784.png|241]]
 * Restituisce l'immagine originale senza modifiche.
 
@@ -190,9 +183,8 @@ $h[i,j]= \sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$
 * **Perdita di informazione:** Il valore assoluto della differenza viene utilizzato, quindi si perde il senso della direzione (se il bordo è più scuro a sinistra o a destra).
 **Domanda:** Perché trovo contorni neri o bianchi?
 * **Risposta:**
-    * La differenza tra un valore positivo e uno negativo risulta in un valore nero.
-    * La differenza tra un valore negativo e uno positivo risulta in un valore bianco. 
-
+ * La differenza tra un valore positivo e uno negativo risulta in un valore nero.
+ * La differenza tra un valore negativo e uno positivo risulta in un valore bianco. 
 
 ### 4) Filtro per Bordi Orizzontali
 
@@ -200,6 +192,7 @@ $h[i,j]= \sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$
 * Simile al filtro per bordi verticali, ma evidenzia i cambiamenti di intensità orizzontale.
 
 ### 5) Filtro per Migliorare il Contorno
+
  ![[2) Filters-20241001214853302.png|330]]
 * Combina due filtri: uno per aumentare il contrasto e uno per lo smoothing.
 * Il risultato è un'immagine con contorni più netti.
@@ -211,7 +204,7 @@ $h[i,j]= \sum_{k=-a}^a \sum_{l=-b}^b f[k+a,l+b] \times I[i+k,j+l]$
 
 **Definizione:**
 
-$(f * g)(x) = \int_{-\infty}^{\infty} f(u) g(x-u) \, du$
+$$(f * g)(x) = \int_{-\infty}^{\infty} f(u) g(x-u) \, du$$
 
 **Interpretazione:**
 
@@ -222,12 +215,13 @@ $(f * g)(x) = \int_{-\infty}^{\infty} f(u) g(x-u) \, du$
 
 * La convoluzione è un'operazione che prende due funzioni e restituisce una terza funzione che rappresenta la loro sovrapposizione.
 * Nel caso bidimensionale, la convoluzione viene applicata a due immagini:
-    * Un'immagine di input.
-    * Un filtro.
+ * Un'immagine di input.
+ * Un filtro.
 * Il filtro viene spostato su tutta l'immagine, calcolando la somma ponderata dei valori dei pixel nell'intorno del filtro per ogni posizione.
 * Il risultato è un'immagine filtrata, dove i valori dei pixel sono stati modificati in base al filtro applicato. 
 
 ### Convoluzione e Correlazione
+
 - **Convoluzione** $(f * I)(x,y) = \sum_{i,j=-\infty}^\infty f(i,j) I(x-i,y-j)$
 	- $(x,y)$ = Segnale filtrato
 	- $f(i,j)$ = Filtro
@@ -247,13 +241,11 @@ Questo perché la convoluzione è un'operazione di tipo "scorrevole" e il mirror
 
 L'operazione di correlazione prende gli elementi nell'ordine in cui si trovano. Questo argomento non è trattato nel corso. 
 
-
 ==skip fino a filtri separabili==
 ## Filtri Separabili
 
 Un filtro è separabile se lo stesso effetto può essere ottenuto applicando in sequenza due filtri più semplici.
 ![[Pasted image 20240930181445.png]]
-
 
 **Esempio:** (filtro di edge)
 
@@ -281,10 +273,10 @@ Siccome sono separabili, possiamo applicare un'operazione sulle righe e una sull
 Ad esempio, lo smoothing è un passa-basso perché taglia le frequenze alte.
 
 * **Filtro passa-basso (es., average filter):**
-    * La somma dei coefficienti vale 1 -> regioni uniformi preservate e non uniformi tendono ad uniformarsi.
-    * Offusca sia i bordi che il rumore.
+ * La somma dei coefficienti vale 1 -> regioni uniformi preservate e non uniformi tendono ad uniformarsi.
+ * Offusca sia i bordi che il rumore.
 * **Filtro passa-alto:**
-    * La somma dei coefficienti è 0 -> la risposta sulle componenti a bassa frequenza è prossima a zero.
+ * La somma dei coefficienti è 0 -> la risposta sulle componenti a bassa frequenza è prossima a zero.
 
 **Col passa-alto evidenziamo i punti di cambio della frequenza.**
 
@@ -293,21 +285,22 @@ Siccome si parla di discontinuità, usiamo la derivata, che misura la variazione
 ## Edge Detection
 
 * **Come si possono identificare le discontinuità?**
-    * Si calcolano le derivate.
-    * Nei punti di discontinuità le derivate sono grandi.
+ * Si calcolano le derivate.
+ * Nei punti di discontinuità le derivate sono grandi.
 * **Come si calcolano le derivate di un segnale discreto?**
-    * Calcolando le differenze finite.
+ * Calcolando le differenze finite.
 
 **La variazione si calcola con le derivate: nei punti di discontinuità le derivate sono grandi, dunque c'è un possibile edge.** 
-
 
 ![[2) Filters-20241001215021438.png|440]]
 la definizione che c'è di derivata sul segnale discreto è la seconda, la def di derivata seconda sul segnale discreto è la terza
 
 cosa calcolano queste derivate?
 ## Derivate di immagini digitali
+
 ![[2) Filters-20241001215049063.png|505]]
 **Scenario:**
+
 * Iniziamo con un segnale di intensità alta (6).
 * Scendiamo a 1 e manteniamo un andamento "smooth" (liscio).
 * Saliamo bruscamente a 6.
@@ -316,9 +309,9 @@ cosa calcolano queste derivate?
 
 * **Edge:** Quando la derivata passa da 0 a 5, si identifica un edge (bordo).
 * **0-Crossing:** Quando la derivata passa da 5 a -5, si verifica uno 0-crossing (cambio rapido).
-    * Gli 0-crossing indicano variazioni significative di intensità.
-    * Le piccole variazioni di intensità sono poco significative.
-    * La derivata seconda registra le variazioni significative tramite il meccanismo dello 0-crossing.
+ * Gli 0-crossing indicano variazioni significative di intensità.
+ * Le piccole variazioni di intensità sono poco significative.
+ * La derivata seconda registra le variazioni significative tramite il meccanismo dello 0-crossing.
 
 **Derivata Seconda:**
 
@@ -330,8 +323,8 @@ cosa calcolano queste derivate?
 * Possiamo utilizzare i filtri per calcolare le derivate.
 * Il filtro di Sobel calcola la derivata prima. 
 
-
 ## Filtro sobel
+
 - **Orizzontale**:
 $$
 \begin{bmatrix}
@@ -373,6 +366,7 @@ $$
 ![[2) Filters-20241001215112251.png|509]]
 
 **Calcolo del Gradiente:**
+
 * A partire dalle due derivate parziali (rispetto a x e y) di un'immagine, possiamo calcolare il gradiente.
 * Il gradiente è un vettore che indica la direzione e l'ampiezza della massima variazione di intensità dell'immagine.
 ![[2) Filters-20241001215952259.png]]
@@ -403,10 +397,10 @@ $$
 
 * **Abbiamo una striscia bianca e poi una striscia nera.**
 * **Questo perché il filtro laplaciano, essendo una derivata seconda, evidenzia le variazioni di intensità più brusche.**
-    * Quando si passa da un'area di alta intensità (bianca) ad un'area di bassa intensità (nera), la derivata seconda assume un valore molto alto, creando una striscia bianca.
-    * Viceversa, quando si passa da un'area di bassa intensità ad un'area di alta intensità, la derivata seconda assume un valore molto basso, creando una striscia nera. 
-    * Esempio:
-      ![[2) Filters-20241001123217625.webp|148]]
+ * Quando si passa da un'area di alta intensità (bianca) ad un'area di bassa intensità (nera), la derivata seconda assume un valore molto alto, creando una striscia bianca.
+ * Viceversa, quando si passa da un'area di bassa intensità ad un'area di alta intensità, la derivata seconda assume un valore molto basso, creando una striscia nera. 
+ * Esempio:
+ ![[2) Filters-20241001123217625.webp|148]]
 
 ## Definizione dei Contorni e Problemi con la Derivata
 
@@ -423,7 +417,6 @@ $$
 
 * Il Laplaciano è un operatore più robusto per la definizione dei contorni rispetto alla derivata.
 * La derivata è sensibile alla risoluzione dell'immagine e al rumore, il che può portare a risultati imprecisi. 
-
 
 ![[2) Filters-20241001123544559.webp|347]]
 in questo esempio c'è molto rumore nella zona dei capelli
@@ -455,7 +448,6 @@ come fare a risolvere? si usa il filtro di media(blurring)
 
 * L'applicazione di una serie di operazioni in cascata può essere utile per ottenere informazioni specifiche da un'immagine.
 * Il filtro Gaussiano e la derivata sono un esempio di come combinare filtri per ottenere risultati desiderati. 
-
 
 ![[2) Filters-20241001215243027.png|526]]
 Matematicamente, applicare i due filtri in cascata $S_{x}(\cdot G_{\sigma}\cdot I)$ equivalale ad applicare $(S_{x}\cdot G_{\sigma})\cdot I$
@@ -490,10 +482,8 @@ Le operazioni di filtraggio sono operazioni che lavorano sia sul dominio dell'in
 
 https://github.com/gmanco/cv_notebooks/blob/master/labs_lecture/lab02/4.Fourier_transform.ipynb
 
-
 ![[2) Filters-20241001125616233.webp|405]]
 conservo i valori bassi (?)
-
 
 altre trasformate utili
 ![[2) Filters-20241001220035817.png]]
@@ -511,9 +501,9 @@ altre trasformate utili
 
 * L'informazione del gradiente da sola non è sufficiente perché genera troppi artefatti, ovvero troppi dettagli all'interno dei bordi.
 * Altri problemi:
-    * **Rumore:** risolvibile con il filtro Gaussiano.
-    * **Toni di grigio:** risolvibile con il *thresholding*.
-    * **Bordi di diverso spessore**.
+ * **Rumore:** risolvibile con il filtro Gaussiano.
+ * **Toni di grigio:** risolvibile con il *thresholding*.
+ * **Bordi di diverso spessore**.
 
 **Soluzione: Canny Edge Detector**
 
@@ -540,6 +530,7 @@ il gradiente, nell'espressione in termini di angolo, punta a valori ad alta inte
 l'algo calcola l'angolo nella direzione della normale, poi lo discretizza in una serie di zone (8), utilizzate per identificare i pixel massimali lungo la direzione del gradiente. 
 
 ## Non maximal suppression
+
 •La non-maximal suppression è un algoritmo che serve a eliminare i pixel non massimali lungo la direzione del gradiente, se i pixel adiacenti hanno un valore più alto
 ![[2) Filters-20241001215549309.png|299]]
 - Le 8 zone corrispondono a 8 possibili combinazioni di triplette all interno dell immagine
@@ -561,13 +552,13 @@ L'algoritmo di non-maximal suppression produce un'immagine in cui i pixel massim
 ## Level-wise thresholding, hysteresis
 
 * **Strong/Weak/Irrelevant pixels:**
-    * **Strong pixels:** intensità alta (contribuiscono sicuramente ai bordi)
-    * **Weak pixels:** intensità non alta, ma neanche bassa. Li teniamo da parte.
-    * **Irrelevant pixels:** intensità bassa, da rimuovere.
+ * **Strong pixels:** intensità alta (contribuiscono sicuramente ai bordi)
+ * **Weak pixels:** intensità non alta, ma neanche bassa. Li teniamo da parte.
+ * **Irrelevant pixels:** intensità bassa, da rimuovere.
 * **Utilizzo di due soglie:**
-    * **High threshold:** per identificare strong pixels.
-    * **Low threshold:** per identificare irrelevant pixels.
-    * Tutti i pixel nel mezzo delle due soglie sono weak e verranno gestiti dal meccanismo dell'isteresi.
+ * **High threshold:** per identificare strong pixels.
+ * **Low threshold:** per identificare irrelevant pixels.
+ * Tutti i pixel nel mezzo delle due soglie sono weak e verranno gestiti dal meccanismo dell'isteresi.
 
 **Problema:** con questo meccanismo molti elementi vengono eliminati, non ottenendo una soluzione valida.
 

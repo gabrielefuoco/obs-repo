@@ -1,5 +1,4 @@
 
-
 Questo testo esplora il funzionamento dei Large Language Models (LLM) e come i ricercatori stanno cercando di renderli più comprensibili. 
 
 ### Analogia con il Cervello Umano

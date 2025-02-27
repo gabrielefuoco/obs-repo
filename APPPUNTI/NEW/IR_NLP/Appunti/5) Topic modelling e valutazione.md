@@ -4,7 +4,7 @@
 
 * **SpaCy:** Una libreria Python per l'elaborazione del linguaggio naturale, progettata per la velocità e l'efficienza. Offre funzionalità avanzate per l'analisi del testo, come il riconoscimento di entità denominate (NER), l'estrazione di entità, l'analisi del sentimento e la classificazione del testo. È utilizzata anche a livello commerciale per queste attività.
 
-* **Gensim:** Una libreria Python per l'analisi di argomenti e la modellazione di argomenti. Fornisce implementazioni di modelli di argomenti stocastici, come LDA (Latent Dirichlet Allocation), che possono essere utilizzati per scoprire argomenti latenti in grandi set di dati di testo.
+* **Gensim:** Una libreria Python per l'analisi di argomenti e la modellazione di argomenti. Fornisce implementazioni di modelli di argomenti stocastici, come LDA (*Latent Dirichlet Allocation*), che possono essere utilizzati per scoprire argomenti latenti in grandi set di dati di testo.
 
 ## Latent Dirichlet Allocation 
 
@@ -15,20 +15,20 @@ LDA può essere utilizzato per modellare, oltre ai topic, anche un profilo di au
 Si sfrutta una proprietà importante: **coniugate prior tra le distribuzioni** (tra Dirichlet e polinomiale).
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/5)-20241031095017801.png]]
-$\alpha$ e $\eta$  sono parametri di dispersione che influenzano la distribuzione di probabilità sui topic e sulle parole. $\alpha$ controlla la dispersione della distribuzione di probabilità sui topic, mentre $\eta$ controlla la dispersione della distribuzione di probabilità sulle parole.
+$\alpha$ e $\eta$ sono parametri di dispersione che influenzano la distribuzione di probabilità sui topic e sulle parole. $\alpha$ controlla la dispersione della distribuzione di probabilità sui topic, mentre $\eta$ controlla la dispersione della distribuzione di probabilità sulle parole.
 
 Ciò che importa è mantenere la differenza in ordine di grandezza, con l'obiettivo di essere più inclusivi nel modellare la distribuzione di probabilità per topic (grana fine nel modellare ogni topic), e meno dispersivi per modellare la distribuzione di probabilità sui topic per ogni documento (assumiamo che ogni documento contenga dati caratteristici di pochi topic). 
 
 ### Pseudo
 
-$\text{For each topic, generate a Dirichlet distribution over terms:}$
-$\beta_k \sim \text{Dir}_M(\eta), k \in \{1, \ldots, K\}$
+$$\text{For each topic, generate a Dirichlet distribution over terms:}$$
+$$\beta_k \sim \text{Dir}_M(\eta), k \in \{1, \ldots, K\}$$
 
-$\text{For each document } d_i, i \in \{1, \ldots, N\}$
+$$\text{For each document } d_i, i \in \{1, \ldots, N\}$$
 - $\text{Generate a Dirichlet distribution over topics: } \theta_i \sim \text{Dir}_K(\alpha)$
 - $\text{For each word position } j \text{ in document } d_i:$
-  - $\text{Choose a topic } z_{ij} \text{ from the distribution in step a., i.e., } z_{ij} \sim \text{Multi}(\theta_i)$
-  - $\text{Choose word } w_{ij} \text{ from topic } z_{ij} \text{, i.e., } w_{ij} \sim \text{Multi}(\beta_{z_{ij}})$
+ - $\text{Choose a topic } z_{ij} \text{ from the distribution in step a., i.e., } z_{ij} \sim \text{Multi}(\theta_i)$
+ - $\text{Choose word } w_{ij} \text{ from topic } z_{ij} \text{, i.e., } w_{ij} \sim \text{Multi}(\beta_{z_{ij}})$
 
 # Modellazione di documenti segmentati per argomento
 
@@ -58,7 +58,6 @@ Per catturare la struttura dei micro-topic, si può utilizzare l'overclustering,
 
 L'obiettivo di questo lavoro è di integrare la segmentazione del testo nei topic model, creando un modello a grana più fine che tenga conto della variabile dei segmenti. 
 
-
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/5)-20241031100023606.png|394]]
 
 Questa immagine rappresenta una rete probabilistica, spesso usata nei modelli di generazione del linguaggio, in cui:
@@ -73,10 +72,10 @@ Il joint model diventa triadico, con le variabili latenti che rimangono i topic.
 
 I processi rappresentati dalle frecce indicano che:
 
-1. **Dato un documento \(D\), scegliamo un topic \(Z\) secondo la probabilità condizionata  $\text{Pr}(z|d)$.**
+1. **Dato un documento \(D\), scegliamo un topic \(Z\) secondo la probabilità condizionata $\text{Pr}(z|d)$.**
 2. **Dato il topic \(Z\), selezioniamo un segmento \(S\) con probabilità $\text{Pr}(s|z)$ .**
 3. **Dato il topic \(Z\), possiamo anche scegliere una parola \(W\) con probabilità $\text{Pr}(w|z)$.**
-4. **Dato un segmento \(S\), scegliamo una parola \(W\) con probabilità  $\text{Pr}(w|s)$ .**
+4. **Dato un segmento \(S\), scegliamo una parola \(W\) con probabilità $\text{Pr}(w|s)$ .**
 
 Il campionamento in questo contesto viene effettuato iterativamente o ripetutamente per generare contenuti a partire dai documenti, utilizzando la struttura probabilistica del modello. 
 
@@ -181,8 +180,8 @@ $$C_{\text{UMass}}(w_{i},w_{j})=\log \frac{D(w_{i},w_{j})+1}{D(w_{i})}$$
 
 Dove:
 
-*  $D(w_{i}, w_{j})$: numero di volte in cui le parole $w_{i}$ e $w_{j}$ compaiono insieme nei documenti.
-*  $D(w_{i})$: numero di volte in cui la parola $w_{i}$ compare da sola.
+* $D(w_{i}, w_{j})$: numero di volte in cui le parole $w_{i}$ e $w_{j}$ compaiono insieme nei documenti.
+* $D(w_{i})$: numero di volte in cui la parola $w_{i}$ compare da sola.
 
 #### Punteggio di coerenza UCI
 
@@ -195,7 +194,7 @@ Dove:
 
 * $P(w_{i}, w_{j})$: probabilità di vedere $w_{i}$ e $w_{j}$ insieme in una finestra scorrevole.
 * $P(w_{i})$: probabilità di vedere $w_{i}$ in una finestra scorrevole.
-    * Entrambe le probabilità sono stimate dall'intero corpus di oltre due milioni di articoli di Wikipedia in inglese utilizzando una finestra scorrevole di 10 parole.
+ * Entrambe le probabilità sono stimate dall'intero corpus di oltre due milioni di articoli di Wikipedia in inglese utilizzando una finestra scorrevole di 10 parole.
 - È un approccio robusto ma parametrico: i parametri sono 2: stride e overlap
 #### Coerenza basata sulla similarità intra/inter-argomento
 
@@ -220,7 +219,7 @@ Un **topic**, o **classe**, è un concetto che introduciamo per raggruppare attr
 
 La divergenza di Kullback-Leibler (da Q a P), nota anche come entropia relativa di P rispetto a Q, è definita come:
 
-$D_{KL}(P\|Q) = -\sum_{x\in X}P(x)\log\left( \frac{Q(x)}{P(x)} \right)$
+$$D_{KL}(P\|Q) = -\sum_{x\in X}P(x)\log\left( \frac{Q(x)}{P(x)} \right)$$
 
 La divergenza di Kullback-Leibler presenta le seguenti proprietà:
 
@@ -232,7 +231,7 @@ La divergenza di Kullback-Leibler presenta le seguenti proprietà:
 
 La divergenza di Jensen-Shannon è definita come:
 
-$D_{JS} = \frac{1}{2}D_{KL}(P\|M) + \frac{1}{2}D_{KL}(Q\|M)$
+$$D_{JS} = \frac{1}{2}D_{KL}(P\|M) + \frac{1}{2}D_{KL}(Q\|M)$$
 
 dove M è la media di P e Q, ovvero:
 
@@ -271,7 +270,7 @@ Ricordiamo: l'entropia di X è una misura del tasso di informazioni prodotte da 
 
 * (dal Teorema di Codifica Senza Rumore di Shannon) il limite inferiore per la lunghezza attesa del codice di codifica dei token.
 * per ogni token, la sua lunghezza di codifica è $-log(p(x))$.
-    * ovvero, i token frequenti dovrebbero essere assegnati a codici più brevi: minimizzano la lunghezza della descrizione.
+ * ovvero, i token frequenti dovrebbero essere assegnati a codici più brevi: minimizzano la lunghezza della descrizione.
 
 **Perplessità di una singola variabile casuale X**
 $$PP[X]:=2^{H[X]}$$
@@ -323,9 +322,11 @@ $$
 * $N_{d}$ il numero di parole nel documento d.
 
 ### In LDA: 
+
 $$\log p(w|\alpha,\beta)=E[\log p(\theta,z,w|\alpha,\beta)]-E[\log q(\theta,z)]$$
 Nel caso di LDA, valutiamo alpha e beta, i parametri di dispersione. Questa forma deriva dall'utilizzo della variational inference, una tecnica più accurata rispetto al Gibbs sampling.
 
 ### In SGM:
+
 $$Pr(d,S_{d},V)=Pr(d)\prod_{S\in S_{d}}\sum_{z\in Z}Pr(z|d)Pr(s|z)\prod_{w\in V}Pr(w|z,s)$$
 Anche in SGM, il modello LDA adattato a stream di dati, la *perplexity* si basa sul calcolo di probabilità simili, valutate per ogni documento, utilizzando i valori calcolati durante la fase di test.

@@ -97,7 +97,6 @@
 60. Come funziona RBFS?
 61. Qual è il problema principale di RBFS?
 
-
 # Ricerca in ambienti complessi
 
 ### Ricerca di Stati Finali
@@ -580,7 +579,6 @@
 6. Cos'è il Subgame Perfect Equilibrium (SPE) e come si differenzia dall'equilibrio di Nash?
 7. Cos'è l'algoritmo Minimax e come si relaziona alla dimostrazione dell'esistenza di un SPE?
 
-
 # Planning 
 
 ### Domande sul paragrafo "Modello di Pianificazione"
@@ -731,5 +729,4 @@
 10. Come si utilizzano le azioni di maintenance/frame nel Planning-Graph?
 11. Come si definiscono i mutex tra azioni e stati nel Planning-Graph?
 12. Quali sono i vantaggi e gli svantaggi del Planning-Graph rispetto ad altri approcci?
-
 

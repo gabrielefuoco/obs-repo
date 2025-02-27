@@ -49,8 +49,8 @@ La regressione polinomiale può essere utilizzata per implementare un regressore
 
 Per valutare la performance del modello di regressione lineare, si possono utilizzare diverse metriche.
 
-* **Errore quadratico medio (MSE):**  Questa metrica misura la differenza quadratica media tra i valori previsti e i valori reali. Non è una misura definita in un range specifico, quindi non è possibile stabilire se un valore sia alto o basso.
-* **R-quadrato (R²):**  Questa metrica misura la proporzione della varianza dei dati spiegata dal modello. I valori di R² sono compresi tra 0 e 1, dove 1 indica che il modello spiega completamente la varianza dei dati.
+* **Errore quadratico medio (MSE):** Questa metrica misura la differenza quadratica media tra i valori previsti e i valori reali. Non è una misura definita in un range specifico, quindi non è possibile stabilire se un valore sia alto o basso.
+* **R-quadrato (R²):** Questa metrica misura la proporzione della varianza dei dati spiegata dal modello. I valori di R² sono compresi tra 0 e 1, dove 1 indica che il modello spiega completamente la varianza dei dati.
 
 La formula per calcolare R² è:
 
@@ -58,11 +58,10 @@ $$R^2 = 1 - \frac{RSS}{TSS}$$
 
 dove:
 
-* **RSS (Somma dei quadrati residui):**  $\sum_{i}(y_{i}-\hat{y_{i}})^2$
-* **TSS (Somma dei quadrati totali):**  $\sum_{i}(y_{i}-\bar{y})^2$
+* **RSS (Somma dei quadrati residui):** $\sum_{i}(y_{i}-\hat{y_{i}})^2$
+* **TSS (Somma dei quadrati totali):** $\sum_{i}(y_{i}-\bar{y})^2$
 
 Se il denominatore (TSS) tende a 0, allora R² sarà pari a 1 (indica un modello che spiega bene la varianza dei dati).
-
 
 ### Regressione polinomiale
 

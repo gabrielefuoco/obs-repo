@@ -9,4 +9,4 @@ Istruzioni:
 
 Obiettivo: Correggere la frase evidenziata in modo coerente con il testo fornito, garantendo chiarezza e completezza nella risposta. 
 
-Testo da correggere:  
+Testo da correggere: 

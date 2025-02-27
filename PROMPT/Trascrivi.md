@@ -1,6 +1,7 @@
 Trascrivi il seguente testo in italiano, mantenendo la struttura originale e l'integrità del contenuto.
 
 **Istruzioni per la trascrizione:**
+
 - **Organizzazione e Formato:** Utilizza il formato Markdown per organizzare il testo in paragrafi chiari e schematizzati, assicurandoti che tutti i concetti rilevanti siano coperti senza aggiungere contenuti superflui.
 - **Integrità del contenuto:** Assicurati di non tralasciare alcun punto e di mantenere l'integrità del contenuto originale. 
 - **Immagini:** Non rimuovere le immagini indicate con il tag `![[]]`. Lascia il tag come indicato (! seguito da due coppie di parentesi quadre con il codice relativo all'immagine).
@@ -9,5 +10,6 @@ Trascrivi il seguente testo in italiano, mantenendo la struttura originale e l'i
 - **Obiettivo:** Fornire una trascrizione fedele, ben organizzata e chiara del testo fornito.
 
 **Testo da trascrizivere:**
+
 {}
 

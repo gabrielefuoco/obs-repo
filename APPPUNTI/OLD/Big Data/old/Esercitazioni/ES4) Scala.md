@@ -67,6 +67,7 @@ Scala offre una sintassi più concisa e funzionale per l'utilizzo di classi. La 
 * **Valore funzione:** Le funzioni in Scala sono trattate come valori, facilitando la loro manipolazione e passaggio tra contesti. Ad esempio, la funzione `_.age < 18` è passata come argomento alla funzione `partition`.
 
 ### Sintesi
+
 Scala è un linguaggio di programmazione moderno che offre una sintassi concisa e leggibile, un forte sistema di tipi statici e prestazioni elevate. La sua natura orientata agli oggetti e funzionale lo rende un linguaggio potente e versatile per lo sviluppo di software. 
 
 ---
@@ -82,19 +83,19 @@ Scala è stato progettato con due ipotesi chiave:
 Scala combina i punti di forza di FP e OOP per creare un linguaggio potente e versatile:
 
 * **Programmazione orientata agli oggetti (OOP):**
-    * **Adattabilità e estensione:**  Facilita l'adattamento e l'estensione di sistemi complessi attraverso sottotipi, ereditarietà e configurazioni dinamiche.
-    * **Astrazione parziale:** Le classi fungono da astrazioni parziali, consentendo di modellare sistemi complessi in modo graduale.
+ * **Adattabilità e estensione:** Facilita l'adattamento e l'estensione di sistemi complessi attraverso sottotipi, ereditarietà e configurazioni dinamiche.
+ * **Astrazione parziale:** Le classi fungono da astrazioni parziali, consentendo di modellare sistemi complessi in modo graduale.
 * **Programmazione funzionale (FP):**
-    * **Composizione:** Facilita la costruzione di soluzioni complesse partendo da parti semplici tramite funzioni di ordine superiore, tipi algebrici e pattern matching.
-    * **Polimorfismo parametrico:** Consente di scrivere codice generico che può essere applicato a diversi tipi di dati.
+ * **Composizione:** Facilita la costruzione di soluzioni complesse partendo da parti semplici tramite funzioni di ordine superiore, tipi algebrici e pattern matching.
+ * **Polimorfismo parametrico:** Consente di scrivere codice generico che può essere applicato a diversi tipi di dati.
 
 ### Scala: Un Linguaggio Unificato
 
 Scala è un linguaggio orientato agli oggetti e funzionale, completamente interoperabile con Java. Offre:
 
-* **Un modello a oggetti uniforme:**  Consente di utilizzare i concetti OOP in modo coerente e intuitivo.
-* **Pattern matching e funzioni di ordine superiore:**  Fornisce strumenti potenti per la manipolazione di dati e la creazione di codice conciso.
-* **Nuovi modi per astrarre e comporre i programmi:**  Consente di creare codice più leggibile, manutenibile e riutilizzabile.
+* **Un modello a oggetti uniforme:** Consente di utilizzare i concetti OOP in modo coerente e intuitivo.
+* **Pattern matching e funzioni di ordine superiore:** Fornisce strumenti potenti per la manipolazione di dati e la creazione di codice conciso.
+* **Nuovi modi per astrarre e comporre i programmi:** Consente di creare codice più leggibile, manutenibile e riutilizzabile.
 
 ### Interoperabilità con Java
 
@@ -111,26 +112,26 @@ I programmi Scala vengono compilati in bytecode JVM, il che garantisce la compat
 
 La sintassi di Scala assomiglia a quella di Java, ma presenta alcune differenze:
 
-* **`object` invece di membri statici:**  In Scala, gli oggetti sono utilizzati per rappresentare membri statici.
-* **`Array[String]` invece di `String[]`:**  Scala utilizza una notazione più esplicita per i tipi di dati.
+* **`object` invece di membri statici:** In Scala, gli oggetti sono utilizzati per rappresentare membri statici.
+* **`Array[String]` invece di `String[]`:** Scala utilizza una notazione più esplicita per i tipi di dati.
 * **Indicizzazione degli array:** Gli array sono indicizzati con `args(i)` invece di `args[i]`.
 
 ### Scala: Un Linguaggio Funzionale
 
 Scala supporta uno stile di programmazione funzionale, che consente di scrivere codice più conciso e leggibile.
 
-* **Funzioni di ordine superiore:**  Le funzioni possono essere passate come argomenti ad altre funzioni e restituite come risultati.
-* **Chiusure:**  Le funzioni possono accedere a variabili locali del contesto in cui sono definite.
+* **Funzioni di ordine superiore:** Le funzioni possono essere passate come argomenti ad altre funzioni e restituite come risultati.
+* **Chiusure:** Le funzioni possono accedere a variabili locali del contesto in cui sono definite.
 
 ### Scala: Un Linguaggio Conciso
 
 La sintassi di Scala è leggera e concisa, grazie a:
 
-* **Inference del punto e virgola:**  Il compilatore Scala può inferire automaticamente il punto e virgola alla fine di ogni riga.
-* **Inference dei tipi:**  Il compilatore Scala può inferire automaticamente il tipo di dati delle variabili.
-* **Classi leggere:**  Le classi in Scala sono più concise rispetto a Java.
-* **API estensibili:**  Le API di Scala sono progettate per essere estensibili e personalizzabili.
-* **Chiusure come astrazioni di controllo:**  Le chiusure possono essere utilizzate per creare astrazioni di controllo più flessibili.
+* **Inference del punto e virgola:** Il compilatore Scala può inferire automaticamente il punto e virgola alla fine di ogni riga.
+* **Inference dei tipi:** Il compilatore Scala può inferire automaticamente il tipo di dati delle variabili.
+* **Classi leggere:** Le classi in Scala sono più concise rispetto a Java.
+* **API estensibili:** Le API di Scala sono progettate per essere estensibili e personalizzabili.
+* **Chiusure come astrazioni di controllo:** Le chiusure possono essere utilizzate per creare astrazioni di controllo più flessibili.
 
 ## Scala: Un Linguaggio Preciso
 
@@ -167,34 +168,37 @@ assert(capital("Russia") == "? ")
 * **`assert(capital("Russia") == "? ")`**: Verifica che la mappa restituisca il valore predefinito "? " per la chiave "Russia", che non è presente nella mappa.
 
 **In sintesi:**
-Il codice dimostra come Scala consente di specificare il tipo di dati delle collezioni, di utilizzare i trait per aggiungere funzionalità e di fornire valori predefiniti per le variabili. Questo approccio aiuta a rendere il codice più sicuro, affidabile e manutenibile. 
 
+Il codice dimostra come Scala consente di specificare il tipo di dati delle collezioni, di utilizzare i trait per aggiungere funzionalità e di fornire valori predefiniti per le variabili. Questo approccio aiuta a rendere il codice più sicuro, affidabile e manutenibile. 
 
 ---
 ## Grande o piccolo? Il dilemma del design dei linguaggi
 
 Ogni linguaggio di programmazione deve affrontare un dilemma fondamentale: essere **grande** o **piccolo**.
 ### Grande è buono
+
 Un linguaggio **grande** offre una vasta gamma di funzionalità e costrutti, rendendolo **espressivo** e **facile da usare** per compiti complessi. 
 ### Piccolo è buono
+
 Un linguaggio **piccolo** si concentra su un set di funzionalità essenziale, risultando **elegante** e **facile da apprendere**.
 
 ### Il dilemma
+
 La sfida sta nel trovare un equilibrio tra queste due tendenze. Un linguaggio troppo grande può diventare complesso e difficile da imparare, mentre un linguaggio troppo piccolo potrebbe non essere abbastanza potente per compiti complessi.
 ### L'approccio di Scala
+
 Scala affronta questo dilemma concentrandosi sulle **capacità di astrazione e composizione** piuttosto che sui costrutti di base del linguaggio. Questo approccio consente a Scala di essere **potente** e **espressivo** pur rimanendo **relativamente semplice** da imparare.
 
 **In sintesi:** Scala cerca di essere sia grande che piccolo, offrendo un set di funzionalità di base relativamente piccolo ma potente, che può essere esteso e combinato in modi complessi attraverso l'astrazione e la composizione.
 
-
-| **Scala aggiunge**                       | **Scala rimuove**                            |
+| **Scala aggiunge** | **Scala rimuove** |
 |------------------------------------------|----------------------------------------------|
-| + un sistema a oggetti puro              | - membri statici                             |
-| + sovraccarico degli operatori           | - trattamento speciale dei tipi primitivi    |
-| + chiusure come astrazioni di controllo  | - break, continue                            |
-| + composizione mixin con trait           | - trattamento speciale delle interfacce      |
-| + membri di tipo astratto                | - wildcard                                   |
-| + pattern matching                        |                                              |
+| + un sistema a oggetti puro | - membri statici |
+| + sovraccarico degli operatori | - trattamento speciale dei tipi primitivi |
+| + chiusure come astrazioni di controllo | - break, continue |
+| + composizione mixin con trait | - trattamento speciale delle interfacce |
+| + membri di tipo astratto | - wildcard |
+| + pattern matching | |
 
 ---
 
@@ -239,7 +243,6 @@ z: Complex = 0.0 + 1.0 * i
 
 In questo esempio, `Complex` è un tipo di dato definito dall'utente che rappresenta i numeri complessi. Scala consente di utilizzare `Complex` come se fosse un tipo nativo, supportando operazioni come l'addizione, la moltiplicazione e l'assegnazione.
 
-
 ---
 
 #### Implementazione dei numeri complessi
@@ -261,7 +264,7 @@ class Complex(val re: Double, val im: Double) {
     new Complex((this.re * that.re + this.im * that.im) / denom, 
                 (this.im * that.re - this.re * that.im) / denom)
   }
-  
+
   override def toString = re + (if (im < 0) "-" + (-im) else "+" + im) + "*i"
   ...
 }
@@ -436,15 +439,15 @@ object Sample {
 ```java
 class Sample {
   final int x;
-  
+
   Sample(int x) { 
     this.x = x; 
   }
-  
+
   int instMeth(int y) {
     return x + y;
   }
-  
+
   static int staticMeth(int x, int y) {
     return x * y;
   }
@@ -458,9 +461,9 @@ class Sample {
 ```scala
 trait T {
   def abstractMeth(x: String): String
-  
+
   def concreteMeth(x: String) = x + field
-  
+
   var field = "!"
 }
 ```
@@ -486,7 +489,6 @@ interface T {
 ```java
 class C extends Super implements T
 ```
-
 
 ---
 
@@ -1002,7 +1004,6 @@ object e07HigherOrderFunction {
 }
 ```
 
-
 #### Chiamare metodi senza parentesi e punti
 
 ```scala
@@ -1079,9 +1080,7 @@ extends Composition with SoundProduction {
 }
 ```
 
-
 Quando si eredita da più tratti in Scala, si utilizza la parola chiave `extends` solo per il primo tratto. Per i tratti successivi, si utilizza la parola chiave `with`
-
 
 ## Classe Astratta
 
@@ -1172,9 +1171,8 @@ list1.prepend("y")
 
 * **Implementazione:** Questa implementazione di buffer utilizza una lista mutabile come struttura dati sottostante.
 * **Tempo di esecuzione:**
-    * **Prepend e Append:** Le operazioni di inserimento all'inizio (prepend) e alla fine (append) della lista hanno un tempo di esecuzione costante. Ciò significa che il tempo necessario per completare queste operazioni non dipende dalla dimensione della lista.
-    * **Altre operazioni:** La maggior parte delle altre operazioni, come l'accesso a un elemento specifico o la rimozione di un elemento in una posizione specifica, hanno un tempo di esecuzione lineare. Ciò significa che il tempo necessario per completare queste operazioni aumenta linearmente con la dimensione della lista. 
-
+ * **Prepend e Append:** Le operazioni di inserimento all'inizio (prepend) e alla fine (append) della lista hanno un tempo di esecuzione costante. Ciò significa che il tempo necessario per completare queste operazioni non dipende dalla dimensione della lista.
+ * **Altre operazioni:** La maggior parte delle altre operazioni, come l'accesso a un elemento specifico o la rimozione di un elemento in una posizione specifica, hanno un tempo di esecuzione lineare. Ciò significa che il tempo necessario per completare queste operazioni aumenta linearmente con la dimensione della lista. 
 
 ## Set
 
@@ -1215,8 +1213,7 @@ val m3 = m1 ++ m2
 println(m3)
 ```
 
-Una Map è un Iterable  costituito da coppie di chiavi e valori (chiamate anche mappature o associazioni).
-
+Una Map è un Iterable costituito da coppie di chiavi e valori (chiamate anche mappature o associazioni).
 
 ## Tuple
 
@@ -1233,9 +1230,7 @@ val (a: String, b: Int, c: Boolean) = ("b", 2, false)
 println(a)
 ```
 
-
- Una tupla è un valore che  contiene un numero fisso di  elementi, ciascuno con il proprio tipo. Le tuple sono immutabili.
-
+ Una tupla è un valore che contiene un numero fisso di elementi, ciascuno con il proprio tipo. Le tuple sono immutabili.
 
 ## Array
 
@@ -1260,10 +1255,10 @@ arr3.foreach(x => print(x))
 
 * **Definizione:** Un Array è un tipo speciale di collezione in Scala. 
 * **Caratteristiche:**
-    * **Dimensione fissa:** Un array ha una dimensione fissa, che viene definita al momento della creazione.
-    * **Tipo di dato uniforme:** Tutti gli elementi di un array devono essere dello stesso tipo di dato.
-    * **Indici:** Gli elementi di un array sono indicizzati a partire da zero. L'ultimo elemento ha indice `n-1`, dove `n` è il numero totale di elementi.
-    * **Mutabilità:** Gli elementi di un array sono mutabili, ovvero possono essere modificati dopo la creazione dell'array. 
+ * **Dimensione fissa:** Un array ha una dimensione fissa, che viene definita al momento della creazione.
+ * **Tipo di dato uniforme:** Tutti gli elementi di un array devono essere dello stesso tipo di dato.
+ * **Indici:** Gli elementi di un array sono indicizzati a partire da zero. L'ultimo elemento ha indice `n-1`, dove `n` è il numero totale di elementi.
+ * **Mutabilità:** Gli elementi di un array sono mutabili, ovvero possono essere modificati dopo la creazione dell'array. 
 
 ## Equals
 
@@ -1392,5 +1387,4 @@ prices.map { case (k, v) => (k, v - 1.1) }.toMap
 
 * L'utilizzo di `case` nel pattern matching è necessario quando si lavora con funzioni che accettano tuple come argomenti.
 * `case` consente di decomporre la tupla in variabili separate, rendendo la funzione più leggibile e facile da usare. 
-
 

@@ -5,8 +5,8 @@
 * La rete riceve input, non tutti con la stessa importanza.
 * Ogni input è associato ad un **peso** che ne determina l'influenza.
 * Lo **stimolo** ricevuto dalla rete è la combinazione lineare degli input ponderati: 
-  
-  $\sum_{i=1}^d w_{i}x_{i}$
+
+$$\sum_{i=1}^d w_{i}x_{i}$$
 
 * Se lo stimolo supera una certa **soglia** ($\theta$), la rete attiva un'uscita.
 
@@ -14,7 +14,7 @@
 
 * La funzione **segno** ($sign$) implementa un semispazio:
 
-  $h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},\vec{x}>$
+$$h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},\vec{x}>$$
 
 * **Esempio:** Funzione AND
 
@@ -22,15 +22,14 @@
 
 * **Inizializzazione:** $\vec{w}^{(1)}=(0,0,\dots,0)$
 * **Iterazione:**
-    * Finché esiste un input $i$ per cui $y_{i} <\vec{w}^{(1)},\vec{x_{i}}> \leq_{0}$:
-        * Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
-        * Incrementa il contatore di iterazioni: $t=t+1$
+ * Finché esiste un input $i$ per cui $y_{i} <\vec{w}^{(1)},\vec{x_{i}}> \leq_{0}$:
+ * Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
+ * Incrementa il contatore di iterazioni: $t=t+1$
 
 **Convergenza:**
 
 * L'algoritmo converge sempre nel caso di dati **linearmente separabili**.
 * Al termine, restituisce un **iperpiano separatore**. 
-
 
 ## Teorema del Perceptron
 
@@ -42,6 +41,7 @@
 * $B = \min{||\vec{w}||}: \forall i, <\vec{w_i}, \vec{x_i}> \ge 1$ è la più piccola norma che restituisce una soluzione al problema di separazione lineare.
 
 **Dimostrazione:**
+
 Sia $w^*$ un vettore soluzione a norma minima. Allora:
 $$1 \ge \cos \theta = \frac{<w^*, w^{t+1}>}{||w^*|| ||w^{t+1}||} \ge \frac{\sqrt{T}}{RB}$$
 
@@ -57,37 +57,40 @@ Per dimostrare la disuguaglianza iniziale, consideriamo separatamente numeratore
 
 1. **Numeratore:**
 
-    Scriviamo il numeratore come la differenza del prodotto vettoriale:    $$<w^*, w(t+1)> - <w^*, w(t)>.$$
-    Possiamo riscriverlo come:
-    $$<w^*, w(t+1) - w(t)> = <w^*, y_i x_i>.$$
-    Portiamo fuori lo scalare:
-    $$y_i <w^*, x_i> \ge 1$$
-    Quindi sappiamo che la nostra differenza iniziale è $\ge 1$.
-    $$<\vec{w}^*, \vec{w}^{(t+1)}> = \sum_{i=1}^I(<\vec{w}^*, w^{(t+1)}>-<w^*, w^{()}>) \ge T$$
-    perché viene ripetuto T volte.
+ Scriviamo il numeratore come la differenza del prodotto vettoriale: $$<w^*, w(t+1)> - <w^*, w(t)>.$$
+ Possiamo riscriverlo come:
+ $$<w^*, w(t+1) - w(t)> = <w^*, y_i x_i>.$$
+ Portiamo fuori lo scalare:
+ $$y_i <w^*, x_i> \ge 1$$
+ Quindi sappiamo che la nostra differenza iniziale è $\ge 1$.
+ $$<\vec{w}^*, \vec{w}^{(t+1)}> = \sum_{i=1}^I(<\vec{w}^*, w^{(t+1)}>-<w^*, w^{()}>) \ge T$$
+ perché viene ripetuto T volte.
 
 2. **Denominatore:**
-    $$||w(t+1)||^2 = ||w_t + y_i x_i||^2$$
-    Sviluppiamo il quadrato:
-    $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2$$
-    Notiamo che abbiamo fatto un'iterazione, $x$ era missclassificato, quindi $2y_i <w_t, x_i> \le 0$, e $y_i^2$ è la nostra etichetta che vale 1. Allora possiamo riscrivere tutto come:
-    $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2 \le ||w_t||^2 + ||x_i||^2 \le ||w_t||^2 + R^2$$
-    Siccome $||x_i|| \le R$, l'abbiamo sostituita con $R$.
+ $$||w(t+1)||^2 = ||w_t + y_i x_i||^2$$
+ Sviluppiamo il quadrato:
+ $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2$$
+ Notiamo che abbiamo fatto un'iterazione, $x$ era missclassificato, quindi $2y_i <w_t, x_i> \le 0$, e $y_i^2$ è la nostra etichetta che vale 1. Allora possiamo riscrivere tutto come:
+ $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2 \le ||w_t||^2 + ||x_i||^2 \le ||w_t||^2 + R^2$$
+ Siccome $||x_i|| \le R$, l'abbiamo sostituita con $R$.
 
-    Considerando la T-esima iterazione, abbiamo che:
-    $$||w(t+1)||^2 \le ||w_t||^2 + R^2 \le ||w(t-1)||^2 + R^2 \le TR^2$$
-    Mettendo tutto insieme, abbiamo:
-    $$\frac{<\vec{w}^*, \vec{w}^{(t+1)}>}{||w^*|| ||w^{t+1}||} \ge \frac{T \sqrt{T}}{B \sqrt{T}R} = \frac{\sqrt{T}}{BR}$$
-    Il teorema è dimostrato.
+ Considerando la T-esima iterazione, abbiamo che:
+ $$||w(t+1)||^2 \le ||w_t||^2 + R^2 \le ||w(t-1)||^2 + R^2 \le TR^2$$
+ Mettendo tutto insieme, abbiamo:
+ $$\frac{<\vec{w}^*, \vec{w}^{(t+1)}>}{||w^*|| ||w^{t+1}||} \ge \frac{T \sqrt{T}}{B \sqrt{T}R} = \frac{\sqrt{T}}{BR}$$
+ Il teorema è dimostrato.
 
 **Conclusione:**
+
 Il teorema del Perceptron dimostra che l'algoritmo del Perceptron converge in un numero finito di iterazioni se il set di dati è linearmente separabile. Questo risultato è importante perché fornisce una garanzia di convergenza per l'algoritmo.
 
 **Vantaggi:**
+
 * **Semplicità:** L'algoritmo del Perceptron è relativamente semplice da implementare.
 * **Efficienza:** L'algoritmo del Perceptron può essere molto efficiente per set di dati di piccole dimensioni.
 
 **Svantaggi:**
+
 * **Linearità:** L'algoritmo del Perceptron può solo classificare set di dati linearmente separabili.
 * **Sensibilità al rumore:** L'algoritmo del Perceptron può essere sensibile al rumore nei dati.
 
@@ -141,7 +144,7 @@ $$
 
 Riscriviamolo in forma ridotta:
 
-$(X^T X)w = X^T y$ , sappiamo che $(X^T X) = A$ e $X^T y = b$  quindi otteniamo che $Aw=b$
+$$(X^T X)w = X^T y$ , sappiamo che $(X^T X) = A$ e $X^T y = b$ quindi otteniamo che $Aw=b$$
 
 Tutti i problemi che hanno una *Loss* Convessa possono essere risolti con un algoritmo generale.
 
@@ -154,8 +157,8 @@ $$p_n(x) = a_0x_0 + a_1x + a_2x^2 + ... + a_nx^n$$
 Possiamo riscrivere il polinomio in una forma più familiare in questo modo:
 $$h_w(x) = w_0 + w_1x + w_2x^2 + ... + w_nx^n = <(w_0, w_1, ..., w_n), (1, x, x^2, ..., x^n)>$$
 Definiamo la funzione $\phi$:
-$\phi: R \rightarrow R^{n+1}$
-$\phi(x) = (1, x, x^2, x^3, ..., x^n)$
+$$\phi: R \rightarrow R^{n+1}$$
+$$\phi(x) = (1, x, x^2, x^3, ..., x^n)$$
 
 Il nostro regressore polinomiale è:
 $$h_w(x) = <w, \phi(x)>$$
@@ -179,11 +182,11 @@ $<w, x>$ è proporzionale alla $dist(w, x)$.
 
 Per convertire la distanza in probabilità utilizziamo la funzione Sigmoide. La Sigmoide ci permette di fare un mapping di un numero reale sull'intervallo [0, 1].
 
-$\sigma: R \rightarrow [0, 1]$
+$$\sigma: R \rightarrow [0, 1]$$
 
-$\sigma(x) = \frac{1}{1 + e^{-x}}$
+$$\sigma(x) = \frac{1}{1 + e^{-x}}$$
 
-$h_{\vec{w}}(x) = \sigma(<\vec{w}, \vec{x}>) = \frac{1}{1 + e^{-<w, x>}}$
+$$h_{\vec{w}}(x) = \sigma(<\vec{w}, \vec{x}>) = \frac{1}{1 + e^{-<w, x>}}$$
 
 Abbiamo bisogno di una nuova Loss, la loss che utilizzeremo è la Cross Entropy Loss. 
 
@@ -193,7 +196,6 @@ La Cross Entropy Loss misura la distanza tra due distribuzioni. Nel caso della c
 
 $$l_{CE}(h,(x,y))= - y \log(h(x)) - (1-y) log(1-h(x))$$
 ![[3)-20241005212757080.png|270]]
-
 
 Dove $y$ è l'etichetta vera.
 
@@ -243,11 +245,11 @@ Serve per caratterizzare la learnability delle classi di ipotesi infinite. Come 
 
 1. **Restrizione di H a C dove C è un sottoinsieme di X:** È l'insieme delle funzioni che hanno C come dominio e possono essere derivate da H.
 
-| X   | h_1 | h_2 | h_3 | h_4 |
+| X | h_1 | h_2 | h_3 | h_4 |
 | --- | --- | --- | --- | --- |
-| x_1 | 1   | 1   | 0   | 1   |
-| x_2 | 1   | 1   | 1   | 0   |
-| x_3 | 0   | 1   | 0   | 1   |
+| x_1 | 1 | 1 | 0 | 1 |
+| x_2 | 1 | 1 | 1 | 0 |
+| x_3 | 0 | 1 | 0 | 1 |
 H_c=?
 
 2. **SHATTERING:** una classe di ipotesi H FRANTUMA un sottoinsieme C di X se Hc contiene tutte le funzioni da C→{0,1}, la restrizione deve avere cardinalità 2C (|Hc|=2C).
@@ -269,23 +271,23 @@ La **VC-DIMENSION** (Vapnik-Chervonenkis Dimension) è una misura della compless
 Per calcolare la VC-DIMENSION di una classe di ipotesi, si seguono due passi:
 
 1. **Trovare il massimo numero di punti che possono essere shattered:**
-    * Se esiste un sottoinsieme di punti C con |C|=d che può essere shattered dalla classe di ipotesi, allora la VC-DIMENSION è almeno d.
+ * Se esiste un sottoinsieme di punti C con |C|=d che può essere shattered dalla classe di ipotesi, allora la VC-DIMENSION è almeno d.
 2. **Verificare che non esistano sottoinsiemi di punti più grandi che possono essere shattered:**
-    * Se per ogni sottoinsieme di punti C con |C|=d+1 la classe di ipotesi non può creare tutte le possibili classificazioni, allora la VC-DIMENSION è esattamente d.
+ * Se per ogni sottoinsieme di punti C con |C|=d+1 la classe di ipotesi non può creare tutte le possibili classificazioni, allora la VC-DIMENSION è esattamente d.
 
 **Esempi:**
 
 * Partiamo dalla classe di ipotesi delle funzioni soglia:
-    $H=\{  h_{0}(x)=1[x>0], \ 0\in R \}$
-    ![[3)-20241005175148387.png|403]]
-    Abbiamo trovato un sottoinsieme di cardinalità 2 per cui prediamo i punti non riusciamo a costruire tutte le possibili funzioni da questo sottoinsieme a {0,1}.
+$$H=\{  h_{0}(x)=1[x>0], \ 0\in R \}$$
+ ![[3)-20241005175148387.png|403]]
+ Abbiamo trovato un sottoinsieme di cardinalità 2 per cui prediamo i punti non riusciamo a costruire tutte le possibili funzioni da questo sottoinsieme a {0,1}.
 * Prendiamo le funzioni intervallo:
-    $H=\{  h_{a,l}(x)\}=1[a\leq x\leq l,a,l \in R]$
-    ![[3)-20241005175437626.png|401]]
-    $VCdim(M|n|)=2$
+$$H=\{  h_{a,l}(x)\}=1[a\leq x\leq l,a,l \in R]$$
+ ![[3)-20241005175437626.png|401]]
+$$VCdim(M|n|)=2$$
 * Prendiamo la classe dei rettangolo:
-    $h_{a,b,c,d}(x)=1[a\leq x_{1}\leq b \cap c\leq\lambda_{2}\leq d], \ a,b,c,d \in R$
-    ![[3)-20241005175735494.png|507]]
+$$h_{a,b,c,d}(x)=1[a\leq x_{1}\leq b \cap c\leq\lambda_{2}\leq d], \ a,b,c,d \in R$$
+ ![[3)-20241005175735494.png|507]]
 
 ## TEOREMA FONDAMENTALE DEL PAC LEARNABLE
 

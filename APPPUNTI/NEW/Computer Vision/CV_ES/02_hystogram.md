@@ -54,13 +54,10 @@ print(f'tensor type {rgb_image.type()}')
 print(f'tensor shape {rgb_image.shape}')
 ```
 
-    
 ![png](02_hystogram_3_0.png)
-    
 
-    tensor type torch.FloatTensor
-    tensor shape torch.Size([3, 416, 600])
-    
+ tensor type torch.FloatTensor
+ tensor shape torch.Size([3, 416, 600])
 
 ```python
 # tensori dei singoli canali
@@ -71,7 +68,7 @@ b_image = rgb_image[2]
 r_image.shape
 ```
 
-    torch.Size([416, 600])
+ torch.Size([416, 600])
 
 ```python
 def show_grayscale_image(tensor):
@@ -88,9 +85,7 @@ def show_grayscale_image(tensor):
 show_grayscale_image(torch.cat((r_image, g_image, b_image), 1))
 ```
 
-    
 ![png](02_hystogram_5_0.png)
-    
 
 Le tre immagine visualizzate sono state ottenute visualizzando un solo canale (R, G, B).
 
@@ -100,30 +95,26 @@ Proviamo a enfetizzare il contributo del canale G
 
 ```python
 image_copy = rgb_image.clone()
- 
+
 # Multiply the green channel by two, clamp the values to the 0-1 range.
 image_copy[1] = image_copy[1].mul(2.0).clamp(0.0, 1.0)
 
 plot_image(image_copy)
 ```
 
-    
 ![png](02_hystogram_7_0.png)
-    
 
 ```python
 # Try the opposite
 image_copy = rgb_image.clone()
- 
+
 # Divide the green channel by two, clamp the values to the 0-1 range.
 image_copy[1] = image_copy[1].mul(0.5).clamp(0.0, 1.0)
 
 plot_image(image_copy)
 ```
 
-    
 ![png](02_hystogram_8_0.png)
-    
 
 ## Conversione in scala di grigi
 
@@ -142,29 +133,25 @@ def plot_grayscale_image(tensor):
     plt.figure()
     plt.imshow(tensor.numpy(), cmap = 'gray')
     plt.show()
-    
+
 plot_grayscale_image(grayscale_image)
 ```
 
-    
 ![png](02_hystogram_10_0.png)
-    
 
 ```python
 # weighted alternative
 
 grayscale_image = (r_image * 0.4 + g_image * 0.5 + b_image * 0.1).clamp(0.0, 1.0)
-    
+
 plot_grayscale_image(grayscale_image)
 ```
 
-    
 ![png](02_hystogram_11_0.png)
-    
 
 ## Luminosità
 
-Abbiamo visto che visualizzando un solo canale posso visualizzare l'immagine in scala di grigi.  
+Abbiamo visto che visualizzando un solo canale posso visualizzare l'immagine in scala di grigi. 
 Cambiando il contributo dei singoli canali posso variare la resa finale della conversione.
 
 Posso fare lo stesso con i singoli canali visualizzando l'immagine nei tre canali?
@@ -189,11 +176,10 @@ def show_image(tensor):
 show_image(torch.cat((rgb_image, bright_rgb_image, dark_rgb_image), 2))
 ```
 
-    
 ![png](02_hystogram_13_0.png)
-    
 
 ## Istogrammi
+
 Le trasformazioni che abbiamo eseguito (moltiplicazione, divisione) hanno modificato l'immagine effettuando delle trasformazioni sui singoli canali.
 
 Queste trasformazioni possono essere analizzate in termini di variazioni sullo spazio colore.
@@ -222,9 +208,7 @@ ax3.bar(np.linspace(1.0, 10.0, num = 10), hist_b.numpy(), color='b')
 plt.show()
 ```
 
-    
 ![png](02_hystogram_15_0.png)
-    
 
 Valutiamo la precedente trasformazione sullo spazio colore:
 
@@ -243,7 +227,7 @@ def get_channels(rgbim, bins=10):
     hist_r = hist_r.div(hist_r.sum())
     hist_g = hist_g.div(hist_g.sum())
     hist_b = hist_b.div(hist_b.sum())
-    
+
     return hist_r, hist_g, hist_b
 
 show_image(torch.cat((rgb_image, bright_rgb_image, dark_rgb_image), 2))
@@ -261,13 +245,9 @@ plt.show();
 
 ```
 
-    
 ![png](02_hystogram_17_0.png)
-    
 
-    
 ![png](02_hystogram_17_1.png)
-    
 
 NB.
 - La seconda immagine è stata ottenuta moltiplicando per 1.8 i valori di tutti i canali
@@ -297,15 +277,9 @@ show_chart(v1)
 show_chart(v2)
 ```
 
-    
 ![png](02_hystogram_19_0.png)
-    
 
-    
 ![png](02_hystogram_19_1.png)
-    
 
-    
 ![png](02_hystogram_19_2.png)
-    
 

@@ -4,12 +4,13 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
-Core  G=(N,v) ^L6bHf1Ke
+
+Core G=(N,v) ^L6bHf1Ke
 
 worth fun ^gny8HYWU
 
@@ -43,7 +44,7 @@ Worth Fun ^98MZwlj8
 Worth tot
  ^H4wqlexh
 
-      Assunzioni
+ Assunzioni
 - Trasferable utility
 -Non TU ^hAjMcKij
 
@@ -57,7 +58,7 @@ Efficiency ^ynYE8ba8
 Individual Rationality
  ^UYpRkDlC
 
-Fairness  ^4XTUsptV
+Fairness ^4XTUsptV
 
 Stability ^B9Btt5CA
 
@@ -80,7 +81,7 @@ Shapley Value ^sAFI3iBm
 - ∃ Sempre
 
 - Unica pre-imputazione a soddisfare i 3 
-  assiomi ^9cUB6WyM
+ assiomi ^9cUB6WyM
 
 Caratteristiche ^20GaEWWn
 
@@ -93,12 +94,14 @@ Caratteristiche ^20GaEWWn
 Formula ^DwjxBh39
 
 ## Embedded Files
+
 8ce571741dc25818dfc29028e1dd1cbeb9deb4f5: $$v(S) \leq x(S)$$
 
 4b68c4638e72f05190336de00b8c5f76dc41948a: $$\phi_i(N, v) = \frac{1}{|N|!} \sum_{S \subseteq N \setminus \{i\}} |S|! \cdot (|N| - |S| - 1)! \cdot [v(S \cup \{i\}) - v(S)]$$
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBLoeHF0KCwoVJLIRhZ2LjQkgE4+QvqmVk4AOU4xbgAWHgAGAHYecYBmcfj+UsIOYixu
 

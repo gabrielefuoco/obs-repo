@@ -1,35 +1,39 @@
 
-
 Il progetto si pone come obiettivo la modellazione e risoluzione di un problema di pianificazione classica utilizzando il linguaggio PDDL, insieme all'integrazione di un modello temporale all'interno di un'architettura robotica. Lo scenario è ispirato al contesto della produzione industriale, dove più agenti robotici collaborano per consegnare scatole contenenti rifornimenti a diverse stazioni di lavoro. Le principali assunzioni del problema includono la posizione fissa delle stazioni e delle scatole, la capacità degli agenti robotici di manipolare le scatole (riempirle, svuotarle, trasportarle e consegnarle) e i vincoli relativi agli spostamenti degli agenti all'interno dell'ambiente.
 
 Il lavoro si articola in due fasi principali: **pianificazione classica** e **pianificazione temporale**.
 
-
 ### Istanza 1:
 
 **Condizioni iniziali:**
-- Tutte le scatole sono inizialmente situate  nel magazzino centrale.
+
+- Tutte le scatole sono inizialmente situate nel magazzino centrale.
 - I contenuti delle scatole sono inizialmente situati nel magazzino centrale
 - Nessuna stazione di lavoro è presente all'interno del magazzino.
 - Un singolo agente robotico si trova nel magazzino centrale, pronto per eseguire le operazioni.
 
 **Obiettivi:**
+
 - Alcune stazioni di lavoro devono ricevere specifici rifornimenti
 - Le stazioni di lavoro non richiedono rifornimenti specifici per tipo.
 
 **Risultati ottenuti:**
+
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante l'elaborazione.
 
 ### Istanza 2:
 
 **Condizioni iniziali:**
+
 - Simili a quelle dell'istanza 1, con l'aggiunta di nuovi vincoli: ciascun agente robotico ha una capacità di carico limitata e ci sono più agenti coinvolti nella consegna.
 
 **Obiettivi:**
+
 - Analoghi a quelli dell'istanza 1, ma con l'introduzione della gestione del carico massimo che ogni agente può trasportare.
 
 **Risultati ottenuti:**
+
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante il processo.
 
@@ -40,7 +44,7 @@ Dopo aver definito chiaramente le condizioni iniziali e gli obiettivi per entram
 La modellazione in PDDL richiede la creazione di due file distinti:
 1. **Domain file**: specifica il dominio del problema, ovvero l'insieme delle azioni che possono essere eseguite dagli agenti robotici e le condizioni che determinano il cambiamento di stato del sistema. In questo file vengono descritte le dinamiche del mondo in cui operano i robot.
 2. **Problem file**: definisce il problema specifico da risolvere, contenente: 
-	* Gli oggetti coinvolti, ad esempio: scatole, stazioni di lavoro, agenti.  
+	* Gli oggetti coinvolti, ad esempio: scatole, stazioni di lavoro, agenti. 
 	* Lo stato iniziale del sistema. 
 	* Gli obiettivi che devono essere raggiunti.
 
@@ -107,11 +111,13 @@ In PDDL, un'azione rappresenta una trasformazione da uno stato a un altro e si c
 
 Nel progetto, sono state implementate le seguenti azioni:
 
-#### 1. fill  
+#### 1. fill 
+
 L'azione di riempimento di una scatola con un contenuto specifico eseguita da un agente. Le precondizioni verificano che:
 - Il contenuto, la scatola e l'agente si trovino nella stessa posizione. 
 - La scatola sia vuota.
 **Effetti**:
+
 - La scatola non sarà più vuota.
 - La scatola verrà riempita con il contenuto specifico.
 ```python
@@ -126,12 +132,14 @@ L'azione di riempimento di una scatola con un contenuto specifico eseguita da un
     )
 ```
 
-#### 2. charge  
+#### 2. charge 
+
 L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verificano che:
 - Il mezzo abbia uno spazio disponibile (**carrierSlot**) per la scatola.
 - Lo spazio libero appartenga al mezzo.
 - La scatola, l'agente e il mezzo si trovino nella stessa posizione.
 **Effetti**:
+
 - La scatola viene caricata sul veicolo.
 - La scatola non si trova più nella sua posizione originale e lo spazio sul veicolo non è più disponibile.
 ```python
@@ -150,12 +158,14 @@ L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verifi
     )
 ```
 
-#### 3. discharge  
+#### 3. discharge 
+
 L'azione di scarico della scatola da un veicolo. Questa azione è applicabile solo se la scatola è vuota. Le precondizioni verificano che:
 - Lo slot del veicolo sia effettivamente occupato dalla scatola.
 - L'agente, il mezzo e la scatola siano nella posizione corretta.
 - La scatola sia vuota.
 **Effetti**:
+
 - Lo slot da cui è stata scaricata la scatola diventa disponibile.
 - La scatola non si trova più sul mezzo, ma nella posizione di scarico.
 ```python
@@ -174,11 +184,13 @@ L'azione di scarico della scatola da un veicolo. Questa azione è applicabile so
     )
 ```
 
-#### 4. moveRobot  
+#### 4. moveRobot 
+
 L'azione di movimento di un robot privo di carrier, verso una nuova posizione. Le precondizioni verificano che:
 - Il robot si trovi nella posizione di partenza specificata.
 - Le due posizioni siano connesse.
 **Effetti**:
+
 - Il robot non si trova più nella posizione iniziale.
 - Il robot è arrivato alla nuova posizione.
 ```python
@@ -191,11 +203,13 @@ L'azione di movimento di un robot privo di carrier, verso una nuova posizione. L
     )
 ```
 
-#### 5. moveCarrier  
+#### 5. moveCarrier 
+
 L'azione di movimento di un carrier da parte di un robot verso una nuova posizione. Le precondizioni verificano che:
 - Il robot e il carrier si trovino nella posizione di partenza.
 - Le posizioni siano connesse.
 **Effetti**:
+
 - Il robot e il carrier non si trovano più nella posizione di partenza.
 - Entrambi si trovano nella nuova posizione.
 ```python
@@ -211,11 +225,13 @@ L'azione di movimento di un carrier da parte di un robot verso una nuova posizio
     )
 ```
 
-#### 6. contentDelivered  
+#### 6. contentDelivered 
+
 Questo predicato viene introdotto per gestire il vincolo OR richiesto nelle istanze successive della pianificazione classica. Si tratta di un'azione fittizia che rappresenta la condizione in cui una workstation ha ricevuto il contenuto necessario. Le **precondizioni** verificano che:
 - La workstation abbia ricevuto almeno uno dei due contenuti richiesti.
 - La workstation non abbia già ricevuto uno dei contenuti in precedenza.
 **Effetti**:
+
 - La workstation risulta soddisfatta perché ha ricevuto uno dei contenuti richiesti.
 ```python
     (:action contentDelivered

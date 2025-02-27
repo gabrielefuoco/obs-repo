@@ -1,6 +1,5 @@
 ## Task 3: Temporal Planning & Robotics
 
-
 Il Task 3 richiede di adattare il dominio per permettere la creazione di una sequenza temporale di azioni, ognuna con una durata specifica. A differenza della pianificazione classica, che si limita a individuare una sequenza causale delle azioni, la pianificazione temporale deve anche garantire che le azioni possano essere programmate nel tempo. 
 Questo significa rispettare i vincoli sulla durata delle azioni, lungo una linea temporale che non ha un limite prefissato ed è dunque potenzialmente illimitata.
 
@@ -71,10 +70,11 @@ Sono stati inoltre introdotti, sotto forma di predicati, i concetti di posto occ
 - L'azione di **spostamento dell'agente** (_move-agent_) ha una durata fissa pari a due. Tale valore tiene conto del tempo necessario per il movimento dell'agente senza ulteriori complicazioni, come l'interazione con mezzi o carichi.
 
 - L'azione di **movimento dell'agente insieme a un carrello** (_move_vehicle_) ha una durata variabile, strettamente legata al peso del contenuto trasportato. In questo caso, la durata è calcolata come il doppio del peso del mezzo, poiché il peso influisce direttamente sulla velocità e sull'efficienza del movimento. Questa scelta consente di rappresentare in modo più realistico il maggiore sforzo richiesto per spostare un carico "più pesante".
-  
+
 Qui di seguito le **durative actions**:
 
 **Charge:**
+
 ```python
   (:durative-action charge
     :parameters (?l - location ?r - robot ?b - box ?p - place ?v - vehicle)
@@ -101,6 +101,7 @@ Qui di seguito le **durative actions**:
 ```
 
 **Discharge:**
+
 ```python
   (:durative-action discharge
     :parameters (?l - location ?r - robot ?b - box ?p - place ?v - vehicle)
@@ -128,6 +129,7 @@ Qui di seguito le **durative actions**:
 ```
 
 **Fill:**
+
 ```python
   (:durative-action fill 
     :parameters (?l - location ?c - content ?b - box ?r - robot)
@@ -142,6 +144,7 @@ Qui di seguito le **durative actions**:
 ```
 
 **Give Content:**
+
 ```python
   (:durative-action give_content
     :parameters (?l - location ?c - content ?b - box ?r - robot ?w - workstation ?v - vehicle)
@@ -158,6 +161,7 @@ Qui di seguito le **durative actions**:
 ```
 
 **Move Vehicle:**
+
 ```python
   (:durative-action move_vehicle
     :parameters (?r - robot ?from ?to - location ?v - vehicle)
@@ -171,6 +175,7 @@ Qui di seguito le **durative actions**:
 ```
 
 **Move Robot:**
+
 ```python
   (:durative-action move_robot
     :parameters (?r - robot ?from ?to - location)
@@ -209,11 +214,11 @@ Successivamente, altre cartelle sono state generate automaticamente dall’utili
 
 - **pddl**: contiene il file del dominio, denominato **`domain.pddl`**, necessario per definire le regole e le azioni del piano.
 - **launch**: include il file di configurazione **`plansys2_project_launch.py`**, che avvia i nodi ROS richiesti per l’esecuzione del piano. Qui sono presenti anche:
-    - **`plan.txt`**: file in cui viene salvato il piano generato.
-    - **`commands`**: file utilizzato come parametro dal terminale di Plansys2 per impostare le istanze del problema.
+ - **`plan.txt`**: file in cui viene salvato il piano generato.
+ - **`commands`**: file utilizzato come parametro dal terminale di Plansys2 per impostare le istanze del problema.
 - **src**: contiene i file relativi alle azioni specifiche del dominio, scritte in linguaggio C++. Al suo interno si trovano:
-    - **`CMakeLists.txt`**: file utilizzato per configurare il processo di compilazione del package.
-    - **`package.xml`**: file che definisce le dipendenze richieste per il package.
+ - **`CMakeLists.txt`**: file utilizzato per configurare il processo di compilazione del package.
+ - **`package.xml`**: file che definisce le dipendenze richieste per il package.
 
 Le specifiche del progetto e dei task hanno fornito una guida dettagliata per creare e configurare queste directory, assicurando una corretta integrazione dei componenti richiesti da **ROS** e **Plansys2** per l’esecuzione del piano. Questo approccio sistematico ha semplificato il processo e ridotto la possibilità di errori durante l’implementazione.
 

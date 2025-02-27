@@ -28,9 +28,7 @@ image = Image.open(myResourcePath('car.jpg'))
 plt.imshow(image, cmap='gray');
 ```
 
-    
 ![png](01_math_operations_2_0.png)
-    
 
 Carichiamo l'immagine in B/N
 
@@ -49,12 +47,9 @@ image_array = np.array(image)
 print(f'shape = {image_array.shape}')
 ```
 
-    shape = (133, 200)
-    
+ shape = (133, 200)
 
-    
 ![png](01_math_operations_4_1.png)
-    
 
 Il codice seguente effettua tre operazioni
 
@@ -88,13 +83,10 @@ img[range(100), range(100)] = 255
 plt.imshow(img, cmap='gray')
 ```
 
-    X = (133, 1)
-    Y = (1, 200)
-    
+ X = (133, 1)
+ Y = (1, 200)
 
-    
 ![png](01_math_operations_6_2.png)
-    
 
 ```python
 # MASK
@@ -113,12 +105,9 @@ img[mask] = 255
 plt.imshow(img, cmap='gray')
 ```
 
-    mask shape is (133, 200)
-    
+ mask shape is (133, 200)
 
-    
 ![png](01_math_operations_7_2.png)
-    
 
 ```python
 from scipy import ndimage
@@ -149,18 +138,18 @@ plt.subplot(1, 5, 5)
 plt.imshow(crop_face, cmap='gray');
 ```
 
-    
 ![png](01_math_operations_8_0.png)
-    
 
 ## Blurring/smoothing
 
 Filtro gaussiano vs filtro uniforme 
 
 ### filtro gaussiano
+
 **sigma** Standard deviation for Gaussian kernel. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes.
 
 ### filtro uniforme
+
 **size** The sizes of the uniform filter are given for each axis as a sequence, or as a single number, in which case the size is equal for all axes.
 
 ```python
@@ -181,9 +170,7 @@ plt.subplot(1, 4, 4)
 plt.imshow(local_mean, cmap='gray');
 ```
 
-    
 ![png](01_math_operations_10_0.png)
-    
 
 ## Sharpening
 
@@ -209,7 +196,5 @@ plt.subplot(1, 3, 3)
 plt.imshow(sharpened, cmap='gray')
 ```
 
-    
 ![png](01_math_operations_12_1.png)
-    
 

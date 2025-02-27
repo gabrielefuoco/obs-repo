@@ -1,6 +1,3 @@
-
-Prima di iniziare la parte di MLT (Interlanguage Models), è importante soffermarsi su due argomenti chiave: **Topic Modeling** e **Basi di Conoscenza Lessicali**.
-
 ### Topic Modeling
 
 Il **Topic Modeling**, in particolare il **Stochastic Topic Modeling**, ha avuto un grande impatto nella prima decade degli anni 2000. Si tratta di un'espressione generica che indica la modellazione e la rappresentazione dei dati testuali. La differenza principale con i modelli precedenti risiede nel fatto che il **Topic Modeling** rappresenta un **topic** come una **distribuzione di probabilità sullo spazio dei termini**. Allo stesso tempo, un documento è visto come una **miscela di distribuzioni di probabilità dei topic**. 
@@ -14,6 +11,7 @@ Le **Basi di Conoscenza Lessicali** sono un elemento importante del **Knowledge 
 Il **Vector Space Model** riemergerà nell'ambito dell'Information Retrieval. Vedremo un modello e le sue proprietà, insieme a una generalizzazione che rappresenta la versione probabilistica della funzione TF, specificamente per i task di retrieval.
 
 #### Premessa
+
 Un sistema tradizionale di Information Retrieval richiede un meccanismo di matching, ovvero un sistema di **ranking**. 
 
 ## Incertezza nella Ricerca di Informazioni
@@ -52,10 +50,10 @@ L'introduzione dell'incertezza nei dati è particolarmente importante in contest
 
 Esistono diversi modelli di retrieval probabilistici, tra cui:
 
-* **Probability Ranking Principle:** Questo principio, estremamente intuitivo, è alla base di molti modelli di retrieval. Classifica i documenti in base alla probabilità di pertinenza.
-* **Binary Independence Model:** Questo modello presenta affinità con la teoria bayesiana e con il concetto di probabilità a priori. Assume che i termini siano indipendenti l'uno dall'altro.
-* **Modello Okapi BM25:** Questo modello è una versione probabilistica della TF-IDF, utilizzata per il retrieval di informazioni, tiene conto della frequenza dei termini e della lunghezza del documento.
-* **Reti bayesiane per il recupero di testo:** un approccio più generale che consente di modellare le dipendenze tra i termini. In generale, l'applicazione dell'inferenza bayesiana è fondamentale per la gestione dell'incertezza nei modelli di retrieval.
+* **Probability Ranking Principle:** Questo principio, estremamente intuitivo, è alla base di molti modelli di retrieval. *Classifica i documenti in base alla probabilità di pertinenza*.
+* **Binary Independence Model:** Questo modello presenta affinità con la teoria bayesiana e con il concetto di probabilità a priori. *Assume che i termini siano indipendenti l'uno dall'altro*.
+* **Modello Okapi BM25:** Questo modello è una versione probabilistica della TF-IDF, utilizzata per il retrieval di informazioni, *tiene conto della frequenza dei termini e della lunghezza del documento*.
+* **Reti bayesiane per il recupero di testo:** un approccio più generale che *consente di modellare le dipendenze tra i termini*. In generale, l'applicazione dell'inferenza bayesiana è fondamentale per la gestione dell'incertezza nei modelli di retrieval.
 
 ## Modelli Probabilistici per il Ranking di Documenti
 
@@ -84,7 +82,7 @@ Il problema può essere formalizzato come un problema di **classificazione**. Si
 
 La probabilità di rilevanza può essere calcolata utilizzando la formula di Bayes:
 
-$P(R=1|X) = \frac{{(P(X|R=1) \cdot P(R=1))}}{P(X)}$ 
+$$P(R=1|X) = \frac{{P(X|R=1) \cdot P(R=1)}}{P(X)}$$
 
 Dove:
 
@@ -93,6 +91,7 @@ Dove:
 * **P(X):** Probabilità di osservare il documento X.
 
 **Osservazioni:**
+
 * Il termine **P(X)** è costante rispetto alle classi e quindi non influenza il ranking.
 * Il ranking dei documenti dipende quindi dai termini **P(X|R=1)** e **P(R=1)**.
 ## Classificazione e il Problema del Bias
@@ -151,7 +150,6 @@ Il modello assume l'indipendenza tra i termini, quindi la presenza di un termine
 Per ogni documento D e query Q, il BIM calcola la probabilità di rilevanza $P(R=1|D,Q)$ e di non rilevanza $P(R=0|D,Q)$ per determinare l'ordinamento dei documenti.
 L'obiettivo è solo il ranking
 
-
 ## Applicazione del Teorema di Bayes per il Ranking dei Documenti
 
 Come già visto con altre applicazioni del teorema di Bayes, non siamo interessati al punteggio (score) o alle probabilità in sé, ma al **ranking** dei documenti. 
@@ -160,7 +158,7 @@ La novità rispetto alla classificazione Bayesiana è che questa volta ricorrere
 
 **O(R|QX)** è un rapporto tra la probabilità che il documento **X** sia della classe **R** (R = 1) e la probabilità che il documento **X** non sia della classe **R** (R = 0). In formule:
 
-$O(R|Q\vec{X}) = \frac{P(R=1|Q\vec{X})}{P(R=0|Q\vec{X})}$
+$$O(R|Q\vec{X}) = \frac{P(R=1|Q\vec{X})}{P(R=0|Q\vec{X})}$$
 
 Per ognuno di questi termini applichiamo il teorema di Bayes. 
 
@@ -174,20 +172,17 @@ Gli odds ci aiutano a rimanere concentrati sull'analisi specifica per stabilire 
 
 Gli Odds Ratio (OR) sono una misura di associazione relativa tra due variabili binarie. Sono utilizzati in statistica descrittiva per misurare la forza di associazione o di non indipendenza tra due variabili.
 
-**Esempio???????????????:**
-
 Consideriamo una tabella di contingenza 2x2 con le variabili X e Y:
 
-|        | Y=1 | Y=0 | Totale |
+| | Y=1 | Y=0 | Totale |
 |--------|-----|-----|--------|
-| X=1    | n11 | n10 | n1.    |
-| X=0    | n01 | n00 | n0.    |
-| Totale | n.1 | n.0 | N      |
+| X=1 | n11 | n10 | n1. |
+| X=0 | n01 | n00 | n0. |
+| Totale | n.1 | n.0 | N |
 
 L'Odds Ratio è calcolato come:
 
-$OR =  \frac{n_{11} \cdot n_{00}}{n_{10} \cdot n_{01}}$
-
+$$OR =  \frac{n_{11} \cdot n_{00}}{n_{10} \cdot n_{01}}$$
 
 **Applicazioni degli Odds Ratio:**
 
@@ -294,7 +289,6 @@ L'OR è un'utile misura di associazione per studiare l'impatto di fattori di ris
 
 L'assunzione di sparsità, ovvero la rarità degli eventi, è fondamentale per l'approssimazione dell'OR al RR. In caso di eventi frequenti, l'OR può sovrastimare il RR.
 
-
 ## OTS-I e Likelihood Ratio
 
 L'OTS-I (Odd of Term Significance - I) è una query che, rispetto alla presenza o meno dell'ipotesi di rilevanza (gruppo dei rilevanti vs. gruppo dei non rilevanti), è equivalente a TOS (Odd of Term Significance). La probabilità di osservare un dato Q, data l'ipotesi di rilevanza, è calcolata come:
@@ -353,10 +347,10 @@ Questo testo tratta il concetto di probabilità di osservare un termine specific
 
 La tabella di contingenza mostra la relazione tra le variabili "presenza/assenza del termine" e "rilevanza/non rilevanza" del documento.
 
-|                    | Rilevanza (r=1) | Non Rilevanza (r=0) |
+| | Rilevanza (r=1) | Non Rilevanza (r=0) |
 | ------------------ | --------------- | ------------------- |
-| Presenza $(x_i=1)$ | $p_i$           | $r_i$               |
-| Assenza $(x_i=0)$  | $(1-p_i)$       | $(1-r_i)$           |
+| Presenza $(x_i=1)$ | $p_i$ | $r_i$ |
+| Assenza $(x_i=0)$ | $(1-p_i)$ | $(1-r_i)$ |
 
 **Interpretazione:**
 
@@ -401,8 +395,8 @@ $$
 Scomponiamo questi termini e li ridistribuiamo nelle due produttorie originali:
 
 * Alcuni termini della produttoria fittizia vanno nella **prima produttoria** per formare un **odds ratio**:
-    * P / (1 - P): Probabilità di osservare il termine dato che il documento è rilevante, diviso la probabilità di osservare il termine dato che il documento non è rilevante.
-    * R / (1 - R): Probabilità di osservare il termine dato che il documento non è rilevante, diviso la probabilità di non osservare il termine dato che il documento non è rilevante.
+ * P / (1 - P): Probabilità di osservare il termine dato che il documento è rilevante, diviso la probabilità di osservare il termine dato che il documento non è rilevante.
+ * R / (1 - R): Probabilità di osservare il termine dato che il documento non è rilevante, diviso la probabilità di non osservare il termine dato che il documento non è rilevante.
 * Nella **prima produttoria** abbiamo ora un **odds ratio** per ogni termine "match".
 * Dalla produttoria fittizia rimane la quantità `1 con i / 1 con i`, identica al rapporto presente nella **seconda produttoria** (termini "non-match").
 
@@ -415,12 +409,10 @@ $$
 
 Questa produttoria finale considera sia i termini "match" che "non-match". I termini "non-match" erano già presenti nella seconda produttoria originale, mentre i termini "match" sono stati inclusi tramite la scomposizione della produttoria fittizia.
 
-
 Ricapitolando, abbiamo ottenuto:
 
 * **Odds ratio di R dato il primo termine:** Rappresenta la probabilità di rilevanza del documento dato il primo termine della query.
-* **Produttoria sui termini indipendenti:**  Rappresenta l'influenza dei termini che non dipendono dalla rilevanza del documento. 
-
+* **Produttoria sui termini indipendenti:** Rappresenta l'influenza dei termini che non dipendono dalla rilevanza del documento. 
 
 ## Retrieval Status Value (RSV)
 
@@ -452,7 +444,6 @@ Un RSV più alto indica una maggiore rilevanza del documento rispetto alla query
 **Stima delle probabilità:**
 
 Per calcolare gli odds ratio, è necessario stimare le probabilità di occorrenza dei termini nel documento e in un documento casuale. Questo può essere fatto utilizzando tecniche di stima della probabilità come la **smoothing di Laplace**.
-
 
 ## Analisi dei Dati di Addestramento dei Modelli Linguistici
 
@@ -492,11 +483,12 @@ In questo contesto, stiamo analizzando un insieme di documenti, dove **N** rappr
 
 | Documents | Relevant | Non-Relevant | Total |
 | --------- | -------- | ------------ | ----- |
-| $x_i=1$   | s        | n-s          | n     |
-| $x_i=0$   | S-s      | N-n-S+s      | N-n   |
-| **Total** | **S**    | **N-S**      | **N** |
+| $x_i=1$ | s | n-s | n |
+| $x_i=0$ | S-s | N-n-S+s | N-n |
+| **Total** | **S** | **N-S** | **N** |
 
 **Calcolo delle Probabilità:**
+
 $$
 p_i = \frac{s}{S} \quad \text{e} \quad r_i = \frac{(n-s)}{(N-S)}
 $$
@@ -504,6 +496,7 @@ $$
 * **R(I):** Probabilità che il termine sia presente dato che il documento non è rilevante.
 
 **Oz Ratio:**
+
 L'Oz Ratio è una misura che quantifica la forza dell'associazione tra un termine e la rilevanza di un documento. Si calcola come segue:
 $$c_i = \log \frac{p_i(1-r_i)}{r_i(1-p_i)}$$
 
@@ -527,12 +520,12 @@ Partiamo da $r_i$, che rappresenta la probabilità di incidenza del termine di r
 Quindi, $r_i$ è approssimabile a N piccolo diviso N grande, ovvero la frazione dei documenti nella collezione totale che contengono il termine di ricerca.
 
 **Oz di competenza:** 
+
 $$\log \frac{1-r_i}{r_i} = \log \frac{N-n-S+s}{n-s} \approx \log \frac{N-n}{n} \approx \log \frac{N}{n} = IDF$$
 
 **Approssimazione successiva:** N grande - N piccolo può essere ulteriormente approssimato a N grande, perché N piccolo è una porzione trascurabile rispetto a N grande.
 
 **Validità dell'approssimazione:** Questa approssimazione è valida soprattutto in sistemi aperti come il web, dove la collezione di documenti è molto ampia. In corpus tematici, l'approssimazione potrebbe essere meno accurata a causa della presenza di termini altamente frequenti (legge di Zipf).
-
 
 ## Probabilità e Smoothing
 
@@ -561,11 +554,9 @@ La formula di probabilità condizionale è la seguente: $$ P_{i}^{(h+1)} = \frac
 * **$K$:** Parametro di smoothing, utilizzato per gestire eventi non presenti in $B$ ed evitare probabilità nulle.
 * **$p_i^{(h)}$:** Probabilità di osservare l'evento $i$ all'iterazione $h$. 
 
-
 **Effetti dello Smoothing**
 
 Lo smoothing introduce dei **fattori nascosti** che influenzano la probabilità di occorrenza di un termine. Questi fattori nascosti rappresentano la correlazione o la dipendenza tra i termini stessi. 
-
 
 ## Stima di $p_{i}$ e Relevance Feedback
 
@@ -593,7 +584,6 @@ L'obiettivo finale del *relevance feedback* è quello di migliorare la risposta 
 
 L'espansione della query consiste nell'aggiungere nuovi termini alla query originale. Questi termini non sono scelti a caso, ma sono identificati come caratterizzanti i documenti rilevanti. Il sistema, iterazione dopo iterazione, identifica i documenti rilevanti e un meccanismo di estrazione di keyword identifica i termini importanti presenti in questi documenti. Questi termini vengono poi aggiunti alla query, migliorando la sua accuratezza. 
 
-
 ## Relevance Feedback e Probabilistic Relevance Feedback
 
 Il **relevance feedback** è un processo iterativo che mira a migliorare la qualità dei risultati di una ricerca. Inizialmente, il sistema restituisce un set di risultati basato su una query iniziale. L'utente fornisce un feedback, indicando quali risultati sono rilevanti e quali non lo sono. Questo feedback viene utilizzato per raffinare la query e ottenere risultati più pertinenti.
@@ -619,32 +609,35 @@ Supponiamo che l'utente abbia identificato 5 documenti rilevanti tra 10 restitui
 
 **Il probabilistic relevance feedback è un processo iterativo che consente al sistema di apprendere dalle preferenze dell'utente e di fornire risultati sempre più pertinenti.**
 
-
 ## Approssimazione della Probabilità di Rilevanza
 
 In questo contesto, si cerca di approssimare la probabilità di rilevanza di un termine in un documento, rappresentata dal rapporto tra la cardinalità dell'insieme dei documenti rilevanti (V) e la cardinalità dell'insieme di tutti i documenti (I). 
 
 **Formula:**
 
-$P(rilevanza | termine) ≈ |V| / |I|$
+$$P(rilevanza | termine) ≈ \frac{|V|}{|I|}  $$
 
 **Problema:**
+
 - Se l'insieme V è troppo grande, diventa computazionalmente costoso calcolare la probabilità di rilevanza.
 
 **Soluzione:**
+
 - Si introduce un meccanismo iterativo che raffina progressivamente l'insieme dei documenti candidati. Ad ogni passo, si stima la probabilità di rilevanza del termine in base all'insieme corrente di documenti candidati, utilizzando uno smoothing per tenere conto degli eventi non osservati.
 
 **Smoothing:**
+
 - Lo smoothing introduce una parte di probabilità che dipende da eventi non osservati, come la presenza o l'assenza del termine in altri documenti. Questo aiuta a evitare che la probabilità di rilevanza sia zero per termini che non sono presenti nell'insieme corrente di documenti candidati.
 
 **Parametro K:**
+
 - Il parametro K, utilizzato nello smoothing, è tipicamente un valore piccolo (5 o 10) e rappresenta un fattore di proporzionalità rispetto alla cardinalità dell'insieme dei documenti candidati.
 
 **Pseudo Relevance Feedback:**
+
 - In assenza di un feedback esplicito da parte dell'utente, si può utilizzare un feedback implicito basato sull'assunzione che i documenti in cima al ranking del sistema siano altamente rilevanti. Questo insieme di documenti viene utilizzato come base per il feedback implicito.
 
-
-##  Miglioramento della stima dei documenti rilevanti
+## Miglioramento della stima dei documenti rilevanti
 
 Il processo di stima della rilevanza dei documenti può essere migliorato utilizzando un valore **K**, che rappresenta la cardinalità dell'insieme iniziale di documenti. Un valore **K** maggiore aiuta a ottenere una stima più accurata, evitando stime troppo basse.
 
@@ -652,15 +645,14 @@ Il modello **BM25**, utilizzato per il recupero delle informazioni, assegna punt
 
 Questa differenza di punteggio è dovuta alla **parametrizzazione** utilizzata da BM25, che tiene conto della **normalizzazione della richiesta**. 
 
-
 ### Esempio di Applicazione del Modello Vettoriale
+
 **Scenario:**
+
 Immaginiamo di avere due documenti, due "terri", con una grana molto grossa (cioè, con poche informazioni in comune). 
 
 **Osservazioni:**
+
 * Nonostante la scarsità di informazioni, il modello vettoriale riesce a distinguere i due documenti, evidenziando la differenza nel loro trattamento.
 * Questo esempio dimostra la capacità del modello vettoriale di gestire situazioni con dati limitati.
-
-
-
 

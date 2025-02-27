@@ -48,10 +48,10 @@
 ```
 
 * **Cluster Privati:** Sono disponibili diverse opzioni per cluster privati:
-    * **Modalità Standalone:** Simile agli script di deployment di Hadoop.
-    * **Mesos:** Un framework di orchestrazione dei cluster.
-    * **Hadoop YARN:** Il framework di gestione dei cluster di Hadoop.
-    * **Amazon EMR:** Un servizio di cluster gestito da Amazon (tinyurl.com/spark-emr). 
+ * **Modalità Standalone:** Simile agli script di deployment di Hadoop.
+ * **Mesos:** Un framework di orchestrazione dei cluster.
+ * **Hadoop YARN:** Il framework di gestione dei cluster di Hadoop.
+ * **Amazon EMR:** Un servizio di cluster gestito da Amazon (tinyurl.com/spark-emr). 
 ## Persistenza RDD
 
 **Definizione:** La persistenza (o memorizzazione nella cache) di un RDD in memoria è una funzionalità fondamentale di Spark che consente di migliorare le prestazioni delle operazioni successive.
@@ -80,23 +80,23 @@
 3. **Mappatura:** Estrarre i messaggi di errore: `messages = errors.map(lambda s: s.spli[2])`
 4. **Memorizzazione nella Cache:** Memorizzare l'RDD `messages` nella cache: `messages.cache()`
 5. **Ricerca:** Eseguire ricerche interattive sui messaggi:
-    * `messages.filter(lambda s: "mysql" in s).count()`
-    * `messages.filter(lambda s: "php" in s).count()`
+ * `messages.filter(lambda s: "mysql" in s).count()`
+ * `messages.filter(lambda s: "php" in s).count()`
 
 **Risultati:**
 
 * **Wikipedia:** Un esempio di ricerca full-text su un dataset di 60GB su 20 macchine EC2.
-    * Tempo di esecuzione con cache: 0.5 secondi
-    * Tempo di esecuzione senza cache: 20 secondi
+ * Tempo di esecuzione con cache: 0.5 secondi
+ * Tempo di esecuzione senza cache: 20 secondi
 
 **Tabella di Confronto:**
 
 | % del set di lavoro nella cache | Tempo di esecuzione (s) |
 |---|---|
-| 25% |  |
-| 50% |  |
-| 75% |  |
-| Completamente disabilitato |  |
+| 25% | |
+| 50% | |
+| 75% | |
+| Completamente disabilitato | |
 
 **Livelli di Storage:**
 
@@ -111,7 +111,6 @@
 
 * Il livello di storage viene scelto passando un oggetto `org.apache.spark.storage.StorageLevel` al metodo `persist()`.
 * Il metodo `cache()` utilizza il livello predefinito `StorageLevel.MEMORY_ONLY`.
-
 
 ## Persistenza RDD: Scegliere il Livello di Storage
 
@@ -145,7 +144,6 @@
 * **Spark:** Crea un task per ogni partizione del nuovo RDD, pianifica e assegna i task ai nodi worker.
 * **Esecuzione Interna:** Tutto questo processo avviene internamente, senza intervento dell'utente.
 
-
 ## Riepilogo dei Componenti di Spark
 
 **Livello Grossolano:**
@@ -161,7 +159,6 @@
 * **Operatori:** Funzioni che trasformano o agiscono sugli RDD.
 * **Shuffle:** Operazione che ridistribuisce i dati tra le partizioni.
 
-
 ## Vista a Livello di Partizione di un RDD
 
 **Vista a Livello di Dataset:**
@@ -176,7 +173,6 @@ log:
             shouldCache = true
 ```
 
-
 **Spiegazione:**
 
 * **Vista a Livello di Dataset:** Mostra la struttura gerarchica degli RDD, partendo dal dataset originale (in questo caso, `log`) e mostrando le trasformazioni applicate (ad esempio, `errors` è un RDD filtrato da `log`).
@@ -187,37 +183,38 @@ log:
 
 ## Durata di un Job in Spark (Flusso dei Task)
 
-| Fase                                                  | **Descrizione**                                                                                                                                                                          |
+| Fase | **Descrizione** |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. Oggetti RDD**                                        | * `rddl.join(rdd2)`: Unione di due RDD. <br> * `.groupBy(...)`: Raggruppamento di elementi in base a una chiave. <br> * `.filter(...)`: Filtraggio di elementi in base a una condizione. |
-| **2. Costruzione del DAG di operatori**                   | Il DAG (Directed Acyclic Graph) rappresenta le operazioni sugli RDD come un grafo.                                                                                                       |
-| **3. DAG Scheduler**                                      | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.                                                                                                           |
-| **4. Task Scheduler**                                     | Il Task Scheduler assegna i task ai worker del cluster.                                                                                                                                  |
-| **5. Worker**                                             | I worker eseguono i task assegnati.                                                                                                                                                      |
-| **6. Cluster Manager**                                    | Gestisce i nodi del cluster e assegna i task ai worker.                                                                                                                                  |
-| **7. Threads**                                            | I thread eseguono i task all'interno dei worker.                                                                                                                                         |
-| **8. Block Manager**                                      | Memorizza e serve i blocchi di dati.                                                                                                                                                     |
-| **9. Dividi il DAG in stage di task**                     | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle.                                                                                                           |
-| **10. Invia ogni stage e i suoi task quando sono pronti** | Il Task Scheduler invia gli stage e i task ai worker quando sono pronti per l'esecuzione.                                                                                                |
-| **11. Lancia i task tramite Master**                      | Il Master (o Cluster Manager) lancia i task sui worker.                                                                                                                                  |
-| **12. Riprova i task falliti e strag­gler**               | Il Task Scheduler riprova i task falliti o che impiegano troppo tempo (stragglers).                                                                                                      |
-| **13. Esegui i task**                                     | I worker eseguono i task assegnati.                                                                                                                                                      |
-| **14. Memorizza e servi i blocchi**                       | Il Block Manager memorizza e serve i blocchi di dati utilizzati dai task.                                                                                                                |
+| **1. Oggetti RDD** | * `rddl.join(rdd2)`: Unione di due RDD. <br> * `.groupBy(...)`: Raggruppamento di elementi in base a una chiave. <br> * `.filter(...)`: Filtraggio di elementi in base a una condizione. |
+| **2. Costruzione del DAG di operatori** | Il DAG (Directed Acyclic Graph) rappresenta le operazioni sugli RDD come un grafo. |
+| **3. DAG Scheduler** | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle. |
+| **4. Task Scheduler** | Il Task Scheduler assegna i task ai worker del cluster. |
+| **5. Worker** | I worker eseguono i task assegnati. |
+| **6. Cluster Manager** | Gestisce i nodi del cluster e assegna i task ai worker. |
+| **7. Threads** | I thread eseguono i task all'interno dei worker. |
+| **8. Block Manager** | Memorizza e serve i blocchi di dati. |
+| **9. Dividi il DAG in stage di task** | Il DAG Scheduler divide il DAG in stage, sequenze di operazioni senza shuffle. |
+| **10. Invia ogni stage e i suoi task quando sono pronti** | Il Task Scheduler invia gli stage e i task ai worker quando sono pronti per l'esecuzione. |
+| **11. Lancia i task tramite Master** | Il Master (o Cluster Manager) lancia i task sui worker. |
+| **12. Riprova i task falliti e strag­gler** | Il Task Scheduler riprova i task falliti o che impiegano troppo tempo (stragglers). |
+| **13. Esegui i task** | I worker eseguono i task assegnati. |
+| **14. Memorizza e servi i blocchi** | Il Block Manager memorizza e serve i blocchi di dati utilizzati dai task. |
 
 **Spiegazione:**
+
 Il processo inizia con la creazione di un DAG di operatori che rappresenta le operazioni sugli RDD. Il DAG Scheduler divide il DAG in stage, che vengono poi assegnati ai worker del cluster. I worker eseguono i task assegnati, memorizzando i dati nel Block Manager. Il Task Scheduler gestisce l'esecuzione dei task, riprovando quelli falliti o che impiegano troppo tempo.
 
 ## Architettura di un'Applicazione Spark
 
-| Componente                       | Descrizione                                                                                                                                                                   |
+| Componente | Descrizione |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Applicazione**                 | Un programma che viene eseguito su un cluster di nodi, composto da diversi componenti che lavorano insieme per elaborare i dati.                                              |
-| **Client**                       | Il punto di ingresso per l'applicazione Spark. <br>Invia l'applicazione al Cluster Manager e alloca le risorse necessarie per l'esecuzione dell'applicazione (core, memoria). |
-| **Cluster Manager (YARN/Mesos)** | Gestisce i nodi del cluster e assegna le risorse ai worker (Spark Worker) per l'esecuzione dei task.                                                                          |
-| **Nodi Dati**                    | I nodi del cluster che memorizzano i dati. <br>Esempio: Nodo 1, Nodo 2, Nodo 3, Nodo 4.                                                                                       |
-| **Spark Worker**                 | I processi che eseguono i task assegnati dal Cluster Manager. Memorizzano i dati in memoria per un accesso rapido.                                                            |
-| **Driver**                       | Il processo che esegue la funzione principale dell'applicazione. Crea il SparkContext, che è il punto di accesso all'API Spark.                                               |
-| **Executors**                    | I processi che eseguono i task assegnati dal Driver. Sono eseguiti sui nodi dati.                                                                                             |
+| **Applicazione** | Un programma che viene eseguito su un cluster di nodi, composto da diversi componenti che lavorano insieme per elaborare i dati. |
+| **Client** | Il punto di ingresso per l'applicazione Spark. <br>Invia l'applicazione al Cluster Manager e alloca le risorse necessarie per l'esecuzione dell'applicazione (core, memoria). |
+| **Cluster Manager (YARN/Mesos)** | Gestisce i nodi del cluster e assegna le risorse ai worker (Spark Worker) per l'esecuzione dei task. |
+| **Nodi Dati** | I nodi del cluster che memorizzano i dati. <br>Esempio: Nodo 1, Nodo 2, Nodo 3, Nodo 4. |
+| **Spark Worker** | I processi che eseguono i task assegnati dal Cluster Manager. Memorizzano i dati in memoria per un accesso rapido. |
+| **Driver** | Il processo che esegue la funzione principale dell'applicazione. Crea il SparkContext, che è il punto di accesso all'API Spark. |
+| **Executors** | I processi che eseguono i task assegnati dal Driver. Sono eseguiti sui nodi dati. |
 
 ## Tolleranza agli Errori in Spark
 
@@ -241,15 +238,14 @@ val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
 * Ad esempio, se il nodo che memorizza `cachedSics` fallisce, Spark può ricalcolare `cachedSics` a partire da `file` e `sics`.
 * Questo meccanismo di tolleranza agli errori rende Spark molto robusto e affidabile.
 
-
 ## Pianificazione dei Job in Spark
 
 * La pianificazione dei job in Spark tiene conto delle partizioni degli RDD persistenti disponibili in memoria.
 * Quando un utente esegue un'azione su un RDD, lo scheduler costruisce un DAG (Directed Acyclic Graph) di stage dal grafo di lineage dell'RDD.
 * Uno stage contiene il maggior numero possibile di trasformazioni in pipeline con dipendenze strette.
 * Il confine di uno stage è definito da:
-    * **Shuffle:** per dipendenze ampie (ad esempio, operazioni di join o group by).
-    * **Partizioni già calcolate:** se una partizione è già stata calcolata e memorizzata in memoria, non è necessario ricalcolarla.
+ * **Shuffle:** per dipendenze ampie (ad esempio, operazioni di join o group by).
+ * **Partizioni già calcolate:** se una partizione è già stata calcolata e memorizzata in memoria, non è necessario ricalcolarla.
 
 ## Pianificazione dei Job in Spark (continua)
 
@@ -265,13 +261,13 @@ val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
 ## Località dei Dati (continua)
 
 * **Livelli di Località:** La località dei dati indica quanto sono vicini i dati al codice che li elabora. Esistono diversi livelli di località in base alla posizione corrente dei dati. In ordine dal più vicino al più lontano:
-    * **PROCESS_LOCAL:** i dati e il task si trovano sullo stesso executor.
-    * **NODE_LOCAL:** i dati e il task si trovano sullo stesso nodo, ma su executor diversi.
-    * **RACK_LOCAL:** i dati e il task si trovano sullo stesso rack, ma su nodi diversi.
-    * **ANY:** i dati e il task possono trovarsi ovunque nel cluster.
+ * **PROCESS_LOCAL:** i dati e il task si trovano sullo stesso executor.
+ * **NODE_LOCAL:** i dati e il task si trovano sullo stesso nodo, ma su executor diversi.
+ * **RACK_LOCAL:** i dati e il task si trovano sullo stesso rack, ma su nodi diversi.
+ * **ANY:** i dati e il task possono trovarsi ovunque nel cluster.
 * **Strategia di Pianificazione:** Spark preferisce pianificare tutti i task al livello di località migliore, ma questo non è sempre possibile. In situazioni in cui non ci sono dati non elaborati su alcun executor inattivo, Spark passa a livelli di località inferiori. Ci sono due opzioni:
-    * **Aspettare:** Aspettare che un CPU occupato si liberi per avviare un task sui dati sullo stesso server.
-    * **Avviare Immediatamente:** Avviare immediatamente un nuovo task in un luogo più lontano che richiede lo spostamento dei dati.
+ * **Aspettare:** Aspettare che un CPU occupato si liberi per avviare un task sui dati sullo stesso server.
+ * **Avviare Immediatamente:** Avviare immediatamente un nuovo task in un luogo più lontano che richiede lo spostamento dei dati.
 * **Comportamento Tipico:** Spark in genere aspetta un po' nella speranza che un CPU occupato si liberi. Una volta scaduto il timeout, inizia a spostare i dati da lontano al CPU libero.
 
 ## Spark: Impostazione del Livello di Parallelismo
@@ -343,8 +339,6 @@ for i in range(ITERATIONS):
 print "Final separating plane: %s" % w
 ```
 
-
-
 ## Regressione Logistica (Scala)
 
 ```scala
@@ -362,7 +356,6 @@ for (i <- 1 to ITERATIONS) {
 
 println("Final separating plane: " + w)
 ```
-
 
 ## Regressione Logistica (Java)
 
@@ -394,37 +387,37 @@ System.out.println("Final separating plane: " + w);
 
 * **Evoluzione delle API Spark:** DataFrames e Datasets rappresentano un'evoluzione delle API di Spark, offrendo nuove funzionalità e miglioramenti rispetto agli RDD.
 * **Collezioni di dati distribuite immutabili:** Come gli RDD, DataFrames e Datasets sono collezioni di dati distribuite e immutabili. Ciò significa che i dati sono suddivisi tra i nodi del cluster e non possono essere modificati direttamente.
-* **Valutazione pigra:**  Anche DataFrames e Datasets vengono valutati in modo pigro, come gli RDD. Le operazioni vengono eseguite solo quando viene invocata un'azione (ad esempio, `collect`, `count`, `take`).
+* **Valutazione pigra:** Anche DataFrames e Datasets vengono valutati in modo pigro, come gli RDD. Le operazioni vengono eseguite solo quando viene invocata un'azione (ad esempio, `collect`, `count`, `take`).
 * **DataFrames:** Introdotti in Spark 1.3, i DataFrames introducono il concetto di schema per descrivere i dati. Lo schema definisce il tipo di dati di ogni colonna e il nome della colonna.
-    * **Organizzazione dei dati:** I dati in un DataFrame sono organizzati in colonne denominate, come una tabella in un database relazionale. Questo rende i DataFrames più facili da usare e da comprendere rispetto agli RDD.
-    * **Dati strutturati e semi-strutturati:** I DataFrames sono progettati per lavorare con dati strutturati e semi-strutturati, come file JSON, CSV, Parquet e Avro.
-    * **Spark SQL:** Spark SQL fornisce API per eseguire query SQL su DataFrames con una semplice sintassi simile a SQL.
-    * **Implementazione come Datasets:** Da Spark 2.0, i DataFrames sono implementati come un caso speciale di Datasets.
+ * **Organizzazione dei dati:** I dati in un DataFrame sono organizzati in colonne denominate, come una tabella in un database relazionale. Questo rende i DataFrames più facili da usare e da comprendere rispetto agli RDD.
+ * **Dati strutturati e semi-strutturati:** I DataFrames sono progettati per lavorare con dati strutturati e semi-strutturati, come file JSON, CSV, Parquet e Avro.
+ * **Spark SQL:** Spark SQL fornisce API per eseguire query SQL su DataFrames con una semplice sintassi simile a SQL.
+ * **Implementazione come Datasets:** Da Spark 2.0, i DataFrames sono implementati come un caso speciale di Datasets.
 
 ## Datasets
 
 * **Estensione dei DataFrames:** Introdotti in Spark 1.6, i Datasets estendono i DataFrames fornendo un'interfaccia di programmazione tipizzata e sicura.
-    * **Collezione di dati tipizzata:** Un Dataset è una collezione di dati strutturata ma tipizzata. Ciò significa che ogni elemento del Dataset ha un tipo di dati definito.
-    * **Tipizzazione forte:** A differenza dei DataFrames, che sono generici e non tipizzati, i Datasets sono fortemente tipizzati. Questo rende il codice più sicuro e più facile da leggere.
-    * **Classe SparkSession:** La classe `SparkSession` è il punto di ingresso per entrambe le API, DataFrames e Datasets.
+ * **Collezione di dati tipizzata:** Un Dataset è una collezione di dati strutturata ma tipizzata. Ciò significa che ogni elemento del Dataset ha un tipo di dati definito.
+ * **Tipizzazione forte:** A differenza dei DataFrames, che sono generici e non tipizzati, i Datasets sono fortemente tipizzati. Questo rende il codice più sicuro e più facile da leggere.
+ * **Classe SparkSession:** La classe `SparkSession` è il punto di ingresso per entrambe le API, DataFrames e Datasets.
 
 ## Datasets
 
 * **Vantaggi:** I Datasets offrono i vantaggi degli RDD (tipizzazione forte, capacità di utilizzare funzioni lambda) con quelli del motore di esecuzione ottimizzato di Spark SQL (ottimizzatore Catalyst).
-    * **Tipizzazione forte e funzioni lambda:** I Datasets consentono di utilizzare la tipizzazione forte e le funzioni lambda, come gli RDD.
-    * **Ottimizzazione Catalyst:** I Datasets sfruttano l'ottimizzatore Catalyst di Spark SQL, che ottimizza il piano di esecuzione delle query per migliorare le prestazioni.
-    * **Disponibilità:** I Datasets sono disponibili in Scala e Java, ma non in Python e R.
-    * **Costruzione:** I Datasets possono essere costruiti da oggetti JVM.
-    * **Trasformazioni funzionali:** I Datasets possono essere manipolati utilizzando trasformazioni funzionali come `map`, `filter`, `flatMap`, ecc.
-    * **Valutazione pigra:** I Datasets sono pigri, ovvero il calcolo viene attivato solo quando viene invocata un'azione.
-    * **Piano logico e piano fisico:** Internamente, un piano logico descrive il calcolo necessario per produrre i dati. Quando viene invocata un'azione, l'ottimizzatore di query di Spark ottimizza il piano logico e genera un piano fisico per un'esecuzione efficiente in modo parallelo e distribuito.
+ * **Tipizzazione forte e funzioni lambda:** I Datasets consentono di utilizzare la tipizzazione forte e le funzioni lambda, come gli RDD.
+ * **Ottimizzazione Catalyst:** I Datasets sfruttano l'ottimizzatore Catalyst di Spark SQL, che ottimizza il piano di esecuzione delle query per migliorare le prestazioni.
+ * **Disponibilità:** I Datasets sono disponibili in Scala e Java, ma non in Python e R.
+ * **Costruzione:** I Datasets possono essere costruiti da oggetti JVM.
+ * **Trasformazioni funzionali:** I Datasets possono essere manipolati utilizzando trasformazioni funzionali come `map`, `filter`, `flatMap`, ecc.
+ * **Valutazione pigra:** I Datasets sono pigri, ovvero il calcolo viene attivato solo quando viene invocata un'azione.
+ * **Piano logico e piano fisico:** Internamente, un piano logico descrive il calcolo necessario per produrre i dati. Quando viene invocata un'azione, l'ottimizzatore di query di Spark ottimizza il piano logico e genera un piano fisico per un'esecuzione efficiente in modo parallelo e distribuito.
 
 ## Datasets
 
 * **Creazione di un Dataset:**
-    * **Da un file:** Utilizzando la funzione `read`.
-    * **Da un RDD:** Convertendo un RDD esistente.
-    * **Tramite trasformazioni:** Applicando trasformazioni su Datasets esistenti.
+ * **Da un file:** Utilizzando la funzione `read`.
+ * **Da un RDD:** Convertendo un RDD esistente.
+ * **Tramite trasformazioni:** Applicando trasformazioni su Datasets esistenti.
 
 * **Esempio in Scala:**
 
@@ -438,18 +431,18 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING);
 
 ## DataFrames
 
-* **Dataset organizzato in colonne:** Un DataFrame è un _Dataset_ organizzato in colonne denominate.
+* **Dataset organizzato in colonne:** Un DataFrame è un *Dataset* organizzato in colonne denominate.
 * **Equivalente a una tabella:** Concettualmente equivalente a una tabella in un database relazionale, ma con ottimizzazioni più ricche.
 * **Ottimizzazione Catalyst:** Come i Datasets, i DataFrames sfruttano l'ottimizzatore Catalyst.
 * **Disponibilità:** I DataFrames sono disponibili in Scala, Java, Python e R.
 * **Rappresentazione:** In Scala e Java, un DataFrame è rappresentato da un Dataset di righe.
 * **Costruzione:** I DataFrames possono essere costruiti da:
-    * **RDD esistenti:** Sia inferendo lo schema usando la riflessione sia specificando lo schema in modo programmatico.
-    * **Tabelle in Hive:**
-    * **File di dati strutturati:** JSON, Parquet, CSV, Avro.
+ * **RDD esistenti:** Sia inferendo lo schema usando la riflessione sia specificando lo schema in modo programmatico.
+ * **Tabelle in Hive:**
+ * **File di dati strutturati:** JSON, Parquet, CSV, Avro.
 * **Manipolazione:** I DataFrames possono essere manipolati in modo simile agli RDD.
 
-## _MLlib_
+## *MLlib*
 
 _MLlib_, la libreria di Machine Learning (ML) di Spark, fornisce molti algoritmi ML _distribuiti_. Questi algoritmi coprono compiti come l'estrazione di feature, la classificazione, la regressione, il clustering, la raccomandazione e altro ancora. MLlib fornisce anche strumenti come ML Pipelines per la costruzione di flussi di lavoro, CrossValidator per la messa a punto dei parametri e la persistenza del modello per il salvataggio e il caricamento dei modelli.
 
@@ -473,22 +466,22 @@ model.transform(df).show()
 **Funzionalità di MLlib:**
 
 * **Algoritmi ML distribuiti:**
-    * Classificazione (ad esempio, regressione logistica)
-    * Regressione
-    * Clustering (ad esempio, K-mean)
-    * Raccomandazione
-    * Alberi decisionali
-    * Foreste casuali
-    * E altro ancora.
+ * Classificazione (ad esempio, regressione logistica)
+ * Regressione
+ * Clustering (ad esempio, K-mean)
+ * Raccomandazione
+ * Alberi decisionali
+ * Foreste casuali
+ * E altro ancora.
 * **Utility:**
-    * Trasformazioni di feature
-    * Valutazione del modello
-    * Messa a punto degli iperparametri
+ * Trasformazioni di feature
+ * Valutazione del modello
+ * Messa a punto degli iperparametri
 * **Algebra lineare distribuita:**
-    * PCA (Principal Component Analysis)
+ * PCA (Principal Component Analysis)
 * **Statistica:**
-    * Statistiche riassuntive
-    * Test di ipotesi
+ * Statistiche riassuntive
+ * Test di ipotesi
 * **Supporto per DataFrames:** MLlib adotta DataFrames per supportare una varietà di tipi di dati.
 ## Mllib: Esempio
 
@@ -537,7 +530,6 @@ Spark Streaming funziona internamente come segue:
 4. **Motore Spark:** Ogni micro-batch viene elaborato dal motore Spark.
 5. **Dati elaborati:** I risultati dell'elaborazione vengono restituiti come un nuovo flusso di dati.
 
-
 ## Spark Streaming: Esempio
 
 Spark Streaming rappresenta i flussi di dati come una serie di RDD nel tempo. Ogni RDD rappresenta un micro-batch di dati, elaborato in un intervallo di tempo configurabile (tipicamente sub-secondi).
@@ -576,7 +568,6 @@ Le operazioni di finestra accettano due parametri: `windowLength` e `slideInterv
 | `reduceByWindow(func, windowLength, slideInterval)` | Restituisce un nuovo flusso di un singolo elemento, creato aggregando gli elementi nel flusso su un intervallo scorrevole usando la funzione `func`. La funzione dovrebbe essere associativa e commutativa in modo che possa essere calcolata correttamente in parallelo. |
 | `reduceByKeyAndWindow(func, windowLength, slideInterval, [numTasks])` | Quando viene chiamato su un DStream di coppie (K, V), restituisce un nuovo DStream di coppie (K, V) in cui i valori per ogni chiave sono aggregati usando la funzione di riduzione `func` data su batch in una finestra scorrevole. Nota: Per impostazione predefinita, questo utilizza il numero predefinito di task paralleli di Spark (2 per la modalità locale e in modalità cluster il numero è determinato dalla proprietà di configurazione `spark.default.parallelism`) per eseguire il raggruppamento. È possibile passare un argomento `numTasks` opzionale per impostare un numero diverso di task. |
 
-
 ## Spark: Combinazione di librerie (pipeline unificata)
 
 Spark offre la possibilità di combinare diverse librerie per creare pipeline di elaborazione dati complete. Un esempio di questo è l'utilizzo di Spark SQL, MLlib e Spark Streaming per analizzare i dati in streaming e applicare modelli di machine learning.
@@ -589,7 +580,7 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
    points = spark.sql("select latitude, longitude from tweets")
    ```
 
-   Questo codice carica i dati di latitudine e longitudine dai tweet in un DataFrame usando Spark SQL.
+ Questo codice carica i dati di latitudine e longitudine dai tweet in un DataFrame usando Spark SQL.
 
 2. **Addestra un modello di machine learning:**
 
@@ -597,7 +588,7 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
    model = KMeans.train(points, 10)
    ```
 
-   Questo codice addestra un modello di clustering K-means usando MLlib, utilizzando i dati di latitudine e longitudine caricati nel DataFrame.
+ Questo codice addestra un modello di clustering K-means usando MLlib, utilizzando i dati di latitudine e longitudine caricati nel DataFrame.
 
 3. **Applica il modello a un flusso:**
 
@@ -607,7 +598,7 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
      .reduceByWindow("5s", lambda a, b: a + b)
    ```
 
-   Questo codice crea un flusso di tweet da Twitter, predice il cluster di appartenenza per ogni tweet usando il modello K-means addestrato e calcola il numero di tweet per cluster ogni 5 secondi.
+ Questo codice crea un flusso di tweet da Twitter, predice il cluster di appartenenza per ogni tweet usando il modello K-means addestrato e calcola il numero di tweet per cluster ogni 5 secondi.
 
 ## Spark GraphX
 
@@ -618,8 +609,6 @@ Spark GraphX è una libreria che estende Spark per l'elaborazione di grafi. Offr
 * **Calcolo parallelo sui grafi:** GraphX consente di eseguire calcoli paralleli su grafi di grandi dimensioni.
 * **Operatori fondamentali:** GraphX fornisce un set di operatori fondamentali per la manipolazione dei grafi, come `subgraph`, `joinVertices` e `aggregateMessages`.
 * **Algoritmi e costruttori:** GraphX include una collezione di algoritmi e costruttori di grafi per semplificare i compiti di analisi dei grafi.
-
-
 
 ```scala
 // Supponiamo che lo SparkContext sia già stato costruito
@@ -667,8 +656,8 @@ PageRank assegna un rango (punteggio) ai nodi (pagine web) in base ai link che p
 
 1. **Inizializzazione:** Inizializza il rango di ogni pagina a 1.
 2. **Iterazione:** Per un numero fisso di iterazioni o fino alla convergenza:
-    * **Calcolo dei contributi:** Ogni pagina `p` contribuisce con `rank(p) / |neighbors(p)|` a tutte le pagine a cui punta (i suoi vicini).
-    * **Aggiornamento dei ranghi:** Il rango di ogni pagina viene aggiornato a `0.15 + 0.85 * somma_contributi`. La costante 0.15 rappresenta un fattore di smorzamento che tiene conto dei "salti casuali" tra le pagine.
+ * **Calcolo dei contributi:** Ogni pagina `p` contribuisce con `rank(p) / |neighbors(p)|` a tutte le pagine a cui punta (i suoi vicini).
+ * **Aggiornamento dei ranghi:** Il rango di ogni pagina viene aggiornato a `0.15 + 0.85 * somma_contributi`. La costante 0.15 rappresenta un fattore di smorzamento che tiene conto dei "salti casuali" tra le pagine.
 
 **Implementazione in Scala:**
 

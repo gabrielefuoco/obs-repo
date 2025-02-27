@@ -1,6 +1,5 @@
 ## Task 2: Classical Planning
 
-
 La pianificazione automatica si occupa della creazione di strategie o sequenze di azioni per risolvere problemi complessi. Nel progetto, abbiamo adottato un approccio che comprende la modellazione del problema e la creazione di una funzione euristica personalizzata per il dominio in esame. Questo ci ha permesso di generare piani d'azione efficienti in tempi ragionevoli.
 
 ### Istanza 1
@@ -19,18 +18,18 @@ Gli oggetti coinvolti nel problema sono i seguenti:
 - Il robot r1 e tutte le scatole (b1, b2, b3, b4) si trovano nel deposito centrale (**dep**).
 - Il carrier cr1 e tutti i contenuti (vite, bullone, dado, cacciavite, martello) sono nel deposito centrale.
 - Le stazioni di lavoro sono distribuite come segue:
-  1. w1 si trova in loc1
-  2. w2 si trova in loc2
-  3. w3 si trova in loc3
-  4. w4 si trova in loc4
-  5. w5 si trova anch'essa in loc3
+ 1. w1 si trova in loc1
+ 2. w2 si trova in loc2
+ 3. w3 si trova in loc3
+ 4. w4 si trova in loc4
+ 5. w5 si trova anch'essa in loc3
 - Tutte le scatole sono inizialmente vuote.
 - Le necessità delle stazioni di lavoro sono:
-  1. w1 necessita di un bullone
-  2. w2 necessita di una vite
-  3. w3 necessita di un dado
-  4. w4 necessita di un cacciavite
-  5. w5 necessita di un martello
+ 1. w1 necessita di un bullone
+ 2. w2 necessita di una vite
+ 3. w3 necessita di un dado
+ 4. w4 necessita di un cacciavite
+ 5. w5 necessita di un martello
 
 #### Obiettivo
 
@@ -128,6 +127,7 @@ Nella seconda istanza del problema, ci sono alcune differenze rispetto alla prim
 L'obiettivo finale è lo stesso del primo problema: assicurarsi che tutte le stazioni di lavoro ricevano i contenuti necessari.
 
 #### Modifiche agli oggetti coinvolti:
+
 - **Robot**: r1, r2
 - **Carrier**: cr1, cr2
 - **Spazi nei carrier (carrierSlot)**: carrierSlot1_cr1, carrierSlot2_cr1, carrierSlot1_cr2, carrierSlot2_cr2
@@ -242,7 +242,7 @@ Include una serie di euristiche e di algoritmi di ricerca, tra cui **Enforced Hi
 
 ### Enforced Hill-Climbing (EHC)
 
-EHC è una variante della ricerca locale che cerca di superare il problema dei **plateau** (regioni dello spazio di ricerca con valori euristici simili) combinando una strategia di ricerca in profondità limitata con il criterio greedy.  
+EHC è una variante della ricerca locale che cerca di superare il problema dei **plateau** (regioni dello spazio di ricerca con valori euristici simili) combinando una strategia di ricerca in profondità limitata con il criterio greedy. 
 Il funzionamento generale di EHC si articola nei seguenti passi:
 
 1. **Scelta dello stato iniziale:** L'algoritmo parte dallo stato iniziale e utilizza l'euristica per calcolare il costo stimato verso l'obiettivo.
@@ -261,7 +261,6 @@ Questo approccio permette di ottenere stime rapide e generalmente accurate, risu
 
 Nel nostro caso, la scelta dell'euristica **Fast Forward** bilancia ottimamente la qualità della soluzione con il tempo di esecuzione della ricerca. 
 
-
 Dopo aver definito il planner e l'euristica, il sistema è stato eseguito utilizzando **PDDL4J**, che offre un framework flessibile per eseguire esperimenti di pianificazione automatica. I risultati mostrano che l'algoritmo **Enforced Hill-Climbing** con l'euristica **Fast Forward** ha permesso di ottenere soluzioni di qualità ottimale con tempi di elaborazione ragionevoli:
 
 Di seguito, il comando per eseguire il planner:
@@ -279,18 +278,17 @@ L'algoritmo **Enforced Hill-Climbing** con l'euristica **Fast Forward** è riusc
 Il piano si compone di 32 step temporali (da 00 a 31). Ogni step contiene una o più azioni con la loro rappresentazione, comprese le precondizioni e gli effetti.
 
 - **Dimensioni del problema**:
-    - *Azioni* disponibili: 456.
-    - *Fluents* (stati): 92.
+ - *Azioni* disponibili: 456.
+ - *Fluents* (stati): 92.
 - **Performance**:
-    - *Parsing*: 0.04 secondi.
-    - *Encoding*: 0.04 secondi.
-    - *Ricerca*: 1.14 secondi.
-    - *Tempo totale*: 1.31 secondi.
+ - *Parsing*: 0.04 secondi.
+ - *Encoding*: 0.04 secondi.
+ - *Ricerca*: 1.14 secondi.
+ - *Tempo totale*: 1.31 secondi.
 - **Memoria usata**:
-    - *Rappresentazione del problema*: 1.99 MB.
-    - *Per la ricerca*: 0 MB aggiuntivi.
-    - *Totale*: 1.99 MB.
-
+ - *Rappresentazione del problema*: 1.99 MB.
+ - *Per la ricerca*: 0 MB aggiuntivi.
+ - *Totale*: 1.99 MB.
 
 ![[Task 2-20241230172141511.png|600]]
 

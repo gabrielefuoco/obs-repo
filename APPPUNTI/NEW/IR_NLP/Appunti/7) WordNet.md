@@ -28,17 +28,16 @@ WordNet offre funzionalità per diversi utilizzi:
 	* **Gloss**: Descrizione di un concetto.
 * **Ontologia lessicale:** Relazioni tra i synsets: is-a, parte-tutto, implicazione, ...
 
-
 WordNet supporta diverse attività:
 
 * **Ricerca semantica e IR:**
-    * Espansione dei termini di query/documento.
-    * Relazione semantica e disambiguazione del senso delle parole. Un esempio è il **Lowest Common Subsumer**: concetto che sussume i due concetti in imput, ovvero il concetto più generale che include entrambi i concetti specifici.
+ * Espansione dei termini di query/documento.
+ * Relazione semantica e disambiguazione del senso delle parole. Un esempio è il **Lowest Common Subsumer**: concetto che sussume i due concetti in imput, ovvero il concetto più generale che include entrambi i concetti specifici.
 * **Classificazione automatica del testo:**
-    * I documenti vengono assegnati a una o più categorie tematiche in base al loro contenuto.
+ * I documenti vengono assegnati a una o più categorie tematiche in base al loro contenuto.
 * **Traduzione automatica:**
-    * Può essere esteso a più lingue.
-    * Viene utilizzato anche da Google Translate come parte del processo di traduzione tra le lingue coinvolte nei WordNet multilingue.
+ * Può essere esteso a più lingue.
+ * Viene utilizzato anche da Google Translate come parte del processo di traduzione tra le lingue coinvolte nei WordNet multilingue.
 
 ## Costituenti
 
@@ -73,9 +72,9 @@ Le relazioni semantiche vengono estratte dai sinonimi del thesaurus manualmente.
 **Tipi di relazioni:**
 
 * **Lessicali:** tra le parole che compongono i synsets.
-    * Individuano sinonimi e contrari
+ * Individuano sinonimi e contrari
 * **Semantiche:** tra i synsets
-    * Iperonimo(costituente dell'asse relazionale Is-a), meronimo(part of), implicazione, ...
+ * Iperonimo(costituente dell'asse relazionale Is-a), meronimo(part of), implicazione, ...
 
 ## Memorizzazione
 
@@ -161,7 +160,6 @@ Un termine può essere sostituito in almeno un contesto.
 * O indiretto.
 	* Ad esempio, pesante/arioso. 
 
-
 Altre relazioni: Troponimo (~), Iperonimo (@), Implicazione (\*), Causa (>), Vedi anche (^).
 
 **Contrario:** una delle proposizioni può essere vera o entrambe possono essere false.
@@ -209,14 +207,14 @@ Gli aggettivi possono essere usati per esprimere diversi livelli di azione.
 
 * Derivati da aggettivi mediante suffissazione.
 * "-ly":
-    * Specifica il modo: ad esempio: "beautifully".
-    * Specifica il grado: ad esempio: "extremely".
+ * Specifica il modo: ad esempio: "beautifully".
+ * Specifica il grado: ad esempio: "extremely".
 * Altri suffissi:
-    * "-wise", "-way", "-ward".
-    * Ad esempio: "northward", "forward".
+ * "-wise", "-way", "-ward".
+ * Ad esempio: "northward", "forward".
 * Ereditano dai loro aggettivi:
-    * Antonimo.
-    * Graduazione.
+ * Antonimo.
+ * Graduazione.
 
 ## Verbi
 
@@ -239,8 +237,8 @@ L'inglese ha meno verbi rispetto ai nomi, *MA* circa il doppio di polisemia risp
 * Sinonimi e quasi sinonimi.
 * Ad esempio: "pass away" vs. "die" vs. "kick the bucket".
 * Idiomi e metafore:
-    * "Kick the bucket" include synset.
-    * "Die" include sinonimi: "break", "break down" (per auto e computer). 
+ * "Kick the bucket" include synset.
+ * "Die" include sinonimi: "break", "break down" (per auto e computer). 
 
 ## Relazioni verbali
 
@@ -278,6 +276,7 @@ L'Entailment Lessicale è la relazione costituente che lega un verbo con un altr
 **Glosses {get}:** descrizione di un concetto.
 
 ## Esempio di codice con NLTK
+
 ```python
 >>from nltk.corpus import wordnet as wn
 
@@ -341,7 +340,7 @@ Synset('trunk.n.01'), Synset('limb.n.02')]
 >>wn.synset('tease.v.03').entailments()
 [Synset('arouse.v.07'), Synset('disappoint.v.01')]
 ```
----
+
 ### Organizzazione dei Verbi
 
 Per organizzare i verbi in base al loro argomento, è necessario utilizzare il **lexname**, ovvero il nome lessicale del verbo.
@@ -367,7 +366,6 @@ Esistono due metodi principali per accedere agli entailment di un verbo:
 * **Significato come insieme di concetti atomici:** Questa teoria sostiene che il significato di una parola può essere scomposto in un insieme di concetti elementari. Questo permette di esprimere il significato in modo più preciso e analitico.
 
 **Esempio:** "Comprare" (Jackendoff 1983): 
-
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110336756.png]]
 
@@ -400,7 +398,7 @@ Il significato di una parola è l'informazione che è vera per gli esemplari pi�
 
 Il significato di una parola è definito dalle relazioni con altre parole.
 
-**Esempio:**  buy è un troponimo di get
+**Esempio:** buy è un troponimo di get
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110514312.png]]
 
@@ -438,9 +436,7 @@ $$p-rel(s_{1},s_{2})=\frac{2\text{depth}(lcs(s_{1},s_{2}))}{\text{depth}(s_{1})+
 **Misure basate sul contenuto informativo**: funzione dell'IC dei nodi synset nell'ontologia lessicale
 - L'IC di un concetto è definito tramite la teoria dell'informazione, calcolando il logaritmo della probabilità di osservare quel concetto in un corpus.
 
-
 $$ic-rel(s_{1},s_{2})=\frac{2IC(lcs(s_{1},s_{2}))}{IC(s_{1})+IC(s_{2})}$$
-
 
 ### Approccio basato sulla frequenza relativa
 
@@ -485,12 +481,11 @@ EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e
 
 * **Indici interlingua:** Un elenco non strutturato di indici interlingua, ognuno composto da un synset e una gloss inglese.
 * **Collegamento dei codici ILI:** I codici ILI sono collegati a:
-    * Il significato specifico del synset per la lingua data.
-    * Uno o più termini generali di livello superiore.
-    * Possibili domini.
+ * Il significato specifico del synset per la lingua data.
+ * Uno o più termini generali di livello superiore.
+ * Possibili domini.
 
 **Relazioni di equivalenza:** I concetti di alto livello e i domini possono essere collegati con relazioni di equivalenza tra indici ILI e significati di una lingua specifica.
-
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110457034.png]]
 
@@ -534,17 +529,16 @@ I gruppi di traduzione (TGR) rappresentano diversi significati tradotti in entra
 * Parte inglese: 40.959 parole, 60.901 TGR
 * Parte italiana: 32.602 parole, 46.545 TGR
 
-
 ### Selezione dei synset
 
 La selezione dei synset "migliori" avviene attraverso i seguenti passaggi:
 
 1. Trova synset per ogni senso.
 2. Elenca i synset in base ai seguenti criteri principali:
-    * Probabilità generica
-    * Traduzione
-    * Somiglianza delle gloss
-    * Intersezione tra synset
+ * Probabilità generica
+ * Traduzione
+ * Somiglianza delle gloss
+ * Intersezione tra synset
 3. Seleziona i synset "migliori". 
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241111151924702.png]]

@@ -77,9 +77,7 @@ ax3.set_title(f'Fig. 3. FID: {fid3:.5f}')
 fig.show();
 ```
 
-    
 ![png](FrechetInceptionDistanceExample_8_0.png)
-    
 
 ## Vettori non random
 
@@ -129,9 +127,7 @@ ax4.set_title(f'Fig. 4. FID: {fid4:.5f}')
 fig.show();
 ```
 
-    
 ![png](FrechetInceptionDistanceExample_11_0.png)
-    
 
 # Un esempio con delle immagini
 
@@ -181,7 +177,7 @@ cat1FF = inception_model(cat1.view(1, 3, 100, 100).to(device)).cpu().detach()
 cat1FF.shape
 ```
 
-    torch.Size([1, 2048])
+ torch.Size([1, 2048])
 
 Calcoliamo le FM delle immagini in input
 
@@ -206,7 +202,7 @@ nocatFF = torch.cat((nocatFF, nocatFF), dim=0)
 cat1FF.shape
 ```
 
-    torch.Size([2, 2048])
+ torch.Size([2, 2048])
 
 ```python
 fid1 = calculate_fid(cat1FF.numpy(), cat1FF.numpy()) 
@@ -216,7 +212,7 @@ fid3 = calculate_fid(cat1FF.numpy(), nocatFF.numpy())
 fid1, fid2, fid3
 ```
 
-    (0.0, 657.1576538085938, 1090.859619140625)
+ (0.0, 657.1576538085938, 1090.859619140625)
 
 ```python
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(16, 8))
@@ -233,9 +229,7 @@ ax3.set_title(f'Fig. 3. FID: {fid3:.5f}')
 fig.show();
 ```
 
-    
 ![png](FrechetInceptionDistanceExample_23_0.png)
-    
 
 ## Esempio con varianti della stessa immagine
 
@@ -262,9 +256,7 @@ ax3.set_title('C')
 fig.show();
 ```
 
-    
 ![png](FrechetInceptionDistanceExample_25_0.png)
-    
 
 ```python
 cat1filteredFF_A = inception_model(tensorMapper(cat1filteredA).view(1, 3, 100, 100).to(device)).cpu().detach()
@@ -293,7 +285,5 @@ ax3.set_title(f'Fig. FID A-C: {fidAC:.5f}')
 fig.show();
 ```
 
-    
 ![png](FrechetInceptionDistanceExample_27_0.png)
-    
 

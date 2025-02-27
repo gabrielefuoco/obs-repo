@@ -35,7 +35,6 @@ WordNet, pur essendo una risorsa preziosa per l'elaborazione del linguaggio natu
 * **Soggettività:** WordNet è una risorsa curata manualmente, quindi è soggetta a bias culturali. Ad esempio, WordNet è un progetto britannico, quindi potrebbe riflettere una prospettiva culturale specifica.
 * **Similarità:** WordNet non può essere utilizzato per calcolare accuratamente la similarità tra parole.
 
-
 ### Rappresentazione Semantica delle Parole
 
 È possibile calcolare la similarità semantica tra due parole utilizzando tecniche di *embedding*. Questo processo consiste nel rappresentare le parole in uno spazio multidimensionale, dove ogni dimensione corrisponde a un aspetto del significato della parola. 
@@ -53,10 +52,10 @@ WordNet, pur essendo una risorsa preziosa per l'elaborazione del linguaggio natu
 
 - Le parole sono considerate simboli discreti (es. *hotel*, *conference*, *motel*).
 - Vengono rappresentate tramite **vettori one-hot**:
-  - Solo una posizione ha valore "1", tutte le altre sono "0".
-  - Esempio:
-    - *motel* = $[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]$
-    - *hotel* = $[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]$
+ - Solo una posizione ha valore "1", tutte le altre sono "0".
+ - Esempio:
+ - *motel* = $[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]$
+ - *hotel* = $[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]$
 - La dimensione del vettore corrisponde al numero di parole nel vocabolario (es. 500.000+).
 
 Questo metodo presenta alcuni svantaggi:
@@ -88,8 +87,8 @@ Utilizzando i molti contesti di *w*, è possibile costruire una rappresentazione
 
 La matrice di co-occorrenza a livello di documento rappresenta una parola tramite la distribuzione delle parole con cui appare. L'idea di base è la seguente:
 
-1. **Determinare un vocabolario V:**  Definisci l'insieme di tutte le parole che saranno considerate nella matrice.
-2. **Creare una matrice di dimensione |V| × |V|:**  Crea una matrice quadrata dove le righe e le colonne corrispondono alle parole del vocabolario. Inizialmente, tutti i valori della matrice sono impostati a zero.
+1. **Determinare un vocabolario V:** Definisci l'insieme di tutte le parole che saranno considerate nella matrice.
+2. **Creare una matrice di dimensione |V| × |V|:** Crea una matrice quadrata dove le righe e le colonne corrispondono alle parole del vocabolario. Inizialmente, tutti i valori della matrice sono impostati a zero.
 3. **Contare le co-occorrenze:** Per ogni documento, per ogni parola *w* nel documento, incrementa il conteggio nella cella della matrice corrispondente alla riga di *w* e alla colonna di ogni altra parola *w'* presente nel documento.
 4. **Normalizzare le righe:** Dividi ogni valore di una riga per la somma dei valori della riga stessa, per renderli indipendeti dalla lunghezza del documento.
 Il risultato è una rappresentazione sparsa ed è ancora troppo costosa.
@@ -99,11 +98,11 @@ Il risultato è una rappresentazione sparsa ed è ancora troppo costosa.
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111154837159.png|532]]
 La co-occorrenza a livello di documento presenta alcuni problemi:
 
-* **Nozioni ampie di co-occorrenza:**  Se si utilizzano finestre o documenti di grandi dimensioni, la matrice di co-occorrenza può catturare informazioni semantiche o di argomento, ma perdere informazioni di livello sintattico. 
-* **Finestre brevi:**  Quanto deve essere esteso il contesto? Se si utilizzano finestre di piccole dimensioni, la matrice di co-occorrenza può catturare informazioni di livello **sintattico**, ma perdere informazioni **semantiche** o di argomento. 
-* **Conteggi grezzi:**  I conteggi grezzi delle parole tendono a sovrastimare l'importanza delle parole molto comuni.
-* **Logaritmo della frequenza:**  Utilizzare il logaritmo della frequenza dei conteggi è più utile per mitigare l'effetto delle parole comuni (prima di normalizzare).
-* **GloVe:**  Un'alternativa ancora migliore è l'utilizzo di GloVe (Global Vectors for Word Representation), un modello che apprende le rappresentazioni delle parole in base alle loro co-occorrenze in un corpus di testo. Ne parleremo più avanti. 
+* **Nozioni ampie di co-occorrenza:** Se si utilizzano finestre o documenti di grandi dimensioni, la matrice di co-occorrenza può catturare informazioni semantiche o di argomento, ma perdere informazioni di livello sintattico. 
+* **Finestre brevi:** Quanto deve essere esteso il contesto? Se si utilizzano finestre di piccole dimensioni, la matrice di co-occorrenza può catturare informazioni di livello **sintattico**, ma perdere informazioni **semantiche** o di argomento. 
+* **Conteggi grezzi:** I conteggi grezzi delle parole tendono a sovrastimare l'importanza delle parole molto comuni.
+* **Logaritmo della frequenza:** Utilizzare il logaritmo della frequenza dei conteggi è più utile per mitigare l'effetto delle parole comuni (prima di normalizzare).
+* **GloVe:** Un'alternativa ancora migliore è l'utilizzo di GloVe (Global Vectors for Word Representation), un modello che apprende le rappresentazioni delle parole in base alle loro co-occorrenze in un corpus di testo. Ne parleremo più avanti. 
 
 ## Vettori di parole
 
@@ -143,12 +142,11 @@ Il nostro obiettivo è minimizzare la log-verosimiglianza.
 
 Per calcolare queste probabilità condizionate, utilizziamo due vettori distinti per ogni parola, a seconda del suo ruolo: parola target o parola di contesto. Nell'esempio precedente, "INTO" è la parola centrale all'iterazione *t*, ma poi diventa parola di contesto. Ogni parola può apparire più volte come target o come contesto. 
 
-
 ### Minimizzazione della Funzione Obiettivo
 
 Si vuole minimizzare la seguente funzione obiettivo:
 
-$$J(θ) = -\frac{1}{T}  \sum_{t=1}^T\sum_{j≠0}\log P(W_{t+j} | W_{t}; θ)$$
+$$J(θ) = -\frac{1}{T} \sum_{t=1}^T\sum_{j≠0}\log P(W_{t+j} | W_{t}; θ)$$
 Minimizzare la funzione obiettivo implica massimizzare l'accuratezza di predizione
 
 Questa funzione è comunemente utilizzata in modelli linguistici per misurare la qualità di una rappresentazione distribuzionale delle parole.
@@ -173,11 +171,11 @@ Data una parola di contesto, la probabilità di osservarla data l'osservazione d
 Seleziona iterativamente una parola centrale e la sua finestra di dimensione fissa *m* da un documento di lunghezza *T*, ed estrai esempi di addestramento.
 
 * Addestra una rete neurale con 1 strato nascosto di dimensione *N*, dove:
-    * Gli strati di input/output sono vettori one-hot di dimensione *V*, ovvero la dimensione del vocabolario.
-    * Lo strato nascosto è di dimensione *N*, con *N* $\ll$ *V*.
+ * Gli strati di input/output sono vettori one-hot di dimensione *V*, ovvero la dimensione del vocabolario.
+ * Lo strato nascosto è di dimensione *N*, con *N* $\ll$ *V*.
 
 * Compito di apprendimento:
-    * "Dato una parola specifica all'interno di una frase (parola centrale), scegliendo casualmente una parola nella finestra, restituisci una probabilità per ogni parola nel vocabolario di essere effettivamente la parola scelta casualmente".
+ * "Dato una parola specifica all'interno di una frase (parola centrale), scegliendo casualmente una parola nella finestra, restituisci una probabilità per ogni parola nel vocabolario di essere effettivamente la parola scelta casualmente".
 
 * Utilizza l'ottimizzatore SGD per aggiornare i parametri del modello. 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112100823370.png]]
@@ -201,7 +199,7 @@ $$\frac{\delta J}{\delta V_{c}}=\frac{\delta}{\delta V_{c}}\log e^{U_{0}^TV_c}-\
 Il primo termine è semplicemente $U_{0}$. Il secondo termine diventa:
 # separare
 
-$$=\frac{1}{\sum_{w\in V} e^{U_{0}^TV_c}}  \frac{\delta}{\delta V_{c}}\sum_{x\in V} e^{U_{x}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} \frac{\delta}{\delta v_{c}}e^{U_{w}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} e^{U_{w}^TV_c} u_{x}=\sum \frac{e^{U_{w}^TV_c} }{\sum_{x\in V} e^{U_{w}^TV_c} } u_{x}$$
+$$=\frac{1}{\sum_{w\in V} e^{U_{0}^TV_c}} \frac{\delta}{\delta V_{c}}\sum_{x\in V} e^{U_{x}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} \frac{\delta}{\delta v_{c}}e^{U_{w}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} e^{U_{w}^TV_c} u_{x}=\sum \frac{e^{U_{w}^TV_c} }{\sum_{x\in V} e^{U_{w}^TV_c} } u_{x}$$
 
 Quindi, il gradiente della log-probabilità rispetto a $V_c$ è:
 
@@ -209,14 +207,13 @@ $$\frac{\delta}{\delta V_{c}}\log p(o|c)=u_{o}-\sum_{x\in V}p(x|c)v_{x}$$
 
 dove $p(x|c)$ rappresenta la probabilità della parola $x$ dato il contesto $c$, calcolata tramite la softmax.
 
-
 ## Derivazione delle Regole di Aggiornamento per la Regressione Logistica
 
 ### Definizione della Funzione di Perdita
 
 La funzione di perdita utilizzata per la regressione logistica è la **cross-entropy**, definita come:
 
-$L = -y \log(\hat{y}) - (1-y) \log(1-\hat{y})$
+$$L = -y \log(\hat{y}) - (1-y) \log(1-\hat{y})$$
 
 dove:
 
@@ -231,7 +228,7 @@ Per aggiornare i parametri, dobbiamo calcolare il gradiente della funzione di pe
 
 Il gradiente rispetto a $z$ è dato da:
 
-$\frac{\delta L}{\delta z} = \frac{\delta L}{\delta \hat{y}} \frac{\delta \hat{y}}{\delta z}$
+$$\frac{\delta L}{\delta z} = \frac{\delta L}{\delta \hat{y}} \frac{\delta \hat{y}}{\delta z}$$
 
 Calcoliamo i due termini separatamente:
 
@@ -240,13 +237,13 @@ Calcoliamo i due termini separatamente:
 
 Moltiplicando i due termini, otteniamo:
 
-$\frac{\delta L}{\delta z} = -y(1-\hat{y}) + \hat{y}(1-y) = \hat{y} - y$
+$$\frac{\delta L}{\delta z} = -y(1-\hat{y}) + \hat{y}(1-y) = \hat{y} - y$$
 
 #### Gradiente rispetto a $w$
 
 Il gradiente rispetto a $w$ è dato da:
 
-$\frac{\delta L}{\delta w} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta w} = (\hat{y}-y)x$
+$$\frac{\delta L}{\delta w} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta w} = (\hat{y}-y)x$$
 
 dove $x$ è il valore dell'input.
 
@@ -254,7 +251,7 @@ dove $x$ è il valore dell'input.
 
 Il gradiente rispetto a $b$ è dato da:
 
-$\frac{\delta L}{\delta b} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta b} = \hat{y} - y$
+$$\frac{\delta L}{\delta b} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta b} = \hat{y} - y$$
 
 ### Regole di Aggiornamento
 
@@ -294,9 +291,7 @@ Ricordiamo che ogni parola ha due vettori:
 
 Ottimizziamo questi parametri muovendoci lungo il gradiente.
 
-
 ## Famiglia di algoritmi Word2vec
-
 
 Gli autori Mikolov e altri hanno proposto due varianti di embeddings: **Skip-gram** e **Continuous Bag-of-Words (CBOW)**.
 
@@ -311,7 +306,6 @@ Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un
 2. **Continuos bag of words (CBOW):**
 - CBOW è una variante di Skip-gram in cui, date le parole di contesto, si deve predire la parola centrale. In altre parole, l'input è il contesto e l'output è la parola target.
 
-
 **Visualizzazione:**
 
 * **Skip-gram:** Si muove sul testo, la parola centrale è evidenziata e il contesto sono le altre parole. Questo processo genera le coppie di addestramento. L'associazione è uno a molti: una parola centrale e M parole di contesto. Le parole di contesto vengono spesso aggregate, mediate, quindi dato il vettore medio di contesto, si deve predire la parola centrale.
@@ -320,19 +314,19 @@ Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un
 **Implementazione:**
 
 * **Skip-gram:**
-    * Si parte da un input one-hot che rappresenta la parola target.
-    * Si ha un hidden layer di dimensionalità D (chiamato anche N).
-    * La matrice dei pesi tra input layer e hidden layer è la matrice di embedding, mentre tra hidden layer e output layer è la matrice di contesto.
-    * Si calcola la probabilità per ogni parola di contesto.
+ * Si parte da un input one-hot che rappresenta la parola target.
+ * Si ha un hidden layer di dimensionalità D (chiamato anche N).
+ * La matrice dei pesi tra input layer e hidden layer è la matrice di embedding, mentre tra hidden layer e output layer è la matrice di contesto.
+ * Si calcola la probabilità per ogni parola di contesto.
 
 * **CBOW:**
-    * Si parte da un input one-hot per ogni parola di contesto.
-    * Si ha un hidden layer e un output layer.
-    * Si calcola la media dei vettori delle parole di contesto.
-    * La dimensione dell'hidden layer è N o D, la dimensione dello spazio di trasformazione.
-    * Si codifica ogni parola di contesto in uno spazio di dimensione N o D.
-    * Si calcola la media delle codifiche delle parole di contesto.
-    * Si decodifica il vettore medio con la matrice dei pesi tra hidden layer e output layer, che è collegato al softmax.
+ * Si parte da un input one-hot per ogni parola di contesto.
+ * Si ha un hidden layer e un output layer.
+ * Si calcola la media dei vettori delle parole di contesto.
+ * La dimensione dell'hidden layer è N o D, la dimensione dello spazio di trasformazione.
+ * Si codifica ogni parola di contesto in uno spazio di dimensione N o D.
+ * Si calcola la media delle codifiche delle parole di contesto.
+ * Si decodifica il vettore medio con la matrice dei pesi tra hidden layer e output layer, che è collegato al softmax.
 
 ## Esempio in CBOW
 
@@ -391,30 +385,30 @@ Per calcolare la probabilità di una parola di contesto data una parola centrale
 
 ## Skip-gram con Negative Sampling (HW2)
 
-La normalizzazione del termine nella softmax si presenta computazionalmente costosa, soprattutto con vocabolari estesi.  Generalizzando la regressione logistica a più classi (da classificazione binaria a multiclasse) si utilizza una softmax, dove al denominatore la maggior parte delle parole contribuisce come rumore.
+La normalizzazione del termine nella softmax si presenta computazionalmente costosa, soprattutto con vocabolari estesi. Generalizzando la regressione logistica a più classi (da classificazione binaria a multiclasse) si utilizza una softmax, dove al denominatore la maggior parte delle parole contribuisce come rumore.
 
 Una soluzione a questo problema è adottare il *negative sampling*, che trasforma la *average log likelihood* come segue:
 
-$J_{t}(\theta)=\log\sigma(u_{o}^Tv_{c})+\sum_{i=1}^k E_{P(W)}[\log\sigma(-u_{j}^Tv_{c})]$
+$$J_{t}(\theta)=\log\sigma(u_{o}^Tv_{c})+\sum_{i=1}^k E_{P(W)}[\log\sigma(-u_{j}^Tv_{c})]$$
 
 Questa formula presenta due termini additivi:
 
 * Il primo, $\log\sigma(u_{o}^Tv_{c})$, rappresenta il logaritmo della sigmoide applicata al prodotto scalare tra il vettore della parola centrale ($v_c$) e il vettore della parola di output/contesto osservata ($u_o$).
 * Il secondo termine, $\sum_{i=1}^k E_{P(W)}[\log\sigma(-u_{j}^Tv_{c})]$, approssima il termine al denominatore della softmax. Anziché considerare il confronto tra la parola centrale e tutte le parole del vocabolario, si effettua un confronto con *k* parole negative campionate secondo una distribuzione $P(W)$.
 
-Data una parola negativa *j*-esima tra le *k* campionate, si moltiplica per il negativo del prodotto scalare tra il suo vettore ($u_j$) e quello della parola centrale ($v_c$).  Questo perché si vuole massimizzare la differenza tra l'accoppiamento desiderato (tra la parola centrale e una vera parola di contesto) e l'accoppiamento con le parole negative (rumore).  L'obiettivo è:
+Data una parola negativa *j*-esima tra le *k* campionate, si moltiplica per il negativo del prodotto scalare tra il suo vettore ($u_j$) e quello della parola centrale ($v_c$). Questo perché si vuole massimizzare la differenza tra l'accoppiamento desiderato (tra la parola centrale e una vera parola di contesto) e l'accoppiamento con le parole negative (rumore). L'obiettivo è:
 
 * Avvicinare il più possibile le vere parole di contesto alla parola centrale.
 * Allontanare le parole rumorose (negative) dalla parola centrale.
 
-Questo è un approccio di apprendimento *discriminativo* (o contrastivo).  Si apprendono delle prossimità facendo in modo che istanze con proprietà desiderabili (parola centrale e contesto) siano il più vicine possibili, mentre istanze di classi diverse (parola centrale e parole negative) siano tenute più lontane possibile.
+Questo è un approccio di apprendimento *discriminativo* (o contrastivo). Si apprendono delle prossimità facendo in modo che istanze con proprietà desiderabili (parola centrale e contesto) siano il più vicine possibili, mentre istanze di classi diverse (parola centrale e parole negative) siano tenute più lontane possibile.
 
 In pratica, vogliamo:
 
 * **Massimizzare la similarità** tra la parola centrale e le parole di contesto.
 * **Massimizzare la distanza** tra la parola centrale e altre parole nel vocabolario.
 
-Le parole negative vengono campionate da una distribuzione unigramma elevata a una potenza $\alpha$ (tipicamente $\alpha \approx 0.75$). La distribuzione unigramma modella la frequenza di occorrenza di una parola normalizzata, in modo che la somma delle frequenze sia uguale a 1.  Elevare la distribuzione unigramma a una potenza inferiore a 1 riduce l'enfasi sul campionamento di parole molto frequenti, che altrimenti dominerebbero il processo di negative sampling.
+Le parole negative vengono campionate da una distribuzione unigramma elevata a una potenza $\alpha$ (tipicamente $\alpha \approx 0.75$). La distribuzione unigramma modella la frequenza di occorrenza di una parola normalizzata, in modo che la somma delle frequenze sia uguale a 1. Elevare la distribuzione unigramma a una potenza inferiore a 1 riduce l'enfasi sul campionamento di parole molto frequenti, che altrimenti dominerebbero il processo di negative sampling.
 
 Campionare le *k* parole negative con una distribuzione proporzionale alla distribuzione delle occorrenze enfatizzerebbe eccessivamente le parole più presenti nel testo, il che non è desiderabile.
 
@@ -433,12 +427,11 @@ La softmax gerarchica è un'altra tecnica che migliora l'efficienza dell'addestr
 * **Efficienza:** Riduce il numero di calcoli necessari per la softmax, rendendo l'addestramento più veloce.
 * **Struttura gerarchica:** L'albero di Huffman fornisce una struttura gerarchica che può essere utilizzata per migliorare la comprensione delle relazioni tra le parole.
 
-
 ## Word2vec: Scelte di progettazione
 
 ### Skip-gram vs. CBOW
 
-**Skip-gram:** Prevede le parole di contesto data una parola centrale.  È migliore per parole rare e finestre di contesto ampie, ma più lento in addestramento e meno efficiente per task *document-oriented*.
+**Skip-gram:** Prevede le parole di contesto data una parola centrale. È migliore per parole rare e finestre di contesto ampie, ma più lento in addestramento e meno efficiente per task *document-oriented*.
 
 **CBOW:** Prevede la parola centrale date le parole di contesto. È migliore per parole frequenti, più veloce in addestramento e adatto a task *document-oriented*, ma meno preciso per parole rare.
 
@@ -475,47 +468,45 @@ Generalmente, maggiore è meglio (ma non sempre).
 
 - **Aggiornamento gradiente**: iterativamente calcolato per ogni finestra (`window`) di parole.
 - **Sparsità del gradiente**:
-  - In ogni finestra, abbiamo al massimo $2m + 1$ parole (più $2km$ parole per il negative sampling).
-  - Il gradiente $\nabla_{\theta} J_t(\theta)$ è molto sparso per via del negative sampling.
+ - In ogni finestra, abbiamo al massimo $2m + 1$ parole (più $2km$ parole per il negative sampling).
+ - Il gradiente $\nabla_{\theta} J_t(\theta)$ è molto sparso per via del negative sampling.
 
-  
-$$  \nabla_{\theta} J_t(\theta) = 
-  \begin{bmatrix}
-  0 \\
-  \vdots \\
-  \nabla_{\theta_{target\_word}} \\
-  \vdots \\
-  \nabla_{\theta_{context\_word}} \\
-  \vdots \\
-  0
-  \end{bmatrix}
-  \in \mathbb{R}^{2dV}$$
-  
+$$ \nabla_{\theta} J_t(\theta) = 
+ \begin{bmatrix}
+ 0 \\
+ \vdots \\
+ \nabla_{\theta_{target\_word}} \\
+ \vdots \\
+ \nabla_{\theta_{context\_word}} \\
+ \vdots \\
+ 0
+ \end{bmatrix}
+ \in \mathbb{R}^{2dV}$$
 
 - **Aggiornamento selettivo dei vettori**:
-  - Si aggiornano solo i vettori di parola che compaiono nella finestra.
-  - **Soluzioni per ottimizzare l'aggiornamento**:
-    - Usare operazioni di aggiornamento sparse per aggiornare solo le righe necessarie delle matrici di embedding $U$ e $V$.
-    - Utilizzare un hash per i vettori di parola, evitando di aggiornare ogni vettore in $U$ e $V$ completamente.
+ - Si aggiornano solo i vettori di parola che compaiono nella finestra.
+ - **Soluzioni per ottimizzare l'aggiornamento**:
+ - Usare operazioni di aggiornamento sparse per aggiornare solo le righe necessarie delle matrici di embedding $U$ e $V$.
+ - Utilizzare un hash per i vettori di parola, evitando di aggiornare ogni vettore in $U$ e $V$ completamente.
 
 - **Evitare aggiornamenti ingombranti**:
-  - Quando si hanno milioni di vettori di parola e si usa il calcolo distribuito, è importante ridurre la necessità di inviare aggiornamenti di grandi dimensioni.
+ - Quando si hanno milioni di vettori di parola e si usa il calcolo distribuito, è importante ridurre la necessità di inviare aggiornamenti di grandi dimensioni.
 
 - **Alternative per la costruzione di una Matrice di Co-occorrenza $X$:** 
-  - **Finestra (window)**:
-    - Simile a Word2Vec, utilizza una finestra attorno a ogni parola.
-    - Cattura informazioni sintattiche e semantiche (*spazio delle parole*).
-  - **Documento completo**:
-    - Matrice di co-occorrenza basata su documenti.
-    - Permette di ottenere temi generali (es. termini sportivi correlati), conducendo all'Analisi Semantica Latente (*spazio dei documenti*).
+ - **Finestra (window)**:
+ - Simile a Word2Vec, utilizza una finestra attorno a ogni parola.
+ - Cattura informazioni sintattiche e semantiche (*spazio delle parole*).
+ - **Documento completo**:
+ - Matrice di co-occorrenza basata su documenti.
+ - Permette di ottenere temi generali (es. termini sportivi correlati), conducendo all'Analisi Semantica Latente (*spazio dei documenti*).
 
 ### Limitazioni delle rappresentazioni basate su co-occorrenze
 
 Utilizzare direttamente le co-occorrenze come rappresentazione delle parole presenta alcune limitazioni:
 
-* **Rappresentazione sparsa:** La matrice delle co-occorrenze è tipicamente molto sparsa (la maggior parte delle celle ha valore zero).  Questa sparsità rende difficile e inefficiente l'utilizzo di tecniche di fattorizzazione lineare come la Latent Semantic Analysis (LSA).
+* **Rappresentazione sparsa:** La matrice delle co-occorrenze è tipicamente molto sparsa (la maggior parte delle celle ha valore zero). Questa sparsità rende difficile e inefficiente l'utilizzo di tecniche di fattorizzazione lineare come la Latent Semantic Analysis (LSA).
 
-* **Relazioni lineari:** LSA cattura principalmente relazioni lineari tra le parole.  Questo significa che LSA può efficacemente modellare relazioni di sinonimia (parole con significati simili), ma fatica a gestire la polisemia (parole con molteplici significati).  Se l'obiettivo è apprendere embedding delle parole per supportare diversi task *word-oriented*, è necessaria una rappresentazione capace di catturare la complessità delle relazioni semantiche, non solo quelle lineari.  LSA, applicata alla matrice di co-occorrenze, favorisce quei task in cui le relazioni tra parole sono prevalentemente di sinonimia, a discapito di altri tipi di relazioni semantiche, come la polisemia.
+* **Relazioni lineari:** LSA cattura principalmente relazioni lineari tra le parole. Questo significa che LSA può efficacemente modellare relazioni di sinonimia (parole con significati simili), ma fatica a gestire la polisemia (parole con molteplici significati). Se l'obiettivo è apprendere embedding delle parole per supportare diversi task *word-oriented*, è necessaria una rappresentazione capace di catturare la complessità delle relazioni semantiche, non solo quelle lineari. LSA, applicata alla matrice di co-occorrenze, favorisce quei task in cui le relazioni tra parole sono prevalentemente di sinonimia, a discapito di altri tipi di relazioni semantiche, come la polisemia.
 
 ## GloVe
 
@@ -583,7 +574,6 @@ La loss contiene due termini di bias e il $\log X_{ij}$ che rappresenta $P(i|j)=
 L'errore è valutato come la differenza tra la co-occorrenza reale e la co-occorrenza attesa.
 
 L'idea è quella di catturare le proprietà tra i rapporti di co-occorrenza. 
-
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112111853927.png|582]]
 

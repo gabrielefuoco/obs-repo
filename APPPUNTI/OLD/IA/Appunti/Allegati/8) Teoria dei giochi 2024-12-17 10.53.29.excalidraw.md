@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Teorema di Nash ^bzEtz3bj
 
 In ogni gioco non co-op con n (finito) di giocatori e di strategie
@@ -25,14 +26,16 @@ Insieme delle azioni che il giocatore i
 sceglie con una probabilità non nulla ^DD2mKTRO
 
 Un profilo di strategie miste ּσ* è Nash sse:
-    - Per ogni giocatore, tutte le strategie pure nel 
-       supporto di σ* sono best response ^1URfkvoh
+ - Per ogni giocatore, tutte le strategie pure nel 
+ supporto di σ* sono best response ^1URfkvoh
 
 ## Embedded Files
+
 bb44d64572612455b6a54bb4cef116746409a361: $$\text{supp}(\sigma_i) = \{ s_i \in S_i : \sigma_i(s_i) > 0 \}$$
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4ITSMAUSgjAGZNACtUkshYRAqoLChW0sxuZySABgBObQAWAHZ6nmH4+IA2RYnh
 

@@ -12,26 +12,27 @@ Entrambi sono campi della scienza e dell'ingegneria.
 ### Definizione di IR
 
 ###### Enunciato del problema di base:
+
 * **Dato:**
-    * **Documenti:**  (si presume che sia una collezione statica).
-    * **Bisogno informativo (query):** Un singolo termine di ricerca, una stringa di termini, una frase in linguaggio naturale o un'espressione stilizzata che utilizza simboli speciali.
-    * **Modello di recupero:** Un meccanismo per determinare se un documento corrisponde alla query.
+ * **Documenti:** (si presume che sia una collezione statica).
+ * **Bisogno informativo (query):** Un singolo termine di ricerca, una stringa di termini, una frase in linguaggio naturale o un'espressione stilizzata che utilizza simboli speciali.
+ * **Modello di recupero:** Un meccanismo per determinare se un documento corrisponde alla query.
 * **Obiettivo:** Recuperare documenti con informazioni rilevanti per il bisogno informativo dell'utente e che aiutino l'utente a completare un'attività.
-    * **Risultati:** Un insieme di risultati. 
+ * **Risultati:** Un insieme di risultati. 
 
 ## Problemi con i dati testuali
 
 * **Sfide generali:** Tutti i problemi e le sfide noti nella gestione/estrazione dei dati si estendono ai dati testuali, come:
-    * Grandi set di dati
-    * Alta dimensionalità
-    * Dati rumorosi
-    * Dati e conoscenza in continua evoluzione
-    * Comprensibilità dei risultati
+ * Grandi set di dati
+ * Alta dimensionalità
+ * Dati rumorosi
+ * Dati e conoscenza in continua evoluzione
+ * Comprensibilità dei risultati
 * **Sfide specifiche:** Oltre alle sfide generali, i dati testuali presentano problemi specifici:
-    * **Progettazione:** Il testo non è progettato per essere utilizzato dai computer.
-    * **Struttura e semantica:** Struttura e semantica complesse e scarsamente definite, con ambiguità nel linguaggio, morfologia, sintassi, semantica e pragmatica.
-    * **Linguaggi:** Linguaggi generali vs. linguaggi specifici di dominio.
-    * **Multilinguismo:** La gestione di lingue diverse.
+ * **Progettazione:** Il testo non è progettato per essere utilizzato dai computer.
+ * **Struttura e semantica:** Struttura e semantica complesse e scarsamente definite, con ambiguità nel linguaggio, morfologia, sintassi, semantica e pragmatica.
+ * **Linguaggi:** Linguaggi generali vs. linguaggi specifici di dominio.
+ * **Multilinguismo:** La gestione di lingue diverse.
 
 ## IR vs. altre discipline
 
@@ -64,13 +65,14 @@ Entrambi sono campi della scienza e dell'ingegneria.
 * **Analisi dei dati incrementale:** I dati vengono analizzati in modo continuo, man mano che vengono acquisiti.
 * **Supervisionato o non supervisionato:** Non è specificato se il processo di analisi sia supervisionato o meno.
 #### Difficoltà nel Topic Detection and Tracking
+
 * **Task incrementale:** Il sistema automatico deve essere in grado di riconoscere nuovi topic emergenti e di identificare quelli obsoleti.
 * **Capacità limitate:** La fase di tracking richiede risorse computazionali limitate.
 * **Definizione di topic:** Un topic è un insieme di termini, anche se non è l'unica definizione possibile.
 * **Segnale:** Il sistema deve tenere traccia del segnale, ovvero dei dati in ingresso, per identificare i topic.
 ### modellazione di topic stocastica
 
-È una tecnica che utilizza modelli probabilistici per analizzare grandi quantità di testo e identificare i temi principali (topic) presenti nei documenti.  
+È una tecnica che utilizza modelli probabilistici per analizzare grandi quantità di testo e identificare i temi principali (topic) presenti nei documenti. 
 - Si basa sull'idea che ogni documento sia una combinazione di diversi topic, e che ogni parola abbia una probabilità di appartenere a un determinato topic.
 Questo approccio permette di scoprire i temi principali, analizzare la loro distribuzione nei documenti e classificare i documenti in base ai topic che contengono. 
 - Un esempio di modello di topic stocastico è il Latent Dirichlet Allocation (LDA). 
@@ -100,25 +102,26 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 
 # Funzioni Principali
 
-* **Funzione principale:**  Il compito principale di un sistema di elaborazione del linguaggio naturale (NLP) è quello di **estrarre informazioni** da testi.
+* **Funzione principale:** Il compito principale di un sistema di elaborazione del linguaggio naturale (NLP) è quello di **estrarre informazioni** da testi.
 * **Macro categorie:** Le funzioni principali possono essere suddivise in due macro categorie:
-    * **Indicativa:** Questa funzione serve a rivelare gli elementi dei contenuti in modo da consentire la determinazione della rilevanza del testo rispetto alle query. È fondamentale per l'esplorazione dei corpus e per il retrieval.
-    * **Informativa:** Questa funzione consente di ottenere un surrogato del testo (o di una sua porzione) senza fare necessariamente riferimento al testo originale. Questo concetto è ancora valido per il retrieval, che consiste nel condensare i dati originali in un formato surrogato.
+ * **Indicativa:** Questa funzione serve a rivelare gli elementi dei contenuti in modo da consentire la determinazione della rilevanza del testo rispetto alle query. È fondamentale per l'esplorazione dei corpus e per il retrieval.
+ * **Informativa:** Questa funzione consente di ottenere un surrogato del testo (o di una sua porzione) senza fare necessariamente riferimento al testo originale. Questo concetto è ancora valido per il retrieval, che consiste nel condensare i dati originali in un formato surrogato.
 
 ## Browsing
 
 * **Definizione:** La navigazione (browsing) è solitamente parte di sistemi di ipertesto e ipermedia.
 * **Scopo:** Permette agli utenti di scorrere collezioni di testo alla ricerca di informazioni utili.
 * **Vantaggi:** Gli utenti non hanno bisogno di:
-    * generare descrizioni di ciò che desiderano, o
-    * specificare in anticipo gli argomenti di interesse.
+ * generare descrizioni di ciò che desiderano, o
+ * specificare in anticipo gli argomenti di interesse.
 * **Funzionamento:** Gli utenti possono semplicemente indicare i documenti che trovano rilevanti.
 * **Utilizzo:** La navigazione è utile quando un utente:
-    * non ha un bisogno chiaro,
-    * non riesce a esprimere il suo bisogno in modo accurato,
-    * o è un utente occasionale delle informazioni. 
+ * non ha un bisogno chiaro,
+ * non riesce a esprimere il suo bisogno in modo accurato,
+ * o è un utente occasionale delle informazioni. 
 * **Supporto all'annotazione:** Eventualmente, se la navigazione non è limitata a se stessa, può servire a supporto dell'annotazione.
 #### Utilizzo: Valutazioni e Gold Standard
+
 **Scenario:** Valutazioni in assenza di un esperto di dominio per generare un gold standard.
 
 * **Problema:** In alcuni casi, non è possibile ottenere un gold standard (set di dati perfetto) generato da un esperto di dominio.
@@ -134,14 +137,17 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 **Definizione:** Recuperare informazioni specifiche dai documenti, estraendo o inferendo risposte dalla rappresentazione del testo. In pratica, dato un documento già identificato come rilevante per un task di retrieval (a monte di esso), si concentra sulla selezione di informazioni specifiche.
 
 **Esempi:**
+
 * **Retrieval sul web:** Schemi pre-esistenti possono aiutare a identificare le informazioni rilevanti.
 * **E-commerce:** La costruzione di un database può facilitare l'estrazione di informazioni specifiche.
 **In altre parole:**
+
 * Il sistema ha già identificato un documento come rilevante per una specifica richiesta.
 * L'estrazione di informazioni si concentra quindi sull'individuazione di informazioni specifiche all'interno di quel documento.
 * Questo processo può essere facilitato da schemi o database pre-esistenti, come nel caso del retrieval sul web o nell'e-commerce.
 
 **Tipi di template:**
+
 * **Slot:** Gli slot nel template sono tipicamente riempiti da una sottostringa del documento.
 * **Riempitivi pre-specificati:** Alcuni slot possono avere un set fisso di riempitivi pre-specificati che potrebbero non apparire nel testo stesso.
 * **Multipli riempitivi(filler):** Alcuni slot possono consentire più filler .
@@ -152,7 +158,6 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 * **Specificare un elemento:** Specificare un elemento da estrarre per uno slot, ad esempio, utilizzando un modello di regex.
 * **Modelli precedenti e successivi:** Potrebbe essere necessario un modello precedente (pre-filler) per identificare il contesto appropriato e un modello successivo (post-filler) per identificare la fine del riempitivo. 
 	* **Es**: *Estrazione di termini da un modello*. Definiziamo il template a priori e per ogni slot creiamo dei pattern.
-
 
 ## Recupero di Documenti
 
@@ -175,19 +180,19 @@ Selezionare documenti da una collezione in risposta a una query dell'utente.
 
 Le principali aree di applicazione coprono due aspetti:
 * **Scoperta della conoscenza**
-    * **Estrazione di informazioni:**  il processo di estrazione di informazioni utili da grandi quantità di dati.
+ * **Estrazione di informazioni:** il processo di estrazione di informazioni utili da grandi quantità di dati.
 * **Distillazione delle informazioni**
-    * **Estrazione basata su struttura:**  l'estrazione di informazioni basata su una struttura predefinita di documenti, per identificare i documenti rilevanti per un'informazione target.
+ * **Estrazione basata su struttura:** l'estrazione di informazioni basata su una struttura predefinita di documenti, per identificare i documenti rilevanti per un'informazione target.
 
 **Utilizzi tipici:**
+
 * Estrarre informazioni rilevanti dai documenti.
 * Classificare e gestire i documenti in base al loro contenuto.
 * Organizzare repository di meta-informazioni relative ai documenti per la ricerca e il recupero.
 
-
-* **Categorizzazione gerarchica:**  Usare il retrival per organizzare i documenti in una struttura gerarchica basata su categorie (Seguendo l'esempio delle web directory).
-* **Riassunto del testo:**  Creare un riassunto conciso di un documento, mantenendo le informazioni più importanti.
-* **Disambiguazione del senso delle parole:**  Determinare il significato corretto di una parola in un contesto specifico.
+* **Categorizzazione gerarchica:** Usare il retrival per organizzare i documenti in una struttura gerarchica basata su categorie (Seguendo l'esempio delle web directory).
+* **Riassunto del testo:** Creare un riassunto conciso di un documento, mantenendo le informazioni più importanti.
+* **Disambiguazione del senso delle parole:** Determinare il significato corretto di una parola in un contesto specifico.
 - **Filtraggio del Testo (o dell'Informazione)**: Rimuovere il testo non rilevante da un documento. Inizialmente accoppiato alla web personalization, da cui nascono gli attuali sistemi di raccomandazione.
 	- **Approcci alla** **Web Personalization**
 		* **Selezionare l'informazione per un gruppo di utenti target in base alle loro specifiche esigenze.**
@@ -197,11 +202,11 @@ Le principali aree di applicazione coprono due aspetti:
 **Altri esempi di applicazioni:**
 
 * **CRM e marketing:** (Customer Relationship Managment) Cross-selling, raccomandazioni di prodotti.
-* **Raccomandazione di prodotti:**  Suggerire prodotti pertinenti agli utenti in base alle loro preferenze.
-* **Consegna di informazioni nelle organizzazioni per la gestione della conoscenza:**  Fornire informazioni pertinenti ai dipendenti per migliorare la collaborazione e la produttività.
-* **Personalizzazione dell'accesso alle informazioni:**  Adattare l'accesso alle informazioni alle esigenze individuali degli utenti.
-* **Filtraggio di notizie in newsgroup Usenet:**  Rimuovere le notizie non pertinenti o indesiderate.
-* **Rilevamento di messaggi spam:**  Identificare e filtrare i messaggi di posta elettronica indesiderati. 
+* **Raccomandazione di prodotti:** Suggerire prodotti pertinenti agli utenti in base alle loro preferenze.
+* **Consegna di informazioni nelle organizzazioni per la gestione della conoscenza:** Fornire informazioni pertinenti ai dipendenti per migliorare la collaborazione e la produttività.
+* **Personalizzazione dell'accesso alle informazioni:** Adattare l'accesso alle informazioni alle esigenze individuali degli utenti.
+* **Filtraggio di notizie in newsgroup Usenet:** Rimuovere le notizie non pertinenti o indesiderate.
+* **Rilevamento di messaggi spam:** Identificare e filtrare i messaggi di posta elettronica indesiderati. 
 
 ### Categorizzazione Gerarchica
 
@@ -213,11 +218,12 @@ Sotto strutture gerarchiche (ad esempio, tassonomie), un ricercatore può:
 La categorizzazione basata su categorie dovrebbe consentire l'aggiunta di nuove categorie e l'eliminazione di quelle obsolete.
 
 **Caratteristiche:**
+
 * Natura ipertestuale dei documenti:
-    * Analisi degli hyperlink
+ * Analisi degli hyperlink
 * Struttura gerarchica dell'insieme di categorie
 * Decomposizione della classificazione come decisione ramificata:
-    * A un nodo interno
+ * A un nodo interno
 
 ### Riassunto
 
@@ -250,17 +256,19 @@ attenzione: l'obiettivo è disambiguare il significato di ogni parola ma dobbiam
 La WSD è un esempio del problema più generale di risolvere le ambiguità del linguaggio naturale.
 
 **Ad esempio:**
+
 * "Bank" può avere (almeno) due sensi in inglese:
-    * "The Bank of England" (un istituto finanziario)
-    * "The bank of river Thames" (un manufatto di ingegneria idraulica)
+ * "The Bank of England" (un istituto finanziario)
+ * "The bank of river Thames" (un manufatto di ingegneria idraulica)
 * Quale dei sensi di cui sopra ha l'occorrenza di "bank" in:
-    * "Last week I borrowed some money from the bank"
+ * "Last week I borrowed some money from the bank"
 
 approcci knowledge based: questa task ha avbuto nuova vita quando si è iniziato a poter accedere a risorse linguistiche in maniera elettronica e, grazie al web, wikipedia(la tassnomia di wikipedia può essere assimilata a quella di un tesauro)
 
 ## Filtraggio nel Text Mining
 
 **Definizione:**
+
 Il filtraggio nel text mining consiste nel classificare un flusso di documenti inviati da un produttore di informazioni a un consumatore di informazioni, bloccando la consegna di quelli irrilevanti per il consumatore.
 
 **Esempio:**
@@ -310,8 +318,6 @@ Classificare le email come spam o legittime utilizzando il text mining.
 * La valutazione del modello è complessa a causa dei costi asimmetrici degli errori (falsi positivi vs. falsi negativi).
 * La distribuzione non uniforme delle classi (molto più spam che email legittime) complica l'apprendimento del classificatore. 
 
-
-
 ## Vocabolario(modello di rappresentazione dei testi)
 
 ### Definizione di Termine
@@ -320,8 +326,8 @@ Classificare le email come spam o legittime utilizzando il text mining.
 
 * **Tutte le parole o solo quelle "importanti"?**
 * **Cosa ne pensiamo della presenza o della frequenza?**
-    * Alcune parole sono molto comuni.
-    * La maggior parte delle parole sono molto rare.
+ * Alcune parole sono molto comuni.
+ * La maggior parte delle parole sono molto rare.
 
 **Contesto:** I testi sono fatti da parole. Ci stiamo ponendo il problema di una selezione dei termini ai fini di indicizzazione (es. indice analitico di un libro, ovvero parole ritenute più importanti con una lista di numeri di pagine). L'indice è il mezzo per raggiungere un obiettivo.
 
@@ -346,53 +352,55 @@ Classificare le email come spam o legittime utilizzando il text mining.
 **Altri argomenti:**
 
 * **Analisi lessicale e morfologica**
-    * Elaborazione di punteggiatura, numeri, conversione in minuscolo, ecc.
-    * Rimozione di stopwords
-    * Stemming, lemmatizzazione
-    * Tagging delle parti del discorso
+ * Elaborazione di punteggiatura, numeri, conversione in minuscolo, ecc.
+ * Rimozione di stopwords
+ * Stemming, lemmatizzazione
+ * Tagging delle parti del discorso
 * **Analisi della semantica del discorso: Anafora**
-    * Anafora letterale/anafora pronominale
-    * Ellissi testuale
-    * Meronomia referenziale
+ * Anafora letterale/anafora pronominale
+ * Ellissi testuale
+ * Meronomia referenziale
 * **Pragmatica**
 * **Semiotica**
 * **Morfologia** 
 
 ## Tokenizzazione: Problemi lessicali e morfologici
+
 * Un token è un termine candidato.
 * Come organizziamo un testo?
 * Rappresenta una fase di pre-processing nella pipeline di analisi dei testi
 ### Punteggiatura
 
 * **Sequenza con trattino:**
-    * Ad esempio, *state-of-the-art*, *co-education*, *lowercase*, *lower-case*, *lower case*.
-    * Potremmo decidere di tenere distinte le due parole, sarebbe una scelta onesta perché trattiamo le parole allo stesso modo. **Problema**: in alcuni casi rompiamo la semantica. Nel nostro caso vogliamo regolarci senza considerare la semantica. Comunque questo approccio non è scalabile.
+ * Ad esempio, *state-of-the-art*, *co-education*, *lowercase*, *lower-case*, *lower case*.
+ * Potremmo decidere di tenere distinte le due parole, sarebbe una scelta onesta perché trattiamo le parole allo stesso modo. **Problema**: in alcuni casi rompiamo la semantica. Nel nostro caso vogliamo regolarci senza considerare la semantica. Comunque questo approccio non è scalabile.
 * **Apostrofi:**
-    * Ad esempio, *Italy’s capital* → *Italy AND s*? *Italys*? *Italy’s*?
+ * Ad esempio, *Italy’s capital* → *Italy AND s*? *Italys*? *Italy’s*?
 * **Acronimi:**
-    * Ad esempio, *U.S.A*, *USA*.
+ * Ad esempio, *U.S.A*, *USA*.
 * **Entità nominate:**
-    * Ad esempio, *San Francisco*, *Hewlett-Packard*.
+ * Ad esempio, *San Francisco*, *Hewlett-Packard*.
 
 ### Numeri
+
 * **Rimozione:** Se abbiamo una stringa numerica la rimuoviamo, se abbiamo una stringa alfanumerica la teniamo.
 * **Motivi per tenere i numeri:**
-    * Permettere ai contenuti informativi di tenere conto dei dati.
-    * Utili quando si cercano codici di errore, si controlla l'intervallo di tempo, ecc.
+ * Permettere ai contenuti informativi di tenere conto dei dati.
+ * Utili quando si cercano codici di errore, si controlla l'intervallo di tempo, ecc.
 * **Metadati:** Spesso si indicizzeranno i "metadati" separatamente:
-    * Data di creazione, formato, ecc.
-    * La complessità dell'intreccio tra numeri e testo rende difficile prendere una decisione valida per tutti i casi.
+ * Data di creazione, formato, ecc.
+ * La complessità dell'intreccio tra numeri e testo rende difficile prendere una decisione valida per tutti i casi.
 * **Varietà di tipi:**
-    * **Date:** *3/20/91*, *Mar. 12, 1991*, *20/3/91*.
-    * **Tempo:** *55 B.C.*.
-    * **Codici:** *B-52*.
-    * **Identificatori:** *My PGP key is 324a3df234cb23e*.
-    * **Numeri di telefono:** *(800) 234-2333*. 
+ * **Date:** *3/20/91*, *Mar. 12, 1991*, *20/3/91*.
+ * **Tempo:** *55 B.C.*.
+ * **Codici:** *B-52*.
+ * **Identificatori:** *My PGP key is 324a3df234cb23e*.
+ * **Numeri di telefono:** *(800) 234-2333*. 
 
 * **Case delle lettere:** il case delle lettere diventa lowercase. 
 
-
 ## Stopwords
+
 È una fase banale, ma risulta fondamentale perchè è quella con l'impatto maggiore.
 * **Definizione:** Parole grammaticali che servono a scopi grammaticali ma con scarso potere informativo. Sono specifiche della lingua.
 
@@ -400,20 +408,20 @@ Classificare le email come spam o legittime utilizzando il text mining.
 	* Le dimensioni delle rappresentazioni dovrebbero avere un giusto trade-off di generalizzazione e omogeneità.
 
 * **Motivi per rimuovere le stopwords:**
-    * Non si riferiscono a oggetti o concetti.
-    * Hanno poco contenuto semantico.
-    * Sono le parole più comuni.
-    * Impattiamo sulla dimensionalità della rappresentazione dei nostri testi
-    * Ciò implica **sparsità**: insieme sono un problema per le misure di distanza, che perdono di sensibilità $\to$ *perdita di potere discriminante*
+ * Non si riferiscono a oggetti o concetti.
+ * Hanno poco contenuto semantico.
+ * Sono le parole più comuni.
+ * Impattiamo sulla dimensionalità della rappresentazione dei nostri testi
+ * Ciò implica **sparsità**: insieme sono un problema per le misure di distanza, che perdono di sensibilità $\to$ *perdita di potere discriminante*
 
 * **Casi in cui le stopwords potrebbero essere necessarie:**
-    * Query di frase: "King of Denmark"
-    * Titoli: "Let it be", "To be or not to be"
-    * Query "relazionali": "flights to London"
+ * Query di frase: "King of Denmark"
+ * Titoli: "Let it be", "To be or not to be"
+ * Query "relazionali": "flights to London"
 
 * **Gestione delle stopwords:**
-    * **Buone tecniche di compressione:** Lo spazio per includere le stopwords in un sistema è molto piccolo.
-    * **Buone tecniche di ottimizzazione delle query:** Si paga poco al momento della query per includere le stopwords. 
+ * **Buone tecniche di compressione:** Lo spazio per includere le stopwords in un sistema è molto piccolo.
+ * **Buone tecniche di ottimizzazione delle query:** Si paga poco al momento della query per includere le stopwords. 
 ## Personalizzazione della Stop-List
 
 **Obiettivo:** Non solo ridurre la stop-list, ma arricchirla.
@@ -421,17 +429,17 @@ Classificare le email come spam o legittime utilizzando il text mining.
 **Come e con cosa?**
 
 * **Rimozione di termini comuni al corpus:** 
-    * Se un termine è frequente nel corpus di documenti, è poco esplicativo per la distinzione tra i documenti stessi.
-    * La rimozione di questi termini è giustificata quando si analizzano i documenti nel contesto del corpus.
+ * Se un termine è frequente nel corpus di documenti, è poco esplicativo per la distinzione tra i documenti stessi.
+ * La rimozione di questi termini è giustificata quando si analizzano i documenti nel contesto del corpus.
 * **Mantenimento dei termini frequenti per l'analisi individuale:**
-    * Se si analizza ogni documento in modo indipendente, non è possibile rimuovere i termini più frequenti across collection.
+ * Se si analizza ogni documento in modo indipendente, non è possibile rimuovere i termini più frequenti across collection.
 - **Termini Super Rari**
 	* **Esclusione:**
-	    * È ragionevole considerare l'esclusione dei termini super rari, ma è un'operazione ancora più delicata della rimozione dei termini comuni.
-	    * Ciò che distingue un testo dall'altro è più importante di ciò che li accomuna.
+	 * È ragionevole considerare l'esclusione dei termini super rari, ma è un'operazione ancora più delicata della rimozione dei termini comuni.
+	 * Ciò che distingue un testo dall'altro è più importante di ciò che li accomuna.
 	* **Termini che appaiono una sola volta nel corpus:**
-	    * La decisione di escluderli dipende dal tipo di termine.
-	    * Non esiste una regola fissa.
+	 * La decisione di escluderli dipende dal tipo di termine.
+	 * Non esiste una regola fissa.
 
 **Conclusione:**
 
@@ -454,10 +462,10 @@ Classificare le email come spam o legittime utilizzando il text mining.
 
 * Definiscono implicitamente gruppi di termini equivalenti.
 * Esempi:
-    * Eliminazione di punti: "U.S.A.", "USA" -> "USA"
-    * Eliminazione di trattini: "anti-discriminatory", "antidiscriminatory" -> "antidiscriminatory"
-    * Eliminazione di accenti: "French résumé" vs. "resume"
-    * Eliminazione di umlaut: "German Tuebingen" vs. "Tübingen"
+ * Eliminazione di punti: "U.S.A.", "USA" -> "USA"
+ * Eliminazione di trattini: "anti-discriminatory", "antidiscriminatory" -> "antidiscriminatory"
+ * Eliminazione di accenti: "French résumé" vs. "resume"
+ * Eliminazione di umlaut: "German Tuebingen" vs. "Tübingen"
 
 L'obiettivo è ridurre le varianti lessicali a una sola parola, sacrificando parte dell'informazione per ottenere una rappresentazione dei testi focalizzata sulla sintassi e non sulla semantica.
 
@@ -467,12 +475,12 @@ Questo processo di semplificazione permette di concentrarsi sulla struttura gram
 
 * Un'alternativa alla classificazione per classi di equivalenza.
 * Esempi:
-    * Inserire: "window"
-        * Ricerca: "window", "windows"
-    * Inserire: "windows"
-        * Ricerca: "Windows", "windows", "window"
-    * Inserire: "Windows"
-        * Ricerca: "Windows"
+ * Inserire: "window"
+ * Ricerca: "window", "windows"
+ * Inserire: "windows"
+ * Ricerca: "Windows", "windows", "window"
+ * Inserire: "Windows"
+ * Ricerca: "Windows"
 * Potenzialmente più potente, ma meno efficiente.
 
 **Criterio più importante: uso della lingua**
@@ -489,7 +497,6 @@ Questo processo di semplificazione permette di concentrarsi sulla struttura gram
 **Conclusione:**
 
 * È necessario "normalizzare" il testo indicizzato e i termini di query in modo identico. 
-
 
 ## Case Folding
 
@@ -519,25 +526,27 @@ L'obiettivo è ridurre questi sinonimi a una sola dimensione, concentrandosi sui
 * **Corpus rumorosi:** In alcuni casi, come ad esempio i messaggi istantanei, il corpus è molto rumoroso e il spell checking potrebbe essere inutile.
 
 ## Emoticon
+
 * **Costruzione:** Utilizzano simboli di punteggiatura (in codifica ASCII).
 * **Preservazione:** Per evitare perdite, possono essere sostituite con termini, eventualmente con un markup.
 * **Pesatura:** La pesatura dei termini può essere demandata al modulo successivo.
 * **Importanza:** Sono importanti nell'analisi del sentiment e in task simili. 
 
-
 ## Tesauri
+
 Generalizza termini che hanno significato correlato, ma forme superficiali non correlate, in termini di indice più uniformi.
 
 * Gestiamo sinonimi e omonimi?
 * **Esempio:** tramite classi di equivalenza costruite a mano
-    * car = automobile
-    * color = colour
+ * car = automobile
+ * color = colour
 * Possiamo riscrivere per formare termini di classe di equivalenza.
-    * Quando il documento contiene "automobile", indicizzarlo sotto "car-automobile" (e viceversa).
+ * Quando il documento contiene "automobile", indicizzarlo sotto "car-automobile" (e viceversa).
 * Oppure possiamo espandere una query.
-    * Quando la query contiene "automobile", cercare anche sotto "car".
+ * Quando la query contiene "automobile", cercare anche sotto "car".
 
 ### Errori di ortografia
+
 * Un approccio è Soundex che forma classi di equivalenza di parole basate su euristiche fonetiche.
 
 ## Lemmatizzazione
@@ -553,7 +562,6 @@ La lemmattizzazione implica l'esecuzione di una riduzione "corretta" alla forma 
 Supporto per l'analisi morfologica completa.
 
 * Al massimo benefici modesti per il retrieval. 
-
 
 ## Stemming
 
@@ -577,28 +585,27 @@ Questa fase distrugge il lessico: va fatta solo se non vogliamo elaborare semant
 Itera su un insieme di regole pre-costruite e data una parola si agisce ripetutamente su essa. La decisione finale di stemming viene presa sulla base di quello che è il longest match.
 
 * Algoritmo più comune per lo stemming dell'inglese.
-    * Uno stemmer a corrispondenza più lunga in più passaggi.
-    * Delle regole in un comando composto, seleziona quella che si applica al suffisso più lungo.
+ * Uno stemmer a corrispondenza più lunga in più passaggi.
+ * Delle regole in un comando composto, seleziona quella che si applica al suffisso più lungo.
 * Notazione: v: vocale(i), c: consonante(i), (vc)m: vocale(i) seguite da consonante(i), ripetute m volte.
 * Ogni parola può essere scritta: $[c](vc)m[v]$
-    * m è chiamato la "misura" della parola.
+ * m è chiamato la "misura" della parola.
 * Convenzioni + 5 fasi di riduzioni.
-    * Fasi applicate in sequenza.
-    * **Esempio:** GENERALIZATIONS -> GENERALIZATION (Fase 1) -> GENERALIZE (Fase 2) -> GENERAL (Fase 3) -> GENER (Fase 4)
-    * Ogni fase consiste in un insieme di comandi. 
+ * Fasi applicate in sequenza.
+ * **Esempio:** GENERALIZATIONS -> GENERALIZATION (Fase 1) -> GENERALIZE (Fase 2) -> GENERAL (Fase 3) -> GENER (Fase 4)
+ * Ogni fase consiste in un insieme di comandi. 
 
-
-| Conditions         | Suffix | Replacement | Examples                           |
+| Conditions | Suffix | Replacement | Examples |
 | ------------------ | ------ | ----------- | ---------------------------------- |
-|                    | sses   | ss          | caresses -> caress                 |
-|                    | ies    | i           | ponies -> poni, ties -> ti         |
-|                    | ss     | ss          | caress -> caress                   |
-|                    | s      |             | cats -> cat                        |
-| (m > 0)            | eed    | ee          | feed -> feed, agreed -> agree      |
-| (*v*)              | ed     |             | plastered -> plaster, bled -> bled |
-| (*v*)              | ing    |             | motoring -> motor, sing -> sing    |
-| (m > 1)            | e      |             | probate -> probat, rate -> rate    |
-| (m = 1 and not *o) | e      |             | cease -> ceas                      |
+| | sses | ss | caresses -> caress |
+| | ies | i | ponies -> poni, ties -> ti |
+| | ss | ss | caress -> caress |
+| | s | | cats -> cat |
+| (m > 0) | eed | ee | feed -> feed, agreed -> agree |
+| (*v*) | ed | | plastered -> plaster, bled -> bled |
+| (*v*) | ing | | motoring -> motor, sing -> sing |
+| (m > 1) | e | | probate -> probat, rate -> rate |
+| (m = 1 and not *o) | e | | cease -> ceas |
 Dove:
 - `*v*` - lo stem contiene una vocale.
 - `*o` - lo stem termina in `cvc`, dove la seconda `c` non è W, X o Y (es. -WIL, -HOP).
@@ -627,28 +634,30 @@ Lo stemming può influenzare le prestazioni del retrieval, generalmente in megli
 Le prestazioni di vari algoritmi di stemming sono simili.
 
 * **Stemmer di Lovins:**
-    * Passaggio singolo, rimozione del suffisso più lungo (circa 250 regole).
+ * Passaggio singolo, rimozione del suffisso più lungo (circa 250 regole).
 * **Stemmer di Paice/Husk:**
 * **Snowball:**
 
 Tutti questi algoritmi hanno lo stesso impatto, ma presentano diverse peculiarità. 
-
 
 ## Modello Booleano
 
 Il modello booleano confronta l'istruzione di query booleana con gli insiemi di termini utilizzati per identificare il contenuto testuale (termini di indice). 
 
 **Query booleana:**
+
 * **Espressione:** Combina termini di indice con operatori booleani.
 * **Struttura:** L'espressione contiene:
-    * **Termini di indice:** Termini selezionati dal documento indicizzato.
-    * **Operatori booleani:** AND, OR e NOT, definiti sui termini. Il modello è rigido e il concetto di corrispondenza è binario: il documento corrisponde alla condizione o meno.
+ * **Termini di indice:** Termini selezionati dal documento indicizzato.
+ * **Operatori booleani:** AND, OR e NOT, definiti sui termini. Il modello è rigido e il concetto di corrispondenza è binario: il documento corrisponde alla condizione o meno.
 
 **Applicazioni:**
+
 * Molti sistemi di ricerca ancora oggi utilizzano il modello booleano:
-    * Email, cataloghi di biblioteche, macOS Spotlight.
+ * Email, cataloghi di biblioteche, macOS Spotlight.
 
 ### Esempio: WestLaw
+
 * Il più grande servizio di ricerca legale commerciale (a pagamento) (iniziato nel 1975; classificazione aggiunta nel 1992; nuova ricerca federata aggiunta nel 2010).
 * Decine di terabyte di dati; ~700.000 utenti.
 * La maggior parte degli utenti utilizza ancora query booleane.
@@ -656,14 +665,14 @@ Il modello booleano confronta l'istruzione di query booleana con gli insiemi di 
 **Esempi di query:**
 
 * **Query 1:** Qual è il termine di prescrizione nei casi che coinvolgono il Federal Tort Claims Act?
-    * **Espressione:** LIMIT! /3 STATUTE ACTION /S FEDERAL /2 TORT /3 CLAIM
-    * **Spiegazione:**
-        * `/3` = entro 3 parole, `/S` = nella stessa frase.
-        * Questi dati aggiungono informazioni di contesto.
+ * **Espressione:** LIMIT! /3 STATUTE ACTION /S FEDERAL /2 TORT /3 CLAIM
+ * **Spiegazione:**
+ * `/3` = entro 3 parole, `/S` = nella stessa frase.
+ * Questi dati aggiungono informazioni di contesto.
 
 * **Query 2:** Requisiti per le persone disabili per poter accedere a un luogo di lavoro.
-    * **Espressione:** disabl! /p access! /s work-site work-place (employment /3 place
-    * **Nota:** Lo SPAZIO è disgiunzione, non congiunzione!
+ * **Espressione:** disabl! /p access! /s work-site work-place (employment /3 place
+ * **Nota:** Lo SPAZIO è disgiunzione, non congiunzione!
 
 ### Vantaggi del modello booleano
 
@@ -673,6 +682,7 @@ Il modello booleano confronta l'istruzione di query booleana con gli insiemi di 
 * **Differenze dalla ricerca sul web:** Le query booleane sono più precise e controllate rispetto alle ricerche sul web. 
 
 ## Esempio di query
+
 Quali opere di Shakespeare contengono le parole "Brutus" e "Caesar" ma NON "Calpurnia"?
 - Si potrebbe cercare "Brutus" e "Caesar" in tutte le opere di Shakespeare, quindi eliminare le righe che contengono "Calpurnia"?
 Perché questa non è la risposta?
@@ -680,8 +690,6 @@ Perché questa non è la risposta?
 * l'interpretazione "NOT Calpurnia" non è banale.
 * Altre operazioni (ad esempio, trovare la parola "Romans" VICINO a "countrymen") non sono fattibili.
 * Nessun recupero classificato (migliori documenti da restituire).
-
-
 
 ![[Pasted image 20241001111231.png|663]]
 ==come funziona?==
@@ -692,7 +700,7 @@ Molto rigido: AND significa tutti; OR significa qualsiasi.
 
 * Incoraggia query brevi.
 * Richiede una scelta precisa dei termini di indice -> potremmo avere risultati controintuitivi perché il modello non prevede né espansione della query (in line o a runtime) con termini equivalenti dal punto di vista semantico.
-    * Ogni termine indice è considerato in maniera isolata.
+ * Ogni termine indice è considerato in maniera isolata.
 
 Difficile controllare il numero di documenti recuperati.
 * Tutti i documenti corrispondenti saranno restituiti.
@@ -711,34 +719,33 @@ Difficile esprimere richieste complesse dell'utente.
 
 **Conclusioni:** da utilizzare solo quando le esigenze degli utenti sono esprimibili tramite query corte e semplici e necessitiamo di sapere solo se un item c'è o non c'è. 
 
-
 ## Estensione del modello booleano
 
 ### Incorporare metodi di classificazione
 
 * **Obiettivo:** Preservare il modello booleano, ma aggiungere un meccanismo di ordinamento dei risultati.
 * **Metodo:**
-    * **Pesi dei termini:** Assegnare pesi ai termini nei documenti e/o nelle query.
-        * Il peso del termine misura il grado in cui quel termine caratterizza un documento.
-        * I pesi dei termini sono in [0, 1].
-        * Nel modello booleano standard, tutti i pesi sono 0 o 1.
-    * **Calcolo dei risultati:**
-        * Calcolare l'insieme dei risultati mediante il modello booleano standard.
-        * Calcolare la distanza/somiglianza con la query per ogni documento (ad esempio Jaccard).
-        * Classificare i risultati in base alle distanze/somiglianze vettoriali.
-    * **Feedback di rilevanza:** Selezionare i documenti in base alla loro classificazione.
+ * **Pesi dei termini:** Assegnare pesi ai termini nei documenti e/o nelle query.
+ * Il peso del termine misura il grado in cui quel termine caratterizza un documento.
+ * I pesi dei termini sono in [0, 1].
+ * Nel modello booleano standard, tutti i pesi sono 0 o 1.
+ * **Calcolo dei risultati:**
+ * Calcolare l'insieme dei risultati mediante il modello booleano standard.
+ * Calcolare la distanza/somiglianza con la query per ogni documento (ad esempio Jaccard).
+ * Classificare i risultati in base alle distanze/somiglianze vettoriali.
+ * **Feedback di rilevanza:** Selezionare i documenti in base alla loro classificazione.
 * **Risultato:** Si ottiene un ordine all'interno della lista dei risultati.
 
 ### Insiemi fuzzy
 
 * **Concetto:** Rilassare i confini (boundaries) degli insiemi utilizzati nel recupero booleano.
 * **Modello booleano come insieme fuzzy:**
-    * **Standard:** d è in A o non è in A.
-    * **Fuzzy:** d è più o meno in A.
+ * **Standard:** d è in A o non è in A.
+ * **Fuzzy:** d è più o meno in A.
 * **Grado di appartenenza:** wA è il grado di appartenenza di un elemento all'insieme A.
 * **Operazioni:**
-    * **Intersezione (and):** $wA∩B = min(wA, wB)$
-    * **Unione (or):** $wA∪B = max(wA, wB)$
+ * **Intersezione (and):** $wA∩B = min(wA, wB)$
+ * **Unione (or):** $wA∪B = max(wA, wB)$
 
 ### MMM: Mixed Min and Max Model
 
@@ -746,16 +753,16 @@ Difficile esprimere richieste complesse dell'utente.
 * **Documento:** d, con pesi dei termini di indice: w1, w2, ..., wn
 * **Query disgiuntiva:** $q_{or}$ = (t1 or t2 or ... or tn)
 * **Somiglianza query-documento:**
-    * $S(q_{or}, d) = λ_{or} * max(w1,.. ,wn) + (1 - λ_{or}) * min(w1,.. , wn)$
-    * $λ_{or}$ è un parametro che controlla il peso relativo del massimo e del minimo.
-    * Con la logica booleana regolare, $λ_{or} = 1$.
-    * Se la query è puramente disgiuntiva, si considera solo il primo termine.
+ * $S(q_{or}, d) = λ_{or} * max(w1,.. ,wn) + (1 - λ_{or}) * min(w1,.. , wn)$
+ * $λ_{or}$ è un parametro che controlla il peso relativo del massimo e del minimo.
+ * Con la logica booleana regolare, $λ_{or} = 1$.
+ * Se la query è puramente disgiuntiva, si considera solo il primo termine.
 
 * **Query congiuntiva:**
-    * $q_{and}$ = (t1 and t2 and ... and tn)
-    * $S(q_{and}, d) = λ_{and} * min(w1,.. , wn) + (1 - λ_{and}) * max(w1,.. , wn)$
-    * $λ_{and}$ è un parametro che controlla il peso relativo del minimo e del massimo.
-    * Con la logica booleana regolare, $λ_{and} = 1$.
+ * $q_{and}$ = (t1 and t2 and ... and tn)
+ * $S(q_{and}, d) = λ_{and} * min(w1,.. , wn) + (1 - λ_{and}) * max(w1,.. , wn)$
+ * $λ_{and}$ è un parametro che controlla il peso relativo del minimo e del massimo.
+ * Con la logica booleana regolare, $λ_{and} = 1$.
 
 ### Modello di Paice
 
@@ -766,27 +773,32 @@ Difficile esprimere richieste complesse dell'utente.
 ### Modello P-norma
 
 * **Caratteristiche:**
-    * Documenti con pesi dei termini.
-    * Termini di query con pesi associati ai termini.
-    * Operatori con coefficienti che indicano il grado di rigore.
+ * Documenti con pesi dei termini.
+ * Termini di query con pesi associati ai termini.
+ * Operatori con coefficienti che indicano il grado di rigore.
 * **Calcolo della somiglianza:**
-    * Considera ogni documento e query come punti multidimensionali (considerando due schemi di pesatura).
+ * Considera ogni documento e query come punti multidimensionali (considerando due schemi di pesatura).
 
 ## Sparsità
+
 #### Rappresentazione di matrici termine-documento
+
 - Adottando un modello di rappresentazione di questo un modello poco sparso è irrealistico.
-	
+
 **Esempio:** Considera un insieme di **N = 1 milione di documenti**, ognuno con circa **1000 parole.**
 - Un esempio simile è la market-basket-analisys
 Assumiamo una media di **6 byte/parola**, inclusi spazi e punteggiatura.
 * Questo corrisponde a **6 GB di dati** nei documenti.
 Supponiamo che ci siano **M = 500K termini distinti** tra questi documenti.
 **Problemi:**
+
 * Una matrice di incidenza termine-documento di dimensioni **500K x 1M** avrebbe mezzo Trillion (milione di miliardi) di 0 e 1.
 **Nella realtà:**
+
 * La matrice ha **non più di un miliardo di 1**.
 * Le matrici di incidenza termine-documento sono **estremamente sparse**.
 **Rappresentazione migliore:**
+
 * **Registrare solo le posizioni 1.**
 Desiderata per una struttura dati:
 * Capacità di rappresentare concetti e relazioni.
@@ -796,33 +808,33 @@ Desiderata per una struttura dati:
 
 * **Definizione:** L'indice inverso mappa ogni termine all'insieme dei documenti in cui compare.
 * **Vantaggi:**
-    * **Efficienza di memorizzazione:** È più efficiente per memorizzare e gestire matrici sparse.
-    * **Ricerca efficiente:** Consente di identificare rapidamente i documenti che contengono un determinato termine.
+ * **Efficienza di memorizzazione:** È più efficiente per memorizzare e gestire matrici sparse.
+ * **Ricerca efficiente:** Consente di identificare rapidamente i documenti che contengono un determinato termine.
 
 * **Costruzione:**
-    * **Identificazione dei documenti indicizzati:** Per ogni termine:
-        * Identifica tutti i documenti che sono indicizzati da quel termine.
-        * Memorizza gli ID di quei documenti (docID).
-    * **Creazione della matrice termine-documento:**
-        * Inizialmente, rappresenta l'indice inverso come un array di documenti indicizzati.
-        * Trasponi l'array per ottenere una matrice termine-documento.
+ * **Identificazione dei documenti indicizzati:** Per ogni termine:
+ * Identifica tutti i documenti che sono indicizzati da quel termine.
+ * Memorizza gli ID di quei documenti (docID).
+ * **Creazione della matrice termine-documento:**
+ * Inizialmente, rappresenta l'indice inverso come un array di documenti indicizzati.
+ * Trasponi l'array per ottenere una matrice termine-documento.
 
 * **Struttura:**
-    * **Liste di postings:** Per ogni termine *t*, memorizza un elenco di tutti i documenti che contengono *t*.
-    * **DocID:** Ogni documento è identificato da un docID univoco.
+ * **Liste di postings:** Per ogni termine *t*, memorizza un elenco di tutti i documenti che contengono *t*.
+ * **DocID:** Ogni documento è identificato da un docID univoco.
 
 * **Implementazione:**
-    * **Array di dimensioni fisse:** Non sono adatti per liste di postings di dimensioni variabili, poiché il numero di elementi contenuti in questi array è variabile.
-    * **Liste concatenate:** Offrono flessibilità per gestire liste di postings di dimensioni variabili.
-    * **Array di lunghezza variabile:** Offrono un compromesso tra dimensioni e facilità di inserimento.
+ * **Array di dimensioni fisse:** Non sono adatti per liste di postings di dimensioni variabili, poiché il numero di elementi contenuti in questi array è variabile.
+ * **Liste concatenate:** Offrono flessibilità per gestire liste di postings di dimensioni variabili.
+ * **Array di lunghezza variabile:** Offrono un compromesso tra dimensioni e facilità di inserimento.
 
 * **Memorizzazione:**
-    * **Su disco:** Una sequenza continua di postings è la soluzione più comune ed efficiente.
-    * **In memoria:** Le liste concatenate e gli array di lunghezza variabile sono opzioni valide.
+ * **Su disco:** Una sequenza continua di postings è la soluzione più comune ed efficiente.
+ * **In memoria:** Le liste concatenate e gli array di lunghezza variabile sono opzioni valide.
 
 * **Considerazioni:**
-    * La scelta della struttura dati per l'indice inverso dipende dalle esigenze specifiche dell'applicazione.
-    * È importante considerare i compromessi tra efficienza di memorizzazione, velocità di accesso e facilità di aggiornamento.
+ * La scelta della struttura dati per l'indice inverso dipende dalle esigenze specifiche dell'applicazione.
+ * È importante considerare i compromessi tra efficienza di memorizzazione, velocità di accesso e facilità di aggiornamento.
 
 Il core di un indice è composto da due elementi principali:
 
@@ -834,7 +846,6 @@ Questo sistema di indicizzazione è doppiamente indicizzato:
 * **Per chiave:** Il dizionario permette di accedere rapidamente alla lista di posting per una parola specifica.
 * **Per documento:** Le liste di posting permettono di identificare rapidamente i documenti in cui una parola specifica compare, insieme alla sua frequenza nel documento
 
-
 ![[1) Intro-20241003104139467.png|393]]
 
 L'indexer raccoglie i postings per ogni token, ovvero l'insieme di documenti in cui quel token appare. 
@@ -843,20 +854,20 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 ## Passaggi dell'indexer
 
-4. **Sequenza di coppie (Termine, docID):**  L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
+4. **Sequenza di coppie (Termine, docID):** L'indexer analizza i documenti e genera una sequenza di coppie, dove ogni coppia rappresenta un termine e l'ID del documento in cui il termine appare.
 
 5. **Ordina per Termine:** La sequenza di coppie viene ordinata in base al termine.
 
-6. **Ordina per docID:**  Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
+6. **Ordina per docID:** Le coppie con lo stesso termine vengono raggruppate e ordinate in base al docID.
 
 7. **Unisci voci multiple:** Se un termine appare più volte nello stesso documento, le voci vengono unite in un'unica voce, mantenendo la frequenza del termine nel documento.
 
-8. **Aggiungi frequenza del documento:**  Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
+8. **Aggiungi frequenza del documento:** Per ogni voce, viene aggiunta l'informazione sulla frequenza del termine nel documento.
 
 9. **Dividi in:**
 
-    * **Dizionario:**  Contiene tutti i termini distinti trovati nei documenti, con il loro corrispondente termID.
-    * **Postings:**  Contiene le liste di postings per ogni termine, ovvero l'insieme di documenti in cui il termine appare, con la loro frequenza. 
+ * **Dizionario:** Contiene tutti i termini distinti trovati nei documenti, con il loro corrispondente termID.
+ * **Postings:** Contiene le liste di postings per ogni termine, ovvero l'insieme di documenti in cui il termine appare, con la loro frequenza. 
 
 ## Elaborazione delle query
 
@@ -865,13 +876,13 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 **Passaggi:**
 
 10. **Individua Brutus nel Dizionario:**
-    * Recupera i suoi postings (lista di documenti in cui compare Brutus).
+ * Recupera i suoi postings (lista di documenti in cui compare Brutus).
 11. **Individua Caesar nel Dizionario:**
-    * Recupera i suoi postings (lista di documenti in cui compare Caesar).
+ * Recupera i suoi postings (lista di documenti in cui compare Caesar).
 12. **Unisci i due postings (interseca gli insiemi di documenti):**
-    * Attraversa i due postings simultaneamente, in tempo lineare nel numero totale di voci di postings. 
-	    * Garantito dal fatto che manteniamo le due liste ordinate
-    * Questo significa che l'algoritmo impiega un tempo proporzionale al numero di documenti in cui compare Brutus più il numero di documenti in cui compare Caesar.
+ * Attraversa i due postings simultaneamente, in tempo lineare nel numero totale di voci di postings. 
+	 * Garantito dal fatto che manteniamo le due liste ordinate
+ * Questo significa che l'algoritmo impiega un tempo proporzionale al numero di documenti in cui compare Brutus più il numero di documenti in cui compare Caesar.
 		![[1) Intro-20241003104909533.png|438]]
 **Nota:** Questo processo di unione dei postings è un esempio di come vengono elaborate le query booleane (AND, OR, NOT) nei motori di ricerca. 
 
@@ -898,25 +909,28 @@ INTERSECT(p1, p2)
 **Strategia:**
 
 * **Elabora in ordine di frequenza crescente:**
-    * Inizia con il termine che compare nel minor numero di documenti (insieme di postings più piccolo).
-	    * Questo processo riduce il numero di operazioni di intersecazione e quindi il tempo di elaborazione complessivo
-    * Ad ogni passo, interseca l'insieme corrente con il postings del termine successivo, riducendo progressivamente la dimensione dell'insieme.
+ * Inizia con il termine che compare nel minor numero di documenti (insieme di postings più piccolo).
+	 * Questo processo riduce il numero di operazioni di intersecazione e quindi il tempo di elaborazione complessivo
+ * Ad ogni passo, interseca l'insieme corrente con il postings del termine successivo, riducendo progressivamente la dimensione dell'insieme.
 
 **Esempio:**
+
 * Se la query è "Brutus AND Caesar AND Antony", e la frequenza documentale è:
-    * Brutus: 1000 documenti
-    * Caesar: 500 documenti
-    * Antony: 200 documenti
+ * Brutus: 1000 documenti
+ * Caesar: 500 documenti
+ * Antony: 200 documenti
 * L'ordine ottimale sarebbe: Antony, Caesar, Brutus.
 
 **Query booleane arbitrarie:**
+
 * **Esempio:** (Brutus OR Caesar) AND NOT (Antony OR Cleopatra)
 * **Strategia:**
-    1. **Ottieni la frequenza documentale per tutti i termini.**
-    2. **Stima la dimensione di ogni OR (Upper Bound) come la somma delle sue frequenze documentali (stima conservativa).**
-    3. **Elabora in ordine crescente di dimensioni OR.**
+ 1. **Ottieni la frequenza documentale per tutti i termini.**
+ 2. **Stima la dimensione di ogni OR (Upper Bound) come la somma delle sue frequenze documentali (stima conservativa).**
+ 3. **Elabora in ordine crescente di dimensioni OR.**
 
 **Nota:**
+
 * Il tempo di elaborazione è "lineare" rispetto al numero totale di voci nei postings.
 * L'ordine di elaborazione può influenzare significativamente l'efficienza, soprattutto per query complesse.
 
@@ -933,18 +947,18 @@ INTERSECT(p1, p2)
 **Approcci:**
 
 * **Indici biword:**
-    * Indizza ogni coppia consecutiva di termini nel testo come una frase ( come se avvessimo un *n-gram* che preserva le parole con *n=2*).
-    * **Esempio**: "*Amici, Romani, Concittadini*" genera i biword "*amici romani*" e "*romani concittadini*".
-    * Ogni biword diventa un termine del dizionario.
-    * L'elaborazione delle query di frase a due parole è immediata.
+ * Indizza ogni coppia consecutiva di termini nel testo come una frase ( come se avvessimo un *n-gram* che preserva le parole con *n=2*).
+ * **Esempio**: "*Amici, Romani, Concittadini*" genera i biword "*amici romani*" e "*romani concittadini*".
+ * Ogni biword diventa un termine del dizionario.
+ * L'elaborazione delle query di frase a due parole è immediata.
 
 * **Scomposizione di frasi più lunghe:**
-    * "Corsi del dipartimento DIMES" può essere scomposto nella query booleana sui biword: *"dipartimento DIMES  AND corsi dipartimento".*
-    * Senza i documenti, non è possibile verificare se i documenti che corrispondono alla query booleana contengano effettivamente la frase.
-	    * Rischio di falsi positivi.
-    * Espansione dell'indice a causa di un dizionario più grande.
-	    * Inattuabile per più di due parole, anche per i biword (aumenta di molto la complessità).
-    * **Gli indici biword non sono la soluzione standard, ma possono essere parte di una strategia composita.**
+ * "Corsi del dipartimento DIMES" può essere scomposto nella query booleana sui biword: *"dipartimento DIMES AND corsi dipartimento".*
+ * Senza i documenti, non è possibile verificare se i documenti che corrispondono alla query booleana contengano effettivamente la frase.
+	 * Rischio di falsi positivi.
+ * Espansione dell'indice a causa di un dizionario più grande.
+	 * Inattuabile per più di due parole, anche per i biword (aumenta di molto la complessità).
+ * **Gli indici biword non sono la soluzione standard, ma possono essere parte di una strategia composita.**
 
 ### Etichettatura Morfologica (POST) e Biword Estensi
 
@@ -962,14 +976,17 @@ INTERSECT(p1, p2)
 * **Biword Estenso:** "cacciatore segale"
 
 #### Elaborazione delle Query
+
 * **Analisi della query:** suddividere la query in termini N e X.
 * **Segmentazione in biword:** segmentare la query in biword estesi.
 * **Ricerca nell'indice:** cercare i biword estesi nell'indice.
 
 #### Indici Posizionali
+
 * **Memorizzazione delle posizioni:** per ogni termine, memorizzare le posizioni in cui compaiono i token del termine nei documenti.
 
 **Formato:**
+
 ```
 <termine, numero di documenti contenenti il termine;
 doc1: posizione1, posizione2 … ;
@@ -989,61 +1006,64 @@ doc2: posizione1, posizione2 … ;
 * **Limiti degli indici biword:** gli indici biword non possono essere utilizzati per le query di prossimità.
 * **Algoritmo di unione ricorsivo:** utilizzato per le query di frase, ma con la necessità di gestire più della semplice uguaglianza.
 
-
 ## Dimensione dell'indice posizionale
 
 * Un indice posizionale espande in modo sostanziale l'archiviazione dei postings.
-    * Bisogna avere una voce per ogni occorrenza, non solo una per documento.
-    * La dimensione dell'indice dipende dalla dimensione media del documento. (Anche se gli indici possono essere compressi.)
+ * Bisogna avere una voce per ogni occorrenza, non solo una per documento.
+ * La dimensione dell'indice dipende dalla dimensione media del documento. (Anche se gli indici possono essere compressi.)
 * **Regola empirica:**
-    * Un indice posizionale è 2-4 volte più grande di un indice non posizionale.
-    * La dimensione dell'indice posizionale è il 35-50% del volume del testo originale.
+ * Un indice posizionale è 2-4 volte più grande di un indice non posizionale.
+ * La dimensione dell'indice posizionale è il 35-50% del volume del testo originale.
 * Tuttavia, un indice posizionale è ora utilizzato standardmente a causa della potenza e dell'utilità delle query di frase e prossimità, sia utilizzate esplicitamente che implicitamente in un sistema di recupero di ranking. 
 
 ## Costruzione dell'indice basata sull'ordinamento
+
 * Mentre costruiamo l'indice, analizziamo i documenti uno alla volta.
-    * I postings finali per qualsiasi termine sono incompleti fino alla fine.
+ * I postings finali per qualsiasi termine sono incompleti fino alla fine.
 * Richiede molto spazio per collezioni di grandi dimensioni:
-    * ad esempio, a 8 byte per (termID, docID) e 100 milioni(valore realistico per un anno di pubblicazioni) #postings non posizionali (cioè, RCV1(corpus), un anno di notizie di Reuters) ->
-        * in linea di principio, è possibile indicizzare questo in memoria oggi, ma
-        * le collezioni tipiche sono molto più grandi
-            * ad esempio, il New York Times fornisce un indice di >150 anni di notizie
+ * ad esempio, a 8 byte per (termID, docID) e 100 milioni(valore realistico per un anno di pubblicazioni) #postings non posizionali (cioè, RCV1(corpus), un anno di notizie di Reuters) ->
+ * in linea di principio, è possibile indicizzare questo in memoria oggi, ma
+ * le collezioni tipiche sono molto più grandi
+ * ad esempio, il New York Times fornisce un indice di >150 anni di notizie
 * **Dobbiamo memorizzare i risultati intermedi su disco**.
 
 ### Scalabilità della costruzione dell'indice
+
 * La costruzione dell'indice in memoria non è scalabile.
-    * Non è possibile inserire l'intera collezione in memoria, ordinarla e poi riscriverla.
+ * Non è possibile inserire l'intera collezione in memoria, ordinarla e poi riscriverla.
 * Come possiamo costruire un indice per collezioni molto grandi?
-    * Tenendo conto dei **vincoli hardware**: memoria, disco, velocità, ecc.
+ * Tenendo conto dei **vincoli hardware**: memoria, disco, velocità, ecc.
 ### Basi hardware
+
 * I server utilizzati nei sistemi IR ora hanno in genere diversi GB di memoria principale.
-    * Lo spazio su disco disponibile è di diversi (2-3) ordini di grandezza maggiore.
+ * Lo spazio su disco disponibile è di diversi (2-3) ordini di grandezza maggiore.
 * La **tolleranza ai guasti** è molto costosa:
-    * È molto più economico utilizzare molte macchine normali piuttosto che una macchina tollerante ai guasti.
+ * È molto più economico utilizzare molte macchine normali piuttosto che una macchina tollerante ai guasti.
 * L'accesso ai dati in memoria è molto più veloce dell'accesso ai dati su disco.
 * Ricerche su disco: Nessun dato viene trasferito dal disco mentre la testina del disco viene posizionata.
-    * Pertanto, il trasferimento di un grande blocco di dati dal disco alla memoria è più veloce del trasferimento di molti piccoli blocchi.
+ * Pertanto, il trasferimento di un grande blocco di dati dal disco alla memoria è più veloce del trasferimento di molti piccoli blocchi.
 * L'I/O del disco è basato su blocchi:
-    * Lettura e scrittura di blocchi interi (al contrario di piccoli blocchi)
-    * Dimensioni dei blocchi: da 8 KB a 256 KB(dipende dal task, per il retrival si arriva a 64, 256 è il massimo).
+ * Lettura e scrittura di blocchi interi (al contrario di piccoli blocchi)
+ * Dimensioni dei blocchi: da 8 KB a 256 KB(dipende dal task, per il retrival si arriva a 64, 256 è il massimo).
 
 #### Ordinamento usando il disco come "memoria"?
+
 * Possiamo usare lo stesso algoritmo di costruzione dell'indice per collezioni più grandi, ma usando il disco invece della memoria?
-    * No: Ordinare 100 milioni di record su disco è troppo lento, poichè implica troppe ricerche su disco.
+ * No: Ordinare 100 milioni di record su disco è troppo lento, poichè implica troppe ricerche su disco.
 * Abbiamo bisogno di un algoritmo di ordinamento esterno.
 
 ## BSBI: Indicizzazione basata sull'ordinamento a blocchi
 
 * **Ordinamento con meno ricerche su disco** (minimizzare le ricerche sul disco)
 	* Partiamo dall'assunzione che il corpus sia statico.
-    * I record (termID, docID) vengono generati mentre analizziamo i documenti.
-    * Supponiamo di ordinare 100 milioni di tali record da 8 byte per termID.
-    * Definiamo un blocco di circa 10 milioni di tali record.
-        * Possiamo facilmente inserirne un paio in memoria.
-        * Avremo 10 blocchi di questo tipo per iniziare.
+ * I record (termID, docID) vengono generati mentre analizziamo i documenti.
+ * Supponiamo di ordinare 100 milioni di tali record da 8 byte per termID.
+ * Definiamo un blocco di circa 10 milioni di tali record.
+ * Possiamo facilmente inserirne un paio in memoria.
+ * Avremo 10 blocchi di questo tipo per iniziare.
 * **Idea di base dell'algoritmo**:
-    * Accumulare i postings per ogni blocco, ordinarli e scriverli su disco.
-    * Quindi unire i blocchi in un unico ordine ordinato.
+ * Accumulare i postings per ogni blocco, ordinarli e scriverli su disco.
+ * Quindi unire i blocchi in un unico ordine ordinato.
 
 ```
 BSBIndexConstruction()
@@ -1058,21 +1078,20 @@ BSBIndexConstruction()
 
 ```
 
-
 #### Ordinamento di 10 blocchi di 10 milioni di record.
-* Innanzitutto, leggiamo ogni blocco e ordiniamo al suo interno:
-    * Quicksort richiede $O(N \cdot ln (N))$ passaggi in media.
-    * Nel nostro caso N=10 milioni.
-* 10 volte questa stima
-    * ci fornisce 10 run ordinate di 10 milioni di record ciascuna.
-* Fatto in modo semplice, abbiamo bisogno di 2 copie dei dati su disco.
-    * Ma possiamo ottimizzare questo. 
 
+* Innanzitutto, leggiamo ogni blocco e ordiniamo al suo interno:
+ * Quicksort richiede $O(N \cdot ln (N))$ passaggi in media.
+ * Nel nostro caso N=10 milioni.
+* 10 volte questa stima
+ * ci fornisce 10 run ordinate di 10 milioni di record ciascuna.
+* Fatto in modo semplice, abbiamo bisogno di 2 copie dei dati su disco.
+ * Ma possiamo ottimizzare questo. 
 
 ## Come unire le run ordinate?
 
 * Possiamo fare delle **merge binarie**, con un albero di merge di $log_2(10) = 4$ livelli.
-    * Durante ogni livello, leggiamo in memoria le run a blocchi di 10 milioni, le uniamo e le riscriviamo.
+ * Durante ogni livello, leggiamo in memoria le run a blocchi di 10 milioni, le uniamo e le riscriviamo.
 Invece di eseguire un unico merge finale, si può adottare una struttura ad albero, dove ogni livello (layer) del processo prevede un merge parziale.
 1. **Partizionamento:** I dati vengono suddivisi in partizioni.
 2. **Merge parziale:** Ogni partizione viene caricata in memoria e sottoposta a un merge, generando un nuovo indice.
@@ -1080,13 +1099,14 @@ Invece di eseguire un unico merge finale, si può adottare una struttura ad albe
 
 ![[1) Intro-20241003112202805.png]]
 * Ma è più efficiente fare un **multi-way merge**, dove si legge da tutti i blocchi simultaneamente.
-    * Apriamo tutti i file di blocco simultaneamente, manteniamo un **buffer di lettura** per ciascuno e un **buffer di scrittura** per il file di output.
-    * In ogni iterazione, scegliamo il termID più basso che non è stato elaborato usando una coda di priorità.
-    * Uniamo tutte le liste di postings (una o più) per quel termID, che derivano dai vari blocchi, e lo scriviamo.
+ * Apriamo tutti i file di blocco simultaneamente, manteniamo un **buffer di lettura** per ciascuno e un **buffer di scrittura** per il file di output.
+ * In ogni iterazione, scegliamo il termID più basso che non è stato elaborato usando una coda di priorità.
+ * Uniamo tutte le liste di postings (una o più) per quel termID, che derivano dai vari blocchi, e lo scriviamo.
 * A condizione che si leggano blocchi di dimensioni decenti da ogni blocco in memoria e poi si scriva un blocco di output di dimensioni decenti.
-- **Assunzione:**  Vi è una condivisione solo parziale del lessico tra i vari documenti.
+- **Assunzione:** Vi è una condivisione solo parziale del lessico tra i vari documenti.
 
 **Problema della crescita del lessico**:
+
 - **Gestione dei termini:** È fondamentale gestire correttamente i termini (token precessati) e i loro identificativi (ID).
 - **Compressione con perdita:** La compressione con perdita può essere applicata solo a quei termini che non sono essenziali per la comprensione del testo.
 - **Valutazione dei token:** Sono necessarie soluzioni intermedie per valutare l'importanza dei token e decidere quali possono essere compressi con perdita.
@@ -1094,8 +1114,8 @@ Invece di eseguire un unico merge finale, si può adottare una struttura ad albe
 ## SPIMI: Indicizzazione in memoria a passaggio singolo (approccio lazy)
 
 * **Problema rimanente con l'algoritmo basato sull'ordinamento:**
-    * La mappatura (termine, termID) potrebbe non entrare in memoria.
-    * Abbiamo bisogno del dizionario (che cresce dinamicamente) per implementare una mappatura termine-termID.
+ * La mappatura (termine, termID) potrebbe non entrare in memoria.
+ * Abbiamo bisogno del dizionario (che cresce dinamicamente) per implementare una mappatura termine-termID.
 
 Idee chiave: sono complementari
 * **Idea chiave 1:** Generare dizionari separati per ogni blocco - non c'è bisogno di mantenere la mappatura termine-termID tra i blocchi (mapping across block).
@@ -1105,28 +1125,26 @@ Idee chiave: sono complementari
 * Questi indici separati possono quindi essere uniti in un unico grande indice.
 * SPIMI può indicizzare collezioni di qualsiasi dimensione a condizione che ci sia abbastanza spazio su disco disponibile.
 * **Ogni lista di postings è una struttura dinamica e immediatamente disponibile per collezionare i postings**.
-    * **più veloce** - non è necessario ordinare.
-    * **risparmia memoria** - i termID dei postings non devono essere memorizzati e non vi sono fasi di sorting intermedie. 
-    * In pratica, è una struttura che conserviamo in memoria e che viene riallocata all'occorrenza.
-    * Evitiamo di tenere traccia dei term-id, l'algoritmo lavora direttamente con i termini
+ * **più veloce** - non è necessario ordinare.
+ * **risparmia memoria** - i termID dei postings non devono essere memorizzati e non vi sono fasi di sorting intermedie. 
+ * In pratica, è una struttura che conserviamo in memoria e che viene riallocata all'occorrenza.
+ * Evitiamo di tenere traccia dei term-id, l'algoritmo lavora direttamente con i termini
 
 ### SPIML-Invert(token_stream)
 
-4.  **output_file** = NEWFILE()
-5.  **dictionary** = NEWHASH()
-6.  **while** (free memory available)
-7.      **do** token ← next(token_stream)
-8.      **if** term(token) ∉ dictionary
-9.          **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
-10.      **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
-11.      **if** full(postings_list)
-12.          **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
-13.     ADDToPOSTINGSLIST(postings_list, docID(token))
-14.     sorted_terms ← SORTTERMS(dictionary)
-15.     WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
-16.     **return** output_file
-
-
+4. **output_file** = NEWFILE()
+5. **dictionary** = NEWHASH()
+6. **while** (free memory available)
+7. **do** token ← next(token_stream)
+8. **if** term(token) ∉ dictionary
+9. **then** postings_list = ADDToDICTIONARY(dictionary, term(token))
+10. **else** postings_list = GETPOSTINGSLIST(dictionary, term(token))
+11. **if** full(postings_list)
+12. **then** postings_list = DOUBLEPOSTINGSLIST(dictionary, term(token))
+13. ADDToPOSTINGSLIST(postings_list, docID(token))
+14. sorted_terms ← SORTTERMS(dictionary)
+15. WRITEBLOCKToDISK(sorted_terms, dictionary, output_file)
+16. **return** output_file
 
 Linea 5) il token raw viene pre-processato: riconduciamo il token a quello che è un index-term.
 Linea 10) rendiamo immediatamente disponibile il posting (occorrenza del termine) nel documento dove è stato osservato.
@@ -1144,7 +1162,7 @@ Ogni split rappresenta un insieme di documenti gestito come blocchi. La macchina
 * Il master assegna uno split a una macchina parser inattiva.
 * Il parser legge un documento alla volta ed emette coppie (termine, documento).
 * Il parser scrive le coppie in *j* partizioni. Le partizioni (fold) sono determinate in modo lessicografico.
-    * **Esempio:** Ogni partizione è per un intervallo di lettere iniziali dei termini (ad esempio, a-f, g-p, q-z), quindi *j* = 3.
+ * **Esempio:** Ogni partizione è per un intervallo di lettere iniziali dei termini (ad esempio, a-f, g-p, q-z), quindi *j* = 3.
 
 Una volta completato il parsing, si procede con l'inversione dell'indice.
 
@@ -1152,7 +1170,6 @@ Una volta completato il parsing, si procede con l'inversione dell'indice.
 
 * Un inverter raccoglie tutte le coppie (termine, doc) (cioè, postings) per una partizione di termini.
 * Ordina e scrive le liste di postings. 
-
 
 ![[1) Intro-20241003093756427.png]]
 
@@ -1177,11 +1194,11 @@ L'algoritmo di costruzione dell'indice è un'istanza di MapReduce (Dean e Ghemaw
 ### Schema per la costruzione dell'indice in MapReduce
 
 * **Funzioni map e reduce:**
-    * `map`: input → list(k, v)
-    * `reduce`: (k,list(v)) → output
+ * `map`: input → list(k, v)
+ * `reduce`: (k,list(v)) → output
 * **Istanza dello schema per la costruzione dell'indice:**
-    * `map`: collection → list(termID, docID)
-    * `reduce`: (<termID1, list(docID)>, <termID2, list(docID)>, …) → (postings list1, postings list2, …)
+ * `map`: collection → list(termID, docID)
+ * `reduce`: (<termID1, list(docID)>, <termID2, list(docID)>, …) → (postings list1, postings list2, …)
 
 Fino ad ora, abbiamo ipotizzato che le collezioni siano statiche, ma:
 
@@ -1198,8 +1215,8 @@ Questo significa che il dizionario e le liste di postings devono essere modifica
 * **Indice principale e indice ausiliario:** Mantenere un "grande" indice principale, i nuovi documenti vanno in uno (o più) "piccolo" indice ausiliario.
 * **Ricerca:** La ricerca viene effettuata su entrambi gli indici, unendo i risultati.
 * **Eliminazioni:**
-    * **Vettore di bit di invalidazione:** Un vettore di bit indica i documenti eliminati.
-    * **Filtraggio:** I documenti in output su un risultato di ricerca vengono filtrati tramite questo vettore di bit di invalidazione.
+ * **Vettore di bit di invalidazione:** Un vettore di bit indica i documenti eliminati.
+ * **Filtraggio:** I documenti in output su un risultato di ricerca vengono filtrati tramite questo vettore di bit di invalidazione.
 * **Re-indicizzazione:** Periodicamente, re-indicizzare in un unico indice principale.
 
 ### Problemi con gli indici principali e ausiliari
@@ -1207,10 +1224,10 @@ Questo significa che il dizionario e le liste di postings devono essere modifica
 * **Merge frequenti:** Il problema delle merge frequenti.
 * **Scarsa performance:** Scarsa performance durante le merge.
 * **Efficienza della fusione:** La fusione dell'indice ausiliario nell'indice principale è efficiente se si mantiene un file separato per ogni lista di postings.
-    * La fusione è la stessa di una semplice append.
-    * Ma poi avremmo bisogno di molti file - inefficiente per il sistema operativo.
+ * La fusione è la stessa di una semplice append.
+ * Ma poi avremmo bisogno di molti file - inefficiente per il sistema operativo.
 * **Ipotesi:** L'indice è un unico grande file.
-    * **Realtà:** Usare uno schema da qualche parte nel mezzo (ad esempio, dividere le liste di postings molto grandi, raccogliere le liste di postings di lunghezza 1 in un unico file, ecc.).
+ * **Realtà:** Usare uno schema da qualche parte nel mezzo (ad esempio, dividere le liste di postings molto grandi, raccogliere le liste di postings di lunghezza 1 in un unico file, ecc.).
 
 ## Fusione Logaritmica
 
@@ -1232,8 +1249,8 @@ La fusione logaritmica è una tecnica di ordinamento che utilizza una serie di i
 ### Indice Ausiliario e Principale
 
 * **Fusione T/n:**
-    * Si utilizzano indici ausiliari di dimensione $n$ e un indice principale con $T$ postings.
-    * Il tempo di costruzione dell'indice è $O\left( \frac{T^2}{n} \right)$ 
+ * Si utilizzano indici ausiliari di dimensione $n$ e un indice principale con $T$ postings.
+ * Il tempo di costruzione dell'indice è $O\left( \frac{T^2}{n} \right)$ 
  nel caso peggiore, poiché un posting potrebbe essere toccato $\frac{T}{n}$ volte.
 
 ### Fusione Logaritmica
@@ -1255,7 +1272,7 @@ Il ranking dei risultati si basa su queste statistiche, rendendo la loro gestion
 
 I motori di ricerca effettuano l'indicizzazione dinamica con:
 
-* **Modifiche incrementali frequenti:**  es. notizie, blog, nuove pagine web.
+* **Modifiche incrementali frequenti:** es. notizie, blog, nuove pagine web.
 * **Ricostruzioni periodiche dell'indice da zero:** L'elaborazione delle query viene commutata sul nuovo indice e il vecchio indice viene eliminato.
 
 ### Requisiti per la Ricerca in Tempo Reale
@@ -1266,7 +1283,6 @@ La ricerca in tempo reale richiede:
 * **Elevato tasso di ingestione:** Immediata disponibilità dei dati.
 * **Letture e scritture concorrenti:** Gestione di letture e scritture simultanee dell'indice.
 * **Dominanza del segnale temporale:** Priorità ai dati più recenti.
-
 
 ## Costruzione dell'Indice: Riepilogo
 
@@ -1311,11 +1327,11 @@ La compressione è fondamentale per:
 ### Compressione senza perdita vs. con perdita
 
 * **Compressione senza perdita:** tutte le informazioni vengono preservate.
-    * Ciò che facciamo principalmente in IR.
+ * Ciò che facciamo principalmente in IR.
 * **Compressione con perdita:** scarta alcune informazioni.
-    * Diversi passaggi di pre-elaborazione possono essere visti come compressione con perdita: conversione in minuscolo, stop words, stemming, eliminazione dei numeri.
-    * Potare le voci di postings che hanno poche probabilità di apparire nella lista dei primi k per qualsiasi query.
-        * Quasi nessuna perdita di qualità nella lista dei primi k.
+ * Diversi passaggi di pre-elaborazione possono essere visti come compressione con perdita: conversione in minuscolo, stop words, stemming, eliminazione dei numeri.
+ * Potare le voci di postings che hanno poche probabilità di apparire nella lista dei primi k per qualsiasi query.
+ * Quasi nessuna perdita di qualità nella lista dei primi k.
 
 ## Dimensione del vocabolario vs. dimensione della collezione
 
@@ -1323,9 +1339,9 @@ La compressione è fondamentale per:
 
 * **Cioè, quante parole distinte ci sono?**
 * **Possiamo assumere un limite superiore?**
-    * Non proprio: almeno $7020 = 1037$ parole diverse di lunghezza $20$.
-    * In pratica, il vocabolario continuerà a crescere con la dimensione della collezione.
-    * Soprattutto con Unicode.
+ * Non proprio: almeno $7020 = 1037$ parole diverse di lunghezza $20$.
+ * In pratica, il vocabolario continuerà a crescere con la dimensione della collezione.
+ * Soprattutto con Unicode.
 
 ### Legge di Heaps: $M = kT^b$
 
@@ -1333,14 +1349,14 @@ La compressione è fondamentale per:
 * Valori tipici: $30 ≤ k ≤ 100$ e $b ≈ 0.5$.
 * In un grafico log-log della dimensione del vocabolario M vs. T, la legge di Heaps prevede una linea con pendenza di circa ½.
 * È la relazione più semplice possibile (lineare) tra i due in spazio log-log.
-    * $log M = log k + b log T$.
+ * $log M = log k + b log T$.
 * Un'osservazione empirica ("legge empirica").
 
 ### Legge di Heaps per Reuters RCV1:
 
-$log_{10}M = 0.49 log_{10}T + 1.64$
-$\to$
-$M = 10^{1.64}T^{0.49}$
+$$log_{10}M = 0.49 log_{10}T + 1.64$$
+$$\to$$
+$$M = 10^{1.64}T^{0.49}$$
 cioè, $k=10^{1.64}≈ 44$ e $b = 0.49$.
 
 Buona aderenza empirica per Reuters RCV1:
@@ -1363,10 +1379,12 @@ La distribuzione skewd di tipo power-law è caratterizzata da una concentrazione
 **Nota:** La distribuzione skewd di tipo power-law è spesso osservata in fenomeni naturali e sociali. 
 
 ### Distribuzione di tipo Power-law
-La **distribuzione di tipo power law** è un modello matematico che descrive la distribuzione di molti fenomeni naturali e sociali, come la dimensione delle città, la frequenza delle parole in un linguaggio e la ricchezza delle persone.  È caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa(simile alla funzione esponenziale).  In altre parole, pochi elementi hanno un valore molto alto, mentre molti altri hanno un valore molto basso. 
+
+La **distribuzione di tipo power law** è un modello matematico che descrive la distribuzione di molti fenomeni naturali e sociali, come la dimensione delle città, la frequenza delle parole in un linguaggio e la ricchezza delle persone. È caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa(simile alla funzione esponenziale). In altre parole, pochi elementi hanno un valore molto alto, mentre molti altri hanno un valore molto basso. 
 
 ### Legge di Pareto
-Un esempio di questo modello è la **legge di Pareto**, nota anche come principio 80-20, che afferma che l'80% degli effetti deriva dal 20% delle cause.  Nel contesto del linguaggio naturale, la legge di Zipf è un esempio di distribuzione di tipo power law, dove pochi termini sono molto frequenti, mentre molti altri sono molto rari. 
+
+Un esempio di questo modello è la **legge di Pareto**, nota anche come principio 80-20, che afferma che l'80% degli effetti deriva dal 20% delle cause. Nel contesto del linguaggio naturale, la legge di Zipf è un esempio di distribuzione di tipo power law, dove pochi termini sono molto frequenti, mentre molti altri sono molto rari. 
 
 **Esempi di distribuzione di tipo power law:**
 
@@ -1377,6 +1395,7 @@ Un esempio di questo modello è la **legge di Pareto**, nota anche come principi
 - **Frequenza delle parole in un documento**
 
 **Confronto tra la distribuzione di Poisson (legge degli eventi rari) con la legge di potenza:** 
+
 Entrambe le distribuzioni sono asimmetriche (skewed), ma si differenziano per la loro natura:
 La scelta tra le due distribuzioni dipende da come si modella il tasso minimo (min rate) nella distribuzione di Poisson.
 - **Poisson:** È una distribuzione spaziale, che descrive la probabilità di un certo numero di eventi in un dato intervallo di tempo o spazio.
@@ -1407,9 +1426,8 @@ Questa equazione indica una relazione lineare inversa tra il logaritmo della fre
 
 Se il termine più frequente ("the") si verifica $cf1$ volte, allora il secondo termine più frequente ("of") si verifica $cf1/2$ volte, il terzo termine più frequente ("and") si verifica $cf1/3$ volte, e così via.
 
-
 ![[1) Intro-20241007160144378.png|504]]
-- In posizioni di rank basse (origine) abbiamo alta frequenza.  
+- In posizioni di rank basse (origine) abbiamo alta frequenza. 
 - La frequenza scende linearmente con scala doppia logaritmica 
 
 ## La legge di Zipf: le implicazioni di Luhn
@@ -1436,20 +1454,24 @@ Se fossimo capaci di stabilirlo, allora avremmo stabilito le due frequenze di ta
 In teoria, potremmo individuare due frequenze di taglio per effettuare un pruning dell'insieme dei termini candidati a formare il vocabolario (index terms). 
 
 **Scopo delle frequenze di taglio:**
+
 L'obiettivo è escludere:
 
 * **Termini troppo frequenti:** presenti in molti documenti ma poco significativi per la caratterizzazione del contenuto (es. articoli, preposizioni).
 * **Termini troppo rari:** presenti in pochi documenti e quindi poco utili per l'analisi generale.
 
 **Vantaggi del pruning:**
+
 * Miglioramento dell'efficienza: riduzione della dimensionalità del vocabolario, con conseguente risparmio di memoria e risorse computazionali.
 * Maggiore accuratezza: eliminazione di termini poco significativi o fuorvianti.
 
 **Criticità:**
+
 * **Individuazione delle frequenze di taglio ottimali:** non esiste una regola universale, la scelta dipende dal task specifico e dal dominio di applicazione.
-* **Dipendenza dal dominio e dal linguaggio:**  la frequenza di un termine può variare significativamente a seconda del contesto.
+* **Dipendenza dal dominio e dal linguaggio:** la frequenza di un termine può variare significativamente a seconda del contesto.
 
 **Esempi di regole pratiche:**
+
 Nonostante la mancanza di regole universali, l'esperienza su diversi benchmark ha permesso di identificare alcune linee guida:
 * **Rimozione dei termini troppo frequenti:** escludere termini presenti in più del 50% dei documenti.
 * **Rimozione dei termini troppo rari:** escludere termini presenti in meno di 3-5 documenti.
@@ -1510,21 +1532,21 @@ Come possiamo classificare i documenti della collezione rispetto a una query?
 Un modo è quello di usare **misure di similarità** per insiemi finiti:
 * Ad esempio: *Jaccard, Sorensen-Dice, Overlap, Simple Matching, ecc.*
 * Sono efficienti e forniscono la normalizzazione della lunghezza.
-    * Cioè, i documenti e le query non devono avere le stesse dimensioni.
+ * Cioè, i documenti e le query non devono avere le stesse dimensioni.
 * Ma non considerano:
-    * La frequenza del termine $(tf)$ nel documento.
-        * Più frequente è il termine di query nel documento, più alto dovrebbe essere il punteggio.
-    * La scarsità del termine nella collezione (frequenza di menzione del documento).
-        * I termini rari in una collezione sono più informativi dei termini frequenti.
+ * La frequenza del termine $(tf)$ nel documento.
+ * Più frequente è il termine di query nel documento, più alto dovrebbe essere il punteggio.
+ * La scarsità del termine nella collezione (frequenza di menzione del documento).
+ * I termini rari in una collezione sono più informativi dei termini frequenti.
 
 ## Misure di Similarità
 
-| Coefficiente        | Formula                                                                            | Descrizione                                                                                                                                                                                                                         |
+| Coefficiente | Formula | Descrizione |
 | ------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Jaccard**         | $J(A,B) = \frac{\|A \cap B\|}{\|A \cup B\|}$                                       | **Misura la similarità tra due insiemi come la dimensione della loro intersezione divisa per la dimensione della loro unione**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                  |
-| **Sørensen-Dice**   | $DSC(A,B) = \frac{2 \times \|A \cap B\|}{\|A\| + \|B\|}$                           | **Simile a Jaccard, ma pesa doppiamente gli elementi in comune**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                                                                                |
-| **Overlap**         | $O(A,B) = \frac{\|A \cap B\|}{min(\|A\|, \|B\|)}$                                  | **Misura la sovrapposizione tra due insiemi come la dimensione della loro intersezione divisa per la cardinalità dell'insieme più piccolo**. *Varia tra 0 (nessuna sovrapposizione) e 1 (un insieme è un sottoinsieme dell'altro).* |
-| **Simple Matching** | $SM(A,B) = \frac{\|A \cap B\| + \|\overline{A} \cap \overline{B}\|}{\|A \cup B\|}$ | **Misura la similarità tra due insiemi considerando sia le presenze che le assenze di elementi**. *Varia tra 0 (nessuna similarità) e 1 (identità).*                                                                                |
+| **Jaccard** | $J(A,B) = \frac{\|A \cap B\|}{\|A \cup B\|}$ | **Misura la similarità tra due insiemi come la dimensione della loro intersezione divisa per la dimensione della loro unione**. *Varia tra 0 (nessuna similarità) e 1 (identità).* |
+| **Sørensen-Dice** | $DSC(A,B) = \frac{2 \times \|A \cap B\|}{\|A\| + \|B\|}$ | **Simile a Jaccard, ma pesa doppiamente gli elementi in comune**. *Varia tra 0 (nessuna similarità) e 1 (identità).* |
+| **Overlap** | $O(A,B) = \frac{\|A \cap B\|}{min(\|A\|, \|B\|)}$ | **Misura la sovrapposizione tra due insiemi come la dimensione della loro intersezione divisa per la cardinalità dell'insieme più piccolo**. *Varia tra 0 (nessuna sovrapposizione) e 1 (un insieme è un sottoinsieme dell'altro).* |
+| **Simple Matching** | $SM(A,B) = \frac{\|A \cap B\| + \|\overline{A} \cap \overline{B}\|}{\|A \cup B\|}$ | **Misura la similarità tra due insiemi considerando sia le presenze che le assenze di elementi**. *Varia tra 0 (nessuna similarità) e 1 (identità).* |
 
 La cardinalità di X con Y include anche l'intersezione. Lo stesso vale per la cardinalità di Y e l'intersezione. Ovviamente, le due misure sono indipendenti, nel senso che conoscerne una non implica la conoscenza dell'altra. In che relazione si trovano? Si inseriscono nella relazione espressa dalla notazione con la J, vista prima applicata alle variabili di J e sottolineando "non J" più 1. 
 
@@ -1556,9 +1578,7 @@ La disuguaglianza non è rispettata, poiché 2/3 + 2/3 non è maggiore o uguale 
 
 L'Overlap Coefficient, detto anche Simpson o con un altro nome difficile da ricordare, è definito come l'intersezione divisa per la minima cardinalità tra X e Y. 
 
-
-$Overlap(X,Y) = \frac{{|X ∩ Y|}}{{min(|X|, |Y|)}}$
-
+$$Overlap(X,Y) = \frac{{|X ∩ Y|}}{{min(|X|, |Y|)}}$$
 
 Calcolare il word overlap tra due porzioni di testo può essere utile, ad esempio per confrontare due summary, uno di riferimento e l'altro generato artificialmente.
 
@@ -1568,12 +1588,15 @@ Un'altra misura di similarità, non direttamente legata al concetto di matching,
 
 ---
 #### Frequenza di Collezione (Collection Frequency)
+
 La **frequenza di collezione** (collection frequency) rappresenta il numero totale di occorrenze di una parola all'interno di un'intera collezione di documenti. È una proprietà globale, ovvero riguarda l'intera collezione e non un singolo documento. Rappresenta la somma delle Term Frequency su tutti i documenti della collezione
 
 #### Frequenza di Termine (Term Frequency)
+
 La **frequenza di termine** (term frequency) è la controparte della frequenza di collezione, ma a livello locale. Indica il numero di occorrenze di una parola all'interno di un singolo documento. 
 
 #### Document Frequency
+
 La **Document Frequency** è il numero di documenti in cui un termine compare.
 
 ## Rappresentazione dei testi: calcolo dello score
@@ -1604,20 +1627,19 @@ Ogni singola cella della matrice di rappresentazione dei testi dovrà contenere 
 | mercy | 2 | 0 | 0 | 1 | 1 | 0 |
 | worser | 2 | 0 | 0 | 1 | 0 | 0 |
 
-
 Esistono diverse opzioni per modellare la rappresentazione dei testi:
 
 **1. Term Frequency e Collection Frequency:**
 
-Una prima opzione consiste nell'utilizzare direttamente la _term frequency_ (tf) e la _collection frequency_ (cf) per calcolare il peso di un termine in un documento:
+Una prima opzione consiste nell'utilizzare direttamente la *term frequency* (tf) e la *collection frequency* (cf) per calcolare il peso di un termine in un documento:
 
 $$w_{t,d}=tf_{t,d} \frac{1}{cf_{t}}$$
 
 dove:
 
-*  $w_{t,d}$ è il peso del termine *t* nel documento *d*
-*  $tf_{t,d}$ è la frequenza del termine *t* nel documento *d*
-*  $cf_{t}$ è la frequenza del termine *t* nell'intera collezione di documenti
+* $w_{t,d}$ è il peso del termine *t* nel documento *d*
+* $tf_{t,d}$ è la frequenza del termine *t* nel documento *d*
+* $cf_{t}$ è la frequenza del termine *t* nell'intera collezione di documenti
 
 Al momento, non ci preoccupiamo di normalizzare i valori.
 
@@ -1630,26 +1652,28 @@ $$w_{t,d}^{(t)}=f(tf_{t,d})+g(cf_{t})=tf_{t,d}+ly(cf_{t})$$
 Tuttavia, in questo caso, il secondo addendo (relativo alla collection frequency) risulta troppo dominante.
 
 #### Considerazioni sulla Lunghezza dei Documenti
+
 Per semplicità, non facciamo assunzioni sulla lunghezza dei documenti e ci poniamo su una lunghezza media. Potrebbe esserci alternanza tra documenti lunghi e brevi.
 
 ### Smorzamento della Term Frequency
+
 Smorzare in maniera lineare inversa la term frequency con la collection frequency appiattisce troppo verso il basso i valori.
 
 ## La Rilevanza di un Termine in un Documento
 
 Come possiamo definire la rilevanza di un termine all'interno di un documento?
 
-* **Tempo di Inerzia:** Un'idea potrebbe essere quella di utilizzare il tempo di inerzia del termine nel documento come indicatore di rilevanza. Tuttavia, la _term frequency_ da sola non è sufficiente.
+* **Tempo di Inerzia:** Un'idea potrebbe essere quella di utilizzare il tempo di inerzia del termine nel documento come indicatore di rilevanza. Tuttavia, la *term frequency* da sola non è sufficiente.
 
-* **Importanza di CF e DF:** Anche la _collection frequency_ (CF) e la _document frequency_ (DF) giocano un ruolo importante. La legge di Zipf ci ricorda che termini eccessivamente popolari tendono ad essere più intensi localmente.
+* **Importanza di CF e DF:** Anche la *collection frequency* (CF) e la *document frequency* (DF) giocano un ruolo importante. La legge di Zipf ci ricorda che termini eccessivamente popolari tendono ad essere più intensi localmente.
 
 * **Funzione di Scoring:** Per definire la rilevanza, possiamo utilizzare una funzione che tenga conto sia di TF che di CF:
 
-	$Rilevanza(termine) = F(TF) + G(CF)$
+$$Rilevanza(termine) = F(TF) + G(CF)$$
 
 * **Peso Relativo:** Se vogliamo dare maggior peso alla rilevanza locale, F dovrà crescere più rapidamente di G. Viceversa, se vogliamo dare maggior peso alla CF, G dovrà crescere più rapidamente di F.
 
-* **TF vs. CF:** La _term frequency_ sarà generalmente minore della _collection frequency_, soprattutto in corpus di grandi dimensioni.
+* **TF vs. CF:** La *term frequency* sarà generalmente minore della _collection frequency_, soprattutto in corpus di grandi dimensioni.
 
 * **Lunghezza dei Documenti:** Non facciamo alcuna assunzione sulla lunghezza dei documenti nel corpus.
 
@@ -1690,9 +1714,7 @@ Ci stiamo interrogando sulla coerenza di due idee (idea 1 e idea 2) con la legge
 
 Per smorzare in modo *smooth*, si propone di utilizzare la seguente formula:
 
-
-$\frac{1}{log(document frequency)}$
-
+$$\frac{1}{log(document frequency)}$$
 
 **Spiegazione:**
 
@@ -1708,7 +1730,7 @@ Importanza dello smorzamento della term frequency (tf) nel calcolo dell'informaz
 
 ## Funzione TF-IDF
 
-La funzione TF-IDF (Term Frequency - Inverse Document Frequency) è una misura statistica che valuta l'importanza di un termine all'interno di un documento, in relazione ad una collezione di documenti (corpus).  Combina la frequenza di un termine in un documento con la sua rarità nel corpus. 
+La funzione TF-IDF (Term Frequency - Inverse Document Frequency) è una misura statistica che valuta l'importanza di un termine all'interno di un documento, in relazione ad una collezione di documenti (corpus). Combina la frequenza di un termine in un documento con la sua rarità nel corpus. 
 
 La formula per calcolare il peso TF-IDF di un termine *t* nel documento *d* è:
 
@@ -1722,8 +1744,8 @@ Dove:
 
 **Interpretazione della formula:**
 
-* **log(1+tf<sub>t,d</sub>):**  Rappresenta la frequenza del termine nel documento. Il logaritmo smorza l'influenza dei termini molto frequenti in un documento.
-* **log<sub>10</sub>(N/df<sub>t</sub>):** Rappresenta la frequenza inversa del documento (IDF).  Un valore di IDF elevato indica che il termine è raro nel corpus, quindi più informativo. Viceversa, un IDF basso indica un termine comune e poco informativo.
+* **log(1+tf<sub>t,d</sub>):** Rappresenta la frequenza del termine nel documento. Il logaritmo smorza l'influenza dei termini molto frequenti in un documento.
+* **log<sub>10</sub>(N/df<sub>t</sub>):** Rappresenta la frequenza inversa del documento (IDF). Un valore di IDF elevato indica che il termine è raro nel corpus, quindi più informativo. Viceversa, un IDF basso indica un termine comune e poco informativo.
 
 **Vantaggi dell'utilizzo di TF-IDF:**
 
@@ -1761,14 +1783,14 @@ Il modello Bag-of-words (BoW) si basa sull'ipotesi di indipendenza dei termini.
 Quando dobbiamo capire se una feature è significativa, dovremmo misurare quantitativamente quanto è il suo potere caratterizzante e discriminante.
 
 * L'ordinamento delle parole in un documento viene scartato.
-    * In un certo senso, un passo indietro rispetto all'indice posizionale.
+ * In un certo senso, un passo indietro rispetto all'indice posizionale.
 
 **Contro:**
 
 * Informazioni sintattiche mancanti (ad esempio, struttura frasale, ordine delle parole, informazioni di prossimità).
 * Informazioni semantiche mancanti (ad esempio, senso delle parole).
 * Manca il controllo di un modello booleano (ad esempio, richiedere che un termine appaia in un documento).
-    * Data una query a due termini "A B", si potrebbe preferire un documento che contiene A frequentemente ma non B, rispetto a un documento che contiene sia A che B, ma entrambi meno frequentemente.
+ * Data una query a due termini "A B", si potrebbe preferire un documento che contiene A frequentemente ma non B, rispetto a un documento che contiene sia A che B, ma entrambi meno frequentemente.
 
 **Pro:**
 
@@ -1782,14 +1804,15 @@ Quando dobbiamo capire se una feature è significativa, dovremmo misurare quanti
 Vogliamo usare la frequenza del termine (tf) quando calcoliamo i punteggi di corrispondenza query-documento. Ma come?
 
 * La frequenza grezza del termine non è ciò che vogliamo:
-    * Un documento con 10 occorrenze del termine è più rilevante di un documento con 1 occorrenza del termine.
-    * Ma non 10 volte più rilevante.
+ * Un documento con 10 occorrenze del termine è più rilevante di un documento con 1 occorrenza del termine.
+ * Ma non 10 volte più rilevante.
 * La rilevanza non aumenta proporzionalmente alla frequenza del termine.
 
 ### Peso di frequenza logaritmica del termine
+
 $$w_{t,d}
 \begin{cases}
-1+\log_{10}\text{tf}_{td} \ \text{  if tf}_{td} \ >0 \\
+1+\log_{10}\text{tf}_{td} \ \text{ if tf}_{td} \ >0 \\
 0,\ \text{otherwise}
 \end{cases}$$ 
 
@@ -1827,7 +1850,7 @@ La frequenza del documento di un termine *t*:
 * Una misura inversa dell'informatività di *t*.
 
 Definisci l'idf (frequenza inversa del documento) di *t* come:
-$idf_{t}=\log_{10}\left( \frac{N}{df_{t}} \right)$
+$$idf_{t}=\log_{10}\left( \frac{N}{df_{t}} \right)$$
 
 * log (N/dft) invece di N/dft
 per "smorzare" l'effetto dell'idf.
@@ -1850,16 +1873,14 @@ Questo schema di ponderazione è in linea con la legge di distribuzione della pr
 
 Il metodo tf-idf, quindi, **riduce il peso dei termini comuni e aumenta il peso dei termini rari**, riflettendo la distribuzione di probabilità osservata nella realtà. 
 
-
 Il peso tf-idf di un termine è il prodotto del suo peso tf e del suo peso idf:
 
-$w_{t,d}=\log(1+tf_{t,d})\times\log_{10}\left( \frac{N}{df_{t}} \right)$
+$$w_{t,d}=\log(1+tf_{t,d})\times\log_{10}\left( \frac{N}{df_{t}} \right)$$
 
 * **Aumenta con il numero di occorrenze all'interno di un documento.**
 * **Aumenta con la rarità del termine nella collezione.**
 
 Il punteggio per una coppia documento-query è la somma sui termini *t* sia in *q* che in *d*. 
-
 
 ## Varianti di Tf-Idf
 
@@ -1882,6 +1903,7 @@ Esistono diverse varianti di questa tecnica, che si differenziano principalmente
 * **Non ponderati:** Tutti i termini nella query hanno lo stesso peso.
 
 **Assunzioni:**
+
 * La collezione di documenti è omogenea in termini di dominio dei dati, ovvero il dominio è fissato e il lessico è comune a tutti i documenti.
 * I pattern di frequenza dei termini sono molto simili tra i documenti.
 
@@ -1898,14 +1920,17 @@ Esistono diverse varianti di questa tecnica, che si differenziano principalmente
 **Problema:** La normalizzazione dei vettori di parole, in particolare la divisione per la norma L2, può influenzare la rappresentazione dei topic. 
 
 **Considerazioni:**
+
 * **Diluisce il segnale informativo:** La normalizzazione può diluire il segnale informativo dei topic, soprattutto quando si passa da un abstract breve a un testo lungo.
 * **Proprietà geometriche:** La normalizzazione L2 ha proprietà geometriche specifiche che possono differire da altri metodi di normalizzazione, come la normalizzazione al massimo.
 * **Influenza sulla costruzione della matrice dei dati:** La normalizzazione L2 interviene direttamente nella costruzione della matrice dei dati, modificando la rappresentazione dei vettori di parole.
 
 **Esempio:**
+
 Se si utilizza la matrice di peso Tf-Idf senza normalizzazione e la collezione di documenti contiene un mix di documenti lunghi e brevi, la distanza euclidea tenderà a favorire i documenti più lunghi.
 
 ## Matrice di peso Tf.Idf
+
 ![[1) Intro-20241014151203327.png]]
 
 ## Documenti e query come vettori
@@ -1928,6 +1953,7 @@ Classifichiamo i documenti in base alla loro prossimità alla query in questo sp
 * **Prossimità ≈ inversa della distanza.**
 
 ## Prossimità dello spazio vettoriale
+
 ![[1) Intro-20241014153843176.png]]
 
 Potremmo decidere di utilizzare una misura di prossimità che sia **scale-invariant**, ovvero indipendente dalla lunghezza dei vettori. 
@@ -1978,36 +2004,31 @@ Quanto sono simili i romanzi:
 * PaP: Orgoglio e Pregiudizio
 * WH: Cime Tempestose?
 
-
-
-| term      | Sas  | PaP  | **WH** |
+| term | Sas | PaP | **WH** |
 | --------- | ---- | ---- | ------ |
-| affection | 3.06 | 2.76 | 2.30   |
-| jealous   | 2.00 | 1.85 | 2.04   |
-| gossip    | 1.30 | 0    | 1.78   |
-| wuthering | 0    | 2.58 | 2.58   |
+| affection | 3.06 | 2.76 | 2.30 |
+| jealous | 2.00 | 1.85 | 2.04 |
+| gossip | 1.30 | 0 | 1.78 |
+| wuthering | 0 | 2.58 | 2.58 |
 
-| term      | Sas   | PaP   | WH    |
+| term | Sas | PaP | WH |
 | --------- | ----- | ----- | ----- |
 | affection | 0.789 | 0.832 | 0-524 |
-| jealous   | 0.515 | 0.555 | 0.465 |
-| gossip    | 0,335 | 0     | 0.405 |
-| wuthering | 0     | 0     | 0.588 |
+| jealous | 0.515 | 0.555 | 0.465 |
+| gossip | 0,335 | 0 | 0.405 |
+| wuthering | 0 | 0 | 0.588 |
 
-
-| Log frequency weighting<br> |        |
+| Log frequency weighting<br> | |
 | --------------------------- | ------ |
-| dot(SaS,PaP)                | ≈ 12.1 |
-| dot(SaS,WH)                 | ≈ 13.4 |
-| dot(PaP,WH)                 | ≈ 10.1 |
+| dot(SaS,PaP) | ≈ 12.1 |
+| dot(SaS,WH) | ≈ 13.4 |
+| dot(PaP,WH) | ≈ 10.1 |
 
-
-| After length normalization |        |     |
+| After length normalization | | |
 | -------------------------- | ------ | --- |
-| cos(SaS,PaP)               | ≈ 0.94 |     |
-| cos(SaS,WH)                | ≈ 0.79 |     |
-| cos(PaP,WH)                | ≈ 0.69 |     |
-
+| cos(SaS,PaP) | ≈ 0.94 | |
+| cos(SaS,WH) | ≈ 0.79 | |
+| cos(PaP,WH) | ≈ 0.69 | |
 
 ---
 
@@ -2030,24 +2051,23 @@ Quanto sono simili i romanzi:
 
 **Term Frequency**
 
-*   **n (natural)**: $tf_{r, d}$
-*   **l (logarithm)**: $1 + \log(tf_{r, d})$
-*   **a (augmented)**: $0.5 + \frac{0.5 \cdot tf_{r, d}}{\max_{r} (tf_{r, d})}$
-*   **b (boolean)**: $\begin{cases} 1 & \text{if } tf_{r, d} > 0 \\ 0 & \text{otherwise} \end{cases}$
+* **n (natural)**: $tf_{r, d}$
+* **l (logarithm)**: $1 + \log(tf_{r, d})$
+* **a (augmented)**: $0.5 + \frac{0.5 \cdot tf_{r, d}}{\max_{r} (tf_{r, d})}$
+* **b (boolean)**: $\begin{cases} 1 & \text{if } tf_{r, d} > 0 \\ 0 & \text{otherwise} \end{cases}$
 
 **Document Frequency**
 
-*   **n (no)**: $1$
-*   **t (idf)**: $\log \frac{N}{df_r}$
-*   **p (prob idf)**: $\max \{ 0, \log \frac{N - df_r}{df_r} \}$
+* **n (no)**: $1$
+* **t (idf)**: $\log \frac{N}{df_r}$
+* **p (prob idf)**: $\max \{ 0, \log \frac{N - df_r}{df_r} \}$
 
 **Normalization**
 
-*   **n (none)**: $1$
-*   **c (cosine)**: $\frac{1}{\sqrt{w_1^2 + w_2^2 + \dots + w_n^2}}$
-*   **u (pivoted unique)**: $\frac{1}{u}$
-*   **b (byte size)**: $\frac{1}{\text{CharLength}^{\alpha}}, \alpha < 1$
-
+* **n (none)**: $1$
+* **c (cosine)**: $\frac{1}{\sqrt{w_1^2 + w_2^2 + \dots + w_n^2}}$
+* **u (pivoted unique)**: $\frac{1}{u}$
+* **b (byte size)**: $\frac{1}{\text{CharLength}^{\alpha}}, \alpha < 1$
 
 - **Soluzioni di default:** Le soluzioni di default in alcuni sistemi di retrieval sono le seconde di ogni tipo
 - **Term frequency aumentata:** La versione aumentata della term frequency è interessante in contesti di retrieval puro, dove si confrontano query espanse con documenti.
@@ -2064,13 +2084,13 @@ Uno schema di ponderazione molto standard è: lnc.ltc
 * **Documento:** tf logaritmico, nessun idf, normalizzazione del coseno.
 * **Query:** tf logaritmico, idf, normalizzazione del coseno.
 
-| Termine   | Query | Documento | Prod  |     |        |        |       |     |        |      |      |
+| Termine | Query | Documento | Prod | | | | | | | | |
 | --------- | ----- | --------- | ----- | --- | ------ | ------ | ----- | --- | ------ | ---- | ---- |
-| tf-raw    | tf-wt | df        | idf   | wt  | n'lize | tf-raw | tf-wt | wt  | n'lize |      |      |
-| auto      | 0     | 0         | 5000  | 2.3 | 0      | 0      | 1     | 1   | 1      | 0.52 | 0    |
-| best      | 1     | 1         | 50000 | 1.3 | 1.3    | 0.34   | 0     | 0   | 0      | 0    | 0    |
-| car       | 1     | 1         | 10000 | 2.0 | 2.0    | 0.52   | 1     | 1   | 1      | 0.52 | 0.27 |
-| insurance | 1     | 1         | 1000  | 3.0 | 3.0    | 0.78   | 2     | 1.3 | 1.3    | 0.68 | 0.53 |
+| tf-raw | tf-wt | df | idf | wt | n'lize | tf-raw | tf-wt | wt | n'lize | | |
+| auto | 0 | 0 | 5000 | 2.3 | 0 | 0 | 1 | 1 | 1 | 0.52 | 0 |
+| best | 1 | 1 | 50000 | 1.3 | 1.3 | 0.34 | 0 | 0 | 0 | 0 | 0 |
+| car | 1 | 1 | 10000 | 2.0 | 2.0 | 0.52 | 1 | 1 | 1 | 0.52 | 0.27 |
+| insurance | 1 | 1 | 1000 | 3.0 | 3.0 | 0.78 | 2 | 1.3 | 1.3 | 0.68 | 0.53 |
 
 **Documento:** assicurazione auto assicurazione auto
 **Query:** migliore assicurazione auto

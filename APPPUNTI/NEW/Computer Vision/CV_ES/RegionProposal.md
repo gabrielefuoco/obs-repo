@@ -46,12 +46,9 @@ print(f'Shape del tensore: {image.shape}')
 plot_image(image)
 ```
 
-    Shape del tensore: torch.Size([3, 800, 800])
-    
+ Shape del tensore: torch.Size([3, 800, 800])
 
-    
 ![png](RegionProposal_2_1.png)
-    
 
 # 1. Estrazione delle feature
 
@@ -73,7 +70,7 @@ with torch.no_grad():
     _, topclass = ps.topk(1, dim=1)
 
     idx_class = topclass[0][0]
-    
+
 with open('imagenet_labels.json') as fp:
     labels = json.load(fp)
 
@@ -82,8 +79,7 @@ detected_class = labels[str(idx_class.item())]
 print(f'detected class by Vgg16 is "{detected_class}"')
 ```
 
-    detected class by Vgg16 is "lion, king of beasts, Panthera leo"
-    
+ detected class by Vgg16 is "lion, king of beasts, Panthera leo"
 
 ## Identificazione della feature map
 
@@ -97,13 +93,13 @@ Il nostro obiettivo è calcolare una feature map 50x50 e quindi ci servono le fe
 model
 ```
 
-    VGG(
-      (features): Sequential(
-        (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): ReLU(inplace=True)
-        (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (3): ReLU(inplace=True)
-        (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+ VGG(
+ (features): Sequential(
+ (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+ (1): ReLU(inplace=True)
+ (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+ (3): ReLU(inplace=True)
+ (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
 
 ```python
 # VGG16 feature map levels
@@ -115,10 +111,10 @@ test_image = image4D.clone()
 out_channels = None
 for level in fe:
     test_image = level(test_image)
-    
+
     if test_image.shape[2] < 800 // 16:
         break
-    
+
     # store current level and its output
     req_features.append(level)
     out_channels = test_image.shape[1]
@@ -132,10 +128,9 @@ out_map = faster_rcnn_fe_extractor(image4D)
 print(f'Shape of the input image processed by FE extractor: {out_map.shape}')
 ```
 
-    number of levels extracted: 30
-    dimension of the last level: 512
-    Shape of the input image processed by FE extractor: torch.Size([1, 512, 50, 50])
-    
+ number of levels extracted: 30
+ dimension of the last level: 512
+ Shape of the input image processed by FE extractor: torch.Size([1, 512, 50, 50])
 
 ### Step 2
 
@@ -145,18 +140,18 @@ I parametri per individuare le anchor box sono:
 
 - Posizione x, y
 - Scala **s**: 8, 16, 32
-- Aspect ratio  **r** = $a^2$: 0.5, 1, 2
+- Aspect ratio **r** = $a^2$: 0.5, 1, 2
 
 Per ogni pixel generiamo tutte le possibili anchor box, cioé per ogni valore di scala e per ogni valore di aspect ratio. Quindi sono 9 anchor box, ognuna definita dalla quadrupla $x_1, y_1, x_2, y_2$
 
 La dimensione di ogni anchor box sarà ottenute utilizzando i seguenti coefficienti
 
 $$ h = s * a $$
-$$ w = \frac{s}{a}    $$
+$$ w = \frac{s}{a} $$
 
 ```python
 def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2], anchor_scales=[8, 16, 32]):
-    
+
     py = base_size / 2
     px = base_size / 2
 
@@ -164,7 +159,7 @@ def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2], anchor_scales=[8, 16,
 
     for i in range(len(ratios)):
         for j in range(len(anchor_scales)):
-            
+
             h = base_size * anchor_scales[j] * np.sqrt(ratios[i])
             w = base_size * anchor_scales[j] * np.sqrt(1. / ratios[i])
 
@@ -174,7 +169,7 @@ def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2], anchor_scales=[8, 16,
             anchor_base[index, 1] = px - w / 2
             anchor_base[index, 2] = py + h / 2
             anchor_base[index, 3] = px + w / 2
-            
+
     return anchor_base
 
 sub_sample = 16
@@ -186,16 +181,15 @@ anchor_base = generate_anchor_base(sub_sample, ratio, anchor_scales)
 print(anchor_base)
 ```
 
-    [[ -37.254833  -82.50967    53.254833   98.50967 ]
-     [ -82.50967  -173.01933    98.50967   189.01933 ]
-     [-173.01933  -354.03867   189.01933   370.03867 ]
-     [ -56.        -56.         72.         72.      ]
-     [-120.       -120.        136.        136.      ]
-     [-248.       -248.        264.        264.      ]
-     [ -82.50967   -37.254833   98.50967    53.254833]
-     [-173.01933   -82.50967   189.01933    98.50967 ]
-     [-354.03867  -173.01933   370.03867   189.01933 ]]
-    
+ [[ -37.254833 -82.50967 53.254833 98.50967 ]
+ [ -82.50967 -173.01933 98.50967 189.01933 ]
+ [-173.01933 -354.03867 189.01933 370.03867 ]
+ [ -56. -56. 72. 72. ]
+ [-120. -120. 136. 136. ]
+ [-248. -248. 264. 264. ]
+ [ -82.50967 -37.254833 98.50967 53.254833]
+ [-173.01933 -82.50967 189.01933 98.50967 ]
+ [-354.03867 -173.01933 370.03867 189.01933 ]]
 
 ```python
 import matplotlib.patches as patches
@@ -220,13 +214,11 @@ def plot_bbox(image_tensor, bbox_list):
         ax.add_patch(rect)
 
     plt.show();
-    
+
 plot_bbox(image, anchor_base)
 ```
 
-    
 ![png](RegionProposal_11_0.png)
-    
 
 In questo caso gli anchor box sono stati calcolati considerando come centro del box il pixel (0, 0), quindi viene selezionata parte dell'immagine al di fuori del frame.
 
@@ -234,10 +226,10 @@ Effettuando uno shift al centro dell'immagine otteniamo questo risultato. Il pro
 
 Una possibile soluzione è eseguire una doppia iterazione su tutti i possibili shift:
 
-    for i in shift_x:
-        for j in shift_y:
-            compute 9 boxes on (i, j)
-            
+ for i in shift_x:
+ for j in shift_y:
+ compute 9 boxes on (i, j)
+
 L'alternativa è calcolare tutti i possibili shift (800/16 = 50) e sommare questo shift ai 9 anchor box di base
 
 ```python
@@ -246,9 +238,7 @@ anchor_at_400_400 = anchor_base + 400
 plot_bbox(image, anchor_at_400_400)
 ```
 
-    
 ![png](RegionProposal_13_0.png)
-    
 
 ```python
 # compute all possible anchor box
@@ -286,27 +276,26 @@ anchors = anchors.reshape((K * boxes, 4)).astype(np.float32)
 print(f'anchor boxes = {anchors.shape}')
 ```
 
-    matX shape = (50, 50)
-    [[  0  16  32 ... 752 768 784]
-     [  0  16  32 ... 752 768 784]
-     [  0  16  32 ... 752 768 784]
-     ...
-     [  0  16  32 ... 752 768 784]
-     [  0  16  32 ... 752 768 784]
-     [  0  16  32 ... 752 768 784]]
-    matY shape = (50, 50)
-    [[  0   0   0 ...   0   0   0]
-     [ 16  16  16 ...  16  16  16]
-     [ 32  32  32 ...  32  32  32]
-     ...
-     [752 752 752 ... 752 752 752]
-     [768 768 768 ... 768 768 768]
-     [784 784 784 ... 784 784 784]]
-    ________________________________________
-    shift shape = (2500, 4)
-    anchor shape = (2500, 9, 4)
-    anchor boxes = (22500, 4)
-    
+ matX shape = (50, 50)
+ [[ 0 16 32 ... 752 768 784]
+ [ 0 16 32 ... 752 768 784]
+ [ 0 16 32 ... 752 768 784]
+ ...
+ [ 0 16 32 ... 752 768 784]
+ [ 0 16 32 ... 752 768 784]
+ [ 0 16 32 ... 752 768 784]]
+ matY shape = (50, 50)
+ [[ 0 0 0 ... 0 0 0]
+ [ 16 16 16 ... 16 16 16]
+ [ 32 32 32 ... 32 32 32]
+ ...
+ [752 752 752 ... 752 752 752]
+ [768 768 768 ... 768 768 768]
+ [784 784 784 ... 784 784 784]]
+ ________________________________________
+ shift shape = (2500, 4)
+ anchor shape = (2500, 9, 4)
+ anchor boxes = (22500, 4)
 
 ```python
 # an example
@@ -316,21 +305,18 @@ print(anchors[idx:idx+9])  # select 9 boxes
 plot_bbox(image, anchors[idx:idx+9])
 ```
 
-    (4,)
-    [[264.        40.       776.       552.      ]
-     [429.49033  250.74516  610.50964  341.25482 ]
-     [338.98065  205.49033  701.01935  386.50967 ]
-     [157.96133  114.98067  882.0387   477.01935 ]
-     [474.74518  221.49033  565.2548   402.50967 ]
-     [429.49033  130.98067  610.50964  493.01935 ]
-     [338.98065  -50.038666 701.01935  674.0387  ]
-     [456.       248.       584.       376.      ]
-     [392.       184.       648.       440.      ]]
-    
+ (4,)
+ [[264. 40. 776. 552. ]
+ [429.49033 250.74516 610.50964 341.25482 ]
+ [338.98065 205.49033 701.01935 386.50967 ]
+ [157.96133 114.98067 882.0387 477.01935 ]
+ [474.74518 221.49033 565.2548 402.50967 ]
+ [429.49033 130.98067 610.50964 493.01935 ]
+ [338.98065 -50.038666 701.01935 674.0387 ]
+ [456. 248. 584. 376. ]
+ [392. 184. 648. 440. ]]
 
-    
 ![png](RegionProposal_15_1.png)
-    
 
 ### Step 3
 
@@ -347,9 +333,7 @@ ground_truth_box = np.asarray([[155, 61, 332, 140], [274, 296, 555, 588]], dtype
 plot_bbox(image, ground_truth_box)
 ```
 
-    
 ![png](RegionProposal_17_0.png)
-    
 
 **Strategia**
 Filtro le anchor box al di fuori dell'immagine e etichetto in funzione dei valori IoU
@@ -376,24 +360,23 @@ valid_anchor_boxes = anchors[inside_indexes]
 print(valid_anchor_boxes.shape)
 ```
 
-    (8940,)
-    (8940,)
-    (8940, 4)
-    
+ (8940,)
+ (8940,)
+ (8940, 4)
 
 Per ogni anchor box valida devo calcolare il valore di **ioU** con le ground-truth-box.
 
 La strategia per calcolare il valore IoU tra 2 box è la seguente:
 
-    - Find the max of x1 and y1 in both the boxes (xn1, yn1)
-    - Find the min of x2 and y2 in both the boxes (xn2, yn2)
-    - Now both the boxes are intersecting only
-     if (xn1 < xn2) and (yn2 < yn1)
-          - iou_area will be (xn2 - xn1) * (yn2 - yn1)
-     else
-          - iuo_area will be 0
-    - similarly calculate area for anchor box and ground truth object
-    - iou = iou_area/(anchor_box_area + ground_truth_area - iou_area)
+ - Find the max of x1 and y1 in both the boxes (xn1, yn1)
+ - Find the min of x2 and y2 in both the boxes (xn2, yn2)
+ - Now both the boxes are intersecting only
+ if (xn1 < xn2) and (yn2 < yn1)
+ - iou_area will be (xn2 - xn1) * (yn2 - yn1)
+ else
+ - iuo_area will be 0
+ - similarly calculate area for anchor box and ground truth object
+ - iou = iou_area/(anchor_box_area + ground_truth_area - iou_area)
 
 ```python
 num_boxes = 2  # true label
@@ -403,7 +386,7 @@ ious = np.zeros((len(valid_anchor_boxes), num_boxes), dtype=np.float32)
 for idx, valid_box in enumerate(valid_anchor_boxes):
     ya1, xa1, ya2, xa2 = valid_box
     anchor_area = (ya2 - ya1) * (xa2 - xa1)
-    
+
     for idx_true, true_box in enumerate(ground_truth_box):
         yb1, xb1, yb2, xb2 = true_box
         box_area = (yb2 - yb1) * (xb2 - xb1)
@@ -424,8 +407,7 @@ for idx, valid_box in enumerate(valid_anchor_boxes):
 print(ious.shape)
 ```
 
-    (8940, 2)
-    
+ (8940, 2)
 
 ```python
 # the highest iou for each ground truth box and its corresponding anchor box
@@ -436,9 +418,8 @@ gt_max_ious = ious[gt_argmax_ious, np.arange(ious.shape[1])]
 print(gt_max_ious)
 ```
 
-    [1979 4620]
-    [0.8314627 0.798713 ]
-    
+ [1979 4620]
+ [0.8314627 0.798713 ]
 
 ```python
 # the highest iou for each anchor box and its corresponding ground truth box
@@ -455,17 +436,16 @@ gt_argmax_ious = np.where(ious == gt_max_ious)[0]
 print(gt_argmax_ious)
 ```
 
-    (8940,)
-    [0 0 0 ... 0 0 0]
-    [0. 0. 0. ... 0. 0. 0.]
-    [1979 4620 4628 4636 4894 4902 4910]
-    
+ (8940,)
+ [0 0 0 ... 0 0 0]
+ [0. 0. 0. ... 0. 0. 0.]
+ [1979 4620 4628 4636 4894 4902 4910]
 
 Adesso assegno le label con questa logica
 
-*argmax_ious* contiene gli indici dei valori massimi di IoU di ogni box con la ground truth box  
-*max_ious* contiene i valori massimi di IoU di ogni box con la ground truth box  
-*gt_argmax_ious* indica quali sono i boxes che hanno intersezione massima con ground truth box  
+*argmax_ious* contiene gli indici dei valori massimi di IoU di ogni box con la ground truth box 
+*max_ious* contiene i valori massimi di IoU di ogni box con la ground truth box 
+*gt_argmax_ious* indica quali sono i boxes che hanno intersezione massima con ground truth box 
 
 - si assegna una label negativa (0) agli anchor box che hanno IoU inferiore al massimo
 - si assegna una label positiva (1) agli anchor box che hanno IoU pari al massimo oppure maggiore della soglia
@@ -553,23 +533,22 @@ anchor_locations[inside_indexes, :] = anchor_locs
 anchor_labels.shape, anchor_locations.shape
 ```
 
-    [[155.  61. 332. 140.]
-     [155.  61. 332. 140.]
-     [155.  61. 332. 140.]
-     ...
-     [155.  61. 332. 140.]
-     [155.  61. 332. 140.]
-     [155.  61. 332. 140.]]
-    [[ 2.0716019  -0.01933499  0.670693   -0.8291561 ]
-     [ 2.0716019  -0.10772333  0.670693   -0.8291561 ]
-     [ 2.0716019  -0.19611163  0.670693   -0.8291561 ]
-     ...
-     [-5.5297976  -3.112928    0.67069334 -0.82915574]
-     [-5.5297976  -3.2013164   0.67069334 -0.82915574]
-     [-5.5297976  -3.2897048   0.67069334 -0.82915574]]
-    
+ [[155. 61. 332. 140.]
+ [155. 61. 332. 140.]
+ [155. 61. 332. 140.]
+ ...
+ [155. 61. 332. 140.]
+ [155. 61. 332. 140.]
+ [155. 61. 332. 140.]]
+ [[ 2.0716019 -0.01933499 0.670693 -0.8291561 ]
+ [ 2.0716019 -0.10772333 0.670693 -0.8291561 ]
+ [ 2.0716019 -0.19611163 0.670693 -0.8291561 ]
+ ...
+ [-5.5297976 -3.112928 0.67069334 -0.82915574]
+ [-5.5297976 -3.2013164 0.67069334 -0.82915574]
+ [-5.5297976 -3.2897048 0.67069334 -0.82915574]]
 
-    ((22500,), (22500, 4))
+ ((22500,), (22500, 4))
 
 # Estrazione delle feature per ogni anchor box
 
@@ -618,15 +597,15 @@ pred_cls_scores = pred_cls_scores.view(1, -1, 2)
 print(f'pred_cls_scores: {pred_cls_scores.shape}')
 ```
 
-    feautures shape: torch.Size([1, 512, 50, 50])
-    score shape: torch.Size([1, 18, 50, 50]), loc shape: torch.Size([1, 36, 50, 50])
-    pred_anchor_locs: torch.Size([1, 22500, 4])
-    torch.Size([1, 50, 50, 18])
-    objectness_score: torch.Size([1, 22500])
-    pred_cls_scores: torch.Size([1, 22500, 2])
-    
+ feautures shape: torch.Size([1, 512, 50, 50])
+ score shape: torch.Size([1, 18, 50, 50]), loc shape: torch.Size([1, 36, 50, 50])
+ pred_anchor_locs: torch.Size([1, 22500, 4])
+ torch.Size([1, 50, 50, 18])
+ objectness_score: torch.Size([1, 22500])
+ pred_cls_scores: torch.Size([1, 22500, 2])
 
 # Risultati
+
 A questo punto abbiamo:
 
 1. **pred_cls_scores** contiene gli score sulle classi (è l'ouput del classification layer della RPN)

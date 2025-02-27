@@ -3,8 +3,6 @@ La regressione è una tecnica statistica utilizzata per studiare la relazione tr
 $$Y = f(X_1, X_2, ..., X_k) + b$$
 dove *b* rappresenta gli effetti e le cause non considerate nel modello.
 
-
-
 Nel caso della regressione lineare, il modello è rappresentato da un'equazione di primo grado:
 $$y = wx + b$$
 Il problema chiave è stimare i parametri *w* e *b* in modo che il modello si adatti al meglio ai dati osservati.
@@ -21,17 +19,21 @@ Per minimizzare $J(w, b)$, si utilizza l'algoritmo di discesa del gradiente. I p
 
 2. **Aggiornamento dei parametri:** Calcolare i nuovi parametri $w'$ e $b'$ che riducono $J(w, b)$, usando le formule delle derivate parziali.
 
-    **Caso semplice (1 attributo, 1 variabile dipendente):**
-   $$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
-   $$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
+ **Caso semplice (1 attributo, 1 variabile dipendente):**
 
-    **Caso più complesso (n attributi, 1 variabile dipendente):**
-    **Modello di regressione lineare a più valori:**
-   $$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
-    **Aggiornamento dei parametri:**
+ $$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
+ $$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
+
+ **Caso più complesso (n attributi, 1 variabile dipendente):**
+
+ **Modello di regressione lineare a più valori:**
+
+ $$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
+ **Aggiornamento dei parametri:**
+
 $$
 \begin{aligned}
-w_1' = w_1 - \alpha \frac{\partial}{\partial w_1} J(w_1, b)  \\
+w_1' = w_1 - \alpha \frac{\partial}{\partial w_1} J(w_1, b) \\
 \dots
 \\
 w_n' = w_n - \alpha \frac{\partial}{\partial w_n} J(w_n, b)
@@ -39,11 +41,10 @@ w_n' = w_n - \alpha \frac{\partial}{\partial w_n} J(w_n, b)
 b' = b - \alpha \frac{\partial}{\partial b} J(w, b)
 \end{aligned}
 $$
-       
-  
-   dove:
 
-   * $α$ è il *learning rate*, che determina l'ampiezza dello spostamento dei parametri ad ogni iterazione.
+ dove:
+
+ * $α$ è il *learning rate*, che determina l'ampiezza dello spostamento dei parametri ad ogni iterazione.
 
 3. **Iterazione:** Ripetere il passo 2 fino a raggiungere il minimo di $J(w, b)$.
 
@@ -63,9 +64,8 @@ $$
 **Metodo:**
 
 * Per ogni valore $x$ di un attributo $i$, si sottrae la media $\mu_{i}$ di quell'attributo e si divide per la deviazione standard $\sigma_{i}$:
-  $$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
+ $$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
 **Risultato:** Tutti i valori di un attributo vengono trasformati in una scala con media 0 e deviazione standard 1. 
-
 
 ## Funzione logistica
 
@@ -101,6 +101,7 @@ $$
 ## Calcolo delle derivate per l'aggiornamento dei parametri
 
 **Formule di aggiornamento dei parametri:**
+
 $$w' = w - \alpha\frac{\partial J(w,b)}{\partial w}$$
 $$b' = b - \alpha\frac{\partial J(w,b)}{\partial b}$$
 ### Calcolo delle derivate parziali:
@@ -108,17 +109,21 @@ $$b' = b - \alpha\frac{\partial J(w,b)}{\partial b}$$
 Supponiamo di voler calcolare le seguenti derivate parziali che ci serviranno per l'aggiornamento dei parametri:
 
 **Derivata rispetto a w:**
+
 $$\frac{\partial G_{w,b}(x)}{\partial w} = \frac{\partial}{\partial w}\frac{1}{1 + e^{-wx-b}} = \frac{-e^{-wx-b}(-x)}{(1 + e^{-wx-b})^2} = \frac{(1 + e^{-wx-b} - 1)x}{(1 + e^{-wx-b})^2}$$
 $$= \frac{x}{1 + e^{-wx-b}} - \frac{x}{(1 + e^{-wx-b})^2} = (G_{w,b}(x) - G_{w,b}(x)^2) \cdot x$$
 
 **Derivata rispetto a b:**
+
 $$\frac{\partial G_{w,b}(x)}{\partial b} = (G_{w,b}(x) - G_{w,b}(x)^2)$$
 
 **Derivate del logaritmo di G(x):**
+
 $$\frac{\partial \log G_{w,b}(x)}{\partial w} = \frac{G_{w,b}(x)(1 - G_{w,b}(x))x}{G_{w,b}(x)} = (1 - G_{w,b}(x))x$$
 $$\frac{\partial \log G_{w,b}(x)}{\partial b} = (1 - G_{w,b}(x))$$
 
 **Derivate del logaritmo di (1 - G(x)):**
+
 $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial w} = \frac{-G_{w,b}(x)(1 - G_{w,b}(x))x}{(1 - G_{w,b}(x))} = -G_{w,b}(x) \cdot x$$
 $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial b} = -G_{w,b}(x)$$
 * **m:** rappresenta il numero di istanze.
@@ -129,10 +134,12 @@ $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial b} = -G_{w,b}(x)$$
 
 Vengono calcolate le derivate della funzione di costo, necessarie per l'aggiornamento dei pesi **w** e dell'intercetta **b** durante l'addestramento:
 **Derivata rispetto a w:**
+
 $$\frac{\partial J(w,b)}{\partial w} = \frac{1}{m}\sum_{i=1}^m y^{(i)}(1 - G_{w,b}(x^{(i)}))x^{(i)} + (1-y^{(i)})(-G_{w,b}(x^{(i)}))x^{(i)}$$
 $$= \frac{1}{m}\sum_{i=1}^m [y^{(i)} - y^{(i)}G_{w,b}(x^{(i)}) - G_{w,b}(x^{(i)}) + y^{(i)}G_{w,b}(x^{(i)})] \cdot x^{(i)}$$
 $$= \frac{1}{m}\sum_{i=1}^m (G_{w,b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
 **Derivata rispetto a b:**
+
 $$\frac{\partial J(w,b)}{\partial b} = \frac{1}{m}\sum_{i=1}^m (G_{w,b}(x^{(i)}) - y^{(i)})$$
 
 **Osservazioni:**
@@ -143,6 +150,7 @@ $$\frac{\partial J(w,b)}{\partial b} = \frac{1}{m}\sum_{i=1}^m (G_{w,b}(x^{(i)})
 * Se la nostra equazione contiene più parametri, dovremmo ovviamente aggiornarli tutti.
 
 ### Aggiornamento parametri con regressione logistica multivariata
+
 $$
 \begin{aligned}
 w'_1 = w_1 - \alpha\frac{\partial J(w_1,...,w_n,b)}{\partial w_1} \\

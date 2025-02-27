@@ -1,5 +1,4 @@
 
-
 | Termine | Spiegazione |
 |---|---|
 | **Ricerca di Stati Finali** | Strategia di ricerca che si focalizza sul trovare uno stato finale desiderabile, senza considerare il cammino percorso per raggiungerlo. |
@@ -26,7 +25,7 @@ Le strategie di ricerca precedenti si focalizzavano sul trovare cammini attraver
 In sostanza, la soluzione era una sequenza di azioni, mentre ora ci interessa solo trovare un buon stato (non il relativo cammino), eventualmente rilassando anche le ipotesi di determinismo e di osservabilità. Un buon stato si intende come un ottimo locale.
 
 * **Ambiente non deterministico:** lo stato successivo non è completamente determinato dallo stato corrente e dall'azione compiuta dall'agente.
-	*  L'agente dovrà avere un piano condizionale ed eseguire azioni diverse a seconda di ciò che osserva.
+	* L'agente dovrà avere un piano condizionale ed eseguire azioni diverse a seconda di ciò che osserva.
 * **Ambiente non osservabile:** l'agente non ha accesso, in ogni momento, allo stato completo dell'ambiente.
 	* L'agente dovrà anche tenere traccia dei possibili stati in cui potrebbe trovarsi.
 

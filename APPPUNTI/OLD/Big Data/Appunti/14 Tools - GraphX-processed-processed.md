@@ -3,7 +3,6 @@
 
 ## Graph Analysis
 
-
 Un **grafo** è una struttura dati composta da un insieme di vertici (nodi) connessi da archi. I grafi sono adatti a rappresentare relazioni non lineari tra oggetti, trovando applicazione in diversi ambiti:
 
 * Analisi di social network
@@ -15,10 +14,6 @@ Un **grafo** è una struttura dati composta da un insieme di vertici (nodi) conn
 
 Modellare queste relazioni permette di ottenere informazioni utili sui pattern sottostanti, creando rappresentazioni più accurate dei fenomeni analizzati.
 
-
-
-
-
 ### La necessità di strumenti grafo-paralleli nell'ambito del Big Data
 
 Con l'aumento delle dimensioni e della complessità dei dataset, gli strumenti tradizionali di elaborazione di grafi diventano inefficienti. I framework di elaborazione del Big Data, come Hadoop o Spark, non sono ottimali per i grafi perché:
@@ -26,9 +21,7 @@ Con l'aumento delle dimensioni e della complessità dei dataset, gli strumenti t
 * Non considerano la struttura del grafo sottostante ai dati.
 * Il calcolo può causare eccessivo movimento di dati e degradazione delle prestazioni.
 
-Questo evidenzia la necessità di soluzioni *ad hoc* per un calcolo grafo-parallelo efficiente.  **Pregel**, sviluppato da Google, è un framework per l'elaborazione efficiente di grafi su larga scala tramite cluster distribuiti. È particolarmente adatto per algoritmi iterativi altamente grafo-paralleli e si basa sul modello **Bulk Synchronous Parallel** (BSP).
-
-
+Questo evidenzia la necessità di soluzioni *ad hoc* per un calcolo grafo-parallelo efficiente. **Pregel**, sviluppato da Google, è un framework per l'elaborazione efficiente di grafi su larga scala tramite cluster distribuiti. È particolarmente adatto per algoritmi iterativi altamente grafo-paralleli e si basa sul modello **Bulk Synchronous Parallel** (BSP).
 
 ## Il modello BSP
 
@@ -43,7 +36,6 @@ Questo evidenzia la necessità di soluzioni *ad hoc* per un calcolo grafo-parall
 
 ![[|384](_page_7_Figure_9.jpeg)]
 
-
 ## Il superstep
 
 Il calcolo BSP procede in **supersteps**, unità di esecuzione sequenziali composte da tre fasi:
@@ -54,7 +46,6 @@ Il calcolo BSP procede in **supersteps**, unità di esecuzione sequenziali compo
 
 ![[|468](_page_8_Figure_10.jpeg)] 
 
-
 ### Programmazione vertex-centric e il framework Pregel
 
 Google Pregel, per l'elaborazione distribuita scalabile di grafi, si basa su:
@@ -62,11 +53,9 @@ Google Pregel, per l'elaborazione distribuita scalabile di grafi, si basa su:
 * **BSP**: i vertici eseguono calcoli locali, inviano messaggi e si sincronizzano tra i superstep.
 * **Programmazione vertex-centric**: i grafi sono elaborati tramite funzioni che operano su singoli vertici e archi associati.
 
-BSP fornisce un framework strutturato per il calcolo parallelo, la tolleranza ai guasti e la scalabilità. La programmazione vertex-centric semplifica lo sviluppo di algoritmi grafici, aumentando chiarezza ed efficienza.  Sebbene l'implementazione di Pregel di Google non sia pubblica, esistono alternative open source come Apache **Giraph**, l'API **Gelly** di Apache Flink e **GraphX** di Apache Spark.
+BSP fornisce un framework strutturato per il calcolo parallelo, la tolleranza ai guasti e la scalabilità. La programmazione vertex-centric semplifica lo sviluppo di algoritmi grafici, aumentando chiarezza ed efficienza. Sebbene l'implementazione di Pregel di Google non sia pubblica, esistono alternative open source come Apache **Giraph**, l'API **Gelly** di Apache Flink e **GraphX** di Apache Spark.
 ]
 ## Spark GraphX
-
-
 
 ### Caratteristiche principali
 
@@ -77,10 +66,9 @@ Apache Spark **GraphX** è una libreria di elaborazione di grafi di Apache Spark
 * **Operatori Grafo:** Fornisce operatori per la trasformazione e manipolazione di grafi (mappatura, creazione di sottografi, inversione di archi, ecc.).
 * **Integrazione con Spark:** Si integra perfettamente con altri componenti Spark.
 
-
 ### Grafi Distribuiti Resilienti
 
-GraphX estende gli RDD di Spark introducendo il **Grafo Distribuito Resiliente**, un multigrafo diretto con proprietà associate a vertici e archi.  Fornisce un'interfaccia unificata per rappresentare i dati considerando la struttura del grafo, mantenendo l'efficienza degli RDD di Spark. Permette di sfruttare concetti di grafo e primitive efficienti per il calcolo del grafo e operazioni parallele distribuite di dati tipiche di Spark. Un grafo contiene due RDD distinti: uno per gli archi e uno per i vertici.
+GraphX estende gli RDD di Spark introducendo il **Grafo Distribuito Resiliente**, un multigrafo diretto con proprietà associate a vertici e archi. Fornisce un'interfaccia unificata per rappresentare i dati considerando la struttura del grafo, mantenendo l'efficienza degli RDD di Spark. Permette di sfruttare concetti di grafo e primitive efficienti per il calcolo del grafo e operazioni parallele distribuite di dati tipiche di Spark. Un grafo contiene due RDD distinti: uno per gli archi e uno per i vertici.
 
 ![[](_page_12_Figure_9.jpeg)
 GraphX fornisce un'ulteriore visualizzazione della struttura del grafo tramite **EdgeTriplet**, estendendo le informazioni degli RDD degli archi aggiungendo le proprietà dei vertici sorgente e destinazione.
@@ -93,12 +81,12 @@ GraphX fornisce un'ulteriore visualizzazione della struttura del grafo tramite *
 
 ### Partizionamento Vertex-cut
 
-I grafi in GraphX sono partizionati per applicazioni distribuite grafo-parallele scalabili.  Si usa un approccio **basato sui vertici** per ridurre i costi di comunicazione e archiviazione.  L'operatore *Graph.partitionBy* permette di scegliere tra diversi algoritmi di partizionamento.
+I grafi in GraphX sono partizionati per applicazioni distribuite grafo-parallele scalabili. Si usa un approccio **basato sui vertici** per ridurre i costi di comunicazione e archiviazione. L'operatore *Graph.partitionBy* permette di scegliere tra diversi algoritmi di partizionamento.
 
 ![[|403](_page_14_Picture_7.jpeg)
 
-
 ### Operatori di base
+
 ### Operatori di base
 
 Dato un grafo di input, vengono fornite informazioni topologiche e rappresentazioni basate su RDD:
@@ -132,7 +120,6 @@ def joinVertices[U](table: RDD[(VertexId, U)])(mapFunc: (VertexId, VD, U) => VD)
 def outerJoinVertices[U, VD2](other: RDD[(VertexId, U)])(mapFunc: (VertexId, VD, Option[U]) => VD2): Graph[VD2, ED]
 ```
 
-
 ## L'API Pregel
 
 GraphX fornisce un'implementazione del modello di calcolo vertex-centrico **Pregel** per applicazioni grafo su larga scala altamente parallele. Durante un superstep Pregel, il framework invoca una funzione definita dall'utente (UDF) per ogni vertice, eseguita in parallelo. Ogni vertice può cambiare il suo stato, leggere messaggi ricevuti nel superstep precedente o inviarne di nuovi per il superstep successivo.
@@ -142,32 +129,27 @@ Differenze con il Pregel standard:
 * GraphX esegue il calcolo dei messaggi in parallelo come funzione della tripla arco, accedendo alle proprietà del vertice sorgente e di quello di destinazione.
 * I vertici possono inviare messaggi solo ai vicini; quelli che non ricevono messaggi in un superstep vengono saltati.
 
-
 ### L'operatore Pregel
 
 L'operatore **Pregel** accetta due insiemi di parametri di input:
 
 * Il primo specifica il messaggio iniziale, il numero di iterazioni e la direzione dell'arco.
 * Il secondo aspetta tre funzioni definite dall'utente:
-    * **vprog: (VertexId, VD, A) => VD**: codifica il comportamento del vertice.  Questa UDF è invocata su ogni vertice che riceve un messaggio e calcola il valore del vertice aggiornato.
-
-
-
+ * **vprog: (VertexId, VD, A) => VD**: codifica il comportamento del vertice. Questa UDF è invocata su ogni vertice che riceve un messaggio e calcola il valore del vertice aggiornato.
 
 ## Algoritmi di Elaborazione di Grafi con GraphX
 
 Le User Defined Functions (UDF) utilizzate in GraphX per l'elaborazione di grafi includono:
 
-* **`sendMsg: EdgeTriplet[VD, ED] => Iterator[(VertexId, A)]`**: Questa UDF viene applicata agli archi in uscita dei vertici che hanno ricevuto messaggi nell'iterazione corrente.  Restituisce un iteratore di coppie (VertexId, A), dove `A` è il tipo del messaggio.
+* **`sendMsg: EdgeTriplet[VD, ED] => Iterator[(VertexId, A)]`**: Questa UDF viene applicata agli archi in uscita dei vertici che hanno ricevuto messaggi nell'iterazione corrente. Restituisce un iteratore di coppie (VertexId, A), dove `A` è il tipo del messaggio.
 
 * **`mergeMsg: (A, A) => A`**: Specifica come due messaggi ricevuti da un vertice devono essere uniti in un singolo messaggio dello stesso tipo. Questa UDF deve essere commutativa e associativa.
 
 Al termine del calcolo, il grafo risultante viene restituito in output.
 
-
 ## L'Algoritmo PageRank
 
-PageRank è un algoritmo iterativo sviluppato da Larry Page e Sergey Brin, utilizzato da Google Search per classificare le pagine web.  Si basa sull'idea che un link da una pagina ad un'altra rappresenta un voto di fiducia: pagine con molti link in entrata da fonti autorevoli sono considerate più importanti.
+PageRank è un algoritmo iterativo sviluppato da Larry Page e Sergey Brin, utilizzato da Google Search per classificare le pagine web. Si basa sull'idea che un link da una pagina ad un'altra rappresenta un voto di fiducia: pagine con molti link in entrata da fonti autorevoli sono considerate più importanti.
 
 PageRank modella il processo di navigazione di un utente:
 
@@ -177,12 +159,11 @@ L'utente può interrompere la navigazione e effettuare un "*random hop*", ovvero
 
 La probabilità di continuare a cliccare sui link in uscita è il fattore di smorzamento, generalmente impostato a *d* = 0.85; la probabilità di un *random hop* è 1 − *d* = 0.15.
 
-
 ### Approfondimento Matematico
 
-Il PageRank della pagina *p<sub>i</sub>*,  *PR(p<sub>i</sub>)*, rappresenta la probabilità che un utente, partendo da una pagina *p<sub>j</sub>*, arrivi su *p<sub>i</sub>*. È dato dalla somma di due probabilità:
+Il PageRank della pagina *p<sub>i</sub>*, *PR(p<sub>i</sub>)*, rappresenta la probabilità che un utente, partendo da una pagina *p<sub>j</sub>*, arrivi su *p<sub>i</sub>*. È dato dalla somma di due probabilità:
 
-* La probabilità di raggiungere *p<sub>i</sub>* tramite un *random hop*.  Si assume una probabilità uniforme di atterrare su ciascuna delle *N* pagine disponibili.
+* La probabilità di raggiungere *p<sub>i</sub>* tramite un *random hop*. Si assume una probabilità uniforme di atterrare su ciascuna delle *N* pagine disponibili.
 * La probabilità di raggiungere *p<sub>i</sub>* seguendo un link esistente in *p<sub>j</sub>*, assumendo una probabilità uniforme di seguire ciascun link in *p<sub>j</sub>*.
 
 La formula è:
@@ -205,8 +186,6 @@ Dove:
 
 **Applicazioni principali:** riepiloghi di notizie, motori di ricerca, e-learning, ricerca accademica.
 
-
-
 ### TextRank: Utilizzo di PageRank per la Sintesi Estrattiva
 
 TextRank, proposto da Mihalcea e Tarau nel 2004, è un algoritmo di sintesi estrattiva. Rappresenta il testo di input come un grafo pesato di frasi semanticamente connesse ed estrae un riassunto identificando le *k* frasi più rappresentative tramite PageRank.
@@ -222,7 +201,7 @@ L'implementazione di TextRank con GraphX prevede i seguenti step:
 
 1. **Inizializzazione:** Si inizializza una sessione Spark e si definisce una funzione per calcolare la similarità tra frasi.
 
-2. **Creazione del grafo:**  Si legge il testo, si estraggono le frasi, si crea un grafo completamente connesso dove ogni nodo è una frase e il peso di ogni arco è la similarità tra le frasi connesse.
+2. **Creazione del grafo:** Si legge il testo, si estraggono le frasi, si crea un grafo completamente connesso dove ogni nodo è una frase e il peso di ogni arco è la similarità tra le frasi connesse.
 
 3. **Preparazione del grafo per PageRank:** Si normalizzano i pesi degli archi (somma dei pesi uscenti da ogni nodo = 1) e si assegna un PageRank iniziale a ogni nodo.
 

@@ -37,17 +37,18 @@ type(pil_image)
 ```
 
 ## Visualizzazione di un'immagine
+
 Possiamo visualizzare l'immagine appena caricata con il metodo *imshow* di matplotlib
 
 Dalla documentazione sappiamo che il primo parametro richiede:
 
-    array-like or PIL image
-    The image data. Supported array shapes are:
+ array-like or PIL image
+ The image data. Supported array shapes are:
 
-    (M, N): an image with scalar data. The values are mapped to colors using normalization and a colormap. See parameters norm, cmap, vmin, vmax.
-    (M, N, 3): an image with RGB values (0-1 float or 0-255 int).
-    (M, N, 4): an image with RGBA values (0-1 float or 0-255 int), i.e. including transparency.
-    The first two dimensions (M, N) define the rows and columns of the image.
+ (M, N): an image with scalar data. The values are mapped to colors using normalization and a colormap. See parameters norm, cmap, vmin, vmax.
+ (M, N, 3): an image with RGB values (0-1 float or 0-255 int).
+ (M, N, 4): an image with RGBA values (0-1 float or 0-255 int), i.e. including transparency.
+ The first two dimensions (M, N) define the rows and columns of the image.
 
 Quindi dobbiamo convertire l'immagine in un oggetto array-like. 
 
@@ -83,33 +84,31 @@ def plot_image(tensor):
 plot_image(tensor_image)
 ```
 
-    
 ![png](01_LoadingImage_7_0.png)
-    
 
 ```python
 print(f'tensor shape {tensor_image.shape}')
 print(f'np.array shape {pil2array.shape}')
 ```
 
-    tensor shape torch.Size([3, 416, 600])
-    np.array shape (416, 600, 3)
-    
+ tensor shape torch.Size([3, 416, 600])
+ np.array shape (416, 600, 3)
 
 ## Shape del tensore vs shape del numpy array
+
 Per visualizzare con il metodo *imshow* l'array in input deve avere una shape **(H, W, rgb)**.
 
 L'array numpy *pil2array* ha una shape già compatibile, invece il tensore deve essere trasformato.
 
 L'istruzione seguente è un esempio di una trasformazione
 
-    tensore (rgb, H, W) -> numpy array (rgb, H, W) -> numpy array (H, W, rgb) 
+ tensore (rgb, H, W) -> numpy array (rgb, H, W) -> numpy array (H, W, rgb) 
 
 ```python
 tensor_image.numpy().transpose(1, 2, 0).shape
 ```
 
-    (416, 600, 3)
+ (416, 600, 3)
 
 ```python
 # plot with numpy array
@@ -121,16 +120,14 @@ plt.imshow(pil2array)
 plt.show()
 ```
 
-    
 ![png](01_LoadingImage_11_0.png)
-    
 
 # Dataset di immagini
 
 Nella CV è molto più frequente avere un dataset di immagini, quindi esitono dei metodo che facilitano il caricamento e la costruzione del dataset. Nel package torchvision è presente la classe ImageFolder che restituisce un oggetto che rappresenta il dataset
 
-    torchvision.datasets.ImageFolder(root, transform=None, target_transform=None, loader=<function default_loader>, is_valid_file=None)
-  A generic data loader where the images are arranged in this way:
+ torchvision.datasets.ImageFolder(root, transform=None, target_transform=None, loader=<function default_loader>, is_valid_file=None)
+ A generic data loader where the images are arranged in this way:
 
 Iterando sul dataset, ogni elemento è rappresentato dalla tupla (sample, target) where target is class_index of the target class.
 
@@ -154,7 +151,7 @@ for i, (item, c_index) in enumerate(dataset):
     print(f'{i} -> {item.shape}')
 ```
 
-    0 -> torch.Size([3, 266, 400])
+ 0 -> torch.Size([3, 266, 400])
 
 ```python
 for i, (item, c_index) in enumerate(dataset):
@@ -162,33 +159,21 @@ for i, (item, c_index) in enumerate(dataset):
     plot_image(item)
 ```
 
-    0 -> torch.Size([3, 266, 400])
-    
+ 0 -> torch.Size([3, 266, 400])
 
-    
 ![png](01_LoadingImage_16_1.png)
-    
 
-    1 -> torch.Size([3, 267, 400])
-    
+ 1 -> torch.Size([3, 267, 400])
 
-    
 ![png](01_LoadingImage_16_3.png)
-    
 
-    2 -> torch.Size([3, 267, 400])
-    
+ 2 -> torch.Size([3, 267, 400])
 
-    
 ![png](01_LoadingImage_16_5.png)
-    
 
-    3 -> torch.Size([3, 281, 400])
-    
+ 3 -> torch.Size([3, 281, 400])
 
-    
 ![png](01_LoadingImage_16_7.png)
-    
 
 ```python
 # visualizzazione con un subplot 2 x 2
@@ -205,7 +190,5 @@ for i in range(1, columns*rows +1):
 plt.show()
 ```
 
-    
 ![png](01_LoadingImage_17_0.png)
-    
 

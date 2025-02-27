@@ -187,7 +187,7 @@ class FeaturePyramid(nn.Module):
         pyramid_feature_4 = self.pyramid_transformation_4(resnet_feature_4)
         upsampled_feature_5 = upsample(pyramid_feature_5, pyramid_feature_4)
         pyramid_feature_4 = self.upsample_transform_1(torch.add(upsampled_feature_5, pyramid_feature_4))
-        
+
         pyramid_feature_3 = self.pyramid_transformation_3(resnet_feature_3)
         upsampled_feature_4 = upsample(pyramid_feature_4, pyramid_feature_3)
         pyramid_feature_3 = self.upsample_transform_2(torch.add(upsampled_feature_4, pyramid_feature_3))

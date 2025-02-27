@@ -32,13 +32,11 @@ axes = axes.ravel()
 for i, mx in enumerate((image_left, image_right)):
     axes[i].imshow(mx)
     axes[i].axis('off')
-         
+
 plt.show()
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_4_0.png)
-    
 
 ## Analizziamo l'immagine A
 
@@ -50,7 +48,7 @@ keypoints_left, descriptors_left = SIFT.detectAndCompute(image_left_gray, None)
 len(keypoints_left)
 ```
 
-    2233
+ 2233
 
 ```python
 img_2 = cv2.drawKeypoints(image_left_gray, keypoints_left, image_left.copy())
@@ -59,9 +57,7 @@ plt.figure(figsize=(16, 12))
 plt.imshow(img_2);
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_7_0.png)
-    
 
 ## Analizziamo l'immagine B
 
@@ -73,7 +69,7 @@ keypoints_right, descriptors_right = SIFT.detectAndCompute(image_right_gray, Non
 len(keypoints_right)
 ```
 
-    2364
+ 2364
 
 ```python
 img_2_right = cv2.drawKeypoints(image_right_gray, keypoints_right, image_right.copy())
@@ -82,9 +78,7 @@ plt.figure(figsize=(16, 12))
 plt.imshow(img_2_right);
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_10_0.png)
-    
 
 ## Combiniamo le immagini
 
@@ -116,7 +110,7 @@ matches = np.asarray(good)
 matches.shape
 ```
 
-    (507,)
+ (507,)
 
 visualizziamo la corrispondenza di 100 punti tra tutti quelli individuati
 
@@ -126,7 +120,6 @@ matches_sublist = np.random.choice(matches.flatten(), 100)
 img_desc = cv2.drawMatches(image_right, keypoints_right, image_left, keypoints_left, 
                            matches_sublist,
                            None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    
 
 plt.figure(figsize=(20, 12))
 plt.imshow(img_desc)
@@ -134,9 +127,7 @@ plt.axis('off')
 plt.show()
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_14_0.png)
-    
 
 Per alli
 
@@ -145,25 +136,24 @@ def getHomography(kpsA, kpsB, featuresA, featuresB, matches, reprojThresh):
     # convert the keypoints to numpy arrays
     kpsA = np.float32([kp.pt for kp in kpsA])
     kpsB = np.float32([kp.pt for kp in kpsB])
-    
+
     if len(matches) > 4:
 
         # construct the two sets of points
         ptsA = np.float32([kpsA[m.queryIdx] for m in matches])
         ptsB = np.float32([kpsB[m.trainIdx] for m in matches])
-        
+
         # estimate the homography between the sets of points
         (H, status) = cv2.findHomography(ptsA, ptsB, cv2.RANSAC, reprojThresh)
 
         return H, status
     else:
         raise RuntimeError('Can’t find enough keypoints.')
-    
-    
+
 H, status = getHomography(keypoints_right, keypoints_left, 
                           descriptors_right, descriptors_left,
                           matches, 3)
-    
+
 H    
 ```
 
@@ -183,9 +173,7 @@ plt.axis('off')
 plt.show()
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_17_0.png)
-    
 
 ```python
 # transform the panorama image to grayscale and threshold it 
@@ -210,9 +198,7 @@ plt.figure(figsize=(20,10))
 plt.imshow(result);
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_18_0.png)
-    
 
 ```python
 # Images
@@ -224,18 +210,13 @@ for i, mx in enumerate((image_left, image_right)):
     axes[i].imshow(mx)
     axes[i].axis('off')
 
-    
 plt.figure(figsize=(20,10))
 plt.imshow(result);
-    
+
 plt.show()
 ```
 
-    
 ![png](ImageCombinerOpenCVSift_19_0.png)
-    
 
-    
 ![png](ImageCombinerOpenCVSift_19_1.png)
-    
 

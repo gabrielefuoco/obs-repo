@@ -1,15 +1,14 @@
 Normalize tf using document length
 
-$tf_i' = \frac{tf_i}{B}$
+$$tf_i' = \frac{tf_i}{B}$$
 
-$c_i^{BM25}(tf_i) = \log{\frac{N}{df_i}} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'}$
+$$c_i^{BM25}(tf_i) = \log{\frac{N}{df_i}} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'}$$
 
-$= \log{\frac{N}{df_i}} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$
+$$= \log{\frac{N}{df_i}} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$$
 
 BM25 ranking function
 
-$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$
-
+$$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$$
 
 ---
 
@@ -29,18 +28,15 @@ where
 * $len_z$ is length of zone $z$
 * $Z$ is the number of zones
 
-
-
 ---
 
 # Simple BM25F with zones
 
 Simple interpretation: zone $z$ is "replicated" $v_z$ times
 
-$RSV_{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)\tilde{tf_i}}{k_1((1-b) + b \frac{\tilde{dl_i}}{av\tilde{dl}}) + \tilde{tf_i}}$
+$$RSV_{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)\tilde{tf_i}}{k_1((1-b) + b \frac{\tilde{dl_i}}{av\tilde{dl}}) + \tilde{tf_i}}$$
 
 But we may want zone-specific parameters ($k_1$, $b$, IDF)
-
 
 ---
 
@@ -52,11 +48,9 @@ $$ B_z = \left( (1 - b_z) + b_z \frac{len_z}{avlen_z} \right), \quad 0 \le b_z \
 
 $$ RSV_{BM2.5F} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)\tilde{tf}_i}{k_1 + \tilde{tf}_i} $$
 
-
 ---
 
 $$RSV^{BM25} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)tf_i}{k_1((1-b) + b \frac{dl}{avdl}) + tf_i}$$
-
 
 ---
 
@@ -73,7 +67,6 @@ For each doc in a collection of $N$ docs
 Word token at position $i$ in doc $d_j$
 
 [Moens and Vulic, Tutorial @WSD]
-
 
 ---
 
@@ -98,41 +91,36 @@ Word token at position $i$ in doc $d_j$
 \end{tikzpicture}
 ```
 
-
 ---
 
 [It's hot and delicious. [I poured the tea for my uncle]3.document
 
 center word
 
-
 ---
 
-$\text{banking} = \begin{bmatrix} 0.286 \\ 0.792 \\ -0.177 \\ -0.107 \\ 0.109 \\ -0.542 \\ 0.349 \\ 0.271 \end{bmatrix}$
+$$\text{banking} = \begin{bmatrix} 0.286 \\ 0.792 \\ -0.177 \\ -0.107 \\ 0.109 \\ -0.542 \\ 0.349 \\ 0.271 \end{bmatrix}$$
 
-$\text{monetary} = \begin{bmatrix} 0.413 \\ 0.582 \\ -0.007 \\ 0.247 \\ 0.216 \\ -0.718 \\ 0.147 \\ 0.051 \end{bmatrix}$
-
+$$\text{monetary} = \begin{bmatrix} 0.413 \\ 0.582 \\ -0.007 \\ 0.247 \\ 0.216 \\ -0.718 \\ 0.147 \\ 0.051 \end{bmatrix}$$
 
 ---
 
 Example windows and process for computing $P(w_{t+j} | w_t)$
 
-$P(w_{t-2} | w_t)$  $P(w_{t+2} | w_t)$
+$$P(w_{t-2} | w_t)$ $P(w_{t+2} | w_t)$$
 
-$P(w_{t-1} | w_t)$  $P(w_{t+1} | w_t)$
+$$P(w_{t-1} | w_t)$ $P(w_{t+1} | w_t)$$
 
 ... problems turning into banking crises as ...
 
-outside context words  center word  outside context words
-in window of size 2  at position t  in window of size 2
-
-
+outside context words center word outside context words
+in window of size 2 at position t in window of size 2
 
 ---
 
 Example windows and process for computing $P(w_{t+j} | w_t)$
 
-$P(w_{t-2} | w_t)$                              $P(w_{t+2} | w_t)$
+$$P(w_{t-2} | w_t)$ $P(w_{t+2} | w_t)$$
 
 \begin{tikzpicture}[node distance=0.5cm]
 \node[fill=pink, text width=1cm, align=center] (w1) {...};
@@ -159,10 +147,9 @@ $P(w_{t-2} | w_t)$                              $P(w_{t+2} | w_t)$
 \node at (5.5,-0.9) {in window of size 2};
 \end{tikzpicture}
 
-
 ---
 
-$\theta = \begin{bmatrix} v_{aardvark} \\ v_a \\ \vdots \\ v_{zebra} \\ u_{aardvark} \\ u_a \\ \vdots \\ u_{zebra} \end{bmatrix} \in \mathbb{R}^{2dV}$
+$$\theta = \begin{bmatrix} v_{aardvark} \\ v_a \\ \vdots \\ v_{zebra} \\ u_{aardvark} \\ u_a \\ \vdots \\ u_{zebra} \end{bmatrix} \in \mathbb{R}^{2dV}$$
 
 ---
 
@@ -219,7 +206,6 @@ $$
 
 $N$-dimension vector
 
-
 # Output
 
 softmax
@@ -242,7 +228,6 @@ on              $w_{(t+1)}$
 floor           $w_{(t+2)}$
 
 ```
-
 
 ---
 
@@ -293,7 +278,6 @@ sat
 one-hot
 vector
 
-
 # We must learn $W$ and $W'$
 
 # Input layer
@@ -310,7 +294,7 @@ vector
 ```
 cat
 
-$W_{V \times N}$
+$$W_{V \times N}$$
 
 V-dim
 
@@ -326,7 +310,7 @@ V-dim
 ```
 on
 
-$W_{V \times N}$
+$$W_{V \times N}$$
 
 V-dim
 
@@ -350,10 +334,9 @@ N will be the size of word vector
 ```
 sat
 
-$W'_{N \times V}$
+$$W'_{N \times V}$$
 
 V-dim
-
 
 ---
 
@@ -376,11 +359,9 @@ $x_{cat}$
 
 V-dim
 
-
 $\begin{bmatrix} 0.1 & 2.4 & 1.6 & \color{red}{1.8} & 0.5 & 0.9 & ... & 3.2 \\ 0.5 & 2.6 & 1.4 & \color{red}{2.9} & 1.5 & 3.6 & ... & 6.1 \\ ... & ... & ... & ... & ... & ... & ... & ... \\ 0.6 & 1.8 & 2.7 & \color{red}{1.9} & 2.4 & 2.0 & ... & 1.2 \end{bmatrix}$
 
 $W_{V \times N}^T$ $\times$ $x_{cat}$ = $v_{cat}$
-
 
 +
 
@@ -390,7 +371,6 @@ Hidden layer
 N-dim
 
 $W_{V \times N}^T$ $\times$ $x_{on}$ = $v_{on}$
-
 
 | Output layer |  |
 |---|---|
@@ -407,17 +387,14 @@ $W_{V \times N}^T$ $\times$ $x_{on}$ = $v_{on}$
 
 ```
 
-
 ---
 
 Probability and Ratio
-|             | $k = solid$ | $k = gas$ | $k = water$ | $k = fashion$ |
+| | $k = solid$ | $k = gas$ | $k = water$ | $k = fashion$ |
 |-------------|---------------|-------------|---------------|----------------|
-| $P(k|ice)$  | $1.9 \times 10^{-4}$ | $6.6 \times 10^{-5}$ | $3.0 \times 10^{-3}$ | $1.7 \times 10^{-5}$ |
+| $P(k|ice)$ | $1.9 \times 10^{-4}$ | $6.6 \times 10^{-5}$ | $3.0 \times 10^{-3}$ | $1.7 \times 10^{-5}$ |
 | $P(k|steam)$ | $2.2 \times 10^{-5}$ | $7.8 \times 10^{-4}$ | $2.2 \times 10^{-3}$ | $1.8 \times 10^{-5}$ |
-| $\frac{P(k|ice)}{P(k|steam)}$ | $8.9$          | $8.5 \times 10^{-2}$ | $1.36$          | $0.96$           |
-
-
+| $\frac{P(k|ice)}{P(k|steam)}$ | $8.9$ | $8.5 \times 10^{-2}$ | $1.36$ | $0.96$ |
 
 ---
 
@@ -430,7 +407,6 @@ $\begin{bmatrix}
 \end{array}
 \end{bmatrix}$
 ```
-
 
 ---
 
@@ -468,7 +444,6 @@ guidare
 ...
 ```
 
-
 ---
 
 ```
@@ -487,19 +462,16 @@ Troponym Troponym
 TAKE OVER          PICK UP
 ```
 
-
 ---
 
 **wood** [wʊd]
 1. n.
-    a. (material) legno; (timber)
-    b. (forest) bosco
-    c. (Golf) mazza di legno; (Bowls)
+ a. (material) legno; (timber)
+ b. (forest) bosco
+ c. (Golf) mazza di legno; (Bowls)
 2. adj.
-    a. (made of wood) di legno
-    b. (living etc. in a wood) di bosco, silvestre.
-
-
+ a. (made of wood) di legno
+ b. (living etc. in a wood) di bosco, silvestre.
 
 ---
 
@@ -507,7 +479,7 @@ Gloss similarity
 
 * Semantic field
 
-sclerosis  $n$ (Med) sclerosi
+sclerosis $n$ (Med) sclerosi
 
 * Synonyms, hypernyms
 reason 1. $n$. a. (motive, cause) ragione,...
@@ -515,10 +487,8 @@ sole $n$ (fish) sogliola
 
 * Context
 handle 1. $n$. ...
-(of knife)          manico, impugnatura;
-(of door, drawer)   maniglia
-
-
+(of knife) manico, impugnatura;
+(of door, drawer) maniglia
 
 ---
 
@@ -536,13 +506,11 @@ $\implies$ \{flatfish\} -- any of several families of *fishes* having...
 \{sole\} -- the underside of the foot
 $\implies$ \{area, region\} -- a part of an animal that has a special...
 
-
 ---
 
-$a:b :: c:?$
+$$a:b :: c:?$$
 
-$d = \text{arg } \max_i \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||}$
-
+$$d = \text{arg } \max_i \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||}$$
 
 ---
 
@@ -552,22 +520,19 @@ woman
 man
 ```
 
-
 ---
 
-| Word 1      | Word 2    | Human (mean) |
+| Word 1 | Word 2 | Human (mean) |
 |--------------|------------|----------------|
-| tiger        | cat        | 7.35           |
-| tiger        | tiger      | 10             |
-| book         | paper      | 7.46           |
-| computer     | internet   | 7.58           |
-| plane        | car        | 5.77           |
-| professor    | doctor     | 6.62           |
-| stock        | phone      | 1.62           |
-| stock        | CD         | 1.31           |
-| stock        | jaguar     | 0.92           |
-
-
+| tiger | cat | 7.35 |
+| tiger | tiger | 10 |
+| book | paper | 7.46 |
+| computer | internet | 7.58 |
+| plane | car | 5.77 |
+| professor | doctor | 6.62 |
+| stock | phone | 1.62 |
+| stock | CD | 1.31 |
+| stock | jaguar | 0.92 |
 
 ---
 
@@ -583,8 +548,6 @@ man
 | GloVe | 42B | 75.9 | 83.6 | 82.9 | 59.6 | 47.8 |
 | CBOW\* | 100B | 68.4 | 79.6 | 75.4 | 59.4 | 45.5 |
 
-
-
 ---
 
 | Model | Dev | Test | ACE | MUC7 |
@@ -598,8 +561,6 @@ man
 | CW | 92.2 | 87.4 | 81.7 | 80.2 |
 | CBOW | 93.1 | 88.2 | 82.2 | 81.1 |
 | GloVe | $\mathbf{93.2}$ | $\mathbf{88.3}$ | $\mathbf{82.9}$ | $\mathbf{82.2}$ |
-
-
 
 ---
 
@@ -617,7 +578,6 @@ $$H(p, q) = - \sum_{c=1}^{C} p(c) \log q(c)$$
 * Assuming a ground truth (or true or gold or target) probability distribution that is 1 at the right class and 0 everywhere else, $p = [0, ..., 0, 1, 0, ..., 0]$, then:
 
 * Because of one-hot $p$, the only term left is the negative log probability of the true class $y_i$: $- \log p(y_i | x_i)$
-
 
 ---
 

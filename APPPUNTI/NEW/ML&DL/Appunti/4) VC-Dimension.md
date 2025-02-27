@@ -30,7 +30,7 @@ La VC-dimension per gli iperpiani separatori in uno spazio vettoriale di dimensi
 
 Per dimostrare questo teorema, dobbiamo dimostrare due punti:
 
-1. **VC-dimension ≥ d:**  Dobbiamo dimostrare che esiste un insieme di $d$ punti che possono essere classificati arbitrariamente da un iperpiano separatore.
+1. **VC-dimension ≥ d:** Dobbiamo dimostrare che esiste un insieme di $d$ punti che possono essere classificati arbitrariamente da un iperpiano separatore.
 2. **VC-dimension ≤ d:** Dobbiamo dimostrare che per ogni insieme di $d+1$ punti, esiste almeno una funzione binaria che non può essere realizzata da un iperpiano separatore.
 
 **Punto 1: VC-dimension ≥ d**
@@ -69,9 +69,9 @@ $$
 
 Supponiamo che esista un iperpiano separatore definito dal vettore $\vec{w}$ che implementa questa funzione. Quindi, avremmo:
 
-$$\sum_{i \in I}a_{i}<\vec{w},\vec{x_{i}}> \ = \  < \sum_{i \in I}a_{i}\vec{w},\vec{x_{i}}>$$
+$$\sum_{i \in I}a_{i}<\vec{w},\vec{x_{i}}> \ = \ < \sum_{i \in I}a_{i}\vec{w},\vec{x_{i}}>$$
 
-$$= \ < \sum_{j \in J}|a_{j}|\vec{w},\vec{x_{j}}> \ = \  \sum_{j \in J}|a_{j}| \ <\vec{w},\vec{x_{j}}>$$
+$$= \ < \sum_{j \in J}|a_{j}|\vec{w},\vec{x_{j}}> \ = \ \sum_{j \in J}|a_{j}| \ <\vec{w},\vec{x_{j}}>$$
 
 Poiché $a_i > 0$ per $i \in I$ e la funzione assegna $+1$ a tutti gli $\vec{x_i}$, il prodotto scalare $<\vec{w},\vec{x_{i}}>$ è positivo. Quindi, la prima sommatoria è positiva.
 
@@ -99,10 +99,10 @@ Se utilizziamo questi valori, la funzione XOR sarà:
 
 | $x_1$ | $x_2$ | Risultato |
 | ----- | ----- | --------- |
-| -1    | -1    | 1         |
-| -1    | 1     | 0         |
-| 1     | -1    | 0         |
-| 1     | 1     | 1         |
+| -1 | -1 | 1 |
+| -1 | 1 | 0 |
+| 1 | -1 | 0 |
+| 1 | 1 | 1 |
 
 Il percettrone non può catturare la funzione XOR (un singolo neurone non è in grado di rappresentarla). 
 
@@ -175,7 +175,7 @@ In conclusione, la model selection è un processo cruciale nell'apprendimento au
 
 Stiamo confrontando ipotesi in generale, che provengono da classi di ipotesi con espressività diversa. Il **validation set** ha la stessa forma del training set ma non viene utilizzato durante l'addestramento. Lo usiamo solo per stimare l'errore di generalizzazione.
 
-$V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$
+$$V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$$
 
 *V è indipendente da S*
 
@@ -186,7 +186,7 @@ $V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$
 
 **Stima dell'errore di generalizzazione:**
 
-$h^* = \arg \ \min_{h \in H^*} L_v(h)$
+$$h^* = \arg \ \min_{h \in H^*} L_v(h)$$
 
 Dovrebbe funzionare perché l'errore sul validation set è una buona stima dell'errore di generalizzazione.
 
@@ -196,7 +196,7 @@ La regola precedente corrisponde a minimizzare il rischio empirico sul validatio
 
 Questo problema ha una **sample complexity** $m=\frac{\log\left( \frac{2|H|}{S} \right)}{2\epsilon^2}$.
 
-Da qui deriva che  $\forall h \in H^*,| L_{D}(h)-L_{V}(h)|\leq\epsilon$.
+Da qui deriva che $\forall h \in H^*,| L_{D}(h)-L_{V}(h)|\leq\epsilon$.
 
 Dalla sample complexity deriva $\epsilon=\sqrt{ \frac{\frac{\log(2|H|)}{S}}{2m_{v}} }$.
 
@@ -216,7 +216,6 @@ Nonostante ciò, questa tecnica è la più potente a livello teorico, poiché ab
 **Varianti per alleviare il problema:**
 
 Esistono delle varianti per alleviare il problema della diminuzione della qualità del training set quando si aumenta la dimensione del validation set. 
-
 
 ## K-fold Cross-Validation
 
@@ -243,13 +242,13 @@ dove:
 
 Dalla seconda equazione, si deriva il costo $c_{i}$ per l'iterazione *i*:
 
-$\to c_{i}=L_{Vi}(h_{i})$
+$$\to c_{i}=L_{Vi}(h_{i})$$
 
 dove $L_{Vi}(h_{i})$ è la funzione di perdita calcolata sul validation set $V_{i}$ utilizzando il modello $h_{i}$.
 
 L'errore totale viene quindi calcolato come la media degli errori su tutte le *k* iterazioni:
 
-$err=\frac{1}{k} \sum_{i=1}^k e_{i}$
+$$err=\frac{1}{k} \sum_{i=1}^k e_{i}$$
 
 Questo processo viene ripetuto per *k* volte. Alla fine, si sceglie l'iperparametro che ha l'errore minimo. Si utilizza quindi l'intero set di training per addestrare il modello con il valore dell'iperparametro ottimale.
 

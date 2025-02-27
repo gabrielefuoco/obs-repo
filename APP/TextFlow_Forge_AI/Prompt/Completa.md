@@ -6,4 +6,4 @@ Istruzioni:
 
 Obiettivo: Completare la frase evidenziata in modo coerente con il testo fornito, garantendo chiarezza e completezza nella risposta. 
 
-Testo da completare:  
+Testo da completare: 

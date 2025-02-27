@@ -14,7 +14,7 @@ II. **Teoria della Probabilità:**
 * Probabilità marginale: $P(X=x_i)$
 
 III. **Probabilità Condizionata:**
-* Probabilità condizionata: $P(Y|X) = \frac{P(X,Y)}{P(X)}$  e  $P(X|Y) = \frac{P(X,Y)}{P(Y)}$
+* Probabilità condizionata: $P(Y|X) = \frac{P(X,Y)}{P(X)}$ e $P(X|Y) = \frac{P(X,Y)}{P(Y)}$
 * Relazione tra probabilità congiunta e condizionata: $P(X, Y)= P(Y|X) \times P(X) = P(X|Y) \times P(Y)$
 
 IV. **Teorema di Bayes:**
@@ -38,31 +38,29 @@ VIII. **Stima delle Probabilità:**
 * $P(Y)$: stimata dalla frazione di record per classe nel training set.
 * $P(X_1, X_2, ..., X_d|Y)$: stimata dalla frazione di record di una data classe per ogni combinazione di valori di attributo (problematica per alta dimensionalità e piccoli dataset).
 
-
 **Classificatore Naïve Bayes**
 
-* **Principio:**  Classificazione basata sull'assunzione di indipendenza condizionale degli attributi data la classe.
+* **Principio:** Classificazione basata sull'assunzione di indipendenza condizionale degli attributi data la classe.
 
-    * **Assunzione di indipendenza condizionale:**  $P(X_1, ..., X_d|Y ) = \prod_{i=1}^d P(X_i|Y )$
-    * **Classificazione:** Assegna un nuovo oggetto alla classe $Y_j$ che massimizza $P(Y_j) \prod_{i=1}^d P(X_i|Y_j)$.
-    * **Calcolo delle probabilità (attributi categorici):**
-        * $P(Y_j) = \frac{n_j}{N}$
-        * $P(X_i|Y_j) = \frac{|X_{ij}|}{n_j}$
-    * **Calcolo delle probabilità (attributi continui):**
-        * **Discretizzazione:** suddivisione in intervalli.
-        * **Distribuzione di probabilità (es. Normale):** $P(X_{i}=x_{i}|Y=y_{j})=\frac{1}{\sqrt{ 2 \pi\sigma_{ij} }}e^-\frac{(x_{i}-\mu_{ij})^2}{2\sigma^2_{ij}}$  (con $\mu_{ij}$ e $\sigma_{ij}^2$ stimati dai dati).
+ * **Assunzione di indipendenza condizionale:** $P(X_1, ..., X_d|Y ) = \prod_{i=1}^d P(X_i|Y )$
+ * **Classificazione:** Assegna un nuovo oggetto alla classe $Y_j$ che massimizza $P(Y_j) \prod_{i=1}^d P(X_i|Y_j)$.
+ * **Calcolo delle probabilità (attributi categorici):**
+ * $P(Y_j) = \frac{n_j}{N}$
+ * $P(X_i|Y_j) = \frac{|X_{ij}|}{n_j}$
+ * **Calcolo delle probabilità (attributi continui):**
+ * **Discretizzazione:** suddivisione in intervalli.
+ * **Distribuzione di probabilità (es. Normale):** $P(X_{i}=x_{i}|Y=y_{j})=\frac{1}{\sqrt{ 2 \pi\sigma_{ij} }}e^-\frac{(x_{i}-\mu_{ij})^2}{2\sigma^2_{ij}}$ (con $\mu_{ij}$ e $\sigma_{ij}^2$ stimati dai dati).
 
 * **Indipendenza Condizionale:**
 
-    * Definizione: $P(X|Y, Z) = P(X|Z)$  => $P(X, Y |Z) = P(X|Z)P(Y |Z)$
+ * Definizione: $P(X|Y, Z) = P(X|Z)$ => $P(X, Y |Z) = P(X|Z)P(Y |Z)$
 
 * **Gestione Probabilità Zero:**
 
-    * **Problema:** $P(X_i|Y) = 0$ rende $P(X_1, ..., X_d|Y) = 0$.
-    * **Soluzioni:**
-        * **Stima di Laplace:** $P(A_i|C) = \frac{N_{ic} + 1}{N_c + c}$
-        * **Stima m-estimate:** $P(A_i|C) = \frac{N_{ic} + mp}{N_c + m}$ 
-
+ * **Problema:** $P(X_i|Y) = 0$ rende $P(X_1, ..., X_d|Y) = 0$.
+ * **Soluzioni:**
+ * **Stima di Laplace:** $P(A_i|C) = \frac{N_{ic} + 1}{N_c + c}$
+ * **Stima m-estimate:** $P(A_i|C) = \frac{N_{ic} + mp}{N_c + m}$ 
 
 **Reti Bayesiane**
 
@@ -92,26 +90,24 @@ IV. **Tabelle di Probabilità Condizionata (CPT):**
 	* Se nessun genitore: $P(X_i)$
 	* Altrimenti: $P(X_i|Parents(X_i))$ per ogni combinazione di valori.
 
-
 **Reti Bayesiane: Inferenza e Apprendimento**
 
 I. **Rappresentazione della Probabilità:**
 
-*   **Tavole di Probabilità Condizionata (CPT):**  Una variabile booleana con *k* genitori richiede una CPT con 2<sup>(k+1)</sup> voci.
-*   **Funzione delle CPT:** Quantificano l'influenza dei genitori sul nodo figlio.
+* **Tavole di Probabilità Condizionata (CPT):** Una variabile booleana con *k* genitori richiede una CPT con 2<sup>(k+1)</sup> voci.
+* **Funzione delle CPT:** Quantificano l'influenza dei genitori sul nodo figlio.
 
 II. **Inferenza:**
 
-*   **Calcolo della Probabilità Condizionale:**
-	*   $P(Y = y|x) = \frac{P(y, x)}{P(x)} = \frac{P(y, x)}{\sum_{y}P(y,x)}$
-	*   Calcola la probabilità che la classe Y assuma il valore y, dati gli attributi osservati x.
+* **Calcolo della Probabilità Condizionale:**
+	* $P(Y = y|x) = \frac{P(y, x)}{P(x)} = \frac{P(y, x)}{\sum_{y}P(y,x)}$
+	* Calcola la probabilità che la classe Y assuma il valore y, dati gli attributi osservati x.
 
-*   **Calcolo della Probabilità Marginale:**
-	*   $P(x, y) = \sum_{H} P(y, x, H)$
-	*   Calcola la probabilità congiunta di x e y marginalizzando sulle variabili nascoste H.
+* **Calcolo della Probabilità Marginale:**
+	* $P(x, y) = \sum_{H} P(y, x, H)$
+	* Calcola la probabilità congiunta di x e y marginalizzando sulle variabili nascoste H.
 
-*   **Fattorizzazione:**
-	*   Sfrutta la fattorizzazione della probabilità congiunta (derivante dalla struttura della rete Bayesiana) per calcolare $P(y, x, H)$.
-	*   Permette il calcolo di probabilità condizionali anche in presenza di variabili nascoste.
-
+* **Fattorizzazione:**
+	* Sfrutta la fattorizzazione della probabilità congiunta (derivante dalla struttura della rete Bayesiana) per calcolare $P(y, x, H)$.
+	* Permette il calcolo di probabilità condizionali anche in presenza di variabili nascoste.
 

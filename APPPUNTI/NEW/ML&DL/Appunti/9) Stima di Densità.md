@@ -1,6 +1,5 @@
 ## Famiglie di Tecniche di Machine Learning
 
-
 $$
 \text{Famiglie di tecniche di ML:}
 \begin{cases}
@@ -24,8 +23,8 @@ $$
 * **Obiettivo:** Ricostruire la densità di probabilità incognita che genera i dati.
 * **Scopo:** Creare una funzione di densità che rappresenti la distribuzione dei dati, anche in presenza di complessità.
 * **Famiglie:**
-    * **Metodi Parametrici:** Si assume una specifica distribuzione (es. Gaussiana) e si stimano i suoi parametri (media e varianza) dai dati.
-    * **Metodi non Parametrici:** Non si fa alcuna assunzione sulla forma della distribuzione, ma si ricostruisce la densità come somma di contributi associati a ciascun esempio del training set.
+ * **Metodi Parametrici:** Si assume una specifica distribuzione (es. Gaussiana) e si stimano i suoi parametri (media e varianza) dai dati.
+ * **Metodi non Parametrici:** Non si fa alcuna assunzione sulla forma della distribuzione, ma si ricostruisce la densità come somma di contributi associati a ciascun esempio del training set.
 
 ## Stima di Densità dei Parametri
 
@@ -112,14 +111,14 @@ $$L(S;\mu,\sigma)=\log \prod_{i=1}^m \phi(x_{i};\mu,\sigma)$$
 
 $$=\log \prod_{i=1}^m\frac{1}{\sigma \sqrt{ 2\pi }}\exp\left[- \frac{(x_{i}-\mu)^2}{2\sigma^2} \right]$$
 
-$$=\sum_{i=1}^m\left\{  \log  \frac{1}{\sigma \sqrt{ 2\pi }}-\frac{(x_{i}-\mu)^2}{2\sigma^2}  \right\}$$
+$$=\sum_{i=1}^m\left\{ \log \frac{1}{\sigma \sqrt{ 2\pi }}-\frac{(x_{i}-\mu)^2}{2\sigma^2} \right\}$$
 
 $$=-m\log(\sigma \sqrt{ 2\pi })-\frac{1}{2\sigma^2}\sum_{i=1}^m(x_{i}-\mu)^2$$
 
 Per trovare lo stimatore di massima verosimiglianza, calcoliamo le derivate parziali della log-verosimiglianza rispetto a $\mu$ e $\sigma$ e le poniamo uguali a zero:
 
 $$\begin{cases}
-\frac{\partial}{\partial \mu}L(s;\theta)=\frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0\\  
+\frac{\partial}{\partial \mu}L(s;\theta)=\frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0\\ 
 \\
 
 \frac{\partial}{\partial\sigma}L(S;\theta)=-\frac{m}{\sigma}+\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2=0
@@ -138,7 +137,7 @@ m\mu=\sum_{i=1}^mx_{i} \\
 $$\text{Deviazione Standard:}
 \begin{cases}
 -\frac{m}{\sigma}+\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2=0 \\
-\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2  =\frac{m}{\sigma} \\
+\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2 =\frac{m}{\sigma} \\
 \sigma=\sqrt{ \frac{1}{m}\sum_{i=1}^m(x_{i}-\mu)^2 }
 \end{cases}
 $$
@@ -263,21 +262,21 @@ L'algoritmo EM viene ripetuto iterativamente fino a quando la convergenza è rag
 
 1) **Inizializzazione**
 
-	$t=1; \ c_{y}^{(t)}=\frac{1}{k}; \ \mu_{y}^{(t)}=\text{Random}; \ \Sigma_{y}^{(t)}=diag\left[ \left( \frac{\sigma_{j}}{k} \right)^2 \right]$
-	
+$$t=1; \ c_{y}^{(t)}=\frac{1}{k}; \ \mu_{y}^{(t)}=\text{Random}; \ \Sigma_{y}^{(t)}=diag\left[ \left( \frac{\sigma_{j}}{k} \right)^2 \right]$$
+
 1) **Expecation** $\forall \vec{x}_{i}$
 
-	$P_{\theta^{(t)}}(y|\vec{x}_{i})=\frac{1}{Z_{i}}P_{\theta^{(t)}}(\vec{x}_{i}|y)\cdot P_{\theta^{(t)}}(y)=\frac{1}{Z_{i}}\phi(\vec{x}_{i};\vec{\mu}_{i}^{(t)},\Sigma_{y}^{(t)})$
-	
-	$Z_{i}=\sum_{y=1}^k c_{y}^{(t)}\phi(\vec{x}_{i};\vec{\mu}_{i}^{(t)},\Sigma_{y}^{(t)})$
-	
+$$P_{\theta^{(t)}}(y|\vec{x}_{i})=\frac{1}{Z_{i}}P_{\theta^{(t)}}(\vec{x}_{i}|y)\cdot P_{\theta^{(t)}}(y)=\frac{1}{Z_{i}}\phi(\vec{x}_{i};\vec{\mu}_{i}^{(t)},\Sigma_{y}^{(t)})$$
+
+$$Z_{i}=\sum_{y=1}^k c_{y}^{(t)}\phi(\vec{x}_{i};\vec{\mu}_{i}^{(t)},\Sigma_{y}^{(t)})$$
+
 1) **Maximization**
 
-	$\vec{\mu}_{y}^{(t+1)}=\frac{\sum_{i=1}\vec{x}_{i}\cdot P_{\theta^{(t)}}(y|\vec{x}_{i})}{\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}$
-	
-	$c_{y}^{(t+1)}=\frac{\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}{\sum_{y=1}^k\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}$
-	
-	$\sum^{(t+1)}_{d_{1},d_{2},y}=\frac{\sum_{i=1}^mp(y|\vec{x}_{i})(x_{i},d_{1}-\mu_{y},d_{1})(y|\vec{x}_{i})(x_{i},d_{2}-\mu_{y},d_{2})}{\sum_{i=1}^mP(y|\vec{x}_{i})}$
+$$\vec{\mu}_{y}^{(t+1)}=\frac{\sum_{i=1}\vec{x}_{i}\cdot P_{\theta^{(t)}}(y|\vec{x}_{i})}{\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}$$
+
+$$c_{y}^{(t+1)}=\frac{\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}{\sum_{y=1}^k\sum_{i=1}^mP_{\theta^{(t)}}(y|\vec{x}_{i})}$$
+
+$$\sum^{(t+1)}_{d_{1},d_{2},y}=\frac{\sum_{i=1}^mp(y|\vec{x}_{i})(x_{i},d_{1}-\mu_{y},d_{1})(y|\vec{x}_{i})(x_{i},d_{2}-\mu_{y},d_{2})}{\sum_{i=1}^mP(y|\vec{x}_{i})}$$
 
 Questa tecnica è chiamata anche **Soft K-Means**.
 
@@ -288,7 +287,7 @@ Questa tecnica è chiamata anche **Soft K-Means**.
 $$
 \text{Setting AD:}
 \begin{cases}
-\text{Non supervisionato:}  \\
+\text{Non supervisionato:} \\
 \quad\text{S: Dataset non etichettato} \\
 \quad\alpha \text{: Contaminazione} \\
  \\

@@ -4,17 +4,17 @@ Il testo analizza la catena del valore che porta dalla ricerca scientifica al pr
 ### 1. Tipi di ricerca
 
 * **Ricerca di base:** 
-    * **Scopo:** Avanzare la conoscenza umana senza un'applicazione immediata.
-    * **Caratteristiche:** Libertà di esplorazione, focus sui principi fondamentali, impatto a lungo termine.
-    * **Esempio:** La scoperta del calcolo da parte di Newton, che ha avuto applicazioni solo decenni dopo.
+ * **Scopo:** Avanzare la conoscenza umana senza un'applicazione immediata.
+ * **Caratteristiche:** Libertà di esplorazione, focus sui principi fondamentali, impatto a lungo termine.
+ * **Esempio:** La scoperta del calcolo da parte di Newton, che ha avuto applicazioni solo decenni dopo.
 * **Ricerca applicata:**
-    * **Scopo:** Risolvere problemi specifici e sviluppare soluzioni concrete.
-    * **Caratteristiche:** Focus su applicazioni pratiche, impatto a breve termine.
-    * **Esempio:** Sviluppare batterie più efficienti o vetri che catturano l'energia solare.
+ * **Scopo:** Risolvere problemi specifici e sviluppare soluzioni concrete.
+ * **Caratteristiche:** Focus su applicazioni pratiche, impatto a breve termine.
+ * **Esempio:** Sviluppare batterie più efficienti o vetri che catturano l'energia solare.
 * **Ricerca e Sviluppo (R&D) in ambito aziendale:**
-    * **Scopo:** Migliorare prodotti esistenti, sviluppare nuovi prodotti e generare profitto.
-    * **Caratteristiche:** Fortemente orientata al mercato, focus su iterazioni rapide e lancio di prodotti innovativi.
-    * **Esempio:** I reparti R&D di aziende come Apple o Google.
+ * **Scopo:** Migliorare prodotti esistenti, sviluppare nuovi prodotti e generare profitto.
+ * **Caratteristiche:** Fortemente orientata al mercato, focus su iterazioni rapide e lancio di prodotti innovativi.
+ * **Esempio:** I reparti R&D di aziende come Apple o Google.
 
 ### 2. La catena del valore
 

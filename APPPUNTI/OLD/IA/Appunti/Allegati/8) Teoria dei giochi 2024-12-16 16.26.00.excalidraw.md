@@ -4,11 +4,12 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
-
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
 # Excalidraw Data
+
 ## Text Elements
+
 Nucleolo ^zuBGWjo9
 
 Minimizzazione dell'excess massimo ^sC0Z4i2M
@@ -23,6 +24,7 @@ Unicità ^pbm7Ucsv
 Ɛ-core ^l3ErHs3B
 
 ## Embedded Files
+
 1d3faf345f8a4ae2ba62a0466db027fe9f2958bb: $$e(x, S) = v(S) - \sum_{i \in S} x_i$$
 
 a669e9609ad8a9022f33983312298ca65cb3d33a: $$N(G) = \{x \in X(G): \ \nexists y \ \text{ tale che } \ \Theta(y) \succ \Theta(x)\}$$
@@ -31,6 +33,7 @@ a669e9609ad8a9022f33983312298ca65cb3d33a: $$N(G) = \{x \in X(G): \ \nexists y \ 
 
 %%
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBWbQBGGjoghH0EDihmbgBtcDBQMBKIEm4IIyEAIQBxAHUAKzYATlSSyFhECqgsKHbSzG5nADYW7QBmAHYADiSpiZmeOZ54
 

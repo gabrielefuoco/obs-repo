@@ -2,8 +2,6 @@
 
 Il **modello di passaggio di messaggi** è un paradigma per la comunicazione inter-processo (IPC) nell'informatica distribuita, dove ogni elemento di elaborazione ha la propria memoria privata. I meccanismi IPC, forniti dal sistema operativo, includono la *memoria condivisa* e la *memoria distribuita* o il *passaggio di messaggi*. I modelli di programmazione parallela sono generalmente categorizzati in base all'utilizzo della memoria.
 
-
-
 ## Modello a Memoria Condivisa vs. Modello a Passaggio di Messaggi
 
 Nel **modello a memoria condivisa**, più processi accedono a uno spazio di indirizzi condiviso. Tali processi possono comunicare condividendo direttamente le variabili, e la comunicazione è tipicamente più veloce ma richiede meccanismi di sincronizzazione.
@@ -18,8 +16,8 @@ La distinzione chiave risiede nel modo in cui i processi interagiscono e condivi
 
 Il modello di passaggio di messaggi consiste principalmente di due primitive principali:
 
-*   `Send(destinazione, messaggio)`: un processo invia un *messaggio* a un altro processo identificato come *destinazione*.
-*   `Receive(sorgente, messaggio)`: un processo riceve un *messaggio* da un altro processo identificato come *sorgente*.
+* `Send(destinazione, messaggio)`: un processo invia un *messaggio* a un altro processo identificato come *destinazione*.
+* `Receive(sorgente, messaggio)`: un processo riceve un *messaggio* da un altro processo identificato come *sorgente*.
 
 Il processo di invio crea il messaggio contenente i dati da condividere con il processo ricevente e lo trasmette alla rete eseguendo un'operazione di *invio*. Il processo ricevente deve essere consapevole di aspettarsi dati e indica la sua disponibilità a ricevere un messaggio eseguendo un'operazione di *ricezione*.
 
@@ -27,9 +25,9 @@ Il processo di invio crea il messaggio contenente i dati da condividere con il p
 
 L'implementazione pratica delle operazioni di invio e ricezione determina varie implementazioni del passaggio di messaggi, che possono essere categorizzate come:
 
-*   *dirette* o *indirette*
-*   *bufferizzate* o *non bufferizzate*
-*   *bloccanti* o *non bloccanti*
+* *dirette* o *indirette*
+* *bufferizzate* o *non bufferizzate*
+* *bloccanti* o *non bloccanti*
 
 ![[|335](_page_5_Figure_6.jpeg)]
 
@@ -47,7 +45,6 @@ Esiste una distinzione significativa tra il passaggio di messaggi **bloccante** 
 
 In un'operazione di *invio bloccante* (blocking send), il mittente deve attendere che il ricevente confermi la ricezione del messaggio. In un'operazione di *ricezione bloccante* (blocking receive), il ricevente attende di ricevere un messaggio prima di procedere con le sue attività. Le operazioni bloccanti sono spesso definite **sincronizzate** (synchronous) perché sia il mittente che il ricevente sono sincronizzati durante la comunicazione.
 
-
 ### Invio e Ricezione di Messaggi Bloccanti e Non Bloccanti
 
 In un'operazione di *invio non bloccante* (non-blocking send), il mittente continua le sue operazioni senza attendere l'avviso di ricezione. Tuttavia, il mittente si aspetta una conferma dal ricevente nel caso in cui l'invio fallisca.
@@ -56,19 +53,17 @@ In un'operazione di *ricezione non bloccante* (non-blocking receive), il riceven
 
 Sono raccomandate tre combinazioni fondamentali:
 
-*   Invio bloccante e ricezione bloccante, chiamata comunicazione *rendez-vous*.
-*   Invio non bloccante e ricezione non bloccante.
-*   Invio non bloccante e ricezione bloccante, che è la più utilizzata.
-
+* Invio bloccante e ricezione bloccante, chiamata comunicazione *rendez-vous*.
+* Invio non bloccante e ricezione non bloccante.
+* Invio non bloccante e ricezione bloccante, che è la più utilizzata.
 
 ## Buffering 
 
 Un modo per distinguere tra i modelli di passaggio dei messaggi è considerare la dimensione della coda del ricevitore. Esistono tre alternative:
 
-*   *Coda a capacità zero* (o *nessuna coda*): richiede un rendez-vous poiché il mittente deve attendere che il ricevente sia pronto a ricevere il messaggio.
-*   *Coda limitata*: la coda è limitata a *n* messaggi o byte, causando il blocco del mittente quando è piena.
-*   *Coda illimitata*: i mittenti procedono senza attendere, ponendo potenziali rischi a causa delle risorse fisiche limitate.
-
+* *Coda a capacità zero* (o *nessuna coda*): richiede un rendez-vous poiché il mittente deve attendere che il ricevente sia pronto a ricevere il messaggio.
+* *Coda limitata*: la coda è limitata a *n* messaggi o byte, causando il blocco del mittente quando è piena.
+* *Coda illimitata*: i mittenti procedono senza attendere, ponendo potenziali rischi a causa delle risorse fisiche limitate.
 
 ## Comunicazione di Gruppo
 
@@ -78,17 +73,14 @@ Nelle applicazioni distribuite parallele, un sistema di passaggio dei messaggi p
 
 Nella comunicazione **uno-a-molti**, un singolo mittente trasmette un messaggio a più ricevitori, chiamato anche comunicazione *multicast*. I processi di ricezione dei messaggi stabiliscono un gruppo, che può essere *chiuso* o *aperto*. In un **gruppo chiuso**, solo i membri possono inviare messaggi internamente. In un **gruppo aperto**, qualsiasi processo nel sistema può inviare messaggi all'intero gruppo. Un caso speciale della comunicazione uno-a-molti è la comunicazione **broadcast**, in cui un messaggio viene inviato a tutti i processori connessi a una rete.
 
-
 ### Comunicazione Molti-a-Uno
 
 Nella comunicazione **molti-a-uno**, più mittenti trasmettono messaggi a un singolo ricevitore. Il singolo ricevitore può essere:
 
-*   *selettivo*, identificando un mittente specifico per lo scambio di messaggi.
-*   o *non selettivo*, rispondendo a qualsiasi mittente da un set predefinito.
+* *selettivo*, identificando un mittente specifico per lo scambio di messaggi.
+* o *non selettivo*, rispondendo a qualsiasi mittente da un set predefinito.
 
 Il non determinismo pone una sfida significativa nella comunicazione molti-a-uno, poiché rimane incerto quale/i membro/i del gruppo avrà/avranno per prima/e la propria informazione disponibile.
-
-
 
 ### Comunicazione Molti-a-Molti
 

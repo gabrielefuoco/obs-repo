@@ -3,8 +3,8 @@ TTC è una tecnica promettente per migliorare le capacità di ragionamento dei m
 * **Definizione:** TTC è un processo che permette ai modelli linguistici di esplorare diverse tracce di ragionamento prima di fornire una risposta. 
 * **Funzionamento:** Invece di generare direttamente una risposta, il modello genera diverse possibili tracce di ragionamento, partendo dallo stesso punto iniziale. 
 * **Valutazione:** Le tracce di ragionamento vengono valutate tramite:
-    * **Self-revision:** Il modello stesso valuta la validità del ragionamento e decide se proseguire o meno. Questo avviene tramite un prompt secondario che guida il modello nella valutazione.
-    * **Verifier:** Un modello separato, addestrato a parte, valuta le tracce e assegna un punteggio. Il modello principale prosegue sulla traccia con il punteggio più alto.
+ * **Self-revision:** Il modello stesso valuta la validità del ragionamento e decide se proseguire o meno. Questo avviene tramite un prompt secondario che guida il modello nella valutazione.
+ * **Verifier:** Un modello separato, addestrato a parte, valuta le tracce e assegna un punteggio. Il modello principale prosegue sulla traccia con il punteggio più alto.
 * **Differenza da modelli tradizionali:** TTC introduce una fase aggiuntiva di ragionamento, a differenza dei modelli tradizionali che generano direttamente una risposta.
 
 **Equiparazione di ricerca e ragionamento:**
@@ -17,8 +17,8 @@ TTC è una tecnica promettente per migliorare le capacità di ragionamento dei m
 
 * **Punto Critico:** TTC introduce una nuova variabile nelle leggi di scala dei modelli linguistici, ovvero il tempo dedicato all'esplorazione e alla valutazione delle tracce di ragionamento. 
 * **Implicazioni:** 
-    * **Modelli più piccoli:** Modelli più piccoli possono ottenere prestazioni simili a modelli più grandi, con un aumento dei tempi di inferenza.
-    * **Risorse computazionali:** TTC richiede più tempo di calcolo rispetto ai modelli tradizionali, ma può ridurre il numero di parametri necessari.
+ * **Modelli più piccoli:** Modelli più piccoli possono ottenere prestazioni simili a modelli più grandi, con un aumento dei tempi di inferenza.
+ * **Risorse computazionali:** TTC richiede più tempo di calcolo rispetto ai modelli tradizionali, ma può ridurre il numero di parametri necessari.
 * **Contesto:** Le leggi di scala tradizionali si basano su parametri, dati di addestramento e potenza di calcolo. TTC introduce il tempo di calcolo come una nuova variabile.
 	* Le leggi di scala descrivono la relazione tra le risorse utilizzate per costruire un modello linguistico e le sue prestazioni
 
@@ -63,6 +63,4 @@ TTC è una tecnica promettente per migliorare le capacità di ragionamento dei m
 | **Potenza di calcolo** | La capacità di un sistema di elaborare dati. |
 | **Pianificazione** | Il processo di creazione di un piano di azione per raggiungere un obiettivo. |
 | **Psicologia cognitiva** | Lo studio dei processi mentali come la memoria, il linguaggio e il ragionamento. |
-
-
 

@@ -14,7 +14,7 @@ La loss è definita come $l(\theta)=nll(\theta)+\|\theta\|$
 * La regolarizzazione è una tecnica che "disciplina" la rete durante il fitting, evitando che i pesi assumano valori estremi.
 * La **regolarizzazione L2** aggiunge un termine alla loss function che penalizza i pesi grandi. La formula della loss con regolarizzazione L2 è:
 
-$Loss = Loss_{originale} + λ * ||w||^2$ 
+$$Loss = Loss_{originale} + λ * ||w||^2$$
 dove:
 
 * `Loss_originale` è la loss function originale.
@@ -34,7 +34,6 @@ dove:
 * Per gestire i dati sequenziali, è necessario utilizzare strutture di rete che siano in grado di tenere conto della sequenza temporale.
 * Esempi di queste strutture includono le **reti ricorrenti (RNN)** e le **reti convoluzionali ricorrenti (RCNN)**.
 
-
 # Tecniche per la Regolazione delle Reti Neurali
 
 Uno dei problemi che si possono incontrare nelle architetture di rete che gestiscono sequenze, come le reti ricorrenti, è l'**esplosione** del gradiente. L'esplosione del gradiente è il contrario dell'**annullamento**: nell'annullamento i valori dei pesi della rete tendono a zero, mentre nell'esplosione i valori dei pesi aumentano a dismisura.
@@ -46,6 +45,7 @@ Il **clipping** è una strategia che nasce per mitigare il problema dell'esplosi
 Il clipping si basa sull'idea di "tagliare" i valori dei pesi che superano una certa soglia. In pratica, se un valore di peso supera la soglia, viene "tagliato" e riportato al valore massimo o minimo consentito.
 
 ## Dropout
+
 ![[1-processed-20241020171249127.png|476]]
 Un'altra strategia per gestire le reti neurali e ridurre l'overfitting è il **dropout**. Questa tecnica, proposta da Hinton, consiste nell'annullare in modo casuale i pesi di alcuni neuroni durante la fase di training.
 
@@ -60,8 +60,9 @@ Durante il training di una rete neurale, alcuni archi tra i nodi possono diventa
 Il dropout forza la rete a non fare affidamento su singoli neuroni, ma a distribuire l'apprendimento su un gruppo più ampio di neuroni. Questo aiuta a prevenire l'overfitting e a migliorare la generalizzazione della rete.
 
 **Come funziona il Dropout:**
+
 Durante il training, il dropout seleziona in modo casuale alcuni neuroni e azzera il loro contributo. Ad esempio, in un livello della rete, alcuni neuroni potrebbero essere "disabilitati" e non partecipare al calcolo del forward pass
-In  particolare:
+In particolare:
 1. Durante il forward pass, alcuni neuroni vengono disabilitati in modo casuale.
 2. Il calcolo della loss viene effettuato solo sui neuroni attivi.
 3. Durante il backward pass, i gradienti vengono aggiornati solo per i neuroni attivi.
@@ -79,7 +80,7 @@ Il dropout può essere visto come una combinazione di più reti neurali, ciascun
 ## Reti Neurali Convoluzionali
 
 Questo concetto emerge analizzando una rete neurale fully connected. Prendiamo ad esempio una rete semplice a 4 livelli. L'input ha dimensione 4, e le equazioni che la caratterizzano sono rappresentate di seguito:
-$$  \begin{aligned} a_i & = \sum_{j<i} w_{i,j} z_{j} \\ z_i & = f(a_i) \\  \mathbf{a}^{(h+1)} & = \mathbf{W}^{(h)} \mathbf{z}^{(h)} \\ z^{(h+1)} & = f(\mathbf{a}^{(h+1)}) \\ z^{(0)} & = \mathbf{x}\end{aligned} $$
+$$ \begin{aligned} a_i & = \sum_{j<i} w_{i,j} z_{j} \\ z_i & = f(a_i) \\ \mathbf{a}^{(h+1)} & = \mathbf{W}^{(h)} \mathbf{z}^{(h)} \\ z^{(h+1)} & = f(\mathbf{a}^{(h+1)}) \\ z^{(0)} & = \mathbf{x}\end{aligned} $$
 Ogni nuovo livello in Computer Vision dipende dai livelli precedenti, combinati tramite una matrice di pesi (L e H) e una funzione di attivazione.
 ### Notazione Semplificata
 
@@ -123,9 +124,9 @@ Ora, proviamo a pensare all'idea del filtro e a come possiamo costruire questa c
 Un filtro, ad esempio un filtro 3x3, viene applicato all'immagine di input in modo scorrevole. Per ogni posizione del filtro sull'immagine, calcoliamo il prodotto scalare tra il filtro e la porzione corrispondente dell'immagine. Il risultato di questo prodotto scalare viene poi associato alla cella corrispondente nell'immagine di output.
 
 **Possiamo definire il filtro come la matrice dei pesi**: in questo caso, il filtro, applicato all'immagine di input, calcola la componente che poi dovrà essere attivata (chiamiamola A). Questa componente A è in realtà il risultato del prodotto scalare tra il filtro e la porzione corrispondente dell'immagine.
-$a=W \cdot lin(x)$
+$$a=W \cdot lin(x)$$
 - Dove $lin(X)$ è la linearizzazione di x
-$a=conv(x,w)$
+$$a=conv(x,w)$$
 In altre parole, il filtro rappresenta la matrice dei pesi della rete neurale *fully-connected* che stiamo costruendo. L'applicazione del filtro è equivalente alla moltiplicazione della matrice dei pesi per il vettore di input linearizzato.
 
 ![[1-processed-20241020173241253.png|370]]
@@ -175,6 +176,7 @@ La derivabilità degli indici nei vettori è fondamentale perché permette di ap
 La derivabilità della somma degli indici apre la possibilità di **apprendere direttamente i filtri** durante il processo di addestramento. Questo è un passo importante perché permette di **ottimizzare la rappresentazione dell'immagine** in base al compito specifico.
 
 ## Condivisione dei Pesi e Kernel Multipli
+
 ![[1-processed-20241020173436878.png|538]]
 Un'ulteriore ottimizzazione si ottiene condividendo i pesi su più kernel. Questo consente di **ridurre il numero di parametri** necessari per l'addestramento. Inoltre, non c'è bisogno di limitarsi a un solo kernel. È possibile utilizzare **più kernel** con diverse caratteristiche, aumentando la capacità di estrarre informazioni dall'immagine.
 
@@ -190,6 +192,7 @@ L'utilizzo di più kernel offre diversi vantaggi:
 
 È la formula per calcolare la dimensione dell'output di una convoluzione su un'immagine, tenendo conto di vari parametri:
 ### Parametri:
+
 - **Input \(I\)**: Dimensione dell'input (larghezza o altezza).
 - **Padding \(P\)**: Quantità di padding applicata sui bordi dell'immagine.
 - **Kernel size \(K\)**: Dimensione del kernel (finestra di convoluzione).
@@ -200,8 +203,8 @@ L'utilizzo di più kernel offre diversi vantaggi:
 
 $$\left\lfloor \frac{I - K - (K - 1)(D - 1) + 2P}{S} \right\rfloor + 1$$
 
-
 ### Spiegazione:
+
 1. **\(I - K\)**: Rimuove la parte dell'immagine coperta dalla dimensione del kernel.
 2. **\((K - 1)(D - 1)\)**: Aggiusta l'area coperta dal kernel in base alla dilatazione.
 3. **\(2P\)**: Aggiunge lo spazio introdotto dal padding, che aumenta la dimensione effettiva dell'input.
@@ -259,8 +262,7 @@ Oltre al padding e allo stride, è possibile utilizzare anche la **dilatazione**
 
 La formula per calcolare la dimensione dell'output è la seguente:
 
-$Dimensione\_Output = (Dimensione\_Input + 2 * Padding - Dimensione\_Kernel) / Stride + 1$ 
-
+$$Dimensione\_Output = (Dimensione\_Input + 2 * Padding - Dimensione\_Kernel) / Stride + 1$$
 
 **Esempio:**
 
@@ -364,9 +366,9 @@ Dove:
 
 I tensori sono quadrimensionali perché devono gestire diversi aspetti dell'input e dell'output:
 
-* **Canali di input:**  Rappresentano le diverse informazioni che vengono fornite al modello, come ad esempio i canali RGB di un'immagine.
-* **Canali di output:**  Rappresentano le diverse informazioni che il modello produce, come ad esempio le probabilità di appartenenza a diverse classi in un problema di classificazione.
-* **Dimensione del tensore:**  Rappresenta la dimensione spaziale dell'input o dell'output, come ad esempio la larghezza e l'altezza di un'immagine.
+* **Canali di input:** Rappresentano le diverse informazioni che vengono fornite al modello, come ad esempio i canali RGB di un'immagine.
+* **Canali di output:** Rappresentano le diverse informazioni che il modello produce, come ad esempio le probabilità di appartenenza a diverse classi in un problema di classificazione.
+* **Dimensione del tensore:** Rappresenta la dimensione spaziale dell'input o dell'output, come ad esempio la larghezza e l'altezza di un'immagine.
 
 **Esempio:**
 
@@ -377,5 +379,4 @@ Un tensore che rappresenta un'immagine RGB con dimensioni 100x100 avrà le segue
 * **Dimensione del tensore:** 100x100
 
 Quindi, la dimensione totale del tensore sarà 3x1x100x100.
-
 

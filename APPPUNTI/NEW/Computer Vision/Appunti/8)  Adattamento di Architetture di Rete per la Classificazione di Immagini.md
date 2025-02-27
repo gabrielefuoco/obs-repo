@@ -42,7 +42,6 @@ log(Σ(i=1 a N) exp(y_i)) = m + log(Σ(i=1 a N) exp(y_i - m))
 
 Dove m è il valore massimo di y. 
 
-
 ### Implementazione in PyTorch
 
 In PyTorch, la funzione log-softmax è già implementata e viene utilizzata per calcolare la perdita durante l'addestramento.
@@ -124,8 +123,6 @@ Nel caso della classificazione multipla, un'immagine può appartenere a più cla
 
 È importante notare che l'architettura della rete neurale rimane invariata sia per la classificazione mutuamente esclusiva che per la classificazione multipla. La differenza risiede nella funzione di attivazione e nella funzione di loss. La prima parte della rete, che estrae le feature, rimane invariata perché il suo obiettivo è estrarre informazioni significative dall'immagine, indipendentemente dal tipo di classificazione. La seconda parte della rete, che si occupa della classificazione, utilizza le informazioni estratte dalla prima parte per generare le predizioni.
 
-
-
 ## Architettura di una Rete Neurale
 
 L'architettura di una rete neurale può essere suddivisa in due parti principali:
@@ -182,7 +179,6 @@ Per valutare l'efficacia di un sistema di Object Detection si utilizzano diverse
 * **Recall:** quanti oggetti effettivamente presenti nell'immagine sono stati individuati.
 * **Velocità:** quanti fotogrammi al secondo (FPS) il sistema è in grado di analizzare. 
 
-
 ## Valutazione delle prestazioni e architetture
 
 ### Il compromesso tra velocità e accuratezza
@@ -231,19 +227,19 @@ Esistono due tipi principali di architetture di object detection:
 **1. Multi-shot:**
 
 * Queste architetture utilizzano due fasi distinte:
-    * **Fase 1: Generazione di Region Proposal:** In questa fase, l'algoritmo identifica aree dell'immagine che potrebbero contenere oggetti, chiamate "region proposal".
-    * **Fase 2: Classificazione e Localizzazione:** In questa fase, le region proposal vengono classificate e localizzate con precisione.
+ * **Fase 1: Generazione di Region Proposal:** In questa fase, l'algoritmo identifica aree dell'immagine che potrebbero contenere oggetti, chiamate "region proposal".
+ * **Fase 2: Classificazione e Localizzazione:** In questa fase, le region proposal vengono classificate e localizzate con precisione.
 * Esempi di architetture multi-shot includono:
-    * **R-CNN (Regions with CNN features):** Un'architettura pionieristica che ha introdotto l'utilizzo delle CNN per l'object detection.
-    * **Fast R-CNN:** Un'evoluzione di R-CNN che ha migliorato la velocità di elaborazione.
-    * **Faster R-CNN:** Un'ulteriore evoluzione che ha integrato la generazione di region proposal all'interno della rete neurale, rendendola ancora più efficiente.
+ * **R-CNN (Regions with CNN features):** Un'architettura pionieristica che ha introdotto l'utilizzo delle CNN per l'object detection.
+ * **Fast R-CNN:** Un'evoluzione di R-CNN che ha migliorato la velocità di elaborazione.
+ * **Faster R-CNN:** Un'ulteriore evoluzione che ha integrato la generazione di region proposal all'interno della rete neurale, rendendola ancora più efficiente.
 
 **2. Single-shot:**
 
 * Queste architetture combinano le due fasi in un unico passaggio, rendendole più veloci ma leggermente meno accurate rispetto alle architetture multi-shot.
 * Esempi di architetture single-shot includono:
-    * **SSD (Single Shot MultiBox Detector):** Un'architettura che utilizza una rete neurale per generare direttamente le bounding box e classificare gli oggetti.
-    * **YOLO (You Only Look Once):** Un'architettura che elabora l'intera immagine in un'unica volta, rendendola molto veloce.
+ * **SSD (Single Shot MultiBox Detector):** Un'architettura che utilizza una rete neurale per generare direttamente le bounding box e classificare gli oggetti.
+ * **YOLO (You Only Look Once):** Un'architettura che elabora l'intera immagine in un'unica volta, rendendola molto veloce.
 
 ### Scelta dell'Architettura
 

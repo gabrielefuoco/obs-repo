@@ -30,16 +30,16 @@ Per valutare un sistema di recupero informazioni, sono necessari tre elementi:
 
 Le valutazioni binarie si basano sulla classificazione dei documenti come rilevanti o non rilevanti. Le misure più comuni sono:
 
-* **Precision:** La frazione di documenti recuperati che sono rilevanti. In termini di probabilità, è la probabilità di un documento essere rilevante dato che è stato recuperato:  P(rilevante|recuperato).
+* **Precision:** La frazione di documenti recuperati che sono rilevanti. In termini di probabilità, è la probabilità di un documento essere rilevante dato che è stato recuperato: P(rilevante|recuperato).
 
 * **Recall:** La frazione di documenti rilevanti che sono recuperati. In termini di probabilità, è la probabilità di un documento essere recuperato dato che è rilevante: P(recuperato|rilevante). Il richiamo è anche noto come *true positive rate* o *sensitivity*. Indica quanto il sistema è stato in grado di trovare informazioni rilevanti nella repository.
 
 Un sistema che è più selettivo e meno abile a massimizzare il proprio spazio di ricerca avrà una precisione migliore del richiamo.
 
-|                   | Relevant | Nonrelevant |
+| | Relevant | Nonrelevant |
 | ----------------- | -------- | ----------- |
-| **Retrieved**     | tp       | fp          |
-| **Not Retrieved** | fn       | tn          |
+| **Retrieved** | tp | fp |
+| **Not Retrieved** | fn | tn |
 
 - **Precision (P)** = $\frac{tp}{tp + fp}$
 - **Recall (R)** = $\frac{tp}{tp + fn}$
@@ -52,21 +52,21 @@ Le due misure sono in conflitto tra loro, poiché un sistema che cura l'aspetto 
 
 Esiste un trade-off intrinseco tra precisione e richiamo:
 
-* **Aumentare il richiamo:**  Restituendo più documenti, si aumenta il richiamo. Il richiamo è una funzione non decrescente del numero di documenti recuperati. Un sistema che restituisce tutti i documenti ha un richiamo del 100%!
-* **Aumentare la precisione:**  È facile ottenere un'alta precisione per un richiamo molto basso. Ad esempio, se il documento con il punteggio più alto è rilevante, possiamo massimizzare la precisione restituendo solo quel documento.
+* **Aumentare il richiamo:** Restituendo più documenti, si aumenta il richiamo. Il richiamo è una funzione non decrescente del numero di documenti recuperati. Un sistema che restituisce tutti i documenti ha un richiamo del 100%!
+* **Aumentare la precisione:** È facile ottenere un'alta precisione per un richiamo molto basso. Ad esempio, se il documento con il punteggio più alto è rilevante, possiamo massimizzare la precisione restituendo solo quel documento.
 
 **Misure di Combinazione:**
 
 La media aritmetica di precisione e richiamo rischia di fornire una media troppo generosa. Per questo motivo, si utilizzano altre misure di combinazione:
 
-* **Media geometrica:**  Considera la radice quadrata del prodotto di precisione e richiamo.
-* **Media armonica:**  È preferita perché può assegnare un peso diverso a precisione e richiamo. Un'altra proprietà è che la media armonica è penalizzata dalle misurazioni più basse e gestisce bene gli score vicini allo zero.
+* **Media geometrica:** Considera la radice quadrata del prodotto di precisione e richiamo.
+* **Media armonica:** È preferita perché può assegnare un peso diverso a precisione e richiamo. Un'altra proprietà è che la media armonica è penalizzata dalle misurazioni più basse e gestisce bene gli score vicini allo zero.
 
 **F-measure:**
 
 La F-measure è una misura di combinazione che permette un trade-off tra precisione e richiamo:
 
-$$F=\frac{1}{\alpha   \frac{1}{P}+(1-\alpha)\frac{1}{R}}=\frac{(\beta^2+1)PR}{\beta^2P+R}$$
+$$F=\frac{1}{\alpha \frac{1}{P}+(1-\alpha)\frac{1}{R}}=\frac{(\beta^2+1)PR}{\beta^2P+R}$$
 
 Dove:
 
@@ -76,8 +76,8 @@ Dove:
 
 **Impostazione di Beta:**
 
-* **Beta > 1:**  Pesa maggiormente la recall.
-* **Beta < 1:**  Pesa maggiormente la precisione.
+* **Beta > 1:** Pesa maggiormente la recall.
+* **Beta < 1:** Pesa maggiormente la precisione.
 
 ![[Senza nome-20241104120509218.png]]
 Questo plot ha sull'asse x la precisione a una recall fissata (asse y). Confronta la media armonica e la media geometrica: hanno lo stesso andamento, ma la media armonica penalizza di più rispetto alla geometrica in regimi bassi di uno dei due valori (precisione o richiamo). 
@@ -90,39 +90,39 @@ Le misure basate sul ranking valutano la qualità di un sistema di ranking, ovve
 
 Nel caso di rilevanza binaria (un documento è rilevante o non rilevante), le misure più comuni sono:
 
-* **Precisione@K (P@K):**  Calcola la percentuale di documenti rilevanti tra i primi K risultati.
-* **Media della Precisione Media (MAP):**  Calcola la media della precisione per ogni query, considerando tutti i valori di K.
-* **Preferenza Binaria:**  Misura la probabilità che un documento rilevante sia classificato più in alto rispetto a un documento non rilevante.
-* **Media del Rango Reciproco (MRR):**  Calcola il reciproco del rango del primo documento rilevante per ogni query.
+* **Precisione@K (P@K):** Calcola la percentuale di documenti rilevanti tra i primi K risultati.
+* **Media della Precisione Media (MAP):** Calcola la media della precisione per ogni query, considerando tutti i valori di K.
+* **Preferenza Binaria:** Misura la probabilità che un documento rilevante sia classificato più in alto rispetto a un documento non rilevante.
+* **Media del Rango Reciproco (MRR):** Calcola il reciproco del rango del primo documento rilevante per ogni query.
 
 ### Livelli di Rilevanza Multipli
 
 Quando si hanno livelli di rilevanza multipli (ad esempio, molto rilevante, rilevante, non rilevante), si può utilizzare:
 
-* **Guadagno Cumulativo Scontato Normalizzato (NDCG):**  Considera l'ordine dei documenti e assegna un punteggio più alto ai documenti più rilevanti e classificati più in alto.
+* **Guadagno Cumulativo Scontato Normalizzato (NDCG):** Considera l'ordine dei documenti e assegna un punteggio più alto ai documenti più rilevanti e classificati più in alto.
 
 ### Curva Precision-Richiamo
 
 L'idea è di adattare le misure di set (come precisione e richiamo) per diventare misure per liste ordinate, ovvero per il ranking.
 
-* **Precisione/Richiamo/F:**  Sono misure per set non ordinati.
-* **Trasformazione in misure di liste ordinate:**  Si calcola la misura di set per ogni "prefisso" della lista ordinata: i primi 1, i primi 2, i primi 3, i primi 4 risultati, ecc.
-* **Curva Precision-Richiamo:**  Si ottiene tracciando la precisione in funzione del richiamo per ogni prefisso.
+* **Precisione/Richiamo/F:** Sono misure per set non ordinati.
+* **Trasformazione in misure di liste ordinate:** Si calcola la misura di set per ogni "prefisso" della lista ordinata: i primi 1, i primi 2, i primi 3, i primi 4 risultati, ecc.
+* **Curva Precision-Richiamo:** Si ottiene tracciando la precisione in funzione del richiamo per ogni prefisso.
 
 ### Precision@K
 
-* **Soglia di rango K:**  Si imposta una soglia di rango K (parametro specificato).
-* **Determinazione della porzione di documenti rilevanti:**  Si determina la porzione dei documenti rilevanti tra i primi K risultati.
-* **Valutazione della precisione per diversi valori di K:**  Si valuta la precisione per diversi valori di K.
-* **Calcolo della % di rilevanza nei primi K:**  Si calcola la percentuale di documenti rilevanti nei primi K risultati.
-* **Ignorare i documenti classificati al di sotto di K:**  Si ignorano i documenti classificati al di sotto di K.
+* **Soglia di rango K:** Si imposta una soglia di rango K (parametro specificato).
+* **Determinazione della porzione di documenti rilevanti:** Si determina la porzione dei documenti rilevanti tra i primi K risultati.
+* **Valutazione della precisione per diversi valori di K:** Si valuta la precisione per diversi valori di K.
+* **Calcolo della % di rilevanza nei primi K:** Si calcola la percentuale di documenti rilevanti nei primi K risultati.
+* **Ignorare i documenti classificati al di sotto di K:** Si ignorano i documenti classificati al di sotto di K.
 
 **Esempio:**
 
-* **Prec@3 di 2/3:**  Se tra i primi 3 risultati, 2 sono rilevanti, la Precision@3 è 2/3.
+* **Prec@3 di 2/3:** Se tra i primi 3 risultati, 2 sono rilevanti, la Precision@3 è 2/3.
 	![[Senza nome-20241104121345108.png]]
-* **Prec@4 di 2/4:**  Se tra i primi 4 risultati, 2 sono rilevanti, la Precision@4 è 2/4.
-* **Prec@5 di 3/5:**  Se tra i primi 5 risultati, 3 sono rilevanti, la Precision@5 è 3/5.
+* **Prec@4 di 2/4:** Se tra i primi 4 risultati, 2 sono rilevanti, la Precision@4 è 2/4.
+* **Prec@5 di 3/5:** Se tra i primi 5 risultati, 3 sono rilevanti, la Precision@5 è 3/5.
 
 Allo stesso modo, si può calcolare la **Recall@K**, che misura la percentuale di documenti rilevanti recuperati tra i primi K risultati.
 
@@ -130,10 +130,10 @@ Allo stesso modo, si può calcolare la **Recall@K**, che misura la percentuale d
 
 La curva Precision-Richiamo fornisce una visione d'insieme globale delle prestazioni di un sistema di ranking. L'obiettivo è individuare i valori di precisione per ogni query e interpolarli a un livello fissato di richiamo.
 
-* **Calcolo delle prestazioni medie su un set di argomenti:**  Si calcola la precisione per ogni argomento, considerando un numero diverso di documenti rilevanti per ogni argomento.
-* **Interpolazione a un set di livelli di richiamo standard:**  I valori di precisione individuali per argomento vengono interpolati a un set di livelli di richiamo standard (da 0 a 1 con incrementi di 0,1).
-* **Regola di interpolazione:**  Per interpolare la precisione al livello di richiamo standard *i*, si utilizza la massima precisione ottenuta per l'argomento per qualsiasi livello di richiamo effettivo maggiore o uguale a *i*.
-* **Razionale per l'interpolazione:**  L'utente è disposto a guardare più cose se sia la precisione che il richiamo migliorano.
+* **Calcolo delle prestazioni medie su un set di argomenti:** Si calcola la precisione per ogni argomento, considerando un numero diverso di documenti rilevanti per ogni argomento.
+* **Interpolazione a un set di livelli di richiamo standard:** I valori di precisione individuali per argomento vengono interpolati a un set di livelli di richiamo standard (da 0 a 1 con incrementi di 0,1).
+* **Regola di interpolazione:** Per interpolare la precisione al livello di richiamo standard *i*, si utilizza la massima precisione ottenuta per l'argomento per qualsiasi livello di richiamo effettivo maggiore o uguale a *i*.
+* **Razionale per l'interpolazione:** L'utente è disposto a guardare più cose se sia la precisione che il richiamo migliorano.
 
 **Esempio:**
 
@@ -160,7 +160,7 @@ La Mean Average Precision (MAP) è una misura utilizzata per valutare la perform
 
 ![[Senza nome-20241104121732053.png]]
 
-In questo esempio, l'Average Precision è: $\frac{1}{3}\cdot\left( \frac{1}{1}+\frac{2}{3}+\frac{3}{5} \right)=0.76$  
+In questo esempio, l'Average Precision è: $\frac{1}{3}\cdot\left( \frac{1}{1}+\frac{2}{3}+\frac{3}{5} \right)=0.76$ 
 
 La MAP è la media delle Average Precision calcolate per diverse query.
 
@@ -216,7 +216,7 @@ Bpref e MAP (Mean Average Precision) sono altamente correlate quando si utilizza
 MRR è una misura di rilevanza che si basa sulla posizione del primo documento rilevante nella lista dei risultati.
 
 * **Posizione del primo documento rilevante:** Si considera la posizione di rango, K, del primo documento rilevante. Questo potrebbe essere il primo documento cliccato dall'utente.
-* **Punteggio del Rango Reciproco (RR):**  $\frac{1}{K}$
+* **Punteggio del Rango Reciproco (RR):** $\frac{1}{K}$
 * **MRR:** La media dei punteggi RR su più query.
 * **Vantaggi:** MRR è la misura più semplice da calcolare.
 * **Svantaggi:** Se il primo documento rilevante non è il primo recuperato, il suo punteggio viene abbassato in modo significativo. 
@@ -252,8 +252,8 @@ La misura **Discounted Cumulative Gain (DCG)** è un esempio di metrica che tien
 La MRR (Mean Reciprocal Rank) è una misura molto bassa.
 
 * **Due assunzioni:**
-    * I documenti altamente rilevanti sono più utili dei documenti marginalmente rilevanti.
-    * Più alta è la posizione in classifica di un documento rilevante, meno utile è per l'utente, poiché è meno probabile che venga esaminato. Rank bassi = posizioni migliori.
+ * I documenti altamente rilevanti sono più utili dei documenti marginalmente rilevanti.
+ * Più alta è la posizione in classifica di un documento rilevante, meno utile è per l'utente, poiché è meno probabile che venga esaminato. Rank bassi = posizioni migliori.
 
 Un aspetto cruciale nella valutazione delle performance di un sistema di Information Retrieval è la **top-weightedness**, ovvero la capacità di dare maggiore peso ai risultati posizionati più in alto nella lista, penalizzando quelli in posizioni inferiori. Questo perché gli utenti tendono a esaminare principalmente i primi risultati. Per valutare questo aspetto si utilizza il **Discounted Cumulative Gain (DCG)**.
 
@@ -267,18 +267,18 @@ Il DCG considera il guadagno ottenuto da ciascun documento recuperato, applicand
 Cosa succede se i giudizi di rilevanza sono in una scala di $[0, r]$? ($r > 2$)
 
 * **Guadagno Cumulativo (CG) al rango n:**
-    * Siano i **rating** degli n documenti $r_1, r_2, … r_n$ (in ordine di classifica).
-    * $CG=r_1 + r_2 + … + r_n$
+ * Siano i **rating** degli n documenti $r_1, r_2, … r_n$ (in ordine di classifica).
+ * $CG=r_1 + r_2 + … + r_n$
 * **Guadagno Cumulativo Scontato (DCG) al rango n:**
-    * $DCG = r_1 + \frac{r_2}{log_2(2)} + \frac{r_3}{log_2(3)} + … \frac{r_n}{log_2(n)}$
-    * Il logaritmo rappresenta lo sconto di un rating.
+ * $DCG = r_1 + \frac{r_2}{log_2(2)} + \frac{r_3}{log_2(3)} + … \frac{r_n}{log_2(n)}$
+ * Il logaritmo rappresenta lo sconto di un rating.
 * Possiamo usare qualsiasi base per il logaritmo.
 
 **Guadagno Cumulativo Scontato**
 
 * Il DCG (Discounted Cumulative Gain) è il guadagno totale accumulato ad un particolare rango p: 
 
-$DCG_{p}=rel_{1}+\sum_{i=2}^p \frac{rel_{i}}{\log_{2}i}$
+$$DCG_{p}=rel_{1}+\sum_{i=2}^p \frac{rel_{i}}{\log_{2}i}$$
 
 dove:
 
@@ -286,6 +286,7 @@ dove:
 * La sommatoria indica la posizione dei giudizi di rilevanza
 
 **Formulazione alternativa (per il recupero di documenti più rilevanti):**
+
 * Esiste una formulazione alternativa del DCG che enfatizza ulteriormente il recupero dei documenti più rilevanti, applicando uno scaling diverso ai guadagni cumulati.
 $$DCG_{p}=\sum_{i=1}^p \frac{2^{rel_{i}}-1}{\log(1+i)}$$
 * Utilizzata da alcune aziende di ricerca web.
@@ -311,8 +312,8 @@ Il primo documento recuperato è stato giudicato come rilevante 3, il secondo 2 
 Il DCG è spesso normalizzato per ottenere l'**NDCG**. Questa normalizzazione è **supervisionata**, poiché richiede la conoscenza del ranking ideale per la query. L'NDCG si calcola dividendo il DCG ottenuto dal sistema per il DCG del ranking ideale, posizione per posizione.
 
 * **Guadagno Cumulativo Scontato Normalizzato (NDCG)** al rango n:
-    * Normalizza il DCG al rango n con il valore DCG al rango n della classifica ideale.
-    * La classifica ideale restituirebbe prima i documenti con il livello di rilevanza più alto, poi il livello di rilevanza successivo più alto, ecc.
+ * Normalizza il DCG al rango n con il valore DCG al rango n della classifica ideale.
+ * La classifica ideale restituirebbe prima i documenti con il livello di rilevanza più alto, poi il livello di rilevanza successivo più alto, ecc.
 * La normalizzazione è utile per confrontare query con un numero variabile di risultati rilevanti.
 * L'NDCG è ora molto popolare nella valutazione della ricerca sul Web. 
 è da preferirsi alla dcg quando è molto rilevante la query
@@ -381,16 +382,15 @@ In sostanza, la Kappa measure confronta la probabilità di accordo osservata (P(
 
 ![[Senza nome-20241104132249727.png]]
 
+Observed proportion of the times the judges agreed 
+$$P(A) = (300 + 70)/400 = 370/400 = 0.925$$
 
-Observed proportion of the times the judges agreed  
-$P(A) = (300 + 70)/400 = 370/400 = 0.925$
-
-Pooled marginals  
-$P(nonrelevant) = (80 + 90)/(400 + 400) = 170/800 = 0.2125$  
-$P(relevant) = (320 + 310)/(400 + 400) = 630/800 = 0.7878$  
-Probability that the two judges agreed by chance $P(E) = $  
-$P(nonrelevant)^2 + P(relevant)^2 = 0.2125^2 + 0.7878^2 = 0.665$  
-Kappa statistic $\kappa = (P(A) - P(E))/(1 - P(E)) = $  
+Pooled marginals 
+$$P(nonrelevant) = (80 + 90)/(400 + 400) = 170/800 = 0.2125$$
+$$P(relevant) = (320 + 310)/(400 + 400) = 630/800 = 0.7878$$
+Probability that the two judges agreed by chance $P(E) = $ 
+$$P(nonrelevant)^2 + P(relevant)^2 = 0.2125^2 + 0.7878^2 = 0.665$$
+Kappa statistic $\kappa = (P(A) - P(E))/(1 - P(E)) = $ 
 $(0.925 - 0.665)/(1 - 0.665) = 0.776$ (still in acceptable range)
 
 La matrice ci fornisce informazioni su quanto due giudici siano d'accordo sulla rilevanza di un determinato elemento. In questo caso, i giudici sono stati d'accordo 300 volte sulla rilevanza dell'elemento e 70 volte sulla non rilevanza.

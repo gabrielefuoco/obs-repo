@@ -43,9 +43,7 @@ plt.subplot(133)
 plt.imshow(img2)
 ```
 
-    
 ![png](04_skimage_2_1.png)
-    
 
 ```python
 linear0 = np.linspace(0, 1, 2500).reshape((50, 50))
@@ -59,13 +57,10 @@ ax0.imshow(linear0, cmap='gray')
 ax1.imshow(linear1, cmap='gray')
 ```
 
-    Linear0: float64 0.0 1.0
-    Linear1: uint8 0 255
-    
+ Linear0: float64 0.0 1.0
+ Linear1: uint8 0 255
 
-    
 ![png](04_skimage_3_2.png)
-    
 
 ```python
 # convert between format [0, 255] and [0, 1]
@@ -103,9 +98,7 @@ plt.imshow(gray, cmap='gray')
 
 ```
 
-    
 ![png](04_skimage_5_2.png)
-    
 
 ```python
 # collection of images
@@ -116,12 +109,12 @@ print(f'Type: {type(ic)}')
 ic.files
 ```
 
-    ['data/car.jpg',
-     'data/figure_geometriche.jpg',
-     'data/google_android.jpg',
-     'data/logo.jpg',
-     'data/sudokuoriginal.jpg',
-     'data/track.jpg']
+ ['data/car.jpg',
+ 'data/figure_geometriche.jpg',
+ 'data/google_android.jpg',
+ 'data/logo.jpg',
+ 'data/sudokuoriginal.jpg',
+ 'data/track.jpg']
 
 ```python
 f, axes = plt.subplots(nrows=2, ncols=len(ic) // 2 + 1, figsize=(20, 5))
@@ -136,13 +129,11 @@ for ax in axes:
 for i, image in enumerate(ic):
     axes[i].imshow(image, cmap='gray')
     axes[i].set_title(os.path.basename(ic.files[i]))
-    
+
 plt.tight_layout()
 ```
 
-    
 ![png](04_skimage_7_0.png)
-    
 
 ```python
 # thanks to https://github.com/scikit-image/skimage-tutorials
@@ -169,41 +160,33 @@ plt.subplot(144)
 plt.imshow(blue_image)
 ```
 
-    
 ![png](04_skimage_8_1.png)
-    
 
 ```python
 # nella libreria sono disponibili altri metodi di utilità
 skdemo.imshow_with_histogram?
 ```
 
-    Plot an image side-by-side with its histogram.
-    
-    - Plot the image next to the histogram
-    - Plot each RGB channel separately (if input is color)
-    - Automatically flatten channels
-    - Select reasonable bins based on the image's dtype
-    
-    See `plot_histogram` for information on how the histogram is plotted.
+ Plot an image side-by-side with its histogram.
 
-    
+ - Plot the image next to the histogram
+ - Plot each RGB channel separately (if input is color)
+ - Automatically flatten channels
+ - Select reasonable bins based on the image's dtype
+
+ See `plot_histogram` for information on how the histogram is plotted.
 
 ```python
 skdemo.imshow_with_histogram(data.camera())
 ```
 
-    
 ![png](04_skimage_10_1.png)
-    
 
 ```python
 skdemo.imshow_with_histogram(data.chelsea())
 ```
 
-    
 ![png](04_skimage_11_1.png)
-    
 
 # Trasformazioni di base
 
@@ -218,9 +201,7 @@ rotated = transform.rotate(image, 45)
 skdemo.imshow_all(image, rotated)
 ```
 
-    
 ![png](04_skimage_13_0.png)
-    
 
 ```python
 # traslazione
@@ -233,9 +214,7 @@ warped = transform.warp(image, tform)
 skdemo.imshow_all(image, warped)
 ```
 
-    
 ![png](04_skimage_14_0.png)
-    
 
 ```python
 # scale -> float, Scale factor.
@@ -248,9 +227,7 @@ warped = transform.warp(image, tform)
 skdemo.imshow_all(image, warped)
 ```
 
-    
 ![png](04_skimage_15_0.png)
-    
 
 # Skimage filters
 
@@ -267,12 +244,9 @@ print(f'suggested threashold is {threshold}')
 skdemo.imshow_all(image, image > threshold)
 ```
 
-    suggested threashold is 102
-    
+ suggested threashold is 102
 
-    
 ![png](04_skimage_17_1.png)
-    
 
 ```python
 # gaussian filter
@@ -283,9 +257,7 @@ gaussian_result = filters.gaussian(image, sigma=10, multichannel=True)
 skdemo.imshow_all(image, gaussian_result)
 ```
 
-    
 ![png](04_skimage_18_0.png)
-    
 
 # Edge detection
 
@@ -298,9 +270,7 @@ pixelated_gradient = filters.sobel(pixelated)
 skdemo.imshow_all(pixelated, pixelated_gradient)
 ```
 
-    
 ![png](04_skimage_20_0.png)
-    
 
 ```python
 # ma il filtro sobel può essere applicato solo in una direzione
@@ -311,9 +281,7 @@ skdemo.imshow_all(pixelated, pixelated_gradient, h_result, v_result,
                   titles=('Original', 'SObel', 'HSobel', 'VSobel'))
 ```
 
-    
 ![png](04_skimage_21_0.png)
-    
 
 ```python
 pixelated = io.imread(myResourcePath('figure_geometriche.jpg'))
@@ -326,9 +294,7 @@ skdemo.imshow_all(pixelated, pixelated_gradient, h_result, v_result,
                   titles=('Original', 'SObel', 'HSobel', 'VSobel'))
 ```
 
-    
 ![png](04_skimage_22_0.png)
-    
 
 ```python
 # Vediamo un esempio più semplice
@@ -339,9 +305,7 @@ simpleimg[40:-40,60:-60] = 1
 plt.imshow(simpleimg, cmap='gray')
 ```
 
-    
 ![png](04_skimage_23_1.png)
-    
 
 ```python
 pixelated_gradient = filters.sobel(simpleimg)
@@ -351,9 +315,7 @@ skdemo.imshow_all(simpleimg, pixelated_gradient, h_result, v_result,
                   titles=('Original', 'SObel', 'HSobel', 'VSobel'))
 ```
 
-    
 ![png](04_skimage_24_0.png)
-    
 
 ```python
 # se ruotiamo l'immagine?
@@ -368,9 +330,7 @@ skdemo.imshow_all(pixelated, pixelated_gradient, h_result, v_result,
 
 ```
 
-    
 ![png](04_skimage_25_0.png)
-    
 
 ```python
 from skimage import data
@@ -382,7 +342,7 @@ out = skimage.feature.hog(image, feature_vector=False)
 out.shape
 ```
 
-    (35, 54, 3, 3, 9)
+ (35, 54, 3, 3, 9)
 
 ```python
 import matplotlib.pyplot as plt
@@ -411,7 +371,5 @@ ax2.set_title('Histogram of Oriented Gradients')
 plt.show()
 ```
 
-    
 ![png](04_skimage_27_0.png)
-    
 

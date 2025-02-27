@@ -5,11 +5,12 @@ Info at <https://opencv.org>
 OpenCV (Open Source Computer Vision Library) is an open source computer vision and machine learning software library. OpenCV was built to provide a common infrastructure for computer vision applications and to accelerate the use of machine perception in the commercial products. Being a BSD-licensed product, OpenCV makes it easy for businesses to utilize and modify the code.
 
 ## Installazione
+
 Per le info di installazione si può consultare questa pagina <https://pypi.org/project/opencv-python/>
 
 Per l'uso con questi notebook è consigliata la versione completa headless (per sistemi senza GUI)
 
-    pip install opencv-contrib-python-headless
+ pip install opencv-contrib-python-headless
 
 ```python
 import os
@@ -30,8 +31,7 @@ def myResourcePath(fname):
     return filename
 ```
 
-    OpenCV-Python Version 4.5.1
-    
+ OpenCV-Python Version 4.5.1
 
 # Open/display an image
 
@@ -45,8 +45,7 @@ else:
     print('Image Loaded')
 ```
 
-    Image Loaded
-    
+ Image Loaded
 
 ```python
 # Check the resulting img
@@ -56,25 +55,22 @@ print(img.dtype)
 print(img[:2, :2, :])  # Right-upper-most few pixels of the image
 ```
 
-    <class 'numpy.ndarray'>
-    (133, 200, 3)
-    uint8
-    [[[128 123 122]
-      [126 121 120]]
-    
-     [[126 121 120]
-      [127 122 121]]]
-    
+ <class 'numpy.ndarray'>
+ (133, 200, 3)
+ uint8
+ [[[128 123 122]
+ [126 121 120]]
+
+ [[126 121 120]
+ [127 122 121]]]
 
 ```python
 plt.imshow(cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR))
 ```
 
-    <matplotlib.image.AxesImage at 0x1218be940>
+ <matplotlib.image.AxesImage at 0x1218be940>
 
-    
 ![png](03_opencv_5_1.png)
-    
 
 ```python
 # display an image using matplotlib
@@ -82,13 +78,12 @@ plt.imshow(cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR))
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
 
-    <matplotlib.image.AxesImage at 0x11ea9e668>
+ <matplotlib.image.AxesImage at 0x11ea9e668>
 
-    
 ![png](03_opencv_6_1.png)
-    
 
 # Basic operations on Images
+
 ## 1. Draw an object
 
 - `cv2.line(image, startPoint, endPoint, rgb, thinkness)`
@@ -102,9 +97,7 @@ img2 = np.zeros((512,512,3), np.uint8)
 plt.imshow(img2)
 ```
 
-    
 ![png](03_opencv_8_1.png)
-    
 
 ```python
 # Draw a line using cv2.line(image, startPoint, endPoint, rgb, thinkness)
@@ -126,9 +119,7 @@ cv2.ellipse(img2, (256,256), (100,50), -45, 0, 180, (255,0,0), -1)
 plt.imshow(img2)
 ```
 
-    
 ![png](03_opencv_9_1.png)
-    
 
 ```python
 # Draw a line using cv2.polylines(image, points, isClosed, rgb, thinkness, lineType, shift)
@@ -141,9 +132,7 @@ print(pts)
 plt.imshow(img2)
 ```
 
-    
 ![png](03_opencv_10_2.png)
-    
 
 ```python
 # Put some text using cv2.putText(image, text, bottomLeft, fontType, fontScale, rgb, thinkness, lineType)
@@ -154,9 +143,7 @@ cv2.putText(img2, 'OpenCV', (10,500), font, 4, (255,255,255), 10, cv2.LINE_AA)
 plt.imshow(img2)
 ```
 
-    
 ![png](03_opencv_11_1.png)
-    
 
 ## 2. Modify pixels & ROI
 
@@ -177,9 +164,7 @@ for i in range(15):
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
 
-    
 ![png](03_opencv_14_1.png)
-    
 
 ```python
 # ROI is obtained using Numpy indexing 
@@ -189,9 +174,7 @@ img[80:115, 75:110] = ball
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
 
-    
 ![png](03_opencv_15_1.png)
-    
 
 ---
 
@@ -203,6 +186,7 @@ Please see the following official tutorials for more detailed explanation.
  - [Drawing Functions in OpenCV — OpenCV documentation](http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html)
 
 # Trasformazioni geometriche
+
 Rivediamo alcune delle trasformazioni già viste nei notebook precedenti ma utilizzando opencv
 
 ```python
@@ -219,18 +203,14 @@ plt.subplot(1, 2, 2)
 plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
 ```
 
-    shape = (133, 200, 3)
-    
+ shape = (133, 200, 3)
 
-    
 ![png](03_opencv_18_2.png)
-    
 
 Traslare significa imporre uno spostamento sugli assi *x* e *y*. Quindi si applica una mastrice di trasformazione dove vengono indicati i valori *t1* per lo spostamento su *x* e *t2* per quello su *y*.
 
 $$M = \begin{bmatrix} 1 & 0 & t1 \\ 0 & 1 & t2 \end{bmatrix}$$
 
-         
 WARNING: Third argument of the cv2.warpAffine() function is the size of the output image, which should be in the form of (width, height). Remember width = number of columns, and height = number of rows.
 
 ```python
@@ -250,14 +230,11 @@ plt.subplot(1, 2, 2)
 plt.imshow(dst, cmap='gray')
 ```
 
-    shape = (133, 200)
-    [[  1.   0. 100.]
-     [  0.   1.  50.]]
-    
+ shape = (133, 200)
+ [[ 1. 0. 100.]
+ [ 0. 1. 50.]]
 
-    
 ![png](03_opencv_20_2.png)
-    
 
 Rotation
 
@@ -295,9 +272,7 @@ plt.subplot(1, 4, 4)
 plt.imshow(dst3, cmap='gray')
 ```
 
-    
 ![png](03_opencv_22_1.png)
-    
 
 ## Affine Transformation
 
@@ -320,9 +295,7 @@ plt.show()
 
 ```
 
-    
 ![png](03_opencv_24_0.png)
-    
 
 ## Perspective Transformation
 
@@ -344,13 +317,11 @@ plt.subplot(122),plt.imshow(dst),plt.title('Output')
 plt.show()
 ```
 
-    
 ![png](03_opencv_26_0.png)
-    
 
 Semantica del metodo
 
-    dst = cv.warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]])
+ dst = cv.warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]])
 
 - **src** input image.
 - **M** 3×3 transformation matrix.
@@ -385,14 +356,11 @@ plt.subplot(1, 3, 3)
 plt.imshow(cv2.cvtColor(imgResult, cv2.COLOR_BGR2RGB))
 ```
 
-    [[ 6.87722951e-02 -1.24273581e+00  6.71000000e+02]
-     [ 8.66486286e-02  4.83370157e-02  3.14000000e+02]
-     [-7.63013127e-04 -3.68781623e-04  1.00000000e+00]]
-    
+ [[ 6.87722951e-02 -1.24273581e+00 6.71000000e+02]
+ [ 8.66486286e-02 4.83370157e-02 3.14000000e+02]
+ [-7.63013127e-04 -3.68781623e-04 1.00000000e+00]]
 
-    
 ![png](03_opencv_28_2.png)
-    
 
 ## Analisi con istogrammi
 
@@ -426,12 +394,9 @@ for (chan, color) in zip(chans, colors):
 print(f'flattened feature vector size: {np.array(features).flatten().shape}')
 ```
 
-    flattened feature vector size: (768,)
-    
+ flattened feature vector size: (768,)
 
-    
 ![png](03_opencv_30_1.png)
-    
 
 ```python
 img = cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR)
@@ -453,9 +418,7 @@ plt.hist(np.ndarray.flatten(val), bins=128)
 plt.show()
 ```
 
-    
 ![png](03_opencv_31_0.png)
-    
 
 ## Blurring/smoothing
 
@@ -475,9 +438,7 @@ plt.title('Blurred')
 plt.show()
 ```
 
-    
 ![png](03_opencv_33_0.png)
-    
 
 ```python
 #---Sharpening filter----
@@ -495,9 +456,7 @@ plt.title('sharpened')
 plt.show()
 ```
 
-    
 ![png](03_opencv_34_0.png)
-    
 
 ```python
 #---Sharpening filter----
@@ -515,16 +474,14 @@ plt.title('sharpened')
 plt.show()
 ```
 
-    
 ![png](03_opencv_35_0.png)
-    
 
 # Image Thresholding
 
 Si applica una funzione a soglia. Se un pixel è maggiore di un certa soglia viene sostituito con un colore target (es. bianco), altrimenti si utilizza un altro colore target (es. nero)
 
-    for each pixel
-        pixel = A if pixel > threashold else B
+ for each pixel
+ pixel = A if pixel > threashold else B
 
 ```python
 img = np.zeros((200, 200), dtype=np.uint8)
@@ -537,9 +494,7 @@ plt.imshow(img, cmap='gray')
 
 ```
 
-    
 ![png](03_opencv_37_1.png)
-    
 
 ```python
 
@@ -560,9 +515,7 @@ for i in range(6):
 plt.show()
 ```
 
-    
 ![png](03_opencv_38_0.png)
-    
 
 ## Arithmetic operations
 
@@ -606,9 +559,7 @@ plt.title('new')
 plt.show()
 ```
 
-    
 ![png](03_opencv_41_1.png)
-    
 
 ## Bitwise Operations 
 
@@ -665,12 +616,9 @@ plt.show()
 
 ```
 
-    shape img1 = (133, 200, 3)
-    shape img2 = (260, 462, 3)
-    shape img2 resized = (52, 92, 3)
-    
+ shape img1 = (133, 200, 3)
+ shape img2 = (260, 462, 3)
+ shape img2 resized = (52, 92, 3)
 
-    
 ![png](03_opencv_43_1.png)
-    
 

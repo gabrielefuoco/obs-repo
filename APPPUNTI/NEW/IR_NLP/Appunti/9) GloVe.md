@@ -5,10 +5,10 @@
 **Miglioramenti:**
 
 * **Metodi di fattorizzazione matriciale globale (es. LSA):**
-    * Scarsa performance nel compito di analogia delle parole.
-    * Le parole frequenti contribuiscono in modo sproporzionato alla misura di similarità.
+ * Scarsa performance nel compito di analogia delle parole.
+ * Le parole frequenti contribuiscono in modo sproporzionato alla misura di similarità.
 * **Metodi di finestra di contesto locale, poco profondi:**
-    * Non operano direttamente sui conteggi di co-occorrenza globali (cioè, usano solo parole adiacenti), non possono sfruttare le statistiche del corpus.
+ * Non operano direttamente sui conteggi di co-occorrenza globali (cioè, usano solo parole adiacenti), non possono sfruttare le statistiche del corpus.
 
 **GloVe supera significativamente tutti gli altri modelli:**
 
@@ -63,6 +63,7 @@ Questi metodi vengono valutati confrontando il risultato della prossimità nello
 GloVe performa meglio degli altri modelli, anche di CBOW che ha dimensionalità doppia.
 
 **Valutazione dei modelli su determinati task:**
+
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114101431436.png]]
 
 ## La polisemia delle parole
@@ -84,6 +85,7 @@ Contesto globale e contesto locale delle parole per catturare tutti i significat
 Costruiamo questi cluster di vettori di contesto e all iterazione successiva li utilizziamo per aggiornare i pesi. Invece di avere un unico vettore di embeddings per parola, ne abbiamo tanti quanti sono i contesti della parola
 
 ## Named Entity Recognition
+
 Il task è trovare e classificare nomi nei testi, etichettando toker di parole
 categorie lessicali. è importante fare alcuni step di pre processing: Come trattiamo le compound word e gli acronimi (sigle) 
 generalizzando, si parla di rendere in forma canonica un termine: significa esprimere le entità tutte allo stesso modo (stabilire quindi una convenzione) 
@@ -97,8 +99,8 @@ nel caso binario: decisa una dimensione di contesto(nell'esempio 2), per la paro
 
 potremmo servircene per risolvere altri problemi (Ad esempio sentyment analisys)
 
-
 ## Training con la loss corss entropy
+
 Until now, our objective was stated as to maximize the probability of the correct class y
 or equivalently we can minimize the negative log probability of that class
 Now restated in terms of cross entropv
@@ -107,7 +109,6 @@ Let the true probability distribution be p; Iet our computed model probability b
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114105648796.png]]
 in questo caso y può assumere uno dei valori di c.
 la funzione di costo è binary cross entropy: i valori che può assumere y sono {0,1}. per ogni input abbiamo quindi solo 1 dei due termini attivati. 
-
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110129948.png]]
 
@@ -119,7 +120,6 @@ una classificazione di rete neurale apprende sia la rappresentazione delle parol
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114110412410.png]]
 per ogni esempio di training, massimizzare la probabilità della classe y o minimizzare la negative log likehood di quella stessa classe
 
-
 ## Classificatore lineare neurale
 
 è un regressore logistico, dati input x utilizziamo una funzione di trasformazione (di attivazione) sigmoide. gli input x sono trasformati in accordo ai parametri da apprednere (pesi che regolano la pendenza della superficie di boundary e la sua traslazione nello spazio (bias))
@@ -130,6 +130,7 @@ abbiamo input (istanza di training che data una parola centrale di lunghezza con
 poi si allinea la trasformazione con il vettore su cui viene calcolata la logistica per il calcolo delle probabilità 
 
 ## Neural network
+
 If we feed a vector of inputs through a bunch of logistic regression functions, then we get a vector of outputs which we can feed into another logistic regression function, giving composed functions.
 
 le reti neurali sono multilayer, noi vogliamo abilitare il modello a catturare relazioni non lineari tra gli oggetti
@@ -141,7 +142,7 @@ quando ci allonaniamo dall input catturiamo relazioni non lineari tra contesti, 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114111604129.png|542]]
 
 REgolarizzazione
-legata alla complessità del modello.  vogliamo evitare overfitting
+legata alla complessità del modello. vogliamo evitare overfitting
 lasso, ridge e elastic net
 
 dropout
@@ -150,7 +151,6 @@ disattivando alcuni neuroni evitiamo che le dimensioni possano lavorare in manie
 
 vectorization
 nota: utilizzare trasformazioni matriciali 
-
 
 inizializzazione dei paramtri:
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/9)-20241114112627802.png]]

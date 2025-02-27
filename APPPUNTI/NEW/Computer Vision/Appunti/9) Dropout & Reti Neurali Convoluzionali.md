@@ -43,7 +43,6 @@ Il problema è sempre il costo computazionale. Dobbiamo applicare più filtri pe
 
 Il problema è che la convoluzione ha dei parametri che determinano la dimensione del filtro. Un parametro efficiente è un iperparametro, stabilito in fase di training. Come? Facendo delle prove. Non ci sono regole fisse. Quello che si sa è che tipicamente un principio che funziona è questo: se si riduce la stride size aiuta ad avere più feature map e viceversa. Sempre per bilanciare da un lato l'esigenza di avere più possibilità di apprendere pattern, più pattern possibile, e dall'altro diminuire il numero di operazioni. Però, un numero o una regola precisa non c'è. Bisogna andare per tentativi ed è appunto un iperparametro, con un insieme di parametri che costituiscono la rete in termini di input, numero di layer e così via, ma che non sono parametri addestrati, ma vengono definiti a priori. 
 
-
 ## Pooling Layers e Funzioni di Attivazione
 
 ### Pooling Layers
@@ -142,7 +141,6 @@ Consideriamo un *kernel* 3x3. Se non utilizziamo il *padding*, il *kernel* può 
 
 Il *padding* è un'operazione che permette di applicare il *kernel* anche ai pixel ai bordi dell'immagine, senza perdere informazioni. Questo è importante per preservare le informazioni ai bordi dell'immagine e per evitare che la dimensione dell'immagine diminuisca dopo ogni convoluzione.
 
-
 ## Stride e Dilation
 
 ### Stride
@@ -183,5 +181,4 @@ Il principio della dilation si basa sull'idea che, per riconoscere un pattern, n
 
 * Stride e Dilation sono parametri importanti nella convoluzione che influenzano il modo in cui il kernel viene applicato all'immagine.
 * La scelta di questi parametri dipende dal tipo di feature che si desidera estrarre e dal compromesso tra accuratezza e complessità computazionale.
-
 

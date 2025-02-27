@@ -1,42 +1,46 @@
-| **Termine**                      | **Definizione**                                                                                                                                                        |
+| **Termine** | **Definizione** |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Apache Airflow**               | Piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio dei workflow di elaborazione dati.                                                        |
-| **DAG (Directed Acyclic Graph)** | Struttura che rappresenta un workflow in Airflow, definendo le attività (task) e le loro dipendenze in un grafo aciclico diretto.                                      |
-| **Task**                         | Unità di lavoro all'interno di un DAG, che rappresenta un'azione specifica come il recupero di dati, l'esecuzione di un comando o l'attivazione di un sistema esterno. |
-| **Operator**                     | Template predefinito per un task in Airflow, che definisce un'operazione specifica come l'esecuzione di un comando Bash o l'invio di un'email.                         |
-| **Sensor**                       | Tipo speciale di operator che attende il verificarsi di un evento esterno prima di procedere con l'esecuzione del task successivo nel DAG.                             |
-| **TaskFlow**                     | API di Airflow che consente di definire i task come funzioni Python, semplificando la scrittura e la gestione dei DAG.                                                 |
-| **Scheduler**                    | Componente di Airflow responsabile dell'attivazione dei DAG e dell'invio dei task all'executor in base alla pianificazione definita.                                   |
-| **Executor**                     | Componente di Airflow responsabile dell'esecuzione dei task, delegando il lavoro ai worker.                                                                            |
-| **Worker**                       | Processo o macchina che esegue effettivamente i task inviati dall'executor.                                                                                            |
-| **Jinja**                        | Motore di templating utilizzato da Airflow per la parametrizzazione dei workflow, consentendo di utilizzare variabili e logica condizionale all'interno dei DAG.       |
-| **XCom**                         | Meccanismo di comunicazione tra task in Airflow, che consente di passare dati da un task all'altro.                                                                    |
-| **Ensemble Learning**            | Tecnica di apprendimento automatico che combina le previsioni di più modelli per ottenere prestazioni migliori rispetto a un singolo modello.                          |
-| **Parallelismo dei Dati**        | Esecuzione di task paralleli sullo stesso codice, applicato a diversi sottoinsiemi di dati.                                                                            |
-| **Parallelismo dei Task**        | Esecuzione simultanea di task diversi all'interno di un DAG.                                                                                                           |
+| **Apache Airflow** | Piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio dei workflow di elaborazione dati. |
+| **DAG (Directed Acyclic Graph)** | Struttura che rappresenta un workflow in Airflow, definendo le attività (task) e le loro dipendenze in un grafo aciclico diretto. |
+| **Task** | Unità di lavoro all'interno di un DAG, che rappresenta un'azione specifica come il recupero di dati, l'esecuzione di un comando o l'attivazione di un sistema esterno. |
+| **Operator** | Template predefinito per un task in Airflow, che definisce un'operazione specifica come l'esecuzione di un comando Bash o l'invio di un'email. |
+| **Sensor** | Tipo speciale di operator che attende il verificarsi di un evento esterno prima di procedere con l'esecuzione del task successivo nel DAG. |
+| **TaskFlow** | API di Airflow che consente di definire i task come funzioni Python, semplificando la scrittura e la gestione dei DAG. |
+| **Scheduler** | Componente di Airflow responsabile dell'attivazione dei DAG e dell'invio dei task all'executor in base alla pianificazione definita. |
+| **Executor** | Componente di Airflow responsabile dell'esecuzione dei task, delegando il lavoro ai worker. |
+| **Worker** | Processo o macchina che esegue effettivamente i task inviati dall'executor. |
+| **Jinja** | Motore di templating utilizzato da Airflow per la parametrizzazione dei workflow, consentendo di utilizzare variabili e logica condizionale all'interno dei DAG. |
+| **XCom** | Meccanismo di comunicazione tra task in Airflow, che consente di passare dati da un task all'altro. |
+| **Ensemble Learning** | Tecnica di apprendimento automatico che combina le previsioni di più modelli per ottenere prestazioni migliori rispetto a un singolo modello. |
+| **Parallelismo dei Dati** | Esecuzione di task paralleli sullo stesso codice, applicato a diversi sottoinsiemi di dati. |
+| **Parallelismo dei Task** | Esecuzione simultanea di task diversi all'interno di un DAG. |
 
 **Apache Airflow** è una piattaforma open-source per lo sviluppo, la pianificazione e il monitoraggio dei workflow. Consente di creare applicazioni di elaborazione dati strutturate come DAG (Directed Acyclic Graph) di task.
 
 ### Caratteristiche principali
+
 - **Workflow come codice Python**: I DAG vengono definiti in Python, consentendo:
-  - Archiviazione dei workflow in controllo di versione (rollback a versioni precedenti).
-  - Sviluppo collaborativo dei workflow da parte di più persone.
-  - Scrittura di test per validare i workflow.
+ - Archiviazione dei workflow in controllo di versione (rollback a versioni precedenti).
+ - Sviluppo collaborativo dei workflow da parte di più persone.
+ - Scrittura di test per validare i workflow.
 
 # Strumenti di Programmazione basati su Workflow
 
 ## Apache Airflow
+
 - **Astrazione elevata**: Semplifica la costruzione dei workflow combinando task e specificando dipendenze tra di essi.
 - **Scheduler**: Esegue i task su una serie di worker, tenendo conto delle dipendenze definite nel DAG.
 - **Supporto per il parallelismo**:
-  - **Parallelismo dei dati**: Esecuzione di task paralleli sullo stesso codice, applicato a diversi chunk di dati.
-  - **Parallelismo dei task**: Esecuzione simultanea di task diversi.
+ - **Parallelismo dei dati**: Esecuzione di task paralleli sullo stesso codice, applicato a diversi chunk di dati.
+ - **Parallelismo dei task**: Esecuzione simultanea di task diversi.
 
 #### Principi di Apache Airflow
+
 - **Dinamicità**: I pipeline possono essere generati dinamicamente grazie alla flessibilità del codice Python.
 - **Estensibilità**: Airflow supporta operatori che si connettono a molte tecnologie; ogni componente è estendibile per adattarsi all'ambiente utente.
 - **Flessibilità**: Supporta la parametrizzazione dei workflow grazie al motore di templating **Jinja** 
 #### Componenti di Apache Airflow
+
 - **Scheduler**: Attiva i workflow programmati e invia task all'**Executor**.
 - **Executor**: Gestisce l'esecuzione dei task, delegando i task ai worker in ambienti di produzione.
 - **Webserver**: Fornisce un'interfaccia utente per ispezionare, attivare e fare debug su DAG e task.
@@ -44,16 +48,17 @@
 - **Database Metadata**: Utilizzato da Scheduler, Executor e Webserver per memorizzare lo stato dei task e dei DAG.
 
 #### Nozioni di base
+
 - Un **DAG** definisce:
-  - Le dipendenze tra i task.
-  - L'ordine di esecuzione dei task.
-  - La gestione dei tentativi di esecuzione falliti.
+ - Le dipendenze tra i task.
+ - L'ordine di esecuzione dei task.
+ - La gestione dei tentativi di esecuzione falliti.
 - I **task** definiscono l'azione specifica, che può essere il recupero di dati, l'analisi, l'attivazione di sistemi esterni, ecc.
 - Esempio di un DAG:
-  - Un DAG chiamato "daily backup", inizia il 1° gennaio 2023 e viene eseguito quotidianamente.
-  - Quattro task eseguono script bash diversi.
-  - Le dipendenze tra i task sono espresse con `>>`, che stabilisce la sequenza di esecuzione.
-  
+ - Un DAG chiamato "daily backup", inizia il 1° gennaio 2023 e viene eseguito quotidianamente.
+ - Quattro task eseguono script bash diversi.
+ - Le dipendenze tra i task sono espresse con `>>`, che stabilisce la sequenza di esecuzione.
+
 ```python
 # Dichiarazione DAG
 with DAG(dag_id="daily_backup", start_date=datetime(2023, 1, 1),
@@ -85,13 +90,15 @@ task_A >> [task_B, task_C]
 - **TaskFlow Tasks**: Funzioni Python personalizzate, impacchettate come task.
 
 ## Operators
+
 - Un **Operator** è un template predefinito per un task, definito dichiarativamente all'interno di un DAG.
-    
+
 - Airflow offre un ampio set di **Operators**, molti inclusi nel core o nei provider pre-installati.
-    **Operator più popolari del core**:
-    - **BashOperator**: Esegue un comando Bash.
-    - **PythonOperator**: Esegue una funzione Python arbitraria.
-    - **EmailOperator**: Invia un'email.
+ **Operator più popolari del core**:
+
+ - **BashOperator**: Esegue un comando Bash.
+ - **PythonOperator**: Esegue una funzione Python arbitraria.
+ - **EmailOperator**: Invia un'email.
 
 ### Esempio di Operators
 
@@ -125,33 +132,36 @@ with DAG(dag_id="weather_mail", start_date=datetime(2023, 1, 1),
     send_email = EmailOperator(task_id="send_email", to="user@example.com",
                                subject="Weather today in Cosenza",
                                html_content="{{ti.xcom_pull('prepare_email')}}")
-    
+
     submit_query >> prepare_email >> send_email
 ```
 
 ## Sensors
+
 - I **Sensors** sono un tipo speciale di operator progettato per **attendere che un evento esterno si verifichi**.
 - Due modalità di esecuzione:
-    
-    - **poke** (predefinita): Il sensor occupa uno slot del worker per tutta la durata dell'attesa.
-    - **reschedule**: Il sensor occupa uno slot solo durante il controllo, dormendo tra un controllo e l'altro.
-    
-    **Quando utilizzare**:
-    - Modalità **poke**: Per controlli frequenti (es. ogni secondo).
-    - Modalità **reschedule**: Per controlli meno frequenti (es. ogni minuto).
+
+ - **poke** (predefinita): Il sensor occupa uno slot del worker per tutta la durata dell'attesa.
+ - **reschedule**: Il sensor occupa uno slot solo durante il controllo, dormendo tra un controllo e l'altro.
+
+ **Quando utilizzare**:
+
+ - Modalità **poke**: Per controlli frequenti (es. ogni secondo).
+ - Modalità **reschedule**: Per controlli meno frequenti (es. ogni minuto).
 
 ## TaskFlow Tasks
+
 - L'**API TaskFlow** permette di scrivere DAG puliti in Python utilizzando il decoratore `@task`.
 - Esempio di TaskFlow con tre task:
-    
-    - **get_ip**
-    - **compose_email**
-    - **send_email**
-    
-    **Funzionamento**:
-    - I primi due task (get_ip, compose_email) utilizzano TaskFlow e si passano automaticamente il valore di ritorno.
-    - Il terzo task (send_email) è un operator tradizionale ma utilizza il valore di compose_email per impostare i suoi parametri, creando dipendenze automatiche tra i task.
 
+ - **get_ip**
+ - **compose_email**
+ - **send_email**
+
+ **Funzionamento**:
+
+ - I primi due task (get_ip, compose_email) utilizzano TaskFlow e si passano automaticamente il valore di ritorno.
+ - Il terzo task (send_email) è un operator tradizionale ma utilizza il valore di compose_email per impostare i suoi parametri, creando dipendenze automatiche tra i task.
 
 ### Esempio di TaskFlow tasks
 
@@ -180,41 +190,43 @@ EmailOperator(
 )
 ```
 
-
-
 # Esempio di Programmazione con Apache Airflow
 
 ### Applicazione di Ensemble Learning
+
 L'**ensemble learning** è implementato utilizzando le **API TaskFlow** di Airflow. In questo esempio, viene applicata la tecnica del **voto** per costruire un modello ensemble.
 
 #### Fasi del processo:
+
 1. **Dividere il dataset**: Il dataset di input viene suddiviso in un set di addestramento e un set di test.
 2. **Costruire i modelli**: Vengono addestrati *n* algoritmi di classificazione in parallelo sul set di addestramento per creare *n* modelli indipendenti.
 3. **Classificazione ensemble**: Un sistema di voto combina le previsioni dei modelli, assegnando la classe più votata a ciascuna istanza del set di test.
 
 ### Workflow con Airflow
+
 Il workflow è strutturato come una serie di **task Python**, ognuno dei quali rappresenta una fase del processo:
 
 - **load**:
-  - Carica il dataset utilizzando la funzione `load_breast_cancer` da `sklearn.datasets`.
-  - Restituisce i dati e i target come una tupla.
+ - Carica il dataset utilizzando la funzione `load_breast_cancer` da `sklearn.datasets`.
+ - Restituisce i dati e i target come una tupla.
 
 - **partition**:
-  - Riceve il dataset dal task *load*.
-  - Divide i dati in set di addestramento e di test.
-  - Restituisce i set divisi come un dizionario.
+ - Riceve il dataset dal task *load*.
+ - Divide i dati in set di addestramento e di test.
+ - Restituisce i set divisi come un dizionario.
 
 - **train**:
-  - Riceve i dati di addestramento e un'istanza di uno stimatore di `sklearn`.
-  - Addestra il modello e restituisce il modello addestrato.
+ - Riceve i dati di addestramento e un'istanza di uno stimatore di `sklearn`.
+ - Addestra il modello e restituisce il modello addestrato.
 
 - **vote**:
-  - Riceve i dati di test e una lista di modelli addestrati.
-  - Utilizza i modelli per fare previsioni sul set di test.
-  - Le previsioni vengono aggregate tramite un meccanismo di voto per ottenere la classificazione finale.
+ - Riceve i dati di test e una lista di modelli addestrati.
+ - Utilizza i modelli per fare previsioni sul set di test.
+ - Le previsioni vengono aggregate tramite un meccanismo di voto per ottenere la classificazione finale.
 
 Questo workflow dimostra come Airflow possa essere utilizzato per gestire flussi di lavoro complessi, come l'addestramento parallelo di modelli e l'aggregazione dei risultati tramite ensemble learning.
 #### Codice di esempio in Airflow
+
 ```python
 # istanziazione del DAG
 @dag (

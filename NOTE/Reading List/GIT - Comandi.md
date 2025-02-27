@@ -1,5 +1,4 @@
 
-
 ## Create a new repository
 
 1. Create a new directory.
@@ -36,7 +35,7 @@ Your local repository consists of three "trees" maintained by Git:
    ```bash
    git add <filename>
    ```
-   or
+ or
    ```bash
    git add *
    ```
@@ -51,13 +50,13 @@ Your local repository consists of three "trees" maintained by Git:
    ```bash
    git push origin master
    ```
-   Replace `master` with the desired branch name.
+ Replace `master` with the desired branch name.
 
 2. **Connect to a remote server (if not cloned):**
    ```bash
    git remote add origin <server>
    ```
-   Now you can push changes to the selected remote server.
+ Now you can push changes to the selected remote server.
 
 ## Branching
 
@@ -88,13 +87,13 @@ Branches are used to develop features independently. The `master` branch is the 
    ```bash
    git pull
    ```
-   This fetches and merges remote changes.
+ This fetches and merges remote changes.
 
 2. **Merge another branch into your active branch:**
    ```bash
    git merge <branch>
    ```
-   Git attempts to auto-merge changes. If conflicts arise, resolve them manually by editing the files indicated by Git. After editing, mark the files as merged:
+ Git attempts to auto-merge changes. If conflicts arise, resolve them manually by editing the files indicated by Git. After editing, mark the files as merged:
    ```bash
    git add <filename>
    ```
@@ -112,7 +111,7 @@ Create tags for software releases.
    ```bash
    git tag 1.0.0 1b2e1d63ff
    ```
-   Replace `1b2e1d63ff` with the first 10 characters of the commit ID you want to tag.
+ Replace `1b2e1d63ff` with the first 10 characters of the commit ID you want to tag.
 
 ## Log
 
@@ -122,24 +121,24 @@ Create tags for software releases.
    ```
 
 2. **Filter log output:**
-   - **Commits by a specific author:**
+ - **Commits by a specific author:**
      ```bash
      git log --author=bob
      ```
-   - **Compressed log (one line per commit):**
+ - **Compressed log (one line per commit):**
      ```bash
      git log --pretty=oneline
      ```
-   - **ASCII art tree of branches:**
+ - **ASCII art tree of branches:**
      ```bash
      git log --graph --oneline --decorate --all
      ```
-   - **Files changed in commits:**
+ - **Files changed in commits:**
      ```bash
      git log --name-status
      ```
 
-   For more options, see `git log --help`.
+ For more options, see `git log --help`.
 
 ## Replace local changes
 
@@ -147,7 +146,7 @@ Create tags for software releases.
    ```bash
    git checkout -- <filename>
    ```
-   This keeps changes added to the index and new files.
+ This keeps changes added to the index and new files.
 
 2. **Drop all local changes and commits, fetch the latest history, and reset the local `master` branch:**
    ```bash

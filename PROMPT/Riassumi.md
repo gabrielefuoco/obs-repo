@@ -10,4 +10,5 @@ Riassumi il testo seguente, enfatizzando chiarezza e completezza dei concetti ch
 - **Obiettivo:** Creare un riassunto chiaro e conciso, che evidenzi efficacemente i concetti principali per agevolare lo studio.
 
 **Testo da riassumere:**
+
 {}
