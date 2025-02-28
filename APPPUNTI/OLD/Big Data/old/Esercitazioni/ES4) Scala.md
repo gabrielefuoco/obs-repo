@@ -137,13 +137,13 @@ La sintassi di Scala è leggera e concisa, grazie a:
 
 Scala offre un sistema di tipi statici che aiuta a prevenire errori durante la compilazione. Questo sistema di tipi statici contribuisce a rendere il codice Scala più sicuro e affidabile.
 
-**Caratteristiche chiave:**
+##### Caratteristiche chiave:
 
 * **Specificazione dei tipi:** È possibile specificare il tipo di dati delle variabili e delle funzioni. Questo aiuta a garantire che il codice sia utilizzato correttamente e che non si verifichino errori di tipo durante la compilazione.
 * **Mix-in trait:** I trait sono come interfacce che possono essere utilizzate per aggiungere funzionalità alle classi senza ereditarietà. Questo consente di creare codice più modulare e riutilizzabile.
 * **Valori predefiniti:** È possibile fornire valori predefiniti per le variabili. Questo è utile per gestire situazioni in cui una variabile potrebbe non essere inizializzata esplicitamente.
 
-**Esempio:**
+##### Esempio:
 
 ```scala
 import scala.collection.mutable._
@@ -159,7 +159,7 @@ capital += ("US" -> "Washington",
 assert(capital("Russia") == "? ")
 ```
 
-**Spiegazione:**
+##### Spiegazione:
 
 * **`import scala.collection.mutable._`**: Importa le collezioni mutabili dalla libreria standard di Scala.
 * **`val capital = new HashMap[String, String] with SynchronizedMap[String, String]`**: Crea una nuova mappa mutabile di tipo `HashMap` che implementa anche il trait `SynchronizedMap`. Questo rende la mappa thread-safe.
@@ -167,7 +167,7 @@ assert(capital("Russia") == "? ")
 * **`capital += ("US" -> "Washington", "France" -> "Paris", "Japan" -> "Tokyo")`**: Aggiunge elementi alla mappa.
 * **`assert(capital("Russia") == "? ")`**: Verifica che la mappa restituisca il valore predefinito "? " per la chiave "Russia", che non è presente nella mappa.
 
-**In sintesi:**
+##### In sintesi:
 
 Il codice dimostra come Scala consente di specificare il tipo di dati delle collezioni, di utilizzare i trait per aggiungere funzionalità e di fornire valori predefiniti per le variabili. Questo approccio aiuta a rendere il codice più sicuro, affidabile e manutenibile. 
 
@@ -339,7 +339,7 @@ Questo dimostra che le funzioni in Scala sono oggetti che implementano il *trait
 
 #### Scala cheat sheet (1): Definizioni
 
-**Definizioni di metodo in Scala:**
+##### Definizioni di metodo in Scala:
 
 ```scala
 def fun(x: Int): Int = {
@@ -350,14 +350,14 @@ def fun(x: Int): Int = {
 def fun = result
 ```
 
-**Definizioni di variabili in Scala:**
+##### Definizioni di variabili in Scala:
 
 ```scala
 var x: Int = expression
 val x: String = expression
 ```
 
-**Definizioni di metodo in Java:**
+##### Definizioni di metodo in Java:
 
 ```java
 int fun(int x) {
@@ -366,7 +366,7 @@ int fun(int x) {
 ```
 *(nessun metodo senza parametri)*
 
-**Definizioni di variabili in Java:**
+##### Definizioni di variabili in Java:
 
 ```java
 int x = expression;
@@ -375,7 +375,7 @@ final String x = expression;
 
 ### Scala cheat sheet (2): Espressioni
 
-**Chiamate ai metodi in Scala:**
+##### Chiamate ai metodi in Scala:
 
 ```scala
 obj.meth(arg)
@@ -385,7 +385,7 @@ o
 obj meth arg
 ```
 
-**Espressioni di scelta in Scala:**
+##### Espressioni di scelta in Scala:
 
 ```scala
 if (cond) expr1 else expr2
@@ -398,14 +398,14 @@ expr match {
 }
 ```
 
-**Chiamata ai metodi in Java:**
+##### Chiamata ai metodi in Java:
 
 ```java
 obj.meth(arg)
 // (nessun sovraccarico degli operatori)
 ```
 
-**Espressioni di scelta e stati in Java:**
+##### Espressioni di scelta e stati in Java:
 
 ```java
 cond ? expr1 : expr2; // espressione
@@ -422,7 +422,7 @@ switch (expr) {
 
 ### Scala cheat sheet (3): Oggetti e Classi
 
-**Classe e Oggetto in Scala:**
+##### Classe e Oggetto in Scala:
 
 ```scala
 class Sample(x: Int) {
@@ -434,7 +434,7 @@ object Sample {
 }
 ```
 
-**Classe Java con statico:**
+##### Classe Java con statico:
 
 ```java
 class Sample {
@@ -456,7 +456,7 @@ class Sample {
 
 ### Scala cheat sheet (4): Traits
 
-**Trait in Scala:**
+##### Trait in Scala:
 
 ```scala
 trait T {
@@ -468,13 +468,13 @@ trait T {
 }
 ```
 
-**Composizione mixin in Scala:**
+##### Composizione mixin in Scala:
 
 ```scala
 class C extends Super with T
 ```
 
-**Interfaccia Java:**
+##### Interfaccia Java:
 
 ```java
 interface T {
@@ -484,7 +484,7 @@ interface T {
 }
 ```
 
-**Estensione Java + implementazione:**
+##### Estensione Java + implementazione:
 
 ```java
 class C extends Super implements T
@@ -1117,7 +1117,7 @@ Le collezioni in Scala sono un tipo di dato fondamentale per la gestione di dati
 
 Le collezioni immutabili non possono essere modificate dopo la loro creazione. Ogni operazione che sembra modificare la collezione restituisce in realtà una nuova collezione con le modifiche desiderate, lasciando la collezione originale intatta.
 
-**Esempi:**
+##### Esempi:
 
 * `List`: Una lista immutabile ordinata.
 * `Set`: Un insieme immutabile non ordinato di elementi unici.
@@ -1127,7 +1127,7 @@ Le collezioni immutabili non possono essere modificate dopo la loro creazione. O
 
 Le collezioni mutabili possono essere modificate in loco. È possibile aggiungere, rimuovere o modificare elementi direttamente nella collezione.
 
-**Esempi:**
+##### Esempi:
 
 * `ArrayBuffer`: Una lista mutabile ordinata.
 * `HashSet`: Un insieme mutabile non ordinato di elementi unici.
@@ -1354,36 +1354,36 @@ val prices = Map("bread" -> 4.56, "eggs" -> 2.98, "butter" -> 4.35)
 
 **Obiettivo:** Ridurre il prezzo di ogni articolo di 1.1 unità.
 
-**Soluzione 1 (senza `case`):**
+##### Soluzione 1 (senza `case`):
 
 ```scala
 prices.map((k, v) => (k, v - 1.1)).toMap
 ```
 
-**Errore:**
+##### Errore:
 
 ```
 Error: Il tipo previsto richiede una funzione a un argomento che accetta un 2-Tuple.
 Considera una funzione anonima di pattern matching, `{ case (k, v) => ... }`
 ```
 
-**Spiegazione dell'errore:**
+##### Spiegazione dell'errore:
 
 * `map` si aspetta una funzione che accetta un singolo argomento (una coppia chiave-valore in questo caso).
 * La funzione `(k, v) => (k, v - 1.1)` è una funzione a due argomenti (k e v).
 
-**Soluzione 2 (con `case`):**
+##### Soluzione 2 (con `case`):
 
 ```scala
 prices.map { case (k, v) => (k, v - 1.1) }.toMap
 ```
 
-**Spiegazione:**
+##### Spiegazione:
 
 * `case (k, v)` è un pattern matching che decompone la coppia chiave-valore in due variabili, `k` e `v`.
 * La funzione anonima `{ case (k, v) => (k, v - 1.1) }` accetta una coppia chiave-valore come argomento e restituisce una nuova coppia con il valore modificato.
 
-**Conclusione:**
+##### Conclusione:
 
 * L'utilizzo di `case` nel pattern matching è necessario quando si lavora con funzioni che accettano tuple come argomenti.
 * `case` consente di decomporre la tupla in variabili separate, rendendo la funzione più leggibile e facile da usare. 

@@ -11,7 +11,7 @@ Le funzioni di codifica e decodifica sono definite come:
 * **Codifica:** $z=ψ(x)$
 * **Decodifica:** $x=\phi(x)$
 
-**Applicazioni:**
+##### Applicazioni:
 
 * **Riduzione della dimensionalità:** Gli autoencoder possono essere utilizzati per ridurre la dimensionalità dei dati, trovando una rappresentazione più compatta.
 * **Compressione (con perdita):** Gli autoencoder possono essere utilizzati per la compressione dei dati, con una certa perdita di informazioni.

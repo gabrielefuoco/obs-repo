@@ -18,7 +18,7 @@ L'obiettivo è sviluppare sistemi di intelligenza artificiale (AI) che possiedan
 
 Un problema fondamentale nell'NLP è la rappresentazione del linguaggio in un computer in modo che possa essere elaborato e generato in modo robusto. Una sotto-domanda cruciale è come rappresentare le parole.
 
-**Rappresentazione del significato di una parola:**
+##### Rappresentazione del significato di una parola:
 
 Il significato di una parola è l'idea che essa rappresenta. Un approccio linguistico comune al significato è la semantica denotativa, che associa un significante (simbolo) a un significato (idea o cosa). Ad esempio, la parola "albero" denota diverse rappresentazioni di alberi, come 🌲, 🌳, 🪴. 
 
@@ -115,7 +115,7 @@ Molte di queste rappresentazioni sono neurali.
 
 Word2vec (Mikolov et al. 2013) è un framework per l'apprendimento di vettori di parole.
 
-**Idea:**
+##### Idea:
 
 * Abbiamo un grande corpus ("corpo") di testo: una lunga lista di parole.
 * Ogni parola in un vocabolario fisso è rappresentata da un vettore.
@@ -125,9 +125,9 @@ Word2vec (Mikolov et al. 2013) è un framework per l'apprendimento di vettori di
 	* Data una parola target predire la probabilità rispetto le sue parole di contesto, avendo fissato l'estensione del contesto (quante parole devo considerare come contesto per ogni parola target).
 * Continuiamo ad aggiustare i vettori di parole per massimizzare questa probabilità. 
 
-![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162802037.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162802037.png|579]]
 Fissiamo estensione del contesto a 2, consideriamo "into" come parola centrale, dobbiamo calcolare la probabilità delle due parole a destra e a sinistra
-![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162829597.png|614]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241111162829597.png|571]]
 ## Word2vec: Funzione Obiettivo
 
 Per ogni posizione $t=1,\dots,T$, vogliamo predire le parole di contesto in una certa finestra di taglia fissata **m**, data una parola centrale $w_{t}$. 
@@ -170,12 +170,12 @@ Data una parola di contesto, la probabilità di osservarla data l'osservazione d
 
 Seleziona iterativamente una parola centrale e la sua finestra di dimensione fissa *m* da un documento di lunghezza *T*, ed estrai esempi di addestramento.
 
-* Addestra una rete neurale con 1 strato nascosto di dimensione *N*, dove:
+* **Addestra una rete neurale con 1 strato nascosto di dimensione *N*, dove:**
  * Gli strati di input/output sono vettori one-hot di dimensione *V*, ovvero la dimensione del vocabolario.
  * Lo strato nascosto è di dimensione *N*, con *N* $\ll$ *V*.
 
-* Compito di apprendimento:
- * "Dato una parola specifica all'interno di una frase (parola centrale), scegliendo casualmente una parola nella finestra, restituisci una probabilità per ogni parola nel vocabolario di essere effettivamente la parola scelta casualmente".
+* **Compito di apprendimento:**
+ * Dato una parola specifica all'interno di una frase (parola centrale), scegliendo casualmente una parola nella finestra, restituisci una probabilità per ogni parola nel vocabolario di essere effettivamente la parola scelta casualmente.
 
 * Utilizza l'ottimizzatore SGD per aggiornare i parametri del modello. 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112100823370.png]]
@@ -197,9 +197,12 @@ Calcoliamo il gradiente della funzione di costo rispetto al vettore del contesto
 $$\frac{\delta J}{\delta V_{c}}=\frac{\delta}{\delta V_{c}}\log e^{U_{0}^TV_c}-\log \sum_{w\in V} e^{U_{0}^TV_c}$$
 
 Il primo termine è semplicemente $U_{0}$. Il secondo termine diventa:
-# separare
 
-$$=\frac{1}{\sum_{w\in V} e^{U_{0}^TV_c}} \frac{\delta}{\delta V_{c}}\sum_{x\in V} e^{U_{x}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} \frac{\delta}{\delta v_{c}}e^{U_{w}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} e^{U_{w}^TV_c} u_{x}=\sum \frac{e^{U_{w}^TV_c} }{\sum_{x\in V} e^{U_{w}^TV_c} } u_{x}$$
+
+$$=\frac{1}{\sum_{w\in V} e^{U_{0}^TV_c}} \frac{\delta}{\delta V_{c}}\sum_{x\in V} e^{U_{x}^TV_c}=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} \frac{\delta}{\delta v_{c}}e^{U_{w}^TV_c}=$$
+$$
+=\frac{1}{\sum_{w \in V} e^{U_{w}^TV_c}}\sum_{x\in V} e^{U_{w}^TV_c} u_{x}=\sum \frac{e^{U_{w}^TV_c} }{\sum_{x\in V} e^{U_{w}^TV_c} } u_{x}
+$$
 
 Quindi, il gradiente della log-probabilità rispetto a $V_c$ è:
 
@@ -228,22 +231,22 @@ Per aggiornare i parametri, dobbiamo calcolare il gradiente della funzione di pe
 
 Il gradiente rispetto a $z$ è dato da:
 
-$$\frac{\delta L}{\delta z} = \frac{\delta L}{\delta \hat{y}} \frac{\delta \hat{y}}{\delta z}$$
+$$\frac{\partial L}{\partial z} = \frac{\partial L}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z}$$
 
 Calcoliamo i due termini separatamente:
 
-* **Primo termine:** $\frac{\delta L}{\delta \hat{y}} = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}$
-* **Secondo termine:** $\frac{\delta \hat{y}}{\delta z} = \frac{1}{(1+e^{-z})^2}e^{-z} = \hat{y}(1-\hat{y})$
+* **Primo termine:** $\frac{\partial L}{\partial \hat{y}} = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}$
+* **Secondo termine:** $\frac{\partial \hat{y}}{\partial z} = \frac{1}{(1+e^{-z})^2}e^{-z} = \hat{y}(1-\hat{y})$
 
 Moltiplicando i due termini, otteniamo:
 
-$$\frac{\delta L}{\delta z} = -y(1-\hat{y}) + \hat{y}(1-y) = \hat{y} - y$$
+$$\frac{\partial L}{\partial z} = -y(1-\hat{y}) + \hat{y}(1-y) = \hat{y} - y$$
 
 #### Gradiente rispetto a $w$
 
 Il gradiente rispetto a $w$ è dato da:
 
-$$\frac{\delta L}{\delta w} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta w} = (\hat{y}-y)x$$
+$$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial z} \frac{\partial z}{\partial w} = (\hat{y}-y)x$$
 
 dove $x$ è il valore dell'input.
 
@@ -251,14 +254,14 @@ dove $x$ è il valore dell'input.
 
 Il gradiente rispetto a $b$ è dato da:
 
-$$\frac{\delta L}{\delta b} = \frac{\delta L}{\delta z} \frac{\delta z}{\delta b} = \hat{y} - y$$
+$$\frac{\partial L}{\partial b} = \frac{\partial L}{\partial z} \frac{\partial z}{\partial b} = \hat{y} - y$$
 
 ### Regole di Aggiornamento
 
 Utilizzando il metodo della discesa del gradiente, aggiorniamo i parametri $w$ e $b$ come segue:
 
-* $w^{(k+1)} = w^{(k)} - \lambda \frac{\delta L}{\delta w^{(k)}}$
-* $b^{(k+1)} = b^{(k)} - \lambda \frac{\delta L}{\delta b^{(k)}}$
+* $w^{(k+1)} = w^{(k)} - \lambda \frac{\partial L}{\partial w^{(k)}}$
+* $b^{(k+1)} = b^{(k)} - \lambda \frac{\partial L}{\partial b^{(k)}}$
 
 dove:
 
@@ -298,7 +301,7 @@ Gli autori Mikolov e altri hanno proposto due varianti di embeddings: **Skip-gra
 **Perché due vettori?** - Ottimizzazione più semplice. Si fa la media di entrambi alla fine.
 Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un po'.
 
-**Due varianti:**
+##### Due varianti:
 
 1. **Skip-grams (SG):**
 - In Skip-gram, data una parola target, l'obiettivo è predire le parole di contesto scorrendo il testo e calcolando le probabilità. Si definisce una **window size**, un iperparametro che determina l'estensione del contesto. Per ogni parola target, Skip-gram calcola le probabilità per predire le parole di contesto, ovvero le parole precedenti e successive alla parola target. Se la window size è n, si considerano le n parole precedenti e le n parole successive.
@@ -306,12 +309,12 @@ Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un
 2. **Continuos bag of words (CBOW):**
 - CBOW è una variante di Skip-gram in cui, date le parole di contesto, si deve predire la parola centrale. In altre parole, l'input è il contesto e l'output è la parola target.
 
-**Visualizzazione:**
+##### Visualizzazione:
 
 * **Skip-gram:** Si muove sul testo, la parola centrale è evidenziata e il contesto sono le altre parole. Questo processo genera le coppie di addestramento. L'associazione è uno a molti: una parola centrale e M parole di contesto. Le parole di contesto vengono spesso aggregate, mediate, quindi dato il vettore medio di contesto, si deve predire la parola centrale.
 * **CBOW:** L'associazione è uno a uno. Si ha un input di M parole di contesto e un output di una parola centrale.
 
-**Implementazione:**
+##### Implementazione:
 
 * **Skip-gram:**
  * Si parte da un input one-hot che rappresenta la parola target.
@@ -332,29 +335,28 @@ Ma si può implementare l'algoritmo con un solo vettore per parola... e aiuta un
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101025711.png]]
 
-![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101035268.png]]
+![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101035268.png|696]]
 
-specifichiamo il one hot, abbiamo l'outoput layer con la parola da predire
-dobbiamo apprendere i pesi di collegamento tra input e outout (sull hiddenb layer)
+Specifichiamo il metodo one-hot encoding: l'output layer rappresenta la parola da predire.  Il processo di apprendimento consiste nel determinare i pesi tra l'input e l'output (attraverso lo strato nascosto).  
+Nel modello CBOW (Continuous Bag-of-Words), i vettori delle parole di contesto vengono mediati prima di essere utilizzati per la predizione.
 
-cbow fa una media tra i vettori tra le parole di contesto
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112101140496.png]]
 
 Dato un contesto di parole, ad esempio "cat" e "on", l'obiettivo è predire la parola centrale "sat".
 
-**Rappresentazione:**
+##### Rappresentazione:
 
 * La dimensione della rappresentazione delle parole è pari alla dimensione del vocabolario.
 * **w** è la matrice dei pesi tra lo strato di input e lo strato nascosto, di dimensione $d \cdot n$, dove *n* è la dimensionalità dello strato nascosto.
 * La codifica di "cat" e "on" è ottenuta moltiplicando il loro vettore one-hot per la matrice dei pesi **w**.
 
-**Codifica del contesto:**
+##### Codifica del contesto:
 
 * **V** è una codifica generica in input.
 * Per le parole di contesto, si ottiene una media delle loro codifiche.
 * Questo vettore medio viene decodificato con la matrice dei pesi tra lo strato nascosto e lo strato di output e poi dato in input alla softmax.
 
-**Nota:**
+##### Nota:
 
 * $\hat{v}$ è la media delle codifiche degli *m* input, che per CBOW sono solo le parole di contesto. 
 
@@ -362,12 +364,12 @@ Dato un contesto di parole, ad esempio "cat" e "on", l'obiettivo è predire la p
 
 L'embedding di una parola è ricavabile da una riga della matrice **W**.
 
-**In Skip-gram:**
+##### In Skip-gram:
 
 * L'input è una singola parola.
 * L'embedding della parola viene estratto dalla matrice **W** e rappresenta la rappresentazione della parola target nel task di Skip-gram.
 
-**In CBOW:**
+##### In CBOW:
 
 * L'input è costituito dalle parole di contesto.
 * Gli embedding delle parole di contesto vengono aggregati per ottenere una rappresentazione dell'input.
@@ -416,13 +418,13 @@ Campionare le *k* parole negative con una distribuzione proporzionale alla distr
 
 La softmax gerarchica è un'altra tecnica che migliora l'efficienza dell'addestramento dei modelli di embedding. Invece di utilizzare una softmax standard, che richiede il calcolo della probabilità di tutte le parole nel vocabolario, la softmax gerarchica utilizza un albero di Huffman per organizzare le parole.
 
-**Come funziona la softmax gerarchica:**
+##### Come funziona la softmax gerarchica:
 
 1. **Albero di Huffman:** Viene costruito un albero di Huffman, dove le foglie rappresentano le parole del vocabolario. L'albero è bilanciato e le parole più frequenti sono più vicine alla radice.
 2. **Calcolo della probabilità:** Per calcolare la probabilità di una parola di contesto, si percorre l'albero dalla radice alla foglia corrispondente alla parola. Ogni nodo dell'albero ha un peso associato, che viene utilizzato per calcolare la probabilità.
 3. **Aggiornamento dei pesi:** Durante l'addestramento, i pesi dei nodi dell'albero vengono aggiornati per migliorare la precisione del modello.
 
-**Vantaggi della softmax gerarchica:**
+##### Vantaggi della softmax gerarchica:
 
 * **Efficienza:** Riduce il numero di calcoli necessari per la softmax, rendendo l'addestramento più veloce.
 * **Struttura gerarchica:** L'albero di Huffman fornisce una struttura gerarchica che può essere utilizzata per migliorare la comprensione delle relazioni tra le parole.
@@ -514,17 +516,17 @@ GloVe è una tecnica alternativa a Word2Vec per creare word embeddings, ovvero r
 
 A differenza di modelli come Word2Vec, che generano una singola rappresentazione multidimensionale per ogni parola, GloVe considera il contesto in cui le parole compaiono. Questo approccio è particolarmente utile per gestire parole poco frequenti o con elevata polisemia, ovvero parole che assumono significati diversi a seconda del contesto.
 
-**Come funziona GloVe:**
+##### Come funziona GloVe:
 
 GloVe si basa sull'analisi delle co-occorrenze tra parole. In sostanza, si analizza la probabilità che due parole compaiano insieme in un testo. Queste informazioni vengono utilizzate per costruire una matrice di co-occorrenze, che rappresenta la relazione tra le parole.
 
-**Vantaggi di GloVe:**
+##### Vantaggi di GloVe:
 
 * **Gestione della polisemia:** GloVe riesce a catturare i diversi significati di una parola in base al contesto in cui compare.
 * **Migliore rappresentazione di parole poco frequenti:** Grazie all'analisi delle co-occorrenze, GloVe riesce a rappresentare in modo più accurato anche parole che compaiono raramente nei testi.
 * **Efficienza computazionale:** GloVe è generalmente più efficiente di altri modelli di word embedding, come Word2Vec.
 
-**Punti chiave:**
+##### Punti chiave:
 
 * **Natura neurale:** GloVe è un modello neurale che utilizza le co-occorrenze per apprendere rappresentazioni dense delle parole.
 * **Non un vettore globale:** L'embedding di GloVe non è un vettore globale nel senso che ogni parola è rappresentata da un unico embedding. L'embedding è il risultato dell'addestramento dell'algoritmo di GloVe su uno specifico corpus di training.
@@ -532,17 +534,17 @@ GloVe si basa sull'analisi delle co-occorrenze tra parole. In sostanza, si anali
 
 I word embeddings sono rappresentazioni multidimensionali delle parole che catturano il loro significato in uno spazio vettoriale. In particolare, sono considerati **rappresentazioni globali** e **context-free**. Ciò significa che ogni parola ha un'unica rappresentazione, indipendentemente dal contesto in cui viene utilizzata.
 
-**Rappresentazioni Globali:**
+##### Rappresentazioni Globali:
 
 * Ogni parola ha una sola rappresentazione vettoriale, che viene utilizzata in qualsiasi contesto.
 * Questa rappresentazione è statica e non cambia a seconda del contesto.
 
-**Rappresentazioni Context-Free:**
+##### Rappresentazioni Context-Free:
 
 * La rappresentazione di una parola non tiene conto del contesto in cui viene utilizzata.
 * La stessa rappresentazione viene utilizzata per tutte le occorrenze di una parola, indipendentemente dal testo o dal contesto.
 
-**Limiti delle Rappresentazioni Globali e Context-Free:**
+##### Limiti delle Rappresentazioni Globali e Context-Free:
 
 * **Polisemia:** Le parole possono avere significati diversi a seconda del contesto. Le rappresentazioni globali non riescono a catturare questa complessità.
 * **Parole poco frequenti:** Le parole poco frequenti hanno meno dati di training, il che può portare a rappresentazioni meno accurate.
@@ -575,14 +577,18 @@ L'errore è valutato come la differenza tra la co-occorrenza reale e la co-occor
 
 L'idea è quella di catturare le proprietà tra i rapporti di co-occorrenza. 
 
-![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8) NLP-20241112111853927.png|582]]
+| Probability and Ratio                                         | $k = \text{solid}$   | $k = \text{gas}$     | $k = \text{water}$   | $k = \text{fashion}$ |
+| ------------------------------------------------------------- | -------------------- | -------------------- | -------------------- | -------------------- |
+| $P(k \| \text{ice})$                                          | $1.9 \times 10^{-4}$ | $6.6 \times 10^{-5}$ | $3.0 \times 10^{-3}$ | $1.7 \times 10^{-5}$ |
+| $P(k                  \| \text{steam})$                       | $2.2 \times 10^{-5}$ | $7.8 \times 10^{-4}$ | $2.2 \times 10^{-3}$ | $1.8 \times 10^{-5}$ |
+| $P(k                  \| \text{ice})/P(k    \| \text{steam})$ | $8.9$                | $8.5 \times 10^{-2}$ | $1.36$               | $0.96$               |
 
 Consideriamo tre parole: $i$, $j$ e $k$, dove $k$ è una parola di confronto utilizzata per il confronto. Ad esempio, se $k$ è "solid", possiamo valutare il rapporto tra la probabilità di $k$ dato $i$ ("ice") e la probabilità di $k$ dato $j$ ("steam").
 
 * **Rapporto > 1:** Indica che la parola $k$ è più correlata alla parola al numeratore ($i$). Ad esempio, se il rapporto è 8.9, "solid" è più correlato a "ice" che a "steam".
 * **Rapporto < 1:** Indica che la parola $k$ è più correlata alla parola al denominatore ($j$).
 
-**Relazioni geometriche:**
+##### Relazioni geometriche:
 
 L'obiettivo è di rappresentare le parole in uno spazio vettoriale, dove le relazioni tra le parole possono essere interpretate geometricamente. Ad esempio, la relazione tra "man", "woman", "king" e "queen" può essere espressa come: "man" sta a "woman" come "king" sta a "queen".
 
@@ -592,19 +598,19 @@ Gli embeddings ci permettono di definire queste relazioni geometriche, dove l'em
 
 Per catturare le relazioni tra parole, definiamo una funzione $F$ che confronta la differenza tra due parole $w_i$ e $w_k$ rispetto a una terza parola $w_j$. Questa funzione deve soddisfare le seguenti proprietà:
 
-**Condizione 1: Combinazione Lineare**
+##### Condizione 1: Combinazione Lineare
 
 $$F((w_{i}-w_{j})^Tw_{k})=\frac{P(k|i)}{P(k|j)}$$
 
-**Condizione 2: Simmetria**
+##### Condizione 2: Simmetria
 
 $$F((w_{i}-w_{j})^Tw_{k})=\frac{F(w_{i}^Tw_{k})}{F(w_{j}^Tw_{k})}$$
 
-**Definizione di F**
+##### Definizione di F
 
 $$F(w_{i}^Tw_{k})=e^{w_{i}^Tw_{k}}=P(k|i) \text{, definita come } \frac{x_{ik}}{x_{i}}$$
 
-**Derivazione**
+##### Derivazione
 
 Dunque, possiamo scrivere:
 

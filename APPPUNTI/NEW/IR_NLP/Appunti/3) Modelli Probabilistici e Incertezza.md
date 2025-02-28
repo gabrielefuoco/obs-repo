@@ -63,22 +63,22 @@ L'utilizzo di modelli probabilistici per il ranking di documenti ha avuto un'evo
 
 Il principio di base è quello di **determinare il miglior set di risultati (result set) per una query**, composto da documenti altamente rilevanti. Questo implica non solo l'identificazione dei documenti rilevanti, ma anche il loro **ordinamento per rilevanza**.
 
-**Approccio Probabilistico:**
+##### Approccio Probabilistico:
 
 L'approccio probabilistico al ranking di documenti si basa sul concetto di **probabilità di rilevanza di un documento rispetto a una query**. Invece di utilizzare euristiche per determinare la rilevanza, si cerca di **misurare la probabilità che un documento appartenga alla classe "rilevante" (R)**.
 
-**Formalizzazione del Problema:**
+##### Formalizzazione del Problema:
 
 Il problema può essere formalizzato come un problema di **classificazione**. Si vuole determinare la probabilità che un documento **X** appartenga alla classe **R** (rilevante) piuttosto che alla classe **non R** (non rilevante).
 
-**Notazione:**
+##### Notazione:
 
 * **X:** Rappresentazione vettoriale del documento.
 * **R:** Classe "rilevante".
 	* **R=1** significa "pertinente" e **R=0** "non pertinente"
 * **P(R=1|X):** Probabilità che il documento X appartenga alla classe R.
 
-**Formula di Bayes:**
+##### Formula di Bayes:
 
 La probabilità di rilevanza può essere calcolata utilizzando la formula di Bayes:
 
@@ -90,7 +90,7 @@ Dove:
 * **P(R=1):** Probabilità a priori che un documento sia rilevante.
 * **P(X):** Probabilità di osservare il documento X.
 
-**Osservazioni:**
+##### Osservazioni:
 
 * Il termine **P(X)** è costante rispetto alle classi e quindi non influenza il ranking.
 * Il ranking dei documenti dipende quindi dai termini **P(X|R=1)** e **P(R=1)**.
@@ -100,20 +100,25 @@ L'assunzione di indipendenza condizionata può essere problematica nei dati test
 
 Il problema della classificazione si basa sulla formula di *price*, dove il denominatore rimane costante indipendentemente dalla classe o dalla distanza. 
 
-**Il termine di *likelihood***
+##### Il termine di *likelihood*
+
 - Il termine computazionalmente complesso nel contesto del *DICE* (con due sole classi) è il termine di *likelihood*. Per stimarlo, si utilizza la *maximum likelihood estimate*, che corrisponde alla frequenza relativa.
 - Dato una classe *J*, la probabilità di osservare *X* (un'istanza specifica) si basa sull'assunzione di **indipendenza condizionata** tra le dimensioni. In altre parole, si assume che le dimensioni siano indipendenti tra loro, data la classe *J*.
 
-**Stima delle probabilità *a priori***
+##### Stima delle probabilità *a priori*
+
 - Le probabilità *a priori* delle classi (ad esempio, probabilità di classe rilevante e probabilità di classe non rilevante) possono essere stimate osservando un *training set*.
 
-**Il problema del *bias***
+##### Il problema del *bias*
+
 - Il problema del *bias* applicato alla classificazione (sia per il testo che per altri tipi di dati) è particolarmente importante.
 
-**Validità dell'assunzione di indipendenza**
+##### Validità dell'assunzione di indipendenza
+
 - Questa assunzione può essere valida se la fase di *pre-process* ha ridotto la dimensionalità in modo da valorizzare l'indipendenza delle dimensioni. Tuttavia, in alcuni scenari, come quello dei dati testuali, l'assunzione di indipendenza è difficile da accettare.
 
-**Dipendenza nei dati testuali**
+##### Dipendenza nei dati testuali
+
 - Nei dati testuali, le dimensioni sono spesso dello stesso tipo (ad esempio, parole) e presentano relazioni di dipendenza. Ad esempio, gli articoli sono dipendenti dai sostantivi, e la grammatica influenza le relazioni tra i termini.
 
 ## Probability Ranking e Binary Independence Model
@@ -124,7 +129,7 @@ Come dimostra il classificatore naïve bayesiano, è possibile ottenere buone pr
 
 L'obiettivo del PRP è ordinare i documenti in base alla loro probabilità di rilevanza. Questo approccio si allinea con la regola di decisione ottimale dell'inferenza bayesiana: un documento è rilevante se la probabilità che soddisfi l'ipotesi di rilevanza è maggiore della probabilità che non la soddisfi.
 
-**Bisogna trovare p(R=1|x), ovvero la probabilità che un documento x sia pertinente.**
+##### Bisogna trovare p(R=1|x), ovvero la probabilità che un documento x sia pertinente.
 
 * **p(R=1), p(R=0):** probabilità a priori di recuperare un documento pertinente (non pertinente) a caso.
 * **p(x|R=1), p(x|R=0):** probabilità che, se viene recuperato un documento pertinente (non pertinente), sia x.
@@ -168,7 +173,7 @@ Gli odds sono una misura di probabilità che rappresenta il rapporto tra la prob
 
 Gli odds ci aiutano a rimanere concentrati sull'analisi specifica per stabilire un ordinamento tra i documenti. 
 
-**Cosa sono gli Odds Ratio (OR)?**
+##### Cosa sono gli Odds Ratio (OR)?
 
 Gli Odds Ratio (OR) sono una misura di associazione relativa tra due variabili binarie. Sono utilizzati in statistica descrittiva per misurare la forza di associazione o di non indipendenza tra due variabili.
 
@@ -182,9 +187,9 @@ Consideriamo una tabella di contingenza 2x2 con le variabili X e Y:
 
 L'Odds Ratio è calcolato come:
 
-$$OR =  \frac{n_{11} \cdot n_{00}}{n_{10} \cdot n_{01}}$$
+$$OR = \frac{n_{11} \cdot n_{00}}{n_{10} \cdot n_{01}}$$
 
-**Applicazioni degli Odds Ratio:**
+##### Applicazioni degli Odds Ratio:
 
 Gli Odds Ratio sono utilizzati in diversi campi, tra cui:
 
@@ -200,11 +205,11 @@ Sono due misure utilizzate per valutare l'associazione tra un evento (ad esempio
 
 Il rischio relativo (RR) misura la probabilità di un evento in presenza di una variabile rispetto alla probabilità dello stesso evento in assenza della variabile. 
 
-**Formula:**
+##### Formula:
 
 RR = (Probabilità di osservare X in presenza di Y) / (Probabilità di osservare X in assenza di Y)
 
-**Interpretazione:**
+##### Interpretazione:
 
 * **RR = 1:** Non c'è differenza nel rischio tra l'occorrenza e la non-occorrenza di X.
 * **RR < 1:** L'evento Y è meno probabile che accada in presenza di X.
@@ -214,11 +219,11 @@ RR = (Probabilità di osservare X in presenza di Y) / (Probabilità di osservare
 
 L'odds ratio (OR) è un'altra misura di associazione che confronta le probabilità di un evento in due gruppi diversi.
 
-**Formula:**
+##### Formula:
 
 OR = (Odds di Y in presenza di X) / (Odds di Y in assenza di X)
 
-**Interpretazione:**
+##### Interpretazione:
 
 * **OR = 1:** Non c'è differenza nelle odds tra i due gruppi.
 * **OR < 1:** Le odds di Y sono più basse nel gruppo con X.
@@ -245,23 +250,23 @@ dove:
 
 La **Odds Ratio (OR)** è una misura di associazione tra un fattore di rischio e un evento. È definita come il rapporto tra le odds di un evento nel gruppo esposto al fattore di rischio e le odds dello stesso evento nel gruppo non esposto. 
 
-**Proprietà importanti dell'Odds Ratio:**
+##### Proprietà importanti dell'Odds Ratio:
 
 * **Non simmetrica:** L'OR non è simmetrica, ovvero scambiando le variabili X e Y, il valore dell'OR cambia.
 * **Robusta:** L'OR può essere stimata anche in assenza delle incidenze, rendendola utile per studi retrospettivi.
 * **Approssimazione del rischio relativo:** Per eventi rari, l'OR approssima molto bene il **rischio relativo (RR)**.
 
-**Rischio Relativo (RR):**
+##### Rischio Relativo (RR):
 
 Il RR è una misura di associazione che indica il rapporto tra il rischio di un evento nel gruppo esposto al fattore di rischio e il rischio dello stesso evento nel gruppo non esposto.
 
-**Confronto tra OR e RR:**
+##### Confronto tra OR e RR:
 
 * **Studi retrospettivi:** L'OR è preferibile al RR perché può essere stimata anche in assenza delle incidenze.
 * **Studi prospettivi:** Il RR è preferibile all'OR perché fornisce una misura diretta del rischio.
 * **Eventi rari:** L'OR approssima molto bene il RR per eventi rari.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo uno studio epidemiologico che analizza l'associazione tra il fumo e il rischio di sviluppare una malattia.
 
@@ -271,21 +276,21 @@ Consideriamo uno studio epidemiologico che analizza l'associazione tra il fumo e
 
 Supponiamo che l'incidenza della malattia sia del 30% nel gruppo dei fumatori e del 10% nel gruppo dei non fumatori.
 
-**Calcolo dell'OR:**
+##### Calcolo dell'OR:
 
 * **Odds di malattia nel gruppo dei fumatori:** 30/70 = 0.43
 * **Odds di malattia nel gruppo dei non fumatori:** 10/90 = 0.11
 * **OR:** 0.43 / 0.11 = 3.91
 
-**Interpretazione:**
+##### Interpretazione:
 
 L'OR di 3.91 indica che i fumatori hanno un rischio di sviluppare la malattia 3.91 volte maggiore rispetto ai non fumatori.
 
-**Applicazione in contesti epidemiologici:**
+##### Applicazione in contesti epidemiologici:
 
 L'OR è un'utile misura di associazione per studiare l'impatto di fattori di rischio su eventi rari. Ad esempio, può essere utilizzata per valutare l'associazione tra l'esposizione a determinate condizioni ambientali e il rischio di sviluppare una malattia.
 
-**Nota:**
+##### Nota:
 
 L'assunzione di sparsità, ovvero la rarità degli eventi, è fondamentale per l'approssimazione dell'OR al RR. In caso di eventi frequenti, l'OR può sovrastimare il RR.
 
@@ -338,12 +343,12 @@ Quindi, la produttoria di likelihood può essere riscritta come $\prod_{i=1}^{n}
 
 Questo testo tratta il concetto di probabilità di osservare un termine specifico in un documento, considerando due diverse assunzioni: **rilevanza** e **novità**.
 
-**Definizioni:**
+##### Definizioni:
 
 * **R con i:** Probabilità di osservare il termine iesimo nel documento, assumendo la rilevanza del documento.
 * **t con i:** Probabilità di osservare il termine iesimo nel documento, assumendo la novità del termine.
 
-**Tabella di Contingenza:**
+##### Tabella di Contingenza:
 
 La tabella di contingenza mostra la relazione tra le variabili "presenza/assenza del termine" e "rilevanza/non rilevanza" del documento.
 
@@ -352,21 +357,21 @@ La tabella di contingenza mostra la relazione tra le variabili "presenza/assenza
 | Presenza $(x_i=1)$ | $p_i$ | $r_i$ |
 | Assenza $(x_i=0)$ | $(1-p_i)$ | $(1-r_i)$ |
 
-**Interpretazione:**
+##### Interpretazione:
 
 * $p_i$: Probabilità di osservare il termine iesimo nel documento, dato che il documento è rilevante.
 * $r_i$: Probabilità di osservare il termine iesimo nel documento, dato che il documento non è rilevante.
 * $(1-p_i)$: Probabilità di non osservare il termine iesimo nel documento, dato che il documento è rilevante.
 * $(1-r_i)$: Probabilità di non osservare il termine iesimo nel documento, dato che il documento non è rilevante.
 
-**Odds:**
+##### Odds:
 
 Rappresenta il rapporto tra la probabilità di un evento e la probabilità del suo complemento. In questo caso, gli odds vengono calcolati per tutti i termini della query, distinguendo tra **matching** e **non matching**.
 
 * **Matching:** Il termine iesimo è presente sia nella query che nel documento (x con i = 1, q con i = 1).
 * **Non Matching:** Il termine iesimo è presente nella query ma non nel documento (x con i = 0, q con i = 1).
 
-**Assunzioni:**
+##### Assunzioni:
 
 * Il modello ignora completamente l'assenza di termini nella query (q con i = 0).
 * La probabilità di occorrenza di un termine in un documento non viene valutata per i termini non presenti nella query.
@@ -418,13 +423,13 @@ Ricapitolando, abbiamo ottenuto:
 
 Il **Retrieval Status Value (RSV)** è un punteggio che viene assegnato a un documento per determinare la sua rilevanza rispetto a una query di ricerca. Questo punteggio si basa sul calcolo del logaritmo della produttoria degli **odds ratio** per ogni termine della query che corrisponde a un termine nel documento.
 
-**Calcolo dell'RSV:**
+##### Calcolo dell'RSV:
 
 1. **Produttoria degli odds ratio:** Per ogni termine della query che corrisponde a un termine nel documento, si calcola l'**odds ratio**. L'odds ratio è il rapporto tra la probabilità che il termine appaia nel documento e la probabilità che appaia in un documento casuale.
 2. **Sommatoria dei logaritmi:** Si calcola la sommatoria dei logaritmi degli odds ratio per tutti i termini corrispondenti.
 3. **RSV:** Il risultato della sommatoria dei logaritmi è il **Retrieval Status Value (RSV)**.
 
-**Esempio:**
+##### Esempio:
 
 Supponiamo di avere una query con due termini: "X" e "Q". Un documento contiene entrambi i termini.
 
@@ -437,11 +442,11 @@ Il **RSV** per questo documento sarebbe:
 log(1) + log(1) = 0
 ```
 
-**Interpretazione dell'RSV:**
+##### Interpretazione dell'RSV:
 
 Un RSV più alto indica una maggiore rilevanza del documento rispetto alla query. Un RSV basso indica una minore rilevanza.
 
-**Stima delle probabilità:**
+##### Stima delle probabilità:
 
 Per calcolare gli odds ratio, è necessario stimare le probabilità di occorrenza dei termini nel documento e in un documento casuale. Questo può essere fatto utilizzando tecniche di stima della probabilità come la **smoothing di Laplace**.
 
@@ -473,13 +478,13 @@ $$
 
 In questo contesto, stiamo analizzando un insieme di documenti, dove **N** rappresenta il numero totale di documenti. Il nostro obiettivo è determinare la rilevanza di un termine all'interno di questi documenti.
 
-**Definizioni:**
+##### Definizioni:
 
 * **S:** Numero totale di documenti rilevanti.
 * **n:** Numero di documenti in cui un termine specifico è presente.
 * **s:** Numero di documenti rilevanti che contengono il termine specifico.
 
-**Tabellina di Contingenza:**
+##### Tabellina di Contingenza:
 
 | Documents | Relevant | Non-Relevant | Total |
 | --------- | -------- | ------------ | ----- |
@@ -487,7 +492,7 @@ In questo contesto, stiamo analizzando un insieme di documenti, dove **N** rappr
 | $x_i=0$ | S-s | N-n-S+s | N-n |
 | **Total** | **S** | **N-S** | **N** |
 
-**Calcolo delle Probabilità:**
+##### Calcolo delle Probabilità:
 
 $$
 p_i = \frac{s}{S} \quad \text{e} \quad r_i = \frac{(n-s)}{(N-S)}
@@ -495,12 +500,12 @@ $$
 * **P(I):** Probabilità che il termine sia presente dato che il documento è rilevante.
 * **R(I):** Probabilità che il termine sia presente dato che il documento non è rilevante.
 
-**Oz Ratio:**
+##### Oz Ratio:
 
 L'Oz Ratio è una misura che quantifica la forza dell'associazione tra un termine e la rilevanza di un documento. Si calcola come segue:
 $$c_i = \log \frac{p_i(1-r_i)}{r_i(1-p_i)}$$
 
-**Espressione in termini di Count:**
+##### Espressione in termini di Count:
 
 Possiamo esprimere l'Oz Ratio in termini di count (n, s, N, S) sostituendo le probabilità P(I) e R(I) con le loro espressioni in termini di count:
 $$
@@ -519,7 +524,7 @@ Partiamo da $r_i$, che rappresenta la probabilità di incidenza del termine di r
 
 Quindi, $r_i$ è approssimabile a N piccolo diviso N grande, ovvero la frazione dei documenti nella collezione totale che contengono il termine di ricerca.
 
-**Oz di competenza:** 
+##### Oz di competenza:
 
 $$\log \frac{1-r_i}{r_i} = \log \frac{N-n-S+s}{n-s} \approx \log \frac{N-n}{n} \approx \log \frac{N}{n} = IDF$$
 
@@ -531,18 +536,18 @@ $$\log \frac{1-r_i}{r_i} = \log \frac{N-n-S+s}{n-s} \approx \log \frac{N-n}{n} \
 
 È raro che un sostantivo o un verbo (termini di contenuto) appaia in un numero elevato di documenti. Il logaritmo del numero di documenti rilevanti in cui appare un termine diviso per il numero totale di documenti (log(n grande / n piccolo)) rappresenta la **norma inversa del termine**. 
 
-**Incertezza e Probabilità**
+##### Incertezza e Probabilità
 
 Stiamo trattando l'informazione in modo probabilistico, introducendo incertezza. Questo significa che non abbiamo un valore fisso, ma dobbiamo muoverci in un intorno. La **TFPF (Term Frequency-Probability Factor)** è una misura robusta perché è coerente con la legge di Zipf. 
 
-**Smoothing**
+##### Smoothing
 
 Introduciamo dei **parametri di smoothing** per evitare che il modello risponda in modo troppo generoso, amplificando eccessivamente le probabilità. Lo smoothing ha due effetti principali:
 
 * **Penalizza gli eventi frequenti:** Riduce la probabilità di eventi che si verificano spesso.
 * **Fa emergere eventi rari:** Aumenta la probabilità di eventi che si verificano raramente.
 
-**Smoothing nella Probabilità**
+##### Smoothing nella Probabilità
 
 Nella teoria della probabilità, in particolare nell'inferenza bayesiana, lo smoothing viene utilizzato per evitare che il modello si affidi eccessivamente ai dati osservati. 
 
@@ -554,7 +559,7 @@ La formula di probabilità condizionale è la seguente: $$ P_{i}^{(h+1)} = \frac
 * **$K$:** Parametro di smoothing, utilizzato per gestire eventi non presenti in $B$ ed evitare probabilità nulle.
 * **$p_i^{(h)}$:** Probabilità di osservare l'evento $i$ all'iterazione $h$. 
 
-**Effetti dello Smoothing**
+##### Effetti dello Smoothing
 
 Lo smoothing introduce dei **fattori nascosti** che influenzano la probabilità di occorrenza di un termine. Questi fattori nascosti rappresentano la correlazione o la dipendenza tra i termini stessi. 
 
@@ -576,11 +581,11 @@ Esistono tre approcci principali per stimare $p_{i}$:
 
 Il *probabilistic relevance feedback* si basa sul coinvolgimento dell'utente per raffinare il set di risultati (result set) e renderlo più accurato. L'utente fornisce feedback indicando quali documenti sono rilevanti e quali non lo sono, aiutando il sistema a migliorare la ricerca.
 
-**Obiettivo del Relevance Feedback:**
+##### Obiettivo del Relevance Feedback:
 
 L'obiettivo finale del *relevance feedback* è quello di migliorare la risposta alla query, rendendola più accurata. Questo si traduce in un intervento sulla query stessa, spesso attraverso l'espansione della query.
 
-**Espansione della Query:**
+##### Espansione della Query:
 
 L'espansione della query consiste nell'aggiungere nuovi termini alla query originale. Questi termini non sono scelti a caso, ma sono identificati come caratterizzanti i documenti rilevanti. Il sistema, iterazione dopo iterazione, identifica i documenti rilevanti e un meccanismo di estrazione di keyword identifica i termini importanti presenti in questi documenti. Questi termini vengono poi aggiunti alla query, migliorando la sua accuratezza. 
 
@@ -594,46 +599,46 @@ Il **fine ultimo** del relevance feedback è quello di **adattare il sistema di 
 
 Il **probabilistic relevance feedback** è una tecnica che utilizza un modello probabilistico per stimare la probabilità che un documento sia rilevante per una query. Questo modello si basa sulla **presenza o assenza di termini specifici** nei documenti e sulla **rilevanza dei termini** per la query.
 
-**Il processo di probabilistic relevance feedback prevede i seguenti passaggi:**
+##### Il processo di probabilistic relevance feedback prevede i seguenti passaggi:
 
 1. **Stima iniziale:** Si parte da una stima iniziale della probabilità che un documento sia rilevante (P(R|D)) e della probabilità che un termine sia rilevante (P(I|R)).
 2. **Identificazione dei documenti rilevanti:** L'utente identifica un set di documenti rilevanti tra quelli restituiti dal sistema.
 3. **Raffinamento della stima:** Il sistema utilizza il feedback dell'utente per raffinare la stima della probabilità di rilevanza dei termini e dei documenti.
 4. **Ricerca iterativa:** Il sistema utilizza le nuove stime per eseguire una nuova ricerca, restituendo risultati più pertinenti.
 
-**Il probabilistic relevance feedback si basa sul concetto di **inverso documento**, che indica la probabilità che un termine sia presente in un documento rilevante. Questa probabilità viene utilizzata per stimare la probabilità che un documento sia rilevante per una query.**
+##### Il probabilistic relevance feedback si basa sul concetto di **inverso documento**, che indica la probabilità che un termine sia presente in un documento rilevante. Questa probabilità viene utilizzata per stimare la probabilità che un documento sia rilevante per una query.
 
-**Esempio:**
+##### Esempio:
 
 Supponiamo che l'utente abbia identificato 5 documenti rilevanti tra 10 restituiti dal sistema. In questo caso, la frazione di documenti rilevanti è 5/10 = 0.5. Se il termine "informatica" è presente in 3 dei 5 documenti rilevanti, la probabilità che il termine "informatica" sia presente in un documento rilevante è 3/5 = 0.6.
 
-**Il probabilistic relevance feedback è un processo iterativo che consente al sistema di apprendere dalle preferenze dell'utente e di fornire risultati sempre più pertinenti.**
+##### Il probabilistic relevance feedback è un processo iterativo che consente al sistema di apprendere dalle preferenze dell'utente e di fornire risultati sempre più pertinenti.
 
 ## Approssimazione della Probabilità di Rilevanza
 
 In questo contesto, si cerca di approssimare la probabilità di rilevanza di un termine in un documento, rappresentata dal rapporto tra la cardinalità dell'insieme dei documenti rilevanti (V) e la cardinalità dell'insieme di tutti i documenti (I). 
 
-**Formula:**
+##### Formula:
 
-$$P(rilevanza | termine) ≈ \frac{|V|}{|I|}  $$
+$$P(rilevanza | termine) ≈ \frac{|V|}{|I|} $$
 
-**Problema:**
+##### Problema:
 
 - Se l'insieme V è troppo grande, diventa computazionalmente costoso calcolare la probabilità di rilevanza.
 
-**Soluzione:**
+##### Soluzione:
 
 - Si introduce un meccanismo iterativo che raffina progressivamente l'insieme dei documenti candidati. Ad ogni passo, si stima la probabilità di rilevanza del termine in base all'insieme corrente di documenti candidati, utilizzando uno smoothing per tenere conto degli eventi non osservati.
 
-**Smoothing:**
+##### Smoothing:
 
 - Lo smoothing introduce una parte di probabilità che dipende da eventi non osservati, come la presenza o l'assenza del termine in altri documenti. Questo aiuta a evitare che la probabilità di rilevanza sia zero per termini che non sono presenti nell'insieme corrente di documenti candidati.
 
-**Parametro K:**
+##### Parametro K:
 
 - Il parametro K, utilizzato nello smoothing, è tipicamente un valore piccolo (5 o 10) e rappresenta un fattore di proporzionalità rispetto alla cardinalità dell'insieme dei documenti candidati.
 
-**Pseudo Relevance Feedback:**
+##### Pseudo Relevance Feedback:
 
 - In assenza di un feedback esplicito da parte dell'utente, si può utilizzare un feedback implicito basato sull'assunzione che i documenti in cima al ranking del sistema siano altamente rilevanti. Questo insieme di documenti viene utilizzato come base per il feedback implicito.
 
@@ -647,11 +652,11 @@ Questa differenza di punteggio è dovuta alla **parametrizzazione** utilizzata d
 
 ### Esempio di Applicazione del Modello Vettoriale
 
-**Scenario:**
+##### Scenario:
 
 Immaginiamo di avere due documenti, due "terri", con una grana molto grossa (cioè, con poche informazioni in comune). 
 
-**Osservazioni:**
+##### Osservazioni:
 
 * Nonostante la scarsità di informazioni, il modello vettoriale riesce a distinguere i due documenti, evidenziando la differenza nel loro trattamento.
 * Questo esempio dimostra la capacità del modello vettoriale di gestire situazioni con dati limitati.

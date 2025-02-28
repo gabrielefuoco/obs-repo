@@ -63,7 +63,7 @@ Dopo il filtraggio, l'algoritmo **FPGrowth** (da **MLlib**) viene utilizzato per
 
 Il metodo `computeTrajectoryUsingFPGrowth` prepara i dati di transazione come `RDD[Array[String]]`, rimuove le traiettorie vuote, raggruppa quelle dello stesso utente e le trasforma in un insieme di itemset unici usando la funzione `distinct`. Questo insieme viene passato a FPGrowth con parametri `minSupport` e `minConfidence` per generare itemset frequenti e regole di associazione.
 
-**Esempio di dati di transazione preparati (`prepareTransaction`):**
+##### Esempio di dati di transazione preparati (`prepareTransaction`):
 
 ```
 (user 35716709@N04, day Nov 20, 2016,Set(poi villaborghese, timestamp Nov 20, 2016))
@@ -75,7 +75,7 @@ Il metodo `computeTrajectoryUsingFPGrowth` prepara i dati di transazione come `R
 
 *Nota:* `x._2` è il terzo campo di un oggetto `SingleTrajectory`.
 
-**Esempio di `transactions` risultanti:**
+##### Esempio di `transactions` risultanti:
 
 ```
 Array(villaborghese)
@@ -86,7 +86,7 @@ Array(romanforum)
 …
 ```
 
-**Esempio di itemset frequenti (`Frequent itemset (model.freqItemsets)`):**
+##### Esempio di itemset frequenti (`Frequent itemset (model.freqItemsets)`):
 
 ```
 {campodefiori}: 388

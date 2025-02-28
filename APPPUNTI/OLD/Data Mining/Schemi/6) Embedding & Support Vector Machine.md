@@ -1,4 +1,4 @@
-**Embedding**
+##### Embedding
 
 * **Definizione:** Rappresentazione di dati testuali in uno spazio vettoriale, dove parole/frasi simili sono vicine. Cattura relazioni semantiche per attività NLP (classificazione, traduzione, analisi del sentimento).
 
@@ -8,7 +8,7 @@
  * **Word Embedding (Word2Vec, GloVe):** Rappresentazione distribuita; parole simili sono vicine. Cattura relazioni semantiche e sintattiche.
  * **Sentence Embedding:** Rappresentazione vettoriale di frasi/documenti, combinando word embedding (RNN o Trasformatori).
 
-**Support Vector Machine (SVM)**
+##### Support Vector Machine (SVM)
 
 * **Definizione:** Modello di classificazione che trova iperpiani di separazione (lineari o non lineari) tra classi. Massimizza il margine (distanza minima dalle istanze più vicine).
 
@@ -18,7 +18,7 @@
  * Per dati non linearmente separabili, usa funzioni kernel per apprendere confini non lineari.
  * Regolarizzazione e iperpiano di massimo margine prevengono overfitting e migliorano la generalizzazione.
 
-**Tecniche di Ensemble**
+##### Tecniche di Ensemble
 
 * **Obiettivo:** Migliorare l'accuratezza di classificazione combinando predizioni di più classificatori base.
  * **Meccanismo:** Un ensemble costruisce e combina diversi classificatori base, votando le loro predizioni su un nuovo esempio.
@@ -28,13 +28,13 @@
  * **Vantaggio:** Riduzione dell'errore complessivo rispetto ai singoli classificatori.
  * **Sfida:** Difficoltà nel garantire l'indipendenza assoluta dei classificatori. Miglioramenti osservati anche con correlazione parziale.
 
-**Metodi per costruire un classificatore Ensemble**
+##### Metodi per costruire un classificatore Ensemble
 
 * **Manipolazione della distribuzione dei dati:**
  * Creazione di più insiemi di addestramento tramite campionamento casuale del dataset originale, secondo una specifica distribuzione di probabilità.
  * Ogni insieme genera un classificatore.
 
-**Bagging (Bootstrap Aggregating)**
+##### Bagging (Bootstrap Aggregating)
 
 * **Tecnica:** Crea molteplici versioni dello stesso modello, addestrandole su sottoinsiemi di dati campionati con ricampionamento.
  * **Procedura:**
@@ -45,7 +45,7 @@
 * **Vantaggi:** Migliora la generalizzazione riducendo la varianza dei modelli base (efficace per modelli instabili ad alta varianza).
 * **Limiti:** Potrebbe non migliorare (o addirittura peggiorare) le prestazioni per modelli stabili a bassa varianza, a causa del bias inalterato e della dimensione ridotta dei $D_i$.
 
-**Boosting**
+##### Boosting
 
 * **Tecnica:** Ensemble iterativo che adatta i pesi degli esempi di training.
  * Inizialmente, pesi uguali per tutti gli esempi.
@@ -57,7 +57,7 @@
  * Differenza da Bagging: usa pesi anziché bootstrap; efficace per modelli stabili a basso bias.
  * Diverse implementazioni con variazioni nell'aggiornamento dei pesi e nella combinazione delle predizioni.
 
-**AdaBoost**
+##### AdaBoost
 
 * **Algoritmo di Boosting:** Combina iterativamente classificatori base (deboli) in un classificatore forte.
  * Focus sugli esempi difficili da classificare.
@@ -71,7 +71,7 @@
  * Predizione finale: combinazione pesata delle predizioni dei $k$ classificatori base, usando $\alpha_i$ come pesi.
  * Risultato: accuratezza superiore rispetto ai singoli componenti grazie alla correzione degli errori iterativa.
 
-**Gradient Boosting**
+##### Gradient Boosting
 
 * **Principio Fondamentale:** Costruzione iterativa di un modello predittivo tramite somma pesata di modelli deboli.
  * **Iterazione:** Ad ogni iterazione, un nuovo modello debole viene addestrato sui residui del modello precedente, correggendo gli errori.
@@ -79,7 +79,7 @@
  * **Combinazione:** I modelli deboli sono combinati tramite una somma pesata, i cui pesi dipendono dalla riduzione della funzione di perdita.
  * **Iperparametri:** Numero di iterazioni e complessità dei modelli deboli richiedono ottimizzazione.
 
-**Costruire Classificatori Ensemble**
+##### Costruire Classificatori Ensemble
 
 * **Manipolando le Features di Input:**
  * **Random Forest:** Ensemble di alberi decisionali decorrelati.
@@ -94,7 +94,7 @@
 * **Manipolando le Etichette di Classe:**
  * **Error-Correcting Output Codes (ECOC):** Affronta problemi di classificazione multi-classe con elevato numero di classi.
 
-**Trasformazione del problema multi-classe in problemi binari:**
+##### Trasformazione del problema multi-classe in problemi binari:
 
 * **Idea principale:** Risolvere un problema di classificazione multi-classe tramite un ensemble di classificatori binari.
 

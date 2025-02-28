@@ -31,7 +31,7 @@ IV. **Regole di Associazione:**
 
  C. **Scopo:** Individuare regole forti (supporto e confidenza elevati rispetto alle soglie).
 
-**Scoperta delle Regole di Associazione**
+##### Scoperta delle Regole di Associazione
 
 * **Obiettivo:** Trovare regole X → Y che soddisfano:
  * `Support ≥ minsup`
@@ -46,7 +46,7 @@ IV. **Regole di Associazione:**
  * **Fase 2: Generazione delle Regole:** Per ogni itemset frequente L, genera regole `f → (L-f)` (f ⊂ L) con `Confidenza ≥ minconf`.
  * Sfrutta il fatto che `Support(X → Y) = Support(X ∪ Y)`.
 
-**Generazione degli Itemset Frequenti**
+##### Generazione degli Itemset Frequenti
 
 * **Approccio Brute-Force:**
  * **Scopo:** Trovare tutti gli itemset frequenti.
@@ -58,20 +58,20 @@ IV. **Regole di Associazione:**
  * Ridurre N (numero di transazioni): Possibile per itemset grandi.
  * Ridurre NM (numero totale di confronti): Usare strutture dati efficienti.
 
-**Principio Apriori**
+##### Principio Apriori
 
 * **Enunciato:** Se un itemset è frequente, tutti i suoi sottoinsiemi sono frequenti.
 * **Proprietà:** Antimonotonia del supporto: ∀X,Y: (X⊆Y) ⇒ s(X) ≥ s(Y)
 * **Esempio:** Iterativo, genera itemset di dimensione crescente, scartando quelli che non raggiungono `minsup`.
 * **Efficacia:** Riduce significativamente il numero di itemset candidati (es. da 41 a 13 con 6 elementi, 68% di riduzione).
 
-**Misure di Validità delle Regole**
+##### Misure di Validità delle Regole
 
 * **Supporto:** Frequenza di un itemset nel dataset.
 * **Confidenza:** Probabilità che un itemset appaia dato un altro itemset.
 * **Problema:** Numero esponenziale di itemset possibili, elevata complessità computazionale.
 
-**Algoritmo Apriori: Scoperta di Itemset Frequenti**
+##### Algoritmo Apriori: Scoperta di Itemset Frequenti
 
 I. **Obiettivo:** Trovare tutti gli *itemset* (insiemi di elementi) che appaiono in almeno una percentuale *minsup* di transazioni.
 
@@ -100,7 +100,7 @@ IV. **Generazione di Candidati e Pruning:**
 
  B. **Pruning:** Eliminazione di candidati contenenti almeno un *itemset* non frequente per ridurre il numero di verifiche.
 
-**Generazione di Candidati (Apriori)**
+##### Generazione di Candidati (Apriori)
 
 * **Metodo $F_{k−1}×F_{k−2}$**
  * Combina itemset frequenti di cardinalità *k-1* e *k-2*.
@@ -120,7 +120,7 @@ IV. **Generazione di Candidati e Pruning:**
  * Principio: due itemset si uniscono se differiscono di un solo elemento.
  * Vantaggi: maggiore efficienza rispetto alla forza bruta.
 
-**Generazione di Regole Associative**
+##### Generazione di Regole Associative
 
 * **Partizionamento e Confidenza:**
  * Itemset frequente diviso in Corpo (lato sinistro) e Testa (lato destro).
@@ -134,7 +134,7 @@ IV. **Generazione di Candidati e Pruning:**
 * **Complessità:**
  * Il problema rimane esponenziale nonostante il pruning.
 
-**Complessità degli Algoritmi per le Regole Associative**
+##### Complessità degli Algoritmi per le Regole Associative
 
 I. **Sfide Principali:**
  a. **Esplosione Combinatoria:** Numero esponenziale di itemset e regole con l'aumento della dimensione del dataset.
@@ -166,7 +166,7 @@ VI. **Hash Tree per la Generazione di Regole Associative:**
  c. **Matching tra Hash Tree e Transazione:** Confronto tra l'hash tree e un albero rappresentante la transazione per trovare itemset sottoinsiemi della transazione.
  d. **Vantaggi:** Riduzione del numero di confronti e miglioramento delle prestazioni.
 
-**Rappresentazione Compatta degli Itemset Frequenti**
+##### Rappresentazione Compatta degli Itemset Frequenti
 
 I. **Problema della Complessità:**
 * Crescita esponenziale del numero di itemset con l'aumentare della dimensione del dataset.
@@ -195,7 +195,7 @@ VI. **Problemi nella Valutazione:**
 * **Supporto non omogeneo:** Difficoltà nella scelta della soglia di supporto (troppo basso → troppi itemset; troppo alto → perdita di regole importanti).
 * **Pattern cross support:** Regole con item aventi supporto molto diverso, rendendole poco interessanti.
 
-**Regole Associative: Analisi e Valutazione**
+##### Regole Associative: Analisi e Valutazione
 
 I. **Tabella di Contingenza**
 * Definizione: Strumento per valutare regole associative del tipo X → Y.
@@ -223,7 +223,7 @@ IV. **Pruning delle Regole**
 * Utilizzo delle misure di correlazione per eliminare regole sotto una certa soglia.
 * Esempio: Il Lift non è sempre un indicatore affidabile della forza di una regola. 
 
-**Proprietà delle Metriche di Valutazione delle Regole Associative**
+##### Proprietà delle Metriche di Valutazione delle Regole Associative
 
 * **1. Simmetria:**
  * **Simmetriche:** Risultato indipendente dall'ordine degli elementi (es: Jaccard, coseno, Lift). Adatte per misurare la validità dell'itemset.
@@ -241,7 +241,7 @@ IV. **Pruning delle Regole**
  * **Sensibili:** Risultato variabile all'aggiunta di casi nulli (transazioni senza X né Y).
  * **Insensibili:** Risultato invariato all'aggiunta di casi nulli.
 
-**Paradosso di Simpson**
+##### Paradosso di Simpson
 
 * **Problema:** L'analisi di dati aggregati può portare a conclusioni errate se non si considerano variabili nascoste.
 
@@ -251,7 +251,7 @@ IV. **Pruning delle Regole**
 
 * **Spiegazione:** La variabile nascosta (stato di studente/lavoratore) influenza la relazione osservata. È fondamentale considerare le variabili nascoste e utilizzare l'analisi stratificata per evitare conclusioni errate.
 
-**Effetti della Distribuzione del Supporto nell'Analisi delle Regole Associative**
+##### Effetti della Distribuzione del Supporto nell'Analisi delle Regole Associative
 
 I. **Problema della Distribuzione del Supporto Non Omogeneo**
 * A. **Distorsione:** Pochi itemset ad alto supporto, molti a basso supporto.
@@ -305,7 +305,7 @@ II. **Gestione Attributi Categorici e Continui**
  3. Produzione di più itemset frequenti (dimensione massima limitata al numero di attributi originali).
  4. Approccio per ridurre l'overhead: evitare la presenza di più attributi binari derivanti dallo stesso attributo categorico all'interno di una regola.
 
-**Gestione di Attributi Continui in Regole Associative**
+##### Gestione di Attributi Continui in Regole Associative
 
 I. **Regole Associative Quantitative:**
 * Definizione: Regole che includono attributi con valori continui.
@@ -327,7 +327,7 @@ III. **Regole Ridondanti:**
 * Soluzione per intervalli ampi: Utilizzo di un supporto massimo come soglia.
 * Gestione di regole ridondanti con stessa confidenza: Eliminazione della regola più specifica (intervallo più piccolo). 
 
-**Approccio Statistico all'Estrazione di Regole di Associazione con Attributo Target Continuo**
+##### Approccio Statistico all'Estrazione di Regole di Associazione con Attributo Target Continuo
 
 I. **Fasi dell'Algoritmo:**
 
@@ -351,7 +351,7 @@ II. **Considerazioni:**
  A. **Inutilizzabilità della confidenza:** La confidenza non è applicabile in quanto il conseguente è una variabile continua.
  B. **Significatività della regola:** Una regola è significativa solo se la differenza tra le statistiche dell'attributo target per le transazioni coperte e non coperte dalla regola è statisticamente significativa (supera la soglia definita dal Z-test).
 
-**Regole Associative Senza Discretizzazione (minApriori)**
+##### Regole Associative Senza Discretizzazione (minApriori)
 
 * **Applicazione a diversi tipi di dati:**
  * Dati a grafo
@@ -375,7 +375,7 @@ II. **Considerazioni:**
 
 * **Calcolo delle regole:** Basato sul supporto calcolato.
 
-**Regole Associative Multi-Livello**
+##### Regole Associative Multi-Livello
 
 * **Gerarchie semantiche:**
  * Termini organizzati in gerarchie basate sulla semantica (es. cibo -> latte -> latte scremato).
@@ -393,7 +393,7 @@ II. **Considerazioni:**
  * `If σ(X1 ∪ Y1) ≥ minsup, and X è genitore di X1, Y è genitore di Y1 then σ(X ∪ Y1) ≥ minsup, σ(X1 ∪ Y) ≥ minsup σ(X ∪ Y) ≥ minsup`
  * `If conf(X1 ⇒ Y1) ≥ minconf, then conf(X1 ⇒ Y) ≥ minconf`
 
-**Conseguenze dell'utilizzo di gerarchie di item nell'estrazione di pattern frequenti:**
+##### Conseguenze dell'utilizzo di gerarchie di item nell'estrazione di pattern frequenti:
 
 * **Elevato supporto per item ad alti livelli:**
  * Supporto molto elevato per item nella parte superiore della gerarchia.

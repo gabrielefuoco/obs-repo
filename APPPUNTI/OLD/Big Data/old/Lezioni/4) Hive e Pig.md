@@ -58,7 +58,8 @@ Hive è un'applicazione di data warehousing in Hadoop.
 ## Cos'è Hive?
 
 - Hive è un data warehouse basato su Hadoop, progettato per fornire funzionalità di riepilogo, query e analisi dei dati.
-**Struttura**
+##### Struttura
+
 - **Accesso a diversi storage**: consente l'integrazione con vari sistemi di archiviazione dati.
 - **HiveQL**: un linguaggio di query simile a SQL, facile da usare per chi conosce già SQL.
 - **Esecuzione delle query**: le query HiveQL vengono trasformate in job MapReduce per l'elaborazione distribuita.

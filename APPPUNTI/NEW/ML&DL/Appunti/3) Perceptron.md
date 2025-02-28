@@ -1,6 +1,6 @@
 ## Rete Neuronale: Perceptron
 
-**Introduzione:**
+##### Introduzione:
 
 * La rete riceve input, non tutti con la stessa importanza.
 * Ogni input è associato ad un **peso** che ne determina l'influenza.
@@ -10,7 +10,7 @@ $$\sum_{i=1}^d w_{i}x_{i}$$
 
 * Se lo stimolo supera una certa **soglia** ($\theta$), la rete attiva un'uscita.
 
-**Funzione di Attivazione:**
+##### Funzione di Attivazione:
 
 * La funzione **segno** ($sign$) implementa un semispazio:
 
@@ -18,7 +18,7 @@ $$h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},
 
 * **Esempio:** Funzione AND
 
-**Algoritmo di Apprendimento:**
+##### Algoritmo di Apprendimento:
 
 * **Inizializzazione:** $\vec{w}^{(1)}=(0,0,\dots,0)$
 * **Iterazione:**
@@ -26,7 +26,7 @@ $$h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},
  * Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
  * Incrementa il contatore di iterazioni: $t=t+1$
 
-**Convergenza:**
+##### Convergenza:
 
 * L'algoritmo converge sempre nel caso di dati **linearmente separabili**.
 * Al termine, restituisce un **iperpiano separatore**. 
@@ -35,12 +35,12 @@ $$h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},
 
 **Teorema:** Sia S linearmente separabile, allora l'algoritmo del Perceptron converge al più in T iterazioni con $T \le (RB)^2$.
 
-**Definizioni:**
+##### Definizioni:
 
 * $R = \max_{1 \le i \le m} |\vec{x_i}|$ è la massima norma dei vettori di input.
 * $B = \min{||\vec{w}||}: \forall i, <\vec{w_i}, \vec{x_i}> \ge 1$ è la più piccola norma che restituisce una soluzione al problema di separazione lineare.
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 Sia $w^*$ un vettore soluzione a norma minima. Allora:
 $$1 \ge \cos \theta = \frac{<w^*, w^{t+1}>}{||w^*|| ||w^{t+1}||} \ge \frac{\sqrt{T}}{RB}$$
@@ -80,16 +80,16 @@ Per dimostrare la disuguaglianza iniziale, consideriamo separatamente numeratore
  $$\frac{<\vec{w}^*, \vec{w}^{(t+1)}>}{||w^*|| ||w^{t+1}||} \ge \frac{T \sqrt{T}}{B \sqrt{T}R} = \frac{\sqrt{T}}{BR}$$
  Il teorema è dimostrato.
 
-**Conclusione:**
+##### Conclusione:
 
 Il teorema del Perceptron dimostra che l'algoritmo del Perceptron converge in un numero finito di iterazioni se il set di dati è linearmente separabile. Questo risultato è importante perché fornisce una garanzia di convergenza per l'algoritmo.
 
-**Vantaggi:**
+##### Vantaggi:
 
 * **Semplicità:** L'algoritmo del Perceptron è relativamente semplice da implementare.
 * **Efficienza:** L'algoritmo del Perceptron può essere molto efficiente per set di dati di piccole dimensioni.
 
-**Svantaggi:**
+##### Svantaggi:
 
 * **Linearità:** L'algoritmo del Perceptron può solo classificare set di dati linearmente separabili.
 * **Sensibilità al rumore:** L'algoritmo del Perceptron può essere sensibile al rumore nei dati.
@@ -233,7 +233,7 @@ La Cross Entropy è convessa, quindi anche la Regressione Logistica è convessa.
 
 Sia $X$ un dominio infinito e $Hx$ la classe d'ipotesi formata da tutte le funzioni da $X \rightarrow (0,1)$. L'insieme $Hx$ è Learnable? No, questa classe d'ipotesi NON È Learnable.
 
-**Definizione formale:**
+##### Definizione formale:
 
 Sia $X$ un dominio infinito e $Hx$ la classe d'ipotesi formata da tutte le funzioni da $X \rightarrow \{0,1\}$, allora $Hx$ NON È LEARNABLE.
 
@@ -260,13 +260,13 @@ Quindi, la **VC-DIMENSION** di una classe d'ipotesi H (VCdim(H)) è la taglia de
 
 **Teorema:** Una classe di ipotesi è **LEARNABLE** se e solo se la sua **VC-DIMENSION** è **FINITA**.
 
-**Spiegazione:**
+##### Spiegazione:
 
 La **VC-DIMENSION** (Vapnik-Chervonenkis Dimension) è una misura della complessità di una classe di ipotesi. Indica il numero massimo di punti che possono essere **SHATTERED** dalla classe.
 
 **Shattering** significa che la classe di ipotesi può creare qualsiasi possibile classificazione dei punti dati.
 
-**Calcolo della VC-DIMENSION:**
+##### Calcolo della VC-DIMENSION:
 
 Per calcolare la VC-DIMENSION di una classe di ipotesi, si seguono due passi:
 
@@ -275,14 +275,14 @@ Per calcolare la VC-DIMENSION di una classe di ipotesi, si seguono due passi:
 2. **Verificare che non esistano sottoinsiemi di punti più grandi che possono essere shattered:**
  * Se per ogni sottoinsieme di punti C con |C|=d+1 la classe di ipotesi non può creare tutte le possibili classificazioni, allora la VC-DIMENSION è esattamente d.
 
-**Esempi:**
+##### Esempi:
 
 * Partiamo dalla classe di ipotesi delle funzioni soglia:
-$$H=\{  h_{0}(x)=1[x>0], \ 0\in R \}$$
+$$H=\{ h_{0}(x)=1[x>0], \ 0\in R \}$$
  ![[3)-20241005175148387.png|403]]
  Abbiamo trovato un sottoinsieme di cardinalità 2 per cui prediamo i punti non riusciamo a costruire tutte le possibili funzioni da questo sottoinsieme a {0,1}.
 * Prendiamo le funzioni intervallo:
-$$H=\{  h_{a,l}(x)\}=1[a\leq x\leq l,a,l \in R]$$
+$$H=\{ h_{a,l}(x)\}=1[a\leq x\leq l,a,l \in R]$$
  ![[3)-20241005175437626.png|401]]
 $$VCdim(M|n|)=2$$
 * Prendiamo la classe dei rettangolo:

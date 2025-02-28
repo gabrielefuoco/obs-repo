@@ -12,13 +12,13 @@ $$
 \end{cases}
 $$
 
-**1. Approcci Discriminativi (Distribution Free):**
+##### 1. Approcci Discriminativi (Distribution Free):
 
 * **Obiettivo:** Definire una regola che suddivida lo spazio delle features in due regioni: una per la classe positiva e una per la classe negativa.
 * **Scopo:** Minimizzare l'errore di generalizzazione, ovvero la capacità del modello di prevedere correttamente nuovi dati non visti durante la fase di training.
 * **Esempio:** Classificatori lineari come la Regressione Logistica.
 
-**2. Stima di Densità:**
+##### 2. Stima di Densità:
 
 * **Obiettivo:** Ricostruire la densità di probabilità incognita che genera i dati.
 * **Scopo:** Creare una funzione di densità che rappresenti la distribuzione dei dati, anche in presenza di complessità.
@@ -217,7 +217,7 @@ Se il decision boundary che ne scaturisce coincide con quello reale, il modello 
 I Gaussian Mixture Models (GMM) sono un tipo di modello probabilistico utilizzato per modellare la distribuzione di dati complessi come una combinazione di distribuzioni gaussiane più semplici. 
 Invece di assumere che i dati provengano da una singola distribuzione gaussiana, i GMM cercano di ricostruire la densità generatrice dei dati come una somma di contributi da diverse distribuzioni gaussiane.
 
-**Formalmente:**
+##### Formalmente:
 
  Ricostruisce la densità generatrice dei dati come somma di $k$ distribuzioni gaussiane.
 
@@ -225,7 +225,7 @@ Invece di assumere che i dati provengano da una singola distribuzione gaussiana,
 
 La variabile $y$ assume valori nell'insieme $\{1, \dots, k\}$ e identifica la distribuzione della miscela (cluster) da cui il dato è stato generato.
 
-**Generazione dei dati:**
+##### Generazione dei dati:
 
 Il processo di generazione dei dati con un GMM può essere descritto come segue:
 

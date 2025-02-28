@@ -241,7 +241,7 @@ b :- not(c).
  - È un modello.
 - **I3 = {a, b}:**
  - È un modello.
-**Modelli minimali:**
+##### Modelli minimali:
 
  - **I2** e **I3** sono modelli minimali poiché non esiste un sottoinsieme di essi che sia un modello.
 
@@ -394,7 +394,7 @@ a1 | a2 | ... | an :- b1, ..., bk, not(bk+1), ..., not(bm).
 - **Corpo (Body):** `b1, ..., bk, not(bk+1), ..., not(bm)` sono **letterali positivi** (senza negazione) e **letterali negati** (con negazione default `not`).
  - Se tutti i letterali nel corpo sono veri, la regola impone che almeno un elemento nella testa sia vero.
 
-**Esempio:**
+##### Esempio:
 
 ```
 isInterestedInDLP(john) | isCurious(john) :- attendsDLP(john).
@@ -435,11 +435,11 @@ attendsDLP(john).
 
 Insieme di nodi che coprono tutti gli archi di un grafo.
 
-**Problema del Vertex Cover:**
+##### Problema del Vertex Cover:
 
 - Determinare un **vertex cover** minimale.
 
-**Programma:**
+##### Programma:
 
 ```
 inCover(x) | outCover(x) :- node(x).
@@ -457,7 +457,7 @@ node(y) :- edge(_, y).
 
 - **Obiettivo:** Trovare un insieme di nodi che dominano tutti gli altri nodi nel grafo (ogni nodo è dominato o ha un nodo vicino che lo domina).
 
-**Programma:**
+##### Programma:
 
 ```
 inDS(x) | outDS(x) :- node(x).

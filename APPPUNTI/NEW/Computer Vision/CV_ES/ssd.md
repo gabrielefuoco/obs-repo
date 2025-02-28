@@ -8,7 +8,7 @@ Il modello SSD è composto da tre componenti di base:
 2. Multi-scale feature layers, sono i livelli che identificano gli oggetti e ne estraggono le feature map.
 3. Prediction convolutions, sono i livelli che effttuano le predizioni e selezionano gli oggetti candidati più rilevanti.
 
-**Architettura SSD**
+##### Architettura SSD
 
 L'output dell'ultimo livello convoluzionale della rete VGG16 è utilizzato come input per i moduli successivi. Questi moduli hanno lo scopo di individuare gli oggetti ai diversi livelli di scala e tutti contribuiscono al risultato finale. In questo senso questa parte di rete è definita come *multiscale*.
 

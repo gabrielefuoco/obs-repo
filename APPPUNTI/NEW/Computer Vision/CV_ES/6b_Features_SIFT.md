@@ -929,7 +929,7 @@ print(f'before {len(keypoints_pyr[0])} and {len(keypoints_with_orientation_first
 
  before 1486 and 2379 after orientation
 
-**Osservazioni**
+##### Osservazioni
 
 Per ogni istogramma, si considera l'orientamento del bin max. Ma si considerano anche i bin con valori superiori all'80% del max
 

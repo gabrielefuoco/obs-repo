@@ -18,12 +18,12 @@ L'obiettivo è trovare i pesi $w$ che meglio approssimano la relazione lineare t
 * L'equazione di base è: $y = wx$.
 * La soluzione per i pesi è: $w = \frac{y}{x}$.
 
-**Formula:**
+##### Formula:
 
 * $(x^T x) \cdot w = x^T y$
 * $w = (x^T x)^{-1} x^T y$
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Coordinate omogenee:** Prima di applicare la formula, è necessario passare alle coordinate omogenee. Questo può essere fatto utilizzando il metodo `.add_dummy_feature`, che aggiunge una colonna di 1 alla matrice $x$. Tuttavia, questo metodo aggiunge la colonna in coda, quindi è necessario invertirla.
 2. **Pseudo inversa:** Non tutte le matrici sono invertibili. Per calcolare l'inversa di una matrice non invertibile, si utilizza la pseudo inversa, calcolata tramite il metodo `pinv`.

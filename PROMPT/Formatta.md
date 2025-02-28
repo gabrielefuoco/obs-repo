@@ -1,6 +1,6 @@
 Formatta il testo in input seguendo dettagliatamente le seguenti istruzioni:
 
-**Istruzioni per la formattazione:**
+##### Istruzioni per la formattazione:
 
 - **Organizzazione e Formato:** Utilizza il formato Markdown per organizzare il testo in paragrafi chiari e schematizzati, assicurandoti che tutti i concetti rilevanti siano coperti senza aggiungere contenuti superflui.
 - **Integrità del contenuto:** Assicurati di non tralasciare alcun punto e di mantenere l'integrità del contenuto originale. 
@@ -10,7 +10,7 @@ Formatta il testo in input seguendo dettagliatamente le seguenti istruzioni:
 - **Sintesi conclusiva:** Evita di includere una sezione di sintesi alla conclusione; il testo deve essere autosufficiente.
 - **Obiettivo:** Creare una versione accurata e ben organizzata degli appunti, che evidenzi efficacemente i concetti principali per agevolare lo studio.
 
-**Testo da formattare:**
+##### Testo da formattare:
 
 {}
 

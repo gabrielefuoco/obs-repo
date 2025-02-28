@@ -136,7 +136,7 @@ La dimensione finale del fully-connected layer dipende dal numero di canali fina
 
 L'obiettivo è comprendere come la dimensione dell'output di una convoluzione è determinata dalla dimensione dell'input, dal numero di filtri e dal passo (stride) utilizzato.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo un esempio con un input di dimensione 6,5 e un passo (stride) di 2. Il numero di filtri è 3.
 
@@ -151,7 +151,7 @@ Consideriamo un esempio con un input di dimensione 6,5 e un passo (stride) di 2.
  - Il numero di filtri determina il numero di operazioni di convoluzione eseguite.
  - La dimensione finale dell'output è determinata dal numero di operazioni di convoluzione e dalla dimensione dell'input dopo l'arrotondamento per difetto.
 
-**Applicazione:**
+##### Applicazione:
 
 Se utilizziamo la funzione `model.summary()` in Keras, possiamo ottenere la dimensione dell'output per ogni layer. Ad esempio, se l'output è `(16, 4, 4)`, significa che abbiamo 16 filtri e la dimensione dell'output è 4x4.
 
@@ -171,24 +171,24 @@ Se si dispone di un Mac con il framework Metal installato (di solito presente su
 
 L'obiettivo è comprendere come la convoluzione può essere espressa in termini di calcolo matriciale.
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Trasformazione dell'immagine in patch:** L'immagine viene suddivisa in patch di dimensioni definite.
 2. **Trasformazione in moltiplicazione di matrici:** L'operazione di convoluzione viene trasformata in una moltiplicazione di matrici.
 
-**Esempio:**
+##### Esempio:
 
 * **Kernel:** Un kernel 3x3 viene utilizzato per la convoluzione.
 * **Matrice:** La matrice che rappresenta il kernel viene creata.
 * **Patching:** La matrice del kernel viene applicata alla matrice dell'immagine, creando una nuova matrice.
 
-**Esempio pratico:**
+##### Esempio pratico:
 
 * **Matrice immagine:** Una matrice 4x4 con elementi numerati da 1 a 16.
 * **Kernel:** Un kernel 3x3.
 * **Applicazione del kernel:** Il kernel viene applicato alla matrice immagine, creando una nuova matrice.
 
-**Vettorizzazione:**
+##### Vettorizzazione:
 
 La matrice immagine viene trasformata in un vettore di 16 elementi. Il kernel viene applicato a questo vettore, moltiplicando la matrice del kernel per il vettore.
 
@@ -197,7 +197,7 @@ La matrice immagine viene trasformata in un vettore di 16 elementi. Il kernel vi
 Rappresenta il processo di applicazione di un filtro a una matrice di dati in Computer Vision. 
 Il filtro viene rappresentato come una matrice, e l'applicazione del filtro equivale a una moltiplicazione matriciale.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo una matrice di dati e un filtro:
 
@@ -238,7 +238,7 @@ La moltiplicazione di queste due matrici produce un nuovo vettore:
   m*0 + n*0 + o*0 + p*0 ]
 ```
 
-**Interpretazione:**
+##### Interpretazione:
 
 * Ogni riga del vettore risultante rappresenta l'applicazione del filtro su una "patch" della matrice di dati.
 * La prima riga corrisponde alla prima patch (a, b, c, d).
@@ -246,11 +246,11 @@ La moltiplicazione di queste due matrici produce un nuovo vettore:
 * Gli elementi del filtro vengono moltiplicati per i corrispondenti elementi della patch.
 * Gli elementi del filtro che sono zero non contribuiscono al risultato.
 
-**Estensione a più canali:**
+##### Estensione a più canali:
 
 Se la matrice di dati ha più canali (ad esempio, RGB), la linearizzazione di ogni canale crea nuove colonne nella matrice. La moltiplicazione matriciale viene quindi eseguita su questa matrice più grande.
 
-**Padding e Stride:**
+##### Padding e Stride:
 
 * Il padding aggiunge elementi aggiuntivi alla matrice di dati, consentendo di applicare il filtro anche ai bordi.
 * Lo stride determina il passo con cui il filtro viene applicato alla matrice di dati.
@@ -290,7 +290,7 @@ La parte di organizzazione delle feature è spesso realizzata tramite tecniche t
 
 Un pattern chiave nel design delle CNN è la **riduzione della dimensione dell'immagine** e l'**aumento del numero di canali** man mano che si procede in profondità nella rete. Questo pattern è evidente nella figura presentata e rappresenta una rivoluzione nel campo della Computer Vision.
 
-**Principi chiave:**
+##### Principi chiave:
 
 * **Riduzione della dimensione:** la dimensione dell'immagine viene progressivamente ridotta durante il processo di convoluzione.
 * **Aumento dei canali:** il numero di canali, ovvero il numero di feature estratte, aumenta man mano che si procede in profondità nella rete.
@@ -304,7 +304,7 @@ Un pattern chiave nel design delle CNN è la **riduzione della dimensione dell'i
 
 La rete **VGG**, sviluppata dal Visual Geometry Group nel 2014, è un esempio di rete convoluzionale che standardizza il processo di feature learning. La versione VGG16, in particolare, si basa su un principio di standardizzazione che può essere meglio compreso analizzando la LeNet.
 
-**Standardizzazione:**
+##### Standardizzazione:
 
 * **LeNet:** utilizza filtri di convoluzione 5x5. Perché non 7x7 o 3x3? La scelta della dimensione del filtro è un iperparametro della rete.
 * **VGG:** standardizza la dimensione dei filtri, utilizzando filtri 3x3 in tutti i layer convoluzionali.
@@ -315,20 +315,20 @@ La prossima settimana, durante la lezione, si approfondirà l'architettura della
 
 La VGG è una rete neurale convoluzionale che si distingue per la sua semplicità e standardizzazione nell'utilizzo dei filtri. A differenza di altre reti, come la AlexNet, che utilizzano filtri di dimensioni diverse (11x11, 5x5, 3x3), la VGG si basa esclusivamente su filtri 3x3 con stride 1 e padding 1.
 
-**Perché la VGG utilizza solo filtri 3x3?**
+##### Perché la VGG utilizza solo filtri 3x3?
 
 La scelta di utilizzare solo filtri 3x3 è motivata da due fattori principali:
 
 1. **Simulazione di filtri più grandi:** Un layer 5x5 può essere simulato con due layer 3x3 in cascata. Allo stesso modo, un layer 7x7 può essere simulato con tre layer 3x3 in cascata. Questo significa che la VGG può ottenere la stessa capacità di rappresentazione di reti con filtri più grandi, ma con un numero inferiore di parametri.
 2. **Riduzione della complessità computazionale:** Sebbene la simulazione di filtri più grandi con layer 3x3 in cascata non sia gratuita dal punto di vista computazionale, la VGG riesce comunque a ridurre la complessità complessiva della rete. Questo perché il numero di parametri da apprendere è inferiore rispetto a una rete con filtri più grandi.
 
-**Padding 1: Mantenere la dimensione dell'output**
+##### Padding 1: Mantenere la dimensione dell'output
 
 La VGG utilizza un padding 1 per tutti i suoi layer convoluzionali. Questo significa che l'output di ogni layer convoluzionale ha la stessa dimensione dell'input. 
 
 Con un padding 1, la dimensione dell'output è uguale alla dimensione dell'input. Questo è importante per mantenere la risoluzione dell'immagine durante il processo di convoluzione.
 
-**Vantaggi della standardizzazione dei filtri nella VGG:**
+##### Vantaggi della standardizzazione dei filtri nella VGG:
 
 * **Semplicità:** La VGG è una rete relativamente semplice da implementare e da comprendere.
 * **Efficienza:** La standardizzazione dei filtri consente di ridurre il numero di parametri da apprendere, rendendo la rete più efficiente dal punto di vista computazionale.
@@ -362,47 +362,47 @@ Esistono cinque configurazioni della VGG, che si differenziano per il numero di 
 
 Le reti VGG rappresentano un'evoluzione significativa rispetto a reti come LeNet, caratterizzate da un numero di layer convoluzionali molto più elevato. 
 
-**Configurazioni VGG:**
+##### Configurazioni VGG:
 
 * **VGG 16:** La configurazione più utilizzata, con 16 layer convoluzionali.
 * **VGG 19:** Si differenzia dalla VGG 16 per il numero di layer, che in questo caso sono 19.
 * **VGG 11:** Contiene 11 layer convoluzionali.
 * **VGG 13:** Contiene 13 layer convoluzionali.
 
-**Confronto con LeNet:**
+##### Confronto con LeNet:
 
 Mentre LeNet presentava solo due layer convoluzionali, le reti VGG dimostrano un aumento significativo nella profondità delle architetture. Questo trend verso reti con un numero crescente di layer è un aspetto interessante e significativo nell'evoluzione delle reti neurali.
 
-**Importanza della profondità:**
+##### Importanza della profondità:
 
 L'utilizzo di un numero maggiore di layer convoluzionali consente alle reti VGG di estrarre feature più complesse e di apprendere rappresentazioni più ricche dei dati. Questo si traduce in prestazioni migliori in compiti di classificazione e riconoscimento di immagini.
 
 ![[cv-20241022120308545.png]]
 ## Reti neurali convoluzionali e riconoscimento oggetti
 
-**Dimensione e complessità delle reti:**
+##### Dimensione e complessità delle reti:
 
 - La rete ResNet-44.000, ad esempio, ha 138 milioni di parametri.
 - Modelli più recenti, come i Transformers, possono avere miliardi di parametri.
 - L'aumento del numero di parametri porta a un'architettura di rete più complessa, ma anche a sfide computazionali e di memoria.
 
-**Estrazione di features:**
+##### Estrazione di features:
 
 - Le CNN elaborano un'immagine di input (tipicamente 224x224 pixel con 3 canali RGB) attraverso una serie di strati convoluzionali.
 - Ogni strato estrae informazioni sempre più complesse dall'immagine, riducendone la dimensione spaziale e aumentando la profondità in termini di canali.
 - Il processo di estrazione di features trasforma l'immagine originale in un vettore di features (ad esempio 512x7x7), che cattura le informazioni essenziali per la classificazione.
 
-**Miglioramenti nella classificazione di immagini:**
+##### Miglioramenti nella classificazione di immagini:
 
 - L'aumento del numero di layer nelle architetture di rete (come VGG e ResNet) ha portato a un notevole miglioramento nella precisione della classificazione delle immagini.
 - Si è passati da circa l'80% di accuratezza con VGG a oltre il 93% con VGG e addirittura al 98% con le più recenti configurazioni di ResNet.
 
-**Riconoscimento di oggetti:**
+##### Riconoscimento di oggetti:
 
 - Il riconoscimento di oggetti si differenzia dalla classificazione di immagini perché mira a identificare **tutti** gli oggetti presenti nell'immagine, localizzarli spazialmente e classificarli.
 - Per fare ciò, è necessario disegnare un riquadro (bounding box) attorno a ciascun oggetto e assegnare un'etichetta con la relativa probabilità.
 
-**Architetture di rete per il riconoscimento di oggetti:**
+##### Architetture di rete per il riconoscimento di oggetti:
 
 - Architetture come ResNet, grazie alla loro capacità di estrarre features ricche e informative, sono diventate la base per lo sviluppo di algoritmi di Object Detection sempre più accurati ed efficienti.
 

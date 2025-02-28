@@ -320,7 +320,7 @@ Tabella: Top 5 luoghi visitati a Roma
 | Analisi dati | 120 | 120 |
 | Visualizzazione dati | 75 | 75 |
 | Totale | 285 | 803 |
-**-65% righe di codice**
+##### -65% righe di codice
 
 ## Parsoda-py: Abilitazione di Runtime HPC basati su Python per l'Analisi Parallela dei Dati
 

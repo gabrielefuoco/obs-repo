@@ -410,7 +410,8 @@ Può essere manipolato in modi simili agli RDD.
 Spark Streaming è un'estensione che permette di analizzare dati in streaming, ingeriti e analizzati in micro-batch. Utilizza un'astrazione di alto livello chiamata DStream (discretized stream), che rappresenta un flusso continuo di dati: una sequenza di RDD.
 
 ![|373](_page_58_Figure_5.jpeg)
-**Rappresentazione interna:;**
+##### Rappresentazione interna:;
+
 ![|380](_page_59_Figure_2.jpeg)
 
 ### Spark MLlib

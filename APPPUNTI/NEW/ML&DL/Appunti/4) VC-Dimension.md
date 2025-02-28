@@ -2,7 +2,7 @@
 
 Sia $HS_d$ la classe d'ipotesi dei semispazi omogenei, allora $VC_{dim}(HS_D)=d$.
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 1) Esistono $d$ oggetti del dominio su cui possiamo costruire tutte le possibili funzioni booleane. Il dominio è $X=R^d$.
 
@@ -26,18 +26,18 @@ La VC-dimension per gli iperpiani separatori in uno spazio vettoriale di dimensi
 
 **Teorema:** La VC-dimension per gli iperpiani separatori in $R^d$ è $d$.
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 Per dimostrare questo teorema, dobbiamo dimostrare due punti:
 
 1. **VC-dimension ≥ d:** Dobbiamo dimostrare che esiste un insieme di $d$ punti che possono essere classificati arbitrariamente da un iperpiano separatore.
 2. **VC-dimension ≤ d:** Dobbiamo dimostrare che per ogni insieme di $d+1$ punti, esiste almeno una funzione binaria che non può essere realizzata da un iperpiano separatore.
 
-**Punto 1: VC-dimension ≥ d**
+##### Punto 1: VC-dimension ≥ d
 
 Questo punto è relativamente semplice. Consideriamo un insieme di $d$ punti linearmente indipendenti in $R^d$. Poiché sono linearmente indipendenti, possiamo sempre trovare un iperpiano che li separa in qualsiasi combinazione di classi desiderata. Quindi, la VC-dimension è almeno $d$.
 
-**Punto 2: VC-dimension ≤ d**
+##### Punto 2: VC-dimension ≤ d
 
 Per dimostrare questo punto, consideriamo un sottoinsieme generico di $d+1$ vettori in $R^d$: $\vec{x_1}, \vec{x_2}, ..., \vec{x_{d+1}}$.
 
@@ -79,13 +79,13 @@ Nella seconda parte, gli $a_j$ sono positivi perché sono in valore assoluto. Tu
 
 Abbiamo una contraddizione perché questa espressione dovrebbe essere simultaneamente positiva e negativa. Quindi, non è possibile costruire un iperpiano separatore che implementi la funzione binaria desiderata.
 
-**Conclusione:**
+##### Conclusione:
 
 Abbiamo dimostrato che per ogni insieme di $d+1$ punti in $R^d$, esiste almeno una funzione binaria che non può essere realizzata da un iperpiano separatore. Quindi, la VC-dimension per gli iperpiani separatori in $R^d$ è al massimo $d$.
 
 Combinando questo risultato con il punto 1, possiamo concludere che la VC-dimension per gli iperpiani separatori in $R^d$ è esattamente $d$.
 
-**Esempio:**
+##### Esempio:
 
 Nel piano $R^2$, $d=2$. Quindi, la VC-dimension è $d+1=3$. Se prendiamo 3 punti, possiamo sempre trovare un iperpiano separatore che assegna una combinazione arbitraria di valori booleani. Tuttavia, se prendiamo 4 punti, non sempre sarà possibile trovare un iperpiano separatore che li classifichi in modo arbitrario.
 
@@ -110,11 +110,11 @@ Il percettrone non può catturare la funzione XOR (un singolo neurone non è in 
 
 Il teorema NO-FREE LUNCH dimostra che non esiste un algoritmo di apprendimento universale.
 
-**Prima formulazione:**
+##### Prima formulazione:
 
 Dato un dominio infinito $X$ e considerata la classe di ipotesi formata da tutte le funzioni booleane, questa classe non è PAC-learnable.
 
-**Seconda formulazione:**
+##### Seconda formulazione:
 
 Sia $A$ un algoritmo di apprendimento (combinazione di una classe di ipotesi e minimizzazione del rischio empirico) $A = ERM_H$. Allora esistono un problema di apprendimento $P$ e un secondo algoritmo $A' \neq A (H' \neq H)$ tali che:
 
@@ -127,14 +127,14 @@ $$
 
 Anche se la 1) ci dice che la classe può fallire, la buona notizia è che esiste una classe di ipotesi diversa che si comporta bene sul problema (2).
 
-**Interpretazione:**
+##### Interpretazione:
 
 Il teorema NO-FREE LUNCH ci dice che non esiste un algoritmo di apprendimento universale perché:
 
 * Supponiamo che un algoritmo abbia una predilezione per una classe di ipotesi specifica, ad esempio i semispazi. Il teorema dice che se usiamo sempre la stessa classe di ipotesi, prima o poi arriverà un problema che non riusciremo a risolvere.
 * Dobbiamo quindi cambiare classe di ipotesi.
 
-**Conclusione:**
+##### Conclusione:
 
 Quando abbiamo un problema di apprendimento, dobbiamo provare più classi di ipotesi (model selection). Non esiste un algoritmo universale che funzioni per tutti i problemi.
 
@@ -142,17 +142,17 @@ Quando abbiamo un problema di apprendimento, dobbiamo provare più classi di ipo
 
 La model selection è il processo di scelta della migliore ipotesi da un insieme di ipotesi $H^* = \{h_1, h_2, \dots, h_r\}$, dove le ipotesi possono provenire da classi di ipotesi diverse o essere generate da algoritmi diversi.
 
-**Esempio: Regressione Polinomiale**
+##### Esempio: Regressione Polinomiale
 
 Consideriamo il problema della regressione. Un primo passo è scegliere la classe di ipotesi da utilizzare. Se scegliamo la regressione polinomiale, al variare del grado del polinomio cambia la classe di ipotesi.
 
-**Famiglia di Classi di Ipotesi e Iperparametri**
+##### Famiglia di Classi di Ipotesi e Iperparametri
 
 Quando si effettua la model selection, si considera una famiglia di classi di ipotesi. L'obiettivo è scegliere la migliore classe di ipotesi all'interno di questa famiglia.
 
 L'utilizzo di una famiglia di classi di ipotesi introduce il concetto di **iperparametro**. Un iperparametro è un parametro di un algoritmo di apprendimento che viene fissato a priori, prima di vedere i dati.
 
-**Esempio: Iperparametro nella Regressione Polinomiale**
+##### Esempio: Iperparametro nella Regressione Polinomiale
 
 Nella regressione polinomiale, $y = p_n(x)$, l'iperparametro è il grado del polinomio $n$. Dobbiamo quindi provare diversi valori di $n$.
 
@@ -163,7 +163,7 @@ Nella regressione polinomiale, $y = p_n(x)$, l'iperparametro è il grado del pol
 ![[4) VC-Dimension-20241011084525649.png|512]]
 Possiamo arrivare a un valore di $n$ che passa da tutti i punti, $n = |S|$, dove $|S|$ è il numero di punti dati.
 
-**Scelta dell'Ipotesi Migliore**
+##### Scelta dell'Ipotesi Migliore
 
 Dato l'insieme di ipotesi $H^* = \{h_1, h_2, \dots, h_r\}$, vogliamo estrarre l'ipotesi migliore $h^*$.
 
@@ -179,12 +179,12 @@ $$V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$$
 
 *V è indipendente da S*
 
-**Opzioni per la creazione del validation set:**
+##### Opzioni per la creazione del validation set:
 
 1. **Creazione di S e V:** Possiamo creare sia il training set (S) che il validation set (V) separatamente.
 2. **Sottoinsieme di S:** Se abbiamo solo S, possiamo sacrificarne una parte e metterla nel validation set. Selezioniamo un sottoinsieme casuale di S e lo usiamo come Validation.
 
-**Stima dell'errore di generalizzazione:**
+##### Stima dell'errore di generalizzazione:
 
 $$h^* = \arg \ \min_{h \in H^*} L_v(h)$$
 
@@ -202,18 +202,18 @@ Dalla sample complexity deriva $\epsilon=\sqrt{ \frac{\frac{\log(2|H|)}{S}}{2m_{
 
 Dalla differenza tra gli errori deriva $L_{D}(h^*)\leq L_{V}(h^*)+  \sqrt{ \frac{\frac{\log(2|H|)}{S}}{2m_{v}}}$.
 
-**Influenza della dimensione del validation set:**
+##### Influenza della dimensione del validation set:
 
 * Più è grande il validation set, più l'errore sul validation set approssimerà l'errore vero.
 * $H^*$ invece ci dice che all'aumentare del numero di ipotesi che confrontiamo, aumenta l'errore.
 
-**Indipendenza tra V e S:**
+##### Indipendenza tra V e S:
 
 Per garantire l'indipendenza tra V e S, non devono avere elementi in comune. Per aumentare la qualità della stima, dobbiamo incrementare V, ma ciò significa prendere esempi da S e quindi la qualità del training diminuisce.
 
 Nonostante ciò, questa tecnica è la più potente a livello teorico, poiché abbiamo dei bound sull'errore associato alla stima del rischio.
 
-**Varianti per alleviare il problema:**
+##### Varianti per alleviare il problema:
 
 Esistono delle varianti per alleviare il problema della diminuzione della qualità del training set quando si aumenta la dimensione del validation set. 
 
@@ -252,11 +252,11 @@ $$err=\frac{1}{k} \sum_{i=1}^k e_{i}$$
 
 Questo processo viene ripetuto per *k* volte. Alla fine, si sceglie l'iperparametro che ha l'errore minimo. Si utilizza quindi l'intero set di training per addestrare il modello con il valore dell'iperparametro ottimale.
 
-**Vantaggi:**
+##### Vantaggi:
 
 * Tutti gli esempi del set di training vengono utilizzati per l'addestramento.
 
-**Svantaggi:**
+##### Svantaggi:
 
 * Non ci sono garanzie sulla bontà della stima dell'errore, poiché non è garantita l'indipendenza tra gli errori delle diverse iterazioni.
 

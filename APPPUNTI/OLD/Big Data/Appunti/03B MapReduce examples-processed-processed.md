@@ -63,7 +63,7 @@ Emit(AsString(result));
 
 In molti casi, la stessa funzione può essere utilizzata per la combinazione e per la riduzione finale. Lo shuffle e il sort sono comunque necessari!
 
-**Vantaggi:**
+##### Vantaggi:
 
 * Riduzione della quantità di dati intermedi.
 * Riduzione del traffico di rete.

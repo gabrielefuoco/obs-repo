@@ -61,7 +61,7 @@ Un'**imputazione** (soluzione), per essere considerata ammissibile, deve soddisf
 - **Fairness**: distribuzione equa della ricchezza.
 - **Stability**: nessun giocatore ha incentivi a lasciare la coalizione.
 
-**Inoltre:**
+##### Inoltre:
 
 - Giocatori in una rete connessa formano una coalizione.
 - La ricchezza della coalizione dipende dai costi degli archi nel grafo che li collega.
@@ -359,7 +359,8 @@ Gli agenti devono basarsi su:
 - Le caratteristiche dei partecipanti (budget, tendenze nelle offerte).
 - Potrebbero avere informazioni sulle distribuzioni di probabilità che descrivono come gli altri agenti valutano il bene.
 
-**Distribuzioni IPV (Independent Private Values)**
+##### Distribuzioni IPV (Independent Private Values)
+
 - Ogni partecipante ha un valore attribuito al bene indipendente da quello degli altri.
 - Ciascun giocatore conosce la distribuzione di probabilità da cui vengono estratti i valori degli altri partecipanti, ma non conosce i valori esatti.
 Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere influenzata dalla distribuzione di probabilità delle valutazioni altrui, rendendo complessa la scelta di una strategia ottimale.
@@ -368,7 +369,8 @@ Dunque, nelle aste a busta chiusa, la strategia di un partecipante può essere i
 Ogni partecipante fa la propria offerta e vince chi ha offerto di più, ma paga il secondo prezzo più alto, non la propria offerta.
 - **Mechanism Design truthful**: l'asta al secondo prezzo incoraggia i partecipanti a fare offerte corrispondenti al reale valore che attribuiscono al bene. Questa strategia è ottimale indipendentemente dalle strategie degli altri.
 
-**CASO 1: Gli altri agenti offrono meno del valore $v_i$ che attribuisco al bene**
+##### CASO 1: Gli altri agenti offrono meno del valore $v_i$ che attribuisco al bene
+
 - Se offro $s_i < v_i$, rischio di perdere e ottenere utilità $u_i = 0$.
 - Se offro $s_i = v_i$, vinco e la mia utilità è $u_i = v_i - s_{\text{max}}$ dove $s_{\text{max}}$ è l’offerta più alta tra gli altri agenti).
 - Se offro $s_i > v_i$, vinco, ma la mia utilità resta $u_i = v_i - s_{\text{max}}$, identica al caso precedente.
@@ -716,7 +718,7 @@ La dimostrazione del teorema che ogni gioco estensivo a informazione perfetta am
 
 Una strategia pura consiste nella selezione di una singola azione da un insieme di azioni disponibili, senza alcun elemento di casualità. Il giocatore sceglie una mossa specifica per ogni situazione possibile.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Deterministica: la scelta dell'azione è fissa e prevedibile.
 * Percorso definito: ogni strategia pura corrisponde ad un percorso univoco nel gioco.
@@ -727,7 +729,7 @@ Una strategia pura consiste nella selezione di una singola azione da un insieme 
 
 Una strategia non pura indica una scelta di azioni che varia a seconda del contesto del gioco, ma *senza* l'introduzione di elementi probabilistici. Si tratta di strategie condizionali, spesso utilizzate in giochi sequenziali o estesi.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Strategia condizionale: la scelta dell'azione dipende dallo stato del gioco.
 * Assenza di probabilità: a differenza delle strategie miste, non vengono utilizzate probabilità per selezionare le azioni.
@@ -736,7 +738,7 @@ Una strategia non pura indica una scelta di azioni che varia a seconda del conte
 
 Una strategia mista assegna una probabilità ad ogni azione disponibile, introducendo così un elemento di casualità nella scelta del giocatore.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Probabilistica: la scelta dell'azione è governata da una distribuzione di probabilità.
 * Utile in situazioni di conflitto: particolarmente utile quando non esistono strategie pure dominanti o equilibri di Nash in strategie pure.

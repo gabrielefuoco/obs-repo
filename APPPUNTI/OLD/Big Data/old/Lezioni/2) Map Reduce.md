@@ -161,21 +161,21 @@ Il Reduce somma tutti gli "1" emessi per una data parola
 
 ### Esempio: Moltiplicazione Matrice-Vettore
 
-**Dati:**
+##### Dati:
 
 * Matrice sparsa *A* di dimensione *n x n*
 * Vettore *x* di dimensione *n x 1*
-**Problema:**
+##### Problema:
 
 Calcolare il prodotto matrice-vettore *y = A x x*.
 
-**Soluzione con MapReduce:**
+##### Soluzione con MapReduce:
 
 1. **Map:**
  * Genera coppie (i, *a<sub>ij</sub>x<sub>j</sub>*) moltiplicando gli elementi della matrice *A* per quelli del vettore *x*.
 2. **Reduce:**
  * Somma i valori per ogni riga *i* della matrice per ottenere *y<sub>i</sub> = Σ a<sub>ij</sub>x<sub>j</sub>*, generando coppie (i, *y<sub>i</sub>*).
-**Soluzione quando il vettore non entra in memoria:**
+##### Soluzione quando il vettore non entra in memoria:
 
 * Dividere *x* e *A* in blocchi più piccoli (strisce o blocchi quadrati) per eseguire il calcolo in parallelo. 
 

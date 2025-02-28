@@ -34,13 +34,13 @@ Quando ogni neurone del livello i-esimo è collegato a ogni neurone del livello 
 
 ## Funzioni di attivazione
 
-**Segno:**
+##### Segno:
 
 ![[8)-20241024130744776.png|402]]
 $\phi$ sulle ordinate e $<\vec{w},\vec{x}>$ sulle ascisse.
 Quando usiamo questa funzione il neruone corrisponde a un semispazio.
 
-**Gradino:**
+##### Gradino:
 
 ![[8)-20241024130804304.png|423]]
 
@@ -53,7 +53,7 @@ Una soluzione è data dalla funzione Sigmoide:
 Gode della seguente prorpietà:
 $$\sigma'(x)=\sigma(x)(1-\sigma (x))$$
 
-**Tangente iperbolica:**
+##### Tangente iperbolica:
 
 ![[8)-20241024131749391.png|445]]
 
@@ -62,7 +62,7 @@ $$\tau'(x)=1-\tau(x)^2$$
 
 Se ci allontaniamo dall'origine, il gradiente tende ad azzerarsi e la funzione non cresce(Regioni saturanti). Per risolvere questo problema vengono in gioco altre funzioni di attivazione:
 
-**ReLU:**
+##### ReLU:
 
 ![[8)-20241024131933828.png|446]]
 $$\mathrm{ReLU}=\max(0,x)$$
@@ -72,7 +72,8 @@ $$ \mathrm{ReLU}'
 1< \ x\geq 0
 \end{cases}
 $$
-**Leaky ReLU**
+##### Leaky ReLU
+
 ![[8)-20241024132331064.png|436]]
 
 $$ \mathrm{Leaky \ ReLU}
@@ -211,7 +212,7 @@ Questa può essere rappresentata in una rete neurale come:
 
 $$f(\vec{x})=h_{OR}(h^{EQ}_{w_{1}}(\vec{x}),\dots,h^{EQ}_{w_{n}}(\vec{x}))$$
 
-**Esempio:**
+##### Esempio:
 
 $$g_{i}(\vec{x}) = (x_{1} \land \neg x_{2} \land x_{4})$$
 
@@ -229,7 +230,7 @@ Se ragioniamo in termini di semispazi, con un livello possiamo modellare dei sem
 
 Se invece ragioniamo in termini di funzioni arbitrarie (e non solo booleane), che hanno come dominio $R$, vale la seguente proprietà:
 
-**Le reti neurali sono degli approssimatori universali.**
+##### Le reti neurali sono degli approssimatori universali.
 
 Data la funzione:
 
@@ -316,7 +317,7 @@ supponiamo di utilizzare loss quadratica $l_{SQ}(h(x,y))=\frac{1}{2}(h(x)-y)^2$
 $$\vec{w}^{(1)}=\text{ Inizializzazione}$$
 $$\text{for t=1 to T-1 do}$$
 $$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\text{ in S}$$
-$$\vec{v}_{t=}\nabla_{\vec{w}}l(h_{\vec{w}^{(t)}},(\vec{x_{i}},y_{i}))=\nabla_{\vec{w}}\left[ \frac{1}{2}   \{ \phi(w_{t}\phi(w_{t-1}\phi(\dots w_{2}\phi(w_{1}\phi (w \vec{x_{i}}))))) \}-y \right]^2$$
+$$\vec{v}_{t=}\nabla_{\vec{w}}l(h_{\vec{w}^{(t)}},(\vec{x_{i}},y_{i}))=\nabla_{\vec{w}}\left[ \frac{1}{2} \{ \phi(w_{t}\phi(w_{t-1}\phi(\dots w_{2}\phi(w_{1}\phi (w \vec{x_{i}}))))) \}-y \right]^2$$
 $$\vec{w}^{(t+1)}=\vec{w}^{(1)}+\vec{\eta}v_{t}$$
 $$\text{return }\vec{w}^{(t)}$$
 
@@ -411,7 +412,7 @@ $$\nabla \vec{w}^{(t)}=-\eta (\nabla _{t}+\lambda \vec{w}^{(t)})$$
 
 Un problema che si può incontrare con la discesa del gradiente è quello di rimanere intrappolati in un minimo locale. Questo accade quando l'algoritmo converge a un punto che non è il minimo globale della funzione.
 
-**Come evitare i minimi locali:**
+##### Come evitare i minimi locali:
 
 * **Momentum:** Si aggiunge al termine di aggiornamento del gradiente una certa porzione del passo precedente. Questo aiuta a mantenere una certa velocità nella direzione corretta, evitando che l'algoritmo si blocchi in un minimo locale.
 $$\nabla \vec{w}^{(t)}=\mu \nabla \vec{w}^{(t-1)}- \eta(\vec{v_{t}}+\lambda \vec{w}^{(t)})$$

@@ -24,8 +24,8 @@ Il language modeling è importante non solo per la semplice predizione della par
 * **Speech Recognition:** La predizione di parole successive è fondamentale per la trascrizione accurata del parlato.
 * **Spelling/Grammar Correction:** Il modello può identificare e correggere errori ortografici e grammaticali.
 * **Summarization:**
- * **Estrattiva:** Evidenzia le frasi più importanti da un testo.
- * **Astrattiva:** Rimodula il testo originale creando un riassunto. Anche la summarization astrattiva può essere considerata un caso particolare di language modeling, poiché, data una sequenza di testo in input, genera una nuova sequenza di testo in output.
+	* **Estrattiva:** Evidenzia le frasi più importanti da un testo.
+	* **Astrattiva:** Rimodula il testo originale creando un riassunto. Anche la summarization astrattiva può essere considerata un caso particolare di language modeling, poiché, data una sequenza di testo in input, genera una nuova sequenza di testo in output.
 
 # N-gram Language Models
 
@@ -46,7 +46,7 @@ $$
 
 che è il rapporto tra la frequenza di un n-gram e la frequenza del corrispondente (n-1)-gram nel corpus.
 
-**Esempio (modello 4-gram):**
+##### Esempio (modello 4-gram):
 
 Testo: "gli studenti aprirono i"
 
@@ -54,7 +54,7 @@ Condizionando su "gli studenti aprirono":
 
 * $P(w \mid \text{gli studenti aprirono}) = \frac{\text{count(gli studenti aprirono } w)}{\text{count(gli studenti aprirono)}}$
 
-**Esempio numerico:**
+##### Esempio numerico:
 
 Supponiamo che nel corpus:
 
@@ -64,17 +64,17 @@ Supponiamo che nel corpus:
 * "gli studenti aprirono i compiti" sia apparso 100 volte
 * $P(\text{compiti} \mid \text{gli studenti aprirono i}) = 0.1$
 
-**Gestione della sparsità:**
+##### Gestione della sparsità:
 
 **Problema 1: Numeratore = 0:** Se un n-gram non è presente nel corpus, la sua probabilità è zero.
 
-**Soluzione (Smoothing):** Aggiungere un piccolo valore δ al conteggio di ogni parola nel vocabolario.
+- **Soluzione (Smoothing):** Aggiungere un piccolo valore δ al conteggio di ogni parola nel vocabolario.
 
 **Problema 2: Denominatore = 0:** Se un (n-1)-gram non è presente nel corpus, non è possibile calcolare la probabilità.
 
-**Soluzione (Backoff):** Condizionare su un (n-1)-gram, o un (n-2)-gram, e così via, fino a trovare un n-gram con conteggio non nullo.
+- **Soluzione (Backoff):** Condizionare su un (n-1)-gram, o un (n-2)-gram, e così via, fino a trovare un n-gram con conteggio non nullo.
 
-**Limiti:**
+##### Limiti:
 
 Aumentare *n* peggiora il problema della sparsità. Tipicamente, *n* non supera 5. Un *n* elevato porta a:
 
@@ -93,7 +93,7 @@ L'obiettivo è costruire un modello neurale basato su una finestra di contesto (
 
 Ogni parola è rappresentata da un *embedding*. Questi embeddings vengono concatenati e trasformati tramite una matrice di parametri **U**. Questa trasformazione produce un vettore di punteggi (scores), dove il punteggio più alto corrisponde alla parola più probabile nel contesto.
 
-**Distribuzione di output:**
+##### Distribuzione di output:
 
 $$\mathbf{y} = \text{softmax}(\mathbf{U} \mathbf{h} + \mathbf{b}_2) \in \mathbb{R}^{V}$$
 
@@ -102,10 +102,10 @@ dove:
 * **y** è il vettore di probabilità per ogni parola nel vocabolario.
 * **U** è la matrice di trasformazione.
 * **h** è il vettore nascosto (hidden state).
-* **b<sub>2</sub>** è il bias del layer di output.
-* V è la dimensione del vocabolario.
+* **b<b><sub>2</sub></b>** è il bias del layer di output.
+* **V** è la dimensione del vocabolario.
 
-**Layer nascosto:**
+##### Layer nascosto:
 
 $$\mathbf{h} = f(\mathbf{W} \mathbf{e} + \mathbf{b}_1)$$
 
@@ -115,13 +115,13 @@ dove:
 * **f** è una funzione di attivazione (es. tanh, ReLU).
 * **W** è la matrice di pesi del layer nascosto.
 * **e** è il vettore degli embeddings concatenati.
-* **b<sub>1</sub>** è il bias del layer nascosto.
+* **b<b><sub>1</sub></b>** è il bias del layer nascosto.
 
-**Embeddings concatenati:**
+##### Embeddings concatenati:
 
 $$\mathbf{e} = [e^{(1)}, e^{(2)}, e^{(3)}, e^{(4)}]$$
 
-**Parole/vettori one-hot:**
+##### Parole/vettori one-hot:
 
 $$\mathbf{x}^{(1)}, \mathbf{x}^{(2)}, \mathbf{x}^{(3)}, \mathbf{x}^{(4)}$$
 
@@ -131,23 +131,23 @@ Gli embeddings delle parole (ottenuti da vettori one-hot), vengono concatenati e
 
 ## A Fixed-Window Neural Language Model
 
-**Miglioramenti rispetto ai modelli n-gram:**
+##### Miglioramenti rispetto ai modelli n-gram:
 
 * Nessun problema di sparsità.
 * Non è necessario memorizzare tutti gli n-gram osservati.
 
-**Problemi rimanenti:**
+##### Problemi rimanenti:
 
 * La finestra di contesto fissa è troppo piccola.
 * Aumentare la dimensione della finestra aumenta esponenzialmente la dimensione della matrice dei pesi **W**.
 * Nessuna finestra di dimensione fissa può essere sufficientemente grande per catturare tutte le dipendenze rilevanti nel linguaggio.
-* Le parole$x^{(1)}$ e $x^{(2)}$ sono moltiplicate per pesi completamente diversi nella matrice **W**. Non c'è simmetria nel modo in cui gli input vengono elaborati.
+* Le parole $x^{(1)}$ e $x^{(2)}$ sono moltiplicate per pesi completamente diversi nella matrice **W**. Non c'è simmetria nel modo in cui gli input vengono elaborati.
 
-**Necessità di un'architettura neurale in grado di elaborare input di lunghezza variabile.**
+##### Necessità di un'architettura neurale in grado di elaborare input di lunghezza variabile.
 
 Questo modello, a differenza dei modelli n-gram, non richiede la memorizzazione delle frequenze di occorrenza degli n-gram.
 
-**Problemi:**
+##### Problemi:
 
 * **Dimensione della matrice W:** Una finestra di contesto ampia implica una matrice di pesi **W** di grandi dimensioni, rendendo l'addestramento computazionalmente costoso e soggetto a overfitting.
 * **Asimmetria nell'elaborazione dell'input:** Le parole nella finestra di contesto sono moltiplicate per pesi diversi nella matrice **W**. Questa asimmetria non tiene conto della simmetria intrinseca del linguaggio: l'ordine delle parole è importante, ma una rappresentazione simmetrica del contesto è spesso desiderabile, soprattutto per compiti come il riconoscimento di entità nominate (named entity recognition). L'ottimizzazione dei pesi in **W** avvantaggia le parole in posizioni diverse nella sequenza; le parole all'inizio della sequenza potrebbero essere processate con una parte della matrice meno ottimizzata rispetto a quelle alla fine.
@@ -160,7 +160,7 @@ L'obiettivo delle Reti Neurali Ricorrenti (RNN) è condividere i pesi (**W**) pe
 
 L'output può essere generato ad ogni *timestep* o solo all'ultimo, a seconda del *task* specifico. Ad esempio, nell'analisi del sentiment, interessa solo l'output finale. In questo esempio, **W** contribuisce ad ogni passo, quindi la codifica del passo precedente influenza ogni *timestep* successivo. Un'architettura neurale che segue questo principio, prendendo in input una sequenza di parole, è detta rete neurale ricorrente.
 
-**Distribuzione di output:**
+##### Distribuzione di output:
 
 $$y^{(t)} = \text{softmax}(h^{(t)} + b_o) \in \mathbb{R}^{|\mathcal{V}|}$$
 
@@ -170,7 +170,7 @@ dove:
 * $h^{(t)}$ è lo stato nascosto al *timestep* $t$.
 * $b_o$ è il bias dell'output.
 
-**Stati nascosti:**
+##### Stati nascosti:
 
 $$h^{(t)} = \sigma \left( \mathbf{W}_{hh} h^{(t-1)} + \mathbf{W}_{xo} \mathbf{e}^{(t)} + \mathbf{b}_h \right)$$
 
@@ -185,7 +185,7 @@ dove:
 * $\mathbf{b}_h$ è il bias dello stato nascosto.
 * $\sigma$ è una funzione di attivazione (es. tanh o ReLU).
 
-**Word Embeddings:**
+##### Word Embeddings:
 
 $$\mathbf{e}^{(t)} = \mathbf{E} \mathbf{x}^{(t)}$$
 
@@ -195,7 +195,7 @@ dove:
 * $\mathbf{E}$ è la matrice di embedding.
 * $\mathbf{x}^{(t)}$ è il vettore one-hot della parola al *timestep* $t$.
 
-**Parole / Vettori One-hot:**
+##### Parole / Vettori One-hot:
 
 $$\mathbf{x}^{(t)} \in \mathbb{R}^{|\mathcal{V}|}$$
 
@@ -209,12 +209,12 @@ Se ogni $\mathbf{x}^{(t)}$ è un vettore di dimensione $|\mathcal{V}|$ con tutti
 
 Ogni blocco al passo *t* prende in input la codifica della parola al passo *t* e l'output trasformato (moltiplicato per la sua matrice di pesi) del passo precedente. Ad ogni passo *t* otteniamo la codifica $h_t$.
 
-**Pro:**
+##### Pro:
 
 * **Simmetria dei pesi:** I pesi vengono applicati ad ogni *timestep*, garantendo simmetria nell'elaborazione della sequenza.
 * **Dimensione del modello costante:** La dimensione del modello non aumenta con l'aumentare della lunghezza della sequenza di input.
 
-**Contro:**
+##### Contro:
 
 * **Lunghezza della sequenza limitata:** La lunghezza della sequenza non è arbitraria. Il modello ha difficoltà nell'elaborare sequenze lunghe a causa di un effetto di "perdita di memoria" (vanishing gradient problem). Quando si valuta la probabilità della parola successiva, si osserva un'attenuazione significativa dei valori delle probabilità delle parole precedenti nella sequenza.
 * **Tempo di addestramento:** L'addestramento del modello RNN richiede tempi lunghi.
@@ -245,13 +245,13 @@ Per addestrare una Recurrent Neural Network (RNN) si utilizza la Backpropagation
 
 **Domanda:** Qual è la derivata di $J^{(t)}(\theta)$ rispetto alla matrice di pesi ripetuta $\boldsymbol{W}_{h}$?
 
-**Risposta:**
+##### Risposta:
 
 $$
 \frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h}} = \sum_{i=1}^{t} \frac{\partial J^{(t)}}{\partial \boldsymbol{W}_{h} }\mid_{(i)}
 $$
 
-**Spiegazione:**
+##### Spiegazione:
 
 Il gradiente rispetto ad un peso ripetuto (come $\boldsymbol{W}_{h}$ nella figura) è la somma dei gradienti calcolati ad ogni *timestep* in cui quel peso contribuisce al calcolo. In altre parole, è la somma di gradienti di forma identica calcolati ad ogni *timestep*.
 
@@ -289,15 +289,15 @@ La perplexity rappresenta l'inverso della probabilità geometrica media di predi
  $$\text{Perplexity} = \exp\left(\frac{1}{T} \sum_{t=1}^{T} -\log P(x^{(t+1)}|x^{(t)}, \dots, x^{(1)}) \right) = \exp(J(\theta))$$
  dove $J(\theta)$ è la cross-entropy loss media.
 
-**Perplexity inferiore è migliore.**
+##### Una Perplexity inferiore è migliore.
 
-## Vanishing Gradient
+## Vanishing Gradient Problem
 
 Nel calcolo ricorsivo delle derivate durante la backpropagation through time (BPTT), si possono incontrare probabilità molto piccole. Questo porta ad un problema di *vanishing gradient*: i gradienti diventano sempre più piccoli man mano che si procede indietro nel tempo, rendendo difficile l'addestramento di RNN su sequenze lunghe.
 
 $$\quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{xh} h^{(t-1)} + W_{sx} x^{(t)} + b_{h}\right)$$
 
-* Cosa succede se σ fosse la funzione identità, σ(x) = x?
+Cosa succede se σ fosse la funzione identità, σ(x) = x?
 
  $$
  \begin{aligned}
@@ -306,9 +306,9 @@ $$\quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{xh} h^{(t-1
  &= W_{h}
  \end{aligned}
  $$
- In questo caso semplificato, la derivata dipende direttamente da $W_h$.
+- In questo caso semplificato, la derivata dipende direttamente da $W_h$.
 
-* Consideriamo il gradiente della loss $J^{(i)}(\theta)$ al passo `i`, rispetto allo stato nascosto $\boldsymbol{h}^{(j)}$ ad un passo precedente `j`. Sia $\ell = i - j$.
+Consideriamo il gradiente della loss $J^{(i)}(\theta)$ al passo `i`, rispetto allo stato nascosto $\boldsymbol{h}^{(j)}$ ad un passo precedente `j`. Sia $\ell = i - j$.
 
  $$
  \begin{aligned}
@@ -325,7 +325,7 @@ Definizione di $h^{(t)}$: applicazione di una funzione di attivazione (solitamen
 
 La derivata della funzione di costo J rispetto allo stato nascosto ad un passo precedente, come mostrato precedentemente, contiene il termine $W_h^\ell$, dove $\ell$ è la distanza temporale tra i due passi.
 
-**Cosa c'è di sbagliato con $W_h$?**
+##### Cosa c'è di sbagliato con $W_h$?
 
 * Consideriamo il caso in cui gli autovalori di $W_h$ siano tutti minori di 1 in modulo:
 
@@ -337,7 +337,7 @@ La derivata della funzione di costo J rispetto allo stato nascosto ad un passo p
  * $\frac{\partial J^{(i)}(\theta)}{\partial \mathbf{h}^{(j)}} = \sum_{k=1}^n c_k \lambda_{k}^\ell \mathbf{q}_k$
  * Per grandi valori di $\ell$ (grandi distanze temporali), $\lambda_k^\ell$ si avvicina a 0, quindi il gradiente tende a 0. Questo è il *vanishing gradient*.
 
-**Cosa succede con le funzioni di attivazione non lineari (quelle che usiamo normalmente)?**
+##### Cosa succede con le funzioni di attivazione non lineari (quelle che usiamo normalmente)?
 
 * Il problema è sostanzialmente lo stesso, ma la dimostrazione richiede che $|\lambda_i| < \gamma$ per qualche $\gamma$ dipendente dalla dimensionalità e dalla funzione di attivazione σ. La condizione $|\lambda_i| < 1$ non è più sufficiente.
 
@@ -366,7 +366,7 @@ Nel caso peggiore, questo si tradurrà in **Inf** o **NaN** nella rete (e si dov
 
 In pratica, ricordare di applicare il *gradient clipping* è importante, ma gli *exploding gradient* sono un problema più facile da risolvere rispetto al *vanishing gradient*. È un problema di divergenza del gradiente, e si risolve più facilmente del problema del *vanishing gradient*. È molto frequente e si risolve con operazioni di normalizzazione: può essere uno scaling tale per cui i valori abbiano norma pari a 1. In una rete ricorrente si usa spesso il *clipping*, che è un *thresholding* del gradiente. Si sceglie una soglia e ad ogni passo si ridimensiona il gradiente rispetto a questa soglia fissata.
 
-## Risolvere il Problema del Vanishing Gradient
+## Risolvere il Vanishing Gradient Problem
 
 Il problema del *vanishing gradient* nasce perché il segnale del gradiente proveniente da *timestep* lontani è molto più piccolo del segnale proveniente da *timestep* vicini. Di conseguenza, i pesi del modello vengono aggiornati principalmente in base agli effetti a breve termine, trascurando gli effetti a lungo termine.
 
@@ -384,13 +384,54 @@ Si necessita di un intervento architetturale: invece di riscrivere lo stato corr
 
 ## Long Short-Term Memory (LSTM)
 
-Le LSTM sono un tipo di RNN proposto come soluzione al problema del *vanishing gradient*. 
-Sono diventate veramente famose dopo che Hinton le ha introdotte in Google nel 2013.
+Le LSTM sono un tipo di RNN progettato per risolvere il problema del *vanishing gradient*. Hanno guadagnato notevole popolarità dopo la loro introduzione da parte di Hinton in Google nel 2013.
 
-L'obiettivo è riprogettare una RNN con una sorta di memoria per migliorare la backpropagation. Introduciamo la notazione `c`, che rappresenta la cella di memoria, utilizzata per gestire le informazioni a lungo termine. 
-Abilitiamo operazioni di lettura, scrittura e cancellazione di informazioni. La selezione di quali informazioni gestire è controllata da specifici *gate*. Questi *gate* sono vettori della stessa dimensionalità dello stato della cella; ad ogni *timestep*, il vettore dei *gate* sarà aperto o chiuso. I loro valori sono dinamici e cambiano in base all'input e al contesto.
+L'obiettivo principale delle LSTM è riprogettare le RNN dotandole di una "memoria" interna, migliorando così la backpropagation. Viene introdotta la notazione `c` per rappresentare la cella di memoria, che gestisce le informazioni a lungo termine. Le LSTM permettono operazioni di lettura, scrittura e cancellazione di informazioni, controllate da *gate* specifici. Questi *gate* sono vettori con la stessa dimensionalità dello stato della cella e determinano quali informazioni devono essere gestite. Il loro stato (aperto o chiuso) è dinamico e varia in base all'input e al contesto.
 
-![[10)-20241118164929500.png]]
+**Sequenza di Input e Calcolo degli Stati Nascosti e degli Stati delle Celle**
+
+Data una sequenza di input $x^{(t)}$, l'obiettivo è calcolare una sequenza di stati nascosti $h^{(t)}$ e stati delle celle $c^{(t)}$. Le operazioni principali eseguite al timestep $t$ sono descritte di seguito:
+
+**Forget Gate:** Determina quali informazioni provenienti dallo stato della cella precedente devono essere mantenute o dimenticate.
+
+*   $f^{(t)} = \sigma \left( W_f h^{(t-1)} + U_f x^{(t)} + b_f \right)$
+
+    *   Dove $f^{(t)}$ è il gate di dimenticanza al timestep $t$, $\sigma$ è la funzione sigmoide, $W_f$ e $U_f$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_f$ è il bias. L'intervallo di output è tra 0 e 1.
+
+**Gate di Input:** Determina quali parti del nuovo contenuto della cella devono essere scritte nella cella.
+
+*   $i^{(t)} = \sigma \left( W_i h^{(t-1)} + U_i x^{(t)} + b_i \right)$
+
+    *   Dove $i^{(t)}$ è il gate di input al timestep $t$, $\sigma$ è la funzione sigmoide, $W_i$ e $U_i$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_i$ è il bias. L'intervallo di output è tra 0 e 1.
+
+**Gate di Output:** Determina quali parti della cella devono essere inviate allo stato nascosto.
+
+*   $o^{(t)} = \sigma \left( W_o h^{(t-1)} + U_o x^{(t)} + b_o \right)$
+
+    *   Dove $o^{(t)}$ è il gate di output al timestep $t$, $\sigma$ è la funzione sigmoide, $W_o$ e $U_o$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_o$ è il bias. L'intervallo di output è tra 0 e 1.
+
+**Nuovo Contenuto della Cella:** Rappresenta il nuovo contenuto potenziale da scrivere nella cella.
+
+*   $\tilde{c}^{(t)} = \tanh \left( W_c h^{(t-1)} + U_c x^{(t)} + b_c \right)$
+
+    *   Dove $\tilde{c}^{(t)}$ è il nuovo contenuto della cella al timestep $t$, $\tanh$ è la funzione tangente iperbolica, $W_c$ e $U_c$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_c$ è il bias.
+
+**Stato della Cella:** Aggiorna lo stato della cella, "dimenticando" alcune informazioni dallo stato precedente e "memorizzando" ("input") il nuovo contenuto.
+
+*   $c^{(t)} = f^{(t)} \circ c^{(t-1)} + i^{(t)} \circ \tilde{c}^{(t)}$
+
+    *   Dove $c^{(t)}$ è lo stato della cella al timestep $t$, $f^{(t)}$ è il gate di dimenticanza, $c^{(t-1)}$ è lo stato della cella precedente, $i^{(t)}$ è il gate di input, $\tilde{c}^{(t)}$ è il nuovo contenuto della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
+
+**Stato Nascosto:** Genera lo stato nascosto, "leggendo" ("output") alcune informazioni dalla cella.
+
+*   $h^{(t)} = o^{(t)} \circ \tanh c^{(t)}$
+
+    *   Dove $h^{(t)}$ è lo stato nascosto al timestep $t$, $o^{(t)}$ è il gate di output, $c^{(t)}$ è lo stato della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
+
+**Note:**
+
+*   Tutti i vettori coinvolti hanno la stessa lunghezza $n$.
+*   I gate sono applicati utilizzando il prodotto elemento-wise (o Hadamard): $\circ$.
 
 Partendo dal basso, calcoliamo gli stati nascosti $h^{(t)}$ e le celle di memoria $c^{(t)}$. $h^{(t)}$ è una combinazione element-wise tra l'attivazione dello stato della cella (tanh) e $o^{(t)}$, l'*output gate* (filtro), che controlla quali parti della cella di memoria contribuiscono allo stato nascosto al passo `t`.
 
@@ -398,10 +439,11 @@ $c^{(t)}$ è la combinazione tra $c^{(t-1)}$ e il nuovo contenuto da inserire in
 
 Ogni *gate* è ottenuto come trasformazione non lineare (sigmoide) della combinazione lineare dell'input $x^{(t)}$ e dello stato nascosto $h^{(t-1)}$. Ogni *gate* ha parametri distinti.
 
+
 ![[10)-20241119095018808.png]]
 ![[10)-20241119095044205.png]]
 
-**Come le LSTM risolvono il *vanishing gradient*?**
+##### Come le LSTM risolvono il *vanishing gradient*?
 
 L'architettura LSTM facilita la preservazione delle informazioni su molti *timestep*. Ad esempio, se l'*forget gate* è impostato a 1 per una dimensione della cella e l'*input gate* a 0, l'informazione di quella cella viene preservata indefinitamente. Al contrario, è più difficile per una RNN standard imparare una matrice di pesi ricorrenti $W_{hh}$ che preservi le informazioni nello stato nascosto. In pratica, si ottengono circa 100 *timestep* invece di circa 7 con una RNN standard.
 
@@ -433,13 +475,13 @@ Ad esempio, BERT (Bidirectional Encoder Representations from Transformers) è un
 
 Un'altra estensione è quella di aumentare la profondità della rete aggiungendo più layer.
 
-**Le RNN sono già "deep" in una dimensione (si svolgono su molti *timestep*)**
+##### Le RNN sono già "deep" in una dimensione (si svolgono su molti *timestep*)
 
 * Possiamo renderle "deep" anche in un'altra dimensione applicando più RNN in sequenza – questa è una RNN multi-layer.
 * Questo permette alla rete di calcolare rappresentazioni più complesse.
 * Le RNN inferiori dovrebbero calcolare feature di basso livello, mentre quelle superiori feature di alto livello.
 
-**Le RNN multi-layer sono anche chiamate RNN stacked.**
+##### Le RNN multi-layer sono anche chiamate RNN stacked.
 
 ![[10)-20241119100706568.png]]
 
@@ -489,12 +531,12 @@ Il decoder è autoregressivo: la predizione di ogni parola dipende dalle parole 
  * Parsing (testo in input → albero sintattico come sequenza)
  * Generazione di codice (linguaggio naturale → codice Python)
 
-**Il modello seq2seq è un esempio di modello linguistico condizionale:**
+##### Il modello seq2seq è un esempio di modello linguistico condizionale:
 
 * **Modello linguistico:** perché il decoder predice la parola successiva della frase target `y`.
 * **Condizionale:** perché le sue predizioni sono condizionate anche sulla frase sorgente `x`.
 
-**La traduzione automatica (NMT) calcola direttamente $P(y|x)$:**
+##### La traduzione automatica (NMT) calcola direttamente $P(y|x)$:
 
 $$
 P(y|x) = P(y_1|x) P(y_2|y_1, x) P(y_3|y_1, y_2, x) \ldots P(y_T|y_1, \ldots, y_{T-1}, x)
@@ -512,25 +554,23 @@ Il condizionamento sul decoder emerge come un collo di bottiglia: il decoder è 
 
 ## Decoding Greedy
 
-![[10)-20241119104913791.png]]
+Il decoding greedy è una strategia per generare la frase target selezionando, ad ogni passo del decoder, la parola con la probabilità più alta. Questo approccio, essendo "greedy", non considera l'impatto delle scelte precedenti sulle predizioni future.
 
-Il decoding greedy seleziona ad ogni *timestep* la parola con la probabilità più alta. Essendo greedy, non considera l'effetto delle scelte precedenti sulle predizioni future.
-
-Un approccio più accurato sarebbe una ricerca esaustiva di tutte le possibili sequenze:
+Un approccio più accurato consisterebbe in una ricerca esaustiva di tutte le possibili sequenze. L'obiettivo è massimizzare la probabilità condizionata della sequenza target `y` dato l'input `x`:
 
 $$P(y|x)=\prod_{t=1}^T P(y_{t}|y_{1},\dots,y_{t-1},x)$$
 
-**Idealmente, vogliamo trovare una traduzione `y` (di lunghezza T) che massimizzi:**
+Idealmente, si cerca la traduzione `y` (di lunghezza T) che massimizza:
 
 $$
-P(y|x) = P(y_1|x) \cdot P(y_2|y_1, x) \cdot P(y_3|y_1, y_2, x) \cdots P(y_T|y_1, \dots, y_{T-1}, x)
+P(y|x) = P(y_1|x) \cdot P(y_2|y_1, x) \cdot P(y_3|y_1, y_2, x) \cdots P(y_T|y_1, \dots, y_{t-1}, x)
 $$
 
 $$
 = \prod_{t=1}^{T} P(y_t|y_1, \dots, y_{t-1}, x)
 $$
 
-Potremmo provare a calcolare tutte le possibili sequenze `y`, ma questo ha una complessità computazionale di $O(V^T)$, dove V è la dimensione del vocabolario e T è la lunghezza della sequenza. Questa complessità è proibitiva.**
+Calcolare tutte le possibili sequenze `y` ha una complessità computazionale di $O(V^T)$, dove V è la dimensione del vocabolario e T è la lunghezza della sequenza. Questa complessità rende impraticabile la ricerca esaustiva.
 
 ## Beam Search
 
@@ -557,35 +597,44 @@ Si mantengono le `k` traduzioni più probabili ad ogni *timestep*. Il termine "i
 
 BLEU è una metrica utilizzata per valutare la qualità di una traduzione automatica confrontando l'output del traduttore con una o più traduzioni umane di riferimento (ground truth).
 
-Calcola uno score di corrispondenza tra la traduzione generata e le traduzioni di riferimento, basandosi su una combinazione di precisioni n-gram (da 1-gram a 4-gram). Include una penalità per le traduzioni troppo corte (per evitare di ottenere punteggi alti con traduzioni molto brevi).
+Calcola un punteggio di corrispondenza tra la traduzione generata e le traduzioni di riferimento, basandosi su una combinazione di precisioni n-gram (da 1-gram a 4-gram). Include una penalità per le traduzioni troppo corte (per evitare di ottenere punteggi alti con traduzioni molto brevi).
 
-**Problemi con la precisione:**
+##### Problemi con la precisione:
 
-* **Ripetizioni:** La precisione semplice può essere ingannata da traduzioni che ripetono le stesse parole.
-* **Multiple frasi di riferimento:** Se ci sono più frasi di riferimento, la precisione deve essere calcolata considerando tutte le frasi.
+*   **Ripetizioni:** La precisione semplice può essere ingannata da traduzioni che ripetono le stesse parole.
+*   **Multiple frasi di riferimento:** Se ci sono più frasi di riferimento, la precisione deve essere calcolata considerando tutte le frasi.
 
-**Precisione "clipped":**
+##### Precisione "clipped":
 
-* Si confronta ogni parola della frase predetta con tutte le frasi di riferimento.
-* Se la parola corrisponde a una frase di riferimento, è considerata corretta.
-* Il conteggio delle parole corrette è limitato al numero massimo di volte in cui quella parola appare nella frase di riferimento.
+*   Si confronta ogni parola della frase predetta con tutte le frasi di riferimento.
+*   Se la parola corrisponde a una frase di riferimento, è considerata corretta.
+*   Il conteggio delle parole corrette è limitato al numero massimo di volte in cui quella parola appare nella frase di riferimento.
 
-![[10)-20241119110907996.png]]
+##### Geometric Average (Clipped) Precision Scores
+
+$$\prod_{n=1}^{N} p_n^{w_n}$$
+
+##### Brevity Penalty
+
+$$\begin{cases}
+1, & \text{if } c > r \\
+e^{(1-r/c)}, & \text{if } c <= r
+\end{cases}$$
 
 Il punteggio BLEU è il prodotto della precisione geometrica media e di una penalità di brevità.
 
-**Vantaggi:**
+##### Vantaggi:
 
-* Calcolo rapido e facile da comprendere.
-* Corrisponde al modo in cui un umano valuterebbe lo stesso testo.
-* Indipendente dalla lingua.
-* Può essere utilizzato quando si hanno più frasi di riferimento.
+*   Calcolo rapido e facile da comprendere.
+*   Corrisponde al modo in cui un umano valuterebbe lo stesso testo.
+*   Indipendente dalla lingua.
+*   Può essere utilizzato quando si hanno più frasi di riferimento.
 
-**Svantaggi:**
+##### Svantaggi:
 
-* Non considera il significato delle parole, solo le corrispondenze esatte.
-* Ignora l'importanza delle parole e l'ordine delle parole.
-* Ad esempio, "La guardia arrivò tardi a causa della pioggia" e "La pioggia arrivò tardi a causa della guardia" avrebbero lo stesso punteggio BLEU unigramma.
+*   Non considera il significato delle parole, solo le corrispondenze esatte.
+*   Ignora l'importanza delle parole e l'ordine delle parole.
+*   Ad esempio, "La guardia arrivò tardi a causa della pioggia" e "La pioggia arrivò tardi a causa della guardia" avrebbero lo stesso punteggio BLEU unigramma.
 
 Per superare questi limiti, sarebbero necessari modelli multilingue più sofisticati che possano codificare gli embedding delle frasi nel loro complesso, invece di concentrarsi sulle singole parole. Questi modelli potrebbero fungere da "oracolo", valutando la qualità della traduzione in base al significato e al contesto, piuttosto che solo sulla corrispondenza lessicale.
 
@@ -635,7 +684,7 @@ $$
 [\boldsymbol{a}_t; \boldsymbol{s}_t] \in \mathbb{R}^{2d}
 $$
 
-**Notazione:**
+##### Notazione:
 
 * $\boldsymbol{h}_1, \dots, \boldsymbol{h}_N$: vettori che rappresentano la codifica degli stati nascosti dell'encoder.
 * $N$: lunghezza della frase di input.
@@ -643,7 +692,7 @@ $$
 * $\boldsymbol{s}_{t}$: stato nascosto del decoder al *timestep* `t`.
 * $\boldsymbol{a}$ e $\boldsymbol{\alpha}$: coefficienti di attenzione. $\boldsymbol{\alpha}^{(t)}$ è la probabilità ottenuta con la softmax di $\boldsymbol{e}^{(t)}$. $\boldsymbol{a}$ è la combinazione pesata degli stati nascosti dell'encoder.
 
-**L'attention mechanism migliora significativamente le prestazioni della NMT:**
+##### L'attention mechanism migliora significativamente le prestazioni della NMT:
 
 * Permette al decoder di focalizzarsi su parti specifiche della frase sorgente.
 * Fornisce un modello più "umano" del processo di traduzione.
@@ -670,7 +719,7 @@ La dimensionalità dello stato nascosto può essere diversa per encoder e decode
 
 Abbiamo visto l'attention mechanism applicato ai modelli seq2seq per la traduzione automatica. Tuttavia, l'attention è una tecnica molto più generale, applicabile a diverse architetture e task.
 
-**Definizione generale dell'attenzione:**
+##### Definizione generale dell'attenzione:
 
 Data una serie di vettori (valori) e un vettore di query, l'attenzione calcola una somma ponderata dei valori, dipendente dalla query.
 

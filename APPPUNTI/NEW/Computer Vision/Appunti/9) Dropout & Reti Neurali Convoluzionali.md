@@ -55,7 +55,7 @@ Esistono anche **pooling layers addestrabili**, che hanno parametri che vengono 
 
 Sebbene esistano diverse tipologie di pooling, il **max pooling** è il più diffuso per la sua semplicità e interpretazione intuitiva.
 
-**Interpretazione del Max Pooling:**
+##### Interpretazione del Max Pooling:
 
 Il max pooling seleziona il pixel con il valore massimo all'interno di una finestra, presumibilmente quello con la caratteristica più prominente. Questo processo contribuisce a:
 
@@ -66,18 +66,18 @@ Il max pooling seleziona il pixel con il valore massimo all'interno di una fines
 
 Le **funzioni di attivazione** sono funzioni non lineari, tipicamente differenziabili, che vengono applicate dopo ogni strato convoluzionale. 
 
-**Scopo delle Funzioni di Attivazione:**
+##### Scopo delle Funzioni di Attivazione:
 
 * **Introduzione di non-linearità:** le funzioni di attivazione permettono di modellare relazioni non lineari tra i dati, rendendo le reti neurali più potenti.
 * **Miglioramento dell'addestramento:** le funzioni di attivazione possono limitare il range di valori in uscita, facilitando l'addestramento della rete.
 
-**Esempi di Funzioni di Attivazione:**
+##### Esempi di Funzioni di Attivazione:
 
 * **ReLU (Rectified Linear Unit):** restituisce il massimo tra l'input e 0. È una funzione semplice e computazionalmente efficiente.
 * **Funzione Logistica (Sigmoide):** comprime lo spazio di output tra 0 e 1. Viene utilizzata quando si necessita di un output che sia assimilabile a una probabilità.
 * **Tangente Iperbolica (Tanh):** simile alla funzione logistica, ma comprime lo spazio di output tra -1 e 1.
 
-**ReLU:**
+##### ReLU:
 
 La ReLU è una funzione di attivazione molto popolare per la sua semplicità e efficienza computazionale. La sua formula è:
 
@@ -87,7 +87,7 @@ ReLU(x) = max(0, x)
 
 La ReLU introduce una soglia a 0, restituendo solo valori positivi. Questo aiuta a limitare il range di valori in uscita e a migliorare l'addestramento della rete.
 
-**Funzione Logistica:**
+##### Funzione Logistica:
 
 La funzione logistica, o sigmoide, è una funzione che comprime lo spazio di output tra 0 e 1. La sua formula è:
 
@@ -97,7 +97,7 @@ Sigmoid(x) = 1 / (1 + exp(-x))
 
 La funzione logistica è spesso utilizzata quando si necessita di un output che sia assimilabile a una probabilità.
 
-**Tangente Iperbolica:**
+##### Tangente Iperbolica:
 
 La tangente iperbolica è una funzione simile alla funzione logistica, ma comprime lo spazio di output tra -1 e 1. La sua formula è:
 
@@ -117,11 +117,11 @@ Le reti neurali convoluzionali tipicamente seguono questo schema: convoluzione, 
 
 In questa lezione, analizzeremo il processo di convoluzione e i parametri che lo governano.
 
-**Esempio:**
+##### Esempio:
 
 Immaginiamo di avere un'immagine e di voler applicare un *kernel* ad essa. Il risultato sarà una *feature map*. Il processo di convoluzione consiste nell'iterare su una finestra dell'immagine, applicando il *kernel* e calcolando l'output. Questo output viene memorizzato come elemento nella *feature map*. Il processo viene ripetuto su tutte le dimensioni dell'immagine.
 
-**Parametri:**
+##### Parametri:
 
 Esistono alcuni parametri, o iperparametri, che determinano il modo in cui il *kernel* viene applicato all'immagine. Tra questi, troviamo il *padding*.
 
@@ -133,11 +133,11 @@ Il *padding* è un'operazione che consiste nell'aggiungere dei valori, tipicamen
 
 **"Padding"**: in questo caso, vengono aggiunti dei valori di *padding* ai bordi dell'immagine. Questo permette di applicare il *kernel* anche ai pixel che si trovano ai bordi, considerando i valori di *padding* come se fossero pixel reali.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo un *kernel* 3x3. Se non utilizziamo il *padding*, il *kernel* può essere applicato solo ai pixel che si trovano all'interno dell'immagine, perdendo informazioni sui pixel ai bordi. Utilizzando il *padding*, invece, possiamo applicare il *kernel* anche ai pixel ai bordi, considerando i valori di *padding* come se fossero pixel reali.
 
-**In sintesi:**
+##### In sintesi:
 
 Il *padding* è un'operazione che permette di applicare il *kernel* anche ai pixel ai bordi dell'immagine, senza perdere informazioni. Questo è importante per preservare le informazioni ai bordi dell'immagine e per evitare che la dimensione dell'immagine diminuisca dopo ogni convoluzione.
 
@@ -158,12 +158,12 @@ La "Dilation" determina quali pixel vengono utilizzati nell'applicazione del ker
 * **Dilation = 1:** Vengono considerati solo i pixel adiacenti al kernel.
 * **Dilation > 1:** Vengono considerati pixel non adiacenti, saltando un numero di pixel pari alla dilation.
 
-**Vantaggi della Dilation:**
+##### Vantaggi della Dilation:
 
 * **Riduzione delle dimensioni dell'immagine:** La dilation permette di lavorare su un'immagine più piccola, riducendo il numero di operazioni necessarie.
 * **Estrazione di feature su una superficie più ampia:** La dilation consente di calcolare le feature su una porzione più ampia dell'immagine, pur mantenendo un numero di operazioni inferiore.
 
-**Compromesso:**
+##### Compromesso:
 
 La dilation rappresenta un compromesso tra l'utilizzo di un kernel più grande (che cattura più informazioni) e la riduzione del numero di operazioni necessarie.
 
@@ -177,7 +177,7 @@ La dilation rappresenta un compromesso tra l'utilizzo di un kernel più grande (
 
 Il principio della dilation si basa sull'idea che, per riconoscere un pattern, non è necessario considerare tutti i pixel. Ad esempio, per riconoscere una linea, è sufficiente considerare la maggior parte dei punti della linea.
 
-**In sintesi:**
+##### In sintesi:
 
 * Stride e Dilation sono parametri importanti nella convoluzione che influenzano il modo in cui il kernel viene applicato all'immagine.
 * La scelta di questi parametri dipende dal tipo di feature che si desidera estrarre e dal compromesso tra accuratezza e complessità computazionale.

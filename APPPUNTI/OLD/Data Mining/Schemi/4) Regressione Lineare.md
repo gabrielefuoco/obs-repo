@@ -1,4 +1,4 @@
-**Regressione Lineare e Discesa del Gradiente**
+##### Regressione Lineare e Discesa del Gradiente
 
 I. **Modello di Regressione:**
 
@@ -58,7 +58,7 @@ III. **Aggiornamento Parametri (Discesa del Gradiente)**
 		* $\frac{\partial \log(1 - G_{w,b}(x))}{\partial w} = -G_{w,b}(x) \cdot x$
 		* $\frac{\partial \log(1 - G_{w,b}(x))}{\partial b} = -G_{w,b}(x)$
 
-**Regressione Logistica: Schema Riassuntivo**
+##### Regressione Logistica: Schema Riassuntivo
 
 I. **Caratteristiche del Modello:**
 

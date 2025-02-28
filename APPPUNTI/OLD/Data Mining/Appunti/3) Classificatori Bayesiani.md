@@ -30,7 +30,8 @@ I modelli di classificazione che utilizzano la teoria della probabilità per rap
 * **Formula:** $P(Y|X) = \frac{P(Y,X)}{P(X)}=\frac{P(X|Y)P(Y)}{P(X)}$ 
 * **Significato:** Fornisce una relazione tra le probabilità condizionali $P (Y I X) \text{ e } P(XIY$).
 
-**Nota**
+##### Nota
+
 * La probabilità assume sempre valori compresi tra 0 e 1.
 * La probabilità congiunta è simmetrica.
 
@@ -175,7 +176,7 @@ $$P(X_1, ..., X_n) = P(X_1)P(X_2|X_1)P(X_3|X_1, X_2)...P(X_n|X_1, ..., X_{n-1})$
 
 $$= \prod_{i=1}^{n} P(X_i|X_1, ..., X_{i-1}) = \prod_{i=1}^{n} P(X_i|Parents(X_i))$$
 
-**Spiegazione:**
+##### Spiegazione:
 
 * La probabilità congiunta di tutte le variabili può essere scomposta in un prodotto di probabilità condizionali.
 * Ogni probabilità condizionale $P(X_i|X_1, ..., X_{i-1})$ rappresenta la probabilità di $X_i$ dato il valore dei suoi genitori (antenati) nella rete.
@@ -206,7 +207,7 @@ $$P(x, y) = \sum_{H} P(y, x, H)$$
 
 Dove la quantità $P(y, x, H)$ può essere ottenuta utilizzando la fattorizzazione già descritta precedentemente.
 
-**Spiegazione:**
+##### Spiegazione:
 
 * La probabilità condizionale $P(Y = y|x)$ è il rapporto tra la probabilità congiunta di $y$ e $x$ e la probabilità marginale di $x$.
 * La probabilità marginale $P(x, y)$ può essere calcolata sommando la probabilità congiunta $P(y, x, H)$ su tutti i possibili valori della variabile nascosta $H$.

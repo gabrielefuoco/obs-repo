@@ -1,8 +1,8 @@
-**Genera un brainstorming dettagliato per un progetto di programmazione basato sulle seguenti idee:**
+##### Genera un brainstorming dettagliato per un progetto di programmazione basato sulle seguenti idee:
 
 {}
 
-**Fornisci:**
+##### Fornisci:
 
 * **Un progetto realizzabile e interessante:** Descrivi un progetto concreto che potrebbe essere sviluppato a partire dall'idea, tenendo conto della sua fattibilità e del tempo di realizzazione (breve termine).
 * **Tecnologie e librerie:** Suggerisci le tecnologie e le librerie più adatte per realizzare il progetto, specificando i motivi della scelta.

@@ -1,6 +1,6 @@
 Correggi gli errori presenti nel seguente testo in modo chiaro e dettagliato, mantenendo la coerenza con i concetti presenti nel testo fornito.
 
-**Istruzioni:**
+##### Istruzioni:
 
 * **Integrità del contenuto:** Limita la tua risposta alla frase evidenziata, senza aggiungere sezioni non richieste. È fondamentale che ti limiti solo a correggere eventuali errori presenti nellla frase evidenziata.
 * Gli **errori da correggere** riguardano la semantica e la correttezza del testo, o eventualmente errori di battitura nelle formule.

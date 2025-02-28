@@ -36,7 +36,7 @@ In presenza di agenti non razionali, il concetto di "caso peggiore" non è più 
 
 Expectimax è un algoritmo di ricerca che estende MiniMax per gestire agenti non razionali. I nodi di tipo max si comportano come in MiniMax, mentre i nodi chance rappresentano i risultati casuali. Il valore di un nodo chance è il valore atteso dei suoi figli, calcolato come la somma dei valori dei figli ponderati in base alla probabilità di ogni azione.
 
-**Esempio:**
+##### Esempio:
 
 Se un nodo chance ha due figli con valori 12 e -12, e la probabilità di raggiungere il primo figlio è 0.8 e la probabilità di raggiungere il secondo figlio è 0.2, il valore atteso del nodo chance è:
 
@@ -92,7 +92,7 @@ Una lotteria è un insieme di premi associati a delle probabilità. Un agente de
 
 Per poter parlare di preferenze razionali, è necessario introdurre alcuni assiomi, come l'assioma di transitività:
 
-**(A ≻ B) ∧ (B ≻ C) =⇒ (A ≻ C)** 
+##### (A ≻ B) ∧ (B ≻ C) =⇒ (A ≻ C)
 
 L'assioma di transitività garantisce che le preferenze dell'agente siano coerenti. Se un agente preferisce A a B e B a C, allora deve preferire A a C.
 
@@ -126,7 +126,7 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 * **Formulazione:** $A ≻ B =⇒ (p ≥ q ⇐⇒ [p, A; (1 − p), B] ⪰ [q, A; (1 − q), B])$
  * ⪰ indica una preferenza debole (può essere indifferente o preferita)
 
-**Notazione:**
+##### Notazione:
 
 * **A, B, C:** Premi
 * **p, q:** Probabilità

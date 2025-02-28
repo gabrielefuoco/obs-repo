@@ -2,7 +2,7 @@
 
 La generazione del linguaggio naturale (*NLG*) è un ramo dell'elaborazione del linguaggio naturale (*NLP*). Possiamo definire la relazione tra *NLG* e *NLP* come segue:
 
-**NLP = Comprensione del Linguaggio Naturale (NLU) + Generazione del Linguaggio Naturale (NLG)**
+##### NLP = Comprensione del Linguaggio Naturale (NLU) + Generazione del Linguaggio Naturale (NLG)
 
 L'obiettivo della *NLG* è sviluppare sistemi in grado di produrre output linguistici fluidi, coerenti e utili per gli esseri umani.
 
@@ -56,14 +56,29 @@ Il top-p sampling, o nucleus sampling, specifica una soglia di probabilità cumu
 
 È possibile utilizzare contemporaneamente il top-k e il top-p sampling. Si può impostare un valore di top-k relativamente alto (circa 50), anche con un vocabolario molto ampio (centinaia di migliaia di token). Applicando successivamente una selezione basata sulla concentrazione della massa di probabilità (top-p), si risolvono i problemi derivanti da distribuzioni di probabilità non uniformi. Al contrario, quando la distribuzione è uniforme, l'applicazione del top-p dopo il top-k non apporta miglioramenti significativi.
 
-### Scaling randomness: Temperature
+### Scaling della Randomness: Temperatura
 
-l'effetto della temparatura è quello di agire come fattore di scaling dei logit
-è maggiore di 0 
-interveniamo nella softmax, l'esponete viene scalato per un parametro $\tau$
-quando usiamo una temperatura maggiore di 1, il risultato della softmax tende a essere più piatta, quindi favorire la chanche che il prossimo token da generare possa essere uno qualsiasi
-favoriamo la creatività (diversità) nella selezione dei token
-se vogliamo irrigidire dal punto di vista della novelty, usiamo una temperatura <1 per rendere la distribuzione più skewed
-favoriamo così una minore creatività
-una temperatura alta implica che il modello inizi ad allucinare(o confabulatorio)
-![[13) Natural Language Generation-20241203103250295.png|722]]
+La temperatura agisce come un fattore di scaling dei logit ed è sempre maggiore di 0. Interveniamo nella softmax scalando l'esponente per un parametro $\tau$.
+
+Quando usiamo una temperatura maggiore di 1, il risultato della softmax tende a essere più piatto, favorendo la possibilità che il prossimo token da generare possa essere uno qualsiasi. Questo favorisce la creatività (diversità) nella selezione dei token.
+
+Se vogliamo irrigidire il modello dal punto di vista della novità, usiamo una temperatura < 1 per rendere la distribuzione più skewed, favorendo così una minore creatività.
+
+Una temperatura alta implica che il modello inizi ad allucinare (o a essere confabulatorio).
+
+### Recall
+
+Al passo temporale *t*, il modello calcola una distribuzione di probabilità *P<sub>t</sub>* applicando la funzione softmax a un vettore di punteggi *s<sub>w</sub>* ∈ ℝ<sup>|V|</sup>:
+
+$P_t(y_t = w) = \frac{exp(s_w)}{\sum_{w'∈V} exp(s_{w'})}$
+
+È possibile applicare un iperparametro di temperatura *τ* alla softmax per ribilanciare *P<sub>t</sub>*:
+
+$P_t(y_t = w) = \frac{exp(s_w / \tau)}{\sum_{w'∈V} exp(s_{w'} / \tau)}$
+
+*   **Aumentare la temperatura τ > 1:** *P<sub>t</sub>* diventa più uniforme.
+    *   Output più diversificato (la probabilità è distribuita su tutto il vocabolario).
+*   **Abbassare la temperatura τ < 1:** *P<sub>t</sub>* diventa più appuntita.
+    *   Output meno diversificato (la probabilità è concentrata sulle parole principali).
+
+La temperatura è un iperparametro per il decoding: può essere ottimizzata sia per la ricerca beam search che per il sampling.

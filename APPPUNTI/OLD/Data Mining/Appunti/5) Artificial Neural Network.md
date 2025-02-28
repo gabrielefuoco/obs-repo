@@ -76,7 +76,7 @@ $$\frac{\sum_{i=1}^n|y_{i}-f(\tilde{w}^{(k)},x_{i})|}{n}$$
  - $k=k+1$.
  - Ritorna al passo 2.
 
-**Note:**
+##### Note:
 
 - $w(k)_j$ è il peso della connessione $j$-esima dopo la $k$-esima iterazione.
 - $\lambda$ è il learning rate, compreso tra 0 e 1, che controlla l'entità dell'aggiornamento dei pesi ad ogni iterazione.

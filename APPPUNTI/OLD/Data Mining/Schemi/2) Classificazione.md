@@ -1,4 +1,4 @@
-**Modelli di Classificazione**
+##### Modelli di Classificazione
 
 * **Obiettivo:** Assegnare record non noti a una classe con la massima accuratezza.
  * Utilizza un *training set* per costruire il modello e un *test set* per la validazione.
@@ -25,7 +25,7 @@
  2. Altrimenti, si sceglie un attributo e un criterio per suddividere i record.
  3. Si applica ricorsivamente la procedura sui sottoinsiemi.
 
-**Scelta del Criterio di Split negli Alberi Decisionali**
+##### Scelta del Criterio di Split negli Alberi Decisionali
 
 I. **Tipi di Attributi e Split**
 
@@ -102,7 +102,7 @@ IV. **Overfitting:**
  3. Stima di bound statistici sull'errore di generalizzazione.
  4. Riduzione della complessità del modello.
 
-**Stima dell'Errore di Generalizzazione**
+##### Stima dell'Errore di Generalizzazione
 
 * **Approcci alla stima:**
  * **Ottimistico:** $e'(t) = e(t)$ (errore sul training set uguale all'errore reale)
@@ -112,7 +112,7 @@ IV. **Overfitting:**
  * Primo termine: costo degli errori di classificazione.
  * Secondo termine: costo di codifica della complessità dell'albero (pesato da α).
 
-**Strategie di Pruning**
+##### Strategie di Pruning
 
 * **Pre-pruning:**
  * Arresta la crescita dell'albero prima del completamento.
@@ -123,7 +123,7 @@ IV. **Overfitting:**
  * Pota il sottoalbero che riduce maggiormente l'errore di generalizzazione stimato.
  * Etichettamento delle foglie: classe più frequente nel sottoalbero potato o nel training set del sottoalbero.
 
-**Costruzione dei Dataset**
+##### Costruzione dei Dataset
 
 * **Holdout:**
  * Partizione in training set (2/3) e test set (1/3).
@@ -140,14 +140,14 @@ IV. **Overfitting:**
  * Probabilità di inclusione di un record ≈ 63.2% (per N grande). Probabilità di esclusione ≈ $\frac{1}{e} \approx 0,368$.
  * Utile per dataset piccoli, stabilizza i risultati.
 
-**Class Imbalance Problem**
+##### Class Imbalance Problem
 
 * Classi distorte (numero di record molto diverso tra le classi).
 * Sfide:
  * Molti metodi funzionano meglio con classi bilanciate.
  * L'accuratezza è una metrica inadeguata.
 
-**Metriche Alternative per la Valutazione del Modello**
+##### Metriche Alternative per la Valutazione del Modello
 
 * **Matrice di Confusione:**
  * TP (True Positive): record positivi correttamente classificati. (e altri 3 indicatori non specificati nel testo)
@@ -216,7 +216,7 @@ VI. **Regole Linearmente Ordinate (Liste di Decisione):**
 * **Ordinamento class-based:** gruppi di regole per classe, con ordinamento tra le classi.
 	* Rischio: regole di buona qualità superate da altre di qualità inferiore ma appartenenti a classi più importanti.
 
-**Costruzione di un Classificatore Basato su Regole**
+##### Costruzione di un Classificatore Basato su Regole
 
 I. **Metodi di Costruzione**
 * A. Metodi Diretti: Estraggono regole direttamente dai dati. Esempio: Sequential Covering.
@@ -322,11 +322,11 @@ III. **Metodi Indiretti: C4.5 rules**
  * `g`: parametro dipendente da attributi ridondanti (default 0.5).
  * Ordinamento classi per *description length* crescente (priorità a minimo).
 
-**Tecniche di Classificazione - Nearest Neighbor**
+##### Tecniche di Classificazione - Nearest Neighbor
 
-**Eager Learners vs. Lazy Learners:**
+##### Eager Learners vs. Lazy Learners:
 
-**Algoritmi Lazy Learners**
+##### Algoritmi Lazy Learners
 
 * **Rote Classifier:**
  * Memorizza il training set.
@@ -352,7 +352,7 @@ III. **Metodi Indiretti: C4.5 rules**
  * Tecniche di indicizzazione per ridurre il numero di calcoli di distanza.
  * Condensazione: riduzione del training set mantenendo le prestazioni.
 
-**Strutture a Indice per Ricerca del Vicino Più Prossimo**
+##### Strutture a Indice per Ricerca del Vicino Più Prossimo
 
 I. **Tipi di Query:**
 
@@ -387,7 +387,7 @@ B. **Indici multi-dimensionali (spaziali):**
  3. **Kd-trees (k-dimensional tree):**
 	 * Struttura dati ad albero per organizzare punti in uno spazio k-dimensionale.
 
-**Kd-tree: Struttura dati per la ricerca in spazi k-dimensionali**
+##### Kd-tree: Struttura dati per la ricerca in spazi k-dimensionali
 
 I. **Struttura del Kd-tree:**
 * Ogni nodo: iper-rettangolo k-D con un "punto di separazione".
@@ -418,7 +418,7 @@ IV. **Pro e Contro dei Kd-trees:**
 	* Prestazioni dipendenti dalla scelta dell'asse di partizione e del punto di separazione.
 	* Scarsa performance su dati distorti o con distribuzioni complesse.
 
-**Calcolo Approssimato per Ricerca di Vicini**
+##### Calcolo Approssimato per Ricerca di Vicini
 
 * **Algoritmi di Ricerca Approssimativa:**
  * **Near Neighbor Approssimativo:** Restituisce punti con distanza ≤ c * distanza punti più vicini (c > 1). Vantaggioso quando l'approssimazione è sufficientemente accurata e la metrica di distanza riflette la qualità percepita dall'utente.
@@ -432,7 +432,7 @@ IV. **Pro e Contro dei Kd-trees:**
  * **R-tree:** Approccio ottimistico (tempo logaritmico).
  * **Vector Approximation File:** Approccio pessimistico (scansione veloce dell'intero dataset).
 
-**R-tree**
+##### R-tree
 
 * **Struttura dati:** Estensione dei B+tree per spazi multidimensionali, organizza oggetti in iperrettangoli sovrapposti.
 * **Costruzione (bottom-up):**

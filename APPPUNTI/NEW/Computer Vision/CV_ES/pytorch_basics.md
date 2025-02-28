@@ -104,7 +104,7 @@ print(z)
  [0.7989, 1.5444, 0.5865],
  [0.3518, 1.0559, 1.3198]])
 
-**Reshape**
+##### Reshape
 
 In pytorch il metodo *view* permette di cambiare le dimensioni di un tensore. Un tensore contiene una sequenza di valori e le dimensioni sono solo una loro organizzazione logica. Cambiare dimensioni non determina un cambiamento della struttura dati, quindi... per tensori di "grandi" dimensioni cambiare la shape del tensore non ha un impatto sulle prestazioni, a differenza della copia.
 

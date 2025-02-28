@@ -7,7 +7,8 @@ L'apprendimento automatico si basa sul principio di trasformare l'esperienza in 
  * $x_i$: Vettore numerico che rappresenta un esempio (input).
  * $y_i$: Etichetta associata all'esempio (output).
 
-**Esempio: Classificazione del Sapore della Frutta**
+##### Esempio: Classificazione del Sapore della Frutta
+
 * **Input ($x_i$):**
  * $x_{i1}$: Consistenza (0 = molle, 1 = duro)
  * $x_{i2}$: Colore (0 = nero, 1 = bianco)
@@ -26,7 +27,7 @@ L'apprendimento automatico si basa sul principio di trasformare l'esperienza in 
 * **Obiettivo:** Classificare nuovi esempi (non presenti nel training set) in modo accurato.
 * **Capacità di Generalizzazione:** La capacità del Predittore di estendere le conoscenze acquisite dal training set a nuovi dati. 
 
-**In sintesi:**
+##### In sintesi:
 
 L'apprendimento automatico si basa sull'addestramento di un modello (Learner) su un insieme di dati di esempio (Training Set) per creare un Predittore che può classificare nuovi esempi in modo accurato. La capacità di generalizzazione del Predittore è fondamentale per la sua efficacia. 
 
@@ -119,47 +120,47 @@ Se l'insieme di ipotesi H è finito, allora il predittore $h_S$ ottenuto tramite
 * **Probabilità di accuratezza:** Un predittore $h_S$ è considerato **probabilmente approssimativamente corretto (PAC)** se la probabilità che il suo rischio di generalizzazione sia inferiore a ε è maggiore di 1 - δ, dove δ è una soglia di confidenza:
  * $P_R[L_D(h_S) \leq \epsilon] \geq 1 - \delta$
 
-**In sintesi:**
+##### In sintesi:
 
 Il seguente teorema fornisce una garanzia per la generalizzazione dei modelli quando l'insieme di ipotesi è finito. Le assunzioni di IID e di realizzabilità sono importanti per garantire che il training set sia rappresentativo della distribuzione dei dati reali. Il concetto di overfitting si riferisce alla situazione in cui un modello si adatta troppo bene al training set e non riesce a generalizzare a nuovi dati. La probabilità di accuratezza (PAC) fornisce una misura della probabilità che un modello sia approssimativamente corretto. 
 
 ## Come deve essere fatta $h_S$?
 
-**Condizioni:**
+##### Condizioni:
 
 * **H finita:** L'insieme di ipotesi H è finito.
 * **Realizzabilità:** Vale l'assunzione di realizzabilità, ovvero esiste un'ipotesi $h^*$ in H che ha un rischio empirico nullo ($L_D(h^*) = 0$).
 * **S sufficientemente grande:** Il training set S contiene un numero sufficiente di esempi (m, legato ad altri parametri).
 
-**Conclusione:**
+##### Conclusione:
 
 Se le condizioni sopra elencate sono soddisfatte, allora $h_S$ è **probabilmente approssimativamente corretto (PAC)**.
 
-**Formulazione matematica:**
+##### Formulazione matematica:
 
 * $P_r[{S:L_d(h_S) \leq \epsilon}] \geq 1- \delta$
 * Complementare: $P_r[{S:L_d(h_S) \ge \epsilon}] \leq \delta$
 
-**Ipotesi cattiva (bad):**
+##### Ipotesi cattiva (bad):
 
 * $H_b$: Insieme di ipotesi in H che hanno un rischio di generalizzazione maggiore di
  $\epsilon$ ($h\in H : L_d(h_S) \ge \epsilon$).
 
-**Esempi forvianti (misleading):**
+##### Esempi forvianti (misleading):
 
 * $M$: Insieme di training set S per i quali esiste un'ipotesi in $H_b$ che ha un rischio empirico nullo ($M= {S: ∃ h \in H_b, L_S(h)=0}$).
 
-**Relazione tra insiemi:**
+##### Relazione tra insiemi:
 
 L'insieme di training set per i quali $L_d(h_S) \geq \epsilon$ è strettamente contenuto in M.
 
-**Conclusione finale:**
+##### Conclusione finale:
 
 La probabilità che $L_d(h_S) \geq \epsilon$ è minore o uguale alla probabilità di M:
 
 * $pr[L_d(h_S) \geq \epsilon] \leq P_r(M)$
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 $$M = \bigcup_{h \in H_B} \{S: L_S(h) = 0\}$$
 
@@ -198,7 +199,7 @@ $$m_H(\epsilon, \delta)$$
 * **Formula:** $m_H(\epsilon, \delta) = \frac{1}{\epsilon}ln \frac{|H|}{\delta}$
 * **PAC-Learnability:** Un concetto legato alla Sample Complexity. Una classe di ipotesi H è **PAC-Learnable** se esiste una funzione $m_H(\epsilon, \delta)$ tale che, con un training set di dimensione $m \geq m_H(\epsilon, \delta)$, l'algoritmo ERM produce un'ipotesi PAC.
 
-**Definizione:**
+##### Definizione:
 
 Una classe di ipotesi H è **PAC-Learnable** se esiste una funzione $m_H(\epsilon, \delta)$ detta **Sample Complexity** tale che, se $m = |S| \geq m_H(\epsilon, \delta)$ sotto l'assunzione di realizzabilità, allora $h_S = ERM_H(S)$ è PAC, ovvero:
 $$Pr[L_D(h_s) \leq \epsilon] \geq 1- \delta$$

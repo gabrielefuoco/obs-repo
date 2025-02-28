@@ -1,28 +1,32 @@
 # APACHE SPARK vs HADOOP MapReduce
 
-**MapReduce**
+##### MapReduce
+
 - Facilita l'elaborazione di grandi quantità di dati in parallelo su cluster, garantendo affidabilità e tolleranza ai guasti.
 - Gestisce la schedulazione dei task, il loro monitoraggio e la riesecuzione di quelli falliti.
 
-**HDFS & MapReduce:**
+##### HDFS & MapReduce:
 
 - Esecuzione congiunta su nodi di calcolo e storage, mantenendo i dati vicini al calcolo -> throughput elevato.
 
-**YARN & MapReduce:**
+##### YARN & MapReduce:
 
 - Architettura con un resource manager master, node manager per nodo e AppMaster per applicazione.
 
 ## Debolezze e limitazioni di MapReduce
 
-**Modello di programmazione**
+##### Modello di programmazione
+
 - Difficoltà nell'implementare tutto come programma MapReduce.
 - Operazioni semplici richiedono più passaggi MapReduce (es. WordCount con ordinamento per frequenza).
 - Mancanza di strutture dati e tipi avanzati.
 - Nessun supporto nativo per iterazioni, ogni iterazione legge/scrive su disco -> overhead elevato.
-**Efficienza**
+##### Efficienza
+
 - Alto costo di comunicazione e frequente scrittura dell'output su disco.
 - Utilizzo limitato della memoria.
-**Non adatto per l'elaborazione in tempo reale**
+##### Non adatto per l'elaborazione in tempo reale
+
 - Necessità di scansionare l'intero input prima dell'elaborazione.
 
 ## Apache Spark
@@ -35,14 +39,17 @@
 - Adatto per grafi di esecuzione generali e ottimizzazioni avanzate.
 - Compatibile con le API di storage di Hadoop, inclusi HDFS e HBase.
 
-**Condivisione dei dati: MapReduce vs Spark**
+##### Condivisione dei dati: MapReduce vs Spark
+
 - **MapReduce:** Lento per via di replicazione, serializzazione e I/O su disco.
 - **Spark:** Distribuzione in memoria, 10-100 volte più veloce rispetto a disco e rete.
 
-**Hadoop vs Spark: Flusso dei dati**
+##### Hadoop vs Spark: Flusso dei dati
+
 - **ETL (Extract, Transform, Load):** Processo di copia dei dati da diverse fonti a un sistema di destinazione che rappresenta i dati in modo diverso.
 
-**Paradigma di programmazione**
+##### Paradigma di programmazione
+
 - Sia Hadoop che Spark usano un paradigma simile a MapReduce: "scatter-gather", che distribuisce dati e calcolo su più nodi e raccoglie i risultati finali.
 
 **Spark offre**:

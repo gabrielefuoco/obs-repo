@@ -1,7 +1,7 @@
 
 ## Schema Riassuntivo: Linguaggio Naturale, Recupero Informazioni e NLP
 
-**I. Linguaggio Naturale e sue Applicazioni**
+##### I. Linguaggio Naturale e sue Applicazioni
 
 * **Unicità:** Linguaggio specifico per umani, gestione complessità comunicativa.
 * **Interazione Multimodale:** Integrazione con altre modalità sensoriali (es. visione).
@@ -9,7 +9,7 @@
  * **NLP:** Sviluppo di sistemi automatici per comprensione e generazione di linguaggio naturale.
  * **IR:** Recupero (semi-)automatico di dati testuali non strutturati da grandi collezioni.
 
-**II. Definizione di IR**
+##### II. Definizione di IR
 
 * **Enunciato del Problema:**
  * **Dato:** Collezione di documenti (statica).
@@ -18,7 +18,7 @@
  * **Obiettivo:** Recuperare documenti rilevanti per il bisogno informativo dell'utente.
  * **Risultati:** Insieme di documenti recuperati.
 
-**III. Problemi con i Dati Testuali**
+##### III. Problemi con i Dati Testuali
 
 * **Sfide Generali:** Grandi set di dati, alta dimensionalità, dati rumorosi, dati in continua evoluzione, comprensibilità dei risultati.
 * **Sfide Specifiche:**
@@ -27,7 +27,7 @@
  * **Linguaggi:** Gestione di linguaggi generali e specifici di dominio.
  * **Multilinguismo:** Gestione di lingue diverse.
 
-**IV. IR vs. Altre Discipline**
+##### IV. IR vs. Altre Discipline
 
 * **Obiettivo Comune:** Facilitare la ricerca di informazioni (es. sul Web).
 * **Attività Comuni:** SEO, crawling, estrazione di documenti.
@@ -38,7 +38,7 @@
  * **Discriminazione del Testo:** NLP (Machine Learning).
  * **Comprensione del Testo:** NLP (Machine Learning, AI generativa).
 
-**V. Topic Detection and Tracking**
+##### V. Topic Detection and Tracking
 
 * **Contesto:** Fine anni '90 (inizio text mining).
 * **Definizione:** Acquisizione automatica di dati in streaming (principalmente news).
@@ -47,18 +47,18 @@
 * **Difficoltà:** Task incrementale, risorse computazionali limitate, definizione di "topic", tracciamento del segnale.
 * **Modellazione di Topic Stocastica:** Utilizzo di modelli probabilistici (es. LDA) per identificare temi principali nei documenti.
 
-**VI. Relation Extraction**
+##### VI. Relation Extraction
 
 * **Relazione con NER:** Necessità di identificare prima le entità nominate.
 * **Pattern Frequenti:** Ricerca di pattern ricorrenti.
 * **Definizione in NLP:** Identificazione di relazioni lessicali tra entità nominate.
 
-**VII. Summarization**
+##### VII. Summarization
 
 * **Approccio Tradizionale (anni '90):** Estrazione di parole chiave.
 * **Guida alla Summarization:** Utilizzo delle proprietà del documento per guidare il processo.
 
-**VIII. KDD Pipeline in NLP**
+##### VIII. KDD Pipeline in NLP
 
 * **Fasi:** Sequenza di fasi (unfolding).
 * **Rappresentazione:** Indicizzazione degli elementi costitutivi.
@@ -66,14 +66,14 @@
 * **Feature Selection:** Utilizzo del machine learning.
 * **Valutazione:** Criteri statistici (es. accuracy, con i suoi limiti).
 
-**IX. Funzioni Principali di NLP**
+##### IX. Funzioni Principali di NLP
 
 * **Funzione Principale:** Estrazione di informazioni da testi.
 * **Macro Categorie:**
  * **Indicativa:** Rivelazione di elementi per determinare la rilevanza del testo rispetto alle query (fondamentale per esplorazione e retrieval).
  * **Informativa:** Ottenimento di un surrogato del testo senza riferimento all'originale (valido anche per il retrieval).
 
-**X. Browsing**
+##### X. Browsing
 
 * **Definizione:** Navigazione in sistemi di ipertesto e ipermedia.
 * **Scopo:** Esplorazione di collezioni di testo.
@@ -82,7 +82,7 @@
 * **Supporto all'Annotazione:** Possibile supporto all'annotazione.
 * **Valutazioni e Gold Standard:** Utilizzo di silver standard (es. GPT-4) in assenza di gold standard generato da esperti.
 
-**XI. Estrazione di Informazioni**
+##### XI. Estrazione di Informazioni
 
 * **Contesto:** Task fondamentale nell'analisi di informazioni sul web (insieme a classificazione e clustering).
 * **Esempio:** Web wrapping.
@@ -91,7 +91,7 @@
 
 ---
 
-**I. E-commerce e Estrazione di Informazioni**
+##### I. E-commerce e Estrazione di Informazioni
 
 * **A. Estrazione di Informazioni da Documenti:**
  * Identificazione di documenti rilevanti.
@@ -107,7 +107,7 @@
  * Modelli precedenti (pre-filler) e successivi (post-filler) per il contesto.
  * Esempio: Estrazione di termini da un modello predefinito con pattern per ogni slot.
 
-**II. Recupero di Documenti**
+##### II. Recupero di Documenti
 
 * **A. Processo:**
  * Ricezione di query in linguaggio naturale.
@@ -120,7 +120,7 @@
  * Rappresentazione dei bisogni informativi.
  * Metodo di abbinamento.
 
-**III. Applicazioni di Base**
+##### III. Applicazioni di Base
 
 * **A. Scoperta della Conoscenza:**
  * **Estrazione di Informazioni:** Estrazione di informazioni utili da grandi quantità di dati.
@@ -134,7 +134,7 @@
  * Disambiguazione del senso delle parole.
  * Filtraggio del testo (o dell'informazione).
 
-**IV. Web Personalization e Applicazioni Avanzate**
+##### IV. Web Personalization e Applicazioni Avanzate
 
 * **A. Web Personalization:**
  * Selezione di informazioni per gruppi target.
@@ -148,7 +148,7 @@
  * Filtraggio di notizie.
  * Rilevamento di messaggi spam.
 
-**V. Categorizzazione Gerarchica**
+##### V. Categorizzazione Gerarchica
 
 * **A. Processo:** Navigazione gerarchica per restringere la ricerca.
 * **B. Caratteristiche:**
@@ -156,21 +156,21 @@
  * Struttura gerarchica delle categorie.
  * Decomposizione della classificazione come decisione ramificata.
 
-**VI. Riassunto del Testo**
+##### VI. Riassunto del Testo
 
 * **A. Obiettivi:** Testo breve, coerente, informazioni importanti in campi semanticamente ben definiti.
 * **B. Approcci:** Dipende dalla natura dei documenti (es. summarization di recensioni per aspetti).
 * **C. Applicazioni:** Facilitazione dell'accesso alle informazioni (estrazione parole chiave, astrazione di documenti, riassunto di documenti recuperati).
 * **D. Approcci basati sulla dimensione dell'unità di testo:** Riassunti di parole chiave, riassunti di frasi.
 
-**VII. Disambiguazione del Senso delle Parole (WSD)**
+##### VII. Disambiguazione del Senso delle Parole (WSD)
 
 * **A. Obiettivo:** Assegnare il senso corretto di una parola nel contesto.
 * **B. Approccio Efficace:** Sfruttare misure di correlazione semantica da un inventario di sensi esistente.
 * **C. Esempio:** Disambiguazione del termine "bank".
 * **D. Approcci Knowledge-based:** Sfruttamento di risorse linguistiche elettroniche (es. Wikipedia).
 
-**VIII. Filtraggio nel Text Mining**
+##### VIII. Filtraggio nel Text Mining
 
 * **A. Definizione:** Classificazione di documenti come rilevanti o irrilevanti per un consumatore.
 * **B. Esempio:** Feed di notizie (produttore: agenzia stampa; consumatore: giornale).
@@ -182,27 +182,27 @@
 
 # Schema Riassuntivo del Testo sull'Analisi del Testo
 
-**I. Elaborazione del Feedback:**
+##### I. Elaborazione del Feedback:
 
 * **1. Standardizzazione:** Conversione dei dati di feedback in un formato uniforme.
 * **2. Raggruppamento:** Raggruppamento dei dati standardizzati in base alla similarità del contenuto.
 * **3. Assegnazione:** Assegnazione di nuovi feedback alle categorie predefinite.
 
-**II. Raccomandazione di Prodotti:**
+##### II. Raccomandazione di Prodotti:
 
 * **Approcci:**
  * **Basato sul contenuto:** Analisi dei dati utente (categorie preferite, autori) per suggerire prodotti simili.
  * **Collaborativo:** Suggerimento di prodotti acquistati da utenti con profili simili, basandosi su cronologia e valutazioni.
 * **Tendenza attuale:** Combinazione di entrambi gli approcci per migliorare l'accuratezza.
 
-**III. Rilevamento dello Spam:**
+##### III. Rilevamento dello Spam:
 
 * **Applicazione:** Classificazione di email come spam o legittime tramite text mining.
 * **Sfide:**
  * Valutazione del modello complessa a causa dei costi asimmetrici degli errori (falsi positivi vs. falsi negativi).
  * Distribuzione non uniforme delle classi (più spam che email legittime) complica l'apprendimento del classificatore.
 
-**IV. Vocabolario (Modello di Rappresentazione dei Testi):**
+##### IV. Vocabolario (Modello di Rappresentazione dei Testi):
 
 * **Definizione di Termine:** Quali termini indicizzare? (tutte le parole o solo quelle "importanti"?; considerare presenza o frequenza?)
 * **Contesto:** Selezione dei termini per l'indicizzazione (es. indice analitico).
@@ -212,14 +212,14 @@
 * **Ricerca di termini che catturano la semantica del testo:** Evitando elaborazione manuale intensa.
 * **Altri argomenti:** Analisi lessicale e morfologica, elaborazione di punteggiatura, numeri, stopwords, stemming, lemmatizzazione, tagging delle parti del discorso, analisi della semantica del discorso (anafora, ellissi, meronomia), pragmatica, semiotica, morfologia.
 
-**V. Tokenizzazione: Problemi Lessicali e Morfologici:**
+##### V. Tokenizzazione: Problemi Lessicali e Morfologici:
 
 * **Token:** Termine candidato.
 * **Organizzazione del testo:** Fase di pre-processing.
 * **Punteggiatura:** Gestione di trattini (es. *state-of-the-art*), apostrofi (es. *Italy’s*), acronimi (es. *U.S.A*), entità nominate (es. *San Francisco*).
 * **Numeri:** Rimozione o mantenimento (motivi: dati informativi, codici di errore, intervalli di tempo); metadati indicizzati separatamente; varietà di tipi (date, tempo, codici, identificatori, numeri di telefono). Case delle lettere convertito in lowercase.
 
-**VI. Stopwords:**
+##### VI. Stopwords:
 
 * **Definizione:** Parole grammaticali con scarso potere informativo, specifiche della lingua.
 * **Principio cardine:** Rimozione di colonne con distribuzione super omogenea o eterogenea. Trade-off tra generalizzazione e omogeneità.
@@ -227,13 +227,13 @@
 * **Casi in cui sono necessarie:** Query di frase, titoli, query "relazionali".
 * **Gestione:** Buone tecniche di compressione e ottimizzazione delle query.
 
-**VII. Personalizzazione della Stop-List:**
+##### VII. Personalizzazione della Stop-List:
 
 * **Obiettivo:** Ridurre e arricchire la stop-list.
 * **Come:** Rimozione di termini comuni al corpus (poco esplicativi per la distinzione tra documenti); mantenimento di termini frequenti per analisi individuale; esclusione di termini super rari (più delicata della rimozione dei termini comuni); termini che appaiono una sola volta nel corpus (decisione dipendente dal tipo di termine).
 * **Conclusione:** La stop-list deve contenere termini molto frequenti nella collezione.
 
-**VIII. Normalizzazione:**
+##### VIII. Normalizzazione:
 
 * **Obiettivo:** Uniformizzare le parole nel testo indicizzato e nelle query.
 * **Esempi:** Corrispondenza tra "U.S.A." e "USA".
@@ -243,7 +243,7 @@
 
 ---
 
-**I. Preprocessing del Testo**
+##### I. Preprocessing del Testo
 
 * **A. Uso della Lingua:**
  * Normalizzazione a termini senza accenti/trattini per uniformità, nonostante le variazioni linguistiche.
@@ -276,7 +276,7 @@
  * 5 fasi di riduzione. Esempio: GENERALIZATIONS -> GENER.
 * **J. Confronto Stemming/Lemmatizzazione:** Lo stemming è più aggressivo della lemmatizzazione.
 
-**II. Modello Booleano**
+##### II. Modello Booleano
 
 * **A. Query Booleana:**
  * Combinazione di termini di indice con operatori booleani (AND, OR, NOT).
@@ -284,7 +284,7 @@
 
 ---
 
-**Applicazioni del Modello Booleano**
+##### Applicazioni del Modello Booleano
 
 * **Sistemi di Ricerca Esistenti:**
  * Email
@@ -298,14 +298,14 @@
  * "disabl! /p access! /s work-site work-place (employment /3 place" (accesso al luogo di lavoro per disabili)
  * `/3` = entro 3 parole, `/S` = nella stessa frase.
 
-**Vantaggi del Modello Booleano**
+##### Vantaggi del Modello Booleano
 
 * Query lunghe e precise
 * Operatori di prossimità (es. `/3`, `/S`)
 * Sviluppo incrementale delle query
 * Maggiore precisione e controllo rispetto alla ricerca web
 
-**Limitazioni del Modello Booleano**
+##### Limitazioni del Modello Booleano
 
 * **Rigidità:** AND = tutti i termini; OR = almeno un termine.
 * **Query brevi:** Incoraggia query concise.
@@ -316,7 +316,7 @@
 * **Sparsità:** Problema comune nella rappresentazione dei dati.
 * **Utilizzo appropriato:** Solo per query corte e semplici, quando è sufficiente sapere se un elemento esiste o meno.
 
-**Estensioni del Modello Booleano**
+##### Estensioni del Modello Booleano
 
 * **Incorporare metodi di classificazione:**
  * **Obiettivo:** Ordinare i risultati mantenendo la base booleana.
@@ -339,12 +339,12 @@
 
 * **Modello P-norma:** Considera documenti e query come punti multidimensionali, utilizzando schemi di pesatura e coefficienti per gli operatori.
 
-**Sparsità e Rappresentazione dei Dati**
+##### Sparsità e Rappresentazione dei Dati
 
 * **Matrice termine-documento:** Estremamente sparsa (es. 500K termini x 1M documenti).
 * **Rappresentazione efficiente:** Registrare solo le posizioni non nulle (1).
 
-**Indice Inverso**
+##### Indice Inverso
 
 * **Definizione:** Mappa ogni termine all'insieme dei documenti in cui compare.
 * **Vantaggi:** Efficienza di memorizzazione e ricerca.
@@ -354,7 +354,7 @@
 
 ## Schema Riassuntivo: Indici Inversi e Elaborazione di Query
 
-**I. Creazione della Matrice Termine-Documento**
+##### I. Creazione della Matrice Termine-Documento
 
 * **A. Rappresentazione Iniziale:** Array di documenti indicizzati.
 * **B. Trasposizione:** Generazione della matrice termine-documento.
@@ -376,7 +376,7 @@
  * **1. Per chiave (Dizionario):** Accesso rapido alla lista di postings.
  * **2. Per documento (Liste di postings):** Identificazione rapida dei documenti.
 
-**II. Processo di Indexing**
+##### II. Processo di Indexing
 
 * **A. Input:** Stream di coppie (Termine, docID).
 * **B. Passaggi:**
@@ -387,7 +387,7 @@
  * **5. Aggiungi frequenza del documento:** Aggiunta della frequenza del termine nel documento.
  * **6. Dividi in:** Dizionario (termini distinti con termID) e Postings (liste di postings).
 
-**III. Elaborazione delle Query Booleane**
+##### III. Elaborazione delle Query Booleane
 
 * **A. Esempio:** `Brutus AND Caesar`
 * **B. Passaggi:**
@@ -402,7 +402,7 @@
  * **2. Elaborazione in ordine crescente di dimensioni OR.**
 * **E. Complessità:** Tempo lineare rispetto al numero totale di voci nei postings.
 
-**IV. Query di Frase**
+##### IV. Query di Frase
 
 * **A. Importanza:** Ricerca avanzata, facilità d'uso.
 * **B. Approcci:**
@@ -430,7 +430,7 @@ INTERSECT(p1, p2)
 
 ---
 
-**Schema Riassuntivo: Indicizzazione e Ricerca di Informazioni**
+##### Schema Riassuntivo: Indicizzazione e Ricerca di Informazioni
 
 I. **Indicizzazione Posizionale**
  A. **Segmentazione e Ricerca:**
@@ -478,7 +478,7 @@ III. **Ordinamento e Merge**
 
 ---
 
-**Schema Riassuntivo: Tecniche di Indicizzazione**
+##### Schema Riassuntivo: Tecniche di Indicizzazione
 
 I. **Valutazione dei Token e Compressione:**
  * Necessità di soluzioni intermedie per valutare l'importanza dei token e la loro compressibilità con perdita.
@@ -528,7 +528,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
 
 # Schema Riassuntivo: Indicizzazione e Ricerca di Informazioni
 
-**I. Fusione Logaritmica**
+##### I. Fusione Logaritmica
 
 * **Efficienza:**
  * Ogni posting fuso al massimo $O\left( \log\left( \frac{T}{n} \right) \right)$ volte.
@@ -538,13 +538,13 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
 * **Problema con più indici:** Gestione complessa delle statistiche a livello di collezione (es. correzione ortografica).
 * **Possibile soluzione:** Ignorare indici secondari per l'ordinamento, basandosi solo sull'indice principale per il ranking.
 
-**II. Indicizzazione Dinamica nei Motori di Ricerca**
+##### II. Indicizzazione Dinamica nei Motori di Ricerca
 
 * **Approccio:**
  * Modifiche incrementali frequenti (news, blog).
  * Ricostruzioni periodiche dell'indice da zero.
 
-**III. Requisiti per la Ricerca in Tempo Reale**
+##### III. Requisiti per la Ricerca in Tempo Reale
 
 * **Caratteristiche:**
  * Bassa latenza.
@@ -552,7 +552,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * Letture e scritture concorrenti.
  * Dominanza del segnale temporale.
 
-**IV. Costruzione dell'Indice**
+##### IV. Costruzione dell'Indice
 
 * **Indicizzazione basata sull'ordinamento:**
  * Inversione in memoria ingenua.
@@ -564,7 +564,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * Postings non ordinati.
  * Accumulo postings in liste durante l'elaborazione.
 
-**V. Compressione**
+##### V. Compressione
 
 * **Obiettivi:**
  * Ridurre spazio su disco.
@@ -578,7 +578,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * **Senza perdita:** Preserva tutte le informazioni (metodo principale in IR).
  * **Con perdita:** Scarta informazioni (es. conversione in minuscolo, stop words, stemming). Possibile potare voci di postings poco probabili nei primi k risultati.
 
-**VI. Dimensione del Vocabolario vs. Dimensione della Collezione**
+##### VI. Dimensione del Vocabolario vs. Dimensione della Collezione
 
 * **Problema:** Determinare la dimensione del vocabolario (numero di parole distinte).
 * **Legge di Heaps:** $M = kT^b$ (M = dimensione vocabolario, T = numero di token).
@@ -587,7 +587,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * $log M = log k + b log T$.
 * **Esempio (Reuters RCV1):** $log_{10}M = 0.49 log_{10}T + 1.64$ ($k≈ 44$, $b = 0.49$).
 
-**VII. Distribuzioni Skew di Tipo Power-Law**
+##### VII. Distribuzioni Skew di Tipo Power-Law
 
 * **Caratteristiche:** Concentrazione di massa in una piccola zona, coda lunga.
 * **Esempi:** Legge di Pareto (80-20), Legge di Zipf (frequenza delle parole).
@@ -598,7 +598,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
 
 ## Schema Riassuntivo: Legge di Heaps, Legge di Zipf e Recupero Classificato
 
-**I. Distribuzione delle Parole nel Testo:**
+##### I. Distribuzione delle Parole nel Testo:
 
 * **A. Legge di Heaps:** Stima la dimensione del vocabolario di un corpus.
 * **B. Legge di Zipf:** Descrive la distribuzione di frequenza delle parole.
@@ -608,7 +608,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * Implicazioni: parole molto frequenti o rare sono meno utili per l'indicizzazione; i termini più discriminanti hanno frequenza medio-bassa.
  * Grafico: distribuzione a coda lunga, con poche parole molto frequenti e molte parole rare.
 
-**II. Gestione della Frequenza dei Termini per l'Indicizzazione:**
+##### II. Gestione della Frequenza dei Termini per l'Indicizzazione:
 
 * **A. Problema delle frequenze di taglio:**
  * Difficoltà nell'individuare frequenze di taglio ottimali per escludere termini troppo frequenti (poco significativi) o troppo rari (poco utili).
@@ -626,7 +626,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
  * Rimozione di termini presenti in meno di 3-5 documenti.
  * Approccio conservativo preferibile per IR e Data Mining tradizionale.
 
-**III. Recupero dell'Informazione:**
+##### III. Recupero dell'Informazione:
 
 * **A. Ricerca Booleana:**
  * Svantaggi: risultati troppo pochi o troppi; corrispondenza binaria (o sì o no); inadatta per utenti non esperti.
@@ -643,7 +643,7 @@ VII. **Indicizzazione Dinamica: Fusione T/n:**
 
 ---
 
-**Classificazione di Documenti rispetto a una Query**
+##### Classificazione di Documenti rispetto a una Query
 
 I. **Assegnazione di un punteggio di corrispondenza:**
  * Ogni documento riceve un punteggio in [0, 1] che indica la sua similarità con la query.
@@ -672,7 +672,7 @@ V. **Calcolo dello score di un documento:**
 
 ---
 
-**Schema Riassuntivo: Rilevanza dei Termini e Funzione TF-IDF**
+##### Schema Riassuntivo: Rilevanza dei Termini e Funzione TF-IDF
 
 I. **Definizione della Rilevanza di un Termine**
 
@@ -717,13 +717,13 @@ IV. **Funzione TF-IDF**
 
 ---
 
-**Modello Bag-of-words (BoW)**
+##### Modello Bag-of-words (BoW)
 
 * **Concetto base:** Indipendenza dei termini; ordinamento delle parole ignorato; passo indietro rispetto all'indice posizionale.
  * **Pro:** Corrispondenza parziale, punteggi graduati, efficiente per grandi collezioni, modello spazio vettoriale.
  * **Contro:** Mancanza di informazioni sintattiche e semantiche; assenza di controllo booleano; preferenza potenzialmente errata in query multi-termine.
 
-**Ponderazione dei Termini**
+##### Ponderazione dei Termini
 
 * **Term Frequency (TF):** Frequenza di un termine in un documento.
  * **Frequenza grezza:** Non ideale; la rilevanza non è proporzionale alla frequenza.
@@ -741,7 +741,7 @@ IV. **Funzione TF-IDF**
  * **Varianti:** Differiscono nel calcolo di TF (con o senza logaritmi) e nella ponderazione dei termini nella query (ponderati o non ponderati).
  * **Formule Varianti:** $\frac{tf_{i,d}}{\max_{j}tf_{j,d}} ,\ \frac{tf_{id}}{\sqrt{ \sum_{j}(tf_{j,d})^2 }} ,\ \frac{tf_{id} \cdot idf_{i}}{\sqrt{ \sum_{j}(tf_{j,d} \cdot idf_{j})^2 }}$
 
-**Normalizzazione e Similarità**
+##### Normalizzazione e Similarità
 
 * **Normalizzazione dei vettori TF-IDF:** Aspetto cruciale per il recupero di informazioni e la classificazione di documenti.
 * **Normalizzazione della lunghezza:** Obiettivo: comprendere l'impatto sulla rappresentazione dei topic.
@@ -752,7 +752,7 @@ IV. **Funzione TF-IDF**
 
 ---
 
-**I. Rappresentazione Vettoriale dei Documenti e delle Query**
+##### I. Rappresentazione Vettoriale dei Documenti e delle Query
 
 * **Spazio Vettoriale:** Documenti e query rappresentati come vettori in uno spazio ad alta dimensionalità e sparsità.
  * Assi: termini del vocabolario.
@@ -760,13 +760,13 @@ IV. **Funzione TF-IDF**
 * **Similarità:** Misurata dalla prossimità dei vettori nello spazio.
  * Prossimità ≈ inversa della distanza.
 
-**II. Limiti della Distanza Euclidea**
+##### II. Limiti della Distanza Euclidea
 
 * **Sensibilità alla Lunghezza:** Favoreggia documenti più lunghi, indipendentemente dal contenuto.
  * Esempio: Distanza maggiore tra una query e un documento, rispetto alla stessa query e al documento ripetuto.
 * **Alta Dimensionalità:** Soffre maggiormente dell'alta dimensionalità rispetto a misure di correlazione.
 
-**III. Normalizzazione Implicita con l'Angolo Coseno**
+##### III. Normalizzazione Implicita con l'Angolo Coseno
 
 * **Idea chiave:** Misurare la similarità tramite l'angolo tra i vettori (invece della distanza).
  * Classificazione in base all'angolo o al coseno dell'angolo.
@@ -774,7 +774,7 @@ IV. **Funzione TF-IDF**
  * Formula: $\text{sim}(d_1, d_2) = \frac{d_1 \cdot d_2}{\|d_1\| \cdot \|d_2\|} = \frac{\sum_{i=1}^{n} w_{i,j} \cdot w_{i,k}}{\sqrt{\sum_{i=1}^{n} w_{i,j}^2} \cdot \sqrt{\sum_{i=1}^{n} w_{i,k}^2}}$
 * **Normalizzazione:** Rende i vettori di lunghezza unitaria, eliminando il bias dovuto alla lunghezza.
 
-**IV. Ponderazione Tf-Idf e Varianti**
+##### IV. Ponderazione Tf-Idf e Varianti
 
 * **Term Frequency (tf):**
  * `n (natural)`: $tf_{r, d}$
@@ -792,14 +792,14 @@ IV. **Funzione TF-IDF**
  * `b (byte size)`: $\frac{1}{\text{CharLength}^{\alpha}}, \alpha < 1$
 * **Notazione SMART:** `ddd.qqq` (documento-documento-documento.query-query-query)
 
-**V. Esempio di Calcolo del Punteggio Coseno e Classifica**
+##### V. Esempio di Calcolo del Punteggio Coseno e Classifica
 
 * Calcolo del punteggio coseno per ogni documento rispetto alla query.
 * Classifica dei documenti in base al punteggio decrescente.
 
 ---
 
-**Ricerca di Informazione basata su Punteggio**
+##### Ricerca di Informazione basata su Punteggio
 
 * **Classificazione e Recupero:**
  * Ordinamento dei documenti per punteggio di rilevanza alla query.

@@ -38,13 +38,13 @@ Entrambi sono campi della scienza e dell'ingegneria.
 
 **Obiettivo comune:** Rendere più facile trovare le cose, ad esempio sul Web.
 
-**Attività comuni:**
+##### Attività comuni:
 
 * Ottimizzazione dei motori di ricerca (SEO)
 * Crawling dei dati
 * Estrazione di documenti di interesse da un enorme mucchio
 
-**Differenze:**
+##### Differenze:
 
 * **Web scraping:** Estrazione di informazioni.
 * **Trovare schemi in grandi collezioni:** NLP, Linguistica computazionale.
@@ -60,7 +60,7 @@ Entrambi sono campi della scienza e dell'ingegneria.
 
 **Importanza:** Era un campo di ricerca rilevante prima dell'avvento dei big data.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * **Analisi dei dati incrementale:** I dati vengono analizzati in modo continuo, man mano che vengono acquisiti.
 * **Supervisionato o non supervisionato:** Non è specificato se il processo di analisi sia supervisionato o meno.
@@ -136,24 +136,24 @@ Questo approccio permette di scoprire i temi principali, analizzare la loro dist
 
 **Definizione:** Recuperare informazioni specifiche dai documenti, estraendo o inferendo risposte dalla rappresentazione del testo. In pratica, dato un documento già identificato come rilevante per un task di retrieval (a monte di esso), si concentra sulla selezione di informazioni specifiche.
 
-**Esempi:**
+##### Esempi:
 
 * **Retrieval sul web:** Schemi pre-esistenti possono aiutare a identificare le informazioni rilevanti.
 * **E-commerce:** La costruzione di un database può facilitare l'estrazione di informazioni specifiche.
-**In altre parole:**
+##### In altre parole:
 
 * Il sistema ha già identificato un documento come rilevante per una specifica richiesta.
 * L'estrazione di informazioni si concentra quindi sull'individuazione di informazioni specifiche all'interno di quel documento.
 * Questo processo può essere facilitato da schemi o database pre-esistenti, come nel caso del retrieval sul web o nell'e-commerce.
 
-**Tipi di template:**
+##### Tipi di template:
 
 * **Slot:** Gli slot nel template sono tipicamente riempiti da una sottostringa del documento.
 * **Riempitivi pre-specificati:** Alcuni slot possono avere un set fisso di riempitivi pre-specificati che potrebbero non apparire nel testo stesso.
 * **Multipli riempitivi(filler):** Alcuni slot possono consentire più filler .
 * **Ordine fisso:** Si assume che gli slot siano sempre in un ordine fisso.
 
-**Modelli di estrazione:**
+##### Modelli di estrazione:
 
 * **Specificare un elemento:** Specificare un elemento da estrarre per uno slot, ad esempio, utilizzando un modello di regex.
 * **Modelli precedenti e successivi:** Potrebbe essere necessario un modello precedente (pre-filler) per identificare il contesto appropriato e un modello successivo (post-filler) per identificare la fine del riempitivo. 
@@ -170,7 +170,7 @@ Selezionare documenti da una collezione in risposta a una query dell'utente.
 
 **Modelli di recupero:** Booleano, Spazio vettoriale, Probabilistico, Basato sulla logica(no), ecc.
 
-**Differenze rispetto a:**
+##### Differenze rispetto a:
 
 * Rappresentazione dei contenuti testuali.
 * Rappresentazione dei bisogni informativi.
@@ -184,7 +184,7 @@ Le principali aree di applicazione coprono due aspetti:
 * **Distillazione delle informazioni**
  * **Estrazione basata su struttura:** l'estrazione di informazioni basata su una struttura predefinita di documenti, per identificare i documenti rilevanti per un'informazione target.
 
-**Utilizzi tipici:**
+##### Utilizzi tipici:
 
 * Estrarre informazioni rilevanti dai documenti.
 * Classificare e gestire i documenti in base al loro contenuto.
@@ -199,7 +199,7 @@ Le principali aree di applicazione coprono due aspetti:
 		* **Collaborative based:** il sistema continua a proporre non solo i prodotti in base alle specifiche esigenze, ma anche cose spesso acquistate da utenti con un profilo simile, per un discorso anche di diversificazione e serendipità.
 		* **Per gli utenti cold start:** i più popolari. 
 
-**Altri esempi di applicazioni:**
+##### Altri esempi di applicazioni:
 
 * **CRM e marketing:** (Customer Relationship Managment) Cross-selling, raccomandazioni di prodotti.
 * **Raccomandazione di prodotti:** Suggerire prodotti pertinenti agli utenti in base alle loro preferenze.
@@ -217,7 +217,7 @@ Sotto strutture gerarchiche (ad esempio, tassonomie), un ricercatore può:
 
 La categorizzazione basata su categorie dovrebbe consentire l'aggiunta di nuove categorie e l'eliminazione di quelle obsolete.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Natura ipertestuale dei documenti:
  * Analisi degli hyperlink
@@ -249,13 +249,13 @@ Approcci basati sulla dimensione dell'unità di testo utilizzata nel riassunto:
 
 Assegnare una parola con il senso corretto rispetto al contesto in cui la parola appare.
 attenzione: l'obiettivo è disambiguare il significato di ogni parola ma dobbiamo tenere conto necessariamente dell'intero contesto(da ampliare per supportare lo strumento automatico. lavoro da fare simultaneamente per ogni termnine del contesto)
-**Un approccio efficace:**
+##### Un approccio efficace:
 
 * Scegliere i significati delle parole da un inventario di sensi esistente sfruttando misure di correlazione semantica
 
 La WSD è un esempio del problema più generale di risolvere le ambiguità del linguaggio naturale.
 
-**Ad esempio:**
+##### Ad esempio:
 
 * "Bank" può avere (almeno) due sensi in inglese:
  * "The Bank of England" (un istituto finanziario)
@@ -267,32 +267,32 @@ approcci knowledge based: questa task ha avbuto nuova vita quando si è iniziato
 
 ## Filtraggio nel Text Mining
 
-**Definizione:**
+##### Definizione:
 
 Il filtraggio nel text mining consiste nel classificare un flusso di documenti inviati da un produttore di informazioni a un consumatore di informazioni, bloccando la consegna di quelli irrilevanti per il consumatore.
 
-**Esempio:**
+##### Esempio:
 
 Un feed di notizie dove l'agenzia di stampa è il produttore e il giornale è il consumatore.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Considerabile come un caso di Text Classification con una singola etichetta (rilevante o irrilevante).
 * Implementabile sia lato produttore (instradamento selettivo) che lato consumatore (blocco).
 * Richiede la creazione e l'aggiornamento di un "profilo" per ogni consumatore (lato produttore) o un singolo profilo generale (lato consumatore).
 
-**Filtraggio Adattivo:**
+##### Filtraggio Adattivo:
 
 * Il profilo iniziale è definito dall'utente.
 * Il profilo viene aggiornato in base al feedback dell'utente sulla pertinenza dei documenti consegnati.
 
 ### Filtraggio - CRM (Customer Relationship Management)
 
-**Obiettivo:**
+##### Obiettivo:
 
 Aiutare le aziende a comprendere le opinioni dei clienti.
 
-**Processo:**
+##### Processo:
 
 1. **Standardizzazione:** I dati di feedback vengono convertiti in un formato uniforme.
 2. **Raggruppamento:** I dati standardizzati vengono raggruppati in base alla similarità del contenuto.
@@ -300,7 +300,7 @@ Aiutare le aziende a comprendere le opinioni dei clienti.
 
 ### Filtraggio - Raccomandazione di Prodotti
 
-**Approcci:**
+##### Approcci:
 
 * **Basato sul contenuto:** Analizza i dati dell'utente (es. categorie preferite, autori) per suggerire prodotti simili.
 * **Collaborativo:** Suggerisce prodotti acquistati da utenti con profili simili, basandosi su cronologia e valutazioni.
@@ -309,11 +309,11 @@ Aiutare le aziende a comprendere le opinioni dei clienti.
 
 ### Rilevamento dello Spam
 
-**Applicazione:**
+##### Applicazione:
 
 Classificare le email come spam o legittime utilizzando il text mining.
 
-**Sfide:**
+##### Sfide:
 
 * La valutazione del modello è complessa a causa dei costi asimmetrici degli errori (falsi positivi vs. falsi negativi).
 * La distribuzione non uniforme delle classi (molto più spam che email legittime) complica l'apprendimento del classificatore. 
@@ -333,23 +333,23 @@ Classificare le email come spam o legittime utilizzando il text mining.
 
 **Risposta:** Dobbiamo mettere in relazione le parole tra di loro, creare dei pattern relazionali. L'importanza delle parole passa tra vari concetti.
 
-**Cosa è un termine?**
+##### Cosa è un termine?
 
 * Parola, coppia di parole, frase, ...?
 * Radice della parola (word stem), n-gramma (sequenza di n caratteri), ...?
 * Tipo di parola?
 
-**Possiamo modellare le relazioni tra i termini?**
+##### Possiamo modellare le relazioni tra i termini?
 
 * Paragrafo, frase, ordine delle parole (non utilizzati perché complicano i modelli)
 * Strutture sintattiche più complesse (es: ellissi, anafore)
 * Relazioni semantiche (relazioni is-a, part-of)
 
-**Ricerca di termini che catturano la semantica del testo**
+##### Ricerca di termini che catturano la semantica del testo
 
 * Evitando un'intensa elaborazione manuale (codifica manuale)
 
-**Altri argomenti:**
+##### Altri argomenti:
 
 * **Analisi lessicale e morfologica**
  * Elaborazione di punteggiatura, numeri, conversione in minuscolo, ecc.
@@ -426,7 +426,7 @@ Classificare le email come spam o legittime utilizzando il text mining.
 
 **Obiettivo:** Non solo ridurre la stop-list, ma arricchirla.
 
-**Come e con cosa?**
+##### Come e con cosa?
 
 * **Rimozione di termini comuni al corpus:** 
  * Se un termine è frequente nel corpus di documenti, è poco esplicativo per la distinzione tra i documenti stessi.
@@ -441,7 +441,7 @@ Classificare le email come spam o legittime utilizzando il text mining.
 	 * La decisione di escluderli dipende dal tipo di termine.
 	 * Non esiste una regola fissa.
 
-**Conclusione:**
+##### Conclusione:
 
 * La stop-list deve contenere termini che si aspettano di essere molto frequenti all'interno della collezione. 
 
@@ -449,16 +449,16 @@ Classificare le email come spam o legittime utilizzando il text mining.
 
 **Obiettivo:** Uniformizzare le parole nel testo indicizzato e nelle parole di query nella stessa forma.
 
-**Esempi:**
+##### Esempi:
 
 * Corrispondenza tra "U.S.A." e "USA".
 
-**Risultato:**
+##### Risultato:
 
 * **Termine:** Un tipo di parola (normalizzato).
 * **Voce nel dizionario IR:** Ogni termine rappresenta una voce nel dizionario di Information Retrieval.
 
-**Classi di equivalenza:**
+##### Classi di equivalenza:
 
 * Definiscono implicitamente gruppi di termini equivalenti.
 * Esempi:
@@ -471,7 +471,7 @@ L'obiettivo è ridurre le varianti lessicali a una sola parola, sacrificando par
 
 Questo processo di semplificazione permette di concentrarsi sulla struttura grammaticale del testo, ignorando le sfumature di significato che potrebbero essere introdotte da diverse parole con significati simili.
 
-**Espansione asimmetrica:**
+##### Espansione asimmetrica:
 
 * Un'alternativa alla classificazione per classi di equivalenza.
 * Esempi:
@@ -483,18 +483,18 @@ Questo processo di semplificazione permette di concentrarsi sulla struttura gram
  * Ricerca: "Windows"
 * Potenzialmente più potente, ma meno efficiente.
 
-**Criterio più importante: uso della lingua**
+##### Criterio più importante: uso della lingua
 
 * Come gli utenti scrivono le loro query?
 * Anche nelle lingue che standardmente hanno accenti, trattini, ecc., gli utenti spesso potrebbero non digitarli.
 * È meglio normalizzare a un termine senza accenti/trattini.
 
-**Tokenizzazione e normalizzazione:**
+##### Tokenizzazione e normalizzazione:
 
 * Possono dipendere dalla lingua e quindi sono intrecciate con il rilevamento della lingua.
 * Ad esempio, formati di data: "3/10/2000" (US) vs. "10/3/2000" (UE).
 
-**Conclusione:**
+##### Conclusione:
 
 * È necessario "normalizzare" il testo indicizzato e i termini di query in modo identico. 
 
@@ -574,7 +574,7 @@ Questa fase distrugge il lessico: va fatta solo se non vogliamo elaborare semant
 * Dipendente dalla lingua.
 * **Esempio:** automate(s), automatic, automation **tutti ridotti a** automat.
 
-**Per esempio:**
+##### Per esempio:
 
 * compressed and compression are both accepted as equivalent to compress.
 * Implica
@@ -617,13 +617,13 @@ Lo stemming può influenzare le prestazioni del retrieval, generalmente in megli
 * **Dipendenza dal vocabolario:** L'efficacia dello stemming dipende dal vocabolario specifico.
 * **Perdita di sottili distinzioni:** Le sottili distinzioni semantiche possono essere perse attraverso lo stemming.
 
-**Risultati per l'inglese:**
+##### Risultati per l'inglese:
 
 * I risultati sono molto contrastanti.
 * Aiuta il recall per alcune query, ma danneggia la precisione per altre.
 * **Esempio:** "operative" (odontoiatria) ⇒ "oper".
 
-**Risultati per altre lingue:**
+##### Risultati per altre lingue:
 
 * Sicuramente utile per spagnolo, tedesco, finlandese, ecc.
 * **Guadagni di prestazioni:** 30% per il finlandese.
@@ -644,14 +644,14 @@ Tutti questi algoritmi hanno lo stesso impatto, ma presentano diverse peculiarit
 
 Il modello booleano confronta l'istruzione di query booleana con gli insiemi di termini utilizzati per identificare il contenuto testuale (termini di indice). 
 
-**Query booleana:**
+##### Query booleana:
 
 * **Espressione:** Combina termini di indice con operatori booleani.
 * **Struttura:** L'espressione contiene:
  * **Termini di indice:** Termini selezionati dal documento indicizzato.
  * **Operatori booleani:** AND, OR e NOT, definiti sui termini. Il modello è rigido e il concetto di corrispondenza è binario: il documento corrisponde alla condizione o meno.
 
-**Applicazioni:**
+##### Applicazioni:
 
 * Molti sistemi di ricerca ancora oggi utilizzano il modello booleano:
  * Email, cataloghi di biblioteche, macOS Spotlight.
@@ -662,7 +662,7 @@ Il modello booleano confronta l'istruzione di query booleana con gli insiemi di 
 * Decine di terabyte di dati; ~700.000 utenti.
 * La maggior parte degli utenti utilizza ancora query booleane.
 
-**Esempi di query:**
+##### Esempi di query:
 
 * **Query 1:** Qual è il termine di prescrizione nei casi che coinvolgono il Federal Tort Claims Act?
  * **Espressione:** LIMIT! /3 STATUTE ACTION /S FEDERAL /2 TORT /3 CLAIM
@@ -785,19 +785,20 @@ Difficile esprimere richieste complesse dell'utente.
 
 - Adottando un modello di rappresentazione di questo un modello poco sparso è irrealistico.
 
-**Esempio:** Considera un insieme di **N = 1 milione di documenti**, ognuno con circa **1000 parole.**
+##### Esempio:** Considera un insieme di **N = 1 milione di documenti**, ognuno con circa **1000 parole.
+
 - Un esempio simile è la market-basket-analisys
 Assumiamo una media di **6 byte/parola**, inclusi spazi e punteggiatura.
 * Questo corrisponde a **6 GB di dati** nei documenti.
 Supponiamo che ci siano **M = 500K termini distinti** tra questi documenti.
-**Problemi:**
+##### Problemi:
 
 * Una matrice di incidenza termine-documento di dimensioni **500K x 1M** avrebbe mezzo Trillion (milione di miliardi) di 0 e 1.
-**Nella realtà:**
+##### Nella realtà:
 
 * La matrice ha **non più di un miliardo di 1**.
 * Le matrici di incidenza termine-documento sono **estremamente sparse**.
-**Rappresentazione migliore:**
+##### Rappresentazione migliore:
 
 * **Registrare solo le posizioni 1.**
 Desiderata per una struttura dati:
@@ -873,7 +874,7 @@ L'input dell'indexer è uno stream di coppie termine-ID documento. Questo stream
 
 **Esempio:** Brutus AND Caesar
 
-**Passaggi:**
+##### Passaggi:
 
 10. **Individua Brutus nel Dizionario:**
  * Recupera i suoi postings (lista di documenti in cui compare Brutus).
@@ -906,14 +907,14 @@ INTERSECT(p1, p2)
 ![[1) Intro-20241003105153597.png]]
 **Obiettivo:** Determinare l'ordine ottimale per l'elaborazione della query.
 
-**Strategia:**
+##### Strategia:
 
 * **Elabora in ordine di frequenza crescente:**
  * Inizia con il termine che compare nel minor numero di documenti (insieme di postings più piccolo).
 	 * Questo processo riduce il numero di operazioni di intersecazione e quindi il tempo di elaborazione complessivo
  * Ad ogni passo, interseca l'insieme corrente con il postings del termine successivo, riducendo progressivamente la dimensione dell'insieme.
 
-**Esempio:**
+##### Esempio:
 
 * Se la query è "Brutus AND Caesar AND Antony", e la frequenza documentale è:
  * Brutus: 1000 documenti
@@ -921,7 +922,7 @@ INTERSECT(p1, p2)
  * Antony: 200 documenti
 * L'ordine ottimale sarebbe: Antony, Caesar, Brutus.
 
-**Query booleane arbitrarie:**
+##### Query booleane arbitrarie:
 
 * **Esempio:** (Brutus OR Caesar) AND NOT (Antony OR Cleopatra)
 * **Strategia:**
@@ -929,14 +930,14 @@ INTERSECT(p1, p2)
  2. **Stima la dimensione di ogni OR (Upper Bound) come la somma delle sue frequenze documentali (stima conservativa).**
  3. **Elabora in ordine crescente di dimensioni OR.**
 
-**Nota:**
+##### Nota:
 
 * Il tempo di elaborazione è "lineare" rispetto al numero totale di voci nei postings.
 * L'ordine di elaborazione può influenzare significativamente l'efficienza, soprattutto per query complesse.
 
 ## Query di frase
 
-**Importanza:**
+##### Importanza:
 
 * Le query di frase sono un elemento chiave per la "ricerca avanzata".
 * Sono facilmente comprensibili dagli utenti.
@@ -944,7 +945,7 @@ INTERSECT(p1, p2)
 * La frase "Ci sono 14 dipartimenti presso Unical" non è una corrispondenza, poiché non corrisponde alla query di frase.
 * Per questo tipo di query, non è sufficiente memorizzare solo coppie (Termine, docID).
 
-**Approcci:**
+##### Approcci:
 
 * **Indici biword:**
  * Indizza ogni coppia consecutiva di termini nel testo come una frase ( come se avvessimo un *n-gram* che preserva le parole con *n=2*).
@@ -968,7 +969,7 @@ INTERSECT(p1, p2)
 	* Dunque includiamo uno o più articoli.
 * **Dizionario:** ogni biword esteso diventa un termine nel dizionario.
 
-**Esempio:**
+##### Esempio:
 
 "il cacciatore nella segale"
 
@@ -985,7 +986,7 @@ INTERSECT(p1, p2)
 
 * **Memorizzazione delle posizioni:** per ogni termine, memorizzare le posizioni in cui compaiono i token del termine nei documenti.
 
-**Formato:**
+##### Formato:
 
 ```
 <termine, numero di documenti contenenti il termine;
@@ -1175,11 +1176,11 @@ Una volta completato il parsing, si procede con l'inversione dell'indice.
 
 La figura mostra come l'indicizzazione distribuita possa essere vista come un'istanza particolare del modello MapReduce.
 
-**Fase di Map:**
+##### Fase di Map:
 
 * Partendo dalla collezione di documenti in input, la fase di map produce liste di coppie (termine, documento).
 
-**Fase di Reduce:**
+##### Fase di Reduce:
 
 * La fase di reduce prende le liste di occorrenze (coppie termine-documento) e produce le liste di postings, ovvero le liste di documenti in cui un termine compare. 
 
@@ -1233,7 +1234,7 @@ Questo significa che il dizionario e le liste di postings devono essere modifica
 
 La fusione logaritmica è una tecnica di ordinamento che utilizza una serie di indici di dimensioni crescenti per ordinare un insieme di dati. 
 
-**Principio di funzionamento:**
+##### Principio di funzionamento:
 
 1. **Serie di indici:** Si mantiene una serie di indici, ciascuno con una dimensione doppia rispetto al precedente. Ad esempio, si potrebbe avere un indice di dimensione 1, 2, 4, 8, 16, e così via.
 2. **Memoria e disco:** L'indice più piccolo $(Z_0)$ è mantenuto in memoria, mentre gli indici più grandi $(I_0, I_1, ...)$ sono memorizzati sul disco.
@@ -1371,7 +1372,7 @@ Vi è una fase transitoria iniziale e poi inizia a fittare a regime
 
 La distribuzione skewd di tipo power-law è caratterizzata da una concentrazione di massa in una zona relativamente piccola della distribuzione, seguita da una coda lunga o grassa. 
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * **Concentrazione di massa:** La maggior parte della massa è concentrata in una piccola porzione della distribuzione.
 * **Coda lunga:** La distribuzione presenta una coda che si estende per un lungo periodo, con valori che diminuiscono lentamente.
@@ -1386,7 +1387,7 @@ La **distribuzione di tipo power law** è un modello matematico che descrive la 
 
 Un esempio di questo modello è la **legge di Pareto**, nota anche come principio 80-20, che afferma che l'80% degli effetti deriva dal 20% delle cause. Nel contesto del linguaggio naturale, la legge di Zipf è un esempio di distribuzione di tipo power law, dove pochi termini sono molto frequenti, mentre molti altri sono molto rari. 
 
-**Esempi di distribuzione di tipo power law:**
+##### Esempi di distribuzione di tipo power law:
 
 * **Distribuzione della ricchezza tra individui:** Pochi individui possiedono la maggior parte della ricchezza, mentre molti altri hanno una ricchezza molto bassa.
 * **Numero di pagine di siti web:** Pochi siti web hanno un numero molto elevato di pagine, mentre molti altri hanno un numero di pagine molto basso.
@@ -1394,7 +1395,7 @@ Un esempio di questo modello è la **legge di Pareto**, nota anche come principi
 * **Dimensione delle città:** Poche città hanno una popolazione molto elevata, mentre molte altre hanno una popolazione molto bassa.
 - **Frequenza delle parole in un documento**
 
-**Confronto tra la distribuzione di Poisson (legge degli eventi rari) con la legge di potenza:** 
+##### Confronto tra la distribuzione di Poisson (legge degli eventi rari) con la legge di potenza:
 
 Entrambe le distribuzioni sono asimmetriche (skewed), ma si differenziano per la loro natura:
 La scelta tra le due distribuzioni dipende da come si modella il tasso minimo (min rate) nella distribuzione di Poisson.
@@ -1422,7 +1423,7 @@ $$log(cf_{i}) = log(K) - log(i)$$
 Questa equazione indica una relazione lineare inversa tra il logaritmo della frequenza del termine e il logaritmo del suo rango. Questa relazione è nota come legge di potenza.
 È dunque una power law con slope negativa
 
-**Esempio:**
+##### Esempio:
 
 Se il termine più frequente ("the") si verifica $cf1$ volte, allora il secondo termine più frequente ("of") si verifica $cf1/2$ volte, il terzo termine più frequente ("and") si verifica $cf1/3$ volte, e così via.
 
@@ -1445,7 +1446,7 @@ La distribuzione delle parole in un corpus segue la legge di Zipf, che afferma c
 
 Il grafico mostra la distribuzione delle parole in un corpus. La maggior parte delle parole ha una frequenza medio-bassa, mentre poche parole hanno una frequenza molto alta.
 
-**In funzione del task specifico, non è immediato stabilire quando un termine è eccessivamente frequente e allo stesso modo quando è eccessivamente raro.** 
+##### In funzione del task specifico, non è immediato stabilire quando un termine è eccessivamente frequente e allo stesso modo quando è eccessivamente raro.
 
 Se fossimo capaci di stabilirlo, allora avremmo stabilito le due frequenze di taglio (superiore e inferiore). Ciò che è interno a queste frequenze di taglio è ciò che andrebbe mantenuto (vocabolario) nelle fasi successive.
 
@@ -1453,24 +1454,24 @@ Se fossimo capaci di stabilirlo, allora avremmo stabilito le due frequenze di ta
 
 In teoria, potremmo individuare due frequenze di taglio per effettuare un pruning dell'insieme dei termini candidati a formare il vocabolario (index terms). 
 
-**Scopo delle frequenze di taglio:**
+##### Scopo delle frequenze di taglio:
 
 L'obiettivo è escludere:
 
 * **Termini troppo frequenti:** presenti in molti documenti ma poco significativi per la caratterizzazione del contenuto (es. articoli, preposizioni).
 * **Termini troppo rari:** presenti in pochi documenti e quindi poco utili per l'analisi generale.
 
-**Vantaggi del pruning:**
+##### Vantaggi del pruning:
 
 * Miglioramento dell'efficienza: riduzione della dimensionalità del vocabolario, con conseguente risparmio di memoria e risorse computazionali.
 * Maggiore accuratezza: eliminazione di termini poco significativi o fuorvianti.
 
-**Criticità:**
+##### Criticità:
 
 * **Individuazione delle frequenze di taglio ottimali:** non esiste una regola universale, la scelta dipende dal task specifico e dal dominio di applicazione.
 * **Dipendenza dal dominio e dal linguaggio:** la frequenza di un termine può variare significativamente a seconda del contesto.
 
-**Esempi di regole pratiche:**
+##### Esempi di regole pratiche:
 
 Nonostante la mancanza di regole universali, l'esperienza su diversi benchmark ha permesso di identificare alcune linee guida:
 * **Rimozione dei termini troppo frequenti:** escludere termini presenti in più del 50% dei documenti.
@@ -1603,7 +1604,7 @@ La **Document Frequency** è il numero di documenti in cui un termine compare.
 
 Ogni singola cella della matrice di rappresentazione dei testi dovrà contenere un valore reale che esprime il peso del termine all'interno di un documento (quanto contribuisce a rappresentare il contenuto del documento stesso).
 
-**Come calcoliamo lo score da assegnare a un documento?**
+##### Come calcoliamo lo score da assegnare a un documento?
 
 ### Tabella dei personaggi e delle opere
 
@@ -1629,7 +1630,7 @@ Ogni singola cella della matrice di rappresentazione dei testi dovrà contenere 
 
 Esistono diverse opzioni per modellare la rappresentazione dei testi:
 
-**1. Term Frequency e Collection Frequency:**
+##### 1. Term Frequency e Collection Frequency:
 
 Una prima opzione consiste nell'utilizzare direttamente la *term frequency* (tf) e la *collection frequency* (cf) per calcolare il peso di un termine in un documento:
 
@@ -1643,7 +1644,7 @@ dove:
 
 Al momento, non ci preoccupiamo di normalizzare i valori.
 
-**2. Funzioni Separate per Term Frequency e Collection Frequency:**
+##### 2. Funzioni Separate per Term Frequency e Collection Frequency:
 
 Un'altra opzione consiste nell'utilizzare due funzioni separate, *f* e *g*, per modellare l'influenza di tf e cf sul peso del termine:
 
@@ -1685,24 +1686,24 @@ $$Rilevanza(termine) = F(TF) + G(CF)$$
 
 Ci stiamo interrogando sulla coerenza di due idee (idea 1 e idea 2) con la legge di Zipf e la sua derivata. In particolare, stiamo analizzando l'importanza dei termini in un intervallo di frequenze medio-alte e medio-basse, escludendo gli estremi.
 
-**Analisi delle proposte:**
+##### Analisi delle proposte:
 
-**Caso 1: Termine nella testa della distribuzione**
+##### Caso 1: Termine nella testa della distribuzione
 
 - **Proposta 1:** Il peso del termine è prossimo a 0 a prescindere dalla *term frequency* del documento, dato che la *collection frequency* è molto alta.
 - **Proposta 2:** Il logaritmo della *collection frequency* è alto, ma potrebbe essere smorzato. La *term frequency* potrebbe essere alta, ma non nel caso particolare di un unico documento molto lungo. Il fattore dominante è il secondo termine (logaritmo della *collection frequency*).
 
-**Caso 2: Termine non nella testa della distribuzione**
+##### Caso 2: Termine non nella testa della distribuzione
 
 - **Proposta 1:** La *term frequency* è divisa per la *collection frequency*.
 - **Proposta 2:** La *term frequency* è sommata al logaritmo della *collection frequency*. La *term frequency* è la stessa, ma nella prima proposta è smorzata, mentre nella seconda è enfatizzata.
 
-**Problemi:**
+##### Problemi:
 
 - Nessuna delle due proposte sembra efficace, in quanto il comportamento varia in base al termine e alle caratteristiche del documento.
 - Non è possibile fare calcoli precisi senza conoscere le caratteristiche del documento.
 
-**Considerazioni aggiuntive:**
+##### Considerazioni aggiuntive:
 
 - È importante considerare la *document frequency* al posto della *collection frequency*?
 - La *document frequency* potrebbe essere più discriminante della *collection frequency*, in quanto la sua distribuzione è potenzialmente più piatta.
@@ -1710,13 +1711,13 @@ Ci stiamo interrogando sulla coerenza di due idee (idea 1 e idea 2) con la legge
 - La combinazione lineare non è efficace, in quanto un termine potrebbe dominare l'altro.
 - La funzione reciproca lineare è troppo aggressiva, anche con la *document frequency*.
 
-**Soluzione proposta:**
+##### Soluzione proposta:
 
 Per smorzare in modo *smooth*, si propone di utilizzare la seguente formula:
 
 $$\frac{1}{log(document frequency)}$$
 
-**Spiegazione:**
+##### Spiegazione:
 
 - Se la *document frequency* è prossima a *n* (numero totale di documenti), significa che il termine appare in quasi tutti i documenti.
 - In questo caso, il peso del termine sarà basso, in quanto poco discriminante. 
@@ -1742,37 +1743,37 @@ Dove:
 * **N**: Numero totale di documenti nel corpus.
 * **df<sub>t</sub>**: Numero di documenti in cui il termine *t* compare. Indica in quanti documenti del corpus appare un determinato termine.
 
-**Interpretazione della formula:**
+##### Interpretazione della formula:
 
 * **log(1+tf<sub>t,d</sub>):** Rappresenta la frequenza del termine nel documento. Il logaritmo smorza l'influenza dei termini molto frequenti in un documento.
 * **log<sub>10</sub>(N/df<sub>t</sub>):** Rappresenta la frequenza inversa del documento (IDF). Un valore di IDF elevato indica che il termine è raro nel corpus, quindi più informativo. Viceversa, un IDF basso indica un termine comune e poco informativo.
 
-**Vantaggi dell'utilizzo di TF-IDF:**
+##### Vantaggi dell'utilizzo di TF-IDF:
 
 * **Penalizza i termini comuni:** Termini frequenti in molti documenti (articoli, stop words) avranno un peso TF-IDF basso.
 * **Evidenzia i termini rari:** Termini che compaiono in pochi documenti avranno un peso TF-IDF alto, evidenziando la loro importanza per quei documenti specifici.
 * **Bilancia frequenza locale e globale:** TF-IDF considera sia la frequenza del termine in un documento specifico che la sua rarità nel corpus, fornendo una misura più accurata dell'importanza del termine.
 
-**Considerazioni importanti nell'utilizzo di TF-IDF:**
+##### Considerazioni importanti nell'utilizzo di TF-IDF:
 
 * **Rimozione delle stop words:** È fondamentale rimuovere le stop words ("il", "la", "che", etc.) prima di calcolare TF-IDF, poiché non forniscono informazioni utili.
 * **Stemming e lemmatization:** Applicare tecniche di stemming (riduzione di una parola alla sua radice) e lemmatization (riduzione di una parola al suo lemma) può migliorare la precisione del calcolo TF-IDF, raggruppando parole con lo stesso significato.
 * **Soglie di taglio:** È possibile impostare soglie per escludere termini con frequenza troppo alta o troppo bassa, evitando che influenzino eccessivamente il calcolo.
 
-**Smorzamento e Legge di Zipf:**
+##### Smorzamento e Legge di Zipf:
 
 Lo smorzamento logaritmico nella formula TF-IDF aiuta a gestire la distribuzione dei termini descritta dalla legge di Zipf, che afferma che la frequenza di una parola è inversamente proporzionale al suo rango nella lista di frequenza. Lo smorzamento riduce l'influenza dei termini molto frequenti e aumenta l'importanza di quelli meno frequenti.
 
-**Vantaggi dello smorzamento:**
+##### Vantaggi dello smorzamento:
 
 * Evita di definire soglie di taglio arbitrarie per il vocabolario.
 * Permette di lavorare con matrici TF-IDF sparse, gestendo i valori prossimi allo zero.
 
-**Doppio logaritmo:**
+##### Doppio logaritmo:
 
 In caso di corpus molto grandi, si può utilizzare un doppio logaritmo per smorzare ulteriormente il peso del fattore di frequenza del termine (TF).
 
-**Normalizzazione e calcolo della similarità:**
+##### Normalizzazione e calcolo della similarità:
 
 La normalizzazione dei vettori TF-IDF e il calcolo della similarità tra di essi sono aspetti cruciali per utilizzare questa metrica in compiti come il recupero delle informazioni o la classificazione dei documenti. 
 
@@ -1785,14 +1786,14 @@ Quando dobbiamo capire se una feature è significativa, dovremmo misurare quanti
 * L'ordinamento delle parole in un documento viene scartato.
  * In un certo senso, un passo indietro rispetto all'indice posizionale.
 
-**Contro:**
+##### Contro:
 
 * Informazioni sintattiche mancanti (ad esempio, struttura frasale, ordine delle parole, informazioni di prossimità).
 * Informazioni semantiche mancanti (ad esempio, senso delle parole).
 * Manca il controllo di un modello booleano (ad esempio, richiedere che un termine appaia in un documento).
  * Data una query a due termini "A B", si potrebbe preferire un documento che contiene A frequentemente ma non B, rispetto a un documento che contiene sia A che B, ma entrambi meno frequentemente.
 
-**Pro:**
+##### Pro:
 
 * Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica - non più booleana.
 * Tende a funzionare abbastanza bene nella pratica nonostante le ipotesi semplificative.
@@ -1836,14 +1837,15 @@ I termini rari sono più informativi dei termini frequenti.
 
 Pertanto, più raro è il termine, maggiore è il suo peso.
 
-**Frequenza della collezione (cf) vs. Frequenza del documento (df)**
+##### Frequenza della collezione (cf) vs. Frequenza del documento (df)
+
 Si sceglie la document frequency rispetto alla collection frequency perché quest'ultima rischia di avere correlazione con la maggior parte della tf di quel termine, ma nella pratica l'informazione di document frequency ci aiuta maggiormente nel discriminare tra un documento e un altro.
 
 * Quale è meglio per la ricerca?
 * Ad esempio, "assicurazione": cf=10440, df=3997.
 * Ad esempio, "prova": cf=10422, df=8760.
 
-**Frequenza inversa del documento**
+##### Frequenza inversa del documento
 
 La frequenza del documento di un termine *t*:
 
@@ -1864,7 +1866,7 @@ Nota che:
 
 Il metodo tf-idf (term frequency-inverse document frequency) assegna un peso ai termini in un documento in base alla loro frequenza nel documento stesso e alla loro rarità nell'intero corpus di documenti. 
 
-**Concretamente:**
+##### Concretamente:
 
 * **tf (term frequency):** Maggiore è la frequenza di un termine in un documento, maggiore è il suo peso.
 * **idf (inverse document frequency):** Maggiore è la rarità di un termine nell'intero corpus, maggiore è il suo peso.
@@ -1892,22 +1894,22 @@ $$
 
 Esistono diverse varianti di questa tecnica, che si differenziano principalmente per il modo in cui viene calcolato il termine "tf" (frequenza del termine) e se i termini nella query sono anche ponderati.
 
-**Calcolo del termine "tf":**
+##### Calcolo del termine "tf":
 
 * **Con logaritmi:** Il logaritmo della frequenza del termine viene utilizzato per attenuare l'influenza dei termini che compaiono molto frequentemente in un documento.
 * **Senza logaritmi:** La frequenza del termine viene utilizzata direttamente, senza alcuna trasformazione.
 
-**Ponderazione dei termini nella query:**
+##### Ponderazione dei termini nella query:
 
 * **Ponderati:** I termini nella query vengono ponderati in base alla loro importanza, ad esempio utilizzando la loro frequenza nella query stessa.
 * **Non ponderati:** Tutti i termini nella query hanno lo stesso peso.
 
-**Assunzioni:**
+##### Assunzioni:
 
 * La collezione di documenti è omogenea in termini di dominio dei dati, ovvero il dominio è fissato e il lessico è comune a tutti i documenti.
 * I pattern di frequenza dei termini sono molto simili tra i documenti.
 
-**Principi chiave:**
+##### Principi chiave:
 
 * **Peso variabile:** Il peso di uno stesso termine cambia a seconda del documento su cui appare. Un termine che compare frequentemente in un documento avrà un peso elevato, mentre un termine raro avrà un peso basso.
 * **Normalizzazione della lunghezza:** I documenti hanno dimensioni diverse. Per compensare le variazioni di lunghezza, si può applicare una normalizzazione che tiene conto della lunghezza del documento.
@@ -1919,13 +1921,13 @@ Esistono diverse varianti di questa tecnica, che si differenziano principalmente
 
 **Problema:** La normalizzazione dei vettori di parole, in particolare la divisione per la norma L2, può influenzare la rappresentazione dei topic. 
 
-**Considerazioni:**
+##### Considerazioni:
 
 * **Diluisce il segnale informativo:** La normalizzazione può diluire il segnale informativo dei topic, soprattutto quando si passa da un abstract breve a un testo lungo.
 * **Proprietà geometriche:** La normalizzazione L2 ha proprietà geometriche specifiche che possono differire da altri metodi di normalizzazione, come la normalizzazione al massimo.
 * **Influenza sulla costruzione della matrice dei dati:** La normalizzazione L2 interviene direttamente nella costruzione della matrice dei dati, modificando la rappresentazione dei vettori di parole.
 
-**Esempio:**
+##### Esempio:
 
 Se si utilizza la matrice di peso Tf-Idf senza normalizzazione e la collezione di documenti contiene un mix di documenti lunghi e brevi, la distanza euclidea tenderà a favorire i documenti più lunghi.
 
@@ -2032,9 +2034,9 @@ Quanto sono simili i romanzi:
 
 ---
 
-**Vector space proximity**
+##### Vector space proximity
 
-**CosineScore(q)**
+##### CosineScore(q)
 
 6. float Scores[N] = 0
 7. float Length[N]
@@ -2049,20 +2051,20 @@ Quanto sono simili i romanzi:
 
 ## Varianti di ponderazione Tf-Idf
 
-**Term Frequency**
+##### Term Frequency
 
 * **n (natural)**: $tf_{r, d}$
 * **l (logarithm)**: $1 + \log(tf_{r, d})$
 * **a (augmented)**: $0.5 + \frac{0.5 \cdot tf_{r, d}}{\max_{r} (tf_{r, d})}$
 * **b (boolean)**: $\begin{cases} 1 & \text{if } tf_{r, d} > 0 \\ 0 & \text{otherwise} \end{cases}$
 
-**Document Frequency**
+##### Document Frequency
 
 * **n (no)**: $1$
 * **t (idf)**: $\log \frac{N}{df_r}$
 * **p (prob idf)**: $\max \{ 0, \log \frac{N - df_r}{df_r} \}$
 
-**Normalization**
+##### Normalization
 
 * **n (none)**: $1$
 * **c (cosine)**: $\frac{1}{\sqrt{w_1^2 + w_2^2 + \dots + w_n^2}}$
@@ -2095,26 +2097,26 @@ Uno schema di ponderazione molto standard è: lnc.ltc
 **Documento:** assicurazione auto assicurazione auto
 **Query:** migliore assicurazione auto
 
-**Punteggio = 0 + 0 + 0.27 + 0.53 = 0.8**
+##### Punteggio = 0 + 0 + 0.27 + 0.53 = 0.8
 
-**Lunghezza del documento =**
+##### Lunghezza del documento =
 
 ## Classifica dello spazio vettoriale
 
-**Riepilogo:**
+##### Riepilogo:
 
 * Rappresentare ogni documento e query come un vettore tf-idf ponderato.
 * Calcolare il punteggio di similarità del coseno per il vettore di query e ogni vettore di documento.
 * Classificare i documenti rispetto alla query in base al punteggio.
 * Restituire i primi K all'utente.
 
-**Pro:**
+##### Pro:
 
 * Fornisce una corrispondenza parziale e una misura naturale di punteggi/classifica.
 * Funziona abbastanza bene nella pratica nonostante le ipotesi semplificative.
 * Implementazione efficiente.
 
-**Contro:**
+##### Contro:
 
 * Informazioni sintattiche mancanti.
 * Informazioni semantiche mancanti.

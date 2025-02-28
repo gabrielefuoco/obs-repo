@@ -43,7 +43,7 @@ La **Programmazione Funzionale** è un paradigma che vede il calcolo come la val
 
 #### Programmazione Imperativa vs Programmazione Funzionale
 
-**Esempio: restituire tutti i valori pari dall'input [1, 4, 6, 9, 11]**
+##### Esempio: restituire tutti i valori pari dall'input [1, 4, 6, 9, 11]
 
 *Programmazione Imperativa:*
 ```java

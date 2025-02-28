@@ -346,7 +346,7 @@ public class WordCount {
 - Il metodo `main` specifica vari aspetti del job.
 - L'output di ogni map viene passato attraverso un combiner locale (uguale al Reducer) per l'aggregazione locale, dopo essere stato ordinato sulle chiavi.
 
-**Esempio di input e output:**
+##### Esempio di input e output:
 
 Input:
 ```
@@ -363,7 +363,7 @@ Hello 2
 World 2
 ```
 
-**Esempio di flusso dei dati:**
+##### Esempio di flusso dei dati:
 
 1° output mapper:
 ```

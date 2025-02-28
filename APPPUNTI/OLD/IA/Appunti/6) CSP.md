@@ -5,7 +5,7 @@ Quando si risolvono problemi di **soddisfacimento di vincoli (CSP)**, i vincoli 
 - Una soluzione al CSP è una mappatura delle variabili ai loro domini, tale che i valori assegnati rispettino tutti i vincoli definiti nel DB.
 
 Nel mondo dei database, risolvere un CSP equivale a risolvere **query congiuntive** (o **select-project-join** queries). 
-**La complessità può variare:**
+##### La complessità può variare:
 
 1. **Data complexity**: Si fissa la query e si assume che il database sia molto grande.
 2. **Query complexity**: Il database è piccolo, ma il numero di vincoli o strutture può variare.
@@ -129,7 +129,8 @@ Le due principali euristiche per l'ordinamento delle variabili sono Minimum Rema
  - **Minimo Conflitto**: seleziona il valore che viola il minor numero di vincoli.
  - **Hill Climbing** o **Simulated Annealing** possono essere utilizzati per trovare la soluzione ottimale partendo da assegnamenti completi e migliorando progressivamente.
 
- **Problema del Punto Critico**
+##### Problema del Punto Critico
+
 - In problemi bilanciati (stesso numero di variabili e vincoli), può verificarsi una **transizione di fase** chiamata **punto critico**, in cui gli algoritmi euristici potrebbero fallire.
 - Questo è un problema generale per molti algoritmi euristici, non solo per quelli basati su minimo conflitto.
 

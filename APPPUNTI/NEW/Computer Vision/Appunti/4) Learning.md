@@ -264,13 +264,13 @@ La domanda è: il gradiente discendente stocastico (SGD) funziona? La risposta �
 ![[1.2-20241014230102196.png|315]]
 La slide mostra un confronto visivo tra il gradiente discendente (linea blu) e il gradiente discendente stocastico (linea rossa). La funzione è rappresentata con le sue curve di livello.
 
-**Discesa del gradiente:**
+##### Discesa del gradiente:
 
 - La Discesa del gradiente segue la direzione tangente alla direzione di decrescita della funzione.
 - L'algoritmo punta direttamente verso il punto di minimo della funzione.
 - In questo esempio, sono necessarie 6 iterazioni per raggiungere il minimo.
 
-**Discesa del gradiente stocastico:**
+##### Discesa del gradiente stocastico:
 
 - La Discesa del gradiente stocastico segue un percorso più irregolare, con un percorso più "rumoroso" rispetto al gradiente discendente.
 - Questo è dovuto al fatto che l'algoritmo utilizza un batch di dati per calcolare il gradiente, introducendo un elemento di casualità.
@@ -411,7 +411,7 @@ dove `w1`, `w2`, `w3`, `w4` sono i pesi e `b` è un termine costante.
 
 La struttura di una rete neurale è simile a quella della regressione logistica, ma con l'aggiunta di uno strato di attivazione.
 
-**Calcolo della predizione:**
+##### Calcolo della predizione:
 
 La predizione $\hat{y}$ è calcolata come:
 
@@ -423,7 +423,7 @@ $$a = wx + b$$
 
 In sostanza, la rete neurale impara i pesi $w$ e i parametri $b$ dello strato di attivazione per ottenere la migliore rappresentazione delle *features* e la migliore predizione possibile.
 
-**Rappresentazione grafica con due *features***
+##### Rappresentazione grafica con due *features*
 
 Per semplificare la rappresentazione grafica, consideriamo solo due *features*: $x_1$ e $x_2$.
 
@@ -515,32 +515,38 @@ Con l'aggiunta di più *layer*, le rappresentazioni diventano sempre più comple
 
 ## Funzioni di Costo e Reti Neurali
 
-**Funzioni di Costo Complesse**
+##### Funzioni di Costo Complesse
+
 La complessità di una funzione di costo dipende dalla sua definizione. Nel caso specifico, la funzione di costo utilizzata non è complessa.
 
-**Combinazioni Lineari**
+##### Combinazioni Lineari
+
 La **somma ponderata** tra le colonne, che rappresenta un'unità o un polo, implica sempre una combinazione lineare. 
 
-**Estensioni della Regressione Logistica**
+##### Estensioni della Regressione Logistica
+
 La regressione logistica, una classificazione binaria con separazione lineare, può essere estesa a più classi e relazioni non lineari.
 
-**Estensione a Più Classi**
+##### Estensione a Più Classi
+
 Per estendere la regressione logistica a più classi, si calcola un vettore associato a ciascuna classe. Ad esempio, per la classe k, si calcola il vettore vk. Il fattore di peso diventa una matrice con una riga per classe.
 Le relazioni non lineari si ottengono componendo diverse componenti.
 
-**Reti Neurali come Grafi di Computazione**
+##### Reti Neurali come Grafi di Computazione
+
 Una rete neurale può essere rappresentata come un grafo in cui:
 * **Nodi:** rappresentano le operazioni eseguite.
 * **Archi:** rappresentano le connessioni tra input e output delle operazioni.
 Gli archi possono essere pesati.
 
-**Espressione Algebrica**
+##### Espressione Algebrica
+
 A partire dalla rappresentazione a grafo, è possibile associare un'espressione algebrica alla rete neurale.
 ## Grafi di Computazione
 
 Un grafo di computazione è un grafo in cui ogni nodo rappresenta un dato di input o un'operazione che lavora su dati di input. Gli archi rappresentano le connessioni tra queste operazioni.
 
-**Esempio di Grafo di Computazione**
+##### Esempio di Grafo di Computazione
 
 Consideriamo un grafo con due variabili di input, A e B. Le operazioni sono:
 
@@ -548,60 +554,76 @@ Consideriamo un grafo con due variabili di input, A e B. Le operazioni sono:
 * **D = 1/B**
 * **E = C * D**
 
-**Propagazione in Avanti ("Forward")**
+##### Propagazione in Avanti ("Forward")
+
 Partendo dai valori di input, ad esempio A=1 e B=2, possiamo calcolare i valori di tutti i nodi propagando i valori all'interno del grafo. In questo caso, C = 2, D = 1/2 e E = 1.
 
-**Propagazione all'Indietro ("Backward")**
+##### Propagazione all'Indietro ("Backward")
+
 Per calcolare il gradiente rispetto ad A o B, dobbiamo propagare all'indietro il gradiente attraverso il grafo.
 
-**Gradiente e Propagazione all'Indietro**
+##### Gradiente e Propagazione all'Indietro
+
 Il gradiente è una componente essenziale nella regressione logistica e nel calcolo del gradiente. Per calcolare il gradiente rispetto ad A o B, dobbiamo partire dal nodo finale e propagare all'indietro il gradiente attraverso il grafo.
 
-**Annotare il Grafo con i Gradienti**
+##### Annotare il Grafo con i Gradienti
+
 Possiamo annotare il grafo con i gradienti su ogni arco. Questo ci permette di vedere la direzione della propagazione dell'informazione e come ci spostiamo all'indietro. Ad esempio, l'arco tra C ed E ci dice che il gradiente di E rispetto a C è D, poiché E = C * D.
 
 ## Propagazione all'Indietro e Gradienti
 
 Se il grafo di computazione è annotato con i gradienti, la propagazione all'indietro ci permette di calcolare il gradiente di una variabile rispetto ad un'altra.
 
-**Esempio di Calcolo del Gradiente**
+##### Esempio di Calcolo del Gradiente
+
 Considerando il grafo di computazione precedente, il gradiente di E rispetto a C è 0.5, poiché il gradiente di E rispetto a C è D, che nel nostro caso è 0.5.
 
-**Regola della Catena**
+##### Regola della Catena
+
 La regola della catena ci permette di combinare i gradienti. Ad esempio, per calcolare il gradiente di E rispetto ad A, seguiamo il percorso e moltiplichiamo il gradiente di E rispetto a C per il gradiente di C rispetto ad A.
 
-**Cammini Alternativi**
+##### Cammini Alternativi
+
 In alcuni casi, ci possono essere più cammini per arrivare ad una variabile. Ad esempio, per calcolare il gradiente di E rispetto a B, possiamo passare da C e poi da D. In questo caso, dobbiamo sommare i contributi di entrambi i cammini.
 
-**Importanza dei Grafi di Computazione**
+##### Importanza dei Grafi di Computazione
+
 I grafi di computazione sono importanti perché ci permettono di calcolare i gradienti in modo efficiente, anche per strutture complesse come le reti neurali.
 
-**Reti Neurali e Grafi di Computazione**
+##### Reti Neurali e Grafi di Computazione
+
 Le reti neurali sono essenzialmente grafi di computazione. La funzione di predizione ŷ e la funzione di loss sono combinate in un grafo di computazione. La complessità delle reti neurali deriva dalla complessità di queste funzioni.
 
-**Ottimizzazione dei Parametri**
+##### Ottimizzazione dei Parametri
+
 Per ottimizzare i parametri del modello, si applica la discesa del gradiente. Il gradiente viene calcolato attraverso la propagazione all'indietro nel grafo di computazione.
 
 ## Reti Neurali e Grafi di Computazione
 
 Le reti neurali possono essere rappresentate come grafi di computazione. Ogni nodo del grafo rappresenta un'operazione, come una somma ponderata o una funzione di attivazione. Gli archi rappresentano il flusso di dati tra i nodi.
 
-**Esempio di Rete Neurale**
+##### Esempio di Rete Neurale
+
 Consideriamo una rete neurale con due livelli, tre nodi intermedi e un nodo di output. La formula algebrica che rappresenta questa rete può essere associata ad un grafo di computazione.
 
-**Parametri e Nodi Foglia**
+##### Parametri e Nodi Foglia
+
 I parametri della rete, come i pesi, sono rappresentati da nodi foglia nel grafo di computazione. Gli input sono rappresentati da altri nodi foglia.
 
-**Propagazione in Avanti e all'Indietro**
+##### Propagazione in Avanti e all'Indietro
+
 Per applicare la discesa del gradiente, dobbiamo calcolare il grafo di computazione e ottenere i valori del gradiente associati ai parametri. Questo processo prevede la propagazione in avanti ("forward") e la propagazione all'indietro ("backward").
 
-**Struttura Feed-Forward**
+##### Struttura Feed-Forward
+
 Le reti neurali più semplici sono di tipo *feed-forward*. Questo significa che i dati fluiscono in una sola direzione, dal primo livello all'ultimo.
 
-**Livelli della Rete**
+##### Livelli della Rete
+
 Le reti neurali *feed-forward* sono strutturate in livelli. Il primo livello è il livello di input, seguito da uno o più livelli nascosti e infine dal livello di output.
 
-**Calcolo del Gradiente**
+##### Calcolo del Gradiente
+
 Per ottimizzare i parametri della rete, dobbiamo calcolare il gradiente della funzione di loss rispetto ai parametri. Questo viene fatto attraverso la propagazione all'indietro nel grafo di computazione.
 ![[4) Learning-20241015115658489.png]]
 
@@ -609,10 +631,12 @@ Per ottimizzare i parametri della rete, dobbiamo calcolare il gradiente della fu
 
 Le reti neurali sono composte da diversi livelli, ognuno dei quali elabora i dati in ingresso e produce un output. Il primo livello è il livello di input, che riceve i dati grezzi. I livelli successivi sono chiamati livelli nascosti e il livello finale è il livello di output.
 
-**Rappresentazione Vettoriale dei Livelli**
+##### Rappresentazione Vettoriale dei Livelli
+
 Ogni livello della rete neurale può essere rappresentato come un vettore. Il livello di input può essere un'immagine, un testo o un altro tipo di dati. I livelli nascosti sono combinazioni lineari del livello precedente, moltiplicate per una matrice di pesi e sommate a un vettore di bias.
 
-**Operazione di Combinazione Lineare**
+##### Operazione di Combinazione Lineare
+
 L'operazione di combinazione lineare tra il livello precedente e la matrice di pesi può essere espressa come:
 
 $$Z = VW + B$$
@@ -624,55 +648,68 @@ dove:
 * **W** è la matrice di pesi
 * **B** è il vettore di bias
 
-**Funzioni di Attivazione**
+##### Funzioni di Attivazione
+
 Le funzioni di attivazione sono essenziali per spezzare la linearità della rete neurale. Senza funzioni di attivazione, la rete sarebbe equivalente a una semplice funzione lineare, che non sarebbe in grado di apprendere modelli complessi.
 
-**Motivazione per le Funzioni di Attivazione**
+##### Motivazione per le Funzioni di Attivazione
+
 Le funzioni di attivazione introducono non linearità nella rete, permettendo di apprendere modelli più complessi. Senza funzioni di attivazione, l'output della rete sarebbe una semplice combinazione lineare degli input, che non sarebbe in grado di rappresentare relazioni non lineari tra i dati.
 
 ## Livelli e Espressività nelle Reti Neurali
 
 L'aggiunta di livelli in una rete neurale aumenta la sua capacità di risolvere problemi complessi. Ogni livello rappresenta una trasformazione dei dati di input, arricchendoli con informazioni semantiche.
 
-**Livelli e Complessità**
+##### Livelli e Complessità
+
 * **Livello 1:** Riusciamo a classificare situazioni separabili linearmente.
 * **Livello 2:** Possiamo classificare situazioni rappresentate in forme complesse nello spazio associato.
 * **Livello 3:** Possiamo esprimere qualsiasi forma, inclusi modelli convessi.
 
-**Informazione Semantica**
+##### Informazione Semantica
+
 Ogni livello aggiunge informazioni semantiche ai dati di input. La trasformazione da un livello all'altro arricchisce la rappresentazione dei dati, rendendola più informativa.
 
-**Numero di Neuroni e Dimensionalità**
+##### Numero di Neuroni e Dimensionalità
+
 Il numero di neuroni in un livello determina la dimensionalità dello spazio di rappresentazione. Un numero maggiore di neuroni permette di catturare un numero maggiore di caratteristiche.
 
-**Esempio: Classificazione di Forme**
+##### Esempio: Classificazione di Forme
+
 Se il problema di classificazione riguarda un triangolo, potrebbero essere necessari 3 neuroni per costruire 3 iperpiani di separazione. Se il problema riguarda un pentagono, sarebbero necessari 5 neuroni.
 
-**Feature Artificiali**
+##### Feature Artificiali
+
 Ogni livello corrisponde a un insieme di feature artificiali. Queste feature sono create dalla rete neurale durante il processo di apprendimento.
 
 ## Livelli, Espressività e Funzioni di Attivazione
 
 L'aggiunta di livelli in una rete neurale aumenta la sua capacità di apprendere modelli complessi. Ogni livello rappresenta una trasformazione dei dati di input, arricchendoli con informazioni semantiche.
 
-**Livelli e Complessità**
+##### Livelli e Complessità
+
 * **3 livelli:** Riescono a catturare modelli con 3 lati, come i triangoli.
 * **4 livelli:** Possono catturare modelli con 4 lati, come i quadrilateri.
 * **5 livelli:** Possono catturare modelli con 5 lati, come i pentagoni.
 
-**Ridondanza e Separazione Lineare**
+##### Ridondanza e Separazione Lineare
+
 Un livello può essere ridondante, ovvero non contribuire significativamente all'apprendimento. Ad esempio, se il problema è separabile linearmente, 3 livelli potrebbero semplicemente riprodurre la stessa retta di separazione.
 
-**Potere Espressivo e Trade-off**
+##### Potere Espressivo e Trade-off
+
 L'aggiunta di livelli aumenta il potere espressivo della rete, ma comporta un aumento della complessità computazionale. Ogni livello richiede una matrice di pesi, che aumenta il numero di parametri da apprendere.
 
-**Trasformazioni e Composizioni**
+##### Trasformazioni e Composizioni
+
 Ogni livello può essere visto come una trasformazione dei dati di input. La rete neurale è una composizione di queste trasformazioni, che trasformano i dati da un livello all'altro.
 
-**Funzioni di Attivazione**
+##### Funzioni di Attivazione
+
 Le funzioni di attivazione sono essenziali per spezzare la linearità tra i livelli. Introducono non linearità nella rete, permettendo di apprendere modelli più complessi.
 
-**Tipi di Funzioni di Attivazione**
+##### Tipi di Funzioni di Attivazione
+
 * **Classificazione binaria:** Funzione logistica
 * **Classificazione multiclasse:** Funzione softmax
 * **Regressione:** Funzione di identità
@@ -681,18 +718,21 @@ Le funzioni di attivazione sono essenziali per spezzare la linearità tra i live
 
 Abbiamo visto come le funzioni di attivazione siano cruciali per la capacità di una rete neurale di apprendere modelli complessi. Ma quali funzioni di attivazione utilizziamo tra i vari livelli?
 
-**Funzioni di Attivazione Finali**
+##### Funzioni di Attivazione Finali
+
 * **Classificazione binaria:** Funzione logistica
 * **Classificazione multiclasse:** Funzione softmax
 * **Regressione:** Funzione di identità
 
-**Funzioni di Attivazione Intermedie**
+##### Funzioni di Attivazione Intermedie
+
 Tra i vari livelli, possiamo utilizzare diverse funzioni di attivazione per introdurre non linearità nella rete. Alcune opzioni comuni includono:
 
 * **Funzione logistica:** Può essere utilizzata anche come funzione di attivazione intermedia.
 * **Tangente iperbolica:** Simile alla funzione logistica, ma con un range di output più ampio.
 * **ReLU (Rectified Linear Unit):** Una funzione lineare per valori positivi e zero per valori negativi. Offre diversi vantaggi, come la semplicità computazionale e la riduzione del problema del gradiente che svanisce.
 
-**Vantaggi della ReLU**
+##### Vantaggi della ReLU
+
 * **Semplicità computazionale:** La ReLU è più semplice da calcolare rispetto ad altre funzioni di attivazione, come la funzione logistica o la tangente iperbolica.
 * **Riduzione del problema del gradiente che svanisce:** La ReLU non satura per valori positivi, il che aiuta a prevenire il problema del gradiente che svanisce durante l'addestramento.

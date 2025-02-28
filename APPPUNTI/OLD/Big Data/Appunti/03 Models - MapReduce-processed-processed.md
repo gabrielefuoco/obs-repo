@@ -83,7 +83,7 @@ L'elaborazione in un'applicazione MapReduce può essere descritta come segue:
 
 Per aumentare la velocità, è possibile eseguire un passaggio di combinazione, che prevede una fase di minireduce sull'output map locale, che aggrega i dati prima di trasmetterli ai reducer sulla rete. Un **combiner** viene utilizzato per aggregare l'output map locale:
 
-**combine (k2, list(v2)) → list(v3)**
+##### combine (k2, list(v2)) → list(v3)
 
 In molti casi, la stessa funzione può essere utilizzata sia per la combinazione che per la riduzione finale, con i vantaggi di ridurre la quantità di dati intermedi e il traffico di rete.
 

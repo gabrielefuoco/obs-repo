@@ -2,12 +2,12 @@
 
 Assumiamo che esista una funzione di etichettatura $f(x)$ che ci fornisce l'etichetta vera per un'istanza $x$.
 
-**Problemi di Rappresentazione:**
+##### Problemi di Rappresentazione:
 
 * Se la rappresentazione delle istanze è fissata, potremmo non aver scelto le features più appropriate per la discriminazione.
 * Se abbiamo difficoltà a discriminare tra le istanze, potremmo dover aumentare il numero di features.
 
-**Assunzione Fondamentale:**
+##### Assunzione Fondamentale:
 
 * Due istanze uguali hanno la stessa etichetta.
 
@@ -41,7 +41,7 @@ Assumiamo che esista una funzione di etichettatura $f(x)$ che ci fornisce l'etic
 
 L'errore del classificatore, come illustrato nel disegno, si verifica quando un'istanza con un valore di $x$ inferiore a $\theta$ appartiene alla classe 1, ma il classificatore la classifica erroneamente come classe 0. Allo stesso modo, per la classe 1, l'errore si verifica quando un'istanza con un valore di $x$ maggiore di $\theta$ appartiene alla classe 0, ma il classificatore la classifica erroneamente come classe 1.
 
-**Esempio:**
+##### Esempio:
 
 Immaginiamo di avere un classificatore che separa le istanze in due classi (0 e 1) basandosi su un valore di soglia $\theta$. 
 
@@ -89,7 +89,7 @@ La formula rappresenta la funzione di loss per un classificatore con soglia $\th
 
 La funzione di loss misura l'errore del classificatore, ovvero la probabilità di classificare erroneamente un'istanza. L'integrale calcola la probabilità di classificare erroneamente un'istanza con $x < \theta$ come classe 0, e la probabilità di classificare erroneamente un'istanza con $x < \theta$ come classe 1.
 
-**Interpretazione:**
+##### Interpretazione:
 
 La funzione di loss è sempre maggiore o uguale a zero, e più le classi sono sovrapposte, più è probabile che il classificatore commetta errori. Questo perché la sovrapposizione delle classi implica che ci sono istanze con valori di $x$ simili che appartengono a classi diverse, rendendo difficile la separazione tramite una soglia.
 
@@ -98,7 +98,7 @@ La funzione di loss è sempre maggiore o uguale a zero, e più le classi sono so
 Più le classi sono sovrapposte e più il classificatore è destinato a sbagliare, poichè le due densità di classe sono sovrapposte. 
 - Questo significa che se le distribuzioni di probabilità delle due classi sono molto simili, il classificatore avrà maggiori difficoltà a separarle correttamente.
 
-**Esempio:**
+##### Esempio:
 
 Immaginiamo di avere due classi, una con una distribuzione normale centrata in 0 e l'altra con una distribuzione normale centrata in 5. Se la varianza delle due distribuzioni è molto bassa, le classi saranno ben separate e il classificatore avrà un basso errore. Se la varianza è alta, le classi saranno sovrapposte e il classificatore avrà un errore maggiore.
 
@@ -133,7 +133,7 @@ Nell'ambito del machine learning, possiamo distinguere due grandi famiglie di ap
 
 La funzione di loss è uno strumento fondamentale nell'apprendimento automatico per quantificare l'errore di un modello predittivo. 
 
-**Definizione:**
+##### Definizione:
 
 $$L_s(h)=\frac{|x_i|h(x_i)|\neq y_i,1\leq i \leq m}{m}$$
 
@@ -142,7 +142,7 @@ $$L_s(h)=\frac{|x_i|h(x_i)|\neq y_i,1\leq i \leq m}{m}$$
 * **$y_i$**: Etichetta vera dell'istanza $x_i$.
 * **$m$**: Dimensione del training set.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo un problema di regressione con un'istanza $(x_1, y_1 = 10.4)$. Abbiamo due ipotesi:
 
@@ -157,7 +157,7 @@ Con questo concetto, possiamo generalizzare la definizione di errore empirico:
 
 $$L_S(h)= \frac{1}{m} \sum_{i=1}^m l(h,(x_i,y_i))$$ 
 
-**Tipi di Funzioni di Loss:**
+##### Tipi di Funzioni di Loss:
 
 * **0-1 LOSS:**
  $$l_{0-1}(h,(x_i,y_i)) = \begin{cases}
@@ -170,11 +170,11 @@ $$L_S(h)= \frac{1}{m} \sum_{i=1}^m l(h,(x_i,y_i))$$
  $$l_{sq}(h,(x_i,y_i)) = (h(x)-y)^2$$
  Questa funzione calcola la differenza al quadrato tra la predizione e l'etichetta vera. L'errore empirico con questa funzione di loss diventa l'errore quadratico medio.
 
-**Parametrizzazione:**
+##### Parametrizzazione:
 
 L'errore empirico è **parametrico** perché dipende dalla funzione di loss scelta.
 
-**Errore di Generalizzazione:**
+##### Errore di Generalizzazione:
 
 L'errore di generalizzazione è anch'esso parametrico, perché dipende dalla funzione di loss. È il valore atteso della loss:
 
@@ -188,7 +188,7 @@ L'apprendimento **PAC standard** assume che esista un'ipotesi perfetta nella cla
 
 L'apprendimento PAC agnostico rilassa l'assunzione di realizzabilità, ovvero non assume che esista un'ipotesi perfetta nella classe di ipotesi. In questo caso, l'obiettivo è trovare un'ipotesi che sia "vicina" alla migliore ipotesi possibile nella classe di ipotesi.
 
-**Definizione:**
+##### Definizione:
 
 Un algoritmo di apprendimento è **agnostico PAC-learnable** se, per ogni distribuzione di dati $D$ e per ogni $\epsilon, \delta > 0$, esiste un numero di esempi $m$ tale che, per ogni insieme di training $S$ di dimensione $m$ campionato da $D$, l'algoritmo di apprendimento restituisce un'ipotesi $h_S$ che soddisfa la seguente condizione:
 
@@ -196,12 +196,12 @@ $$L_D(h_S) \leq min_{h \in H} L_D(h) + \epsilon$$
 
 con probabilità almeno $1-\delta$.
 
-**Teoremi:**
+##### Teoremi:
 
 * **Teorema 1:** Dato un training set $S$ di taglia $m=|S|$, se $H$ è finita e $S$ è sufficientemente grande, allora $h_S = ERM_H(S)$ è **agnostic PAC-learnable**.
 * **Teorema 2:** Se $H$ è finita, allora è **agnostic PAC-learnable**.
 
-**Insiemi di Training Rappresentativi:**
+##### Insiemi di Training Rappresentativi:
 
 Un insieme di training $S$ è $\epsilon$-rappresentativo se vale la seguente condizione:
 
@@ -211,7 +211,7 @@ Se un insieme di training è $\frac{\epsilon}{2}-$rappresentativo, allora l'ipot
 
 $$L_D(h_S) \leq min_{h \in H} L_D(h) + \epsilon$$
 
-**Punti Critici:**
+##### Punti Critici:
 
 * L'apprendimento PAC agnostico è più realistico dell'apprendimento PAC standard, poiché non assume l'esistenza di un'ipotesi perfetta.
 * L'apprendimento PAC agnostico è più difficile dell'apprendimento PAC standard, poiché l'algoritmo di apprendimento deve trovare un'ipotesi che sia "vicina" alla migliore ipotesi possibile, piuttosto che all'ipotesi perfetta.
@@ -225,13 +225,13 @@ $$L_D(h_S) \leq min_{h \in H} L_D(h) + \epsilon$$
 
 **Definizione:** Un insieme di training $S$ è $\epsilon$-rappresentativo se per ogni ipotesi $h$ nell'insieme di ipotesi $H$, la differenza tra l'errore di generalizzazione $L_D(h)$ e l'errore empirico $L_S(h)$ è minore o uguale a $\epsilon$.
 
-**Formulazione del problema:**
+##### Formulazione del problema:
 
 Dobbiamo dimostrare che:
 
 $$Pr[S: \forall h \in H, |L_{D}(h)-L_{S}(h)|\leq\epsilon]\geq 1-\delta$$
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Evento complementare:**
 
@@ -243,7 +243,7 @@ $$Pr[S: \forall h \in H, |L_{D}(h)-L_{S}(h)|\leq\epsilon]\geq 1-\delta$$
 
 3. **Disuguaglianza di Boole:**
 
-$$Pr[\{S: ∃ h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon \}]=Pr[\{ \cup _{h \in H}\{   S:|L_{D}(h)-L_{S}(h)|>\epsilon  \}]\leq \sum_{h \in H}Pr[S:|L_{D}(h)-L_{S}(h)|>\epsilon]$$
+$$Pr[\{S: ∃ h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon \}]=Pr[\{ \cup _{h \in H}\{ S:|L_{D}(h)-L_{S}(h)|>\epsilon \}]\leq \sum_{h \in H}Pr[S:|L_{D}(h)-L_{S}(h)|>\epsilon]$$
 
 4. **Definizione di errore empirico e di generalizzazione:**
 
@@ -278,7 +278,7 @@ $$m \geq \frac{1}{2\epsilon^2} \ln\left( \frac{2|H|}{\delta} \right)$$
  - Poiché abbiamo utilizzato $\epsilon$ invece di $\frac{\epsilon}{2}$, dobbiamo sostituire nella formula precedente:
 $$m\leq\frac{{2}}{\epsilon^2}\ln\left( \frac{2|H|}{\delta} \right)$$
 
-**Conclusione:**
+##### Conclusione:
 
 La sample complexity nel caso PAC agnostico è data da:
 
@@ -286,7 +286,7 @@ $$m\leq\frac{{2}}{\epsilon^2}\ln\left( \frac{2|H|}{\delta} \right)$$
 
 Questa formula ci permette di calcolare la dimensione minima dell'insieme di training necessaria per garantire una certa probabilità di convergenza uniforme, a condizione che l'insieme di ipotesi $H$ sia finito.
 
-**Nota:**
+##### Nota:
 
 - La formula della sample complexity è valida anche per insiemi di ipotesi infiniti, a condizione che $|H|\leq 2^{bd}$, dove $b$ è il numero di bit necessari per rappresentare un'ipotesi e $d$ è la dimensione dello spazio di input.
 
@@ -344,7 +344,7 @@ $$\phi(x)= \begin{cases}
 
 La funzione $h_{\vec{w}}(\vec{x})=sign(<\vec{w},\vec{x}>)$ rappresenta un'ipotesi nella classe dei semispazi.
 
-**Interpretazione geometrica:**
+##### Interpretazione geometrica:
 
 - **h:** L'ipotesi h è un iperpiano nello spazio $R^d$.
 - **w:** Il vettore $\vec{w}$ è il vettore normale all'iperpiano.
@@ -356,22 +356,22 @@ La funzione $h_{\vec{w}}(\vec{x})=sign(<\vec{w},\vec{x}>)$ rappresenta un'ipotes
 
 **Obiettivo:** Trovare l'iperpiano che separa le due classi di punti nello spazio (es. punti positivi e negativi).
 
-**Minimizzazione del Rischio Empirico:**
+##### Minimizzazione del Rischio Empirico:
 
 Cerchiamo il vettore $\vec{w}^*$ che minimizza il rischio empirico $L_{s}(h_{\vec{w}})$:
 
 $$\vec{w}^*= arg \ min _{\vec{w}\in R^{d+1}} \ L_{s}(h_{\vec{w}})$$
 
-**Proprietà:**
+##### Proprietà:
 
 - **Intrattabilità:** Trovare il semispazio che minimizza il rischio empirico in accordo alla 0-1 loss è un problema intrattabile (nel caso generale).
 
-**Casi Distinti:**
+##### Casi Distinti:
 
 - **Training Set Linearmente Separabile:** Esiste un iperpiano con errore empirico nullo su quel training set.
 - **Training Set Non Linearmente Separabile:** Qualunque iperpiano scelto commetterà almeno un errore di classificazione su un esempio del training set.
 
-**Osservazioni:**
+##### Osservazioni:
 
 - Nella pratica, è difficile avere un training set linearmente separabile.
 - L'algoritmo che trova un piano ottimo ha un costo computazionale troppo alto.
@@ -383,12 +383,12 @@ $$\vec{w}^*= arg \ min _{\vec{w}\in R^{d+1}} \ L_{s}(h_{\vec{w}})$$
 
 L'idea è di riscrivere il problema di *learning* come un problema di programmazione lineare (PL).
 
-**Forma generale del problema di PL:**
+##### Forma generale del problema di PL:
 
 $\vec{w^*} = \max_{\vec{w}}<\vec{u},\vec{w}>$, 
 $$s.t. A\vec{w}\geq v$$
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 Prendiamo un punto $\forall i$, tale che $sign(\vec{w},\vec{x})=y_{i}$. 
 Dunque $\forall i, y_{i}<\vec{w},\vec{x}>\  >0$. 
@@ -397,7 +397,7 @@ Se esiste un iperpiano separatore $\vec{w}$ per cui vale la precedente, ne esist
 
 $$\forall i, <\vec{w},\vec{x}> \ \geq 1$$
 
-**Dimostrazione:**
+##### Dimostrazione:
 
 Sia $\vec{w^*}$ un iperpiano separatore e $\bar{w}=\frac{\vec{w^*}}{\gamma}$, dove $\gamma= min_{i} \{y_{i}<\vec{w_{i}},\vec{x_{i}}>\}$.
 
@@ -405,13 +405,13 @@ Allora:
 
 $$<\vec{w},\vec{x_{i}}> = y_i{\left( <\frac{w}{\gamma},\vec{x_{i}}> \right)}= \left( \frac{1}{\gamma}<\vec{w^*},\vec{x_{i}}> \right) \geq 1$$
 
-**Matrice A e Vettore v:**
+##### Matrice A e Vettore v:
 
-$$A = \begin{bmatrix} y_1  x_1 \\ y_2  x_2 \\ \vdots \\ y_m  x_m \end{bmatrix}$$
+$$A = \begin{bmatrix} y_1 x_1 \\ y_2 x_2 \\ \vdots \\ y_m x_m \end{bmatrix}$$
 
-$$v = \begin{bmatrix} 1\\ \vdots  \\ 1\end{bmatrix}$$
+$$v = \begin{bmatrix} 1\\ \vdots \\ 1\end{bmatrix}$$
 
-**Caso di Semispazi:**
+##### Caso di Semispazi:
 
 Nel caso di semispazi non c'è nessun criterio di preferenza, dunque dobbiamo impostare $\vec{u}$=0 nella forma generale del problema di PL:
 
@@ -424,7 +424,7 @@ $$s.t. A\vec{w}\geq v$$
 * In realtà, questo algoritmo lavora sui neuroni artificiali.
 * Nell'ambito del *learning*, sono stati introdotti algoritmi che fanno uso di questo concetto. L'idea alla base è che, siccome gli umani sono bravi ad apprendere, cerchiamo di imitare il funzionamento degli organi preposti a questa funzione.
 
-**Modello del Neurone Artificiale:**
+##### Modello del Neurone Artificiale:
 
 * Questo modello cattura solo alcuni aspetti essenziali per il calcolo della struttura del nostro neurone.
 * Ha un nucleo, dove avviene il funzionamento, da cui fuoriescono delle diramazioni (dendriti), che hanno delle terminazioni che vanno in contatto con altri neuroni.
@@ -433,14 +433,14 @@ $$s.t. A\vec{w}\geq v$$
 * Se la somma di questi stimoli supera una certa soglia, il neurone propaga lo stimolo ai neuroni collegati.
 * Oltre i dendriti, abbiamo una lunga terminazione chiamata assone, a sua volta ramificato per entrare in contatto con altre cellule.
 
-**Analogia con il Neurone Artificiale:**
+##### Analogia con il Neurone Artificiale:
 
 * Dal punto di vista informatico, i dendriti sono il canale di input.
 * Il nucleo elabora gli stimoli. Se superano una certa soglia di attivazione, lo stimolo si propaga attraverso l'assone ad altri neuroni, che funge da canale di output.
 
 # inserire foto
 
-**Caratteristiche del Cervello:**
+##### Caratteristiche del Cervello:
 
 * All'interno del nostro cervello ci sono circa 90 miliardi di neuroni.
 * Ogni neurone può avere da 5k a 100k dendriti.

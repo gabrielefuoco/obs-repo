@@ -15,7 +15,7 @@
 * **Partizionamento:** È consapevole del partizionamento per evitare shuffle inutili.
 * **groupBy:** Supporta l'operazione groupBy.
 
-**Esempio:**
+##### Esempio:
 
 ```
 = RDD
@@ -56,24 +56,24 @@
 
 **Definizione:** La persistenza (o memorizzazione nella cache) di un RDD in memoria è una funzionalità fondamentale di Spark che consente di migliorare le prestazioni delle operazioni successive.
 
-**Come Funziona:**
+##### Come Funziona:
 
 * Quando si persiste un RDD, ogni nodo del cluster memorizza in memoria le sue fette (partizioni) del dataset.
 * Queste fette vengono riutilizzate in azioni successive sullo stesso dataset o su dataset derivati da esso.
 * Questo approccio porta a un'accelerazione significativa delle operazioni future, spesso di oltre 10 volte.
 
-**Utilizzo:**
+##### Utilizzo:
 
 * La persistenza è uno strumento chiave per la costruzione di algoritmi iterativi con Spark e per l'utilizzo interattivo dall'interprete.
 * Per persistere un RDD, si utilizzano i metodi `persist()` o `cache()`.
 * La prima volta che un RDD viene calcolato in un'azione, le sue partizioni vengono memorizzate in memoria.
 * La cache è *fault-tolerant*: se una partizione viene persa, verrà automaticamente ricalcolata utilizzando le trasformazioni originali.
 
-**Esempio: Estrazione di Log**
+##### Esempio: Estrazione di Log
 
 **Scenario:** Caricare messaggi di errore da un log in memoria e cercare interattivamente schemi specifici.
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Caricamento:** Caricare il file di log in un RDD: `lines = spark.textFile("hdfs://...")`
 2. **Filtraggio:** Filtrare le righe che iniziano con "ERROR": `errors = lines.filter(lambda s: s.startswith("ERROR"))`
@@ -83,13 +83,13 @@
  * `messages.filter(lambda s: "mysql" in s).count()`
  * `messages.filter(lambda s: "php" in s).count()`
 
-**Risultati:**
+##### Risultati:
 
 * **Wikipedia:** Un esempio di ricerca full-text su un dataset di 60GB su 20 macchine EC2.
  * Tempo di esecuzione con cache: 0.5 secondi
  * Tempo di esecuzione senza cache: 20 secondi
 
-**Tabella di Confronto:**
+##### Tabella di Confronto:
 
 | % del set di lavoro nella cache | Tempo di esecuzione (s) |
 |---|---|
@@ -98,7 +98,7 @@
 | 75% | |
 | Completamente disabilitato | |
 
-**Livelli di Storage:**
+##### Livelli di Storage:
 
 * **`MEMORY_ONLY`:** Memorizza l'RDD come oggetti Java deserializzati nella JVM. Se l'RDD non si adatta in memoria, alcune partizioni non verranno memorizzate nella cache e verranno ricalcolate al volo. Questo è il livello predefinito.
 * **`MEMORY_AND_DISK`:** Memorizza l'RDD come oggetti Java deserializzati nella JVM. Se l'RDD non si adatta in memoria, memorizza le partizioni che non si adattano su disco e leggile da lì quando sono necessarie.
@@ -107,7 +107,7 @@
 * **`DISK_ONLY`:** Memorizza le partizioni RDD solo su disco.
 * **`MEMORY_ONLY_2`, `MEMORY_AND_DISK_2`, ecc.:** Stesso dei livelli precedenti, ma replica ogni partizione su due nodi del cluster.
 
-**Selezione del Livello:**
+##### Selezione del Livello:
 
 * Il livello di storage viene scelto passando un oggetto `org.apache.spark.storage.StorageLevel` al metodo `persist()`.
 * Il metodo `cache()` utilizza il livello predefinito `StorageLevel.MEMORY_ONLY`.
@@ -126,12 +126,12 @@
 
 **Architettura:** Un'applicazione Spark è composta da un programma driver che esegue la funzione principale dell'utente e gestisce l'esecuzione di operazioni parallele su un cluster.
 
-**Componenti:**
+##### Componenti:
 
 * **Driver Program:** Esegue la funzione principale dell'utente e gestisce il contesto di esecuzione (SparkContext).
 * **Cluster Manager:** Gestisce i nodi del cluster e assegna i task ai worker.
 
-**Esecuzione:**
+##### Esecuzione:
 
 * **Task:** L'applicazione crea RDD, li trasforma ed esegue azioni.
 * **DAG (Directed Acyclic Graph):** Le trasformazioni e le azioni vengono rappresentate come un grafo di operatori.
@@ -146,14 +146,14 @@
 
 ## Riepilogo dei Componenti di Spark
 
-**Livello Grossolano:**
+##### Livello Grossolano:
 
 * **RDD:** Dataset parallelo con partizioni.
 * **DAG:** Grafo logico delle operazioni RDD.
 * **Stage:** Insieme di task che vengono eseguite in parallelo.
 * **Task:** Unità fondamentale di esecuzione in Spark.
 
-**Livello Fine:**
+##### Livello Fine:
 
 * **Partizioni:** Suddivisioni del dataset RDD.
 * **Operatori:** Funzioni che trasformano o agiscono sugli RDD.
@@ -161,7 +161,7 @@
 
 ## Vista a Livello di Partizione di un RDD
 
-**Vista a Livello di Dataset:**
+##### Vista a Livello di Dataset:
 
 ```
 log:
@@ -173,7 +173,7 @@ log:
             shouldCache = true
 ```
 
-**Spiegazione:**
+##### Spiegazione:
 
 * **Vista a Livello di Dataset:** Mostra la struttura gerarchica degli RDD, partendo dal dataset originale (in questo caso, `log`) e mostrando le trasformazioni applicate (ad esempio, `errors` è un RDD filtrato da `log`).
 * **Vista a Livello di Partizione:** Mostra come le partizioni dell'RDD vengono distribuite tra i task. Ogni riga rappresenta una partizione, e le lettere all'interno rappresentano i dati contenuti in quella partizione.
@@ -200,7 +200,7 @@ log:
 | **13. Esegui i task** | I worker eseguono i task assegnati. |
 | **14. Memorizza e servi i blocchi** | Il Block Manager memorizza e serve i blocchi di dati utilizzati dai task. |
 
-**Spiegazione:**
+##### Spiegazione:
 
 Il processo inizia con la creazione di un DAG di operatori che rappresenta le operazioni sugli RDD. Il DAG Scheduler divide il DAG in stage, che vengono poi assegnati ai worker del cluster. I worker eseguono i task assegnati, memorizzando i dati nel Block Manager. Il Task Scheduler gestisce l'esecuzione dei task, riprovando quelli falliti o che impiegano troppo tempo.
 
@@ -222,7 +222,7 @@ Il processo inizia con la creazione di un DAG di operatori che rappresenta le op
 * Le informazioni sulla lineage vengono utilizzate per ricalcolare i dati persi in caso di errore.
 * Gli RDD sono memorizzati come una catena di oggetti che catturano la lineage di ogni RDD.
 
-**Esempio:**
+##### Esempio:
 
 ```scala
 val file = sc.textFile("hdfs://...") // Carica un file da HDFS
@@ -232,7 +232,7 @@ val ones = cachedSics.map(_ => 1) // Crea un RDD con il valore 1 per ogni riga
 val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
 ```
 
-**Spiegazione:**
+##### Spiegazione:
 
 * Se un nodo dati fallisce durante l'esecuzione di un task, Spark può ricalcolare i dati persi utilizzando la lineage dell'RDD.
 * Ad esempio, se il nodo che memorizza `cachedSics` fallisce, Spark può ricalcolare `cachedSics` a partire da `file` e `sics`.
@@ -446,7 +446,7 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING);
 
 _MLlib_, la libreria di Machine Learning (ML) di Spark, fornisce molti algoritmi ML _distribuiti_. Questi algoritmi coprono compiti come l'estrazione di feature, la classificazione, la regressione, il clustering, la raccomandazione e altro ancora. MLlib fornisce anche strumenti come ML Pipelines per la costruzione di flussi di lavoro, CrossValidator per la messa a punto dei parametri e la persistenza del modello per il salvataggio e il caricamento dei modelli.
 
-**Esempio di utilizzo di MLlib:**
+##### Esempio di utilizzo di MLlib:
 
 ```scala
 // Ogni record di questo DataFrame contiene l'etichetta e
@@ -463,7 +463,7 @@ val weights = model.weights
 model.transform(df).show()
 ```
 
-**Funzionalità di MLlib:**
+##### Funzionalità di MLlib:
 
 * **Algoritmi ML distribuiti:**
  * Classificazione (ad esempio, regressione logistica)
@@ -488,7 +488,7 @@ model.transform(df).show()
 * **Set di dati:** Il set di dati contiene etichette e vettori di feature.
 * **Obiettivo:** Imparare a prevedere le etichette dai vettori di feature usando la regressione logistica.
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Crea un DataFrame:** Ogni record del DataFrame contiene l'etichetta e le feature rappresentate da un vettore.
 
@@ -520,7 +520,7 @@ Spark Streaming è un'estensione di Spark che consente di analizzare i dati in s
 
 Spark Streaming utilizza un'astrazione di alto livello chiamata **DStream** (discretized stream) che rappresenta un flusso continuo di dati. Un DStream è essenzialmente una sequenza di RDD, dove ogni RDD rappresenta un micro-batch di dati.
 
-**Funzionamento interno:**
+##### Funzionamento interno:
 
 Spark Streaming funziona internamente come segue:
 
@@ -534,7 +534,7 @@ Spark Streaming funziona internamente come segue:
 
 Spark Streaming rappresenta i flussi di dati come una serie di RDD nel tempo. Ogni RDD rappresenta un micro-batch di dati, elaborato in un intervallo di tempo configurabile (tipicamente sub-secondi).
 
-**Esempio di codice:**
+##### Esempio di codice:
 
 ```scala
 val spammers = sc.sequenceFile("hdfs://spammers.seq")
@@ -557,7 +557,7 @@ In questo esempio:
 
 Spark Streaming supporta le operazioni su finestre temporali, che consentono di elaborare i dati in base a intervalli di tempo specifici.
 
-**Operazioni di finestra:**
+##### Operazioni di finestra:
 
 Le operazioni di finestra accettano due parametri: `windowLength` e `slideInterval`.
 
@@ -572,7 +572,7 @@ Le operazioni di finestra accettano due parametri: `windowLength` e `slideInterv
 
 Spark offre la possibilità di combinare diverse librerie per creare pipeline di elaborazione dati complete. Un esempio di questo è l'utilizzo di Spark SQL, MLlib e Spark Streaming per analizzare i dati in streaming e applicare modelli di machine learning.
 
-**Esempio:**
+##### Esempio:
 
 1. **Carica i dati usando Spark SQL:**
 
@@ -604,7 +604,7 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
 
 Spark GraphX è una libreria che estende Spark per l'elaborazione di grafi. Offre un'astrazione di grafo che rappresenta un multigrafo diretto con proprietà associate a ciascun vertice e bordo.
 
-**Caratteristiche principali:**
+##### Caratteristiche principali:
 
 * **Calcolo parallelo sui grafi:** GraphX consente di eseguire calcoli paralleli su grafi di grandi dimensioni.
 * **Operatori fondamentali:** GraphX fornisce un set di operatori fondamentali per la manipolazione dei grafi, come `subgraph`, `joinVertices` e `aggregateMessages`.
@@ -645,21 +645,21 @@ L'algoritmo PageRank è un esempio di elaborazione dati più complessa con Spark
 * **Cache in memoria:** Beneficia della cache in memoria di Spark per migliorare le prestazioni.
 * **Iterazioni multiple:** Richiede più iterazioni sugli stessi dati per convergere al risultato.
 
-**Scopo:**
+##### Scopo:
 
 PageRank assegna un rango (punteggio) ai nodi (pagine web) in base ai link che puntano a loro. L'idea di base è che:
 
 * **Più link in entrata = Rango più alto:** Pagine con molti link in entrata sono considerate più importanti.
 * **Link da pagine importanti = Rango più alto:** Un link da una pagina con un rango alto conferisce maggiore importanza alla pagina di destinazione.
 
-**Algoritmo:**
+##### Algoritmo:
 
 1. **Inizializzazione:** Inizializza il rango di ogni pagina a 1.
 2. **Iterazione:** Per un numero fisso di iterazioni o fino alla convergenza:
  * **Calcolo dei contributi:** Ogni pagina `p` contribuisce con `rank(p) / |neighbors(p)|` a tutte le pagine a cui punta (i suoi vicini).
  * **Aggiornamento dei ranghi:** Il rango di ogni pagina viene aggiornato a `0.15 + 0.85 * somma_contributi`. La costante 0.15 rappresenta un fattore di smorzamento che tiene conto dei "salti casuali" tra le pagine.
 
-**Implementazione in Scala:**
+##### Implementazione in Scala:
 
 ```scala
 // Carica le coppie (URL, vicini) in un RDD
@@ -689,15 +689,15 @@ for (i <- 1 to ITERATIONS) {
 ranks.saveAsTextFile(...)
 ```
 
-**Prestazioni:**
+##### Prestazioni:
 
 Spark offre prestazioni significativamente migliori rispetto a Hadoop per l'esecuzione di PageRank, grazie alla sua capacità di mantenere i dati in memoria durante le iterazioni.
 
-**Grafico delle prestazioni:**
+##### Grafico delle prestazioni:
 
 (Immagine del grafico che mostra il tempo di iterazione in secondi per Hadoop e Spark al variare del numero di macchine)
 
-**Legenda:**
+##### Legenda:
 
 * Asse X: Numero di macchine
 * Asse Y: Tempo di iterazione (s)

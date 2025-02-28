@@ -19,17 +19,17 @@ Per minimizzare $J(w, b)$, si utilizza l'algoritmo di discesa del gradiente. I p
 
 2. **Aggiornamento dei parametri:** Calcolare i nuovi parametri $w'$ e $b'$ che riducono $J(w, b)$, usando le formule delle derivate parziali.
 
- **Caso semplice (1 attributo, 1 variabile dipendente):**
+##### Caso semplice (1 attributo, 1 variabile dipendente):
 
  $$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
  $$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
 
- **Caso più complesso (n attributi, 1 variabile dipendente):**
+##### Caso più complesso (n attributi, 1 variabile dipendente):
 
- **Modello di regressione lineare a più valori:**
+##### Modello di regressione lineare a più valori:
 
  $$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
- **Aggiornamento dei parametri:**
+##### Aggiornamento dei parametri:
 
 $$
 \begin{aligned}
@@ -48,7 +48,7 @@ $$
 
 3. **Iterazione:** Ripetere il passo 2 fino a raggiungere il minimo di $J(w, b)$.
 
-**Osservazioni:**
+##### Osservazioni:
 
 * Le formule per aggiornare $w'$ e $b'$ dipendono dal numero di variabili indipendenti.
 * Il *learning rate* $α$ controlla l'ampiezza degli aggiornamenti.
@@ -61,7 +61,7 @@ $$
 
 **Motivazione:** I dataset spesso contengono variabili con ordini di grandezza molto diversi, il che può rendere più complesse le analisi.
 
-**Metodo:**
+##### Metodo:
 
 * Per ogni valore $x$ di un attributo $i$, si sottrae la media $\mu_{i}$ di quell'attributo e si divide per la deviazione standard $\sigma_{i}$:
  $$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
@@ -75,24 +75,24 @@ $$
 
 **Principio:** Sfrutta una funzione logistica (o sigmoidale) per stimare la probabilità che un'istanza appartenga a una determinata classe.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * Modella la relazione tra una variabile dipendente binaria e una o più variabili indipendenti.
 * La funzione logistica mappa i valori in input nell'intervallo [0,1], interpretabile come probabilità di appartenenza alla classe positiva.
 * È in grado di catturare relazioni non lineari tra le variabili indipendenti e la variabile di risposta.
 * Fornisce previsioni più accurate in presenza di relazioni complesse grazie alla funzione non lineare.
 
-**Funzione sigmoide:**
+##### Funzione sigmoide:
 
 * Trasforma valori lineari in valori nel range [0,1].
 * Formula: $P(y=1|x)=\frac{1}{1+e^{-z}}=\sigma(z)$
 
-**Regressione logistica:**
+##### Regressione logistica:
 
 * Utilizza un predittore lineare $z=wTx+b$, che viene passato alla funzione logistica per ottenere la probabilità di appartenenza alla classe positiva.
 * Formula: $G_{w,b}=\frac{1}{1+e^{-wx-b}}$
 
-**Funzione di costo:**
+##### Funzione di costo:
 
 * La funzione di costo lineare quadratica non è convessa se sostituita con σ(z).
 * Si utilizza una nuova funzione di costo convessa per permettere l'applicazione della discesa del gradiente durante l'addestramento.
@@ -100,7 +100,7 @@ $$
 
 ## Calcolo delle derivate per l'aggiornamento dei parametri
 
-**Formule di aggiornamento dei parametri:**
+##### Formule di aggiornamento dei parametri:
 
 $$w' = w - \alpha\frac{\partial J(w,b)}{\partial w}$$
 $$b' = b - \alpha\frac{\partial J(w,b)}{\partial b}$$
@@ -108,21 +108,21 @@ $$b' = b - \alpha\frac{\partial J(w,b)}{\partial b}$$
 
 Supponiamo di voler calcolare le seguenti derivate parziali che ci serviranno per l'aggiornamento dei parametri:
 
-**Derivata rispetto a w:**
+##### Derivata rispetto a w:
 
 $$\frac{\partial G_{w,b}(x)}{\partial w} = \frac{\partial}{\partial w}\frac{1}{1 + e^{-wx-b}} = \frac{-e^{-wx-b}(-x)}{(1 + e^{-wx-b})^2} = \frac{(1 + e^{-wx-b} - 1)x}{(1 + e^{-wx-b})^2}$$
 $$= \frac{x}{1 + e^{-wx-b}} - \frac{x}{(1 + e^{-wx-b})^2} = (G_{w,b}(x) - G_{w,b}(x)^2) \cdot x$$
 
-**Derivata rispetto a b:**
+##### Derivata rispetto a b:
 
 $$\frac{\partial G_{w,b}(x)}{\partial b} = (G_{w,b}(x) - G_{w,b}(x)^2)$$
 
-**Derivate del logaritmo di G(x):**
+##### Derivate del logaritmo di G(x):
 
 $$\frac{\partial \log G_{w,b}(x)}{\partial w} = \frac{G_{w,b}(x)(1 - G_{w,b}(x))x}{G_{w,b}(x)} = (1 - G_{w,b}(x))x$$
 $$\frac{\partial \log G_{w,b}(x)}{\partial b} = (1 - G_{w,b}(x))$$
 
-**Derivate del logaritmo di (1 - G(x)):**
+##### Derivate del logaritmo di (1 - G(x)):
 
 $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial w} = \frac{-G_{w,b}(x)(1 - G_{w,b}(x))x}{(1 - G_{w,b}(x))} = -G_{w,b}(x) \cdot x$$
 $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial b} = -G_{w,b}(x)$$
@@ -133,16 +133,16 @@ $$\frac{\partial \log(1 - G_{w,b}(x))}{\partial b} = -G_{w,b}(x)$$
 ### Calcolo delle derivate della funzione di costo
 
 Vengono calcolate le derivate della funzione di costo, necessarie per l'aggiornamento dei pesi **w** e dell'intercetta **b** durante l'addestramento:
-**Derivata rispetto a w:**
+##### Derivata rispetto a w:
 
 $$\frac{\partial J(w,b)}{\partial w} = \frac{1}{m}\sum_{i=1}^m y^{(i)}(1 - G_{w,b}(x^{(i)}))x^{(i)} + (1-y^{(i)})(-G_{w,b}(x^{(i)}))x^{(i)}$$
 $$= \frac{1}{m}\sum_{i=1}^m [y^{(i)} - y^{(i)}G_{w,b}(x^{(i)}) - G_{w,b}(x^{(i)}) + y^{(i)}G_{w,b}(x^{(i)})] \cdot x^{(i)}$$
 $$= \frac{1}{m}\sum_{i=1}^m (G_{w,b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
-**Derivata rispetto a b:**
+##### Derivata rispetto a b:
 
 $$\frac{\partial J(w,b)}{\partial b} = \frac{1}{m}\sum_{i=1}^m (G_{w,b}(x^{(i)}) - y^{(i)})$$
 
-**Osservazioni:**
+##### Osservazioni:
 
 * Le equazioni ottenute sono simili a quelle della regressione lineare.
 * L'unica differenza è che al posto della funzione lineare abbiamo la funzione logistica.

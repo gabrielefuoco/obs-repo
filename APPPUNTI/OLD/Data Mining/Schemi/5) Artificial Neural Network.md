@@ -1,4 +1,4 @@
-**Reti Neurali Artificiali**
+##### Reti Neurali Artificiali
 
 I. **Concetto Fondamentale:** Modello ispirato al sistema nervoso umano, composto da nodi (neuroni) interconnessi tramite collegamenti (sinapsi) con pesi associati che rappresentano la forza della connessione. 
 I nodi sommano gli input, e se superano una soglia, si attivano producendo un output (eccitatorio o inibitorio).
@@ -41,7 +41,7 @@ II. **Perceptron (Rosenblatt, 1962):** Rete neurale semplice a singolo strato.
 
  D. **Addestramento:** I pesi $w_i$ e il bias $b$ vengono addestrati per risolvere problemi di classificazione binaria.
 
-**Addestramento del Perceptron**
+##### Addestramento del Perceptron
 
 * **Obiettivo:** Apprendere i parametri ottimali $w$ (pesi) e $b$ (bias) per la classificazione lineare.
 
@@ -80,7 +80,7 @@ II. **Perceptron (Rosenblatt, 1962):** Rete neurale semplice a singolo strato.
  * Rappresentazione di funzioni booleane primitive linearmente separabili (AND, OR).
  * Non può rappresentare funzioni non linearmente separabili (XOR).
 
-**Reti Neurali Multilivello**
+##### Reti Neurali Multilivello
 
 I. **Architettura e Funzionamento:**
 
@@ -108,7 +108,7 @@ V. **Apprendimento di Caratteristiche:**
 * **Formula di attivazione:** Il valore di attivazione del nodo i-esimo dell'l-esimo livello è:
 	* $a_i^l = f(z_i^l) = f(\sum_j w_{ij}^l a_j^{l-1} + b_i^l)$
 
-**Funzioni di Attivazione nelle Reti Neurali**
+##### Funzioni di Attivazione nelle Reti Neurali
 
 * **Funzioni di Attivazione Alternative alla Funzione Segno:**
  * **Funzione Gradino:** `gradino(x) = { 1 se x > t; 0 altrimenti }`
@@ -137,7 +137,7 @@ V. **Apprendimento di Caratteristiche:**
  * **Minimizzazione di E(w,b):** Obiettivo dell'addestramento.
  * **Non Linearità e Minimi Locali:** La non linearità delle funzioni di attivazione rende E(w,b) non convessa, con possibili minimi locali.
 
-**Metodo di Discesa del Gradiente e Backpropagation**
+##### Metodo di Discesa del Gradiente e Backpropagation
 
 I. **Discesa del Gradiente:**
 
@@ -164,7 +164,7 @@ II. **Backpropagation:**
 
 III. **Riepilogo:** Il metodo combina la discesa del gradiente per minimizzare la funzione di perdita con la backpropagation per calcolare efficientemente il gradiente, propagando l'errore dagli output agli strati nascosti della rete neurale. La backpropagation sfrutta la regola della catena per calcolare le derivate parziali necessarie all'aggiornamento dei pesi e dei bias.
 
-**Schema Riassuntivo: Reti Neurali Artificiali (ANN)**
+##### Schema Riassuntivo: Reti Neurali Artificiali (ANN)
 
 I. **Algoritmo di Addestramento**
 

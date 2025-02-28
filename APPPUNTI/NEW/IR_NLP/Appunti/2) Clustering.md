@@ -79,7 +79,7 @@ Tuttavia, l'etichettatura della posizione delle parole presenta anche alcuni lim
 
 Cluto è stato concepito per eseguire il clustering di dati sparsi, altamente dimensionali e di grandi dimensioni.
 
-**Caratteristiche:**
+##### Caratteristiche:
 
 * **Funzione obiettivo:** Un metodo per risolvere un problema di clustering è un metodo che deve ottimizzare una determinata funzione obiettivo. La funzione obiettivo non è esplicitata: si utilizza un'euristica.
 * **Euristica, metodo di ottimizzazione e learner:** I termini euristica, metodo di ottimizzazione e learner vengono spesso usati in modo intercambiabile, ma esistono delle differenze. Ad esempio, un algoritmo che richiede una fase di apprendimento (learner) o che raggiunge il risultato tramite una funzione di ottimizzazione viene erroneamente chiamato euristica. Nonostante ciò, l'euristica può essere anche un metodo iterativo.
@@ -111,15 +111,15 @@ Questo metodo si basa sul concetto di min cut. Ad ogni iterazione, si rompono i 
 
 Una soluzione di clustering partizionale a k-vie può essere utilizzata come input per un metodo di clustering gerarchico agglomerativo. Il k-means definisce quindi un bias per questo tipo di clustering.
 
-**Impostazione di k:**
+##### Impostazione di k:
 
 Il valore di k viene solitamente impostato a $\sqrt{n}$, dove n è il numero di punti dati.
 
-**K-means come input per il clustering gerarchico:**
+##### K-means come input per il clustering gerarchico:
 
 Il k-means trova k cluster che diventano le foglie per un clustering gerarchico agglomerativo.
 
-**Benefici di questo approccio:**
+##### Benefici di questo approccio:
 
 1. **Accuratezza:** Il k-means è un algoritmo dinamico che cerca di minimizzare l'errore quadratico, incentivando la riallocazione degli oggetti tra i cluster. Questa proprietà non è presente nel clustering gerarchico agglomerativo, dove una volta effettuato il merge non è possibile riconsiderare la scelta. Questo può avere un impatto sull'accuratezza del clustering.
 2. **Efficienza:** Partendo da $\sqrt{n}$ foglie, il costo del clustering è $O(n \cdot \log \sqrt{n})$. Questo impatta positivamente sull'efficienza del processo. 
@@ -168,7 +168,7 @@ Utilizzando il file `rclassfile`, possiamo confrontare la soluzione di clusterin
 
 L'entropia può essere utilizzata per valutare la qualità del clustering.
 
-**Definizione:**
+##### Definizione:
 
 Sia $C = \{C_1, ..., C_k\}$ l'insieme dei cluster e $C^* = \{C_1^*, ..., C_h^*\}$ la classificazione di riferimento. L'entropia di un cluster $j \in \{1, ..., k\}$ è definita come:
 
@@ -178,7 +178,7 @@ dove:
 
 * $Pr(C_i^* | C_j)$ è la probabilità che un oggetto appartenga alla classe $C_i^*$ dato che appartiene al cluster $C_j$.
 
-**Stima della Probabilità:**
+##### Stima della Probabilità:
 
 La probabilità $Pr(C_i^* | C_j)$ può essere stimata come la frequenza relativa:
 
@@ -189,11 +189,11 @@ dove:
 * $|C_i^* \cap C_j|$ è il numero di oggetti che appartengono sia alla classe $C_i^*$ che al cluster $C_j$.
 * $|C_j|$ è il numero di oggetti nel cluster $C_j$.
 
-**Interpretazione:**
+##### Interpretazione:
 
 L'entropia di un cluster misura la sua omogeneità rispetto alla classificazione di riferimento. Un'entropia bassa indica che il cluster è composto principalmente da oggetti della stessa classe.
 
-**Relazione con Precision e Recall:**
+##### Relazione con Precision e Recall:
 
 L'entropia è strettamente correlata a precision e recall. La probabilità $Pr(C_i^* | C_j)$ corrisponde alla precision del cluster $j$ per la classe $i$. La recall sarebbe data dal rapporto tra l'intersezione tra il cluster $j$ e la classe $i$ e la cardinalità della classe $i$.
 
@@ -259,12 +259,12 @@ Se Pluto viene utilizzato per il document clustering, specificando l'opzione `-s
 
 Per ogni cluster, è possibile analizzare le caratteristiche più significative in due modi:
 
-**1. Caratteristiche più descrittive:**
+##### 1. Caratteristiche più descrittive:
 
 * Si identificano le **L** caratteristiche che contribuiscono maggiormente alla similarità tra gli oggetti all'interno del cluster.
 * Per ogni caratteristica, si calcola la **percentuale di similarità** rispetto al cluster.
 
-**2. Caratteristiche più discriminative:**
+##### 2. Caratteristiche più discriminative:
 
 * Si identificano le **L** caratteristiche che contribuiscono maggiormente alla dissimilarità tra gli oggetti del cluster e gli oggetti appartenenti agli altri cluster.
 * Per ogni caratteristica, si calcola la **percentuale di dissimilarità** rispetto al resto degli oggetti.

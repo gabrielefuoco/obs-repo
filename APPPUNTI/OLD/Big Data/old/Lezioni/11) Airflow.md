@@ -76,7 +76,8 @@ with DAG(dag_id="daily_backup", start_date=datetime(2023, 1, 1),
     # Definizione delle dipendenze tra i task
     task_A >> [task_B, task_C] >> task_D
 ```
-**Esempio di dichiarazione DAG.**
+##### Esempio di dichiarazione DAG.
+
 ```python
 # Definizione delle dipendenze dei task
 task_A >> [task_B, task_C]

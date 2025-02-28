@@ -12,9 +12,11 @@
 **Codice:** PXB2MDH
 **Numero:** +39 389 940 6226 (anche su Whatsapp), +39 392 256 1012 (in caso di emergenze)
 **Indirizzo:** via delle Rose Zona industriale Modugno, 70132, Bari
-**Ingresso:** mercoledì, 11 dicembre 2024 - **07:00** 
-**Uscita:** sabato, 14 dicembre 2024 - **09:15**
-**PAGATO**
+##### Ingresso:** mercoledì, 11 dicembre 2024 - **07:00
+
+##### Uscita:** sabato, 14 dicembre 2024 - **09:15
+
+##### PAGATO
 
 ## **Budapest** 11/12-14/12
 
@@ -22,7 +24,7 @@
 
 **Partenza:** 09:00 (arrivare per le **07:30**)
 **Arrivo:** 10:35
-**Raggiungere il centro:**
+##### Raggiungere il centro:
 
 ### **Ritorno:** 14/12
 

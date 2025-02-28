@@ -505,14 +505,14 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 
 ### Vantaggi e svantaggi dei classificatori Rule-Based
 
-**Vantaggi:**
+##### Vantaggi:
 
 - Espressivi e di facile interpretazione come gli alberi decisionali.
 - Buone prestazioni paragonabili agli alberi decisionali.
 - Gestione efficace degli attributi ridondanti.
 - Adatti per gestire classi squilibrate.
 
-**Svantaggi:**
+##### Svantaggi:
 
 - Difficoltà nella gestione di test set con dati incompleti.
 - Costo di costruzione che non scala con l'aumento del training set.
@@ -561,12 +561,12 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 
 ### Pro e Contro del Nearest Neighbor
 
-**Pro:**
+##### Pro:
 
 * Non richiedono la costruzione di un modello.
 * Permettono di costruire contorni delle classi in maniera non lineare, offrendo maggiore flessibilità.
 
-**Contro:**
+##### Contro:
 
 * Richiedono una misura di distanza per valutare la vicinanza.
 * Richiedono una fase di pre-processing per normalizzare il range di variazione degli attributi.
@@ -593,7 +593,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 | **K-Nearest-Neighbor** | Trova i K punti più vicini a q. | Trova i 4 ristoranti più vicini al mio albergo. |
 | **Spatial join** | Trova tutte le coppie di punti (p, q) con distanza ≤ r, dove p appartiene a un insieme P e q appartiene a un insieme Q. | Coppie (albergo, ristorante) che distano al massimo 200 m. |
 
-**Approcci:**
+##### Approcci:
 
 * **Linear scan (Approccio Naïf):**
  * Calcola la distanza tra il punto di query e ogni altro punto nel database, tenendo traccia del "miglior vicino finora".
@@ -616,7 +616,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
  * Se C interseca la sfera di raggio r centrata in q, inserisci C nello stack.
  4. Torna al passo 2.
 
-**Svantaggi del Quad-tree:**
+##### Svantaggi del Quad-tree:
 
 * Punti vicini potrebbero richiedere molti livelli per essere separati in celle diverse.
 * Ha complessità temporale e spaziale esponenziale $O(n\cdot 2^d)$ rispetto alla dimensionalità d dei dati.
@@ -651,13 +651,13 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 
 ### Pro e Contro dei Kd-trees
 
-**Pro:**
+##### Pro:
 
 * Permettono una partizione efficiente dello spazio k-dimensionale minimizzando gli spazi vuoti.
 * Consentono query efficienti di ricerca dei k-nearest neighbor.
 * Possono essere usati anche per query di range/intervallo.
 
-**Contro:**
+##### Contro:
 
 * Possono diventare inefficienti ad alte dimensionalità a causa della "maledizione della dimensionalità".
 * Le prestazioni dipendono molto dalla scelta dell'asse di partizione e della strategia di selezione del punto di separazione.
@@ -691,7 +691,7 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
  2. Per ogni gruppo, calcolare il rettangolo minimo che racchiude tutti i suoi oggetti.
  3. Unire ricorsivamente i rettangoli minimi in nodi intermedi, fino ad ottenere un singolo nodo radice che racchiude tutti gli oggetti.
 
-**Pro:**
+##### Pro:
 
 * Supportano nearest neighbor search.
 * Funzionano per punti e per rettangoli.
@@ -699,6 +699,6 @@ Dopo aver generato il set di regole, C4.5rules effettua l'ordinamento Class-Base
 * Molte varianti tra le quali X-tree, SS-tree, SR-tree.
 * Funzionano bene per le dimensioni ridotte.
 
-**Contro:**
+##### Contro:
 
 * Non funzionano molto bene per dimensioni elevate.

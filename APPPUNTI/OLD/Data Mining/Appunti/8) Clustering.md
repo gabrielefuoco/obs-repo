@@ -81,11 +81,11 @@ L'algoritmo K-means è un metodo iterativo che cerca di minimizzare l'SSE.
 ##### Pseudocodice
 
 1. Seleziona K punti come centroidi iniziali.
-**Ripeti:**
+##### Ripeti:
 
 2. Forma K cluster assegnando ogni punto al suo centroide più vicino.
 3. Ricalcola il centroide di ogni cluster.
-**Fino a quando:** 
+##### Fino a quando:
 
 4. I centroidi non cambiano. 
 
@@ -144,12 +144,12 @@ La scelta dei centroidi iniziali può influenzare il risultato del K-means. Esis
 
 Questa euristica seleziona i centroidi iniziali per K-means in modo da massimizzare la distanza tra loro.
 ![[8) Clustering-20241009100711064.png|311]]
-**Passaggi:**
+##### Passaggi:
 
 1. Si sceglie un punto *µ*1 a caso.
 2. Per *i* da 2 a *k*, si sceglie il punto *µi* più distante da qualsiasi centroide precedente.
 
-**Definizione matematica:**
+##### Definizione matematica:
 
 $$µ_{i} = \text{arg max }_x \min_{\mu_{j}:1<j<i} \ d(x,_{\mu_{j}})$$
 dove:
@@ -159,11 +159,11 @@ x : indichiamo il punto che ha la maggior distanza dal centro precedente
 min
 µj:1<j<i d(x, µj): la distanza minima da x a qualsiasi centro precedente
 
-**Svantaggi:**
+##### Svantaggi:
 
 * Sensibile agli outliers.
 ![[8) Clustering-20241009100723154.png|356]]
-**Riepilogo:**
+##### Riepilogo:
 
 * Il primo punto è scelto a caso o come centroide di tutti i punti.
 * I centroidi successivi sono scelti come i punti più lontani da quelli già selezionati.
@@ -182,7 +182,7 @@ Questo metodo garantisce centroidi iniziali ben separati, ma è costoso calcolar
 
 K-means++ è un approccio per l'inizializzazione di K-means che garantisce una soluzione ottimale all'interno di un fattore di *O*(*log*(*k*)), con un SSE inferiore.
 
-**Passaggi:**
+##### Passaggi:
 
 1. Selezionare un centroide a caso.
 2. Calcolare la distanza *D*(*x*) di ogni punto *x* dal centroide più vicino.
@@ -194,7 +194,7 @@ K-means++ è un approccio per l'inizializzazione di K-means che garantisce una s
 
 Se durante l'assegnazione dei punti si ottengono cluster vuoti, è necessario scegliere un centroide sostitutivo.
 
-**Approcci:**
+##### Approcci:
 
 * **Punto più lontano:** Scegliere il punto più lontano da qualsiasi centroide attuale.
 * **Cluster con SSE più alta:** Scegliere un centroide a caso dal cluster con l'SSE più alta.
@@ -205,24 +205,24 @@ Se ci sono diversi cluster vuoti, questo processo può essere ripetuto più volt
 
 Invece di aggiornare i centroidi dopo che tutti i punti sono stati assegnati, è possibile aggiornarli in modo incrementale dopo ogni assegnazione.
 
-**Vantaggi:**
+##### Vantaggi:
 
 * **Previene cluster vuoti:** Tutti i cluster iniziano con un punto e non possono rimanere vuoti.
 * **Peso relativo dei punti:** Il peso dei punti può essere regolato durante il processo di clustering.
 
-**Svantaggi:**
+##### Svantaggi:
 
 * **Dipendenza dall'ordine:** L'ordine di elaborazione dei punti influenza il risultato.
 * **Costo computazionale:** Gli aggiornamenti incrementali sono leggermente più costosi.
 
 ## Pre e post processing
 
-**Pre processing:**
+##### Pre processing:
 
 * Eliminazione degli outlier.
 * Normalizzazione dei dati.
 
-**Post processing:**
+##### Post processing:
 
 * Eliminazione di cluster di piccole dimensioni.
 * Divisione di cluster con SSE elevato.
@@ -232,7 +232,7 @@ Invece di aggiornare i centroidi dopo che tutti i punti sono stati assegnati, è
 
 L'algoritmo Bisecting K-means divide l'insieme di punti in due cluster, seleziona uno di questi cluster da dividere e ripete il processo fino a ottenere *k* cluster.
 
-**Passaggi:**
+##### Passaggi:
 
 1. Calcolare il centroide *w*.
 2. Selezionare un punto casuale *cL*.
@@ -240,7 +240,7 @@ L'algoritmo Bisecting K-means divide l'insieme di punti in due cluster, selezion
 4. Suddividere i punti in due sotto-insiemi: *R* (più vicini a *cR*) e *L* (più vicini a *cL*).
 5. Reiterare la procedura per *R* e *L*.
 
-**Note:**
+##### Note:
 
 * Il cluster da dividere può essere scelto in base alle dimensioni, all'SSE o a entrambi.
 * L'algoritmo può produrre un clustering gerarchico o partizionale.
@@ -255,17 +255,17 @@ Le tecniche di clustering gerarchico generano una gerarchia di cluster.
 * **Agglomerative (bottom up):** Inizia con punti singoli e unisce i cluster più vicini.
 * **Divisive (top down):** Inizia con un cluster unico e divide i cluster fino a ottenere punti singoli.
 
-**Visualizzazione:**
+##### Visualizzazione:
 
 * **Dendrogramma:** Visualizza le relazioni cluster-subcluster e l'ordine di unione/divisione.
 * **Diagramma di cluster nidificato:** Per insiemi di punti bidimensionali.
 
-**Vantaggi:**
+##### Vantaggi:
 
 * Non richiede di specificare il numero di cluster iniziale.
 * Si possono ottenere quanti cluster si vogliono.
 
-**Note:**
+##### Note:
 
 * Gli algoritmi gerarchici utilizzano una matrice di similarità/dissimilarità.
 * Il valore di *k* non è definito a priori.
@@ -274,7 +274,7 @@ Le tecniche di clustering gerarchico generano una gerarchia di cluster.
 
 Molte tecniche di clustering gerarchico agglomerativo sono variazioni del seguente approccio: a partire dai singoli punti come cluster, si uniscono successivamente i due cluster più vicini fino a quando rimane un solo cluster. Questo approccio è espresso in modo più formale dal seguente algoritmo:
 
-**Passaggi:**
+##### Passaggi:
 
 1. **Calcola la matrice di prossimità:** Misura la distanza tra tutti i punti.
 2. **Ripeti:**
@@ -288,7 +288,7 @@ Dobbiamo aggiornare la matrice di prossimità poiché se uniamo due cluster, ci 
 
 La vicinanza tra cluster è definita in base al tipo di cluster considerato.
 
-**Approcci basati su grafici:**
+##### Approcci basati su grafici:
 
 * **MIN (single link):** La vicinanza è data dalla distanza tra i due punti più vicini in cluster diversi. Produce cluster basati sulla contiguità, ma è sensibile al rumore e agli outliers.
  ![[8) Clustering-20241006115321816.png|320]]
@@ -298,7 +298,7 @@ La vicinanza tra cluster è definita in base al tipo di cluster considerato.
  ![[8) Clustering-20241006115347420.png|319]]
  $$proximity(C_i, C_j) = \frac{{\sum_{p_i \in C_i, p_j \in C_j} proximity(p_i, p_j) }}{|C_i| \times |C_j|} $$
 
-**Approcci basati su prototipi:**
+##### Approcci basati su prototipi:
 
 * **Vicinanza tra centroidi:** La vicinanza è data dalla distanza tra i centroidi dei cluster.
  ![[8) Clustering-20241006115356644.png|312]]
@@ -307,7 +307,7 @@ La vicinanza tra cluster è definita in base al tipo di cluster considerato.
 
 *m* rappresenta il centroide del cluster.
 
-**Note:**
+##### Note:
 
 * MIN e MAX sono chiamati anche single link e complete link.
 * Il metodo di Ward può essere visto come un K-means gerarchico.
@@ -361,12 +361,12 @@ Date le precedenti definizioni di punti core, punti border e punti noise, l'algo
 
 ### Vantaggi e Svantaggi
 
-**Vantaggi:**
+##### Vantaggi:
 
 * **Resistente al rumore:** DBSCAN è relativamente resistente al rumore grazie alla sua definizione di cluster basata sulla densità.
 * **Gestione di cluster di forme e dimensioni arbitrarie:** Può trovare cluster di forme e dimensioni diverse, a differenza di algoritmi come K-means.
 
-**Svantaggi:**
+##### Svantaggi:
 
 * **Problemi con cluster a densità diverse:** Ha difficoltà con cluster che hanno densità molto diverse.
 * **Problemi con dati ad alta dimensione:** La densità è più difficile da definire per dati ad alta dimensione, rendendo DBSCAN meno efficace.
@@ -407,12 +407,12 @@ La correlazione tra queste due matrici può essere utilizzata per valutare la qu
 La visualizzazione dei dati tramite grafici di correlazione può essere un metodo efficace per valutare la qualità del clustering. 
 ![[8) Clustering-20241009102033827.png|254]]
 ![[8) Clustering-20241009102042362.png|282]]
-**Interpretazione dei Grafici:**
+##### Interpretazione dei Grafici:
 
 * **Cluster ben definiti:** Se i dati sono ben raggruppati in cluster, il grafico di correlazione mostrerà blocchi distinti sulla diagonale, come nel primo esempio. Questi blocchi rappresentano i cluster identificati dall'algoritmo.
 * **Cluster poco definiti:** Se il clustering non è di alta qualità, il grafico di correlazione mostrerà una struttura meno definita, con blocchi meno distinti o assenti. Questo indica che l'algoritmo non ha catturato correttamente la struttura dei dati, come negli esempi di K-means e complete-link.
 
-**Utilizzo dei Grafici:**
+##### Utilizzo dei Grafici:
 
 I grafici di correlazione possono essere utilizzati per:
 
@@ -428,7 +428,7 @@ I grafici di correlazione possono essere utilizzati per:
 
 Un'altra possibilità per valutare la qualità del clustering è quella di misurare la **Somma degli Errori Quadratici (SSE)**.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo la seguente distribuzione di dati:
 
@@ -438,7 +438,7 @@ La curva seguente mostra l'SSE in funzione del numero di cluster:
 
 ![[8) Clustering-20241009102146917.png|319]]
 
-**Interpretazione della Curva SSE:**
+##### Interpretazione della Curva SSE:
 
 * **Errore elevato con pochi cluster:** Partendo da 1 o 2 cluster, l'errore (SSE) è molto elevato.
 * **Diminuzione dell'errore con più cluster:** Man mano che il numero di cluster aumenta, l'SSE diminuisce.
@@ -461,21 +461,21 @@ La valutazione della validità di un risultato di clusterizzazione si basa su du
 
 Esistono diversi modi per misurare coesione e separazione:
 
-**1. Somma delle distanze:**
+##### 1. Somma delle distanze:
 
 * **Coesione:** somma delle distanze tra tutte le coppie di oggetti all'interno di un cluster.
 $$cohesion(c_i) = \sum_{x \in c_i, y \in c_i} proximity(x, y) )$$ 
 * **Separazione:** somma delle distanze tra tutte le coppie di oggetti appartenenti a due cluster diversi.
 $$separation(c_i, c_j) = \sum_{x \in c_i, y \in c_j} proximity(x, y) $$ 
 
-**2. Distanza dal centroide:**
+##### 2. Distanza dal centroide:
 
 * **Coesione:** somma delle distanze tra ogni punto del cluster e il suo centroide.
 $$cohesion(C_i) = \sum_{x \in c_i} proximity(x, m_i) $$ 
 * **Separazione:** distanza tra i centroidi di due cluster diversi.
 $$separation(C_i, C_j) = proximity(m_i, m_j)$$ 
 
-**3. SSE e BSS:**
+##### 3. SSE e BSS:
 
 * **Coesione:** misurata tramite la somma dei quadrati delle distanze tra ogni punto e il centroide del suo cluster (SSE o WSS).
 $$SSE = WSS = \sum_{i} \sum_{x \in C_i} (x - m_i)^2$$ 
@@ -501,7 +501,7 @@ Il valore del silhouette coefficient varia tra -1 e 1:
 * **s ≈ 0:** indica che il punto è vicino al confine tra due cluster, e potrebbe essere classificato in entrambi.
 * **s ≈ -1:** indica che il punto è probabilmente classificato nel cluster sbagliato, poiché è più vicino ai punti di un altro cluster rispetto ai punti del suo cluster.
 
-**Interpretazione:**
+##### Interpretazione:
 
 Un valore di silhouette coefficient alto (vicino a 1) indica una buona separazione tra i cluster, mentre un valore basso (vicino a 0 o negativo) indica una scarsa separazione o una possibile errata classificazione dei punti.
 
@@ -511,11 +511,11 @@ Un valore di silhouette coefficient alto (vicino a 1) indica una buona separazio
 
 La clusterizzazione fuzzy, o soft clustering, si differenzia dalla clusterizzazione hard (crisp) in quanto consente ai punti di appartenere a più cluster contemporaneamente. In altre parole, un punto può essere membro di più cluster con un diverso grado di appartenenza.
 
-**Appartenenza Fuzzy:**
+##### Appartenenza Fuzzy:
 
 In un contesto fuzzy, ogni punto *i* è associato a ciascun cluster *j* con un **peso** *wij*, che rappresenta il grado di appartenenza del punto *i* al cluster *j*. La somma dei pesi per ogni punto deve essere uguale a 1, ovvero la somma delle appartenenze di un punto a tutti i cluster è sempre 1.
 
-**SSE nel Fuzzy Clustering:**
+##### SSE nel Fuzzy Clustering:
 
 L'SSE (Somma dei Quadrati degli Errori) viene adattata per tenere conto dei pesi di appartenenza:
 
@@ -526,7 +526,7 @@ dove:
 * $x_i$ è il punto che stiamo considerando
 * $c_j$ è il centroide del cluster *j*
 
-**K-Means Fuzzy:**
+##### K-Means Fuzzy:
 
 Il K-Means fuzzy è una variante del K-Means che tiene conto dei pesi di appartenenza. L'obiettivo è minimizzare l'SSE, che viene modificata come segue:
 
@@ -535,7 +535,7 @@ $$SSE = \sum_{j=1}^k \sum_{i=1}^m w_{ij}^p \cdot dist(x_i, c_j)^2$$
 Il parametro *p* controlla l'influenza dei pesi. Più *p* è elevato, meno peso viene dato ai pesi di appartenenza. In generale, *p >* 1.
 ![[8) Clustering-20241009102336916.png|439]]
 
-**Algoritmo K-Means Fuzzy:**
+##### Algoritmo K-Means Fuzzy:
 
 1. Inizializzazione dei pesi *wij* in modo casuale.
 2. Aggiornamento dei centroidi:
@@ -548,35 +548,35 @@ $$w_{ij} =\frac{\left( \frac{1}{dist(x_{i}c_{j})}^2 \right)^{\frac{1}{p-1}}}{ \s
 
 4. Ripetizione dei passi 2 e 3 fino alla convergenza.
 
-**Rappresentazione Grafica:**
+##### Rappresentazione Grafica:
 
 ### Clustering Grid-Based
 
 Il clustering grid-based divide lo spazio dei dati in celle (rettangoli o iper-rettangoli) e conta il numero di punti in ogni cella. Le celle con un numero di punti superiore a una soglia vengono considerate come cluster.
 
-**Algoritmo:**
+##### Algoritmo:
 
 1. Dividere lo spazio dei dati in celle.
 2. Contare il numero di punti in ogni cella.
 3. Identificare le celle con un numero di punti superiore a una soglia.
 4. Raggruppare le celle adiacenti con un numero di punti superiore alla soglia.
 
-**Rappresentazione Grafica:**
+##### Rappresentazione Grafica:
 
 ![[8) Clustering-20241009093514470.png|485]]
-**Pseudocodice:**
+##### Pseudocodice:
 
 1. Definisci un insieme di celle di griglia.
 2. Assegna gli oggetti alle celle appropriate e calcola la densità di ciascuna cella.
 3. Elimina le celle con una densità inferiore a una soglia specificata, r.
 4. Forma cluster da gruppi contigui (adiacenti) di celle dense. 
 
-**Vantaggi:**
+##### Vantaggi:
 
 * Efficiente per grandi dataset.
 * Semplice da implementare.
 
-**Svantaggi:**
+##### Svantaggi:
 
 * Sensibile alla dimensione delle celle.
 * Non adatto per dati con densità variabile.
@@ -600,7 +600,7 @@ Il processo di clusterizzazione è quindi molto influenzato dal numero di attrib
 
 La clusterizzazione basata su grafi sfrutta la rappresentazione dei dati come grafi per identificare i cluster. Due tecniche principali sono:
 
-**1. Clustering Gerarchico Divisivo:**
+##### 1. Clustering Gerarchico Divisivo:
 
 ![[8) Clustering-20241009102407253.png|538]]
 * **Costruzione del Grafo:** Si crea un grafo completo non orientato, dove ogni nodo è collegato a tutti gli altri.
@@ -609,7 +609,7 @@ La clusterizzazione basata su grafi sfrutta la rappresentazione dei dati come gr
 
 **Complessità:** L'algoritmo ha una complessità di $O(n^3)$ se si utilizza un algoritmo di costruzione dell'albero ricoprente con complessità $O(n^2)$. Utilizzando una struttura ad heap, la complessità si riduce a $O(n^2\log n$).
 
-**2. Shared Nearest Neighbour (SNN):**
+##### 2. Shared Nearest Neighbour (SNN):
 
 * **Assegnazione dei Pesi:** Si assegna un peso a ciascun arco del grafo, che corrisponde al numero di vicini in comune tra i due nodi.
 * **Algoritmo di Jarvis-Patrick:**
@@ -622,7 +622,7 @@ La clusterizzazione basata su grafi sfrutta la rappresentazione dei dati come gr
 
 **Svantaggi:** L'algoritmo non è efficace quando i cluster presentano collegamenti tra loro.
 
-**3. SNN Density Based Clustering:**
+##### 3. SNN Density Based Clustering:
 
 * **Combinazione di SNN e DBSCAN:** Questo algoritmo combina l'algoritmo SNN con il DBSCAN.
 * **Fasi:**

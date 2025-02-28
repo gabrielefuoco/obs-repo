@@ -10,13 +10,13 @@ L'analisi delle regole associative è una tecnica di data mining che identifica 
 
 **Scopo:** individuare itemset che tendono a comparire frequentemente insieme in un insieme di transazioni.
 
-**Definizioni:**
+##### Definizioni:
 
 * **Insieme di elementi (I):** $I = \{i_1, i_2, \dots, i_d\}$
 * **Insieme di transazioni (T):** $T = \{t_1, t_2, \dots, t_n\}$, dove ogni*ogni* $t_j$ contiene un sottoinsieme degli elementi di I.
 * **Itemset (X):** sottinsieme degli elementi di I.
 
-**Metriche chiave:**
+##### Metriche chiave:
 
 * **Support count (σ(X)):** numero di transazioni che contengono X:
 $$\sigma(X) = |\{t_i | X \subset t_i, t_j \in T\}|$$
@@ -52,7 +52,7 @@ Il problema della scoperta delle regole di associazione consiste nel trovare, da
 
 Dove minsup e minconf sono soglie definite dall'utente.
 
-**Approccio Brute-Force:**
+##### Approccio Brute-Force:
 
 Un approccio brute-force calcolerebbe supporto e confidenza per tutte le possibili regole. Il numero totale di regole R su un dataset con d elementi distinti è esponenziale:
 
@@ -62,7 +62,7 @@ Dove il numero totale di itemset è pari a $2^d$.
 
 Questo approccio è proibitivamente costoso.
 
-**Approccio Efficiente:**
+##### Approccio Efficiente:
 
 Gli algoritmi tipicamente scompongono il problema in due sotto-task:
 
@@ -71,7 +71,7 @@ Gli algoritmi tipicamente scompongono il problema in due sotto-task:
 
 Questa decomposizione sfrutta il fatto che il supporto di X→Y è uguale a quello di X∪Y. Quindi, si possono subito escludere regole con itemset non frequente.
 
-**Generazione degli Itemset Frequenti:**
+##### Generazione degli Itemset Frequenti:
 
 La chiave è l'efficiente generazione degli itemset frequenti, ancora un problema complesso, svolto tipicamente con algoritmi ad hoc come Apriori.
 
@@ -81,7 +81,7 @@ La chiave è l'efficiente generazione degli itemset frequenti, ancora un problem
 
 Approccio "brute-force" per trovare gli itemset frequenti in un insieme di transazioni, e le strategie per ridurre la sua complessità computazionale.
 
-**Approccio "brute-force"**
+##### Approccio "brute-force"
 
 * **Scopo:** Trovare tutti gli itemset frequenti in un insieme di transazioni.
 * **Procedura:**
@@ -93,7 +93,7 @@ Approccio "brute-force" per trovare gli itemset frequenti in un insieme di trans
  * w è la dimensione massima di una transazione.
 * **Problema:** La complessità esponenziale in d rende l'approccio inefficiente.
 
-**Strategie per ridurre la complessità:**
+##### Strategie per ridurre la complessità:
 
 1. **Ridurre M (numero di candidati):**
  * Utilizzare il principio di Apriori per escludere molti candidati senza calcolare il supporto.
@@ -140,29 +140,29 @@ L'efficacia del pruning basato sul supporto di Apriori può essere dimostrata co
 ## Algoritmo Apriori
 
 L'algoritmo Apriori è un algoritmo per la scoperta di itemset frequenti in un insieme di dati di transazioni. L'obiettivo è trovare tutti gli itemset che appaiono in almeno una certa percentuale di transazioni, definita come *minsup*.
-**Descrizione dell'Algoritmo:**
+##### Descrizione dell'Algoritmo:
 
 L'algoritmo Apriori opera in modo iterativo, partendo da itemset di dimensione 1 e aumentando gradualmente la dimensione degli itemset fino a quando non vengono trovati tutti gli itemset frequenti.
 
-**Fase 1: Inizializzazione**
+##### Fase 1: Inizializzazione
 
 * L'algoritmo inizia calcolando il supporto di ogni singolo item (1-itemset).
 * Gli itemset che superano la soglia di supporto *minsup* vengono inclusi nell'insieme *F1* degli itemset frequenti di dimensione 1.
 
-**Fase 2: Generazione e Pruning di Candidati**
+##### Fase 2: Generazione e Pruning di Candidati
 
 * In ogni iterazione successiva, l'algoritmo genera candidati itemset di dimensione *k* (k-itemset) a partire dagli itemset frequenti di dimensione *k-1*.
 * I candidati vengono poi sottoposti a un processo di pruning, in cui vengono eliminati tutti i candidati che non soddisfano il principio Apriori. Questo principio afferma che se un itemset è frequente, allora tutti i suoi sottoinsiemi devono essere anch'essi frequenti.
 
-**Fase 3: Conteggio del Supporto**
+##### Fase 3: Conteggio del Supporto
 
 * L'algoritmo scansiona l'insieme di dati per contare il supporto di ogni candidato itemset.
 
-**Fase 4: Eliminazione dei Candidati Infrequenti**
+##### Fase 4: Eliminazione dei Candidati Infrequenti
 
 * Gli itemset candidati che non raggiungono la soglia di supporto *minsup* vengono eliminati.
 
-**Fase 5: Terminazione**
+##### Fase 5: Terminazione
 
 * L'algoritmo termina quando non vengono generati nuovi itemset frequenti.
 
@@ -225,27 +225,28 @@ Questo metodo ottimizza la generazione di candidati combinando due itemset di ca
 2. **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
 3. **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004203853657.png|404]]
 
 In questo esempio, gli itemset *ABD* e *ACD* non vengono combinati perché i loro prefissi sono uguali solo per un elemento, non per due.
 
-**Alternative:**
+##### Alternative:
 
 Esistono altre tecniche che considerano i suffissi o combinazioni di prefissi e suffissi. La scelta della tecnica più efficace dipende dal caso specifico.
 
-**Principio generale:**
+##### Principio generale:
 
 Due itemset possono essere uniti se differiscono di un solo elemento.
 
-**Vantaggi:**
+##### Vantaggi:
 
 Queste tecniche sono più efficienti rispetto alla generazione di candidati con forza bruta, riducendo il numero di itemset da verificare.
 
 ## Generazione di Regole Associative
 
-**Partizionamento e Confidenza**
+##### Partizionamento e Confidenza
+
 La generazione di regole associative prevede la divisione di un itemset frequente in due parti:
 
 - **Corpo**: Gli elementi che compaiono nel lato sinistro della regola.
@@ -259,7 +260,8 @@ Dato l'itemset frequente {A, B, C, D}, possiamo generare le seguenti regole:
 
 ![[7) Regole associative-20241005111740790.png]]
 
-**Proprietà di Anti-Monotonicità**
+##### Proprietà di Anti-Monotonicità
+
 La confidenza di una regola non è anti-monotona rispetto al numero di elementi nel corpo. Ad esempio, la confidenza di ABC →D non è necessariamente maggiore o minore della confidenza di AB →D.
 
 Tuttavia, la confidenza è anti-monotona rispetto al numero di elementi nella testa. Questo significa che spostando elementi dalla testa al corpo, la confidenza diminuisce.
@@ -268,10 +270,12 @@ Tuttavia, la confidenza è anti-monotona rispetto al numero di elementi nella te
 
 $$c(ABC \to D) \ge c(AB \to CD) \ge c(A \to BCD)$$
 
-**Pruning delle Regole**
+##### Pruning delle Regole
+
 Il principio Apriori può essere applicato anche alla generazione di regole. Se una regola non è frequente, tutte le regole ottenute spostando elementi dalla testa al corpo non avranno una confidenza adeguata. Questo permette di eliminare un numero significativo di regole candidate.
 
-**Complessità**
+##### Complessità
+
 Nonostante il pruning, il problema della generazione di regole rimane esponenziale. Il numero di regole possibili cresce esponenzialmente con il numero di elementi nell'itemset.
 
 ## Complessità degli Algoritmi per le Regole Associative
@@ -301,7 +305,7 @@ La complessità del calcolo del supporto è data da *O*(*NMw*) confronti, dove:
 
 Le strutture ad hash possono migliorare il calcolo del supporto. Invece di confrontare ogni transazione con tutti gli itemset candidati, si può utilizzare una struttura ad accesso diretto per accedere solo ai bucket corrispondenti all'hash della transazione.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004203906101.png|424]]
 
@@ -325,7 +329,7 @@ dove *k* è il numero di elementi e *n* è la dimensione degli itemset.
 
 Un hash tree è una struttura dati ad albero che organizza gli itemset candidati in base ad una funzione di hash. Ogni nodo dell'albero rappresenta un valore di hash, e i figli di un nodo sono gli itemset che hanno quel valore di hash.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204004920.png|414]]
 
@@ -338,7 +342,7 @@ Un hash tree è una struttura dati ad albero che organizza gli itemset candidati
 
 Per calcolare il supporto di un itemset, è necessario verificare se l'itemset è contenuto in una transazione. L'hash tree può essere utilizzato per velocizzare questo processo.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204015804.png|495]]
 
@@ -374,7 +378,7 @@ Un itemset è **massimale** se nessuno dei suoi immediati superset è frequente.
 
 Il principio apriori afferma che se un itemset è frequente, tutti i suoi sottoinsiemi sono anch'essi frequenti. Questo principio può essere utilizzato per eliminare gli itemset non massimali durante il processo di scoperta delle regole associative.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204050883.png|474]]
 
@@ -384,7 +388,7 @@ Se un itemset è frequente (ad esempio, *F* nel reticolo), tutti i suoi sottoins
 
 Un itemset è **chiuso** se nessuno dei suoi immediati superset ha lo stesso valore di supporto. In altre parole, un itemset chiuso non può essere esteso aggiungendo altri elementi senza diminuire il suo supporto.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204116719.png|462]]
 
@@ -460,25 +464,25 @@ In questo esempio, la regola con correlazione più alta (0.9) ha un valore di *
 
 Le metriche utilizzate per valutare le regole associative presentano diverse proprietà che influenzano la loro interpretazione e applicabilità. Ecco alcune proprietà chiave:
 
-**1. Simmetria:**
+##### 1. Simmetria:
 
 * Alcune metriche sono **simmetriche**, il che significa che il risultato è lo stesso indipendentemente dall'ordine degli elementi nella regola (es. *A → B* è equivalente a *B → A*). Esempi di metriche simmetriche includono Jaccard, coseno e Lift.
 * Altre metriche sono **asimmetriche**, il che significa che il risultato dipende dall'ordine degli elementi nella regola. Esempi di metriche asimmetriche includono confidenza e Laplace.
 * Le metriche simmetriche sono più adatte per misurare la validità dell'itemset, mentre le metriche asimmetriche sono più adatte per misurare la validità della regola.
 
-**2. Variazione di Scala:**
+##### 2. Variazione di Scala:
 
 * Alcune metriche sono **insensibili** alla variazione di scala del dataset. Questo significa che il risultato rimane lo stesso anche se il numero di elementi nel dataset cambia.
 * Altre metriche sono **sensibili** alla variazione di scala. Questo significa che il risultato cambia se il numero di elementi nel dataset cambia.
 * La scelta della metrica dipende dal contesto e dalla sensibilità desiderata alla variazione di scala.
 
-**3. Correlazione:**
+##### 3. Correlazione:
 
 * Il coefficiente *ϕ* è una metrica che misura la correlazione tra due variabili binarie.
 * Il coefficiente *ϕ* è **insensibile** all'inversione dei valori delle variabili. Questo significa che il risultato rimane lo stesso anche se si scambiano i valori di *X* e *Y*.
 * La sensibilità all'inversione può essere un vantaggio o uno svantaggio a seconda del contesto.
 
-**4. Addizione di Casi Nulli:**
+##### 4. Addizione di Casi Nulli:
 
 * Alcune metriche sono **sensibili** all'aggiunta di casi nulli (transazioni che non contengono né *X* né *Y*). Questo significa che il risultato cambia se si aggiungono casi nulli al dataset.
 * Altre metriche sono **insensibili** all'aggiunta di casi nulli. Questo significa che il risultato rimane lo stesso anche se si aggiungono casi nulli al dataset.
@@ -491,7 +495,7 @@ Di seguito una tabella che riassume le proprietà di alcune misure:
 
 Il paradosso di Simpson dimostra come l'analisi di dati aggregati può portare a conclusioni errate quando non si tiene conto di variabili nascoste.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204237497.png|317]]
 Consideriamo l'analisi di due variabili:
@@ -509,7 +513,7 @@ Queste due confidenze ci dicono che sono di più le persone che, oltre alla macc
 
 Tuttavia, quando si introduce una variabile nascosta, come lo stato di studente o lavoratore, la relazione si inverte.
 
-**Analisi Stratificata:**
+##### Analisi Stratificata:
 
 ![[7) Regole associative-20241004204457945.png|454]]
 * **Studenti:** La confidenza è più alta per le persone che comprano la macchina per esercizi ma non il televisore HD.
@@ -519,11 +523,11 @@ $$c((\{HDTV= No\} \to \{text{Exercise Machine} = Yes\}) = 4 /34=11.8\%$$
 $$c((\{HDTV= Yes\} \to \{text{Exercise Machine} = Yes\}) = 98 /170=57.7\%$$
 $$c((\{HDTV= No\} \to \{text{Exercise Machine} = Yes\}) = 50 /86=58.1\%$$
 
-**Spiegazione:**
+##### Spiegazione:
 
 Il paradosso di Simpson si verifica perché la relazione osservata tra le due variabili (Buy HDTV e Buy Exercise Machine) è influenzata dalla variabile nascosta (stato di studente o lavoratore).
 
-**Conclusione:**
+##### Conclusione:
 
 È importante considerare le variabili nascoste quando si analizzano i dati per evitare di trarre conclusioni errate. La stratificazione dei dati, ovvero l'analisi separata di sottogruppi, può aiutare a identificare le relazioni reali tra le variabili e a evitare il paradosso di Simpson.
 
@@ -531,15 +535,15 @@ Il paradosso di Simpson si verifica perché la relazione osservata tra le due va
 
 La distribuzione del supporto negli itemset può influenzare significativamente l'analisi delle regole associative.
 
-**Problema:**
+##### Problema:
 
 La distribuzione del supporto è spesso distorta, con pochi itemset ad alto supporto e molti itemset a basso supporto.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204636451.png|368]]
 
-**Conseguenze:**
+##### Conseguenze:
 
 * **Supporto minimo elevato:**
  * Perdita di itemset rari che potrebbero essere interessanti per l'analisi.
@@ -550,28 +554,28 @@ La distribuzione del supporto è spesso distorta, con pochi itemset ad alto supp
 
 L'analisi di regole associative in dataset con supporto non omogeneo presenta sfide specifiche.
 
-**Problema:**
+##### Problema:
 
 La presenza di itemset con supporto molto diverso tra loro può portare a conclusioni errate sull'interesse delle regole associative.
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241009102544967.png]]
 
 * La regola *q → p* ha una confidenza alta (4/5), ma il supporto di *q* è basso (5/30).
 * La regola *p → q* ha una confidenza bassa (4/25), ma il supporto di *p* è alto (25/30).
 
-**Conseguenze:**
+##### Conseguenze:
 
 * Regole con alta confidenza ma basso supporto possono essere poco significative.
 * Regole con bassa confidenza ma alto supporto possono essere interessanti, ma non vengono rilevate.
 
-**Cross-Support:**
+##### Cross-Support:
 
 * Itemset con supporto elevato ma basso supporto congiunto (es. *{p, q, r}, {p, r}, {p, q}*) possono essere considerati **cross-support**.
 * Le regole associative relative a questi itemset sono di scarso interesse, nonostante l'elevata confidenza.
 
-**Conclusione:**
+##### Conclusione:
 
 In dataset con supporto non omogeneo, la confidenza da sola non è sufficiente per valutare l'interesse delle regole associative. È necessario considerare anche il supporto degli itemset coinvolti.
 
@@ -579,28 +583,28 @@ In dataset con supporto non omogeneo, la confidenza da sola non è sufficiente p
 
 Il cross-support è un problema che si presenta nell'analisi delle regole associative quando gli itemset contengono elementi con supporti molto diversi tra loro.
 
-**Problema:**
+##### Problema:
 
 * Regole con alta confidenza ma basso supporto possono essere poco significative.
 * Esempi tipici: "caviale → latte" (caviale ha basso supporto, latte ha alto supporto).
 
-**Esempio:**
+##### Esempio:
 
 ![[7) Regole associative-20241004204653413.png|330]]
 
-**Soluzione:**
+##### Soluzione:
 
 * Utilizzare una misura di cross-support per identificare itemset con supporti disomogenei.
 * Eliminare gli itemset con cross-support inferiore a una soglia predefinita.
 
-**Misura di Cross-Support:**
+##### Misura di Cross-Support:
 
 Dato un itemset $X = \{x_1, x_2, ..., x_n\}$, la misura di cross-support, r, è definita come:
 
 $$r = \frac{min\{s(x_1), ..., s(x_n)\}}{max\{s(x_1), ..., s(x_n)\}}$$
 dove s(xi) è il supporto dell'i-esimo elemento.
 
-**Interpretazione:**
+##### Interpretazione:
 
 * Se r < γ (γ è una soglia predefinita), allora X contiene elementi con supporto diverso.
 * Gli itemset con cross-support inferiore a γ vengono eliminati.
@@ -609,17 +613,17 @@ dove s(xi) è il supporto dell'i-esimo elemento.
 
 L'H-confidence è una misura che aiuta a identificare regole associative significative in presenza di itemset con supporti disomogenei.
 
-**Problema:**
+##### Problema:
 
 * La confidenza di una regola può essere alta anche se gli itemset coinvolti hanno supporti molto diversi.
 * Questo può portare a regole poco significative, come "caviale → latte".
 
-**Soluzione:**
+##### Soluzione:
 
 * L'H-confidence considera la confidenza minima di tutte le possibili regole ottenibili da un itemset.
 * Questo aiuta a identificare itemset con una forte relazione tra tutti gli elementi, indipendentemente dal loro supporto individuale.
 
-**Definizione:**
+##### Definizione:
 
 Dato un itemset $X = \{x_1, x_2, ..., x_n\}$, l'H-confidence è definita come:
 
@@ -629,7 +633,7 @@ dove $c(X_1 \to X_2)$ è la confidenza della regola $X_1 \to X_2$, definita come
 
 $$c(X_1, X_2) = \frac{s(X_1 \cup X_2)}{s(X_1)}$$
 
-**Calcolo:**
+##### Calcolo:
 
 * Si considera la confidenza minima di tutte le regole ottenibili da $X$ effettuando un partizionamento degli elementi.
 * Si trova la variabile $X_1$ con supporto massimo.
@@ -637,7 +641,7 @@ $$c(X_1, X_2) = \frac{s(X_1 \cup X_2)}{s(X_1)}$$
 
 $$hconf = min\left\{ \frac{s(X)}{s(x_1)}, ..., \frac{s(X)}{s(x_n)} \right\} = \frac{s(X)}{max\{s(x_1), ..., s(x_n)\}}$$
 
-**Vantaggi:**
+##### Vantaggi:
 
 1. Un'elevata H-confidence implica una stretta relazione tra tutti gli elementi del pattern.
 2. Vengono eliminati i cross-support pattern.
@@ -784,7 +788,7 @@ Nell'algoritmo, in questo caso, l'attributo target non viene considerato. Calcol
 ### Validità delle Regole
 
 Ci chiediamo ora quando una regola è significativa. In questo caso non è possibile utilizzare la confidenza in quanto nel conseguente abbiamo dei valori reali. Una regola associativa quantitativa è interessante solo se le statistiche calcolate sulle transazioni coperte dalla regola sono significativamente diverse da quelle calcolate sulle transazioni non coperte dalla regola.
-$$A \to B: \mu \text{   verso } \bar{A}\to B: \mu$$
+$$A \to B: \mu \text{ verso } \bar{A}\to B: \mu$$
 
 (Verso sarebbe vs). A è l’insieme di tutti gli oggetti che non stanno nell’itemset frequente. L’obiettivo quindi è verificare quando la differenza tra μ e μ′ è maggiore di una soglia ∆. Se i due valori μ e μ′ sono molto vicini, la regola non è significativa.
 
@@ -839,7 +843,7 @@ Latte parzialmente scremato-> pane bianco,
 Latte scremato -> pane integrale
 
 Sono tutte indicative di un'associazione più generale tra latte e pane. Le ultime te slide non le ha spiegate ma le riporto come immagine per completezza
-**Supporto e confidenza variano da livello a livello:**
+##### Supporto e confidenza variano da livello a livello:
 
 ```
 If X è genitore di X1 e X2, then 
@@ -865,12 +869,12 @@ then conf(X1 ⇒ Y) ≥ minconf
  * Latte scremato -> Pane
 * **La dimensionalità dei dati aumenta e conseguentemente aumenta il tempo di elaborazione.**
 
-**Una soluzione alternativa è quella di generare i pattern frequenti separatamente per i diversi livelli della gerarchia.**
+##### Una soluzione alternativa è quella di generare i pattern frequenti separatamente per i diversi livelli della gerarchia.
 
 * **Generare inizialmente i pattern al livello più alto della gerarchia.**
 * **Procedere iterativamente verso i livelli successivi.**
 
-**Conseguenze:**
+##### Conseguenze:
 
 * **Il costo di I/O crescerà notevolmente poiché saranno necessarie più scansioni dei dati.**
 * **Saranno persi eventuali associazioni cross-livello interessanti.** 

@@ -124,14 +124,14 @@ $$
 
 ---
 
-**Source Text**
+##### Source Text
 
 The quick brown fox jumps over the lazy dog. 
 The quick brown fox jumps over the lazy dog. 
 The quick brown fox jumps over the lazy dog. 
 The quick brown fox jumps over the lazy dog.
 
-**Training Samples**
+##### Training Samples
 
 (the, quick) 
 (the, brown)
@@ -150,7 +150,8 @@ The quick brown fox jumps over the lazy dog.
 (fox, jumps) 
 (fox, over)
 
-**Input**
+##### Input
+
 $$x_1$$ 0 
 $$x_2$$ 0 
  . 
@@ -168,7 +169,8 @@ Vector of word i
 $$w1$$
 $$N$$
 
-**Hidden** 
+##### Hidden
+
 $$h_1$$ 
 $$h_2$$ 
 $$h_3$$ 
@@ -180,7 +182,8 @@ N-dimension vector
 $$V = $$
 $$X$$
 
-**Output**
+##### Output
+
 softmax 
 $$y_1$$ 0 
 $$y_2$$ 0 

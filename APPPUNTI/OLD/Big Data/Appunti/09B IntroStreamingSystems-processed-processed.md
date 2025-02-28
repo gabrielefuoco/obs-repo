@@ -115,7 +115,7 @@ I dati vengono raccolti in finestre di sessione in base al momento in cui si son
  * Esempio: temperatura nel tempo.
 
 ![[|159](_page_21_Figure_8.jpeg)]
-**Esempio: Windowed Aggregation:**
+##### Esempio: Windowed Aggregation:
 
 ![[](_page_22_Figure_1.jpeg)
 
@@ -166,7 +166,7 @@ I dati vengono raccolti in finestre di sessione in base al momento in cui si son
 * I dati non si muovono!
 * Alta latenza, bassa efficienza.
 
-**Come mantenere i dati in movimento:**
+##### Come mantenere i dati in movimento:
 
 ![[|456](_page_28_Figure_2.jpeg)]
 

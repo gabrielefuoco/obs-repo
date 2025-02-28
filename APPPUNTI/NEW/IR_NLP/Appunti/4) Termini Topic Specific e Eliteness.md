@@ -34,7 +34,7 @@ L'approssimazione di Poisson è uno strumento utile per analizzare eventi rari i
 
 **Approssimazione nella coda della distribuzione:** L'approssimazione di Poisson è particolarmente utile per valutare la probabilità di non occorrenza di eventi, ovvero eventi che si trovano nella coda della distribuzione.
 
-**Derivazione dell'approssimazione:**
+##### Derivazione dell'approssimazione:
 
 La distribuzione delle frequenze dei termini segue una distribuzione binomiale ed è approssimata da una Poisson.
 $$B_{T,P}(k)=\begin{pmatrix}T \\ K \end{pmatrix}p^k(1-p)^{t-k}$$
@@ -57,17 +57,17 @@ La frequenza globale dei termini segue una legge di Zipf, prescinde dalla variab
 
 L'approssimazione di Poisson, pur essendo valida per la maggior parte dei termini, presenta dei limiti quando si tratta di termini "topic specific", ovvero termini legati a un determinato argomento. Questi termini, essendo fortemente legati al contesto del documento, non sono generali e presentano un pattern di occorrenza diverso rispetto ai termini per cui l'approssimazione di Poisson è valida.
 
-**Caratteristiche dei termini "topic specific":**
+##### Caratteristiche dei termini "topic specific":
 
 * **Mancanza di indipendenza:** I termini "topic specific" non sono indipendenti tra loro, ma tendono a co-occorrere in modo significativo.
 * **Contestualità:** Questi termini sono fortemente legati al contesto del documento, presentando una forte proprietà di "contextual bound".
 * **Occorrenza a gruppi:** I termini "topic specific" non si presentano necessariamente a coppie o triple, ma tendono a formare gruppi, evidenziando una coerenza e una condivisione di pattern di occorrenza.
 
-**Implicazioni per la modellazione:**
+##### Implicazioni per la modellazione:
 
 L'approssimazione di Poisson non è adatta a modellare la probabilità di occorrenza dei termini "topic specific" a causa della loro dipendenza e contestualità. Un modello basato sulla Poissoniana non riesce a catturare la complessità del loro comportamento.
 
-**Soluzioni:**
+##### Soluzioni:
 
 * **Approssimazione Okapi BM25:** Un'approssimazione alternativa, vantaggiosa per diversi aspetti, è implementata nel modello Okapi BM25.
 * **Distribuzione Binomiale Negativa:** Un'altra soluzione è l'utilizzo della distribuzione binomiale negativa, che si adatta meglio alla stima della probabilità di occorrenza dei termini "topic specific".
@@ -120,7 +120,7 @@ Un termine "elite" è un termine, generalmente un sostantivo, che descrive un co
 
 L'eliteness di un termine, ovvero la sua capacità di essere informativo per un determinato topic, è strettamente legata alla rilevanza del documento al topic stesso. Un documento può contenere molti termini "elite", ma solo quelli presenti in un documento rilevante al topic sono considerati realmente informativi.
 
-**Modellare l'eliteness:**
+##### Modellare l'eliteness:
 
 * **Variabile nascosta:** Per ogni coppia documento-termine, si introduce una variabile nascosta, indicata come $E_i$ per il termine $i$, che rappresenta l'argomento. Un termine è elite in un documento se il documento tratta il concetto denotato dal termine.
 * **Eliteness binaria:** Un termine o è elite o non lo è.
@@ -153,27 +153,26 @@ Data l'assunzione di rilevanza o meno, la probabilità di osservare una TF=tf è
 
 ### Modello a Due Poisson
 
-I problemi riscontrati con il modello a 1-Poisson suggeriscono l'utilizzo di due distribuzioni di Poisson: la distribuzione varia a seconda che il termine sia "elite" o meno.  La probabilità di osservare una term frequency (TF) pari a *k*, dato uno stato di rilevanza *R*, è data da:
+I problemi riscontrati con il modello a 1-Poisson suggeriscono l'utilizzo di due distribuzioni di Poisson: la distribuzione varia a seconda che il termine sia "elite" o meno. La probabilità di osservare una term frequency (TF) pari a *k*, dato uno stato di rilevanza *R*, è data da:
 
 $$p(TF_{i}=k|R)=\pi \frac{\lambda^k}{k!}e^{-\lambda}+(1-\pi) \frac{\mu^k}{k!}e^{-\mu}$$
 
 dove:
 
 * **π** è la probabilità che un documento sia "elite" per un termine.
-* **λ** e **μ** sono i tassi delle due distribuzioni di Poisson (λ per i termini "elite", μ per gli altri).  Questi sono parametri sconosciuti, così come π.
+* **λ** e **μ** sono i tassi delle due distribuzioni di Poisson (λ per i termini "elite", μ per gli altri). Questi sono parametri sconosciuti, così come π.
 
-Considerando l'esistenza di termini che non si adattano bene a una singola distribuzione di Poisson, si utilizzano due distribuzioni per modellare il termine *i*-esimo con  $TF=k_i$, come combinazione lineare di due distribuzioni di Poisson, a seconda che il termine sia "elite" o meno.
-
+Considerando l'esistenza di termini che non si adattano bene a una singola distribuzione di Poisson, si utilizzano due distribuzioni per modellare il termine *i*-esimo con $TF=k_i$, come combinazione lineare di due distribuzioni di Poisson, a seconda che il termine sia "elite" o meno.
 
 ### Modello di Poisson (semplificato)
 
 Il modello di Poisson presenta le seguenti proprietà:
 
 * Aumenta monotonicamente con la term frequency (tf<sub>i</sub>).
-* Asintoticamente si avvicina a un valore massimo.  
+* Asintoticamente si avvicina a un valore massimo. 
 * Il limite asintotico rappresenta il peso della caratteristica di "eliteness". *
 
-La stima dei parametri per il modello a due Poisson è complessa.  Si può approssimare con una semplice curva parametrica che possiede le stesse proprietà qualitative.
+La stima dei parametri per il modello a due Poisson è complessa. Si può approssimare con una semplice curva parametrica che possiede le stesse proprietà qualitative.
 
 ### Modello di Costo per Termini "Elite"
 
@@ -276,7 +275,7 @@ La normalizzazione della term frequency rispetto alla lunghezza del documento è
 
 $$tf_i' = \frac{tf_i}{B}$$
 
-dove tf<sub>i</sub> è la term frequency del termine *i* e *B* è un parametro.  La formula completa per il punteggio BM25 del termine *i* è:
+dove tf<sub>i</sub> è la term frequency del termine *i* e *B* è un parametro. La formula completa per il punteggio BM25 del termine *i* è:
 
 $$c_i^{BM25}(tf_i) = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i'}{k_1+tf_i'} = \log \frac{N}{df_i} \times \frac{(k_1+1)tf_i}{k_1((1-b)+b\frac{dl}{avdl})+tf_i}$$
 
@@ -287,7 +286,6 @@ dove:
 * k<sub>1</sub> e `b` sono parametri.
 * `dl` è la lunghezza del documento.
 * `avdl` è la lunghezza media dei documenti nella collezione.
-
 
 La funzione di ranking BM25 è data dalla somma dei punteggi BM25 per ogni termine nella query:
 
@@ -373,7 +371,6 @@ dove:
 * $len_z$ è la lunghezza della zona $z$;
 * $Z$ è il numero di zone.
 
-
 Si calcola anche la lunghezza del documento media ponderata:
 
 $$
@@ -381,7 +378,6 @@ $$
 avdl &= \frac{\text{average } d\tilde{l}}{\text{across all docs}}
 \end{aligned}
 $$
-
 
 ## Metodo per il calcolo delle varianti pesate
 
@@ -403,10 +399,9 @@ $$RSV^{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_{i}} \cdot \frac{(k_1 + 1)
 
 Tuttavia, si potrebbero voler utilizzare parametri specifici per ogni zona (k, b, IDF).
 
-
 ## Normalizzazione della lunghezza specifica per zona
 
-Empiricamente, si è riscontrato che la normalizzazione della lunghezza specifica per zona (ovvero, *b* specifico per zona) è utile.  La frequenza del termine modificata ($\tilde{tf}_i$) viene calcolata come:
+Empiricamente, si è riscontrato che la normalizzazione della lunghezza specifica per zona (ovvero, *b* specifico per zona) è utile. La frequenza del termine modificata ($\tilde{tf}_i$) viene calcolata come:
 
 $$
 \tilde{tf}_i = \sum_{z=1}^Z v_z \frac{f_{z i}}{B_z}
@@ -418,7 +413,7 @@ $$
 B_z = \left( (1-b_z) + b_z \frac{\text{len}_z}{\text{avlen}_z} \right), \quad 0 \leq b_z \leq 1
 $$
 
-e  `len_z` rappresenta la lunghezza della zona z e `avlen_z` la lunghezza media delle zone z.
+e `len_z` rappresenta la lunghezza della zona z e `avlen_z` la lunghezza media delle zone z.
 
 La formula per il punteggio RSV nel modello BM25F, considerando la normalizzazione specifica per zona, è:
 
@@ -426,8 +421,7 @@ $$
 \text{RSV}^{BM25F} = \sum_{i \in q} \log \frac{N }{df_{i}} \cdot \frac{(k_1 + 1)tf_i}{k_{1}+tf_{i}}
 $$
 
-Si noti che questa formula differisce leggermente dalla formula del Simple BM25F, semplificando il denominatore.  La differenza principale risiede nell'utilizzo di una normalizzazione della lunghezza specifica per zona, rappresentata da $B_z$.
-
+Si noti che questa formula differisce leggermente dalla formula del Simple BM25F, semplificando il denominatore. La differenza principale risiede nell'utilizzo di una normalizzazione della lunghezza specifica per zona, rappresentata da $B_z$.
 
 ## Classifica con caratteristiche non testuali
 

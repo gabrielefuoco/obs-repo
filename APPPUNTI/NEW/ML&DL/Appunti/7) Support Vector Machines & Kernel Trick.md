@@ -137,7 +137,7 @@ $$\rho =\max_{1\leq i\leq m} \|\vec{x_{i}}\|$$
 $$\Theta^{(1)}=0$$
 $$\text{for t=1 to T do}$$
 $$\vec{w}^{(t)}=\frac{1}{\delta t}\theta^{(t)}$$
-$$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\  in \ S$$
+$$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\ in \ S$$
 $$\text{if }y_{i}<\vec{w}^{(t)},\vec{x}> \ <1$$
 $$\vec{\theta}^{(t+1)}=\vec{\theta}^{(t)}+y_{i}\vec{x_{i}}$$
 $$\text{return }\vec{w}^{(T+1)}$$
@@ -181,7 +181,7 @@ $$\beta^{(1)=0}$$
 
 $$\text{for t=1 to T do}$$
 $$\vec{\alpha}^{(t)}=\frac{1}{\delta t}\beta^{(t)}$$
-$$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\  in \ S$$
+$$\text{seleziona casualmente }(\vec{x_{i}},y_{i})\ in \ S$$
 $$\text{if }y_{i} \sum_{j=1}^m \alpha_{j}<\vec{x_{j}},\vec{x_{i}}> \ <1$$
 $$\vec{\beta_{i}}^{(t+1)}=\vec{\beta_{i}}^{(t)}+y_{i}$$
 $$\text{return }\vec{w}^{(T+1)}=\sum_{i=1}^m \alpha_{i}\vec{x_{i}}$$
@@ -224,12 +224,12 @@ In questo contesto, consideriamo:
 * **Trasformazione non lineare:** $\phi(\vec{x_i})$ che mappa i vettori di input in uno spazio di output ad alta dimensione $\mathbb{R}^{d_{2}}$.
 * **Relazione tra dimensioni:** $d_{1} \ll d_{2}$, ovvero la dimensione dello spazio di input è molto minore della dimensione dello spazio di output.
 
-**Prodotto scalare:**
+##### Prodotto scalare:
 
 * Nello spazio di input: $<\vec{x_i},\vec{x_{j}}>$.
 * Nello spazio di output: $<\phi (\vec{x_i}),\phi(\vec{x_{j})}>$.
 
-**Costo computazionale:**
+##### Costo computazionale:
 
 * $O(d_{1})$: indica un costo computazionale proporzionale alla dimensione dello spazio di input.
 * $O(d_{2})$: indica un costo computazionale proporzionale alla dimensione dello spazio di output.
@@ -245,7 +245,7 @@ $$\forall \vec{x_{1}},\vec{x_{2}} \in \mathbb{R}^{d_{1}}, K_{\phi}(\vec{x_{1}},\
 Le funzioni kernel interessanti hanno costo computazionale $O(d_{1})$. 
 Se troviamo una funzione avente questa proprietà, abbiamo risolto il nostro problema.
 
-**Nota:**
+##### Nota:
 
 * La notazione $<\cdot, \cdot>$ indica il prodotto scalare.
 * La condizione $d_{1} \ll d_{2}$ indica che la dimensione dello spazio di input $d_{1}$ è molto minore della dimensione dello spazio di output $d_{2}$.
@@ -255,15 +255,15 @@ Se troviamo una funzione avente questa proprietà, abbiamo risolto il nostro pro
 
 Il kernel polinomiale è un esempio di funzione kernel che permette di eseguire una trasformazione non lineare dei dati nello spazio di input, proiettandoli in uno spazio di output ad alta dimensione.
 
-**Definizione:**
+##### Definizione:
 
 Dato un vettore di input $x \in \mathbb{R}$, il prodotto scalare tra il vettore dei pesi $\vec{w}$ e la trasformazione non lineare $\phi(x)$ è definito come:
 
-$$<\vec{w},\phi(x)>\  = w_{0}+w_{1}x+w_{2}x^{2}+\dots+w_{n}x^n$$
+$$<\vec{w},\phi(x)>\ = w_{0}+w_{1}x+w_{2}x^{2}+\dots+w_{n}x^n$$
 
 dove il prodotto scalare rappresenta la normale al nostro iperpiano.
 
-**Trasformazione:**
+##### Trasformazione:
 
 Possiamo riscrivere il prodotto scalare come:
 
@@ -271,17 +271,17 @@ $$=\ <w_{0}+w_{1}+\dots+w_{n}>,\ (1,x,x^2,\dots,x^n)>$$
 
 Dove $(1,x,x^2,\dots,x^n)= \phi(x)$ è la trasformazione non lineare che mappa il vettore di input $x$ in uno spazio di output ad alta dimensione.
 
-**Forma del Kernel Polinomiale:**
+##### Forma del Kernel Polinomiale:
 
 Il kernel polinomiale ha la seguente forma:
 
 $$K_{\phi_{n}}(\vec{x_{1}},\vec{x_{2}})=(1+<\vec{x_{1}},\vec{x_{2}}>)^n$$
 
-**Costo computazionale:**
+##### Costo computazionale:
 
 Il costo computazionale del kernel polinomiale è $O(d_{1})$, a causa del prodotto scalare tra i vettori di input.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo il caso $d_1=1, \ n=2$:
 
@@ -294,7 +294,7 @@ $$
 \end{align*}
 $$
 
-**Caso multidimensionale:**
+##### Caso multidimensionale:
 
 Per un vettore di input multidimensionale $\vec{x_{1}} = (x_{11}, x_{12})$ e $\vec{x_{2}} = (x_{21}, x_{22})$, il kernel polinomiale diventa:
 

@@ -1,4 +1,4 @@
-**Analisi dei Cluster**
+##### Analisi dei Cluster
 
 I. **Definizione e Contesto:**
 * Tecnica di apprendimento non supervisionato.
@@ -28,7 +28,7 @@ IV. **Tipi di Cluster:**
 * **Density Based:** Cluster come regioni dense circondate da regioni meno dense.
 * **Shared-Property (Conceptual Clusters):** Cluster basati su proprietà condivise.
 
-**Clustering Partizionale: Ottimizzazione e Metodi**
+##### Clustering Partizionale: Ottimizzazione e Metodi
 
 I. **Funzione di Ottimizzazione:**
 * Obiettivo: Minimizzare l'errore di clustering.
@@ -66,7 +66,7 @@ V. **Importanza della Scelta del Punto Iniziale (K-means):**
 * Risultato dipendente dalla posizione iniziale dei centroidi.
 * Alta probabilità di risultati subottimali, soprattutto con molti cluster.
 
-**Varianti del K-means**
+##### Varianti del K-means
 
 I. **Selezione dei *k* punti iniziali:** Influenza significativamente il risultato.
 
@@ -108,7 +108,7 @@ A. **Passaggi:**
 
 V. **Calcolo della similarità dei punti e Strategie per calcolare i cluster:**
 
-**Gestione del Clustering K-means**
+##### Gestione del Clustering K-means
 
 I. **Gestione Cluster Vuoti**
 * Approcci per sostituire centroidi in cluster vuoti:
@@ -163,7 +163,7 @@ VI. **Clustering Gerarchico**
 	* Usa una matrice di similarità/dissimilarità.
 	* *k* non è definito a priori.
 
-**Algoritmo Gerarchico Agglomerativo**
+##### Algoritmo Gerarchico Agglomerativo
 
 I. **Algoritmo Base:**
 
@@ -231,7 +231,7 @@ B. **Approcci basati su prototipi:**
  - MinPts (numero minimo di oggetti).
  - Analisi della curva dei k-nearest neighbors per determinare Eps.
 
-**Valutazione dei Cluster**
+##### Valutazione dei Cluster
 
 I. **Indici di Valutazione:**
 * **Indici Esterni:** Confronto con un risultato ideale (etichette di classe).
@@ -259,7 +259,7 @@ IV. **Misure Interne: SSE (Somma degli Errori Quadratici)**
 	* Punti di flessione significativi indicano potenziali valori ottimali di *k* (numero di cluster).
 * **Utilizzo:** I punti di flessione nella curva SSE suggeriscono il numero ottimale di cluster.
 
-**Valutazione della Clusterizzazione**
+##### Valutazione della Clusterizzazione
 
 * **Coesione e Separazione:**
  * **Coesione:** Misura la similarità degli oggetti all'interno di uno stesso cluster. Alta coesione indica oggetti vicini.
@@ -288,7 +288,7 @@ IV. **Misure Interne: SSE (Somma degli Errori Quadratici)**
  * **Valore alto (≈1):** Indica buona separazione tra cluster.
  * **Valore basso (≈0 o negativo):** Indica scarsa separazione o errata classificazione.
 
-**Tecniche di Clustering**
+##### Tecniche di Clustering
 
 I. **Fuzzy Clustering**
  A. **Concetto:** Consente l'appartenenza parziale di un punto a più cluster, rappresentata da pesi di appartenenza. La somma dei pesi per ogni punto è 1.
@@ -314,7 +314,7 @@ III. **Clusterizzazione in Sottospazi**
  A. **Concetto:** La clusterizzazione può essere inefficiente con alta dimensionalità. Ridurre la dimensionalità migliora l'identificazione dei cluster. L'esempio mostra come diversi sottoinsiemi di attributi possono rivelare cluster differenti.
  B. **Problema:** L'aumento degli attributi aumenta la distanza tra gli oggetti, rendendo difficile l'identificazione dei cluster.
 
-**Clusterizzazione basata su Grafi**
+##### Clusterizzazione basata su Grafi
 
 I. **Tecniche principali:**
 

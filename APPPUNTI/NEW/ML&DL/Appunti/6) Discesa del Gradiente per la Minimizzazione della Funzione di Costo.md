@@ -4,7 +4,7 @@ $$\mathrm{ERM}_{H}(S) = \arg \min_{\substack{ \vec{\omega} \in H}} L_s(\vec{\ome
 
 Un algoritmo efficiente per la minimizzazione di funzioni convesse è la **discesa del gradiente**. Questo algoritmo è iterativo e si basa sull'utilizzo del gradiente della funzione per trovare il minimo.
 
-**Funzionamento:**
+##### Funzionamento:
 
 1. **Punto di partenza:** Si inizia con una soluzione iniziale, indicata con `w`.
 2. **Calcolo del gradiente:** Ad ogni iterazione, si calcola il gradiente della funzione `F(w)` nel punto corrente `w`. Il gradiente rappresenta la derivata della funzione in caso di funzione monodimensionale, mentre in caso di funzione multidimensionale è un vettore che indica la direzione di massima pendenza.
@@ -212,7 +212,7 @@ La hinge loss vale 0 per punti classificati correttamente con un margine maggior
 La hinge loss è definita come:
 $$l_{hinge}(\vec{w},(\vec{x},y))=\max \{ 0,1-y_{i}<\vec{w},\vec{x_{i}}> \}$$
 
-**Proprietà della Hinge Loss:**
+##### Proprietà della Hinge Loss:
 
 * **Upper bound**: la hinge loss è un upper bound della loss 0-1, poiché il suo valore è sempre maggiore o uguale al valore della loss 0-1 per ogni punto.
 * **Convessità**: la hinge loss è una funzione convessa, quindi può essere utilizzata con la discesa del gradiente.
@@ -236,7 +236,7 @@ Nel caso dei semispazi, la loss 0-1 porta ad un problema di ottimizzazione NP-ha
 
 Una funzione è detta di Lipschitz se la norma della differenza tra le immagini della funzione calcolata in due punti è limitata da una costante (detta costante di Lipschitz) moltiplicata per la distanza tra i due punti. In altre parole, la variazione della funzione è controllata dalla distanza tra i punti nel suo dominio.
 
-**Formalmente:**
+##### Formalmente:
 
 Una funzione $f:R^d \to R^k$ si dice $\rho\text{-lipschitz}$ se $\forall w_{1},w_{2} \in R^d,$ $\| f(\vec{w_{1}})-f(\vec{w_{2}}) \| \leq \rho \| \vec{w_{1}}-\vec{w_{2}} \|$
 
@@ -264,7 +264,8 @@ $$R(\vec{w})
 \text{Funge da Misura della stabilità del modello}
 \end{cases}
 $$
-**Definizione di algoritmo stabile**
+##### Definizione di algoritmo stabile
+
 Un algoritmo di learning si dice stabile quando a piccole variazioni dell'input corrispondono piccole variazioni dell'output
 
 Per dimostrare questa proprietà, è necessario introdurre una variante dell'algoritmo di minimizzazione del rischio empirico chiamata **Regolarizzazione di Tikhonov** (RML).

@@ -54,7 +54,7 @@ In PyTorch, la funzione log-softmax è già implementata e viene utilizzata per 
 
 Consideriamo un modello di classificazione che utilizza un layer convoluzionale seguito da un layer fully connected. Il layer convoluzionale estrae feature dall'immagine, mentre il layer fully connected classifica le feature estratte.
 
-**Esempio:**
+##### Esempio:
 
 ```python
 import torch
@@ -79,25 +79,25 @@ y = model(x)
 
 In questa linea di codice, stiamo appiattendo tutto tranne la prima dimensione. Il risultato finale sarà una matrice con la dimensione del batch come prima componente e 256 come seconda dimensione, ottenuta appiattendo il blocco.
 
-**Spiegazione:**
+##### Spiegazione:
 
 * **`x`**: rappresenta le feature dell'immagine.
 * **`x.shape`**: restituisce la forma di `x`.
 * **`x.view`**: modifica la forma di `x`.
 * **`model.fc(x)`**: applica il layer fully connected a `x`.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo un blocco di un edificio nell'immagine. Il layer convoluzionale estrae un vettore di dimensione 1x16x4x4 da questo blocco. Moltiplicando questi quattro elementi, otteniamo un blocco di 256 elementi. Appiattendo questo blocco, otteniamo una matrice 1x256. Ricordiamo che "1" rappresenta la dimensione del batch.
 
-**Processo di Classificazione:**
+##### Processo di Classificazione:
 
 1. **Input:** L'immagine di dimensione 1x1x28x28 viene passata al modello.
 2. **Estrazione Feature:** Il layer convoluzionale estrae feature, ottenendo un vettore 1x16x4x4.
 3. **Appiattimento:** Il blocco di feature viene appiattito, ottenendo una matrice di dimensione "dimensione del batch" x 256.
 4. **Classificazione:** Il layer fully connected classifica le feature appiattite, fornendo la risposta sulla quale calcolare la logica.
 
-**Softmax:**
+##### Softmax:
 
 Potremmo anche calcolare direttamente la softmax sul risultato del layer fully connected, ottenendo le probabilità per ogni classe.
 
@@ -136,11 +136,11 @@ Questa architettura è in grado di risolvere sia problemi di classificazione esc
 
 Nel caso della classificazione multipla, l'output della rete neurale deve essere adattato per gestire più di una classe. Ad esempio, se l'immagine può appartenere a una delle 1024 classi possibili, l'output dovrebbe essere un vettore di 1024 elementi, dove ogni elemento rappresenta la probabilità che l'immagine appartenga a una specifica classe.
 
-**Esempio:**
+##### Esempio:
 
 Se l'ultimo layer della rete è 84x10, per adattarlo alla classificazione multipla con 1024 classi, dovremmo modificarlo in 84x2^10. Questo significa che il layer dovrebbe avere 2^10 (1024) neuroni in output, uno per ogni classe.
 
-**Soluzione alternativa:**
+##### Soluzione alternativa:
 
 Una soluzione alternativa, più efficiente, è quella di mantenere l'ultimo layer con 84x10 neuroni e utilizzare una funzione di attivazione che permetta di ottenere un output multi-classe. Ad esempio, si potrebbe utilizzare una funzione di attivazione sigmoidale per ogni neurone in output, ottenendo così una probabilità di appartenenza a ciascuna delle 10 classi.
 
@@ -224,7 +224,7 @@ L'object detection, ovvero la capacità di identificare e localizzare oggetti al
 
 Esistono due tipi principali di architetture di object detection:
 
-**1. Multi-shot:**
+##### 1. Multi-shot:
 
 * Queste architetture utilizzano due fasi distinte:
  * **Fase 1: Generazione di Region Proposal:** In questa fase, l'algoritmo identifica aree dell'immagine che potrebbero contenere oggetti, chiamate "region proposal".
@@ -234,7 +234,7 @@ Esistono due tipi principali di architetture di object detection:
  * **Fast R-CNN:** Un'evoluzione di R-CNN che ha migliorato la velocità di elaborazione.
  * **Faster R-CNN:** Un'ulteriore evoluzione che ha integrato la generazione di region proposal all'interno della rete neurale, rendendola ancora più efficiente.
 
-**2. Single-shot:**
+##### 2. Single-shot:
 
 * Queste architetture combinano le due fasi in un unico passaggio, rendendole più veloci ma leggermente meno accurate rispetto alle architetture multi-shot.
 * Esempi di architetture single-shot includono:

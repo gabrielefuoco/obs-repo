@@ -23,7 +23,7 @@ Questo corso guida gli sviluppatori nello sviluppo di applicazioni big data robu
 
 ## Testo di Riferimento
 
-**D. Talia, P. Trunfio, F. Marozzo, L. Belcastro, R. Cantini, A. Orsino** *Programming Big Data Applications* **World Scientific – 2024 ISBN 978-1-80061-504-5**
+##### D. Talia, P. Trunfio, F. Marozzo, L. Belcastro, R. Cantini, A. Orsino** *Programming Big Data Applications* **World Scientific – 2024 ISBN 978-1-80061-504-5
 
 ## Contenuti del Libro
 

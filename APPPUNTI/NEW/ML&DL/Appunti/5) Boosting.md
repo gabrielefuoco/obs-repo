@@ -12,7 +12,7 @@ Data una classe di ipotesi $H$, un weak learner è definito da una diversa class
 1. **Efficienza computazionale di ERM(B):** Il calcolo di $ERM(B)$ (Empirical Risk Minimization su B) deve essere efficiente, idealmente con costo sub-quadratico.
 2. **Performance migliore di un classificatore casuale:** L'ipotesi restituita da $ERM(B)$ deve avere prestazioni migliori di un classificatore casuale sui problemi risolti in maniera esatta da $H$.
 
-**Formalmente:**
+##### Formalmente:
 
 $$H = \{h_{a,b,\alpha}(x) = \alpha \cdot 1[\alpha \leq x \leq b], a,b \in R, \alpha \in \{-1,1\} \}$$
 
@@ -30,7 +30,7 @@ $$B = \{ h_{\theta,\alpha}(x) = \alpha + 1[x \geq \theta], x \in R, \alpha \in \
 ![[5) Boosting-20241011091139119.png]]
 Dato un problema risolto in maniera esatta da $h$, la miglior ipotesi in $B$ deve avere un errore inferiore a $\frac{1}{2}$.
 
-**Esempio:**
+##### Esempio:
 
 Consideriamo un problema con tre intervalli senza sovrapposizioni tra le classi. Almeno uno di questi intervalli conterrà meno di $\frac{1}{3}$ della popolazione. Sbagliando la classificazione solo su questo intervallo, l'errore sarà inferiore a $\frac{1}{2}$.
 
@@ -40,7 +40,7 @@ In questo caso, il Decision Stump rappresenta l'algoritmo che lavora sulla class
 
 ![[5) Boosting-20241011091153416.png]]
 
-**γ-Weak-Learner:**
+##### γ-Weak-Learner:
 
 Un $\gamma\text{-Week-Learner}$ è una classe di ipotesi che garantisce un errore di generalizzazione della classe restituita che si discosta da $\frac{1}{2}$ di almeno $\gamma$.
 
@@ -52,13 +52,13 @@ Prima di approfondire il boosting, analizziamo come applicare la regola della mi
 
 **ERM efficiente per decision stumps:** L'obiettivo è trovare il decision stump che minimizza il rischio empirico. Consideriamo un insieme di punti in ℝ e una funzione 𝜃 che restituisce -1 a destra e +1 a sinistra.
 
-**Algoritmo:**
+##### Algoritmo:
 
 1. **Ordinamento:** Ordiniamo i punti in ℝ.
 2. **Sogli:** Determiniamo le soglie (potenzialmente infinite, ma quelle significative sono date dal valore mediano tra due 𝜃).
 3. **Calcolo dell'errore empirico:** Per ogni soglia 𝜃𝑖, calcoliamo l'errore empirico 𝐹[𝜃𝑖]. L'errore è dato dal numero di punti della classe positiva che si trovano a destra della soglia.
 
-**Complessità:**
+##### Complessità:
 
 L'ordinamento dei punti ha una complessità data da $t(m)=m\log (m)+(m+1)\cdot O(1)=O(m \log(m))$, dove 𝑚 è il numero di punti. 
 La funzione decision stump vale +1 a sinistra di 𝜃 e -1 a destra.
@@ -69,7 +69,7 @@ $$t_{d}=d \cdot m \cdot \log(m)$$
 
 AdaBoost (Adaptive Boosting) è un algoritmo di apprendimento che crea un classificatore forte combinando diversi classificatori deboli.
 
-**Input:**
+##### Input:
 
 * $S = \{(x_1, y_1), (x_2, y_2), \dots, (x_m, y_m)\}$: insieme di dati di addestramento, dove $x_i$ è un esempio e $y_i \in \{-1, +1\}$ è la sua etichetta.
 * $WL$: algoritmo di apprendimento debole (weak learner).
@@ -85,7 +85,7 @@ $$L_s(h) = \sum_{i=1}^m D_i^{(t)} \cdot \mathbb{1}[h(x_i) \neq y_i]$$
 
 dove $\mathbb{1}[h(x_i) \neq y_i]$ è la funzione indicatrice che vale 1 se $h(x_i) \neq y_i$ e 0 altrimenti. Questo calcolo può essere effettuato in tempo costante. L'algoritmo aumenta iterativamente il peso degli esempi erroneamente classificati, forzando i classificatori successivi a focalizzarsi su questi esempi più difficili.
 
-**Output:**
+##### Output:
 
 Un classificatore forte $H(x)$ ottenuto come combinazione pesata dei classificatori deboli:
 
@@ -93,7 +93,7 @@ $$H(x) = \text{sign}\left( \sum_{t=1}^T \omega_t h_t(x) \right)$$
 
 dove $h_t(x)$ è il classificatore debole ottenuto all'iterazione *t*, con output $\pm 1$, e $\omega_t$ è il suo peso.
 
-**Metodo:**
+##### Metodo:
 
 1. Inizializza $D^{(1)} = (\frac{1}{m}, \dots, \frac{1}{m})$.
 2. **For** $t = 1$ **to** $T$ **do**:

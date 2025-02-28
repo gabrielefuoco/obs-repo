@@ -2,7 +2,7 @@
 
 Si utilizzano reti ricorrenti stacked (multi-layer) e un meccanismo di attenzione. Il passo forward di una RNN standard legge l'input da sinistra a destra, codificando ogni località da un punto di vista lineare. L'impatto di una parola sulla rappresentazione è determinato dalle parole adiacenti, ovvero dal suo contesto. Una RNN richiede un numero elevato di step per codificare testi lunghi, permettendo l'interazione tra parti distanti del testo. Questo presenta un problema significativo:
 
-**Il passo di forward e quello di backward hanno O (Lunghezza della sequenza) operazioni non parallelizzabili**
+##### Il passo di forward e quello di backward hanno O (Lunghezza della sequenza) operazioni non parallelizzabili
 
 * Le GPU possono eseguire molte computazioni indipendenti contemporaneamente.
 * Tuttavia, gli stati nascosti futuri di una RNN non possono essere calcolati completamente prima che siano stati calcolati gli stati nascosti passati.
@@ -10,7 +10,7 @@ Si utilizzano reti ricorrenti stacked (multi-layer) e un meccanismo di attenzion
 
 ![[11) Transormers-20241122125219299.png]]
 
-**Numbers indicate min # of steps before a state can be computed**
+##### Numbers indicate min # of steps before a state can be computed
 
 Il numero minimo di step prima di poter calcolare lo stato al passo *t* dipende dalla lunghezza della sequenza.
 
@@ -24,7 +24,7 @@ L'attenzione tratta la rappresentazione di ogni parola come una query per accede
 
 ![[11) Transormers-20241122125255115.png]]
 
-**All words attend to all words in previous layer; most arrows here are omitted**
+##### All words attend to all words in previous layer; most arrows here are omitted
 
 Con l'attenzione, è possibile generalizzare con più layer. Richiede uno step di trasformazione perché ogni stato viene confrontato con ogni altro stato. Il meccanismo di attenzione richiede un numero quadratico di confronti.
 
@@ -90,7 +90,7 @@ $p_i$ è un vettore posizionale di dimensione $d$; vogliamo incorporare questo v
 
 Se adottiamo la **rappresentazione posizionale sinusoidale**, quello che conta non è la posizione assoluta ma quella relativa tra le parole. Questa tecnica è difficilmente apprendibile.
 
-**Barriere:**
+##### Barriere:
 
 * **Ordine delle parole:** Non ha una nozione intrinseca di ordine! *Soluzioni:* Aggiungere rappresentazioni posizionali agli input.
 * **Non linearità:** Non ci sono non linearità per la "magia" del deep learning. Sono solo medie pesate. *Soluzioni:* Applicare la stessa rete feedforward a ciascun output della self-attention.
@@ -100,13 +100,16 @@ Se adottiamo la **rappresentazione posizionale sinusoidale**, quello che conta n
 
 La **self-attention** è alla base del metodo.
 
-**Rappresentazioni Posizionali**
+##### Rappresentazioni Posizionali
+
 Specificano l'ordine della sequenza, poiché la self-attention è una funzione non ordinata dei suoi input.
 
-**Non Linearità**
+##### Non Linearità
+
 Sono applicate all'output del blocco di self-attention e sono spesso implementate come una semplice rete feed-forward.
 
-**Mascheramento**
+##### Mascheramento
+
 Serve per parallelizzare le operazioni senza "guardare al futuro". Impedisce che le informazioni sul futuro "trapelino" nel passato.
 
 ![[11) Transormers-20241122125633686.png]]
@@ -135,11 +138,11 @@ La normalizzazione per layer è un trucco per velocizzare l'addestramento dei mo
 
 **Idea:** Ridurre la variazione non informativa nei valori dei vettori nascosti normalizzando a media unitaria e deviazione standard all'interno di ogni layer.
 
-**Successo della LayerNorm:**
+##### Successo della LayerNorm:
 
 Il successo della LayerNorm potrebbe essere dovuto alla normalizzazione dei gradienti.
 
-**Formulazione Matematica:**
+##### Formulazione Matematica:
 
 Sia $x \in \mathbb{R}^d$ un singolo vettore (di parola) nel modello.
 
@@ -157,7 +160,7 @@ $$
 
 dove $\gamma$ e $\beta$ sono parametri di "guadagno" e "bias" appresi. $\epsilon$ è un piccolo valore aggiunto per evitare divisioni per zero.
 
-**Processo di Normalizzazione:**
+##### Processo di Normalizzazione:
 
 * Normalizzazione tramite media e varianza scalari.
 * Modulazione tramite guadagno e bias elementari appresi.
@@ -218,15 +221,15 @@ Possiamo distribuire la multidimensionalità sulle h teste. Ogni matrice di tras
 
 * Per la parola *i*, la self-attention "guarda" dove $x_i^T Q^T K x_j$ è alto, ma forse vogliamo concentrarci su diversi *j* per motivi diversi?
 
-**Soluzione: Definiamo più "teste" di attenzione tramite molteplici matrici Q, K, V.**
+##### Soluzione: Definiamo più "teste" di attenzione tramite molteplici matrici Q, K, V.
 
 * Siano $Q_\ell, K_\ell, V_\ell \in \mathbb{R}^{d \times d/h}$, dove *h* è il numero di teste di attenzione e *ℓ* varia da 1 a *h*.
 
-**Ogni testa di attenzione esegue l'attenzione in modo indipendente:**
+##### Ogni testa di attenzione esegue l'attenzione in modo indipendente:
 
 * $\text{output}_\ell = \text{softmax}(X Q_\ell K_\ell^T X^T) \times X V_\ell$, dove $\text{output}_\ell \in \mathbb{R}^{n \times d/h}$ (si noti che l'output ha dimensione n x d/h, dove n è il numero di parole nella sequenza).
 
-**Quindi gli output di tutte le teste vengono combinati:**
+##### Quindi gli output di tutte le teste vengono combinati:
 
 * $\text{output} = [\text{output}_1; ...;\text{output}_h]Y$, dove $Y \in \mathbb{R}^{d \times d}$ è una matrice di trasformazione che combina gli output delle diverse teste.
 

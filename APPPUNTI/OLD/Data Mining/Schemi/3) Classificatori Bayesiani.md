@@ -1,4 +1,4 @@
-**Modelli di Classificazione Probabilistici**
+##### Modelli di Classificazione Probabilistici
 
 I. **Introduzione:**
 * Relazione non deterministica tra attributi di input e classe target.
@@ -38,7 +38,7 @@ VIII. **Stima delle Probabilità:**
 * $P(Y)$: stimata dalla frazione di record per classe nel training set.
 * $P(X_1, X_2, ..., X_d|Y)$: stimata dalla frazione di record di una data classe per ogni combinazione di valori di attributo (problematica per alta dimensionalità e piccoli dataset).
 
-**Classificatore Naïve Bayes**
+##### Classificatore Naïve Bayes
 
 * **Principio:** Classificazione basata sull'assunzione di indipendenza condizionale degli attributi data la classe.
 
@@ -62,7 +62,7 @@ VIII. **Stima delle Probabilità:**
  * **Stima di Laplace:** $P(A_i|C) = \frac{N_{ic} + 1}{N_c + c}$
  * **Stima m-estimate:** $P(A_i|C) = \frac{N_{ic} + mp}{N_c + m}$ 
 
-**Reti Bayesiane**
+##### Reti Bayesiane
 
 I. **Rappresentazione:**
 * Grafo Diretto Aciclico (DAG)
@@ -90,7 +90,7 @@ IV. **Tabelle di Probabilità Condizionata (CPT):**
 	* Se nessun genitore: $P(X_i)$
 	* Altrimenti: $P(X_i|Parents(X_i))$ per ogni combinazione di valori.
 
-**Reti Bayesiane: Inferenza e Apprendimento**
+##### Reti Bayesiane: Inferenza e Apprendimento
 
 I. **Rappresentazione della Probabilità:**
 

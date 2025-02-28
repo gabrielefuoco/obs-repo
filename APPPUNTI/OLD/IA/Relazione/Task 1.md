@@ -5,34 +5,34 @@ Il lavoro si articola in due fasi principali: **pianificazione classica** e **pi
 
 ### Istanza 1:
 
-**Condizioni iniziali:**
+##### Condizioni iniziali:
 
 - Tutte le scatole sono inizialmente situate nel magazzino centrale.
 - I contenuti delle scatole sono inizialmente situati nel magazzino centrale
 - Nessuna stazione di lavoro è presente all'interno del magazzino.
 - Un singolo agente robotico si trova nel magazzino centrale, pronto per eseguire le operazioni.
 
-**Obiettivi:**
+##### Obiettivi:
 
 - Alcune stazioni di lavoro devono ricevere specifici rifornimenti
 - Le stazioni di lavoro non richiedono rifornimenti specifici per tipo.
 
-**Risultati ottenuti:**
+##### Risultati ottenuti:
 
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante l'elaborazione.
 
 ### Istanza 2:
 
-**Condizioni iniziali:**
+##### Condizioni iniziali:
 
 - Simili a quelle dell'istanza 1, con l'aggiunta di nuovi vincoli: ciascun agente robotico ha una capacità di carico limitata e ci sono più agenti coinvolti nella consegna.
 
-**Obiettivi:**
+##### Obiettivi:
 
 - Analoghi a quelli dell'istanza 1, ma con l'introduzione della gestione del carico massimo che ogni agente può trasportare.
 
-**Risultati ottenuti:**
+##### Risultati ottenuti:
 
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante il processo.

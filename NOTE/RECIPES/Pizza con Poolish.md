@@ -1,7 +1,7 @@
 
 # Poolish
 
-**Ingredienti:**
+##### Ingredienti:
 
 * 600g di farina
 * 600g di acqua
@@ -11,7 +11,7 @@
 
 # Rinfresco
 
-**Ingredienti:**
+##### Ingredienti:
 
 * 400g di farina
 * 6-8g di malto d'orzo 

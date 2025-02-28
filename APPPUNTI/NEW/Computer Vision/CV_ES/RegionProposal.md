@@ -335,7 +335,8 @@ plot_bbox(image, ground_truth_box)
 
 ![png](RegionProposal_17_0.png)
 
-**Strategia**
+##### Strategia
+
 Filtro le anchor box al di fuori dell'immagine e etichetto in funzione dei valori IoU
 
 ```python

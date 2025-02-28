@@ -36,25 +36,25 @@ $$\text{For each document } d_i, i \in \{1, \ldots, N\}$$
 
 Questo modello rappresenta un approccio più granulare alla modellazione argomento-documento, basato sulla segmentazione del testo in unità più piccole. 
 
-**Traduzione in un modello probabilistico congiunto per dati triadici:**
+##### Traduzione in un modello probabilistico congiunto per dati triadici:
 
 Il modello si basa su un'idea chiave: la traduzione della relazione tra argomenti, documenti e segmenti in un modello probabilistico congiunto. Questo modello considera la probabilità di un documento, dato un argomento e un segmento, e viceversa.
 
-**Motivazione:**
+##### Motivazione:
 
 Per documenti lunghi, assegnare un solo argomento a un intero documento può essere riduttivo. La struttura semantica complessa di un documento lungo potrebbe richiedere una rappresentazione più fine, che tenga conto della presenza di diversi segnali informativi in diverse parti del documento.
 
-**Approcci alternativi:**
+##### Approcci alternativi:
 
 * **Soft clustering:** Invece di assegnare un documento a un solo cluster (hard clustering), il soft clustering permette a un documento di appartenere a più cluster con una certa probabilità.
 	* Tuttavia, se i documenti hanno una struttura logica, esplicita o implicita, con una semantica complessa, ci saranno segnali informativi caratterizzanti nell'introduzione e nella conclusione. Questo può portare al **topic drift**, ovvero alla deriva tematica.
 * **Segmentazione:** La segmentazione del documento in unità più piccole (segmenti) permette di catturare la struttura semantica fine del documento e di associare diversi argomenti a diversi segmenti.
 
-**Overclustering:**
+##### Overclustering:
 
 Per catturare la struttura dei micro-topic, si può utilizzare l'overclustering, ovvero stimare un numero di cluster (k) molto più alto del numero effettivo di argomenti. Questo approccio è stato utilizzato in precedenza con modelli vector space e bag of words, dove la segmentazione veniva applicata prima del clustering dei segmenti e poi dei documenti.
 
-**Integrazione della segmentazione nei topic model:**
+##### Integrazione della segmentazione nei topic model:
 
 L'obiettivo di questo lavoro è di integrare la segmentazione del testo nei topic model, creando un modello a grana più fine che tenga conto della variabile dei segmenti. 
 
@@ -117,14 +117,14 @@ dove:
 Il processo di generazione di un documento, un segmento e una parola può essere descritto come segue:
 
 $$
-\begin{align*}
+\begin{align}
 &\text{Select a document } d \text{ from } \mathcal{D} \Rightarrow \operatorname{Pr}(d) \\
 &\text{For each segment } s \in S_d: \\
 &\text{1. Choose a topic } z \text{ for the document } d \Rightarrow \operatorname{Pr}(z \mid d) \\
 &\text{2. Associate topic-to-segment probability to the segment } s \text{ for the selected topic } z \Rightarrow \operatorname{Pr}(s \mid z) \\
 &\text{3. For each word } w \text{ in the segment } s: \\
 &\text{Choose a word } w \text{ from the current topic and segment } \Rightarrow \operatorname{Pr}(w \mid z, s)
-\end{align*}
+\end{align}
 $$
 
 ### Algoritmo di inferenza EM per LDA
@@ -196,6 +196,7 @@ Dove:
 * $P(w_{i})$: probabilità di vedere $w_{i}$ in una finestra scorrevole.
  * Entrambe le probabilità sono stimate dall'intero corpus di oltre due milioni di articoli di Wikipedia in inglese utilizzando una finestra scorrevole di 10 parole.
 - È un approccio robusto ma parametrico: i parametri sono 2: stride e overlap
+
 #### Coerenza basata sulla similarità intra/inter-argomento
 
 Per ogni coppia di argomenti, la coerenza è calcolata come la media della similarità intra-argomento divisa per la similarità inter-argomento.
@@ -268,40 +269,42 @@ Sia X una fonte di informazioni testuali (variabile aleatoria sorgente), e i suo
 
 Ricordiamo: l'entropia di X è una misura del tasso di informazioni prodotte da X. L'entropia è massima quando è possibile osservare tutti gli esiti della variabile aleatoria. È indicata con $H[X]$.
 
-* (dal Teorema di Codifica Senza Rumore di Shannon) il limite inferiore per la lunghezza attesa del codice di codifica dei token.
+* **Teorema di Codifica Senza Rumore di Shannon:** il limite inferiore per la lunghezza attesa del codice di codifica dei token.
 * per ogni token, la sua lunghezza di codifica è $-log(p(x))$.
- * ovvero, i token frequenti dovrebbero essere assegnati a codici più brevi: minimizzano la lunghezza della descrizione.
+	* ovvero, i token frequenti dovrebbero essere assegnati a codici più brevi: minimizzano la lunghezza della descrizione.
 
-**Perplessità di una singola variabile casuale X**
+##### Perplessità di una singola variabile casuale X
+
 $$PP[X]:=2^{H[X]}$$
-
 ### Perplessità di un processo stocastico
 
-Siamo interessati a un processo stocastico 𝜒 di sequenze **non i.i.d.** di variabili casuali (X₁, X₂, …)
-* le occorrenze di parole all'interno di un testo non sono certamente indipendenti.
+Siamo interessati a un processo stocastico χ di sequenze **non i.i.d.** (indipendenti e identicamente distribuite) di variabili casuali (X₁, X₂, …).  Le occorrenze di parole all'interno di un testo non sono indipendenti.
 
-#### Prima ipotesi: stazionarietà
+#### Prima ipotesi: Stazionarietà
 
-La probabilità di osservare una parola non cambia a seconda della finestra di testo considerata.
-* non è vera per un documento di testo poiché le parole sono distribuite in modo diverso all'inizio e alla fine di un testo.
-* tuttavia, questo fa sì che il limite dell'entropia media per token coincida con il limite dell'entropia media dell'ultimo token.
+La probabilità di osservare una parola non cambia a seconda della finestra di testo considerata.  Questa ipotesi non è vera per un documento di testo, poiché le parole sono distribuite in modo diverso all'inizio e alla fine di un testo. Tuttavia, ciò implica che il limite dell'entropia media per token coincide con il limite dell'entropia media dell'ultimo token:
+
 * $\lim_{ n \to \infty } \frac{1}{n}H[X_{1},\dots,X_{n}]$
-* $\lim_{ n \to \infty } \frac{1}{n}H[X_{n}|X_{1},\dots,X_{n}]$
+* $\lim_{ n \to \infty } \frac{1}{n}H[X_{n}|X_{1},\dots,X_{n-1}]$
 
-#### Seconda ipotesi: ergodicità
 
-Se il numero di osservazioni di una variabile è molto grande, il valore atteso coincide con la media delle misurazioni. Inoltre, per sequenze molto lunghe, la media dei logaritmi negativi delle probabilità sui vari step di generazione approssima l'entropia.
+#### Seconda ipotesi: Ergodicità
 
-* garantisce che l'aspettativa $𝔼[X₁]$ di qualsiasi singola variabile casuale X₁ sulla distribuzione P del processo 𝜒 può essere sostituita con la media temporale di una singola sequenza molto lunga (x₁, x₂, …) estratta da 𝜒 (Teorema Ergodico di Birkhoff):
+Se il numero di osservazioni di una variabile è molto grande, il valore atteso coincide con la media delle misurazioni.  Inoltre, per sequenze molto lunghe, la media dei logaritmi negativi delle probabilità sui vari step di generazione approssima l'entropia. L'ergodicità garantisce che l'aspettativa $𝔼[X₁]$ di qualsiasi singola variabile casuale X₁ sulla distribuzione P del processo χ può essere sostituita con la media temporale di una singola sequenza molto lunga (x₁, x₂, …) estratta da χ (Teorema Ergodico di Birkhoff):
+
 * $\frac{1}{n}\sum_{i=1}^n X_{i}\to_{n \to \infty} E_{p}[X_{1}]\text{ con probabilità 1}$
-* Teorema di Shannon, McMillan, Breiman.
-* $-\frac{1}{n}\log(X_{1},\dots X_{n})\to_{n\to \infty }H[X]\text{ con probabilità 1}$
+
+Questo risultato, insieme al Teorema di Shannon-McMillan-Breiman, implica:
+
+* $-\frac{1}{n}\log p(X_{1},\dots,X_{n})\to_{n\to \infty }H[X]\text{ con probabilità 1}$
+
 
 #### Applicazione all'entropia
 
-Il risultato sopra sarebbe perfetto se conoscessimo le corrispondenti distribuzioni di probabilità p(x₁, x₂, …). Tuttavia, non le conosciamo, quindi ricorriamo a un modello linguistico q(x₁, x₂, …) come approssimazione.
-* Un limite superiore al tasso di entropia per p è la cross-entropia del modello Q (il modello linguistico) rispetto alla sorgente P (il linguaggio naturale).
+Il risultato precedente sarebbe perfetto se conoscessimo le distribuzioni di probabilità p(x₁, x₂, …).  Tuttavia, non le conosciamo, quindi ricorriamo a un modello linguistico q(x₁, x₂, …) come approssimazione. Un limite superiore al tasso di entropia per p è la cross-entropia del modello Q (il modello linguistico) rispetto alla sorgente P (il linguaggio naturale):
+
 * $CE[P,Q]:=\lim_{ n \to \infty }-E_{p}\log q(X_{n}|X_{<n})=\lim_{ n \to \infty } -\frac{1}{n}E_{p}\log q(X_{1},\dots,X_{n})$
+
 
 ### Perplessità di un modello Q per un linguaggio considerato come una sorgente P sconosciuta:
 

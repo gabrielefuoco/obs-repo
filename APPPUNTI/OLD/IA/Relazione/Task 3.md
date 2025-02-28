@@ -73,7 +73,7 @@ Sono stati inoltre introdotti, sotto forma di predicati, i concetti di posto occ
 
 Qui di seguito le **durative actions**:
 
-**Charge:**
+##### Charge:
 
 ```python
   (:durative-action charge
@@ -100,7 +100,7 @@ Qui di seguito le **durative actions**:
   )
 ```
 
-**Discharge:**
+##### Discharge:
 
 ```python
   (:durative-action discharge
@@ -128,7 +128,7 @@ Qui di seguito le **durative actions**:
   )
 ```
 
-**Fill:**
+##### Fill:
 
 ```python
   (:durative-action fill 
@@ -143,7 +143,7 @@ Qui di seguito le **durative actions**:
     )
 ```
 
-**Give Content:**
+##### Give Content:
 
 ```python
   (:durative-action give_content
@@ -160,7 +160,7 @@ Qui di seguito le **durative actions**:
     )
 ```
 
-**Move Vehicle:**
+##### Move Vehicle:
 
 ```python
   (:durative-action move_vehicle
@@ -174,7 +174,7 @@ Qui di seguito le **durative actions**:
     )
 ```
 
-**Move Robot:**
+##### Move Robot:
 
 ```python
   (:durative-action move_robot

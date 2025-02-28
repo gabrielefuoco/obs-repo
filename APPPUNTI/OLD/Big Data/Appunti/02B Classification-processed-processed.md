@@ -3,14 +3,14 @@
 
 **Obiettivo:** Assegnare una classe, da un insieme dato di classi, a record precedentemente invisi, nel modo più accurato possibile.
 
-**Approccio:**
+##### Approccio:
 
 * Dato un insieme di record (training set),
 * ogni record contiene un insieme di attributi,
 * uno degli attributi è l'attributo di classe (etichetta) che dovrebbe essere predetto.
 * Si apprende un modello per l'attributo di classe in funzione dei valori degli altri attributi.
 
-**Varianti:**
+##### Varianti:
 
 * Classificazione binaria (es. frode/nessuna frode o vero/falso)
 * Classificazione multiclasse (es. basso, medio, alto)

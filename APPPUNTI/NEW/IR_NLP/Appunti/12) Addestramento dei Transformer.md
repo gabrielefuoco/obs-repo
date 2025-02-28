@@ -30,7 +30,7 @@ WordPiece adotta un approccio di pattern matching iterativo, guidato dalla frequ
 Vi è una tendenza dell'algoritmo WordPiece a minimizzare il numero di token da generare, per un dato testo in input.
 WordPiece non preserva gli spazi.
 
-**Differenze con BPE:**
+##### Differenze con BPE:
 
 - **Criterio di selezione:** Invece di selezionare la coppia di token più frequenti, WordPiece calcola uno score: frequenza di occorrenza della coppia / frequenza di occorrenza dei singoli token. Nel fare il merge, dà priorità alle coppie le cui parti individuali sono meno frequenti nel vocabolario.
 
@@ -110,7 +110,7 @@ Predice casualmente il **15%** dei token (sub-word):
 
 Questo impedisce al modello di diventare "compiacente" e di non costruire rappresentazioni robuste delle parole non mascherate (nessuna maschera è presente durante il *fine-tuning*!).
 
-**L'addestramento consiste nel predire i token mascherati e nel predire il rumore.**
+##### L'addestramento consiste nel predire i token mascherati e nel predire il rumore.
 
 Un ulteriore compito di pre-addestramento è la **Next Sentence Prediction** (*NSP*): dato due sequenze, determinare se la seconda sequenza è successiva alla prima nel documento originale.
 
@@ -126,7 +126,7 @@ La rappresentazione dell'input è la somma di *positional embeddings* e *segment
 * **Segment Embeddings:** Considerano la posizione del token nella sequenza. I token di una stessa frase hanno lo stesso encoding di segmento.
 * **Position Embeddings:** Tengono traccia della posizione assoluta del token nel testo.
 
-**Token Speciali:**
+##### Token Speciali:
 
 * **`[CLS]`:** Il primo token della sequenza è sempre un token speciale chiamato `[CLS]`. La rappresentazione di output di questo token è considerata rappresentativa dell'intera sequenza di input. Per default, `[CLS]` codifica l'intera frase data in input a BERT. In alternativa, si possono utilizzare gli embedding in output all'ultimo livello, token per token.
 * **`[SEP]`:** Due frasi in input sono separate tra loro da un altro token speciale chiamato `[SEP]`.
