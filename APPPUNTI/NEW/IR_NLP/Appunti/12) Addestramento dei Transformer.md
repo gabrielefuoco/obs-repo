@@ -174,51 +174,57 @@ BERT ha riscosso un enorme successo ed è estremamente versatile; il fine-tuning
 
 ## Estensioni di BERT
 
-Esistono molte varianti di BERT, come RoBERTa, SpanBERT, e altre. Alcuni miglioramenti generalmente accettati alla formula di pre-addestramento di BERT includono:
+Esistono numerose varianti di BERT, tra cui RoBERTa e SpanBERT, che apportano miglioramenti al processo di pre-addestramento.  Alcuni miglioramenti comunemente accettati includono:
 
-* **RoBERTa:** principalmente addestra BERT per più tempo e rimuove la predizione della successiva frase (NSP).
-* **SpanBERT:** mascherare sequenze contigue di parole rende il pre-addestramento più difficile e utile.
+* **RoBERTa:** allunga i tempi di addestramento di BERT e rimuove il task di *Next Sentence Prediction* (NSP).
+* **SpanBERT:** maschera sequenze contigue di parole, rendendo il pre-addestramento più impegnativo ed efficace.
+
 
 ### RoBERTa
 
-La differenza principale è che si sceglie come task di pretraning il **masked language modelling**:
+La principale differenza rispetto a BERT risiede nell'utilizzo esclusivo del **masked language modelling (MLM)** come task di pre-training.  Gli altri miglioramenti includono:
 
-* **Maggiori dati di addestramento:** Oltre a Book Corpus e Wikipedia inglese, sono stati utilizzati:
- * CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
- * Stories (31 GB)
- * OpenWebText (38 GB)
-* **Addestramento molto più lungo:**
- * Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori, a parità di costo computazionale.
- * NSP è rimosso.
- * MLM è **dinamico**, ovvero evita l'utilizzo della stessa maschera e il sampling viene ripetuto non solo per ogni epoca, ma anche per ogni istanza.
-* **Sequenze di pre-addestramento:** Hanno una lunghezza di 512 token (in BERT, il 90% degli step di pre-addestramento coinvolge sequenze di lunghezza 128 token).
-* **Tokenizzazione BPE:** Con 50.000 sub-word (in BERT, vocabolario a livello di carattere di 30.000 token).
-* **Due dimensioni:**
- * RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
- * RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
-* **Supera BERT:** Nei benchmark classici come GLUE, SQuAD v2.0 e RACE.
+* **Maggiori dati di addestramento:** Oltre a BookCorpus e Wikipedia inglese, RoBERTa utilizza:
+    * CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
+    * Stories (31 GB)
+    * OpenWebText (38 GB)
 
-Un insegnamento del paper su RoBERTa: maggiore potenza di calcolo e più dati possono migliorare il pre-addestramento anche senza modificare l'encoder Transformer sottostante.
+* **Addestramento molto più lungo:**  Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori a parità di costo computazionale.  Inoltre:
+    * NSP è rimosso.
+    * MLM è **dinamico**: la stessa maschera non viene utilizzata ripetutamente; il sampling viene ripetuto per ogni epoca e per ogni istanza.
 
-I vantaggi derivano da una fase di pre-training più lunga e accurata.
+* **Sequenze di pre-addestramento:** Lunghezza di 512 token (contro una lunghezza prevalente di 128 token nel 90% degli step di pre-addestramento di BERT).
+
+* **Tokenizzazione BPE:** Con 50.000 sub-word (contro un vocabolario a livello di carattere di 30.000 token in BERT).
+
+* **Due dimensioni del modello:**
+    * RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
+    * RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
+
+* **Prestazioni superiori a BERT:**  Su benchmark classici come GLUE, SQuAD v2.0 e RACE.
+
+
+Il paper su RoBERTa dimostra che una maggiore potenza di calcolo e una maggiore quantità di dati possono migliorare significativamente il pre-addestramento, anche senza modificare l'architettura dell'encoder Transformer. I vantaggi derivano da una fase di pre-training più lunga e accurata.
+
 
 ### SpanBERT
 
-La differenza sta nel generelarizzare la finestra di masking: non più limitata a un singolo token ma aperta a più token.
-Il modello deve imparare a prendire ciascun token presente nello span mascherato servendosi dei boundary dello span. 
+SpanBERT si differenzia per la generalizzazione del masking: non più limitato a singoli token, ma esteso a *span* di token adiacenti. Il modello deve imparare a rappresentare ciascun token nello span mascherato utilizzando i contesti ai bordi dello span.
 
-* **Nuovo approccio di pre-addestramento:** Con schema di mascheramento, obiettivo di addestramento e procedura di addestramento delle sequenze differenti.
-* **Mascheramento di span adiacenti:** Invece di mascherare singoli token casuali, maschera span casuali adiacenti.
- * Il mascheramento dello span viene eseguito campionando span di testo.
- * La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce la selezione di lunghezze brevi, con il punto di partenza del mascheramento dello span selezionato casualmente.
- * Vengono mascherate solo parole complete (invece di sotto-parole).
+* **Nuovo approccio di pre-addestramento:** Con schema di mascheramento, obiettivo di addestramento e procedura di addestramento delle sequenze differenti rispetto a BERT.
+
+* **Mascheramento di span adiacenti:** Invece di mascherare singoli token casuali, vengono mascherati span adiacenti casuali.
+    * La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce lunghezze brevi.
+    * Il punto di partenza del mascheramento è selezionato casualmente.
+    * Vengono mascherate solo parole complete.
+
 * **Obiettivo di confine dello span (SBO - Span-Boundary Objective):**
-	* Nel definire uno span si evita di mascherare parzialmente una parola.
- * Predire ogni token dello span usando solo i token osservati ai confini, ovvero il primo token prima dell'inizio e il primo token dopo la fine dello span.
- * Ragionamento: incoraggiare il modello a registrare quante più informazioni possibili sullo span nelle codifiche di output dei confini.
- * Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
- * Come in MLM, SBO minimizza la perdita di cross-entropia.
- * La perdita complessiva è la somma degli obiettivi MLM e SBO per ogni token nello span.
+    * Si evita di mascherare parzialmente una parola.
+    * Ogni token dello span è predetto usando solo i token ai confini dello span (il primo token prima dell'inizio e il primo token dopo la fine).
+    * Questo incoraggia il modello a registrare più informazioni sullo span nelle codifiche di output dei confini.
+    * Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
+    * Come in MLM, SBO minimizza la perdita di cross-entropia.
+    * La perdita complessiva è la somma delle perdite MLM e SBO per ogni token nello span.
 
 ## S-BERT: BERT per la similarità di frasi
 

@@ -1,5 +1,4 @@
 
-# Scegliere il Framework Giusto per Gestire i Big Data 
 
 ## Fattori Principali
 

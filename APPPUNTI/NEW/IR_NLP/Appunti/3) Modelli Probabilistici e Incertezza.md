@@ -9,10 +9,8 @@ Le **Basi di Conoscenza Lessicali** sono un elemento importante del **Knowledge 
 ### Ritorno al Vector Space Model
 
 Il **Vector Space Model** riemergerà nell'ambito dell'Information Retrieval. Vedremo un modello e le sue proprietà, insieme a una generalizzazione che rappresenta la versione probabilistica della funzione TF, specificamente per i task di retrieval.
-
-#### Premessa
-
-Un sistema tradizionale di Information Retrieval richiede un meccanismo di matching, ovvero un sistema di **ranking**. 
+ 
+**Premessa:** Un sistema tradizionale di Information Retrieval richiede un meccanismo di matching, ovvero un sistema di **ranking**. 
 
 ## Incertezza nella Ricerca di Informazioni
 
@@ -20,29 +18,23 @@ Quando si parla di ricerca di informazioni, è importante considerare che la que
 
 Per affrontare questa incertezza, è necessario introdurre una nozione di **incertezza** nei sistemi di recupero delle informazioni. 
 
-### Un esempio dal Data Mining
+#### Un esempio dal Data Mining
 
-Anche nel **data mining**, esiste un filone dedicato all'**uncertainty data mining**, che si basa su modelli probabilistici per gestire l'incertezza nei dati. 
+Questa incertezza è affrontata introducendo modelli probabilistici, analogamente a quanto avviene nell' "uncertainty data mining",  dove l'incertezza nei dati, ad esempio quelli sensoriali, viene gestita tramite approcci probabilistici.
 
-Un esempio concreto di scenario in cui l'incertezza è rilevante è la misurazione di dati sensoriali, come quelli relativi al monitoraggio ambientale. 
+##### Incertezza nelle Misurazioni Sensoriali
 
-### Incertezza nelle Misurazioni Sensoriali
+Ad esempio, i sensori ottici utilizzati per la rilevazione del particolato atmosferico sono più economici di quelli pneumatici, ma sono anche più sensibili all'umidità, portando a sovrastima.  Questo evidenzia la difficoltà di ottenere valori precisi nelle misurazioni sensoriali.
 
-Ad esempio, i sensori ottici utilizzati per la rilevazione del particolato atmosferico sono più economici di quelli pneumatici, ma sono anche più sensibili all'umidità. 
-
-In presenza di umidità o di una leggera nebbia, le goccioline d'acqua possono influenzare la misurazione ottica, portando a una sovrastima della presenza di particolato atmosferico. 
-
-Questo esempio dimostra come, in contesti di misurazione sensoriale, è difficile ottenere un valore preciso a causa di errori di misura, alcuni dei quali sono rintracciabili, mentre altri sono meno evidenti. 
-
-## Introduzione all'Incertezza nei Dati
+### Introduzione all'Incertezza nei Dati
 
 In un contesto di analisi dati, come la classificazione o il retrieval di informazioni, spesso si assume che i dati siano rappresentati da valori numerici. Tuttavia, è importante considerare che questi valori numerici possono essere affetti da incertezza. 
 
 Un modo per gestire questa incertezza è associare a ciascun valore una distribuzione di probabilità univariata, ad esempio una distribuzione gaussiana con media pari al valore stesso. In questo modo, si passa da vettori multidimensionali a insiemi di distribuzioni di probabilità, rendendo l'analisi più complessa ma anche più realistica.
 
-## Strumenti per la Gestione dell'Incertezza
+### Strumenti per la Gestione dell'Incertezza
 
-Per lavorare con distribuzioni di probabilità, si possono utilizzare strumenti come la divergenza di Shannon-Jensen, che fornisce una misura di distanza tra distribuzioni. 
+Per lavorare con distribuzioni di probabilità, si possono utilizzare strumenti come la divergenza di *Shannon-Jensen*, che fornisce una misura di distanza tra distribuzioni. 
 
 L'introduzione dell'incertezza nei dati è particolarmente importante in contesti come il data mining, il knowledge management e l'information retrieval. Questo perché l'incertezza permette di creare sistemi di retrieval più raffinati, in grado di soddisfare richieste complesse e di identificare il miglior set di risultati (result set) composto dai documenti più rilevanti.
 

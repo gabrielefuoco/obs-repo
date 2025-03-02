@@ -4,7 +4,7 @@ Weka è un toolkit per la knowledge discovery scritto in Java, progettato per es
 
 ### Utilizzo di Weka
 
-Weka può essere utilizzato in diverse fasi del processo di knowledge discovery, dalla prototipazione alla produzione. Può essere utilizzato per:
+Weka può essere utilizzato in diverse fasi del processo di knowledge discovery. Può essere utilizzato per:
 
 * **Prototipazione:** Weka offre un ambiente di sviluppo rapido per sperimentare diversi algoritmi di machine learning.
 * **Implementazione:** Weka può essere integrato in applicazioni reali per eseguire analisi predittive e di classificazione.
@@ -17,13 +17,6 @@ Weka offre una vasta gamma di funzionalità, tra cui:
 * **Pre-processing dei dati:** Weka offre una serie di tecniche per la pulizia, la trasformazione e la preparazione dei dati per l'analisi.
 * **Integrazione con DBMS:** Weka può essere utilizzato per accedere ai dati direttamente da database relazionali tramite driver JDBC.
 * **Interfaccia grafica:** Weka offre un'interfaccia grafica intuitiva per la costruzione di pipeline di knowledge discovery e la visualizzazione dei risultati.
-
-### Confronto con Altri Toolkit
-
-Weka è un toolkit popolare per la knowledge discovery, ma esistono altri toolkit disponibili, come:
-
-* **R:** Un linguaggio di programmazione statistica con una vasta libreria di pacchetti per l'analisi dei dati.
-* **Python:** Un linguaggio di programmazione versatile con librerie come scikit-learn e TensorFlow per il machine learning.
 
 ## Modelli di Rappresentazione del Testo: Vector Space Model
 
@@ -39,18 +32,9 @@ Il VSM è spesso associato al **Bag of Words Model (BoW)**. Il BoW considera i d
 
 ### Limiti del VSM e del BoW
 
-Sebbene il VSM sia un modello semplice ed efficace, presenta alcuni limiti:
+Il VSM e il BoW, pur essendo semplici ed efficaci, presentano limiti significativi: la *mancanza di struttura sintattica* porta a perdita di informazioni semantiche, e la *sensibilità alla frequenza dei termini* può causare sovra-rappresentazione di termini comuni e sottorappresentazione di termini rari.  L'esempio delle frasi "Il gatto insegue il topo" e "Il topo insegue il gatto" evidenzia come il BoW, ignorando l'ordine delle parole, fallisca nel distinguere significati diversi
 
-* **Mancanza di struttura sintattica:** Il VSM e il BoW non tengono conto della struttura sintattica del testo. Questo può portare a una perdita di informazioni semantiche.
-* **Sensibilità alla frequenza:** La rilevanza dei termini è fortemente influenzata dalla loro frequenza. Questo può portare a una sovra-rappresentazione di termini comuni e a una sottorappresentazione di termini rari.
-
-## Limiti del Bag of Words Model: Perdita di Struttura Sintattica
-
-Il Bag of Words Model (BoW) presenta un limite significativo: la perdita di informazioni sulla struttura sintattica del testo. Questo significa che l'ordine delle parole e le relazioni grammaticali tra loro vengono ignorate.
-
-La perdita di struttura sintattica porta a una perdita di informazioni semantiche. Ad esempio, le frasi "Il gatto insegue il topo" e "Il topo insegue il gatto" hanno lo stesso set di parole, ma significati completamente diversi. Il BoW non è in grado di distinguere tra queste due frasi.
-
-### Soluzioni Alternative
+#### Soluzioni Alternative
 
 Per ovviare a questo limite, si possono utilizzare modelli di rappresentazione del testo che tengono conto della struttura sintattica, come ad esempio:
 
@@ -77,7 +61,7 @@ Tuttavia, l'etichettatura della posizione delle parole presenta anche alcuni lim
 
 ## Cluto
 
-Cluto è stato concepito per eseguire il clustering di dati sparsi, altamente dimensionali e di grandi dimensioni.
+Cluto è un algoritmo progettato per il clustering di grandi dataset sparsi e ad alta dimensionalità.  Si basa su un'euristica per ottimizzare una funzione obiettivo non esplicitata
 
 ##### Caratteristiche:
 
@@ -91,21 +75,20 @@ Cluto è stato concepito per eseguire il clustering di dati sparsi, altamente di
 
 ## Clustering
 
-### Direct k-way Clustering
+##### Direct k-way Clustering
 
-Il direct k-way clustering è un tipo di k-means, un algoritmo di clustering partizionale che assegna ogni punto dati a uno dei k cluster.
+- Il direct k-way clustering è un tipo di k-means, un algoritmo di clustering partizionale che assegna ogni punto dati a uno dei k cluster.
 
-### Bisetting k-way Clustering
+##### Bisetting k-way Clustering
 
-Il bisetting k-way clustering è un algoritmo che, a differenza del direct k-way clustering, non assegna direttamente i punti dati a k cluster. Invece, inizia con un unico cluster contenente tutti i dati e procede con k-1 partizionamenti. Ogni partizionamento è uno split a due vie, ovvero il cluster corrente viene diviso in due sotto-cluster.
+- A differenza del direct k-way clustering, inizia con un unico cluster e lo suddivide iterativamente in due sotto-cluster (k-1 volte) fino a raggiungere k cluster.  
+- La scelta del cluster da suddividere può seguire diverse strategie (es. il cluster più grande o quello con maggiore varianza).
+##### Graph Partitioning Based
 
-Il metodo riprende da uno dei due split, solitamente quello più grande, e continua a eseguire partizionamenti fino a raggiungere il numero desiderato di cluster (k).
-
-Esistono diverse strategie per scegliere il cluster da cui riprendere il partizionamento. Di default, viene scelto il cluster più grande (un altro esempio è partire da quello con maggiore varianza).
-
-### Graph Partitioning Based
-
-Questo metodo si basa sul concetto di min cut. Ad ogni iterazione, si rompono i legami con i valori di similarità più bassi. Il numero di cluster desiderato (k) rimane come input. Si ottengono m componenti connesse, che portano a un totale di k+m cluster. 
+- Questo metodo si basa sul concetto di min cut. 
+- Ad ogni iterazione, si rompono i legami con i valori di similarità più bassi. 
+- Il numero di cluster desiderato (k) rimane come input. 
+- Si ottengono m componenti connesse, che portano a un totale di k+m cluster. 
 
 ## Clustering Partizionale a k-vie e Clustering Gerarchico Agglomerativo
 
@@ -136,12 +119,12 @@ Con questa combinazione in cascata, otteniamo un algoritmo che fa da trade-off t
 
 Il formato dei file di input per l'algoritmo di clustering può essere denso o sparso.
 
-### Formato Sparso
+##### Formato Sparso
 
 * **Numero di righe e colonne:** La prima riga del file contiene il numero di righe (oggetti), il numero di colonne (feature) e il numero di entry non nulle. Questo serve per inizializzare la struttura dati.
 * **Formato delle righe successive:** Ogni riga successiva rappresenta un oggetto e contiene l'indice della colonna (feature) e il valore corrispondente.
 
-### Formato Denso
+##### Formato Denso
 
 * **Numero di righe e colonne:** La prima riga del file contiene il numero di righe (oggetti) e il numero di colonne (feature).
 * **Formato delle righe successive:** Ogni riga successiva rappresenta un oggetto e contiene i valori per tutte le feature.
@@ -172,7 +155,7 @@ L'entropia può essere utilizzata per valutare la qualità del clustering.
 
 Sia $C = \{C_1, ..., C_k\}$ l'insieme dei cluster e $C^* = \{C_1^*, ..., C_h^*\}$ la classificazione di riferimento. L'entropia di un cluster $j \in \{1, ..., k\}$ è definita come:
 
-$$E_j = -\sum_{i=1}^h Pr(C_i^* | C_j) \log(Pr(C_i^* | C_j))$$
+$$E_j = -\sum_{i=1}^h  \ Pr(C_i^* | C_j)  \ \log(Pr(C_i^* | C_j))$$
 
 dove:
 
@@ -212,7 +195,7 @@ Se specificato, ogni riga del file di output conterrà due numeri in più: *inte
 * **Internal z-score:** Indica quanto l'oggetto è vicino al centroide del cluster a cui è stato assegnato.
 * **External z-score:** Indica quanto l'oggetto è vicino ai centroidi degli altri cluster.
 
-#### Sicurezza
+###### Sicurezza
 
 La sicurezza non è implementata in questo tool.
 
@@ -229,33 +212,19 @@ Se si tiene conto sia della compattezza che della separabilità dei cluster, l'o
 ## Log di Pluto
 
 Il log di Pluto fornisce informazioni dettagliate sul processo di clustering.
+In particolare, riporta:
 
-#### Riepilogo dei Parametri
+* **Riepilogo dei parametri:**  parametri utilizzati nell'esecuzione.
+* **Dettaglio sulla soluzione di cluster:** informazioni su ogni cluster.
+* **Entropia e purezza (opzionale):** se fornito un file di etichette di classe (`rclassfile`).
+* **Tempistica:** durata del processo di clustering.
+  
+##### Document Clustering
 
-Il log inizia con un riepilogo dei parametri utilizzati per l'esecuzione del clustering.
+Nel caso di *document clustering*, con l'opzione `-showfeatures`, il log mostra le *feature descrittive* (caratterizzano il cluster) e *discriminative* (distinguono il cluster dagli altri).  
+L'ideale è che i due insiemi coincidano, indicando cluster ben caratterizzati e distinti
 
-#### Dettaglio sulla Soluzione di Cluster
-
-Sotto il riepilogo dei parametri, viene mostrato il dettaglio sulla soluzione di cluster. Il log contiene tante righe quanti sono i cluster, e le colonne rappresentano le informazioni relative a ciascun cluster.
-
-#### Entropia e Purezza
-
-Se è stato specificato un file di etichette di classe (`rclassfile`), nel log di output appaiono anche l'entropia e la purezza per ogni cluster. Ad esempio, se sono stati trovati 7 cluster, il log mostrerà l'entropia e la purezza per ciascuno dei 7 cluster.
-
-#### Tempistica
-
-Infine, il log fornisce informazioni sulla tempistica del processo di clustering.
-
-### Document Clustering
-
-Se Pluto viene utilizzato per il document clustering, specificando l'opzione `-showfeatures` nel comando di esecuzione, il log di output mostrerà le feature descrittive e discriminative per ogni cluster.
-
-* **Feature descrittive:** Caratterizzano il cluster.
-* **Feature discriminative:** Distinguono il cluster dagli altri.
-
-È auspicabile che i due insiemi di feature coincidano, poiché ciò indica che ogni cluster è ben caratterizzato e distinto dagli altri. Questo significa che gli oggetti sono riconosciuti come simili perché rappresentati da un sottoinsieme di feature che non è condiviso tra gli altri cluster. 
-
-#### Analisi dei Cluster
+### Analisi dei Cluster
 
 Per ogni cluster, è possibile analizzare le caratteristiche più significative in due modi:
 

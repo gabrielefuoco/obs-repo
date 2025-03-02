@@ -21,7 +21,7 @@ from splitcriteria import MarkdownSplitter, NaturalTextSplitter
 
 # Costanti
 MIN_WORDS = 300
-MAX_WORDS = 1200
+MAX_WORDS = 600
 
 # Configura il logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

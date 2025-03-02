@@ -521,15 +521,17 @@ Un modello seq2seq utilizza due architetture RNN (o LSTM multi-layer) per la tra
 
 Il decoder è autoregressivo: la predizione di ogni parola dipende dalle parole generate precedentemente. L'encoder potrebbe essere una rete bidirezionale per una migliore rappresentazione contestuale.
 
-* L'idea generale è un modello encoder-decoder:
- * Una rete neurale (encoder) prende in input e produce una rappresentazione neurale.
- * Un'altra rete (decoder) produce l'output basandosi su questa rappresentazione.
- * Se input e output sono sequenze, si chiama modello seq2seq.
-* I modelli seq2seq sono utili per molti task oltre alla traduzione automatica:
- * Summarization (testo lungo → testo corto)
- * Dialogo (turni precedenti → turno successivo)
- * Parsing (testo in input → albero sintattico come sequenza)
- * Generazione di codice (linguaggio naturale → codice Python)
+### Architettura Encoder-Decoder
+
+L'idea generale alla base di un modello seq2seq è un'architettura encoder-decoder:
+
+- **Encoder:** Una rete neurale che prende in input una sequenza e produce una rappresentazione vettoriale compatta (una rappresentazione neurale).
+- **Decoder:** Un'altra rete neurale che genera l'output in base alla rappresentazione vettoriale prodotta dall'encoder.
+- **Seq2Seq:** Se sia l'input che l'output sono sequenze, il modello è chiamato seq2seq. I modelli seq2seq sono utili per molti task oltre alla traduzione automatica:
+	 * Summarization (testo lungo → testo corto)
+	 * Dialogo (turni precedenti → turno successivo)
+	 * Parsing (testo in input → albero sintattico come sequenza)
+	 * Generazione di codice (linguaggio naturale → codice Python)
 
 ##### Il modello seq2seq è un esempio di modello linguistico condizionale:
 
@@ -717,19 +719,19 @@ La dimensionalità dello stato nascosto può essere diversa per encoder e decode
 
 ## L'Attention come Tecnica Generale di Deep Learning
 
-Abbiamo visto l'attention mechanism applicato ai modelli seq2seq per la traduzione automatica. Tuttavia, l'attention è una tecnica molto più generale, applicabile a diverse architetture e task.
+L'attention mechanism, inizialmente applicato ai modelli seq2seq per la traduzione automatica, è una tecnica molto più generale, applicabile a diverse architetture e task di deep learning.
+
 
 ##### Definizione generale dell'attenzione:
 
-Data una serie di vettori (valori) e un vettore di query, l'attenzione calcola una somma ponderata dei valori, dipendente dalla query.
+Data una serie di vettori (chiamati *valori*) e un vettore *query*, l'attenzione calcola una somma ponderata dei valori, dipendente dalla query.
 
-* La somma ponderata è un riassunto selettivo delle informazioni contenute nei valori, dove la query determina su quali valori focalizzarsi.
-* L'attenzione è un modo per ottenere una rappresentazione di dimensione fissa di un insieme arbitrario di rappresentazioni (i valori), dipendente da un'altra rappresentazione (la query).
-* L'attenzione è diventata un potente e flessibile meccanismo per la manipolazione di puntatori e memoria in tutti i modelli di deep learning.
+* Questa somma ponderata rappresenta un riassunto selettivo delle informazioni contenute nei valori. La query determina su quali valori focalizzarsi, selezionandoli implicitamente tramite i pesi.
+* L'attenzione permette di ottenere una rappresentazione di dimensione fissa di un insieme arbitrario di rappresentazioni (i valori), condizionata da un'altra rappresentazione (la query).
+* L'attention è diventata un meccanismo potente e flessibile per la manipolazione di puntatori e memoria in diversi modelli di deep learning.
 
-A volte si dice che la query "si concentra" sui valori.
+Si può dire metaforicamente che la query "si concentra" sui valori.
 
-Ad esempio, nel modello seq2seq con attention, ogni stato nascosto del decoder (query) si concentra su tutti gli stati nascosti dell'encoder (valori). Abbiamo visto la *cross-attention*. L'attention non è limitata alle architetture seq2seq.
+Ad esempio, nel modello seq2seq con *cross-attention*, ogni stato nascosto del decoder (query) si concentra su tutti gli stati nascosti dell'encoder (valori).  Tuttavia, l'attention non è limitata alle architetture seq2seq.
 
-Possiamo intendere l'attention come una tecnica generale per calcolare una somma pesata di valori, condizionata a una query. Questa somma è un riassunto selettivo delle informazioni contenute nei valori (stati dell'encoder), mentre la query determina su quali valori concentrarsi durante la generazione.
-
+In generale, l'attention può essere intesa come una tecnica per calcolare una somma ponderata di valori, condizionata a una query. Questa somma rappresenta un riassunto selettivo delle informazioni contenute nei valori, mentre la query determina su quali valori concentrarsi.
