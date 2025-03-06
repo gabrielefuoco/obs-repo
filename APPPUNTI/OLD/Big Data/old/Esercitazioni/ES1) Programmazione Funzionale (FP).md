@@ -1,6 +1,4 @@
----
 
----
 | Termine | Spiegazione |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Programmazione Funzionale (FP)** | Un paradigma di programmazione che vede il calcolo come la valutazione di funzioni matematiche, evitando l'uso di iteratori e cicli. |
@@ -36,10 +34,10 @@
 ## Cos'è la Programmazione Funzionale?
 
 La **Programmazione Funzionale** è un paradigma che vede il calcolo come la valutazione di funzioni matematiche:
- - Non si utilizzano iteratori, cicli `for` o `while`, ma solo funzioni.
+- Non si utilizzano iteratori, cicli `for` o `while`, ma solo funzioni.
 
 - **Funzione** vs **Metodo**:
- - Una funzione è un blocco di codice identificato da un nome, che può accettare parametri e restituire un valore. A differenza dei metodi, le funzioni in programmazione funzionale sono idealmente prive di effetti collaterali.
+- Una funzione è un blocco di codice identificato da un nome, che può accettare parametri e restituire un valore. A differenza dei metodi, le funzioni in programmazione funzionale sono idealmente prive di effetti collaterali.
 
 #### Programmazione Imperativa vs Programmazione Funzionale
 
@@ -69,92 +67,89 @@ La versione dichiarativa non modifica la collezione originale, ma ne restituisce
 ### Funzione vs Metodo
 
 - **Metodo** (OOP):
- - È definito all'interno di un'istanza di classe.
- - Non è indipendente, poiché è legato al contesto dell'oggetto a cui appartiene.
- - Può dipendere da variabili esterne ai suoi argomenti.
- - Può modificare i valori degli argomenti o di altre variabili statiche.
+- È definito all'interno di un'istanza di classe.
+- Non è indipendente, poiché è legato al contesto dell'oggetto a cui appartiene.
+- Può dipendere da variabili esterne ai suoi argomenti.
+- Può modificare i valori degli argomenti o di altre variabili statiche.
 
 - **Funzione** (FP):
- - Esiste indipendentemente da qualsiasi istanza di classe.
- - Può restituire un valore o un'altra funzione.
- - Non modifica né gli argomenti né variabili statiche.
- - Le funzioni possono essere composte liberamente, indipendentemente dal contesto.
+- Esiste indipendentemente da qualsiasi istanza di classe.
+- Può restituire un valore o un'altra funzione.
+- Non modifica né gli argomenti né variabili statiche.
+- Le funzioni possono essere composte liberamente, indipendentemente dal contesto.
 
----
 ### Vantaggi della Programmazione Funzionale
 
 - **Assenza di stato condiviso**:
- - Facilita la comprensione del codice in termini di:
- - **Correttezza**: il programma svolge il compito previsto.
- - **Performance**: misurazione del tempo di esecuzione.
- - **Scalabilità**: impatto delle prestazioni con input crescenti.
- - **Sicurezza**: riduzione dei rischi di uso malevolo dell'algoritmo.
+- Facilita la comprensione del codice in termini di:
+- **Correttezza**: il programma svolge il compito previsto.
+- **Performance**: misurazione del tempo di esecuzione.
+- **Scalabilità**: impatto delle prestazioni con input crescenti.
+- **Sicurezza**: riduzione dei rischi di uso malevolo dell'algoritmo.
 
 - **Concorrenza semplice**:
- - I problemi legati alla concorrenza sono minimizzati e l'ordine di esecuzione diventa irrilevante.
+- I problemi legati alla concorrenza sono minimizzati e l'ordine di esecuzione diventa irrilevante.
 
 - **Testing e debugging**:
- - Le funzioni pure sono facili da testare in isolamento.
- - Il codice di test può coprire facilmente casi tipici, limiti validi e non validi.
+- Le funzioni pure sono facili da testare in isolamento.
+- Il codice di test può coprire facilmente casi tipici, limiti validi e non validi.
 
 - **Algoritmi più eleganti**:
- - Spesso più leggibili, compatti e semplici da capire.
+- Spesso più leggibili, compatti e semplici da capire.
 
----
 ### Funzione Pura
 
 Una **funzione pura** deve rispettare due principi fondamentali:
 - **Determinismo**: dati gli stessi input, produce sempre lo stesso output.
 - **Assenza di effetti collaterali**: non deve eseguire operazioni che influenzano l'esterno, come:
- - Modificare variabili globali.
- - Alterare gli argomenti della funzione.
- - Effettuare operazioni di I/O (es. richieste HTTP, accesso a file).
+- Modificare variabili globali.
+- Alterare gli argomenti della funzione.
+- Effettuare operazioni di I/O (es. richieste HTTP, accesso a file).
 
 Una funzione non pura viola questi principi, risultando imprevedibile e capace di generare effetti collaterali.
 
----
 ### Effetto Collaterale
 
 - Si verifica quando la valutazione di un'espressione influisce su qualcosa al di fuori del suo contesto.
 - **Funzioni pure**:
- - Non utilizzano valori esterni (come variabili globali).
- - Accettano solo parametri e restituiscono un valore senza modificare lo stato esterno.
- - Non hanno dipendenze dallo stato né dall'esecuzione precedente.
- - Non richiedono input dall'utente.
+- Non utilizzano valori esterni (come variabili globali).
+- Accettano solo parametri e restituiscono un valore senza modificare lo stato esterno.
+- Non hanno dipendenze dallo stato né dall'esecuzione precedente.
+- Non richiedono input dall'utente.
 
 - **Problemi delle funzioni con effetti collaterali**:
- - Difficili da testare e debuggare.
- - Complicano il parallelismo.
+- Difficili da testare e debuggare.
+- Complicano il parallelismo.
 
 ### Funzioni Pure o Non Pure?
 
-1. **`f(x) { return x^2 + 5 }` - Pura** 
- Questa funzione è pura perché il suo output dipende solo dal valore di input `x` e non modifica alcuna variabile esterna né interagisce con l'ambiente esterno. Non ci sono effetti collaterali.
+- **`f(x) { return x^2 + 5 }` - Pura**
+Questa funzione è pura perché il suo output dipende solo dal valore di input `x` e non modifica alcuna variabile esterna né interagisce con l'ambiente esterno. Non ci sono effetti collaterali.
 
-2. **`f(x) { return x + x2 }` - Non pura (x2 è una variabile libera)** 
- Questa funzione non è pura perché `x2` è una variabile libera, ovvero non è un parametro della funzione, ma proviene dall'ambiente esterno. Questo rende il comportamento della funzione dipendente da variabili esterne, violando i principi delle funzioni pure.
+- **`f(x) { return x + x2 }` - Non pura (x2 è una variabile libera)**
+Questa funzione non è pura perché `x2` è una variabile libera, ovvero non è un parametro della funzione, ma proviene dall'ambiente esterno. Questo rende il comportamento della funzione dipendente da variabili esterne, violando i principi delle funzioni pure.
 
-3. **`f(x) { x2 = x; return x + x2 }` - Non pura (modifica x2)** 
- In questo caso, la funzione modifica una variabile (`x2`), il che comporta un effetto collaterale. Le funzioni pure non dovrebbero alterare lo stato di variabili esterne o globali, quindi questa non è una funzione pura.
+- **`f(x) { x2 = x; return x + x2 }` - Non pura (modifica x2)**
+In questo caso, la funzione modifica una variabile (`x2`), il che comporta un effetto collaterale. Le funzioni pure non dovrebbero alterare lo stato di variabili esterne o globali, quindi questa non è una funzione pura.
 
-4. **`f(x) { read x2; return x + x2}` - Non pura (dipende dall'input utente)** 
- Questa funzione legge un valore (`x2`) dall'esterno, probabilmente dall'input dell'utente o da una risorsa esterna. Questo significa che l'output non è determinato solo dall'input `x`, ma anche da fattori esterni. Pertanto, non è pura.
+- **`f(x) { read x2; return x + x2}` - Non pura (dipende dall'input utente)**
+Questa funzione legge un valore (`x2`) dall'esterno, probabilmente dall'input dell'utente o da una risorsa esterna. Questo significa che l'output non è determinato solo dall'input `x`, ma anche da fattori esterni. Pertanto, non è pura.
 
-5. **`f(x, x2) { return x + x2*x }` - Pura** 
- Questa funzione è pura perché dipende solo dai suoi parametri di input (`x` e `x2`) e non ha effetti collaterali né interagisce con l'ambiente esterno.
+- **`f(x, x2) { return x + x2*x }` - Pura**
+Questa funzione è pura perché dipende solo dai suoi parametri di input (`x` e `x2`) e non ha effetti collaterali né interagisce con l'ambiente esterno.
 
-6. **`f(<x1,...,xn>, x2) { return <x1,...,xn>.push(x2)}` - Non pura (modifica l'array di input)** 
- In questo caso, la funzione modifica l'array di input (`<x1,...,xn>`) aggiungendo un nuovo elemento (`x2`). Questa modifica dell'input esterno costituisce un effetto collaterale, quindi la funzione non è pura.
+- **`f(<x1,...,xn>, x2) { return <x1,...,xn>.push(x2)}` - Non pura (modifica l'array di input)**
+In questo caso, la funzione modifica l'array di input (`<x1,...,xn>`) aggiungendo un nuovo elemento (`x2`). Questa modifica dell'input esterno costituisce un effetto collaterale, quindi la funzione non è pura.
 
 ### Codice Senza Effetti Collaterali
 
 Le seguenti affermazioni sono equivalenti solo se la funzione `f()` è priva di effetti collaterali:
 
-1. **`int result = f(x) + f(x);`** 
- Qui, `f(x)` viene chiamata due volte, e se `f(x)` è pura (cioè non ha effetti collaterali), entrambe le chiamate restituiranno lo stesso risultato. Se `f()` non è pura, la seconda chiamata potrebbe dare un risultato diverso.
+- **`int result = f(x) + f(x);`**
+Qui, `f(x)` viene chiamata due volte, e se `f(x)` è pura (cioè non ha effetti collaterali), entrambe le chiamate restituiranno lo stesso risultato. Se `f()` non è pura, la seconda chiamata potrebbe dare un risultato diverso.
 
-2. **`int result = 2 * f(x);`** 
- In questo caso, `f(x)` viene chiamata una sola volta, e il risultato viene moltiplicato per 2. Se `f(x)` è pura, questo codice sarà equivalente al primo esempio, poiché `f(x)` produce sempre lo stesso risultato.
+- **`int result = 2 * f(x);`**
+In questo caso, `f(x)` viene chiamata una sola volta, e il risultato viene moltiplicato per 2. Se `f(x)` è pura, questo codice sarà equivalente al primo esempio, poiché `f(x)` produce sempre lo stesso risultato.
 
 ### Cittadini di Prima Classe
 
@@ -167,16 +162,16 @@ In programmazione funzionale, le **funzioni** sono considerate **cittadini di pr
 ### Espressioni Lambda
 
 Le **espressioni lambda** sono funzioni anonime, definite in modo conciso. La sintassi è `(parametri) -> espressione`. Le lambdas sono utilizzate spesso in contesti funzionali.
-- **Esempio**: `(x) -> x * x` 
- Questa lambda prende un parametro `x` e restituisce il valore di `x` al quadrato.
+- **Esempio**: `(x) -> x * x`
+Questa lambda prende un parametro `x` e restituisce il valore di `x` al quadrato.
 
 ### Funzioni di Ordine Superiore
 
 Le **funzioni di ordine superiore** sono funzioni che accettano altre funzioni come argomenti o che restituiscono funzioni come risultato. Queste sono fondamentali nella programmazione funzionale per creare operazioni flessibili e modulari.
 
 - **Esempi**:
- - **`map`**: Applica una funzione a ciascun elemento di una collezione, trasformando ogni elemento.
- - **`filter`**: Restituisce solo gli elementi di una collezione che soddisfano una condizione specifica.
+- **`map`**: Applica una funzione a ciascun elemento di una collezione, trasformando ogni elemento.
+- **`filter`**: Restituisce solo gli elementi di una collezione che soddisfano una condizione specifica.
 
 ## Esempi di Espressioni Lambda
 
@@ -214,18 +209,18 @@ public static void printFormatted(String str, Function<String,String> format) {
 ## Macchina di Turing vs Lambda Calcolo
 
 - **Fondamento Teorico**:
- - Macchina di Turing: modello matematico per computer general-purpose
- - Lambda Calcolo: notazione matematica per esprimere funzioni e applicazione di funzioni
+- Macchina di Turing: modello matematico per computer general-purpose
+- Lambda Calcolo: notazione matematica per esprimere funzioni e applicazione di funzioni
 
 - **Modello di Calcolo**:
- - Macchina di Turing: calcolo imperativo, passo-passo
- - Lambda Calcolo: valutazione di espressioni come funzioni
+- Macchina di Turing: calcolo imperativo, passo-passo
+- Lambda Calcolo: valutazione di espressioni come funzioni
 
 - **Manipolazione Dati**:
- - Macchina di Turing: attraverso celle di memoria e operazioni di lettura/scrittura
- - Lambda Calcolo: rappresenta i dati come funzioni e usa astrazione e applicazione di funzioni
+- Macchina di Turing: attraverso celle di memoria e operazioni di lettura/scrittura
+- Lambda Calcolo: rappresenta i dati come funzioni e usa astrazione e applicazione di funzioni
 
-# Macchina di Turing vs Lambda Calcolo
+## Macchina di Turing vs Lambda Calcolo
 
 ## Paradigma di Programmazione:
 
@@ -241,16 +236,16 @@ public static void printFormatted(String str, Function<String,String> format) {
 
 In sintesi, la programmazione basata su macchina di Turing e quella basata su lambda calcolo rappresentano due approcci diversi al calcolo, con la prima più imperativa e passo-passo, e la seconda più dichiarativa e funzionale. La scelta tra le due dipende dal dominio del problema e dal paradigma di programmazione desiderato.
 
-# Java Stream
+## Java Stream
 
 ## Streams
 
 - **Stream**: una sequenza di elementi da una sorgente di dati che supporta operazioni aggregate.
 - Gli stream operano su una sorgente di dati e la modificano, ad esempio:
- - Stampare ogni elemento di una collezione
- - Sommare ogni intero in un file
- - Concatenare stringhe in una stringa più grande
- - Trovare il valore più grande in una collezione
+- Stampare ogni elemento di una collezione
+- Sommare ogni intero in un file
+- Concatenare stringhe in una stringa più grande
+- Trovare il valore più grande in una collezione
 
 ## Codice con e senza Stream in Java
 
@@ -325,8 +320,7 @@ public static boolean isPrime(int n) {
 }
 ```
 
----
-# Operatori Stream
+## Operatori Stream
 
 | Nome metodo | Descrizione |
 | ---------------- | -------------------------------------------------------------------------------- |
@@ -358,7 +352,7 @@ public static boolean isPrime(int n) {
 | **of(values)** | Converte i valori dati in uno stream |
 | **range(start, end)** | Restituisce un intervallo di valori interi come stream |
 
-# Risultati Opzionali
+## Risultati Opzionali
 
 Alcuni terminatori di stream come `max` restituiscono un risultato "opzionale" perché lo stream potrebbe essere vuoto o non contenere il risultato:
 
@@ -369,7 +363,7 @@ OptionalInt largest = IntStream.of(55, 20, 19, 31, 40, -2, 62, 30)
 int largestInt = largest.getAsInt();
 ```
 
-# Stream e Array
+## Stream e Array
 
 Un array può essere convertito in uno stream con `Arrays.stream`:
 
@@ -381,7 +375,7 @@ int sum = Arrays.stream(numbers)
     .sum();
 ```
 
-# Riferimenti a Metodi
+## Riferimenti a Metodi
 
 Un riferimento a metodo permette di passare un metodo dove altrimenti ci si aspetterebbe una lambda:
 
@@ -390,7 +384,7 @@ Un riferimento a metodo permette di passare un metodo dove altrimenti ci si aspe
 .forEach(System.out::println);
 ```
 
-# Stream e Liste
+## Stream e Liste
 
 Una collezione può essere convertita in uno stream chiamando il suo metodo `stream()`:
 
@@ -405,7 +399,7 @@ list.stream()
     .forEach(System.out::println);
 ```
 
-# Stream e Stringhe
+## Stream e Stringhe
 
 ```java
 List<String> words = Arrays.asList("To", "be", "or", "Not", "to", "be");
@@ -415,7 +409,7 @@ Set<String> words2 = words.stream()
 System.out.println("word set = " + words2);
 ```
 
-# Stream e File
+## Stream e File
 
 ```java
 int longest = Files.lines(Paths.get("haiku.txt"))
@@ -424,7 +418,7 @@ int longest = Files.lines(Paths.get("haiku.txt"))
     .getAsInt();
 ```
 
-# Stream e Map (HashMap)
+## Stream e Map (HashMap)
 
 ```java
 List<Employee> employeeList = new ArrayList<>(Arrays.asList(
@@ -440,7 +434,7 @@ Map<Long, Employee> employeesMap = employeeList.stream()
 System.out.println(employeesMap);
 ```
 
-# Interfacce Funzionali Java
+## Interfacce Funzionali Java
 
 | Interfaccia | Input | Output | Scopo |
 | ------------------- | ---------------------------------------- | --------------------------------- | --------------------------------------------------------------------------- |
@@ -450,7 +444,7 @@ System.out.println(employeesMap);
 | **Consumer/BiConsumer** | Singolo/doppio oggetto di qualsiasi tipo | Nessuno | Usare un valore e output, eseguire qualche effetto collaterale |
 | **Supplier** | Nessuno | Singolo oggetto di qualsiasi tipo | Creare un oggetto del tipo desiderato |
 
-# Interfaccia Function Java
+## Interfaccia Function Java
 
 ```java
 Function<String, Integer> findWordCount = in -> {
@@ -459,7 +453,7 @@ Function<String, Integer> findWordCount = in -> {
 System.out.println(findWordCount.apply("this sentence has five words"));
 ```
 
-# Concatenazione di funzioni
+## Concatenazione di funzioni
 
 ```java
 Function<Integer, Integer> multipliedBy2 = x -> x * 2;
@@ -468,7 +462,7 @@ System.out.println(multipliedBy2.compose(squared).apply(4)); // Restituisce 32
 System.out.println(multipliedBy2.andThen(squared).apply(4)); // Restituisce 64
 ```
 
-# BiFunctions
+## BiFunctions
 
 ```java
 BiFunction<String, String, String> function1 = (s1, s2) -> {
@@ -481,8 +475,7 @@ BiFunction<Integer, Integer, Integer> function2 = (a, b) -> a * b;
 System.out.println(function2.apply(3, 4));
 ```
 
----
-# Interfaccia Predicate Java
+## Interfaccia Predicate Java
 
 L'interfaccia Predicate è usata per testare se un dato è conforme a qualche valore o logica.
 
@@ -511,13 +504,12 @@ System.out.println(sizeChecker.or(specialWordChecker).test(sentence));
 System.out.println(sizeChecker.negate().test(sentence));
 ```
 
-# Interfacce Consumer/Supplier Java
+## Interfacce Consumer/Supplier Java
 
 $$Consumer<T>: (BiConsumer<T,U>)$$
 - Rappresenta un'operazione che accetta un singolo argomento di input e non restituisce alcun risultato.
 - Funzione: `void accept(T t)` (`void accept(T t, U u)`)
 
---- 
 $$Supplier<T>:$$
 
 - Rappresenta un fornitore di risultati.
@@ -544,7 +536,7 @@ Consumer<Long> tabConsumer = o -> System.out.print(o + "\t");
 Stream.generate(fibonacciSupplier).limit(50).forEach(tabConsumer);
 ```
 
-# Riutilizzo degli Stream Java
+## Riutilizzo degli Stream Java
 
 Gli stream Java, una volta consumati, non possono essere riutilizzati per impostazione predefinita.
 
@@ -577,10 +569,10 @@ System.out.println(count);
 ### Pipeline degli Stream (Java 8)
 
 - Una pipeline di stream è composta da:
- 1. **Sorgente**: Punto di partenza dello stream.
- 2. **Operazioni Intermedie**: 0 o più operazioni (es. `filter`, `map`).
- 3. **Operazione Terminale**: Una sola operazione che conclude il flusso (es. `reduce`, `collect`).
-# Creazione di Stream Java
+- **Sorgente**: Punto di partenza dello stream.
+- **Operazioni Intermedie**: 0 o più operazioni (es. `filter`, `map`).
+- **Operazione Terminale**: Una sola operazione che conclude il flusso (es. `reduce`, `collect`).
+## Creazione di Stream Java
 
 ```java
 // Da Array
@@ -603,7 +595,7 @@ String sentence = "This is a six word sentence.";
 Stream<String> wordStream = Pattern.compile("\\W").splitAsStream(sentence);
 ```
 
-# 'Riutilizzo' degli Stream
+## 'Riutilizzo' degli Stream
 
 Gli stream possono essere 'riutilizzati' avvolgendoli con un Supplier:
 
@@ -614,13 +606,13 @@ System.out.println(streamSupplier.get().anyMatch(s -> true)); // true
 System.out.println(streamSupplier.get().noneMatch(s -> true)); // false
 ```
 
-# Caratteristiche delle Operazioni Intermedie
+## Caratteristiche delle Operazioni Intermedie
 
 - Qualsiasi operazione è denotata come operazione intermedia se restituisce un nuovo Stream.
 - Le operazioni intermedie sono sempre lazy.
 - L'attraversamento della sorgente della pipeline non inizia finché non viene eseguita l'operazione terminale della pipeline.
 
-# Operazioni Intermedie
+## Operazioni Intermedie
 
 | Operazione Stream | Scopo | Input |
 | ----------------- | ------------------------------------------------------------------------------------ | -------------- |
@@ -633,7 +625,7 @@ System.out.println(streamSupplier.get().noneMatch(s -> true)); // false
 | **peek** | Restituisce una copia dello stream e poi applica una funzione Consumer sul risultato | Consumer |
 | **skip** | Scarta i primi n elementi dello stream risultante | Long |
 
-# Operazioni di Terminazione
+## Operazioni di Terminazione
 
 Queste operazioni attraversano lo stream per produrre un risultato o un effetto collaterale.
 
@@ -655,7 +647,7 @@ Esempi di operazioni di terminazione:
 | **anyMatch/allMatch/noneMatch** | Restituisce se qualsiasi/tutti/nessuno degli elementi dello stream soddisfano il predicato fornito | Predicate |
 | **findFirst/findAny** | Restituisce un Optional contenente il primo/qualsiasi risultato | |
 
-# collect() usando Collectors
+## collect() usando Collectors
 
 - Collector è un'operazione di riduzione
 - Prende una sequenza di elementi di input e li combina in un unico risultato riassuntivo.
@@ -676,7 +668,7 @@ Esempi di Collectors:
 | Collectors.groupingBy() | Raggruppa gli elementi con un classificatore e un mapper dati |
 | Collectors.partitioningBy() | Partiziona gli elementi con un predicato e un mapper dati |
 
-# Esempi Java
+## Esempi Java
 
 ## Map
 
@@ -706,7 +698,7 @@ System.out.println(myArray.stream()
     .get());
 ```
 
-# Esempio di Stream Java
+## Esempio di Stream Java
 
 ## Classe Student
 
@@ -729,7 +721,7 @@ List<String> result = list.stream()
 result.forEach(x -> System.out.println(x));
 ```
 
-# Esempio: ITCompany
+## Esempio: ITCompany
 
 ## Classe ComputerProgrammer
 
@@ -768,7 +760,7 @@ company.stream()
     .forEach((s, d) -> System.out.println("Group: " + s + "\tTotal Employees: " + d));
 ```
 
-# Operazione peek()
+## Operazione peek()
 
 - Restituisce uno stream composto dagli elementi di questo stream.
 - Esegue anche l'azione fornita su ogni elemento dello stream risultante.
@@ -803,7 +795,7 @@ if (result.isPresent())
     System.out.println(result.get());
 ```
 
-# Ordinamento
+## Ordinamento
 
 ```java
 company.stream().sorted(Comparator.comparingInt(ComputerProgrammer::getSalary))
@@ -819,7 +811,7 @@ company.stream().sorted(Comparator.reverseOrder())
     .forEach(System.out::println);
 ```
 
-# Stream.parallel
+## Stream.parallel
 
 ```java
 public static void main(String[] args) {
@@ -840,7 +832,7 @@ public static boolean isPrime(int number) {
 }
 ```
 
-# Classe ComputerProgrammer
+## Classe ComputerProgrammer
 
 ```java
 public class ComputerProgrammer implements Comparable<ComputerProgrammer> {
@@ -854,9 +846,9 @@ public class ComputerProgrammer implements Comparable<ComputerProgrammer> {
 }
 ```
 
-# Query su IT Company
+## Query su IT Company
 
-1. Stampa i primi 100 dipendenti:
+- Stampa i primi 100 dipendenti:
 ```java
 Files.lines(new File("ITCompany_10000.txt").toPath())
     .map(x -> ComputerProgrammer.parse(x))
@@ -876,7 +868,7 @@ I principi chiave della programmazione funzionale includono:
 - **Costruire il software tramite funzioni**, idealmente **funzioni pure** (senza effetti collaterali).
 - **Ricorsione** al posto dell'iterazione.
 - **Calcolo lazy** (ritardato) anziché eager (immediato).
-# Supporto Java alla Programmazione Funzionale
+## Supporto Java alla Programmazione Funzionale
 
 | Caratteristica | Linguaggi Funzionali | Java Object Oriented | Java 8 |
 |----------------|----------------------|----------------------|--------|

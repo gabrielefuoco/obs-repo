@@ -1,15 +1,15 @@
-## Metodi per Migliorare l'Efficacia dei Modelli 
+## Metodi per Migliorare l'Efficacia dei Modelli
 
 Nel campo della Computer Vision, sono stati sviluppati diversi metodi per migliorare l'efficacia dei modelli. Uno dei problemi comuni è il **vanishing gradient**, che si verifica quando i gradienti si riducono drasticamente durante la backpropagation, rendendo difficile l'apprendimento dei pesi della rete.
 
 La loss è definita come $l(\theta)=nll(\theta)+\|\theta\|$
 ### Tecniche per Contrastare il Vanishing Gradient
 
-##### 1. Funzioni di Attivazione:
+##### Funzioni di Attivazione:
 
 * L'utilizzo di funzioni di attivazione come **ReLU** (Rectified Linear Unit) può aiutare a risolvere il problema del vanishing gradient. ReLU è una funzione lineare per valori positivi e zero per valori negativi, evitando il problema della saturazione che si verifica con funzioni come la sigmoide.
 
-##### 2. Regolarizzazione:
+##### Regolarizzazione:
 
 * La regolarizzazione è una tecnica che "disciplina" la rete durante il fitting, evitando che i pesi assumano valori estremi.
 * La **regolarizzazione L2** aggiunge un termine alla loss function che penalizza i pesi grandi. La formula della loss con regolarizzazione L2 è:
@@ -23,7 +23,7 @@ dove:
 
 * La regolarizzazione L2 aiuta a prevenire l'overfitting, ovvero l'adattamento eccessivo della rete al training set, rendendola meno generalizzabile a nuovi dati.
 
-##### 3. Clipping del Gradiente:
+##### Clipping del Gradiente:
 
 * Il clipping del gradiente limita l'ampiezza dei gradienti, evitando che esplodano durante la backpropagation.
 * Questa tecnica è utile in situazioni in cui i gradienti possono diventare molto grandi, ad esempio quando si utilizzano reti ricorrenti per l'elaborazione di dati sequenziali.
@@ -34,13 +34,13 @@ dove:
 * Per gestire i dati sequenziali, è necessario utilizzare strutture di rete che siano in grado di tenere conto della sequenza temporale.
 * Esempi di queste strutture includono le **reti ricorrenti (RNN)** e le **reti convoluzionali ricorrenti (RCNN)**.
 
-# Tecniche per la Regolazione delle Reti Neurali
+## Tecniche per la Regolazione delle Reti Neurali
 
 Uno dei problemi che si possono incontrare nelle architetture di rete che gestiscono sequenze, come le reti ricorrenti, è l'**esplosione** del gradiente. L'esplosione del gradiente è il contrario dell'**annullamento**: nell'annullamento i valori dei pesi della rete tendono a zero, mentre nell'esplosione i valori dei pesi aumentano a dismisura.
 
 ## Clipping
 
-Il **clipping** è una strategia che nasce per mitigare il problema dell'esplosione, ma che si rivela utile anche come metodo di **regolarizzazione**. 
+Il **clipping** è una strategia che nasce per mitigare il problema dell'esplosione, ma che si rivela utile anche come metodo di **regolarizzazione**.
 
 Il clipping si basa sull'idea di "tagliare" i valori dei pesi che superano una certa soglia. In pratica, se un valore di peso supera la soglia, viene "tagliato" e riportato al valore massimo o minimo consentito.
 
@@ -63,9 +63,9 @@ Il dropout forza la rete a non fare affidamento su singoli neuroni, ma a distrib
 
 Durante il training, il dropout seleziona in modo casuale alcuni neuroni e azzera il loro contributo. Ad esempio, in un livello della rete, alcuni neuroni potrebbero essere "disabilitati" e non partecipare al calcolo del forward pass
 In particolare:
-1. Durante il forward pass, alcuni neuroni vengono disabilitati in modo casuale.
-2. Il calcolo della loss viene effettuato solo sui neuroni attivi.
-3. Durante il backward pass, i gradienti vengono aggiornati solo per i neuroni attivi.
+- Durante il forward pass, alcuni neuroni vengono disabilitati in modo casuale.
+- Il calcolo della loss viene effettuato solo sui neuroni attivi.
+- Durante il backward pass, i gradienti vengono aggiornati solo per i neuroni attivi.
 
 ##### Vantaggi del dropout:
 
@@ -106,8 +106,8 @@ Consideriamo un'immagine. In questo contesto, la rappresentiamo in due dimension
 
 Immaginiamo di voler costruire una rete neurale *fully-connected* per mappare questa immagine in un'immagine 4x4. In termini di rete *fully-connected*, stiamo creando due layer:
 
-1. **Layer di input:** Composto da 25 elementi, uno per ogni cella dell'immagine di input.
-2. **Layer di output:** Composto da 16 elementi, uno per ogni cella dell'immagine finale (4x4).
+- **Layer di input:** Composto da 25 elementi, uno per ogni cella dell'immagine di input.
+- **Layer di output:** Composto da 16 elementi, uno per ogni cella dell'immagine finale (4x4).
 
 In sostanza, stiamo linearizzando l'immagine di input 5x5 e trasformandola in un vettore di 25 elementi. Questo vettore viene poi mappato in un vettore di output di 16 elementi, che rappresenta l'immagine 4x4.
 
@@ -205,11 +205,11 @@ $$\left\lfloor \frac{I - K - (K - 1)(D - 1) + 2P}{S} \right\rfloor + 1$$
 
 ### Spiegazione:
 
-1. **\(I - K\)**: Rimuove la parte dell'immagine coperta dalla dimensione del kernel.
-2. **\((K - 1)(D - 1)\)**: Aggiusta l'area coperta dal kernel in base alla dilatazione.
-3. **\(2P\)**: Aggiunge lo spazio introdotto dal padding, che aumenta la dimensione effettiva dell'input.
-4. **Divisione per \(S\)**: Considera il passo con cui si sposta il kernel sull'immagine, riducendo la dimensione dell'output.
-5. **Somma di 1**: Aggiunge un'unità per includere il primo elemento convoluto.
+- **\(I - K\)**: Rimuove la parte dell'immagine coperta dalla dimensione del kernel.
+- **\((K - 1)(D - 1)\)**: Aggiusta l'area coperta dal kernel in base alla dilatazione.
+- **\(2P\)**: Aggiunge lo spazio introdotto dal padding, che aumenta la dimensione effettiva dell'input.
+- **Divisione per \(S\)**: Considera il passo con cui si sposta il kernel sull'immagine, riducendo la dimensione dell'output.
+- **Somma di 1**: Aggiunge un'unità per includere il primo elemento convoluto.
 
 Il risultato è la dimensione dell'output dopo l'operazione di convoluzione, tenendo conto del padding, della dilatazione e dello stride.
 

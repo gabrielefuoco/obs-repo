@@ -10,8 +10,6 @@ BM25 ranking function
 
 $$RSV^{BM25} = \sum_{i \in q} c_i^{BM25}(tf_i)$$
 
----
-
 # BM25F with zones
 
 Calculate a weighted variant of total term frequency, and
@@ -28,8 +26,6 @@ where
 * $len_z$ is length of zone $z$
 * $Z$ is the number of zones
 
----
-
 # Simple BM25F with zones
 
 Simple interpretation: zone $z$ is "replicated" $v_z$ times
@@ -37,8 +33,6 @@ Simple interpretation: zone $z$ is "replicated" $v_z$ times
 $$RSV_{SimpleBM25F} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)\tilde{tf_i}}{k_1((1-b) + b \frac{\tilde{dl_i}}{av\tilde{dl}}) + \tilde{tf_i}}$$
 
 But we may want zone-specific parameters ($k_1$, $b$, IDF)
-
----
 
 • Empirically, zone-specific length normalization (i.e., zone-specific $b_z$) has been found to be useful
 
@@ -48,11 +42,7 @@ $$ B_z = \left( (1 - b_z) + b_z \frac{len_z}{avlen_z} \right), \quad 0 \le b_z \
 
 $$ RSV_{BM2.5F} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)\tilde{tf}_i}{k_1 + \tilde{tf}_i} $$
 
----
-
 $$RSV^{BM25} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1 + 1)tf_i}{k_1((1-b) + b \frac{dl}{avdl}) + tf_i}$$
-
----
 
 Topic assignment to a word at position $i$ in doc $d_j$
 
@@ -67,8 +57,6 @@ For each doc in a collection of $N$ docs
 Word token at position $i$ in doc $d_j$
 
 [Moens and Vulic, Tutorial @WSD]
-
----
 
 ```
 \begin{tikzpicture}[node distance=2cm]
@@ -91,19 +79,13 @@ Word token at position $i$ in doc $d_j$
 \end{tikzpicture}
 ```
 
----
-
 [It's hot and delicious. [I poured the tea for my uncle]3.document
 
 center word
 
----
-
 $$\text{banking} = \begin{bmatrix} 0.286 \\ 0.792 \\ -0.177 \\ -0.107 \\ 0.109 \\ -0.542 \\ 0.349 \\ 0.271 \end{bmatrix}$$
 
 $$\text{monetary} = \begin{bmatrix} 0.413 \\ 0.582 \\ -0.007 \\ 0.247 \\ 0.216 \\ -0.718 \\ 0.147 \\ 0.051 \end{bmatrix}$$
-
----
 
 Example windows and process for computing $P(w_{t+j} | w_t)$
 
@@ -115,8 +97,6 @@ $$P(w_{t-1} | w_t)$ $P(w_{t+1} | w_t)$$
 
 outside context words center word outside context words
 in window of size 2 at position t in window of size 2
-
----
 
 Example windows and process for computing $P(w_{t+j} | w_t)$
 
@@ -147,11 +127,7 @@ $$P(w_{t-2} | w_t)$ $P(w_{t+2} | w_t)$$
 \node at (5.5,-0.9) {in window of size 2};
 \end{tikzpicture}
 
----
-
 $$\theta = \begin{bmatrix} v_{aardvark} \\ v_a \\ \vdots \\ v_{zebra} \\ u_{aardvark} \\ u_a \\ \vdots \\ u_{zebra} \end{bmatrix} \in \mathbb{R}^{2dV}$$
-
----
 
 # Source Text
 
@@ -217,8 +193,6 @@ softmax
 ...
 0 $y_V$
 
----
-
 ```
 INPUT          PROJECTION          OUTPUT
 
@@ -228,8 +202,6 @@ on              $w_{(t+1)}$
 floor           $w_{(t+2)}$
 
 ```
-
----
 
 # Input layer
 
@@ -338,8 +310,6 @@ $$W'_{N \times V}$$
 
 V-dim
 
----
-
 ```markdown
 $W_{V \times N}^T$  $\times$ $x_{on}$ = $v_{on}$
 
@@ -387,16 +357,12 @@ $W_{V \times N}^T$ $\times$ $x_{on}$ = $v_{on}$
 
 ```
 
----
-
 Probability and Ratio
 | | $k = solid$ | $k = gas$ | $k = water$ | $k = fashion$ |
 |-------------|---------------|-------------|---------------|----------------|
 | $P(k|ice)$ | $1.9 \times 10^{-4}$ | $6.6 \times 10^{-5}$ | $3.0 \times 10^{-3}$ | $1.7 \times 10^{-5}$ |
 | $P(k|steam)$ | $2.2 \times 10^{-5}$ | $7.8 \times 10^{-4}$ | $2.2 \times 10^{-3}$ | $1.8 \times 10^{-5}$ |
 | $\frac{P(k|ice)}{P(k|steam)}$ | $8.9$ | $8.5 \times 10^{-2}$ | $1.36$ | $0.96$ |
-
----
 
 ```
 $\begin{bmatrix}
@@ -407,8 +373,6 @@ $\begin{bmatrix}
 \end{array}
 \end{bmatrix}$
 ```
-
----
 
 ```markdown
 EWN
@@ -444,8 +408,6 @@ guidare
 ...
 ```
 
----
-
 ```
 GET
 
@@ -462,18 +424,14 @@ Troponym Troponym
 TAKE OVER          PICK UP
 ```
 
----
-
 **wood** [wʊd]
-1. n.
- a. (material) legno; (timber)
- b. (forest) bosco
- c. (Golf) mazza di legno; (Bowls)
-2. adj.
- a. (made of wood) di legno
- b. (living etc. in a wood) di bosco, silvestre.
-
----
+- n.
+(material) legno; (timber)
+(forest) bosco
+(Golf) mazza di legno; (Bowls)
+- adj.
+(made of wood) di legno
+(living etc. in a wood) di bosco, silvestre.
 
 Gloss similarity
 
@@ -490,8 +448,6 @@ handle 1. $n$. ...
 (of knife) manico, impugnatura;
 (of door, drawer) maniglia
 
----
-
 Shared hypernym and Synonym
 
 albero 1. sm a. ( *pianta* ) tree
@@ -506,21 +462,15 @@ $\implies$ \{flatfish\} -- any of several families of *fishes* having...
 \{sole\} -- the underside of the foot
 $\implies$ \{area, region\} -- a part of an animal that has a special...
 
----
-
 $$a:b :: c:?$$
 
 $$d = \text{arg } \max_i \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||}$$
-
----
 
 ```
 king
 woman
 man
 ```
-
----
 
 | Word 1 | Word 2 | Human (mean) |
 |--------------|------------|----------------|
@@ -534,8 +484,6 @@ man
 | stock | CD | 1.31 |
 | stock | jaguar | 0.92 |
 
----
-
 | Model | Size | WS353 | MC | RG | SCWS | RW |
 |---|---|---|---|---|---|---|
 | SVD | 6B | 35.3 | 35.1 | 42.5 | 38.3 | 25.6 |
@@ -548,8 +496,6 @@ man
 | GloVe | 42B | 75.9 | 83.6 | 82.9 | 59.6 | 47.8 |
 | CBOW\* | 100B | 68.4 | 79.6 | 75.4 | 59.4 | 45.5 |
 
----
-
 | Model | Dev | Test | ACE | MUC7 |
 |---|---|---|---|---|
 | Discrete | 91.0 | 85.4 | 77.4 | 73.4 |
@@ -561,8 +507,6 @@ man
 | CW | 92.2 | 87.4 | 81.7 | 80.2 |
 | CBOW | 93.1 | 88.2 | 82.2 | 81.1 |
 | GloVe | $\mathbf{93.2}$ | $\mathbf{88.3}$ | $\mathbf{82.9}$ | $\mathbf{82.2}$ |
-
----
 
 # Training with cross entropy loss
 
@@ -578,6 +522,4 @@ $$H(p, q) = - \sum_{c=1}^{C} p(c) \log q(c)$$
 * Assuming a ground truth (or true or gold or target) probability distribution that is 1 at the right class and 0 everywhere else, $p = [0, ..., 0, 1, 0, ..., 0]$, then:
 
 * Because of one-hot $p$, the only term left is the negative log probability of the true class $y_i$: $- \log p(y_i | x_i)$
-
----
 

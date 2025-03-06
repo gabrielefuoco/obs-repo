@@ -1,12 +1,10 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
@@ -15,13 +13,13 @@ Gioco Strategico ^wE3KBeY7
 - N giocatori
 - Azioni ammissibili S_i
 - Profili d'azione S = x S_j
- - N-upla di azione ammissibili
+- N-upla di azione ammissibili
 - Funzione di Utilità ^a5W9qUqQ
 
 S* è Nash se
- ^irYrTJ9e
+^irYrTJ9e
 
- ^wgaA7Q54
+^wgaA7Q54
 
 ## Embedded Files
 

@@ -5,9 +5,9 @@ import numpy.linalg as LA
 img_src = '.'
 ```
 
-# SIFT Detection and Descriptors
+## SIFT Detection and Descriptors
 
-L'algoritmo SIFT si basa essenzialmente su 4 concetti: 
+L'algoritmo SIFT si basa essenzialmente su 4 concetti:
 - Scale-space extrema detection
 - Keypoint localization
 - Orientation assignment
@@ -28,19 +28,19 @@ print('Shape', image.shape)
 img_show(image,cmap=cm.gray)
 ```
 
- Shape (415, 572)
+Shape (415, 572)
 
 ![png](6b_Features_SIFT_3_1.png)
 
 ## Scale-space
 
-Cominciamo con l'illustrare la piramide gaussiana. 
+Cominciamo con l'illustrare la piramide gaussiana.
 
-Il concetto di scale-space può essere illustrato applicando il filtro gaussiano ad un'immagine per valori differenti di deviazione standard. 
+Il concetto di scale-space può essere illustrato applicando il filtro gaussiano ad un'immagine per valori differenti di deviazione standard.
 
-Dalle proprietà della distribuzione gaussiana sappiamo che $6\sigma$ rappresenta il range che racchiude il 99% dei dati distribuiti secondo una gaussiana. Questo significa che, se immaginiamo una griglia di punti, tutti i punti che distano più di $3\sigma$ dal centro avranno valore 0.Un valore di $\sigma$ esprime quindi un filtro gaussiano di dimensione $s = 2\cdot \lceil 3\sigma\rceil +1$. 
+Dalle proprietà della distribuzione gaussiana sappiamo che $6\sigma$ rappresenta il range che racchiude il 99% dei dati distribuiti secondo una gaussiana. Questo significa che, se immaginiamo una griglia di punti, tutti i punti che distano più di $3\sigma$ dal centro avranno valore 0.Un valore di $\sigma$ esprime quindi un filtro gaussiano di dimensione $s = 2\cdot \lceil 3\sigma\rceil +1$.
 
-Proviamo ora ad applicare alla stessa immagine un filtro gaussiano corrispondente a valori crescenti di devianza, su un fattore $2^k$ rispetto ad un valore iniziale di $\sigma$. 
+Proviamo ora ad applicare alla stessa immagine un filtro gaussiano corrispondente a valori crescenti di devianza, su un fattore $2^k$ rispetto ad un valore iniziale di $\sigma$.
 
 ```python
 fig = plt.figure(figsize=(20, 20))
@@ -93,8 +93,8 @@ plt.show()
 
 ![png](6b_Features_SIFT_8_0.png)
 
-Nella figura sopra, l'immagine grande è l'originale, mentre a destra troviamo le riduzioni. Si noti come, nelle riduzioni, si perdono progressivamente i dettagli mentre il focus sulle componenti principali dell'immagine rimane. 
-Proviamo a fare le stesse operazioni in sequenza. 
+Nella figura sopra, l'immagine grande è l'originale, mentre a destra troviamo le riduzioni. Si noti come, nelle riduzioni, si perdono progressivamente i dettagli mentre il focus sulle componenti principali dell'immagine rimane.
+Proviamo a fare le stesse operazioni in sequenza.
 
 ```python
 sz = 4
@@ -131,7 +131,7 @@ for i in range(num_octave):
 
 ![png](6b_Features_SIFT_10_5.png)
 
-La sequenza che abbiamo costruito è una piramide Gaussiana. Nella rappresentazione compatta: 
+La sequenza che abbiamo costruito è una piramide Gaussiana. Nella rappresentazione compatta:
 
 ```python
 rows,cols = image.shape
@@ -166,7 +166,7 @@ plt.show()
 
 Riuscite a scorgere la differenza tra questa immagine e l'immagine di sopra?
 
-Lo Scale space rappresenta un'immagine come una famiglia di versioni smoothed della stessa immagine, con l'obiettivo di simulare la perdita di dettagli che si avrebbe riducendo la scala. L'unico parametro che controlla questa famiglia di versioni è la devianza $\sigma$ del filtro gaussiano di smoothing. Dalle analisi di sopra abbiamo visto che applicando progressivamente $\sigma$, $2\sigma$, $4\sigma$ ... stiamo di fatto riducendo la scala di un fattore 1/4 ad ogni applicazione del filtro. 
+Lo Scale space rappresenta un'immagine come una famiglia di versioni smoothed della stessa immagine, con l'obiettivo di simulare la perdita di dettagli che si avrebbe riducendo la scala. L'unico parametro che controlla questa famiglia di versioni è la devianza $\sigma$ del filtro gaussiano di smoothing. Dalle analisi di sopra abbiamo visto che applicando progressivamente $\sigma$, $2\sigma$, $4\sigma$ ... stiamo di fatto riducendo la scala di un fattore 1/4 ad ogni applicazione del filtro.
 
 SIFT suddivide lo scale space in ottave, dove ogni ottava $i$ corrisponde all'applicazione del filtro $2^i\sigma$ (in pratica, ogni ottava raddoppia il valore precedente). In aggiunta, ogni ottava è suddivisa in un numero $s$ di intervalli: se $s=1$ allora l'ottava sarà composta di due immagini (un intervallo), mentre con $s=2$ avremo tre immagini e così via. Poiché l'ultima immagine dell'ottava sarà raddoppiata rispetto all'immagine iniziale, le immagini saranno ottenute applicando progressivamente il filtro gaussiano con devianza $k \sigma$, dove $k$ è la costante che garantisce che $k^s\sigma = 2\sigma$ (e quindi $k= 2^{1/s}$).
 
@@ -190,7 +190,7 @@ def generate_gaussian_pyramid(im, num_octave, s, sigma):
     return pyr
 ```
 
-La funzione `generate_octave` costruisce delle immagini aggiuntive, per dei motivi che saranno chiari in seguito. Se proviamo a visualizzare la piramide otteniamo questo: 
+La funzione `generate_octave` costruisce delle immagini aggiuntive, per dei motivi che saranno chiari in seguito. Se proviamo a visualizzare la piramide otteniamo questo:
 
 ```python
 def plot_pyramid(p,sz,hspace=10,vspace=10):
@@ -231,20 +231,20 @@ plt.show()
 
 ![png](6b_Features_SIFT_20_0.png)
 
-Lo scale space appena mostrato è in due dimensioni: 
-- lungo le colonne, le immagini viene convolute iterativamente con un filtro gaussiano di devianza $k\sigma$. 
+Lo scale space appena mostrato è in due dimensioni:
+- lungo le colonne, le immagini viene convolute iterativamente con un filtro gaussiano di devianza $k\sigma$.
 - Ogni riga inizia con la terz'ultima immagine della riga precedente, campionata al 50%.
 
-E' interessante vedere le relazioni che esistono tra le varie immagini: poiché partiamo con $\sigma=1$, 
+E' interessante vedere le relazioni che esistono tra le varie immagini: poiché partiamo con $\sigma=1$,
 
 $$
 \begin{array}{|c|c|c|c|}
- \hline
- \sigma = 1,s=1 & \sigma = \sqrt{2},s=1 & \sigma = 2,s=1 & \sigma = 2\sqrt{2},s=1& \sigma = 4,s=1\\
- \sigma = 2,s=1/4 & \sigma = 2\sqrt{2},s=1/4 & \sigma = 4,s=1/4 & \sigma = 4\sqrt{2},s=1/4& \sigma = 8,s=1/4\\
- \sigma = 4,s=1/16 & \sigma = 4\sqrt{2},s=1/16 & \sigma = 8,s=1/16 & \sigma = 8\sqrt{2},s=1/16& \sigma = 16,s=1/16\\
- \sigma = 8,s=1/32 & \sigma = 8\sqrt{2},s=1/32 & \sigma = 16,s=1/32 & \sigma = 16\sqrt{2},s=1/32& \sigma = 32,s=1/32\\
- \hline
+\hline
+\sigma = 1,s=1 & \sigma = \sqrt{2},s=1 & \sigma = 2,s=1 & \sigma = 2\sqrt{2},s=1& \sigma = 4,s=1\\
+\sigma = 2,s=1/4 & \sigma = 2\sqrt{2},s=1/4 & \sigma = 4,s=1/4 & \sigma = 4\sqrt{2},s=1/4& \sigma = 8,s=1/4\\
+\sigma = 4,s=1/16 & \sigma = 4\sqrt{2},s=1/16 & \sigma = 8,s=1/16 & \sigma = 8\sqrt{2},s=1/16& \sigma = 16,s=1/16\\
+\sigma = 8,s=1/32 & \sigma = 8\sqrt{2},s=1/32 & \sigma = 16,s=1/32 & \sigma = 16\sqrt{2},s=1/32& \sigma = 32,s=1/32\\
+\hline
 \end{array}
 $$
 
@@ -276,7 +276,7 @@ plt.show()
 
 ![png](6b_Features_SIFT_24_0.png)
 
-Applicare LoG alle immagini così costruite permetterebbe di individuare delle zone da "attenzionare" per l'individuazione dei keypoint. Il problema è che aumentando la scala (ovvero, la devianza $\sigma$), il responso del filtro tende a diluirsi. Per ovviare a questo problema è possibile pesare LoG con un fattore proporzionale alla scala: 
+Applicare LoG alle immagini così costruite permetterebbe di individuare delle zone da "attenzionare" per l'individuazione dei keypoint. Il problema è che aumentando la scala (ovvero, la devianza $\sigma$), il responso del filtro tende a diluirsi. Per ovviare a questo problema è possibile pesare LoG con un fattore proporzionale alla scala:
 
 $$
 \sigma^2\nabla^2G_\sigma
@@ -399,7 +399,7 @@ plt.show()
 
 ![png](6b_Features_SIFT_31_0.png)
 
-Un aspetto interessante è che l'applicazione del laplaciano può essere ottenuta direttamente, calcolando la differenza tra le immagini in una ottava. Infatti, si può dimostrare (lo faremo graficamente, ma è possibile anche farlo analiticamente) che 
+Un aspetto interessante è che l'applicazione del laplaciano può essere ottenuta direttamente, calcolando la differenza tra le immagini in una ottava. Infatti, si può dimostrare (lo faremo graficamente, ma è possibile anche farlo analiticamente) che
 
 $$G_{k\sigma}(x,y)-G_{\sigma}(x,y) \approx (k-1)\sigma^2\nabla^2G_\sigma(x,y)$$
 
@@ -431,7 +431,7 @@ plt.show()
 
 ![png](6b_Features_SIFT_33_0.png)
 
-A questo punto possiamo ottenere le ottave di DoG: 
+A questo punto possiamo ottenere le ottave di DoG:
 
 ```python
 def generate_DoG_octave(gaussian_octave,use_concat): 
@@ -490,7 +490,7 @@ DoG_shapes = [x.shape for x in d]
 DoG_shapes
 ```
 
- [(415, 572, 4), (208, 286, 4), (104, 143, 4), (52, 72, 4)]
+[(415, 572, 4), (208, 286, 4), (104, 143, 4), (52, 72, 4)]
 
 Ad esempio per la prima DoG quanti punti otteniamo?
 
@@ -503,14 +503,18 @@ def get_candidate_keypoints(D, w=16):
     candidates = [] 
 
     # add new levels for z iterations
+
     D[:,:,0] = 0 
     D[:,:,-1] = 0
 
     # iter on x
+
     for i in range(w//2+1, D.shape[0] - w//2-1): 
         # iter on y
+
         for j in range(w//2+1, D.shape[1]-w//2-1): 
             # iter on z
+
             for k in range(1, D.shape[2]-1): 
                 patch = D[i-1:i+2, j-1:j+2, k-1:k+2] 
                 if np.argmax(patch) == 13 or np.argmin(patch) == 13: 
@@ -525,14 +529,14 @@ candidates_array = np.array(candidates)
 print(f'{candidates_array}\n Shape: {candidates_array.shape}')
 ```
 
- [[ 9 12 1]
- [ 9 56 1]
- [ 9 61 1]
- ...
- [405 494 1]
- [405 518 1]
- [405 533 1]]
- Shape: (7877, 3)
+[[ 9 12 1]
+[ 9 56 1]
+[ 9 61 1]
+...
+[405 494 1]
+[405 518 1]
+[405 533 1]]
+Shape: (7877, 3)
 
 sono stati trovati moltissimi punti! Quindi è necessario un processo di selezione.
 
@@ -578,13 +582,13 @@ plt.show()
 
 ![png](6b_Features_SIFT_42_7.png)
 
-# Keypoint Localization
+## Keypoint Localization
 
 Il processo di selezione si compone di tre step:
 
-1. per ogni keypoint candidato si calcola la posizione del subpixel
-2. fissata una threshold, si scartano i keypoint con un valore del subpixel inferiore alla soglia
-3. si eliminano i keypoint ai bordi (e agli angoli)
+- per ogni keypoint candidato si calcola la posizione del subpixel
+- fissata una threshold, si scartano i keypoint con un valore del subpixel inferiore alla soglia
+- si eliminano i keypoint ai bordi (e agli angoli)
 
 Perché si introduce il concetto di subpixel? Cosa sono i keypoint candidati che sono stati individuati? E dove sono stati individuati?
 
@@ -629,7 +633,7 @@ $$
 H = \begin{bmatrix}
 D_{xx} & D_{xy} & D_{xs} \\
 D_{xy} & D_{yy} & D_{ys} \\
-D_{xs} & D_{ys} & D_{ss} 
+D_{xs} & D_{ys} & D_{ss}
 \end{bmatrix}
 $$
 
@@ -667,13 +671,13 @@ print('Hessian\n', HD)
 print('Keypoint Orig', x, y, s)
 ```
 
- Keypoint [9, 12, 1]
- Offset [-28.80642691 19.85536661 0.11174943]
- Jacobian [ 6.42117581e-05 2.05709231e-04 -1.47988501e-04]
- Hessian
- [[-3.29265108e-05 -5.11428044e-05]
- [-5.11428044e-05 -8.47979040e-05]]
- Keypoint Orig 9 12 1
+Keypoint [9, 12, 1]
+Offset [-28.80642691 19.85536661 0.11174943]
+Jacobian [ 6.42117581e-05 2.05709231e-04 -1.47988501e-04]
+Hessian
+[[-3.29265108e-05 -5.11428044e-05]
+[-5.11428044e-05 -8.47979040e-05]]
+Keypoint Orig 9 12 1
 
 ## Sub pixel inferiori ad una soglia
 
@@ -689,6 +693,7 @@ $$
 
 ```python
 # esempio di valutazione del contrasto
+
 t_c = .03
 
 contrast = first_DoG[y,x,s] + .5*J.dot(offset) 
@@ -696,7 +701,7 @@ if abs(contrast) < t_c:
     print('point is discarded')
 ```
 
- point is discarded
+point is discarded
 
 ## Edge Subpixel
 
@@ -717,7 +722,7 @@ $$
 
 con *r* che rappresenta il rapporto degli autovalori, corrisponde al minimo quando gli autovalori sono uguale e poi cresce con *r*.
 
-> Nel paper di SIFT viene utilizzato il valore 10 come valore limite 
+> Nel paper di SIFT viene utilizzato il valore 10 come valore limite
 
 ```python
 R_th = (10+1)**2/10
@@ -730,7 +735,7 @@ if R > R_th:
     print('point is discarded')
 ```
 
- point is discarded
+point is discarded
 
 Quindi il pruning dei keypoint candidati avviene eseguendo i tre step descritti in precedenza.
 
@@ -745,11 +750,13 @@ def find_keypoints_for_DoG_octave(D, R_th, t_c, w):
         offset, J, H, x, y, s = localize_keypoint(D, x, y, s)
 
         # throw out low contrast points
+
         contrast = D[y,x,s] + .5 * J.dot(offset)
         if abs(contrast) < t_c:
             continue
 
         # # throw out edge points
+
         w, v = LA.eig(H)
         r = w[1]/w[0]
         R = (r+1)**2 / r
@@ -757,6 +764,7 @@ def find_keypoints_for_DoG_octave(D, R_th, t_c, w):
             continue
 
         # compute KP, but throw out boundary points
+
         kp = np.array([x, y, s]) + offset
         if kp[1] >= D.shape[0] or kp[0] >= D.shape[1]: 
             continue 
@@ -775,25 +783,26 @@ keypoints_first_DoG = find_keypoints_for_DoG_octave(first_DoG, R_th, t_c, w_patc
 print(f'{keypoints_first_DoG}\n Shape: {keypoints_first_DoG.shape}')
 ```
 
- #candidates = 7877, #keypoints = 1486
- [[408.75938434 154.24056872 1.2234741 ]
- [367.57668088 154.90026712 1.19036504]
- [424.83006557 158.92296556 1.1530998 ]
- ...
- [346.87703402 405.07882543 1.11209332]
- [367.77683613 404.8731439 1.14202255]
- [481.60012561 404.81703693 1.1847661 ]]
- Shape: (1486, 3)
+#candidates = 7877, #keypoints = 1486
+[[408.75938434 154.24056872 1.2234741 ]
+[367.57668088 154.90026712 1.19036504]
+[424.83006557 158.92296556 1.1530998 ]
+...
+[346.87703402 405.07882543 1.11209332]
+[367.77683613 404.8731439 1.14202255]
+[481.60012561 404.81703693 1.1847661 ]]
+Shape: (1486, 3)
 
 ```python
 # cambiando le soglie 
+
 R_th_2 = 20
 t_c_2 = .001
 w_patch_size = 16
 _ = find_keypoints_for_DoG_octave(first_DoG, R_th_2, t_c_2, w_patch_size)
 ```
 
- #candidates = 7877, #keypoints = 5738
+#candidates = 7877, #keypoints = 5738
 
 ### Final step
 
@@ -811,23 +820,23 @@ keypoints_pyr = get_keypoints(d, R_th, t_c, w_patch_size)
 len(keypoints_pyr) == len(d)
 ```
 
- #candidates = 7877, #keypoints = 1486
- #candidates = 1695, #keypoints = 115
- #candidates = 317, #keypoints = 22
- #candidates = 42, #keypoints = 2
+#candidates = 7877, #keypoints = 1486
+#candidates = 1695, #keypoints = 115
+#candidates = 317, #keypoints = 22
+#candidates = 42, #keypoints = 2
 
- True
+True
 
-# Calcolo dell'orientamento
+## Calcolo dell'orientamento
 
 Fino a questo punto i keypoint calcolati non dipendono dalla scala e dalla posizione. L'altro aspetto da considerare è la rotazione.
 
 La strategia è assegnare un orientamento ad ogni keypoint considerando la direzione del gradiente dominante considerando i suoi vicini.
 
-1. Per ogni keypoint, si costruisce una patch di dimensione proporzionale alla scala.
-2. Si calcola un istogramma dei gradienti per ogni pixel nella patch
- - si considera il valore pesato *Wg* dei gradienti e si assegna al bin corrispondente all'orientamento del gradiente
-3. Si assegna l'orientamento pari al bin con valore massimo
+- Per ogni keypoint, si costruisce una patch di dimensione proporzionale alla scala.
+- Si calcola un istogramma dei gradienti per ogni pixel nella patch
+- si considera il valore pesato *Wg* dei gradienti e si assegna al bin corrispondente all'orientamento del gradiente
+- Si assegna l'orientamento pari al bin con valore massimo
 
 Il numero di bin dell'istogramma è pari a 36, corrispondenti a step di 10° (360° // 36)
 
@@ -922,18 +931,19 @@ def assign_orientation(kps, octave, num_bins=36):
     return np.array(new_kps)
 
 # compute orientations for first DoG
+
 keypoints_with_orientation_firstDoG = assign_orientation(keypoints_pyr[0], first_DoG)
 
 print(f'before {len(keypoints_pyr[0])} and {len(keypoints_with_orientation_firstDoG)} after orientation')
 ```
 
- before 1486 and 2379 after orientation
+before 1486 and 2379 after orientation
 
 ##### Osservazioni
 
 Per ogni istogramma, si considera l'orientamento del bin max. Ma si considerano anche i bin con valori superiori all'80% del max
 
-Nel definire il valore di orientamento, si utilizza una funzione di interpolazione parabolare. Cioè per definire il valore esatto si utillizza la funzione di una parabola consideranto anche i valori vicini al max 
+Nel definire il valore di orientamento, si utilizza una funzione di interpolazione parabolare. Cioè per definire il valore esatto si utillizza la funzione di una parabola consideranto anche i valori vicini al max
 
 Calcoliamo l'orientamento per tutti i keypoint
 
@@ -948,7 +958,7 @@ for i, DoG_octave in enumerate(d):
 print('computed orientations for all octaves')    
 ```
 
-# Local descriptor creation
+## Local descriptor creation
 
 Lo step finale dell'algoritmo SIFT è il calcolo delle features finali (local descriptors).
 
@@ -956,11 +966,11 @@ Per ogni keypoint SIFT restituisce un vettore di 128 elementi. Come vengono calc
 
 Per ogni keypoint:
 
-1. Si calcola una patch 16x16
-2. La patch si suddivide in 16 regioni 4x4
-3. Il gradiente (considerando le coordinate polari) per ogni regione è inserito in un istogramma con 8 bin
-4. Gli istogrammi di tutte le regioni sono concatenati ottenendo un vettore di 4x4x8=128 elementi
-5. Infine, il vettore finale è normalizzato, filtrato per una threshold e rinormalizzato. In questo modo il risultato finale è meno influenzato da piccoli cambiamenti sulla luminosità.
+- Si calcola una patch 16x16
+- La patch si suddivide in 16 regioni 4x4
+- Il gradiente (considerando le coordinate polari) per ogni regione è inserito in un istogramma con 8 bin
+- Gli istogrammi di tutte le regioni sono concatenati ottenendo un vettore di 4x4x8=128 elementi
+- Infine, il vettore finale è normalizzato, filtrato per una threshold e rinormalizzato. In questo modo il risultato finale è meno influenzato da piccoli cambiamenti sulla luminosità.
 
 ```python
 def get_patch_grads(p):
@@ -994,8 +1004,11 @@ def get_histogram_for_subregion(m, theta, num_bin, reference_angle, bin_width, s
         vote = mag
 
         # binno*bin_width is the start angle of the histogram bin
+
         # binno*bin_width+bin_width/2 is the center of the histogram bin
+
         # angle - " is the distance from the angle to the center of the bin 
+
         hist_interp_weight = 1 - abs(angle - (binno*bin_width + bin_width/2))/(bin_width/2)
         vote *= max(hist_interp_weight, 1e-6)
 
@@ -1078,7 +1091,7 @@ for i, DoG_octave in enumerate(d):
 print('computed all local descriptors')    
 ```
 
- computed all local descriptors
+computed all local descriptors
 
 ###### Link utili
 

@@ -14,36 +14,36 @@ Assumiamo che esista una funzione di etichettatura $f(x)$ che ci fornisce l'etic
 ## Funzione Generatrice e Classificatore Bayesiano
 
 * **Funzione Generatrice:**
- * Non ci sono ulteriori informazioni sulla funzione di etichettatura.
- * Consideriamo la funzione generatrice $D : X \cup Y$, dove:
- * $X$ è l'insieme delle istanze.
- * $Y$ è l'insieme delle etichette.
- * Questa funzione diventa $D(x,y) =$ probabilità di osservare una certa istanza $x$ con etichetta $y$, dato un oggetto $\bar{X} \rightarrow \{D(\bar{x}, 0), D(\bar{x}, 1)\}$.
+	* Non ci sono ulteriori informazioni sulla funzione di etichettatura.
+	* Consideriamo la funzione generatrice $D : X \cup Y$, dove:
+	* $X$ è l'insieme delle istanze.
+	* $Y$ è l'insieme delle etichette.
+	* Questa funzione diventa $D(x,y) =$ probabilità di osservare una certa istanza $x$ con etichetta $y$, dato un oggetto $\bar{X} \rightarrow \{D(\bar{x}, 0), D(\bar{x}, 1)\}$.
 
 * **Predittore Ottimo: Classificatore Bayesiano**
- * $f_D(X) =$ restituisce la classe più probabile.
- * $f_D(x) = arg \max_{y \in Y} P(y|x)$ 
+	* $f_D(X) =$ restituisce la classe più probabile.
+	* $f_D(x) = arg \max_{y \in Y} P(y|x)$
 
 * **Esempio:**
- * Supponiamo di avere un oggetto $x$ con $\bar{X} \rightarrow \{D(\bar{x}, 0) = 0.9, D(\bar{x}, 1) = 0.1\}$.
- * Il classificatore Bayesiano restituisce la classe più probabile.
- * Ogni altra regola che possiamo scegliere ci darà un errore più alto.
+	* Supponiamo di avere un oggetto $x$ con $\bar{X} \rightarrow \{D(\bar{x}, 0) = 0.9, D(\bar{x}, 1) = 0.1\}$.
+	* Il classificatore Bayesiano restituisce la classe più probabile.
+	* Ogni altra regola che possiamo scegliere ci darà un errore più alto.
 
 * **Probabilità Congiunta:**
- * $p(x,y) = p(x \cap y) = p(x|y)P(y) = p(y|x)p(x)$
- * $P(y|x) = \frac{p(x|y) P(y)}{p(x)}$
- * $f_D(x) = arg \max_{y \in Y} \frac{p(x|y) P(y)}{p(x)}$
- * Nel caso di equiprobabilità, ovvero $P(y) = \frac{1}{|Y|}$ per ogni $y \in Y$, la formula si semplifica in:
- * $f_D(x) = arg \max_{y \in Y} {p(x|y)}$
- * $f_D(x) = arg \max_{y \in Y} {p_y(x)}$ dove $p_y(x)$ rappresenta la probabilità di osservare $x$ dato che l'etichetta è $y$.
+	* $p(x,y) = p(x \cap y) = p(x|y)P(y) = p(y|x)p(x)$
+	* $P(y|x) = \frac{p(x|y) P(y)}{p(x)}$
+	* $f_D(x) = arg \max_{y \in Y} \frac{p(x|y) P(y)}{p(x)}$
+	* Nel caso di equiprobabilità, ovvero $P(y) = \frac{1}{|Y|}$ per ogni $y \in Y$, la formula si semplifica in:
+	* $f_D(x) = arg \max_{y \in Y} {p(x|y)}$
+	* $f_D(x) = arg \max_{y \in Y} {p_y(x)}$ dove $p_y(x)$ rappresenta la probabilità di osservare $x$ dato che l'etichetta è $y$.
 
-# inserire esempio 1
+## inserire esempio 1
 
 L'errore del classificatore, come illustrato nel disegno, si verifica quando un'istanza con un valore di $x$ inferiore a $\theta$ appartiene alla classe 1, ma il classificatore la classifica erroneamente come classe 0. Allo stesso modo, per la classe 1, l'errore si verifica quando un'istanza con un valore di $x$ maggiore di $\theta$ appartiene alla classe 0, ma il classificatore la classifica erroneamente come classe 1.
 
 ##### Esempio:
 
-Immaginiamo di avere un classificatore che separa le istanze in due classi (0 e 1) basandosi su un valore di soglia $\theta$. 
+Immaginiamo di avere un classificatore che separa le istanze in due classi (0 e 1) basandosi su un valore di soglia $\theta$.
 
 * Se $\theta = 5$, il classificatore classifica tutte le istanze con $x < 5$ come classe 0 e tutte le istanze con $x > 5$ come classe 1.
 
@@ -56,10 +56,10 @@ In sostanza, l'errore del classificatore si verifica quando la soglia scelta non
 ## Come la Distribuzione delle Classi e le Probabilità a Priori Influenzano la Classificazione con Soglia
 
 La probabilità di osservare un'istanza $x$ e l'errore di un classificatore con soglia $\theta$ dipendono dalla distribuzione delle classi e dalla probabilità a priori di ciascuna classe.
-#### 1. Probabilità congiunta e probabilità condizionata
+#### Probabilità congiunta e probabilità condizionata
 
 $$p(x) = \sum_{y \in Y} P(x \cap y)=\sum_{y \in Y} P(x|y)P(Y)=p(x|y=0)p(y=0)+p(x|y=1)p(y=1)$$
- La seguente esprime la probabilità di osservare un'istanza $x$ come somma delle probabilità di osservare $x$ in ciascuna classe, ponderata per la probabilità a priori di ciascuna classe.
+La seguente esprime la probabilità di osservare un'istanza $x$ come somma delle probabilità di osservare $x$ in ciascuna classe, ponderata per la probabilità a priori di ciascuna classe.
 
 * **$p(x)$:** Probabilità di osservare l'istanza $x$.
 * **$P(x \cap y)$:** Probabilità congiunta di osservare l'istanza $x$ e l'etichetta $y$.
@@ -74,7 +74,7 @@ Nel caso di classificazione binaria, dove $Y = \{0, 1\}$, la formula si semplifi
 
 $$p(x) = p(x|y=0)p(y=0) + p(x|y=1)p(y=1)$$
 
-#### 2. Funzione di loss per un classificatore con soglia
+#### Funzione di loss per un classificatore con soglia
 
 $$L_D(f_D) = \int_{x < \theta} p(x|y=1)p(y=1) dx+ \int_{x < \theta} p(x|y=0)p(y=0) dx \ge0$$
 
@@ -93,9 +93,9 @@ La funzione di loss misura l'errore del classificatore, ovvero la probabilità d
 
 La funzione di loss è sempre maggiore o uguale a zero, e più le classi sono sovrapposte, più è probabile che il classificatore commetta errori. Questo perché la sovrapposizione delle classi implica che ci sono istanze con valori di $x$ simili che appartengono a classi diverse, rendendo difficile la separazione tramite una soglia.
 
-### 3. Sovrapposizione delle classi
+### Sovrapposizione delle classi
 
-Più le classi sono sovrapposte e più il classificatore è destinato a sbagliare, poichè le due densità di classe sono sovrapposte. 
+Più le classi sono sovrapposte e più il classificatore è destinato a sbagliare, poichè le due densità di classe sono sovrapposte.
 - Questo significa che se le distribuzioni di probabilità delle due classi sono molto simili, il classificatore avrà maggiori difficoltà a separarle correttamente.
 
 ##### Esempio:
@@ -112,8 +112,8 @@ Nell'ambito del machine learning, possiamo distinguere due grandi famiglie di ap
 * Una volta stimata la densità di probabilità, si può utilizzare il classificatore Bayesiano per predire la classe più probabile per una nuova istanza.
 * Questi approcci sono generalmente più complessi di quelli discriminativi.
 * Si dividono in:
-	* **Parametrica:** L'analista fa un'assunzione sulla forma della funzione di densità di probabilità (ad esempio, una distribuzione normale). Si stimano quindi i parametri della funzione (ad esempio, media e varianza).
-	* **Non Parametrica:** Non si fa alcuna assunzione sulla densità di probabilità. La densità viene ricostruita dai dati, tipicamente come somma di piccoli contributi, ognuno derivante da un esempio.
+* **Parametrica:** L'analista fa un'assunzione sulla forma della funzione di densità di probabilità (ad esempio, una distribuzione normale). Si stimano quindi i parametri della funzione (ad esempio, media e varianza).
+* **Non Parametrica:** Non si fa alcuna assunzione sulla densità di probabilità. La densità viene ricostruita dai dati, tipicamente come somma di piccoli contributi, ognuno derivante da un esempio.
 
 ### Metodi Discriminativi (Distribution-free)
 
@@ -131,7 +131,7 @@ Nell'ambito del machine learning, possiamo distinguere due grandi famiglie di ap
 
 ## Funzione di LOSS
 
-La funzione di loss è uno strumento fondamentale nell'apprendimento automatico per quantificare l'errore di un modello predittivo. 
+La funzione di loss è uno strumento fondamentale nell'apprendimento automatico per quantificare l'errore di un modello predittivo.
 
 ##### Definizione:
 
@@ -155,20 +155,18 @@ $l(h,(x_i,y_i))$ = misura dell'errore in caso di predizione sbagliata (vale 0 se
 
 Con questo concetto, possiamo generalizzare la definizione di errore empirico:
 
-$$L_S(h)= \frac{1}{m} \sum_{i=1}^m l(h,(x_i,y_i))$$ 
+$$L_S(h)= \frac{1}{m} \sum_{i=1}^m l(h,(x_i,y_i))$$
 
 ##### Tipi di Funzioni di Loss:
 
 * **0-1 LOSS:**
- $$l_{0-1}(h,(x_i,y_i)) = \begin{cases}
-1 & \text{se } h(x) \neq y \\
-0 & \text{altrimenti}
-\end{cases}$$
- Questa funzione assegna un errore di 1 se la predizione è sbagliata e 0 se è corretta.
+$$l_{0-1}(h,(x_i,y_i)) = \begin{cases}
+1 & \text{se } h(x) \neq y \\0 & \text{altrimenti}\end{cases}$$
+Questa funzione assegna un errore di 1 se la predizione è sbagliata e 0 se è corretta.
 
 * **SQUARED LOSS:**
- $$l_{sq}(h,(x_i,y_i)) = (h(x)-y)^2$$
- Questa funzione calcola la differenza al quadrato tra la predizione e l'etichetta vera. L'errore empirico con questa funzione di loss diventa l'errore quadratico medio.
+$$l_{sq}(h,(x_i,y_i)) = (h(x)-y)^2$$
+Questa funzione calcola la differenza al quadrato tra la predizione e l'etichetta vera. L'errore empirico con questa funzione di loss diventa l'errore quadratico medio.
 
 ##### Parametrizzazione:
 
@@ -178,7 +176,7 @@ L'errore empirico è **parametrico** perché dipende dalla funzione di loss scel
 
 L'errore di generalizzazione è anch'esso parametrico, perché dipende dalla funzione di loss. È il valore atteso della loss:
 
-$$L_D(h) = E_{x,y \sim D}[l(h,(x_i,y_i))]$$ 
+$$L_D(h) = E_{x,y \sim D}[l(h,(x_i,y_i))]$$
 ## Apprendimento PAC Standard
 
 L'apprendimento PAC (Probably Approximately Correct) è un framework per l'analisi degli algoritmi di apprendimento. L'obiettivo è garantire che un algoritmo di apprendimento possa trovare un'ipotesi che sia "abbastanza buona" con "alta probabilità".
@@ -233,49 +231,49 @@ $$Pr[S: \forall h \in H, |L_{D}(h)-L_{S}(h)|\leq\epsilon]\geq 1-\delta$$
 
 ##### Passaggi:
 
-1. **Evento complementare:**
+- **Evento complementare:**
 
- $$Pr[\{S: \forall h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon\}]\leq 1-\delta$$
+$$Pr[\{S: \forall h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon\}]\leq 1-\delta$$
 
-2. **Unione di eventi:**
+- **Unione di eventi:**
 
- $$\{ S: ∃ h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon \}= \cup _{h \in H}\{ S:|L_{D}(h)-L_{S}(h)|>\epsilon \}$$
+$$\{ S: ∃ h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon \}= \cup _{h \in H}\{ S:|L_{D}(h)-L_{S}(h)|>\epsilon \}$$
 
-3. **Disuguaglianza di Boole:**
+- **Disuguaglianza di Boole:**
 
 $$Pr[\{S: ∃ h \in H,|L_{D}(h)-L_{S}(h)|>\epsilon \}]=Pr[\{ \cup _{h \in H}\{ S:|L_{D}(h)-L_{S}(h)|>\epsilon \}]\leq \sum_{h \in H}Pr[S:|L_{D}(h)-L_{S}(h)|>\epsilon]$$
 
-4. **Definizione di errore empirico e di generalizzazione:**
+- **Definizione di errore empirico e di generalizzazione:**
 
- - $L_S(h)$: errore empirico, calcolato come $\frac{1}{m} \sum l(h,(x,y))$, dove $l(h,(x,y))$ è la funzione di loss.
- - $L_D(h)$: errore di generalizzazione, calcolato come $E[l(h,(x,y))]$, dove $E$ è il valore atteso.
- - Possiamo considerare la funzione di loss come una variabile casuale $w_i$. 
+- $L_S(h)$: errore empirico, calcolato come $\frac{1}{m} \sum l(h,(x,y))$, dove $l(h,(x,y))$ è la funzione di loss.
+- $L_D(h)$: errore di generalizzazione, calcolato come $E[l(h,(x,y))]$, dove $E$ è il valore atteso.
+- Possiamo considerare la funzione di loss come una variabile casuale $w_i$.
 
-5. **Applicazione della disuguaglianza di Hoeffding:**
+- **Applicazione della disuguaglianza di Hoeffding:**
 
- - Sia $w_1, w_2, \cdots, w_m$ una sequenza di variabili casuali i.i.d. con media $μ=E[w_i]$ e tali che $a\leq w_{i}\leq b$.
- - La disuguaglianza di Hoeffding afferma che:
- $$Pr\left[ |\frac{1}{m} \sum_{i=1}^m w_{i} - \mu | >\epsilon\right] \leq 2\exp [- \frac{2m\epsilon^2}{(b-a)^2}]$$
+- Sia $w_1, w_2, \cdots, w_m$ una sequenza di variabili casuali i.i.d. con media $μ=E[w_i]$ e tali che $a\leq w_{i}\leq b$.
+- La disuguaglianza di Hoeffding afferma che:
+$$Pr\left[ |\frac{1}{m} \sum_{i=1}^m w_{i} - \mu | >\epsilon\right] \leq 2\exp [- \frac{2m\epsilon^2}{(b-a)^2}]$$
 
- - Nel nostro caso, la funzione di loss $l(h,(x,y))$ è limitata tra 0 e 1, quindi $a=0$ e $b=1$.
- - Applicando la disuguaglianza di Hoeffding, otteniamo:
- $$Pr[\{ S: |L_{D}(h)-L_{S}(h)|>\epsilon \}] \leq 2 \exp(-2m\epsilon^2)$$
+- Nel nostro caso, la funzione di loss $l(h,(x,y))$ è limitata tra 0 e 1, quindi $a=0$ e $b=1$.
+- Applicando la disuguaglianza di Hoeffding, otteniamo:
+$$Pr[\{ S: |L_{D}(h)-L_{S}(h)|>\epsilon \}] \leq 2 \exp(-2m\epsilon^2)$$
 
-6. **Sommatoria su tutte le ipotesi:**
+- **Sommatoria su tutte le ipotesi:**
 
- $$\sum_{h \in H}Pr[\{ S: |L_{D}(h)-L_{S}(h)|>\epsilon \}] \leq \sum_{h \in H}2 \exp(-2m\epsilon^2)=2|H|\exp(-2m\epsilon^2)\leq\delta$$
+$$\sum_{h \in H}Pr[\{ S: |L_{D}(h)-L_{S}(h)|>\epsilon \}] \leq \sum_{h \in H}2 \exp(-2m\epsilon^2)=2|H|\exp(-2m\epsilon^2)\leq\delta$$
 
-7. **Determinazione della sample complexity:**
+- **Determinazione della sample complexity:**
 
- - Per garantire che la probabilità di convergenza uniforme sia maggiore o uguale a $1-\delta$, dobbiamo trovare la dimensione minima dell'insieme di training $m$.
- - Risolvendo la disuguaglianza precedente per $m$, otteniamo:
+- Per garantire che la probabilità di convergenza uniforme sia maggiore o uguale a $1-\delta$, dobbiamo trovare la dimensione minima dell'insieme di training $m$.
+- Risolvendo la disuguaglianza precedente per $m$, otteniamo:
 $$m \geq \frac{1}{2\epsilon^2} \ln\left( \frac{2|H|}{\delta} \right)$$
 
- - Questa formula fornisce la sample complexity nel caso PAC agnostico.
+- Questa formula fornisce la sample complexity nel caso PAC agnostico.
 
-8. **Sostituzione di $\epsilon$ con $\frac{\epsilon}{2}$:**
+- **Sostituzione di $\epsilon$ con $\frac{\epsilon}{2}$:**
 
- - Poiché abbiamo utilizzato $\epsilon$ invece di $\frac{\epsilon}{2}$, dobbiamo sostituire nella formula precedente:
+- Poiché abbiamo utilizzato $\epsilon$ invece di $\frac{\epsilon}{2}$, dobbiamo sostituire nella formula precedente:
 $$m\leq\frac{{2}}{\epsilon^2}\ln\left( \frac{2|H|}{\delta} \right)$$
 
 ##### Conclusione:
@@ -294,11 +292,11 @@ Questa formula ci permette di calcolare la dimensione minima dell'insieme di tra
 
 I predittori lineari sono una famiglia di classi di ipotesi utilizzate in pratica, che presentano diverse proprietà desiderabili:
 
-1. **Intuitività e Interpretabilità:** Le ipotesi della classe sono intuitive e facili da interpretare.
- - Un modello trasparente e interpretabile, che fornisce spiegazioni sul perché restituisce una certa etichetta, aumenta la fiducia nelle sue predizioni.
- - Fino ad ora, non abbiamo mai visto il perché ci viene restituito un risultato (explainability).
-2. **Efficienza Algoritmica:** Esistono algoritmi efficienti per queste classi di ipotesi, in particolare quelli di *learning* che minimizzano il rischio empirico.
-3. **Performance in Casi Reali:** I predittori lineari si comportano bene, nonostante la semplicità, in molti casi reali.
+- **Intuitività e Interpretabilità:** Le ipotesi della classe sono intuitive e facili da interpretare.
+- Un modello trasparente e interpretabile, che fornisce spiegazioni sul perché restituisce una certa etichetta, aumenta la fiducia nelle sue predizioni.
+- Fino ad ora, non abbiamo mai visto il perché ci viene restituito un risultato (explainability).
+- **Efficienza Algoritmica:** Esistono algoritmi efficienti per queste classi di ipotesi, in particolare quelli di *learning* che minimizzano il rischio empirico.
+- **Performance in Casi Reali:** I predittori lineari si comportano bene, nonostante la semplicità, in molti casi reali.
 
 ### Funzioni Lineari Affini
 
@@ -334,11 +332,9 @@ La classe di ipotesi dei semispazi utilizza come $\phi$ la funzione segno:
 $$\phi=sign()$$
 $$\phi(x)= \begin{cases}
 -1 & \text{se } x < 0 \\
-0 & \text{se } x = 0 \\
-1 & \text{se } x > 0
-\end{cases}$$
+0 & \text{se } x = 0 \\1 & \text{se } x > 0\end{cases}$$
 
-# inserire foto
+## inserire foto
 
 ## Classe di Ipotesi dei Semispazi: Rappresentazione e Proprietà
 
@@ -351,8 +347,8 @@ La funzione $h_{\vec{w}}(\vec{x})=sign(<\vec{w},\vec{x}>)$ rappresenta un'ipotes
 - **b:** L'iperpiano dista $b$ dall'origine.
 - **Equazione dell'iperpiano:** L'iperpiano è il luogo dei punti in cui $<\vec{w},\vec{x}> = 0$.
 - **Semispazi:** L'iperpiano divide lo spazio in due semispazi:
- - **Positivo:** Il segno del prodotto scalare è positivo: $sign(<\vec{w},\vec{x}>) > 0$.
- - **Negativo:** Il segno del prodotto scalare è negativo: $sign(<\vec{w},\vec{x}>) < 0$.
+- **Positivo:** Il segno del prodotto scalare è positivo: $sign(<\vec{w},\vec{x}>) > 0$.
+- **Negativo:** Il segno del prodotto scalare è negativo: $sign(<\vec{w},\vec{x}>) < 0$.
 
 **Obiettivo:** Trovare l'iperpiano che separa le due classi di punti nello spazio (es. punti positivi e negativi).
 
@@ -385,13 +381,13 @@ L'idea è di riscrivere il problema di *learning* come un problema di programmaz
 
 ##### Forma generale del problema di PL:
 
-$\vec{w^*} = \max_{\vec{w}}<\vec{u},\vec{w}>$, 
+$\vec{w^*} = \max_{\vec{w}}<\vec{u},\vec{w}>$,
 $$s.t. A\vec{w}\geq v$$
 
 ##### Dimostrazione:
 
-Prendiamo un punto $\forall i$, tale che $sign(\vec{w},\vec{x})=y_{i}$. 
-Dunque $\forall i, y_{i}<\vec{w},\vec{x}>\  >0$. 
+Prendiamo un punto $\forall i$, tale che $sign(\vec{w},\vec{x})=y_{i}$.
+Dunque $\forall i, y_{i}<\vec{w},\vec{x}>\  >0$.
 
 Se esiste un iperpiano separatore $\vec{w}$ per cui vale la precedente, ne esiste uno che rispetta:
 
@@ -415,7 +411,7 @@ $$v = \begin{bmatrix} 1\\ \vdots \\ 1\end{bmatrix}$$
 
 Nel caso di semispazi non c'è nessun criterio di preferenza, dunque dobbiamo impostare $\vec{u}$=0 nella forma generale del problema di PL:
 
-$\vec{w^*} = \max_{\vec{w}}<\vec{u},\vec{w}>$, 
+$\vec{w^*} = \max_{\vec{w}}<\vec{u},\vec{w}>$,
 $$s.t. A\vec{w}\geq v$$
 
 ### Algoritmo 2: Algoritmo di tipo iterativo: Perceptron Algorithm
@@ -429,7 +425,7 @@ $$s.t. A\vec{w}\geq v$$
 * Questo modello cattura solo alcuni aspetti essenziali per il calcolo della struttura del nostro neurone.
 * Ha un nucleo, dove avviene il funzionamento, da cui fuoriescono delle diramazioni (dendriti), che hanno delle terminazioni che vanno in contatto con altri neuroni.
 * Le regioni di contatto sono chiamate sinapsi.
-* Attraverso le sinapsi, il neurone riceve stimoli da altre cellule. 
+* Attraverso le sinapsi, il neurone riceve stimoli da altre cellule.
 * Se la somma di questi stimoli supera una certa soglia, il neurone propaga lo stimolo ai neuroni collegati.
 * Oltre i dendriti, abbiamo una lunga terminazione chiamata assone, a sua volta ramificato per entrare in contatto con altre cellule.
 
@@ -438,7 +434,7 @@ $$s.t. A\vec{w}\geq v$$
 * Dal punto di vista informatico, i dendriti sono il canale di input.
 * Il nucleo elabora gli stimoli. Se superano una certa soglia di attivazione, lo stimolo si propaga attraverso l'assone ad altri neuroni, che funge da canale di output.
 
-# inserire foto
+## inserire foto
 
 ##### Caratteristiche del Cervello:
 

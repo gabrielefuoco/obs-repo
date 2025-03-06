@@ -46,23 +46,23 @@ Un **cluster Storm** è simile a un cluster Hadoop, ma con alcune differenze chi
 
 #### Componenti di un Cluster Storm:
 
-1. **Nodo master (Nimbus)**:
- - Esegue il demone Nimbus, che ha le seguenti responsabilità:
- - Distribuisce il codice dell'applicazione nel cluster.
- - Assegna i task (compiti) ai nodi worker.
- - Monitora lo stato dei task per rilevare eventuali fallimenti.
- - Riavvia i task o li riassegna ad altre macchine in caso di errore.
- - Nimbus è progettato per essere **stateless**: non conserva direttamente alcuno stato. Utilizza **ZooKeeper** per memorizzare tutte le informazioni sullo stato e sulle configurazioni.
+- **Nodo master (Nimbus)**:
+- Esegue il demone Nimbus, che ha le seguenti responsabilità:
+- Distribuisce il codice dell'applicazione nel cluster.
+- Assegna i task (compiti) ai nodi worker.
+- Monitora lo stato dei task per rilevare eventuali fallimenti.
+- Riavvia i task o li riassegna ad altre macchine in caso di errore.
+- Nimbus è progettato per essere **stateless**: non conserva direttamente alcuno stato. Utilizza **ZooKeeper** per memorizzare tutte le informazioni sullo stato e sulle configurazioni.
 
-2. **Nodi worker (Supervisor)**:
- - Ogni nodo worker esegue un demone chiamato **Supervisor**.
- - Il Supervisor avvia e ferma i processi worker in base ai task assegnati da Nimbus.
- - Ogni worker esegue un sottoinsieme di una topologia.
+- **Nodi worker (Supervisor)**:
+- Ogni nodo worker esegue un demone chiamato **Supervisor**.
+- Il Supervisor avvia e ferma i processi worker in base ai task assegnati da Nimbus.
+- Ogni worker esegue un sottoinsieme di una topologia.
 
-3. **ZooKeeper**:
- - Coordina e condivide informazioni di configurazione tra Nimbus e i Supervisor.
- - Memorizza tutti gli stati associati al cluster e ai task.
- - Garantisce che i componenti Nimbus e Supervisor possano essere riavviati senza perdere lo stato.
+- **ZooKeeper**:
+- Coordina e condivide informazioni di configurazione tra Nimbus e i Supervisor.
+- Memorizza tutti gli stati associati al cluster e ai task.
+- Garantisce che i componenti Nimbus e Supervisor possano essere riavviati senza perdere lo stato.
 
 #### Tolleranza ai guasti (Fault tolerance):
 
@@ -72,11 +72,11 @@ Un **cluster Storm** è simile a un cluster Hadoop, ma con alcune differenze chi
 
 #### Processo di esecuzione:
 
-1. **Sottomissione della topologia**: L'utente sottomette una topologia a Nimbus.
-2. **Distribuzione dei task**: Nimbus distribuisce i task della topologia tra i Supervisor.
-3. **Heartbeat**: I Supervisor inviano regolarmente segnali di attività (heartbeat) a Nimbus per confermare che stanno ancora funzionando.
-4. **Esecuzione dei task**: I worker eseguono i task assegnati. Se un task fallisce, viene riavviato o riassegnato.
-5. **Attesa di nuovi task**: Una volta completati i task, i Supervisor attendono nuovi task da Nimbus.
+- **Sottomissione della topologia**: L'utente sottomette una topologia a Nimbus.
+- **Distribuzione dei task**: Nimbus distribuisce i task della topologia tra i Supervisor.
+- **Heartbeat**: I Supervisor inviano regolarmente segnali di attività (heartbeat) a Nimbus per confermare che stanno ancora funzionando.
+- **Esecuzione dei task**: I worker eseguono i task assegnati. Se un task fallisce, viene riavviato o riassegnato.
+- **Attesa di nuovi task**: Una volta completati i task, i Supervisor attendono nuovi task da Nimbus.
 
 #### Supporto per linguaggi non JVM:
 
@@ -141,34 +141,34 @@ L'obiettivo è creare un'applicazione Storm che prenda parole da una sorgente ca
 #### Spout:
 
 - **Funzione**: Il compito dello spout è emettere le parole casuali nello stream di output.
- - Utilizza lo **SpoutOutputCollector** per emettere tuple (gruppi di dati) usando il metodo `emit()`. 
- - **Values** è una classe che rappresenta la tupla da emettere. In questo caso, la tupla è una singola parola.
- - `declarer.declare(new Fields("word"))` viene utilizzato per dichiarare che ogni tupla contiene un campo chiamato "word", ovvero la parola casuale emessa.
+- Utilizza lo **SpoutOutputCollector** per emettere tuple (gruppi di dati) usando il metodo `emit()`.
+- **Values** è una classe che rappresenta la tupla da emettere. In questo caso, la tupla è una singola parola.
+- `declarer.declare(new Fields("word"))` viene utilizzato per dichiarare che ogni tupla contiene un campo chiamato "word", ovvero la parola casuale emessa.
 
 #### Bolt:
 
 - **Funzione**: Il bolt elabora la parola emessa dallo spout, aggiungendo tre punti esclamativi due volte alla parola.
- - L'**OutputCollector** serve per emettere nuove tuple elaborate.
- - La tupla (una lista di valori) contiene la parola originale a cui vengono aggiunti gli esclamativi.
- - `collector.emit(tuple, new Values(val))` emette la nuova tupla, ancorata alla tupla originale per garantire la corretta gestione dei fallimenti.
- - Anche in questo caso, si dichiara che si sta emettendo una tupla contenente un campo chiamato "word".
+- L'**OutputCollector** serve per emettere nuove tuple elaborate.
+- La tupla (una lista di valori) contiene la parola originale a cui vengono aggiunti gli esclamativi.
+- `collector.emit(tuple, new Values(val))` emette la nuova tupla, ancorata alla tupla originale per garantire la corretta gestione dei fallimenti.
+- Anche in questo caso, si dichiara che si sta emettendo una tupla contenente un campo chiamato "word".
 
 #### Topologia:
 
 - La topologia definisce il flusso dell'applicazione, indicando come gli spout e i bolt sono collegati tra loro.
- - **Config**: Consente di configurare la topologia, come il numero di worker per gestire i task.
- - **TopologyBuilder**: Permette di costruire la topologia specificando spout e bolt.
- - **Shuffle grouping**: Le tuple sono distribuite casualmente tra i bolt per bilanciare il carico.
- - **Parallelism hint**: Definisce quanti thread devono eseguire un particolare bolt o spout.
- - **LocalCluster**: Simula un cluster locale per testare la topologia senza distribuire l'applicazione su un vero cluster.
+- **Config**: Consente di configurare la topologia, come il numero di worker per gestire i task.
+- **TopologyBuilder**: Permette di costruire la topologia specificando spout e bolt.
+- **Shuffle grouping**: Le tuple sono distribuite casualmente tra i bolt per bilanciare il carico.
+- **Parallelism hint**: Definisce quanti thread devono eseguire un particolare bolt o spout.
+- **LocalCluster**: Simula un cluster locale per testare la topologia senza distribuire l'applicazione su un vero cluster.
 
 ### Tick tuple:
 
 - La **tick tuple** è una funzionalità che genera una tupla ad intervalli regolari. Viene usata per task che richiedono operazioni temporizzate, come:
- - Pulire la cache ogni tot secondi.
- - Inserire batch di dati in un database.
+- Pulire la cache ogni tot secondi.
+- Inserire batch di dati in un database.
 
- Per abilitare la tick tuple, si sovrascrive il metodo `getComponentConfiguration()`, specificando la frequenza con cui la tick tuple deve essere emessa (es. ogni 5 secondi).
+Per abilitare la tick tuple, si sovrascrive il metodo `getComponentConfiguration()`, specificando la frequenza con cui la tick tuple deve essere emessa (es. ogni 5 secondi).
 
 ### Soluzione complessiva per il Problema 1:
 
@@ -184,18 +184,18 @@ L'applicazione Storm prende frasi casuali, le divide in parole e conta quante vo
 
 ### Punti principali:
 
-1. **getComponentConfiguration**:
- - Imposta la frequenza della tick tuple, che viene emessa ogni 10 secondi.
-2. **execute**:
- - Il bolt raccoglie i conteggi in una mappa interna e li emette solo quando riceve una tick tuple, evitando emissioni continue.
-3. **shuffleGrouping**:
- - Distribuisce le frasi in modo casuale tra le istanze del bolt che divide le frasi in parole.
-4. **fieldsGrouping**:
- - Assicura che la stessa parola sia inviata alla stessa istanza del bolt per un conteggio corretto.
+- **getComponentConfiguration**:
+- Imposta la frequenza della tick tuple, che viene emessa ogni 10 secondi.
+- **execute**:
+- Il bolt raccoglie i conteggi in una mappa interna e li emette solo quando riceve una tick tuple, evitando emissioni continue.
+- **shuffleGrouping**:
+- Distribuisce le frasi in modo casuale tra le istanze del bolt che divide le frasi in parole.
+- **fieldsGrouping**:
+- Assicura che la stessa parola sia inviata alla stessa istanza del bolt per un conteggio corretto.
 ### Flusso della topologia:
 
-1. Lo **spout** emette frasi casuali.
-2. Il bolt **SplitSentence** divide le frasi in parole.
-3. Il bolt **WordCount** conta le parole e le emette solo quando riceve una tick tuple.
-4. La **tick tuple** attiva l'emissione dei conteggi ogni 10 secondi.
+- Lo **spout** emette frasi casuali.
+- Il bolt **SplitSentence** divide le frasi in parole.
+- Il bolt **WordCount** conta le parole e le emette solo quando riceve una tick tuple.
+- La **tick tuple** attiva l'emissione dei conteggi ogni 10 secondi.
 

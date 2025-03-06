@@ -1,6 +1,6 @@
 ## Task 3: Temporal Planning & Robotics
 
-Il Task 3 richiede di adattare il dominio per permettere la creazione di una sequenza temporale di azioni, ognuna con una durata specifica. A differenza della pianificazione classica, che si limita a individuare una sequenza causale delle azioni, la pianificazione temporale deve anche garantire che le azioni possano essere programmate nel tempo. 
+Il Task 3 richiede di adattare il dominio per permettere la creazione di una sequenza temporale di azioni, ognuna con una durata specifica. A differenza della pianificazione classica, che si limita a individuare una sequenza causale delle azioni, la pianificazione temporale deve anche garantire che le azioni possano essere programmate nel tempo.
 Questo significa rispettare i vincoli sulla durata delle azioni, lungo una linea temporale che non ha un limite prefissato ed è dunque potenzialmente illimitata.
 
 Un'azione durativa è una formulazione in PDDL di un'azione che richiede un certo
@@ -12,10 +12,10 @@ che “*precondition*”. Questo cambiamento semantico è stato introdotto per
 rappresentare che un'azione durativa può non solo condizionare l'inizio dell'azione,
 ma può avere condizioni che devono essere vere alla fine o per tutta la durata stessa.
 
-Un'azione durativa, nella formulazione PDDL, rappresenta un'azione che richiede un intervallo di tempo specifico per essere completata. 
+Un'azione durativa, nella formulazione PDDL, rappresenta un'azione che richiede un intervallo di tempo specifico per essere completata.
 La durata può essere definita come un valore fisso o espressa attraverso disuguaglianze, permettendo di gestire sia azioni a durata determinata che variabile.
 
-Analogamente alle azioni tradizionali, anche per le azioni durative è possibile definire gli effetti che queste producono. 
+Analogamente alle azioni tradizionali, anche per le azioni durative è possibile definire gli effetti che queste producono.
 
 Consideriamo le tre categorie:
 - **Iniziali**: devono essere vere al momento in cui l'azione inizia.
@@ -65,7 +65,7 @@ Sono stati inoltre introdotti, sotto forma di predicati, i concetti di posto occ
   )
 ```
 
-- Le operazioni di **riempimento della scatola** (_fill_), **caricamento sul veicolo** (_charge_), **scarico dal veicolo** (_discharge_) e **rilascio del contenuto** (_give_content_) hanno una durata fissa pari a uno. 
+- Le operazioni di **riempimento della scatola** (_fill_), **caricamento sul veicolo** (_charge_), **scarico dal veicolo** (_discharge_) e **rilascio del contenuto** (_give_content_) hanno una durata fissa pari a uno.
 
 - L'azione di **spostamento dell'agente** (_move-agent_) ha una durata fissa pari a due. Tale valore tiene conto del tempo necessario per il movimento dell'agente senza ulteriori complicazioni, come l'interazione con mezzi o carichi.
 
@@ -209,16 +209,16 @@ Questi interventi, seppur apparentemente semplici, sono stati fondamentali per g
 
 ## Robotics Planning
 
-Per eseguire il piano, è stato necessario organizzare il workspace creando diverse directory, come **launch**, **src**, e **pddl**. 
+Per eseguire il piano, è stato necessario organizzare il workspace creando diverse directory, come **launch**, **src**, e **pddl**.
 Successivamente, altre cartelle sono state generate automaticamente dall’utilizzo di specifici comandi per garantire la corretta esecuzione del piano in ROS. Le modalità di configurazione e creazione di queste directory sono state descritte in dettaglio nelle specifiche del progetto e dei task assegnati. Di seguito una panoramica:
 
 - **pddl**: contiene il file del dominio, denominato **`domain.pddl`**, necessario per definire le regole e le azioni del piano.
 - **launch**: include il file di configurazione **`plansys2_project_launch.py`**, che avvia i nodi ROS richiesti per l’esecuzione del piano. Qui sono presenti anche:
- - **`plan.txt`**: file in cui viene salvato il piano generato.
- - **`commands`**: file utilizzato come parametro dal terminale di Plansys2 per impostare le istanze del problema.
+- **`plan.txt`**: file in cui viene salvato il piano generato.
+- **`commands`**: file utilizzato come parametro dal terminale di Plansys2 per impostare le istanze del problema.
 - **src**: contiene i file relativi alle azioni specifiche del dominio, scritte in linguaggio C++. Al suo interno si trovano:
- - **`CMakeLists.txt`**: file utilizzato per configurare il processo di compilazione del package.
- - **`package.xml`**: file che definisce le dipendenze richieste per il package.
+- **`CMakeLists.txt`**: file utilizzato per configurare il processo di compilazione del package.
+- **`package.xml`**: file che definisce le dipendenze richieste per il package.
 
 Le specifiche del progetto e dei task hanno fornito una guida dettagliata per creare e configurare queste directory, assicurando una corretta integrazione dei componenti richiesti da **ROS** e **Plansys2** per l’esecuzione del piano. Questo approccio sistematico ha semplificato il processo e ridotto la possibilità di errori durante l’implementazione.
 
@@ -298,12 +298,15 @@ Una volta definiti tutti i file necessari per l’esecuzione della parte relativ
 
 ```bash
 # Installazione pulita nella cartella plansys2_project
+
 rm -rf build/ install/ log/
 
 # Compilazione del progetto con symlink per uno sviluppo più rapido
+
 colcon build --symlink-install
 
 # Configurazione dell'ambiente locale
+
 source install/local_setup.bash
 ```
 
@@ -349,7 +352,7 @@ Ecco un esempio di log che indica il corretto funzionamento del sistema:
 
 ![[Task 3-20241230160822732.png|600]]
 
-## Conclusioni 
+## Conclusioni
 
 L’attività svolta ha raggiunto con successo tutti gli obiettivi prefissati, dimostrando l’efficacia del modello di pianificazione automatica sviluppato. La modellazione del problema attraverso il linguaggio **PDDL** ha permesso di ottenere piani d’azione efficienti entro tempi ragionevoli.
 

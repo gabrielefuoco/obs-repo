@@ -41,8 +41,8 @@ Se vogliamo massimizzare la creatività, possiamo campionare in maniera random o
 
 ### Top-k sampling
 
-Il top-k sampling vincola il modello a campionare tra i *k* token con la maggiore probabilità di essere generati. Se un token ha una probabilità non trascurabile di essere selezionato, da un certo punto di vista sarebbe sensato poterlo includere nel campionamento. 
-La massa della distribuzione di probabilità si concentra su un sottoinsieme relativamente piccolo di token. La forma (shape) della distribuzione dei token cambia ad ogni step. 
+Il top-k sampling vincola il modello a campionare tra i *k* token con la maggiore probabilità di essere generati. Se un token ha una probabilità non trascurabile di essere selezionato, da un certo punto di vista sarebbe sensato poterlo includere nel campionamento.
+La massa della distribuzione di probabilità si concentra su un sottoinsieme relativamente piccolo di token. La forma (shape) della distribuzione dei token cambia ad ogni step.
 La soglia scelta (*k*) non è necessariamente adeguata ad ogni step di generazione.
 ![[13) Natural Language Generation-20241203102200812.png|604]]
 
@@ -70,15 +70,15 @@ Una temperatura alta implica che il modello inizi ad allucinare (o a essere conf
 
 Al passo temporale *t*, il modello calcola una distribuzione di probabilità *P<sub>t</sub>* applicando la funzione softmax a un vettore di punteggi *s<sub>w</sub>* ∈ ℝ<sup>|V|</sup>:
 
-$P_t(y_t = w) = \frac{exp(s_w)}{\sum_{w'∈V} exp(s_{w'})}$
+$$P_t(y_t = w) = \frac{exp(s_w)}{\sum_{w'∈V} exp(s_{w'})}$$
 
 È possibile applicare un iperparametro di temperatura *τ* alla softmax per ribilanciare *P<sub>t</sub>*:
 
-$P_t(y_t = w) = \frac{exp(s_w / \tau)}{\sum_{w'∈V} exp(s_{w'} / \tau)}$
+$$P_t(y_t = w) = \frac{exp(s_w / \tau)}{\sum_{w'∈V} exp(s_{w'} / \tau)}$$
 
-*   **Aumentare la temperatura τ > 1:** *P<sub>t</sub>* diventa più uniforme.
-    *   Output più diversificato (la probabilità è distribuita su tutto il vocabolario).
-*   **Abbassare la temperatura τ < 1:** *P<sub>t</sub>* diventa più appuntita.
-    *   Output meno diversificato (la probabilità è concentrata sulle parole principali).
+* **Aumentare la temperatura τ > 1:** *P<sub>t</sub>* diventa più uniforme.
+* Output più diversificato (la probabilità è distribuita su tutto il vocabolario).
+* **Abbassare la temperatura τ < 1:** *P<sub>t</sub>* diventa più appuntita.
+* Output meno diversificato (la probabilità è concentrata sulle parole principali).
 
 La temperatura è un iperparametro per il decoding: può essere ottimizzata sia per la ricerca beam search che per il sampling.

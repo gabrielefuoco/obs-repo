@@ -12,23 +12,23 @@ $$
 \end{cases}
 $$
 
-##### 1. Approcci Discriminativi (Distribution Free):
+##### Approcci Discriminativi (Distribution Free):
 
 * **Obiettivo:** Definire una regola che suddivida lo spazio delle features in due regioni: una per la classe positiva e una per la classe negativa.
 * **Scopo:** Minimizzare l'errore di generalizzazione, ovvero la capacità del modello di prevedere correttamente nuovi dati non visti durante la fase di training.
 * **Esempio:** Classificatori lineari come la Regressione Logistica.
 
-##### 2. Stima di Densità:
+##### Stima di Densità:
 
 * **Obiettivo:** Ricostruire la densità di probabilità incognita che genera i dati.
 * **Scopo:** Creare una funzione di densità che rappresenti la distribuzione dei dati, anche in presenza di complessità.
 * **Famiglie:**
- * **Metodi Parametrici:** Si assume una specifica distribuzione (es. Gaussiana) e si stimano i suoi parametri (media e varianza) dai dati.
- * **Metodi non Parametrici:** Non si fa alcuna assunzione sulla forma della distribuzione, ma si ricostruisce la densità come somma di contributi associati a ciascun esempio del training set.
+	* **Metodi Parametrici:** Si assume una specifica distribuzione (es. Gaussiana) e si stimano i suoi parametri (media e varianza) dai dati.
+	* **Metodi non Parametrici:** Non si fa alcuna assunzione sulla forma della distribuzione, ma si ricostruisce la densità come somma di contributi associati a ciascun esempio del training set.
 
 ## Stima di Densità dei Parametri
 
-L'obiettivo della stima di densità dei parametri è ricostruire la funzione di densità $p(x)$ che, dato un elemento del dominio, restituisce la sua densità. 
+L'obiettivo della stima di densità dei parametri è ricostruire la funzione di densità $p(x)$ che, dato un elemento del dominio, restituisce la sua densità.
 
 Possiamo esprimere la funzione di densità come:
 
@@ -77,14 +77,14 @@ $$\text{Verosimiglianza = }p(S|\theta )= \prod_{i=1}^m p_{\theta}(x_{i})$$
 
 La verosimiglianza è una probabilità condizionale. Abbiamo due eventi:
 
-1. Assumiamo che l'evento nella condizione sia verificato (i parametri $\theta$ sono quelli della distribuzione che ha generato i dati).
-2. Vogliamo sapere la probabilità di osservare il primo evento (il campione $S$).
+- Assumiamo che l'evento nella condizione sia verificato (i parametri $\theta$ sono quelli della distribuzione che ha generato i dati).
+- Vogliamo sapere la probabilità di osservare il primo evento (il campione $S$).
 
 Parliamo di verosimiglianza perché facciamo un uso di questa probabilità contrario a quello usuale: noi abbiamo osservato $S$ (Training Set), mentre l'evento nella condizione (i parametri $\theta$) non sappiamo quale sia.
 
 ## Log-Likelihood
 
-Cerchiamo i parametri che massimizzano la verosimiglianza. La verosimiglianza è la probabilità di osservare un determinato insieme di dati, dato un modello con parametri specifici. 
+Cerchiamo i parametri che massimizzano la verosimiglianza. La verosimiglianza è la probabilità di osservare un determinato insieme di dati, dato un modello con parametri specifici.
 La log-verosimiglianza è il logaritmo naturale della verosimiglianza.
 
 La log-verosimiglianza per un insieme di dati $S = \{x_1, x_2, ..., x_m\}$ con parametri $\theta$ è data da:
@@ -118,7 +118,7 @@ $$=-m\log(\sigma \sqrt{ 2\pi })-\frac{1}{2\sigma^2}\sum_{i=1}^m(x_{i}-\mu)^2$$
 Per trovare lo stimatore di massima verosimiglianza, calcoliamo le derivate parziali della log-verosimiglianza rispetto a $\mu$ e $\sigma$ e le poniamo uguali a zero:
 
 $$\begin{cases}
-\frac{\partial}{\partial \mu}L(s;\theta)=\frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0\\ 
+\frac{\partial}{\partial \mu}L(s;\theta)=\frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0\\
 \\
 
 \frac{\partial}{\partial\sigma}L(S;\theta)=-\frac{m}{\sigma}+\frac{1}{\sigma^3}\sum_{i=1}^m(x_{i}-\mu)^2=0
@@ -127,8 +127,8 @@ $$\begin{cases}
 Risolvendo queste equazioni, otteniamo gli stimatori di massima verosimiglianza per $\mu$ e $\sigma$:
 
 $$ \text{Stimatore di massima Verosimiglianza per }\mu:
-\begin{cases} 
- \frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0 \\
+\begin{cases}
+\frac{1}{\sigma^2}\sum_{i=1}^m(x_{i}-\mu)=0 \\
 \sum_{i=1}x_{i}-m\mu=0 \\
 m\mu=\sum_{i=1}^mx_{i} \\
 \implies \mu=\frac{1}{m}\sum_{i=1}^mx_{i}
@@ -210,16 +210,16 @@ $$p_{\theta_{y}}(x_{1},\dots,x_{d})= \phi(x_{1};\mu_{y_{1}},\sigma_{y_{1}})\cdot
 
 Dove $\phi$ rappresenta la funzione di densità di probabilità di una distribuzione normale.
 
-Se il decision boundary che ne scaturisce coincide con quello reale, il modello si comporta bene. Tuttavia, in generale, i dati non si distribuiscono in accordo a distribuzioni note. Per ottenere una stima più accurata, si possono utilizzare i **mixture models**. 
+Se il decision boundary che ne scaturisce coincide con quello reale, il modello si comporta bene. Tuttavia, in generale, i dati non si distribuiscono in accordo a distribuzioni note. Per ottenere una stima più accurata, si possono utilizzare i **mixture models**.
 
 ## Gaussian Mixture Models (GMM)
 
-I Gaussian Mixture Models (GMM) sono un tipo di modello probabilistico utilizzato per modellare la distribuzione di dati complessi come una combinazione di distribuzioni gaussiane più semplici. 
+I Gaussian Mixture Models (GMM) sono un tipo di modello probabilistico utilizzato per modellare la distribuzione di dati complessi come una combinazione di distribuzioni gaussiane più semplici.
 Invece di assumere che i dati provengano da una singola distribuzione gaussiana, i GMM cercano di ricostruire la densità generatrice dei dati come una somma di contributi da diverse distribuzioni gaussiane.
 
 ##### Formalmente:
 
- Ricostruisce la densità generatrice dei dati come somma di $k$ distribuzioni gaussiane.
+Ricostruisce la densità generatrice dei dati come somma di $k$ distribuzioni gaussiane.
 
 ![[9) Stima di Densità-20241115101913331.png]]
 
@@ -229,8 +229,8 @@ La variabile $y$ assume valori nell'insieme $\{1, \dots, k\}$ e identifica la di
 
 Il processo di generazione dei dati con un GMM può essere descritto come segue:
 
-1. **Selezione del cluster:** Si sceglie un cluster $y$ con probabilità $c(y) = Pr[Y=y]$.
-2. **Generazione del dato:** Si genera un dato $\vec{x}$ in accordo con la distribuzione gaussiana $\phi(\vec{x};\vec{\mu}_{y},\vec{\Sigma}_{y})$ associata al cluster $y$.
+- **Selezione del cluster:** Si sceglie un cluster $y$ con probabilità $c(y) = Pr[Y=y]$.
+- **Generazione del dato:** Si genera un dato $\vec{x}$ in accordo con la distribuzione gaussiana $\phi(\vec{x};\vec{\mu}_{y},\vec{\Sigma}_{y})$ associata al cluster $y$.
 
 La densità di probabilità del dato $\vec{x}$ è quindi data da:
 
@@ -255,8 +255,8 @@ Trovare i parametri $\theta$ che massimizzano la log-verosimiglianza è un probl
 
 L'algoritmo Expectation-Maximization (EM) è un algoritmo iterativo utilizzato per trovare la stima di massima verosimiglianza dei parametri di un modello probabilistico quando i dati sono incompleti o mancanti. L'algoritmo EM si compone di due fasi:
 
-1. **Fase di Expectation (E):** In questa fase, si calcola la probabilità condizionata di appartenenza ad ogni classe per ogni dato, dato il modello corrente.
-2. **Fase di Maximization (M):** In questa fase, si aggiornano i parametri del modello in modo da massimizzare la verosimiglianza dei dati, tenendo conto delle probabilità condizionate calcolate nella fase E.
+- **Fase di Expectation (E):** In questa fase, si calcola la probabilità condizionata di appartenenza ad ogni classe per ogni dato, dato il modello corrente.
+- **Fase di Maximization (M):** In questa fase, si aggiornano i parametri del modello in modo da massimizzare la verosimiglianza dei dati, tenendo conto delle probabilità condizionate calcolate nella fase E.
 
 L'algoritmo EM viene ripetuto iterativamente fino a quando la convergenza è raggiunta, ovvero quando i parametri del modello non cambiano significativamente tra due iterazioni successive.
 
@@ -290,9 +290,9 @@ $$
 \text{Non supervisionato:} \\
 \quad\text{S: Dataset non etichettato} \\
 \quad\alpha \text{: Contaminazione} \\
- \\
+\\
 \text{Semi-Supervisionato (One-Class Classification)} \\
- \\
+\\
 \text{Supervisionato (Problema di Classificazione Binaria Sbilanciata)}
 \end{cases}
 $$
@@ -310,5 +310,5 @@ Gli outlier sono le istanze che hanno meno probabilità di essere osservate .
 Dato $S$ stimiamo $p_{s}(x)=p_{\theta }(x)$.
 - **Caso non supervisionato**: Restituisci gli $\alpha m$ esempi di $S$ che minimizzano $p_\theta$.
 - **Caso Semi-Supervisionato**: Stabilisci una soglia $\pi$ :
-	- Dato un nuovo esempio $\bar{x}$, dichiara $\bar{x}$ anomalo se $p_{\theta}(\bar{x})<\pi$
+- Dato un nuovo esempio $\bar{x}$, dichiara $\bar{x}$ anomalo se $p_{\theta}(\bar{x})<\pi$
 

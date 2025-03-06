@@ -2,7 +2,7 @@ Una base di conoscenza può essere vista come un **dizionario**, ovvero una coll
 
 I linguisti si sono preoccupati di usare un **lessico meno ambiguo possibile**.
 
-**WordNet** non è solo un **tesauro**, ma anche un'**ontologia lessicale**. È dunque un **grafo di relazioni tra concetti**. Non parliamo di un grafo semplice (insieme di nodi e archi, in cui oltre all'orientamento di questi o all'aggiungere un peso, altro non possiamo fare), ma abbiamo una **moltiplicità di tipi di nodi e di relazioni (lessicali semantiche)** che assumono un significato diverso a seconda della tipologia del nodo. Possiamo anche indicarlo come **knowledge graph**. 
+**WordNet** non è solo un **tesauro**, ma anche un'**ontologia lessicale**. È dunque un **grafo di relazioni tra concetti**. Non parliamo di un grafo semplice (insieme di nodi e archi, in cui oltre all'orientamento di questi o all'aggiungere un peso, altro non possiamo fare), ma abbiamo una **moltiplicità di tipi di nodi e di relazioni (lessicali semantiche)** che assumono un significato diverso a seconda della tipologia del nodo. Possiamo anche indicarlo come **knowledge graph**.
 
 ## Motivazioni
 
@@ -17,15 +17,15 @@ Le risolviamo attraverso trasformazioni in un nuovo spazio.
 
 WordNet è un ampio database lessicale della lingua inglese.
 
-* I termini delle principali categorie sintattiche sono raggruppati in insiemi di sinonimi cognitivi, chiamati **synsets**, ognuno dei quali esprime un concetto distinto (lessicalizzato). Un concetto, ossia un significato, detto anche senso, corrisponde a quelli chiamati synsets, Un concetto è un insieme di sinonimi, ovvero una classe di insiemi semanticamente uguali. 
+* I termini delle principali categorie sintattiche sono raggruppati in insiemi di sinonimi cognitivi, chiamati **synsets**, ognuno dei quali esprime un concetto distinto (lessicalizzato). Un concetto, ossia un significato, detto anche senso, corrisponde a quelli chiamati synsets, Un concetto è un insieme di sinonimi, ovvero una classe di insiemi semanticamente uguali.
 * Il ruolo di un dizionario non è quello di organizzare concetti ma di spiegare termini
 
 WordNet offre funzionalità per diversi utilizzi:
 
 * **Dizionario online:** Definizioni delle parole, esempi di frasi, insiemi di sinonimi.
-	* **Usage Example:** Esempi d'uso di un termine.
+* **Usage Example:** Esempi d'uso di un termine.
 * **Tesauro:** Relazioni tra le parole che compongono i synsets: sinonimi, antonimi.
-	* **Gloss**: Descrizione di un concetto.
+* **Gloss**: Descrizione di un concetto.
 * **Ontologia lessicale:** Relazioni tra i synsets: is-a, parte-tutto, implicazione, ...
 
 WordNet supporta diverse attività:
@@ -41,13 +41,12 @@ WordNet supporta diverse attività:
 
 ## Costituenti Lessicali e Sintattici
 
-Il sistema considera quattro categorie sintattiche principali: nomi, verbi, aggettivi e avverbi.  Oltre a queste categorie fondamentali, vengono considerate anche le seguenti unità lessicali:
+Il sistema considera quattro categorie sintattiche principali: nomi, verbi, aggettivi e avverbi. Oltre a queste categorie fondamentali, vengono considerate anche le seguenti unità lessicali:
 
 * **Verbi frasali:** Espressioni composte da un verbo e una particella (es. *get on*, *break up*).
-* **Composti:** Parole formate dalla combinazione di due o più parole (es. *blueberry*).  Questi composti vengono identificati come un singolo lemma.
+* **Composti:** Parole formate dalla combinazione di due o più parole (es. *blueberry*). Questi composti vengono identificati come un singolo lemma.
 * **Collocazioni:** Sequenze di parole che frequentemente compaiono insieme (es. *one way*, *a surge of anger*).
 * **Fraseologismi (o frasi idiomatiche):** Espressioni il cui significato non è deducibile dal significato delle singole parole (es. *kick the bucket*).
-
 
 Le risorse utilizzate non forniscono informazioni su:
 
@@ -57,7 +56,6 @@ Le risorse utilizzate non forniscono informazioni su:
 * **Note di utilizzo:** informazioni contestuali sull'uso delle parole.
 * **Illustrazione pittorica:** immagini associate alle parole.
 
-
 ## Relazioni Semantiche e Lessicali
 
 Le relazioni semantiche vengono estratte manualmente dai sinonimi presenti in un thesaurus.
@@ -66,16 +64,14 @@ Le relazioni semantiche vengono estratte manualmente dai sinonimi presenti in un
 
 ### Gerarchia Lessicale
 
-La gerarchia lessicale organizza i concetti.  Una maggiore distanza nella gerarchia implica un percorso cognitivo più lungo per connettere i concetti.  Inoltre, ogni concetto lessicalizzato richiede una maggiore quantità di informazioni rispetto a quelle necessarie per definire la gerarchia stessa.
-
+La gerarchia lessicale organizza i concetti. Una maggiore distanza nella gerarchia implica un percorso cognitivo più lungo per connettere i concetti. Inoltre, ogni concetto lessicalizzato richiede una maggiore quantità di informazioni rispetto a quelle necessarie per definire la gerarchia stessa.
 
 ### Tipi di Relazioni
 
 Il sistema modella due tipi principali di relazioni:
 
-* **Relazioni Lessicali:**  Stabiliscono legami tra le parole all'interno di un synset, identificando sinonimi e contrari.
-* **Relazioni Semantiche:**  Collegano i synset tra loro, rappresentando relazioni come iperonimia (relazione "Is-a"), meronimia (relazione "parte di"), implicazione, e altre.
-
+* **Relazioni Lessicali:** Stabiliscono legami tra le parole all'interno di un synset, identificando sinonimi e contrari.
+* **Relazioni Semantiche:** Collegano i synset tra loro, rappresentando relazioni come iperonimia (relazione "Is-a"), meronimia (relazione "parte di"), implicazione, e altre.
 
 ## Memorizzazione dei Dati
 
@@ -87,7 +83,6 @@ La memorizzazione dei dati è organizzata come segue:
 * **Avverbi:** Memorizzati in un unico file.
 * **Puntatori di relazione:** Memorizzati per rappresentare i legami tra i diversi elementi lessicali.
 * **Sostantivi:** Per i sostantivi, vengono modellate sia le relazioni semantiche che le relazioni che specificano attributi o qualità.
-
 
 ##### Unique Beginners: Categorie sematiche per organizzare i sostantivi
 
@@ -152,7 +147,6 @@ Si distinguono principalmente tre tipi di aggettivi:
 * **Aggettivi participiali:** Derivati da verbi, possono essere in forma "-ing" (presente) o "-ed" (passato).
 * **Aggettivi relazionali:** Esprimono una relazione tra il nome che modificano e un altro concetto.
 
-
 ### Formato Rappresentazionale
 
 Il formato utilizzato per rappresentare gli aggettivi è:
@@ -166,28 +160,24 @@ Dove:
 
 Esempio: PESO (pacchetto) = pesante
 
-
 ### Relazioni Semantiche tra Aggettivi
 
 #### Antinomia (!)
 
-L'antinomia è una relazione semantica fondamentale tra aggettivi descrittivi, che indica una relazione di opposizione.  "È ANONIMO A" significa che un aggettivo è l'opposto di un altro.  Questa relazione può essere:
+L'antinomia è una relazione semantica fondamentale tra aggettivi descrittivi, che indica una relazione di opposizione. "È ANONIMO A" significa che un aggettivo è l'opposto di un altro. Questa relazione può essere:
 
-* **Diretta:**  es. pesante/leggero.
+* **Diretta:** es. pesante/leggero.
 * **Indiretta:** es. pesante/arioso.
-
 
 Oltre all'antinomia, esistono altre relazioni semantiche tra aggettivi:
 
-* **Troponimo (~):**  Relazione di similarità o vicinanza di significato.
+* **Troponimo (~):** Relazione di similarità o vicinanza di significato.
 * **Iperonimo (@):** Relazione di generalizzazione (l'iperonimo è un termine più generale).
 * **Implicazione (\*):** Un aggettivo implica l'altro.
 * **Causa (>):** Un aggettivo è causa dell'altro.
-* **Vedi anche (^):**  Riferimento ad altri aggettivi correlati.
+* **Vedi anche (^):** Riferimento ad altri aggettivi correlati.
 
-
-**Nota:**  La relazione di "contrario" implica che una delle proposizioni può essere vera, oppure entrambe possono essere false.
-
+**Nota:** La relazione di "contrario" implica che una delle proposizioni può essere vera, oppure entrambe possono essere false.
 
 Gli aggettivi possono essere utilizzati per esprimere diversi livelli di azione o intensità.
 
@@ -195,9 +185,9 @@ Gli aggettivi possono essere utilizzati per esprimere diversi livelli di azione 
 
 Oltre agli aggettivi descrittivi generali, si possono distinguere:
 
-* **Aggettivi di colore:**  Possono funzionare sia come nomi che come aggettivi (es. *il blu del mare*, *un vestito blu*).
-* **Quantificatori:**  Esprimono quantità (es. tutti, alcuni, molti, pochi...).
-* **Aggettivi participiali:**  Derivati da verbi, indicano un'azione o uno stato (es. *acqua corrente*, *tempo trascorso*).  "Parte principale di" indica che il participio deriva dal verbo (es. "breaking" è la parte principale di "break").  Possono essere in forma "-ing" o "-ed".
+* **Aggettivi di colore:** Possono funzionare sia come nomi che come aggettivi (es. *il blu del mare*, *un vestito blu*).
+* **Quantificatori:** Esprimono quantità (es. tutti, alcuni, molti, pochi...).
+* **Aggettivi participiali:** Derivati da verbi, indicano un'azione o uno stato (es. *acqua corrente*, *tempo trascorso*). "Parte principale di" indica che il participio deriva dal verbo (es. "breaking" è la parte principale di "break"). Possono essere in forma "-ing" o "-ed".
 
 ### Aggettivi Relazionali
 
@@ -225,15 +215,15 @@ Esempio: *comportamento criminale*.
 * Ad esempio: "vecchio" può significare "non giovane" - modifica le persone.
 * Ad esempio: "vecchio" può significare "non nuovo" - modifica le cose.
 * Alcuni aggettivi possono modificare quasi tutti i nomi.
-	* Ad esempio: buono / cattivo, desiderabile / indesiderabile.
+* Ad esempio: buono / cattivo, desiderabile / indesiderabile.
 * Alcuni aggettivi possono essere strettamente limitati ad alcuni nomi.
-	* Ad esempio: modificabile / non modificabile.
+* Ad esempio: modificabile / non modificabile.
 
 ## Avverbi
 
-Gli avverbi sono spesso derivati da aggettivi tramite suffissazione.  Il suffisso più comune è "-ly", che può specificare:
+Gli avverbi sono spesso derivati da aggettivi tramite suffissazione. Il suffisso più comune è "-ly", che può specificare:
 
-* **Modo:**  Descrive *come* avviene l'azione.  Esempio: *beautifully*.
+* **Modo:** Descrive *come* avviene l'azione. Esempio: *beautifully*.
 * **Grado:** Indica l'intensità dell'azione o di un aggettivo. Esempio: *extremely*.
 
 Altri suffissi includono: "-wise", "-way", "-ward" (es. *northward*, *forward*).
@@ -242,7 +232,6 @@ Inoltre, gli avverbi ereditano dagli aggettivi di origine:
 
 * **Antonimi:** Se l'aggettivo ha un antonimo, l'avverbio corrispondente ne avrà uno.
 * **Gradazione:** Molti avverbi possono essere graduati (es. *molto*, *abbastanza*, *estremamente*).
-
 
 ## Verbi
 
@@ -265,8 +254,8 @@ L'inglese ha meno verbi rispetto ai nomi, *MA* circa il doppio di polisemia risp
 * Sinonimi e quasi sinonimi.
 * Ad esempio: "pass away" vs. "die" vs. "kick the bucket".
 * Idiomi e metafore:
- * "Kick the bucket" include synset.
- * "Die" include sinonimi: "break", "break down" (per auto e computer). 
+* "Kick the bucket" include synset.
+* "Die" include sinonimi: "break", "break down" (per auto e computer).
 
 ## Relazioni verbali
 
@@ -277,40 +266,38 @@ Non c'è modo di valutare il valore di verità della frase **A** se non attraver
 L'Entailment Lessicale è la relazione costituente che lega un verbo con un altro:
 
 * Il verbo **Y** è implicato da **X** se facendo **X** si deve necessariamente fare **Y**.
-    * Ad esempio, fare un pisolino implica dormire.
-    * **X** è un modo di eseguire l'azione **Y**.
-* La relazione non è reciproca: V1  entailment V2 **NON** implica V2 entailment V1.
-
+* Ad esempio, fare un pisolino implica dormire.
+* **X** è un modo di eseguire l'azione **Y**.
+* La relazione non è reciproca: V1 entailment V2 **NON** implica V2 entailment V1.
 
 ### Tipi di Entailment
 
 L'entailment può essere classificato in base all'inclusione temporale:
 
-**+ Inclusione Temporale:**
+##### + Inclusione Temporale:
 
-* **Troponimia (Coestensività):**  Le azioni si svolgono contemporaneamente per tutta la loro durata.
-    * *camminare - marciare*
-    * *parlare - sussurrare*
+* **Troponimia (Coestensività):** Le azioni si svolgono contemporaneamente per tutta la loro durata.
+* *camminare - marciare*
+* *parlare - sussurrare*
 
 * **Troponimia (Inclusione Propria):** Un'azione è inclusa nell'altra, ma non necessariamente per tutta la sua durata.
-    * *camminare - fare un passo*
-    * *dormire - russare*
+* *camminare - fare un passo*
+* *dormire - russare*
 
-
-**− Inclusione Temporale:**
+##### − Inclusione Temporale:
 
 * **Presupposizione Inversa:** L'azione implica una precedente conoscenza o stato.
-    * *dimenticare - sapere*
-    * *srotolare - arrotolare*
+* *dimenticare - sapere*
+* *srotolare - arrotolare*
 
 * **Causalità:** Un'azione causa l'altra.
-    * *mostrare - vedere*
-    * *rompere - rompere* (Nota: qui si intende probabilmente una relazione di causa-effetto tra due eventi di rottura, ad esempio "rompere un vaso" causa "il vaso è rotto")
+* *mostrare - vedere*
+* *rompere - rompere* (Nota: qui si intende probabilmente una relazione di causa-effetto tra due eventi di rottura, ad esempio "rompere un vaso" causa "il vaso è rotto")
 
 ##### Troponym (~):
 
 * Il verbo **Y** è un troponimo del verbo **X** se l'attività **Y** sta facendo **X** in qualche modo.
-	- **X** è un modo particolare di eseguire **Y**. Vi è un'analogia con il concetto di **Iponimia**.
+- **X** è un modo particolare di eseguire **Y**. Vi è un'analogia con il concetto di **Iponimia**.
 * Ad esempio, balbettare è un troponimo di parlare.
 * Caso speciale di entailment, specializzazione di una particolare azione.
 * Più frequentemente codificato in WordNet.
@@ -324,7 +311,7 @@ L'entailment può essere classificato in base all'inclusione temporale:
 ##### Hypernym (@):
 
 * Il verbo Y è un iperonimo del verbo X se l'attività X è un (tipo di) Y.
-* Ad esempio, percepire è un iperonimo di ascoltare. 
+* Ad esempio, percepire è un iperonimo di ascoltare.
 
 **Glosses {get}:** descrizione di un concetto.
 
@@ -334,15 +321,15 @@ Per organizzare i verbi in base al loro argomento, è necessario utilizzare il *
 
 ### Entailment Lessicale
 
-L'**entailment lessicale** è un concetto che riguarda la relazione tra due verbi. Dati due verbi, l'entailment lessicale si verifica quando uno dei due verbi implica necessariamente l'altro. 
+L'**entailment lessicale** è un concetto che riguarda la relazione tra due verbi. Dati due verbi, l'entailment lessicale si verifica quando uno dei due verbi implica necessariamente l'altro.
 
 - **Prompt indiretto**: non forniamo una specifica di Entailment.
 - **Prompt diretto**: forniamo un significato di Entailment.
 
 Esistono due metodi principali per accedere agli entailment di un verbo:
 
-1. **Metodo entailment:** Questo metodo permette di ottenere gli entailment di un verbo direttamente, fornendo una lista di possibili entailment.
-2. **Hypohyms:** Questo metodo restituisce i troponimi, ovvero i termini che sono più specifici del verbo in questione. I troponimi possono essere utilizzati per inferire gli entailment del verbo.
+- **Metodo entailment:** Questo metodo permette di ottenere gli entailment di un verbo direttamente, fornendo una lista di possibili entailment.
+- **Hypohyms:** Questo metodo restituisce i troponimi, ovvero i termini che sono più specifici del verbo in questione. I troponimi possono essere utilizzati per inferire gli entailment del verbo.
 
 ## WordNet e altre teorie del significato
 
@@ -352,7 +339,7 @@ Esistono due metodi principali per accedere agli entailment di un verbo:
 
 * **Significato come insieme di concetti atomici:** Questa teoria sostiene che il significato di una parola può essere scomposto in un insieme di concetti elementari. Questo permette di esprimere il significato in modo più preciso e analitico.
 
-**Esempio:** "Comprare" (Jackendoff 1983): 
+**Esempio:** "Comprare" (Jackendoff 1983):
 
 ![[Repo/APPPUNTI/NEW/IR_NLP/Appunti/Allegati/8)-20241107110336756.png]]
 
@@ -383,21 +370,21 @@ Il significato di una parola è l'informazione che è vera per gli esemplari pi�
 
 ## Reti Semantiche (Quillian)
 
-Il significato di una parola è definito dalle relazioni che essa intrattiene con altre parole all'interno di una rete semantica.  Questa rappresentazione modella la conoscenza tramite nodi (parole o concetti) e archi (relazioni tra i nodi).
+Il significato di una parola è definito dalle relazioni che essa intrattiene con altre parole all'interno di una rete semantica. Questa rappresentazione modella la conoscenza tramite nodi (parole o concetti) e archi (relazioni tra i nodi).
 
-**BUY (Comprare)**
-**Esempio:** "Comprare" (`buy`) è un iponimo di "ottenere" (`get`).  
+##### BUY (Comprare)
+
+**Esempio:** "Comprare" (`buy`) è un iponimo di "ottenere" (`get`).
 
 * **Antonimo:** VENDERE (`SELL`)
 * **Iponimo di:** OTTENERE (`GET`)
 * **Implica:** PAGARE (`PAY`)
 * **Implica:** SCEGLIERE (`CHOOSE`)
 * **Iponimi (Tipi di "Comprare"):**
-    * ACQUISIRE (`TAKE OVER`)
-    * RACCOGLIERE (`PICK UP`)
+	* ACQUISIRE (`TAKE OVER`)
+	* RACCOGLIERE (`PICK UP`)
 
-
-Questa struttura a rete permette di rappresentare le relazioni semantiche tra i concetti, permettendo inferenze e ragionamenti basati sulla conoscenza rappresentata.  La vicinanza dei nodi nella rete riflette la similarità semantica tra i concetti.
+Questa struttura a rete permette di rappresentare le relazioni semantiche tra i concetti, permettendo inferenze e ragionamenti basati sulla conoscenza rappresentata. La vicinanza dei nodi nella rete riflette la similarità semantica tra i concetti.
 
 ## Valutazione delle Relazioni Semantiche in WordNet
 
@@ -443,10 +430,10 @@ Questo approccio è indipendente dall'ontologia e permette di stimare la similar
 
 Questo approccio si basa sul confronto delle definizioni dei concetti nell'ontologia. Il processo prevede i seguenti passaggi:
 
-1. **Pre-processing:** Si decide se utilizzare una stop-list, la lemmatizzazione o altre tecniche di pre-processing per preparare le definizioni al confronto.
-2. **Estrazione di termini informativi:** Si identificano i sostantivi e i verbi, ovvero i termini con contenuto informativo, all'interno delle definizioni.
-3. **Confronto delle definizioni:** Si decide se utilizzare un matching sintattico o semantico.
-4. **Quantificazione della similarità:** Si calcola l'affinità semantica tra i due testi, utilizzando diverse misure come il *Gloss Overlap*.
+- **Pre-processing:** Si decide se utilizzare una stop-list, la lemmatizzazione o altre tecniche di pre-processing per preparare le definizioni al confronto.
+- **Estrazione di termini informativi:** Si identificano i sostantivi e i verbi, ovvero i termini con contenuto informativo, all'interno delle definizioni.
+- **Confronto delle definizioni:** Si decide se utilizzare un matching sintattico o semantico.
+- **Quantificazione della similarità:** Si calcola l'affinità semantica tra i due testi, utilizzando diverse misure come il *Gloss Overlap*.
 
 #### Gloss Overlap (ρ)
 
@@ -460,11 +447,11 @@ La definizione di un concetto può essere astratta o specifica del dominio. In q
 
 Per affrontare i limiti di ciascun approccio, si possono utilizzare approcci ibridi che combinano elementi di entrambi. Un'altra possibilità interessante è l'utilizzo degli embedding in WordNet, in particolare i node embedding.
 
-## WordNet per più lingue 
+## WordNet per più lingue
 
 ### EuroWordNet
 
-EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e relazioni semantiche per diverse lingue. 
+EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e relazioni semantiche per diverse lingue.
 
 ##### Caratteristiche principali:
 
@@ -478,12 +465,11 @@ EuroWordNet è un progetto che mira a creare un database di sinonimi (synsets) e
 
 * **Indici interlingua:** Un elenco non strutturato di indici interlingua, ognuno composto da un synset e una gloss inglese.
 * **Collegamento dei codici ILI:** I codici ILI sono collegati a:
- * Il significato specifico del synset per la lingua data.
- * Uno o più termini generali di livello superiore.
- * Possibili domini.
+* Il significato specifico del synset per la lingua data.
+* Uno o più termini generali di livello superiore.
+* Possibili domini.
 
 **Relazioni di equivalenza:** I concetti di alto livello e i domini possono essere collegati con relazioni di equivalenza tra indici ILI e significati di una lingua specifica.
-
 
 ## MultiWordNet
 
@@ -505,7 +491,7 @@ La principale differenza tra i due progetti risiede nella strategia per la creaz
 
 ### Procedura di Assegnazione
 
-La procedura di assegnazione in WordNet Italiano v1.4 si basa sulla costruzione efficiente di synset a partire dal riferimento inglese.  Dato un senso italiano per una parola, il sistema fornisce un elenco ponderato di synset inglesi simili. Il lessicografo seleziona il synset corretto e scarta gli altri. La procedura prevede anche l'individuazione di lacune lessicali.
+La procedura di assegnazione in WordNet Italiano v1.4 si basa sulla costruzione efficiente di synset a partire dal riferimento inglese. Dato un senso italiano per una parola, il sistema fornisce un elenco ponderato di synset inglesi simili. Il lessicografo seleziona il synset corretto e scarta gli altri. La procedura prevede anche l'individuazione di lacune lessicali.
 
 Le risorse utilizzate per la creazione di WordNet Italiano v1.4 includono:
 
@@ -514,43 +500,39 @@ Le risorse utilizzate per la creazione di WordNet Italiano v1.4 includono:
 * WordNet Domains
 * Dizionario Italiano (DISC)
 
-
 ### Gruppi di Traduzione (TGR)
 
 I Gruppi di Traduzione (TGR) rappresentano insiemi di significati tradotti tra due lingue. Ogni TGR raggruppa le diverse traduzioni di una parola, riflettendo la polisemia e le sfumature di significato.
 
-**Esempio: "wood" [wʊd]**
+##### Esempio: "wood" [wʊd]
 
-**1. n.** (sostantivo)
-    * **a.** (material) legno; (timber) legname
-    * **b.** (forest) bosco
-    * **c.** (Golf) mazza da golf in legno; (Bowls) boccia di legno
+**n.** (sostantivo)
+* **a.** (material) legno; (timber) legname
+* **b.** (forest) bosco
+* **c.** (Golf) mazza da golf in legno; (Bowls) boccia di legno
 
-**2. adj.** (aggettivo)
-    * **a.** (made of wood) di legno
-    * **b.** (living etc. in a wood) boschivo, silvestre
+**adj.** (aggettivo)
+* **a.** (made of wood) di legno
+* **b.** (living etc. in a wood) boschivo, silvestre
 
-
-**Statistiche:**
+##### Statistiche:
 
 * **Parte Inglese:** 40.959 parole, 60.901 TGR
 * **Parte Italiana:** 32.602 parole, 46.545 TGR
 
 Queste statistiche mostrano il numero di parole e il numero corrispondente di Gruppi di Traduzione in inglese e italiano, evidenziando la complessità della traduzione e la necessità di considerare i diversi significati di una parola.
 
-
 ### Selezione dei Synset
 
 La selezione dei synset "migliori" avviene attraverso i seguenti passaggi:
 
-1. Trova synset per ogni senso.
-2. Elenca i synset in base ai seguenti criteri principali:
-    * Probabilità generica
-    * Traduzione
-    * Somiglianza delle gloss
-    * Intersezione tra synset
-3. Seleziona i synset "migliori".
-
+- Trova synset per ogni senso.
+- Elenca i synset in base ai seguenti criteri principali:
+* Probabilità generica
+* Traduzione
+* Somiglianza delle gloss
+* Intersezione tra synset
+- Seleziona i synset "migliori".
 
 ## Gloss Similarity
 
@@ -560,44 +542,41 @@ La similarità tra glossari (Gloss Similarity) si basa sull'analisi delle relazi
 
 L'appartenenza allo stesso campo semantico indica una relazione di significato.
 
-**Esempio:**
+##### Esempio:
 
 * **sclerosi** n (Med) sclerosi (appartiene al campo semantico della medicina)
-
 
 ### Sinonimi e Iperonimi (Synonyms, Hypernyms)
 
 La presenza di sinonimi o iperonimi condivisi indica una forte similarità semantica.
 
-**Esempi:**
+##### Esempi:
 
 * **ragione** 1. n a. (motive, cause) ragione,...
 * **sogliola** n (fish) sogliola (sinonimo di "sole")
-
 
 ### Contesto (Context)
 
 Il contesto d'uso influenza il significato e la similarità.
 
-**Esempio:**
+##### Esempio:
 
 * **manico** 1. n... (of knife) manico, impugnatura; (of door, drawer) maniglia (il significato di "manico" varia a seconda del contesto)
-
 
 ### Similarità Basata su Iperonimi e Sinonimi Condivisi
 
 L'analisi di iperonimi e sinonimi condivisi è un metodo per valutare la similarità semantica.
 
-**Esempi:**
+##### Esempi:
 
 * **albero** 1. sm a. (pianta) tree
 
-    * `{ tree }` - a tall perennial woody **plant** having a main trunk ...
-    * `{ tree, tree diagram }` - a figure that branches from...  (iperonimo: pianta)
+* `{ tree }` - a tall perennial woody **plant** having a main trunk ...
+* `{ tree, tree diagram }` - a figure that branches from... (iperonimo: pianta)
 
 * **sogliola** sf (pesce) sole
 
-    * `{ sole }` - right-eyed flatfish; many are valued as food:  => `{ flatfish }` - any of several families of **fishes** having ... (iperonimo: pesce)
-    * `{ sole }` - the underside of the foot => `{ area, region }` - a part of an animal that has a special... (in questo caso, il significato è diverso e l'iperonimo è più generico)
+* `{ sole }` - right-eyed flatfish; many are valued as food: => `{ flatfish }` - any of several families of **fishes** having ... (iperonimo: pesce)
+* `{ sole }` - the underside of the foot => `{ area, region }` - a part of an animal that has a special... (in questo caso, il significato è diverso e l'iperonimo è più generico)
 
 In sintesi, la similarità tra glossari si valuta analizzando la condivisione di campi semantici, sinonimi, iperonimi e considerando il contesto d'uso delle parole.

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-# Batch Normalization
+## Batch Normalization
 
 Batch normalization was introduced in Sergey Ioffe's and Christian Szegedy's 2015 paper [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/pdf/1502.03167.pdf). The idea is that, instead of just normalizing the inputs to the network, we normalize the inputs to *layers within* the network. It's called "batch" normalization because during training, we normalize each layer's inputs by using the mean and variance of the values in the current mini-batch.
 
@@ -15,12 +15,15 @@ Batch normalization was introduced in Sergey Ioffe's and Christian Szegedy's 201
 
 ```python
 # generiamo un batch di immagini A con una distribuzione normale e del rumore casuale
+
 batch_size = 30
 A = torch.zeros(batch_size, 32, 32)
 
 for i in range(batch_size):
     # ogni pixel è ottenuto come: 
+
     # random(0, 1) * x + b
+
     A[i, :, :] = torch.randn(32 * 32).view(32, 32) * torch.randint(5, size=(1,)) + torch.randint(50, size=(1,))
 
 A.shape, A
@@ -41,7 +44,7 @@ describe_batch(A, ax)
 
 ![png](Esempio_di_Batch_Normalization_4_0.png)
 
-# Stima dei parametri gamma e beta
+## Stima dei parametri gamma e beta
 
 ```python
 eps = 1e-16

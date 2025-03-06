@@ -13,12 +13,12 @@ $$
 \vec{e_{d}}=(0,0,\dots,1 )\ Y_{d}\in -1,1\\
 \end{cases}$$
 
-Supponiamo di aver scelto i valori per le etichette. 
+Supponiamo di aver scelto i valori per le etichette.
 
-Dobbiamo costruire il vettore $\vec{w}=(y_{1},y_{2},\dots,y_{d})$. 
+Dobbiamo costruire il vettore $\vec{w}=(y_{1},y_{2},\dots,y_{d})$.
 Il semispazio $\forall_{i}, \ h_{\vec{w}}(\vec{e}_{i})= <\vec{w},\vec{e}_{i}> =y_{i}$ sarà uguale alla $i$-esima componente.
 
-Abbiamo dimostrato che esistono i vettori su cui possiamo costruire tutte le funzioni binarie. 
+Abbiamo dimostrato che esistono i vettori su cui possiamo costruire tutte le funzioni binarie.
 
 ## Dimostrazione della VC-dimension per iperpiani separatori
 
@@ -30,8 +30,8 @@ La VC-dimension per gli iperpiani separatori in uno spazio vettoriale di dimensi
 
 Per dimostrare questo teorema, dobbiamo dimostrare due punti:
 
-1. **VC-dimension ≥ d:** Dobbiamo dimostrare che esiste un insieme di $d$ punti che possono essere classificati arbitrariamente da un iperpiano separatore.
-2. **VC-dimension ≤ d:** Dobbiamo dimostrare che per ogni insieme di $d+1$ punti, esiste almeno una funzione binaria che non può essere realizzata da un iperpiano separatore.
+- **VC-dimension ≥ d:** Dobbiamo dimostrare che esiste un insieme di $d$ punti che possono essere classificati arbitrariamente da un iperpiano separatore.
+- **VC-dimension ≤ d:** Dobbiamo dimostrare che per ogni insieme di $d+1$ punti, esiste almeno una funzione binaria che non può essere realizzata da un iperpiano separatore.
 
 ##### Punto 1: VC-dimension ≥ d
 
@@ -104,7 +104,7 @@ Se utilizziamo questi valori, la funzione XOR sarà:
 | 1 | -1 | 0 |
 | 1 | 1 | 1 |
 
-Il percettrone non può catturare la funzione XOR (un singolo neurone non è in grado di rappresentarla). 
+Il percettrone non può catturare la funzione XOR (un singolo neurone non è in grado di rappresentarla).
 
 ## Teorema NO-FREE LUNCH
 
@@ -181,8 +181,8 @@ $$V=\{(x_1',y_1'),(x_2',y_2'),\dots,(x_m',y_m')\}$$
 
 ##### Opzioni per la creazione del validation set:
 
-1. **Creazione di S e V:** Possiamo creare sia il training set (S) che il validation set (V) separatamente.
-2. **Sottoinsieme di S:** Se abbiamo solo S, possiamo sacrificarne una parte e metterla nel validation set. Selezioniamo un sottoinsieme casuale di S e lo usiamo come Validation.
+- **Creazione di S e V:** Possiamo creare sia il training set (S) che il validation set (V) separatamente.
+- **Sottoinsieme di S:** Se abbiamo solo S, possiamo sacrificarne una parte e metterla nel validation set. Selezioniamo un sottoinsieme casuale di S e lo usiamo come Validation.
 
 ##### Stima dell'errore di generalizzazione:
 
@@ -215,7 +215,7 @@ Nonostante ciò, questa tecnica è la più potente a livello teorico, poiché ab
 
 ##### Varianti per alleviare il problema:
 
-Esistono delle varianti per alleviare il problema della diminuzione della qualità del training set quando si aumenta la dimensione del validation set. 
+Esistono delle varianti per alleviare il problema della diminuzione della qualità del training set quando si aumenta la dimensione del validation set.
 
 ## K-fold Cross-Validation
 
@@ -225,7 +225,7 @@ Per *k* volte, si creano *k* problemi distinti, in cui un gruppo diventa il vali
 
 Formalmente, per ogni *i* da 1 a *k*:
 
-$$\forall_{i} 
+$$\forall_{i}
 \begin{cases}
 V_{i}=S_{i} \\
 S'=S \setminus S' \to h_{i}=ERM_{H}(S'_{i})
@@ -273,9 +273,9 @@ La parabola nel grafico rappresenta l'errore di validazione (errore sul validati
 
 Il grafico può essere diviso in tre regioni:
 
-1. **Regione di underfitting:** Associata ai valori più bassi dell'iperparametro. L'errore di validazione e l'errore empirico sono molto vicini e entrambi tendono ad essere alti. La classe di ipotesi è troppo semplice e non si adatta bene ai dati.
-2. **Regione intermedia:** Regione in cui si colloca la soluzione ottimale. L'obiettivo è isolare la regione in cui si trova il minimo dell'errore di validazione.
-3. **Regione di overfitting:** Associata ai valori più alti dell'iperparametro. L'errore empirico si abbassa di molto, ma l'errore sul validation set è molto grande (la differenza tra i due errori è grande). Il modello si adatta troppo bene ai dati di training, perdendo la capacità di generalizzare a nuovi dati.
+- **Regione di underfitting:** Associata ai valori più bassi dell'iperparametro. L'errore di validazione e l'errore empirico sono molto vicini e entrambi tendono ad essere alti. La classe di ipotesi è troppo semplice e non si adatta bene ai dati.
+- **Regione intermedia:** Regione in cui si colloca la soluzione ottimale. L'obiettivo è isolare la regione in cui si trova il minimo dell'errore di validazione.
+- **Regione di overfitting:** Associata ai valori più alti dell'iperparametro. L'errore empirico si abbassa di molto, ma l'errore sul validation set è molto grande (la differenza tra i due errori è grande). Il modello si adatta troppo bene ai dati di training, perdendo la capacità di generalizzare a nuovi dati.
 
 Al grafico si può aggiungere l'errore Bayesiano, che rappresenta l'errore minimo possibile per il problema. L'errore Bayesiano non può essere raggiunto in pratica, ma rappresenta un limite inferiore per l'errore di qualsiasi modello.
 
@@ -283,7 +283,7 @@ La Model-Selection Curve è uno strumento utile per visualizzare il trade-off tr
 
 ## Minimizzazione del Rischio Strutturale (SRM)
 
-La Minimizzazione del Rischio Strutturale (SRM) è una tecnica di model selection che non fa uso di un validation set separato. 
+La Minimizzazione del Rischio Strutturale (SRM) è una tecnica di model selection che non fa uso di un validation set separato.
 
 L'obiettivo di SRM è trovare l'ipotesi $h^*$ che minimizza il rischio strutturale, definito come la somma dell'errore empirico $L_S(h)$ e di un termine di penalizzazione $\epsilon(h)$:
 
@@ -314,4 +314,4 @@ Questa formula indica che l'ipotesi ottimale $h^*$ è quella che minimizza la so
 
 In altre parole, più è complicata la classe di ipotesi (più alta è la dimensione VC), più cresce il termine $\epsilon(h)$ e aumenta il rischio strutturale. Questo perché una classe di ipotesi più complessa è più soggetta a overfitting, ovvero ad adattarsi troppo bene ai dati di training e a perdere la capacità di generalizzare a nuovi dati.
 
-SRM è una tecnica efficace per la model selection, in quanto consente di trovare un compromesso tra la complessità del modello e la sua accuratezza. 
+SRM è una tecnica efficace per la model selection, in quanto consente di trovare un compromesso tra la complessità del modello e la sua accuratezza.

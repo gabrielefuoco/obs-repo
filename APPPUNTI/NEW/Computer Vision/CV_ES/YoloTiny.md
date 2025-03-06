@@ -1,4 +1,4 @@
-# YOLO tiny
+## YOLO tiny
 
 **TASK**: utilizzare la versione tiny di YOLO classificare il dataset <https://github.com/experiencor/kangaroo>
 HINT per la fase di preprocesing del dataset vedi anche <https://towardsdatascience.com/implementing-yolo-on-a-custom-dataset-20101473ce53>

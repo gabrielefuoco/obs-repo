@@ -1,4 +1,4 @@
-# Applicazione di Sift per combinare 2 immagini
+## Applicazione di Sift per combinare 2 immagini
 
 ```python
 import cv2
@@ -48,7 +48,7 @@ keypoints_left, descriptors_left = SIFT.detectAndCompute(image_left_gray, None)
 len(keypoints_left)
 ```
 
- 2233
+2233
 
 ```python
 img_2 = cv2.drawKeypoints(image_left_gray, keypoints_left, image_left.copy())
@@ -69,7 +69,7 @@ keypoints_right, descriptors_right = SIFT.detectAndCompute(image_right_gray, Non
 len(keypoints_right)
 ```
 
- 2364
+2364
 
 ```python
 img_2_right = cv2.drawKeypoints(image_right_gray, keypoints_right, image_right.copy())
@@ -82,8 +82,8 @@ plt.imshow(img_2_right);
 
 ## Combiniamo le immagini
 
-1. Si individuano le corrispondenze tra i keypoint di A e di B
-2. Si trasforma l'immagine B e si effettua il merge
+- Si individuano le corrispondenze tra i keypoint di A e di B
+- Si trasforma l'immagine B e si effettua il merge
 
 Per individuare la corrispondenza si può utilizzare un algoritmo basato sul criterio di distanza euclidea per individuare le coppie di keypoints $(kp_A, kp_B)$.
 
@@ -100,9 +100,12 @@ matches = bf.knnMatch(descriptors_right, descriptors_left, k=2)
 
 good = []
 # loop over the raw matches
+
 for m,n in matches:
     # ensure the distance is within a certain ratio of each
+
     # other (i.e. Lowe's ratio test)
+
     if m.distance < n.distance * ratio:
         good.append(m)
 matches = np.asarray(good)
@@ -110,7 +113,7 @@ matches = np.asarray(good)
 matches.shape
 ```
 
- (507,)
+(507,)
 
 visualizziamo la corrispondenza di 100 punti tra tutti quelli individuati
 
@@ -134,16 +137,19 @@ Per alli
 ```python
 def getHomography(kpsA, kpsB, featuresA, featuresB, matches, reprojThresh):
     # convert the keypoints to numpy arrays
+
     kpsA = np.float32([kp.pt for kp in kpsA])
     kpsB = np.float32([kp.pt for kp in kpsB])
 
     if len(matches) > 4:
 
         # construct the two sets of points
+
         ptsA = np.float32([kpsA[m.queryIdx] for m in matches])
         ptsB = np.float32([kpsB[m.trainIdx] for m in matches])
 
         # estimate the homography between the sets of points
+
         (H, status) = cv2.findHomography(ptsA, ptsB, cv2.RANSAC, reprojThresh)
 
         return H, status
@@ -159,6 +165,7 @@ H
 
 ```python
 # Apply panorama correction
+
 width = image_left.shape[1] + image_right.shape[1]
 height = image_left.shape[0] + image_right.shape[0]
 
@@ -177,23 +184,29 @@ plt.show()
 
 ```python
 # transform the panorama image to grayscale and threshold it 
+
 gray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)
 thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)[1]
 
 # Finds contours from the binary image
+
 cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
 
 # get the maximum contour area
+
 c = max(cnts, key=cv2.contourArea)
 
 # get a bbox from the contour area
+
 (x, y, w, h) = cv2.boundingRect(c)
 
 # crop the image to the bbox coordinates
+
 result = result[y:y + h, x:x + w]
 
 # show the cropped image
+
 plt.figure(figsize=(20,10))
 plt.imshow(result);
 ```
@@ -202,6 +215,7 @@ plt.imshow(result);
 
 ```python
 # Images
+
 fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
 axes = axes.ravel()

@@ -25,9 +25,9 @@ L'obiettivo è trovare i pesi $w$ che meglio approssimano la relazione lineare t
 
 ##### Passaggi:
 
-1. **Coordinate omogenee:** Prima di applicare la formula, è necessario passare alle coordinate omogenee. Questo può essere fatto utilizzando il metodo `.add_dummy_feature`, che aggiunge una colonna di 1 alla matrice $x$. Tuttavia, questo metodo aggiunge la colonna in coda, quindi è necessario invertirla.
-2. **Pseudo inversa:** Non tutte le matrici sono invertibili. Per calcolare l'inversa di una matrice non invertibile, si utilizza la pseudo inversa, calcolata tramite il metodo `pinv`.
-3. **Calcolo dei parametri:** Calcolare $x_1^T x_1$, calcolare la sua pseudo inversa e moltiplicare per $x^T y$. Questo restituisce i parametri $w$.
+- **Coordinate omogenee:** Prima di applicare la formula, è necessario passare alle coordinate omogenee. Questo può essere fatto utilizzando il metodo `.add_dummy_feature`, che aggiunge una colonna di 1 alla matrice $x$. Tuttavia, questo metodo aggiunge la colonna in coda, quindi è necessario invertirla.
+- **Pseudo inversa:** Non tutte le matrici sono invertibili. Per calcolare l'inversa di una matrice non invertibile, si utilizza la pseudo inversa, calcolata tramite il metodo `pinv`.
+- **Calcolo dei parametri:** Calcolare $x_1^T x_1$, calcolare la sua pseudo inversa e moltiplicare per $x^T y$. Questo restituisce i parametri $w$.
 
 ### Soluzione 3: Caso multidimensionale
 
@@ -65,6 +65,6 @@ Se il denominatore (TSS) tende a 0, allora R² sarà pari a 1 (indica un modello
 
 ### Regressione polinomiale
 
-Possiamo usare un regressore lineare con più feature, dove ogni feature rappresenta un polinomio di ordine superiore. Prima di addestrare il modello, possiamo aggiungere una feature che rappresenta il termine di secondo grado. 
+Possiamo usare un regressore lineare con più feature, dove ogni feature rappresenta un polinomio di ordine superiore. Prima di addestrare il modello, possiamo aggiungere una feature che rappresenta il termine di secondo grado.
 
-Avendo un polinomio di grado *n*, possiamo interpolare *n+1* punti. Interpolare troppo i dati del training set causa *overfitting*. 
+Avendo un polinomio di grado *n*, possiamo interpolare *n+1* punti. Interpolare troppo i dati del training set causa *overfitting*.

@@ -43,10 +43,10 @@
 
 ### 10/12:
 
-- 
+-
 ### 14/12:
 
-- 
+-
 # **Budapest:**
 
 ## Giorno 1: City Park e Pest Serale
@@ -59,7 +59,7 @@
 * **Parlamento (esterno):** Ammirazione del Parlamento dall'esterno.
 * **Karavan (Street Food):** Cena con cibo di strada.
 
-## Giorno 2: Pest 
+## Giorno 2: Pest
 
 * **Parlamento di Budapest e Monumento Scarpe sul Danubio:** Visita dell'imponente Parlamento ungherese e riflessione presso il monumento "Scarpe sul Danubio".
 * **Basilica di Santo Stefano e ruota panoramica:** Visita della Basilica di Santo Stefano e, opzionalmente, salita sulla ruota panoramica per una vista panoramica.
@@ -78,7 +78,7 @@
 * **Parco Municipale (Városliget):** Grande parco con lago, Castello Vajdahunyad e Terme Széchenyi.
 * **Palazzo Gresham:** Bellissimo esempio di architettura Art Nouveau, attualmente un hotel di lusso. Vale la pena ammirarne l'esterno.
 
-## Giorno 3: Buda 
+## Giorno 3: Buda
 
 * **Castello di Buda (o Palazzo Reale):** Visita del complesso del Palazzo Reale, con i suoi musei e le sue splendide viste panoramiche.
 * **Chiesa di Mattia e Bastione dei Pescatori:** Ammirazione dell'architettura gotica della Chiesa di Mattia e vista mozzafiato dal Bastione dei Pescatori.
@@ -90,16 +90,16 @@
 ### Attrazioni Aggiuntive a Buda:
 
 * **Collina di Gellért:**
- * **Statua della Libertà:** Vista panoramica spettacolare.
- * **Terme Gellért:** Stabilimento termale in stile Art Nouveau.
+	* **Statua della Libertà:** Vista panoramica spettacolare.
+	* **Terme Gellért:** Stabilimento termale in stile Art Nouveau.
 * **Quartiere di Óbuda:**
- * **Aquincum:** Sito archeologico romano.
-* **Giardino dei Filosofi:** Giardino tranquillo per una passeggiata rilassante.
-* **Palazzo Sándor:** Residenza del Presidente ungherese (cambio della guardia oraria).
-* **Labirinto del Castello di Buda:** Gallerie storiche e leggende.
-* **Funicolare del Castello di Buda:** Trasporto panoramico.
-* **Chiesa di Maria Maddalena:** Rovine storiche del XIII secolo.
-* **Bazar dei Giardini del Castello:** Mercato all'aperto con artigianato locale.
-* **Metropolitan Ervin Szabó (se di interesse):** Visita della biblioteca.
-* **Pattinaggio sul ghiaccio (Vorosmarty, stagionale):** Pattinaggio sulla pista allestita.
+	* **Aquincum:** Sito archeologico romano.
+	* **Giardino dei Filosofi:** Giardino tranquillo per una passeggiata rilassante.
+	* **Palazzo Sándor:** Residenza del Presidente ungherese (cambio della guardia oraria).
+	* **Labirinto del Castello di Buda:** Gallerie storiche e leggende.
+	* **Funicolare del Castello di Buda:** Trasporto panoramico.
+	* **Chiesa di Maria Maddalena:** Rovine storiche del XIII secolo.
+	* **Bazar dei Giardini del Castello:** Mercato all'aperto con artigianato locale.
+	* **Metropolitan Ervin Szabó (se di interesse):** Visita della biblioteca.
+	* **Pattinaggio sul ghiaccio (Vorosmarty, stagionale):** Pattinaggio sulla pista allestita.
 

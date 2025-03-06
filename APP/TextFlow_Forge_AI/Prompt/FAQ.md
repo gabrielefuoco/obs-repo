@@ -1,1 +1,1 @@
-Fornisci una lista di Domande frequenti sul seguente testo. Indicami 10 possibili domande e, per ognuna di esse, fornire una risposta congrua a ciò che c'è scritto nel testo. Sii preciso e formale, ma non troppo prolisso. Ecco il testo in questione: 
+Fornisci una lista di Domande frequenti sul seguente testo. Indicami 10 possibili domande e, per ognuna di esse, fornire una risposta congrua a ciò che c'è scritto nel testo. Sii preciso e formale, ma non troppo prolisso. Ecco il testo in questione:

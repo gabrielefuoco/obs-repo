@@ -1,5 +1,5 @@
 
-## Definizione 
+## Definizione
 
 Il volume è il lavoro svolto in palestra. In fisica, il lavoro è forza x distanza (o variazione dell'energia cinetica). In palestra, spostiamo pesi usando la forza muscolare. Il lavoro di una ripetizione è: carico x accelerazione x distanza. Il lavoro totale è la somma del lavoro di ogni serie. Questo calcolo è complesso e poco pratico; calcolare la distanza con precisione è impossibile. È necessaria una semplificazione, mantenendo l'accuratezza.
 
@@ -42,7 +42,7 @@ Nonostante sembri più preciso, questo metodo presenta degli svantaggi: è più 
 
 ## Lo Stress Index
 
-Lo *Stress Index*, particolarmente utile per i powerlifter, pesa l'impatto di una serie (numero di ripetizioni e prossimità al cedimento) in termini di recupero. Questo indice, appreso dal Reactive Training System di Mike T. Shearer, utilizza tre tabelle (stress metabolico, stress nervoso e strutturale, e una combinazione di entrambi) per paragonare lo stress generato da serie diverse. Non essendo ampiamente supportato dalla letteratura scientifica e derivando da un corso a pagamento, non è possibile condividere dettagliatamente il suo utilizzo. 
+Lo *Stress Index*, particolarmente utile per i powerlifter, pesa l'impatto di una serie (numero di ripetizioni e prossimità al cedimento) in termini di recupero. Questo indice, appreso dal Reactive Training System di Mike T. Shearer, utilizza tre tabelle (stress metabolico, stress nervoso e strutturale, e una combinazione di entrambi) per paragonare lo stress generato da serie diverse. Non essendo ampiamente supportato dalla letteratura scientifica e derivando da un corso a pagamento, non è possibile condividere dettagliatamente il suo utilizzo.
 
 # Il conteggio del volume allenante: un approccio dettagliato
 

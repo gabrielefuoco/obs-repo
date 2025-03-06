@@ -47,9 +47,9 @@ Per affermare che la possion vale come approssimazione di binomiale dobbiamo ave
 - T deve essere molto grande.
 - La probabilità di successo deve essere molto bassa (i termini devono stare nella coda della curva di Zipf).
 * **Media = Varianza = λ = cf/T**
- * Se T è grande e p è piccolo, possiamo approssimare una distribuzione binomiale con una Poisson dove λ = Tp
+	* Se T è grande e p è piccolo, possiamo approssimare una distribuzione binomiale con una Poisson dove λ = Tp
 * **"Intervallo fisso" implica una lunghezza di documento fissa**
- * Ad esempio, abstract di documenti di dimensioni costanti
+	* Ad esempio, abstract di documenti di dimensioni costanti
 
 La frequenza globale dei termini segue una legge di Zipf, prescinde dalla variabile documento.
 
@@ -83,8 +83,8 @@ k
 
 * *r* è il parametro di dispersione (numero di successi), *k* è il numero di failures da osservare, *p* è la probabilità di successo.
 
-A seconda di come si interpreta il supporto, *k* e *r* assumono significato diverso. Noi stiamo osservando la probabilità di osservare *k* insuccessi. 
-La controparte di questa è quella in cui facciamo uno switch tra *k* e *r* **->** *r* diventa il numero di insuccessi e *k* di successi. 
+A seconda di come si interpreta il supporto, *k* e *r* assumono significato diverso. Noi stiamo osservando la probabilità di osservare *k* insuccessi.
+La controparte di questa è quella in cui facciamo uno switch tra *k* e *r* **->** *r* diventa il numero di insuccessi e *k* di successi.
 
 ### Parametrizzazione della Binomiale Negativa
 
@@ -107,13 +107,13 @@ k+r-1 \\
 k
 \end{pmatrix}\left( \frac{r}{\mu+r} \right)^r\left( \frac{\mu}{\mu+r} \right)^k$$
 
-* *k+r* è il numero di trial (*T*), il-1 è perché si assume che l'ultimo evento sia un successo. 
+* *k+r* è il numero di trial (*T*), il-1 è perché si assume che l'ultimo evento sia un successo.
 
 Introduciamo una dimensione che ci consenta di regolarci, in termini poissoniani, che un termini sia o non sia topic-specific, ovvero "elite"
 
 ### Termini Elite
 
-Un termine "elite" è un termine, generalmente un sostantivo, che descrive un concetto, un tema o un topic presente nel corpus o nel testo in esame. La proprietà di "eliteness" è valutata in modo binario: un termine è o elite o non lo è. 
+Un termine "elite" è un termine, generalmente un sostantivo, che descrive un concetto, un tema o un topic presente nel corpus o nel testo in esame. La proprietà di "eliteness" è valutata in modo binario: un termine è o elite o non lo è.
 
 **Attenzione:** l'essere "elite" dipende dalla rilevanza del documento al topic in questione. In altre parole, la "eliteness" di un termine è determinata dalla sua **term frequency** nel documento, ma solo se il documento è effettivamente rilevante per il topic.
 ### Eliteness
@@ -169,7 +169,7 @@ Considerando l'esistenza di termini che non si adattano bene a una singola distr
 Il modello di Poisson presenta le seguenti proprietà:
 
 * Aumenta monotonicamente con la term frequency (tf<sub>i</sub>).
-* Asintoticamente si avvicina a un valore massimo. 
+* Asintoticamente si avvicina a un valore massimo.
 * Il limite asintotico rappresenta il peso della caratteristica di "eliteness". *
 
 La stima dei parametri per il modello a due Poisson è complessa. Si può approssimare con una semplice curva parametrica che possiede le stesse proprietà qualitative.
@@ -202,7 +202,7 @@ In pratica:
 * Per valori alti di $k_1$, gli incrementi in $tf_i$ continuano a contribuire significativamente al punteggio.
 * I contributi diminuiscono rapidamente per valori bassi di $k_1$.
 
-Per valori più alti di $k_1$, l'approssimazione della funzione è peggiore. 
+Per valori più alti di $k_1$, l'approssimazione della funzione è peggiore.
 
 ## Prime versioni di BM25
 
@@ -302,11 +302,11 @@ $$RSV^{BM25} = \sum_{i \in q} \log \frac{N}{df_i} \cdot \frac{(k_1+1)tf_i}{k_1((
 Il modello BM25 utilizza due parametri principali:
 
 * **k1:** gestisce la pendenza della funzione di saturazione. Controlla lo scaling della term frequency.
- * **k1 = 0:** modello binario.
- * **k1 grande:** term frequency grezza.
+* **k1 = 0:** modello binario.
+* **k1 grande:** term frequency grezza.
 * **b:** controlla la normalizzazione della lunghezza del documento.
- * **b = 0:** nessuna normalizzazione della lunghezza.
- * **b = 1:** frequenza relativa (scala completamente in base alla lunghezza del documento).
+* **b = 0:** nessuna normalizzazione della lunghezza.
+* **b = 1:** frequenza relativa (scala completamente in base alla lunghezza del documento).
 
 Tipicamente, k1 è impostato intorno a 1.2-2 e b intorno a 0.75. È possibile incorporare la ponderazione dei termini di query e il feedback di rilevanza (pseudo).
 
@@ -346,7 +346,7 @@ Tuttavia, questo sembra implicare che le proprietà di eliteness delle diverse z
 
 * Assumere che l'eliteness sia una proprietà del termine/documento condivisa tra le zone.
 * Ma la relazione tra eliteness e frequenze dei termini è dipendente dalla zona.
- * Ad esempio, un uso più denso di parole di argomento elite nel titolo.
+* Ad esempio, un uso più denso di parole di argomento elite nel titolo.
 
 #### Conseguenza
 
@@ -383,11 +383,11 @@ $$
 
 Il metodo per il calcolo delle varianti pesate si articola in tre fasi:
 
-1. **Calcolo della TF per zona:** La frequenza dei termini (TF) viene calcolata separatamente per ogni zona del documento.
+- **Calcolo della TF per zona:** La frequenza dei termini (TF) viene calcolata separatamente per ogni zona del documento.
 
-2. **Normalizzazione per zona:** La TF viene normalizzata in base alla lunghezza della zona.
+- **Normalizzazione per zona:** La TF viene normalizzata in base alla lunghezza della zona.
 
-3. **Peso della zona:** A ciascuna zona viene assegnato un peso ($v_z$), che riflette la sua importanza nel contesto del documento. Questo peso è un parametro predefinito e non è apprendibile dal modello.
+- **Peso della zona:** A ciascuna zona viene assegnato un peso ($v_z$), che riflette la sua importanza nel contesto del documento. Questo peso è un parametro predefinito e non è apprendibile dal modello.
 
 ### Simple BM25F con zone
 
@@ -428,14 +428,14 @@ Si noti che questa formula differisce leggermente dalla formula del Simple BM25F
 ### Assunzioni
 
 * **Assunzione di indipendenza usuale:**
- * Le caratteristiche non testuali sono indipendenti l'una dall'altra e dalle caratteristiche testuali.
- * Questa assunzione consente di separare il fattore nella derivazione in stile BIM:
+	* Le caratteristiche non testuali sono indipendenti l'una dall'altra e dalle caratteristiche testuali.
+	* Questa assunzione consente di separare il fattore nella derivazione in stile BIM:
 
 $$\frac{p(F_{j}=f_{j}|R=1)}{p(F_{j}=f_{j}|R=0)}$$
 
 * **Le informazioni di rilevanza sono indipendenti dalla query:**
- * Questa assunzione è generalmente vera per caratteristiche come PageRank, età, tipo, ecc.
- * Consente di mantenere tutte le caratteristiche non testuali nella derivazione in stile BIM, dove vengono eliminati i termini non relativi alla query. 
+	* Questa assunzione è generalmente vera per caratteristiche come PageRank, età, tipo, ecc.
+	* Consente di mantenere tutte le caratteristiche non testuali nella derivazione in stile BIM, dove vengono eliminati i termini non relativi alla query.
 
 ### Formulazione del RSV
 
@@ -450,4 +450,4 @@ dove:
 
 ### Considerazioni sulla selezione di $V_j$
 
-È necessario prestare attenzione nella selezione di $V_j$ a seconda di $f_j$. Ad esempio, la scelta di $V_j$ può spiegare perché $Rsv_{bm25} + log(\text{pagerank})$ funziona bene. 
+È necessario prestare attenzione nella selezione di $V_j$ a seconda di $f_j$. Ad esempio, la scelta di $V_j$ può spiegare perché $Rsv_{bm25} + log(\text{pagerank})$ funziona bene.

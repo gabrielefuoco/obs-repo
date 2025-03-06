@@ -1,4 +1,4 @@
-# Operazioni di base con OpenCV
+## Operazioni di base con OpenCV
 
 Info at <https://opencv.org>
 
@@ -10,7 +10,7 @@ Per le info di installazione si può consultare questa pagina <https://pypi.org/
 
 Per l'uso con questi notebook è consigliata la versione completa headless (per sistemi senza GUI)
 
- pip install opencv-contrib-python-headless
+pip install opencv-contrib-python-headless
 
 ```python
 import os
@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 print("OpenCV-Python Version %s" % cv2.__version__)
 
 # in questa folder sono memorizzati alcuni file a supporto (path relativo al notebook corrente)
+
 IMGSRC = 'data'
 
 def myResourcePath(fname):
@@ -31,60 +32,64 @@ def myResourcePath(fname):
     return filename
 ```
 
- OpenCV-Python Version 4.5.1
+OpenCV-Python Version 4.5.1
 
-# Open/display an image
+## Open/display an image
 
 ```python
 img = cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR)
 
 # If the image path is wrong, the resulting img will be none
+
 if img is None:
     print('Open Error')
 else:
     print('Image Loaded')
 ```
 
- Image Loaded
+Image Loaded
 
 ```python
 # Check the resulting img
+
 print(type(img))
 print(img.shape)
 print(img.dtype)
 print(img[:2, :2, :])  # Right-upper-most few pixels of the image
 ```
 
- <class 'numpy.ndarray'>
- (133, 200, 3)
- uint8
- [[[128 123 122]
- [126 121 120]]
+<class 'numpy.ndarray'>
+(133, 200, 3)
+uint8
+[[[128 123 122]
+[126 121 120]]
 
- [[126 121 120]
- [127 122 121]]]
+[[126 121 120]
+[127 122 121]]]
 
 ```python
 plt.imshow(cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR))
 ```
 
- <matplotlib.image.AxesImage at 0x1218be940>
+<matplotlib.image.AxesImage at 0x1218be940>
 
 ![png](03_opencv_5_1.png)
 
 ```python
 # display an image using matplotlib
+
 # plt.imshow(img) # => The color of this line is wrong
+
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
 
- <matplotlib.image.AxesImage at 0x11ea9e668>
+<matplotlib.image.AxesImage at 0x11ea9e668>
 
 ![png](03_opencv_6_1.png)
 
-# Basic operations on Images
+## Basic operations on Images
 
-## 1. Draw an object
+## Draw an object
 
 - `cv2.line(image, startPoint, endPoint, rgb, thinkness)`
 - `cv2.rectangle(image, topLeft, bottomRight, rgb, thinkness)`
@@ -93,6 +98,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 ```python
 # Create a black image
+
 img2 = np.zeros((512,512,3), np.uint8)
 plt.imshow(img2)
 ```
@@ -101,18 +107,22 @@ plt.imshow(img2)
 
 ```python
 # Draw a line using cv2.line(image, startPoint, endPoint, rgb, thinkness)
+
 cv2.line(img2, (0,0), (511,511), (255,0,0), 5)
 # => Diagonal red line with thickness of 5 px
 
 # Draw a rectangle using cv2.rectangle(image, topLeft, bottomRight, rgb, thinkness)
+
 cv2.rectangle(img2, (384,0), (510,128), (0,255,0), 3)
 # => Green rectangle with thickness of 3 px
 
 # Draw a circle using cv2.circle(image, center, radius, rgb, thinkness)
+
 cv2.circle(img2, (447,63), 63, (0,0,255), -1)
 # => Blue filled circle(note that the thinkness is -1)
 
 # Draw a ellipse using cv2.ellipse(image, center, axes, angle, startAngle, endAngle, rgb, thinkness)
+
 cv2.ellipse(img2, (256,256), (100,50), -45, 0, 180, (255,0,0), -1)
 # => Red wide down-half ellipse
 
@@ -123,6 +133,7 @@ plt.imshow(img2)
 
 ```python
 # Draw a line using cv2.polylines(image, points, isClosed, rgb, thinkness, lineType, shift)
+
 pts = np.array([[10,10],[150,200],[300,150],[200,50]], np.int32)
 pts = pts.reshape((-1,1,2))
 cv2.polylines(img2,[pts],True,(0,255,255),3)
@@ -136,6 +147,7 @@ plt.imshow(img2)
 
 ```python
 # Put some text using cv2.putText(image, text, bottomLeft, fontType, fontScale, rgb, thinkness, lineType)
+
 font = cv2.FONT_HERSHEY_COMPLEX
 cv2.putText(img2, 'OpenCV', (10,500), font, 4, (255,255,255), 10, cv2.LINE_AA)
 # => White 'OpenCV' text at the bottom
@@ -145,18 +157,20 @@ plt.imshow(img2)
 
 ![png](03_opencv_11_1.png)
 
-## 2. Modify pixels & ROI
+## Modify pixels & ROI
 
 - You can access/modify a single pixel or ROI (Region of Interest) using Numpy indexing.
 - Just like matrix indexing, `img[a, b]` refer to `a`-th row and `b`-th column.
 
 ```python
 # Access a pixel value(BGR order)
+
 img[50, 135]
 ```
 
 ```python
 # Change pixel values
+
 for i in range(15):
     for j in range(15):
         img[50+i, 135+j] = (0, 255, 0)
@@ -168,6 +182,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 ```python
 # ROI is obtained using Numpy indexing 
+
 ball = img[80:115, 25:60]
 img[80:115, 75:110] = ball
 
@@ -176,21 +191,20 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 ![png](03_opencv_15_1.png)
 
----
-
 ### Reference
 
 Please see the following official tutorials for more detailed explanation.
 
- - [Basic Operations on Images — OpenCV documentation](http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_core/py_basic_ops/py_basic_ops.html)
- - [Drawing Functions in OpenCV — OpenCV documentation](http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html)
+- [Basic Operations on Images — OpenCV documentation](http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_core/py_basic_ops/py_basic_ops.html)
+- [Drawing Functions in OpenCV — OpenCV documentation](http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html)
 
-# Trasformazioni geometriche
+## Trasformazioni geometriche
 
 Rivediamo alcune delle trasformazioni già viste nei notebook precedenti ma utilizzando opencv
 
 ```python
 # Scaling
+
 img = cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_COLOR)
 print(f'shape = {img.shape}')
 height, width = img.shape[:2]
@@ -203,7 +217,7 @@ plt.subplot(1, 2, 2)
 plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
 ```
 
- shape = (133, 200, 3)
+shape = (133, 200, 3)
 
 ![png](03_opencv_18_2.png)
 
@@ -215,6 +229,7 @@ WARNING: Third argument of the cv2.warpAffine() function is the size of the outp
 
 ```python
 # Translation
+
 img = cv2.imread(myResourcePath('car.jpg'), cv2.IMREAD_GRAYSCALE)
 print(f'shape = {img.shape}')
 rows,cols = img.shape
@@ -230,9 +245,9 @@ plt.subplot(1, 2, 2)
 plt.imshow(dst, cmap='gray')
 ```
 
- shape = (133, 200)
- [[ 1. 0. 100.]
- [ 0. 1. 50.]]
+shape = (133, 200)
+[[ 1. 0. 100.]
+[ 0. 1. 50.]]
 
 ![png](03_opencv_20_2.png)
 
@@ -321,12 +336,12 @@ plt.show()
 
 Semantica del metodo
 
- dst = cv.warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]])
+dst = cv.warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]])
 
 - **src** input image.
 - **M** 3×3 transformation matrix.
 - **dsize** size of the output image.
-- **dst** output image that has the size dsize and the same type as src 
+- **dst** output image that has the size dsize and the same type as src
 - **flags** combination of interpolation methods (INTER_LINEAR or INTER_NEAREST) and the optional flag WARP_INVERSE_MAP, that sets M as the inverse transformation ( 𝚍𝚜𝚝→𝚜𝚛𝚌 ).
 - **borderMode** pixel extrapolation method (BORDER_CONSTANT or BORDER_REPLICATE).
 - **borderValue** value used in case of a constant border; by default, it equals 0.
@@ -356,9 +371,9 @@ plt.subplot(1, 3, 3)
 plt.imshow(cv2.cvtColor(imgResult, cv2.COLOR_BGR2RGB))
 ```
 
- [[ 6.87722951e-02 -1.24273581e+00 6.71000000e+02]
- [ 8.66486286e-02 4.83370157e-02 3.14000000e+02]
- [-7.63013127e-04 -3.68781623e-04 1.00000000e+00]]
+[[ 6.87722951e-02 -1.24273581e+00 6.71000000e+02]
+[ 8.66486286e-02 4.83370157e-02 3.14000000e+02]
+[-7.63013127e-04 -3.68781623e-04 1.00000000e+00]]
 
 ![png](03_opencv_28_2.png)
 
@@ -376,25 +391,36 @@ plt.xlabel("Bins")
 plt.ylabel("# of Pixels")
 features = []
 # loop over the image channels
+
 for (chan, color) in zip(chans, colors):
     # create a histogram for the current channel and
+
     # concatenate the resulting histograms for each
+
     # channel
+
     hist = cv2.calcHist([chan], [0], None, [256], [0, 256])
     features.extend(hist)
     # plot the histogram
+
     plt.plot(hist, color = color)
     plt.xlim([0, 256])
 # here we are simply showing the dimensionality of the
+
 # flattened color histogram 256 bins for each channel
+
 # x 3 channels = 768 total values -- in practice, we would
+
 # normally not use 256 bins for each channel, a choice
+
 # between 32-96 bins are normally used, but this tends
+
 # to be application dependent
+
 print(f'flattened feature vector size: {np.array(features).flatten().shape}')
 ```
 
- flattened feature vector size: (768,)
+flattened feature vector size: (768,)
 
 ![png](03_opencv_30_1.png)
 
@@ -476,12 +502,12 @@ plt.show()
 
 ![png](03_opencv_35_0.png)
 
-# Image Thresholding
+## Image Thresholding
 
 Si applica una funzione a soglia. Se un pixel è maggiore di un certa soglia viene sostituito con un colore target (es. bianco), altrimenti si utilizza un altro colore target (es. nero)
 
- for each pixel
- pixel = A if pixel > threashold else B
+for each pixel
+pixel = A if pixel > threashold else B
 
 ```python
 img = np.zeros((200, 200), dtype=np.uint8)
@@ -542,6 +568,7 @@ img2 = cv2.resize(img2, (W, H))
 print(f'shape img2 after resize = {img2.shape}')
 
 # dst = src1*alpha + src2*beta + gamma;
+
 dst = cv2.addWeighted(img1, 0.4, img2, 0.6, 0)
 
 plt.figure(figsize=(12, 8))
@@ -561,7 +588,7 @@ plt.show()
 
 ![png](03_opencv_41_1.png)
 
-## Bitwise Operations 
+## Bitwise Operations
 
 Operatori AND, OR, NOT, and XOR. Utili, per esempio, per estrarre porzioni di un'immagine
 
@@ -573,6 +600,7 @@ print(f'shape img1 = {img1.shape}')
 print(f'shape img2 = {img2.shape}')
 
 # reduce logo size
+
 H, W, _ = img2.shape
 H = int(H / 5)
 W = int(W / 5)
@@ -582,20 +610,25 @@ rows, cols, _ = img2.shape
 print(f'shape img2 resized = {img2.shape}')
 
 # I want to put logo on top-left corner, So I create a ROI
+
 roi = img1[0:rows, 0:cols]
 
 # Now create a mask of logo and create its inverse mask also
+
 img2gray = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 ret, mask = cv2.threshold(img2gray, 230, 255, cv2.THRESH_BINARY)
 mask_inv = cv2.bitwise_not(mask)
 
 # Now black-out the area of logo in ROI
+
 img1_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
 
 # Take only region of logo from logo image.
+
 img2_fg = cv2.bitwise_and(img2, img2, mask=mask)
 
 # Put logo in ROI and modify the main image
+
 dst = cv2.add(img1_bg, img2_fg)
 img1edit = img1.copy()
 img1edit[0:rows, 0:cols] = dst
@@ -616,9 +649,9 @@ plt.show()
 
 ```
 
- shape img1 = (133, 200, 3)
- shape img2 = (260, 462, 3)
- shape img2 resized = (52, 92, 3)
+shape img1 = (133, 200, 3)
+shape img2 = (260, 462, 3)
+shape img2 resized = (52, 92, 3)
 
 ![png](03_opencv_43_1.png)
 

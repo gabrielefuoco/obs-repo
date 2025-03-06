@@ -7,9 +7,9 @@ Fornisci una spiegazione dettagliata e chiara dei concetti evidenziati nel testo
 ##### Istruzioni per la Spiegazione:
 
 - **Organizzazione e Formato:** Utilizza il formato Markdown per organizzare il testo in sezioni chiare, coprendo tutti i concetti rilevanti senza aggiungere contenuti superflui.
-- **Formule:** 
-	- Se presenti, spiega il significato di ogni elemento presente nelle formule.
-	- Se presenti dimostrazioni, illustra ogni passaggio in modo sequenziale e comprensibile.
+- **Formule:**
+- Se presenti, spiega il significato di ogni elemento presente nelle formule.
+- Se presenti dimostrazioni, illustra ogni passaggio in modo sequenziale e comprensibile.
 
 ##### Istruzioni per l'Utilizzo della Nota Contestuale:
 
@@ -21,7 +21,7 @@ Fornisci una spiegazione dettagliata e chiara dei concetti evidenziati nel testo
 - Concentrati sulle **informazioni essenziali** del testo originale, eliminando qualsiasi spiegazione superflua che non aggiunge valore alla comprensione dei concetti principali.
 - Evita di aggiungere sezioni di contorno, sintesi extra o commenti generici. Ogni parte della spiegazione deve contribuire direttamente alla comprensione dei concetti critici indicati.
 
- **Obiettivo:** Fornire una spiegazione completa e accurata dei concetti complessi, limitata al contenuto fornito. L'output finale deve essere limitato alla spiegazione del testo evidenziato, senza aggiungere nessuna sezione extra
+**Obiettivo:** Fornire una spiegazione completa e accurata dei concetti complessi, limitata al contenuto fornito. L'output finale deve essere limitato alla spiegazione del testo evidenziato, senza aggiungere nessuna sezione extra
 
 ##### Nota contestuale:
 

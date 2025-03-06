@@ -1,7 +1,7 @@
 ## Dropout
 
-Il layer di Dropout ha un compito specifico: modificare il comportamento di un layer denso classico. In un layer denso, ogni input si propaga a tutti i neuroni del layer, influenzando l'output. 
-Il Dropout, invece, "*spegne*" alcuni di questi neuroni in modo casuale durante l'addestramento. In pratica, i neuroni successivi non considerano l'output dei neuroni spenti. 
+Il layer di Dropout ha un compito specifico: modificare il comportamento di un layer denso classico. In un layer denso, ogni input si propaga a tutti i neuroni del layer, influenzando l'output.
+Il Dropout, invece, "*spegne*" alcuni di questi neuroni in modo casuale durante l'addestramento. In pratica, i neuroni successivi non considerano l'output dei neuroni spenti.
 
 Immaginate un'immagine divisa in patch. Durante l'addestramento, alcuni neuroni potrebbero essere inattivi per un certo patch, mentre altri saranno attivi. Questo processo è casuale e varia ad ogni epoca di addestramento.
 
@@ -9,17 +9,17 @@ Immaginate un'immagine divisa in patch. Durante l'addestramento, alcuni neuroni 
 
 L'obiettivo principale del Dropout è **migliorare la capacità di generalizzazione della rete**. Spegnendo casualmente i neuroni, si evita che la rete si "specializzi" eccessivamente su specifici pattern presenti nei dati di training. In altre parole, si impedisce l'overfitting. Senza Dropout, ogni neurone potrebbe diventare troppo dipendente da un ristretto insieme di input. Con il Dropout, invece, i neuroni sono "costretti" ad imparare rappresentazioni più robuste e generali, utili anche con dati mai visti prima.
 
-#### Implementazione 
+#### Implementazione
 
 Durante la fase di addestramento, il Dropout si implementa "spegnendo" i neuroni in base ad una probabilità predefinita, chiamata **tasso di Dropout**. Questo parametro, tipicamente compreso tra il 10% e il 50%, determina la percentuale di neuroni disattivati ad ogni iterazione. Durante la fase di test, invece, il layer di Dropout si comporta come una **funzione identità**: tutti gli input vengono propagati all'output senza modifiche. Questo perché, durante il test, l'obiettivo è valutare le prestazioni della rete su dati sconosciuti, e non è necessario "forzare" la generalizzazione.
 
-#### Utilizzo 
+#### Utilizzo
 
 È fondamentale impostare correttamente la modalità di esecuzione del modello (training o valutazione) per garantire il corretto funzionamento del Dropout. Fortunatamente, framework come PyTorch semplificano questo processo con metodi specifici come `.train()` e `.eval()`. Il Dropout si utilizza principalmente nella parte finale della rete, in particolare nei layer densi responsabili della classificazione. Ad esempio, in architetture come la VGG, l'utilizzo del Dropout dopo i layer convoluzionali e prima dei layer densi ha dimostrato di migliorare significativamente le prestazioni.
 
-#### Implementazione Tecnica 
+#### Implementazione Tecnica
 
-Sebbene si parli di "spegnere" i neuroni, l'implementazione pratica del Dropout non prevede la rimozione fisica di elementi dalla rete. Si tratta, invece, di **mascherare** l'output dei neuroni selezionati, azzerando i loro contributi durante la propagazione. Esistono diverse tecniche per implementare il Dropout. Una soluzione comune è utilizzare un layer dedicato che applica una maschera casuale all'input. In alternativa, è possibile integrare la funzionalità del Dropout direttamente all'interno dei layer esistenti. 
+Sebbene si parli di "spegnere" i neuroni, l'implementazione pratica del Dropout non prevede la rimozione fisica di elementi dalla rete. Si tratta, invece, di **mascherare** l'output dei neuroni selezionati, azzerando i loro contributi durante la propagazione. Esistono diverse tecniche per implementare il Dropout. Una soluzione comune è utilizzare un layer dedicato che applica una maschera casuale all'input. In alternativa, è possibile integrare la funzionalità del Dropout direttamente all'interno dei layer esistenti.
 
 ### Vantaggi dell'utilizzo di un Layer Dedicato per il Dropout
 
@@ -41,13 +41,13 @@ Aumentando il numero di filtri, 6, 16, 16, 16, 16, compensiamo la specializzazio
 
 Il problema è sempre il costo computazionale. Dobbiamo applicare più filtri perché ci sono operazioni di convoluzione. Come si riduce questo numero di operazioni? Ci sono varie strategie architetturali, ne vedremo alcune, ma di fatto per ridurre il numero di operazioni o si riduce il numero di filtri o si riduce la dimensione dell'immagine sulla quale applicarli. In questo caso si adotta proprio questa tecnica, cioè si riduce la risoluzione, che diventa sempre più piccola, fino ad arrivare a una risoluzione 5x5.
 
-Il problema è che la convoluzione ha dei parametri che determinano la dimensione del filtro. Un parametro efficiente è un iperparametro, stabilito in fase di training. Come? Facendo delle prove. Non ci sono regole fisse. Quello che si sa è che tipicamente un principio che funziona è questo: se si riduce la stride size aiuta ad avere più feature map e viceversa. Sempre per bilanciare da un lato l'esigenza di avere più possibilità di apprendere pattern, più pattern possibile, e dall'altro diminuire il numero di operazioni. Però, un numero o una regola precisa non c'è. Bisogna andare per tentativi ed è appunto un iperparametro, con un insieme di parametri che costituiscono la rete in termini di input, numero di layer e così via, ma che non sono parametri addestrati, ma vengono definiti a priori. 
+Il problema è che la convoluzione ha dei parametri che determinano la dimensione del filtro. Un parametro efficiente è un iperparametro, stabilito in fase di training. Come? Facendo delle prove. Non ci sono regole fisse. Quello che si sa è che tipicamente un principio che funziona è questo: se si riduce la stride size aiuta ad avere più feature map e viceversa. Sempre per bilanciare da un lato l'esigenza di avere più possibilità di apprendere pattern, più pattern possibile, e dall'altro diminuire il numero di operazioni. Però, un numero o una regola precisa non c'è. Bisogna andare per tentativi ed è appunto un iperparametro, con un insieme di parametri che costituiscono la rete in termini di input, numero di layer e così via, ma che non sono parametri addestrati, ma vengono definiti a priori.
 
 ## Pooling Layers e Funzioni di Attivazione
 
 ### Pooling Layers
 
-I **pooling layers** sono un altro tipo di blocco utilizzato nelle reti neurali convoluzionali per ridurre il numero di locazioni (feature map) e quindi la complessità computazionale. 
+I **pooling layers** sono un altro tipo di blocco utilizzato nelle reti neurali convoluzionali per ridurre il numero di locazioni (feature map) e quindi la complessità computazionale.
 
 Un esempio comune è il **max pooling**, che calcola il massimo valore all'interno di una finestra di dimensioni definite (ad esempio, 4x4). Questo processo seleziona il pixel con il valore massimo all'interno della finestra, presumibilmente quello con il contenuto informativo più rilevante.
 
@@ -64,7 +64,7 @@ Il max pooling seleziona il pixel con il valore massimo all'interno di una fines
 
 ### Funzioni di Attivazione
 
-Le **funzioni di attivazione** sono funzioni non lineari, tipicamente differenziabili, che vengono applicate dopo ogni strato convoluzionale. 
+Le **funzioni di attivazione** sono funzioni non lineari, tipicamente differenziabili, che vengono applicate dopo ogni strato convoluzionale.
 
 ##### Scopo delle Funzioni di Attivazione:
 

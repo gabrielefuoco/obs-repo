@@ -53,76 +53,76 @@
 ### Logica Classica vs Logica Non-Monotona
 
 - **Logica classica (monotona):**
- - Ogni nuova informazione **aumenta** la conoscenza.
- - Nuove informazioni non contraddicono quelle già conosciute.
+- Ogni nuova informazione **aumenta** la conoscenza.
+- Nuove informazioni non contraddicono quelle già conosciute.
 
 - **Logica umana (non-monotona):**
- - Nuove informazioni possono **contraddire** o **integrare** ciò che già conosciamo.
- - Si basa sul ragionamento di senso comune.
+- Nuove informazioni possono **contraddire** o **integrare** ciò che già conosciamo.
+- Si basa sul ragionamento di senso comune.
 
 #### Commonsense Programming
 
-- **Commonsense Programming:** 
- - Lo scopo è formalizzare il ragionamento umano, che è tipicamente non monotono.
- - Esempi di teorie che affrontano il ragionamento non monotono:
- - **Default Logic**: Gestione delle eccezioni.
- - **Circumscription**: Minimizza ciò che è considerato vero.
- - **Epistemic Reasoning**: Riguarda la conoscenza e il ragionamento su ciò che è noto e ignoto.
+- **Commonsense Programming:**
+- Lo scopo è formalizzare il ragionamento umano, che è tipicamente non monotono.
+- Esempi di teorie che affrontano il ragionamento non monotono:
+- **Default Logic**: Gestione delle eccezioni.
+- **Circumscription**: Minimizza ciò che è considerato vero.
+- **Epistemic Reasoning**: Riguarda la conoscenza e il ragionamento su ciò che è noto e ignoto.
 
 #### Closed World Assumption (CWA)
 
 - **CWA (Assunzione di mondo chiuso):**
- - Si assume che tutto ciò che non è esplicitamente conosciuto sia **falso** o **inesistente**.
- - Utilizzata per minimizzare la conoscenza, affermando che solo ciò che è noto è rilevante.
+- Si assume che tutto ciò che non è esplicitamente conosciuto sia **falso** o **inesistente**.
+- Utilizzata per minimizzare la conoscenza, affermando che solo ciò che è noto è rilevante.
 
 #### Logica del Primo Ordine
 
 - **Logica del primo ordine:**
- - Strumento per **specificare problemi** in maniera dichiarativa, rappresentando fatti, regole e relazioni.
+- Strumento per **specificare problemi** in maniera dichiarativa, rappresentando fatti, regole e relazioni.
 
 #### Potenza Espressiva vs Complessità
 
 - **Potenza espressiva ($Σ^p_2$):**
- - Descrive la **classe di problemi** che un linguaggio può rappresentare.
- - Indica se un problema può essere espresso o rappresentato in un determinato linguaggio.
+- Descrive la **classe di problemi** che un linguaggio può rappresentare.
+- Indica se un problema può essere espresso o rappresentato in un determinato linguaggio.
 
 - **Complessità ($Σ^p_2$)**:
- - Descrive la **difficoltà** computazionale di risolvere un problema, utilizzando una macchina deterministica con l'ausilio di un "oracolo".
+- Descrive la **difficoltà** computazionale di risolvere un problema, utilizzando una macchina deterministica con l'ausilio di un "oracolo".
 
 #### Linguaggi e Problemi
 
 - **Linguaggio $L ∈ Σ^p_2$**:
- - Esiste un programma logico (PL) che risolve i problemi rappresentati da L.
- - Il programma prende come input una **istanza** (w) e fornisce una risposta "yes" se w appartiene al problema rappresentato da L.
+- Esiste un programma logico (PL) che risolve i problemi rappresentati da L.
+- Il programma prende come input una **istanza** (w) e fornisce una risposta "yes" se w appartiene al problema rappresentato da L.
 
 ## Datalog
 
-- **Termini:** 
- - Possono essere **costanti** o **variabili**.
- - **Costanti:** oggetti esistenti nel mondo, iniziano con una lettera minuscola o sono racchiuse tra virgolette. I numeri sono costanti, ma vanno gestiti con l'**ipotesi di mondo chiuso**.
- - **Variabili:** iniziano con una lettera maiuscola.
+- **Termini:**
+- Possono essere **costanti** o **variabili**.
+- **Costanti:** oggetti esistenti nel mondo, iniziano con una lettera minuscola o sono racchiuse tra virgolette. I numeri sono costanti, ma vanno gestiti con l'**ipotesi di mondo chiuso**.
+- **Variabili:** iniziano con una lettera maiuscola.
 
-- **Predicati:** 
- - Forma generale: `pred(t1, ..., tn)` dove `t1, ..., tn` sono termini.
- - L'**arità** di un predicato è il numero di argomenti.
+- **Predicati:**
+- Forma generale: `pred(t1, ..., tn)` dove `t1, ..., tn` sono termini.
+- L'**arità** di un predicato è il numero di argomenti.
 
-- **Atomo:** 
- - Istanza di un predicato.
+- **Atomo:**
+- Istanza di un predicato.
 
-- **Negazione:** 
- - Espressa con la parola chiave `not`, nega ciò che la segue.
+- **Negazione:**
+- Espressa con la parola chiave `not`, nega ciò che la segue.
 
-- **Letterale:** 
- - Un atomo o il suo negato.
+- **Letterale:**
+- Un atomo o il suo negato.
 
 ### Regole di Datalog
 
 - Un **programma Datalog** è un insieme di regole.
- - **Struttura di una regola:**
- - `a :- b1, ..., bk, not bk+1, ..., not bm`
- - **Testa**: `a` (un atomo).
- - **Corpo**: una congiunzione di atomi e negazioni (`b1, ..., not bm`).
- - Significato: "la testa `a` è vera se il corpo è vero".
+- **Struttura di una regola:**
+- `a :- b1, ..., bk, not bk+1, ..., not bm`
+- **Testa**: `a` (un atomo).
+- **Corpo**: una congiunzione di atomi e negazioni (`b1, ..., not bm`).
+- Significato: "la testa `a` è vera se il corpo è vero".
 
 ### Definizioni:
 
@@ -133,13 +133,13 @@
 
 ### Varianti di Datalog
 
-- **Datalog classico (positivo):** 
- - La testa contiene **un solo atomo**.
- - Tutti i letterali nel corpo sono **positivi**.
- - Non gestisce logica **non monotona**.
+- **Datalog classico (positivo):**
+- La testa contiene **un solo atomo**.
+- Tutti i letterali nel corpo sono **positivi**.
+- Non gestisce logica **non monotona**.
 
-- **Datalog disgiuntivo:** 
- - Nella testa possono esserci una **disgiunzione di atomi** (`a1 ∨ ... ∨ an`).
+- **Datalog disgiuntivo:**
+- Nella testa possono esserci una **disgiunzione di atomi** (`a1 ∨ ... ∨ an`).
 
 ### Ricorsione in Datalog
 
@@ -166,19 +166,19 @@ parent(mario, ciccio).
 ### Predicati in Datalog
 
 - **EDB (Extensional Database):**
- - Predicati definiti esplicitamente nei fatti o nei corpi delle regole.
- - Possono essere visti come l'**input** del programma.
+- Predicati definiti esplicitamente nei fatti o nei corpi delle regole.
+- Possono essere visti come l'**input** del programma.
 
 - **IDB (Intensional Database):**
- - Predicati definiti intenzionalmente attraverso regole.
- - Rappresentano la **conoscenza derivata** o l'**output**.
+- Predicati definiti intenzionalmente attraverso regole.
+- Rappresentano la **conoscenza derivata** o l'**output**.
 
 ### Differenze tra Datalog e SQL
 
 - **SQL** è meno potente nella gestione della ricorsione rispetto a Datalog.
- - In SQL, è complesso esprimere query ricorsive come trovare città raggiungibili da un aeroporto con voli diretti e indiretti.
+- In SQL, è complesso esprimere query ricorsive come trovare città raggiungibili da un aeroporto con voli diretti e indiretti.
 
- - **In Datalog:** 
+- **In Datalog:**
     ```prolog
     reaches(lamezia,B) :- connected(lamezia,B).
     reaches(lamezia,C) :- reaches(lamezia,B), connected(B,C).
@@ -191,17 +191,17 @@ parent(mario, ciccio).
 ## Interpretazione in un Programma di Logica
 
 - **Interpretazione (I):**
- - Un insieme di **atomi ground**(senza variabili).
- - Definisce il **significato** degli atomi nel programma: 
- - Gli atomi in `I` sono **veri**.
- - Gli atomi non in `I` sono **falsi**.
- - Un **letterale negativo** (`not(a)`) è vero se l'atomo `a` non appartiene a `I` (`a ∉ I`).
+- Un insieme di **atomi ground**(senza variabili).
+- Definisce il **significato** degli atomi nel programma:
+- Gli atomi in `I` sono **veri**.
+- Gli atomi non in `I` sono **falsi**.
+- Un **letterale negativo** (`not(a)`) è vero se l'atomo `a` non appartiene a `I` (`a ∉ I`).
 
 ### Modelli in Logica
 
 - **Modello (M):**
- - Una **interpretazione** `I` è un **modello** di un programma se, per ogni regola del programma:
- - La **testa** della regola è **vera** rispetto a `I`, se il **corpo** della regola è vero rispetto a `I`.
+- Una **interpretazione** `I` è un **modello** di un programma se, per ogni regola del programma:
+- La **testa** della regola è **vera** rispetto a `I`, se il **corpo** della regola è vero rispetto a `I`.
 
 ### Esempio di Programma:
 
@@ -214,13 +214,13 @@ d.
 #### Interpretazioni Possibili:
 
 - **I = {c, d}:**
- - Gli atomi `c` e `d` sono veri, gli altri sono falsi.
+- Gli atomi `c` e `d` sono veri, gli altri sono falsi.
 - **I1 = {b, c, d}:**
- - Non è un modello: il corpo della regola `a :- b, c` è vero, ma la testa `a` non è vera in `I1`.
+- Non è un modello: il corpo della regola `a :- b, c` è vero, ma la testa `a` non è vera in `I1`.
 - **I2 = {a, b, c, d}:**
- - È un modello: tutte le regole sono soddisfatte.
+- È un modello: tutte le regole sono soddisfatte.
 - **I3 = {c, d}:**
- - È un modello: la regola `a :- b, c` non è soddisfatta nel corpo, quindi la testa può essere vera o falsa.
+- È un modello: la regola `a :- b, c` non è soddisfatta nel corpo, quindi la testa può essere vera o falsa.
 
 ### Modelli Minimali
 
@@ -236,27 +236,27 @@ b :- not(c).
 #### Interpretazioni:
 
 - **I1 = {a}:**
- - Non è un modello: `b` deve essere vero, ma non lo è in `I1`.
- - **I2 = {c}:**
- - È un modello.
+- Non è un modello: `b` deve essere vero, ma non lo è in `I1`.
+- **I2 = {c}:**
+- È un modello.
 - **I3 = {a, b}:**
- - È un modello.
+- È un modello.
 ##### Modelli minimali:
 
- - **I2** e **I3** sono modelli minimali poiché non esiste un sottoinsieme di essi che sia un modello.
+- **I2** e **I3** sono modelli minimali poiché non esiste un sottoinsieme di essi che sia un modello.
 
 ## Differenza tra Logica Monotona e Non Monotona
 
 - **Logica Monotona:**
- - Nuove informazioni **non influenzano** i modelli esistenti.
- - **Regole:** La negazione può essere interpretata come una disgiunzione.
- - Esempio: `b :- not(c)` equivale a `b ∨ c :- true`. 
- - Modelli **fissi**: anche con nuova conoscenza, i modelli non cambiano.
+- Nuove informazioni **non influenzano** i modelli esistenti.
+- **Regole:** La negazione può essere interpretata come una disgiunzione.
+- Esempio: `b :- not(c)` equivale a `b ∨ c :- true`.
+- Modelli **fissi**: anche con nuova conoscenza, i modelli non cambiano.
 
 - **Logica Non Monotona:**
- - Nuove informazioni possono **modificare** i modelli.
- - **Default negation:** `b :- not(c)` significa che `b` è vero se non è possibile dimostrare `c`.
- - I modelli possono diventare **non validi** con nuova conoscenza (es. se `c` diventa falso).
+- Nuove informazioni possono **modificare** i modelli.
+- **Default negation:** `b :- not(c)` significa che `b` è vero se non è possibile dimostrare `c`.
+- I modelli possono diventare **non validi** con nuova conoscenza (es. se `c` diventa falso).
 
 ### Esempio di Programma con Logica Non Monotona:
 
@@ -267,8 +267,8 @@ a ∨ b :- .
 ```
 - La regola con testa vuota (`:- not(a)`) è un **vincolo**: il corpo non può verificarsi.
 - **Interpretazioni:**
- - `I1 = {a}` è un **modello minimale**.
- - `I2 = {a, b}` è un modello, ma **non minimale** (si cerca il modello minimale per l'Answer Set).
+- `I1 = {a}` è un **modello minimale**.
+- `I2 = {a, b}` è un modello, ma **non minimale** (si cerca il modello minimale per l'Answer Set).
 
 ### Programmi Ground
 
@@ -293,9 +293,9 @@ r(a).
 ### Concetto di Safety
 
 - Una regola è **safe** se:
- 1. **Ogni variabile nella testa** appare in un letterale positivo del corpo.
- 2. **Ogni variabile in un letterale negato** appare nel corpo.
- 3. **Ogni variabile in un operatore di confronto** appare in un letterale positivo.
+- **Ogni variabile nella testa** appare in un letterale positivo del corpo.
+- **Ogni variabile in un letterale negato** appare nel corpo.
+- **Ogni variabile in un operatore di confronto** appare in un letterale positivo.
 
 - Esempi di regole **non safe:**
 ```
@@ -303,7 +303,7 @@ s(Y) :- b(Y), not r(X).
 s(X) :- not r(X).
 s(Y) :- b(Y), X < Y.
 ```
- - In queste regole, ci sono variabili nella testa o nei letterali negati che non appaiono nel corpo.
+- In queste regole, ci sono variabili nella testa o nei letterali negati che non appaiono nel corpo.
 
 - Esempio di una regola **safe**:
 
@@ -311,33 +311,33 @@ s(Y) :- b(Y), X < Y.
 s(X) :- b(X), r(X), X < Y, c(Y).
 ```
 
-1. **Ogni variabile nella testa appare in un letterale positivo del corpo**:
- - La variabile `X` è presente nella testa (`s(X)`) e compare in `b(X)` e `r(X)`, che sono letterali positivi nel corpo. Quindi, la prima condizione è soddisfatta.
+- **Ogni variabile nella testa appare in un letterale positivo del corpo**:
+- La variabile `X` è presente nella testa (`s(X)`) e compare in `b(X)` e `r(X)`, che sono letterali positivi nel corpo. Quindi, la prima condizione è soddisfatta.
 
-2. **Ogni variabile in un letterale negato appare nel corpo**:
- - In questo caso, non ci sono letterali negati (come `not r(X)`), quindi la condizione è automaticamente soddisfatta.
+- **Ogni variabile in un letterale negato appare nel corpo**:
+- In questo caso, non ci sono letterali negati (come `not r(X)`), quindi la condizione è automaticamente soddisfatta.
 
-3. **Ogni variabile in un operatore di confronto appare in un letterale positivo**:
- - Nell'operatore di confronto `X < Y`, entrambe le variabili `X` e `Y` compaiono in letterali positivi: `X` è presente in `b(X)` e `Y` in `c(Y)`. Anche questa condizione è soddisfatta.
+- **Ogni variabile in un operatore di confronto appare in un letterale positivo**:
+- Nell'operatore di confronto `X < Y`, entrambe le variabili `X` e `Y` compaiono in letterali positivi: `X` è presente in `b(X)` e `Y` in `c(Y)`. Anche questa condizione è soddisfatta.
 
 ## Negazione Stratificata
 
-La **negazione stratificata** è una tecnica utilizzata per gestire la negazione nei programmi logici con ricorsione, evitando situazioni in cui la negazione causerebbe ambiguità o cicli logici non risolvibili. 
+La **negazione stratificata** è una tecnica utilizzata per gestire la negazione nei programmi logici con ricorsione, evitando situazioni in cui la negazione causerebbe ambiguità o cicli logici non risolvibili.
 ### Grafi di Dipendenze e Cicli con Negazione
 
-1. **Grafo di Dipendenze**:
- - Per costruire un grafo di dipendenze di un programma logico, si rappresentano i predicati come nodi.
- - Ogni regola che usa un predicato per definirne un altro viene rappresentata con un arco direzionale dal predicato usato a quello definito.
- - Se la regola contiene un **letterale negato** (`not P`), l'arco è considerato **negato**.
+- **Grafo di Dipendenze**:
+- Per costruire un grafo di dipendenze di un programma logico, si rappresentano i predicati come nodi.
+- Ogni regola che usa un predicato per definirne un altro viene rappresentata con un arco direzionale dal predicato usato a quello definito.
+- Se la regola contiene un **letterale negato** (`not P`), l'arco è considerato **negato**.
 
-2. **Ciclo con Negazione**:
- - Se nel grafo esiste un ciclo che include un arco negato, significa che c'è una **dipendenza circolare con negazione**.
- - Questo può creare ambiguità, poiché non si può stabilire chiaramente il valore di verità dei predicati coinvolti (ciascuno dipende dall'altro, direttamente o indirettamente, con negazione).
+- **Ciclo con Negazione**:
+- Se nel grafo esiste un ciclo che include un arco negato, significa che c'è una **dipendenza circolare con negazione**.
+- Questo può creare ambiguità, poiché non si può stabilire chiaramente il valore di verità dei predicati coinvolti (ciascuno dipende dall'altro, direttamente o indirettamente, con negazione).
 
-3. **Programma Stratificato**:
- - Un programma è **stratificato** se non contiene cicli con negazione.
- - Questo tipo di programma permette di ordinare i predicati in livelli o *strati* in modo che i predicati in uno strato dipendano solo da predicati di strati precedenti.
- - I programmi stratificati sono **più semplici** da risolvere poiché si può valutare ogni strato sequenzialmente, senza ambiguità derivanti dalla negazione.
+- **Programma Stratificato**:
+- Un programma è **stratificato** se non contiene cicli con negazione.
+- Questo tipo di programma permette di ordinare i predicati in livelli o *strati* in modo che i predicati in uno strato dipendano solo da predicati di strati precedenti.
+- I programmi stratificati sono **più semplici** da risolvere poiché si può valutare ogni strato sequenzialmente, senza ambiguità derivanti dalla negazione.
 
 ### Esempio di Programma Stratificato
 
@@ -351,37 +351,36 @@ noReach(X) :- target(X), not reach(X).
 #### Analisi del Programma
 
 - **Predicati**:
- - `reach(X)`: rappresenta i nodi raggiungibili.
- - `noReach(X)`: rappresenta i nodi non raggiungibili.
- - `source(X)` e `target(X)`: sono fatti che indicano i nodi di origine e destinazione.
+- `reach(X)`: rappresenta i nodi raggiungibili.
+- `noReach(X)`: rappresenta i nodi non raggiungibili.
+- `source(X)` e `target(X)`: sono fatti che indicano i nodi di origine e destinazione.
 
 - **Grafo di Dipendenze**:
- - `reach(X)` dipende da `source(X)` e da `reach(Y)`.
- - `noReach(X)` dipende da `target(X)` e dalla negazione di `reach(X)` (`not reach(X)`).
+- `reach(X)` dipende da `source(X)` e da `reach(Y)`.
+- `noReach(X)` dipende da `target(X)` e dalla negazione di `reach(X)` (`not reach(X)`).
 
 - **Stratificazione**:
- - Primo strato: `reach(X)` può essere calcolato usando `source(X)` e `arc(Y, X)`.
- - Secondo strato: `noReach(X)` viene calcolato dopo `reach(X)`, poiché dipende dal valore di `reach(X)` (con negazione).
+- Primo strato: `reach(X)` può essere calcolato usando `source(X)` e `arc(Y, X)`.
+- Secondo strato: `noReach(X)` viene calcolato dopo `reach(X)`, poiché dipende dal valore di `reach(X)` (con negazione).
 
 Questo programma è **stratificato** perché non ha cicli con negazione; `reach(X)` è calcolato prima e `noReach(X)` viene valutato successivamente, evitando dipendenze circolari.
 ### Semantica di Programmi con Disgiunzione e Negazione
 
-- **Teorema:** 
- - Se il programma è **positivo** (senza negazioni), esiste un **unico modello minimale**.
- - Se c'è **negazione o disgiunzione**, la situazione diventa più complessa e non necessariamente esiste un modello unico.
+- **Teorema:**
+- Se il programma è **positivo** (senza negazioni), esiste un **unico modello minimale**.
+- Se c'è **negazione o disgiunzione**, la situazione diventa più complessa e non necessariamente esiste un modello unico.
 
 ## Disjunctive Logic Programming (DLP)
 
 - In **DLP**, le regole possono avere **disgiunzioni** nella testa, permettendo di modellare situazioni in cui possono verificarsi più alternative.
 
- - **Esempio di regola con disgiunzione:**
+- **Esempio di regola con disgiunzione:**
     ```
     mother(P, S) | father(P, S) :- parent(P, S).
     ```
 
 - Un **programma** è un insieme finito di regole e constraint (regole con testa vuota).
 
----
 ### Forma di una regola in DLP
 
 Una regola generica in DLP ha la seguente forma:
@@ -389,10 +388,10 @@ Una regola generica in DLP ha la seguente forma:
 a1 | a2 | ... | an :- b1, ..., bk, not(bk+1), ..., not(bm).
 ```
 - **Testa (Head):** `a1 | a2 | ... | an` rappresenta una **disgiunzione** di atomi.
- - Almeno uno tra gli `ai` deve essere vero se il **corpo** è vero.
+- Almeno uno tra gli `ai` deve essere vero se il **corpo** è vero.
 
 - **Corpo (Body):** `b1, ..., bk, not(bk+1), ..., not(bm)` sono **letterali positivi** (senza negazione) e **letterali negati** (con negazione default `not`).
- - Se tutti i letterali nel corpo sono veri, la regola impone che almeno un elemento nella testa sia vero.
+- Se tutti i letterali nel corpo sono veri, la regola impone che almeno un elemento nella testa sia vero.
 
 ##### Esempio:
 
@@ -400,37 +399,34 @@ a1 | a2 | ... | an :- b1, ..., bk, not(bk+1), ..., not(bm).
 isInterestedInDLP(john) | isCurious(john) :- attendsDLP(john).
 attendsDLP(john).
 ```
-- Ci sono due modelli minimali: 
- - Uno in cui `john` è interessato (`isInterestedInDLP(john)`).
- - Uno in cui `john` è curioso (`isCurious(john)`).
+- Ci sono due modelli minimali:
+- Uno in cui `john` è interessato (`isInterestedInDLP(john)`).
+- Uno in cui `john` è curioso (`isCurious(john)`).
 
----
 ### Tipologie di Derivazioni in DLP
 
-1. **Brave-Reasoning:**
- - Se un atomo è vero in **almeno un Answer Set**.
- - Formalmente:
+- **Brave-Reasoning:**
+- Se un atomo è vero in **almeno un Answer Set**.
+- Formalmente:
      ```prolog
      LP |= brave a  se ∃ un Answer Set S : a ∈ S.
      ```
 
-2. **Cautious-Reasoning:**
- - Se un atomo è vero in **tutti gli Answer Set**.
- - Formalmente:
+- **Cautious-Reasoning:**
+- Se un atomo è vero in **tutti gli Answer Set**.
+- Formalmente:
      ```
      LP |= cautious a se ∀ Answer Set S, a ∈ S.
      ```
 
----
 ### Integrity Constraints
 
 - Le **regole senza testa** sono utilizzate per scartare modelli che violano determinati vincoli.
- - **Esempio:**
+- **Esempio:**
     ```
     :- edge(x, y), not(inCover(x)), not(inCover(y)).
     ```
 
----
 ### Vertex Cover
 
 Insieme di nodi che coprono tutti gli archi di un grafo.
@@ -449,10 +445,9 @@ node(y) :- edge(_, y).
 ```
 
 - **Interpretazione:**
- - Ogni nodo del grafo è **incluso** o **escluso** dal cover.
- - Il vincolo vuoto assicura che ogni arco del grafo sia coperto da almeno un nodo.
+- Ogni nodo del grafo è **incluso** o **escluso** dal cover.
+- Il vincolo vuoto assicura che ogni arco del grafo sia coperto da almeno un nodo.
 
----
 ### Esempio: Problema del Dominating Set
 
 - **Obiettivo:** Trovare un insieme di nodi che dominano tutti gli altri nodi nel grafo (ogni nodo è dominato o ha un nodo vicino che lo domina).
@@ -467,55 +462,48 @@ dominated(x) :- inDS(x).
 ```
 
 - **Interpretazione:**
- - Ogni nodo è **dominato** da un nodo nel dominating set o appartiene al dominating set stesso.
+- Ogni nodo è **dominato** da un nodo nel dominating set o appartiene al dominating set stesso.
 
----
 ### Weak Constraints
 
 - **Vincoli deboli** sono vincoli che si preferisce **non violare**, ma la loro violazione non rende il modello non valido. Tuttavia, ogni violazione impone una penalità.
 
- - **Sintassi:**
+- **Sintassi:**
     ```prolog
     :-~ inDS(x), [1@1, x].
     ```
- - Questo vincolo preferisce che `inDS(x)` non sia vero per nessun `x`. 
- - La violazione di questo vincolo comporta una **penalità di 1**.
+- Questo vincolo preferisce che `inDS(x)` non sia vero per nessun `x`.
+- La violazione di questo vincolo comporta una **penalità di 1**.
 
 - **Livello delle penalità:** I vincoli deboli possono avere livelli (`@i`), e si cerca di minimizzare la somma dei pesi dei vincoli violati, a partire dal livello 1.
 
 - Gli **Answer Set** validi sono quelli che minimizzano le penalità associate ai vincoli violati.
 
----
 ### Complessità
 
 - I problemi in DLP (come il **vertex cover** o il **dominating set**) sono **NP-completi**.
- - La ricerca di un modello minimale in DLP è computazionalmente equivalente a risolvere problemi NP-completi.
----
+- La ricerca di un modello minimale in DLP è computazionalmente equivalente a risolvere problemi NP-completi.
 ### Semantica per la Disjunctive Logic Programming (DLP)
 
-La semantica di DLP si basa sulla ricerca di **Answer Set**, chiamati anche **modelli stabili**. 
+La semantica di DLP si basa sulla ricerca di **Answer Set**, chiamati anche **modelli stabili**.
 
----
 #### Answer Set per Programmi Positivi
 
 - Per i programmi **positivi** (senza negazione), un **Answer Set** è un **modello minimale** del programma, simile alla semantica della logica classica.
- - Un modello minimale è un insieme di atomi veri che non può essere ridotto ulteriormente senza violare le regole del programma.
- - Quando viene introdotta la **negazione** nel programma, il calcolo degli **Answer Set** diventa più complesso. 
+- Un modello minimale è un insieme di atomi veri che non può essere ridotto ulteriormente senza violare le regole del programma.
+- Quando viene introdotta la **negazione** nel programma, il calcolo degli **Answer Set** diventa più complesso.
 
----
 #### Riduzione di un Programma P rispetto a una Interpretazione I
 
 Dato un programma P e una interpretazione I, la **riduzione** del programma positivo $P^I$ viene ottenuta seguendo questi passi:
 
-1. **Eliminare le regole** che contengono un **letterale negativo** che è **falso** rispetto a I.
-2. **Rimuovere i letterali negativi** dai corpi delle altre regole.
+- **Eliminare le regole** che contengono un **letterale negativo** che è **falso** rispetto a I.
+- **Rimuovere i letterali negativi** dai corpi delle altre regole.
 
----
 #### Definizione di Answer Set
 
 Un **Answer Set** di un programma P è una interpretazione $I$ tale che $I$ è un **modello minimale** del programma ridotto $(P^I)$.
 
----
 #### Esempio di Calcolo di Answer Set
 
 Consideriamo il seguente programma:
@@ -525,62 +513,58 @@ b :- not(d).
 d.
 ```
 
-1. **Interpretazione iniziale I = {a, d}**:
- - \(b\) è falso in I, quindi possiamo eliminare il letterale negativo `not(b)` nella prima regola.
- - \(d\) è vero, quindi possiamo eliminare la seconda regola `b :- not(d)`.
+- **Interpretazione iniziale I = {a, d}**:
+- \(b\) è falso in I, quindi possiamo eliminare il letterale negativo `not(b)` nella prima regola.
+- \(d\) è vero, quindi possiamo eliminare la seconda regola `b :- not(d)`.
 
-2. **Riduzione del programma**:
+- **Riduzione del programma**:
    ```prolog
    a :- d.
    d.
    ```
 
-3. **Risultato**: L'interpretazione I = {a, d} è un **Answer Set**.
+- **Risultato**: L'interpretazione I = {a, d} è un **Answer Set**.
 
 ## Teoremi Importanti per la DLP
 
-1. **Modello Minimo Unico per Programmi Positivi**
- - Un programma di **Datalog positivo senza disgiunzione** ha sempre un **unico modello minimale**.
+- **Modello Minimo Unico per Programmi Positivi**
+- Un programma di **Datalog positivo senza disgiunzione** ha sempre un **unico modello minimale**.
 
-2. **Inclusione dei Fatti negli Answer Set**
- - Se S è un Answer Set di P, allora i **fatti** del programma devono essere **inclusi** in S.
+- **Inclusione dei Fatti negli Answer Set**
+- Se S è un Answer Set di P, allora i **fatti** del programma devono essere **inclusi** in S.
 
-3. **Unicità dell'Answer Set per un Programma con Fatti**
- - Se l'insieme dei fatti è un Answer Set per un programma P, allora è **l'unico Answer Set** per quel programma.
+- **Unicità dell'Answer Set per un Programma con Fatti**
+- Se l'insieme dei fatti è un Answer Set per un programma P, allora è **l'unico Answer Set** per quel programma.
 
-4. **Condizione di Supporto per un Atomo**
- - Un atomo $a \in I$ è **supportato** in $I$ se esiste una regola $r \in P$ tale che:
- - Il corpo di \(r\) è vero rispetto a I.
- - L'unico atomo vero rispetto a I nella testa di \(r\) è \(a\).
- - In altre parole, **head(r) = a**.
+- **Condizione di Supporto per un Atomo**
+- Un atomo $a \in I$ è **supportato** in $I$ se esiste una regola $r \in P$ tale che:
+- Il corpo di \(r\) è vero rispetto a I.
+- L'unico atomo vero rispetto a I nella testa di \(r\) è \(a\).
+- In altre parole, **head(r) = a**.
 
-5. **Condizione Necessaria e Sufficiente di Supporto**
- - I è un Answer Set per P solo se **ogni atomo** $a \in I$ è **supportato** in $I$.
- - Questa condizione diventa **necessaria e sufficiente** se non ci sono **cicli** nel grafo delle dipendenze.
+- **Condizione Necessaria e Sufficiente di Supporto**
+- I è un Answer Set per P solo se **ogni atomo** $a \in I$ è **supportato** in $I$.
+- Questa condizione diventa **necessaria e sufficiente** se non ci sono **cicli** nel grafo delle dipendenze.
 
----
 ### Grafo delle Dipendenze
 
 - Il **grafo delle dipendenze** tra predicati permette di identificare cicli di dipendenze che potrebbero complicare la verifica delle condizioni di supporto.
- - Se ci sono cicli che coinvolgono la **negazione**, il programma può diventare più difficile da risolvere.
----
+- Se ci sono cicli che coinvolgono la **negazione**, il programma può diventare più difficile da risolvere.
 ### Aggregate Function in DLP (Disjunctive Logic Programming)
 
 Le **funzioni di aggregazione** sono state aggiunte ai sistemi di **Answer Set Programming (ASP)** per permettere di eseguire operazioni come somma, conteggio, minimo, massimo, ecc., su insiemi di dati. Queste funzioni sono particolarmente utili per gestire insiemi di valori e calcoli complessi, che in SQL sono facili da implementare ma in DLP richiedono maggiore attenzione.
 
----
 #### Sintassi di Base per l'Aggregazione
 
-- **Aggregazione di un insieme**: `{Variabili : CongiunzioneDiAtomi}` 
- Esempio:
+- **Aggregazione di un insieme**: `{Variabili : CongiunzioneDiAtomi}`
+Esempio:
   ```prolog
   {EmpId : emp(EmpId, Sex, Skill, Salary)}
   ```
- Questo espressione restituisce l'insieme degli **ID degli impiegati**.
+Questo espressione restituisce l'insieme degli **ID degli impiegati**.
 
- - Se aggiungessimo una condizione come `emp(EmpId, male, Skill, Salary)`, otterremmo l'insieme degli ID degli **impiegati maschili**.
+- Se aggiungessimo una condizione come `emp(EmpId, male, Skill, Salary)`, otterremmo l'insieme degli ID degli **impiegati maschili**.
 
----
 #### Funzioni di Aggregazione
 
 Le **funzioni di aggregazione** sono indicate con `f{}` dove `f` rappresenta una funzione specifica. Alcune delle funzioni di aggregazione più comuni includono:
@@ -589,7 +573,6 @@ Le **funzioni di aggregazione** sono indicate con `f{}` dove `f` rappresenta una
 - **#min**: Minimo
 - **#max**: Massimo
 
----
 ##### Esempio: Conteggio con Aggregazione
 
 Se voglio contare il numero di impiegati maschili, posso utilizzare:
@@ -598,7 +581,6 @@ Se voglio contare il numero di impiegati maschili, posso utilizzare:
 ```
 Questo vincolo richiede che il numero di impiegati maschili sia compreso tra 5 e 10.
 
----
 #### Esempio di Aggregazione con \#sum
 
 Supponiamo di avere una base di dati con le seguenti istanze:
@@ -616,7 +598,6 @@ sum(S) :- S = #sum{Y : emp(Id, , , Y)}.
 
 - **Risultato**: La somma ottenuta sarebbe **4500** (anziché 5500) perché uno dei salari `1000` viene considerato duplicato e ignorato.
 
----
 #### Gestione dei Duplicati
 
 Per evitare la rimozione dei duplicati durante l'aggregazione, possiamo includere anche l'ID degli impiegati nell'espressione di aggregazione. In questo modo, ogni occorrenza viene trattata come distinta:
@@ -625,7 +606,6 @@ sum(S) :- S = #sum{Y, Id : emp(Id, , , Y)}.
 ```
 - **Risultato**: Includendo l'ID, la somma sarà correttamente **5500**.
 
----
 ### Semantica in Presenza di Aggregati
 
 Quando utilizziamo **aggregati**, la semantica degli **Answer Set** si estende rispetto alla semantica base.
@@ -634,11 +614,11 @@ Quando utilizziamo **aggregati**, la semantica degli **Answer Set** si estende r
 
 Per verificare se un'interpretazione I è un **Answer Set** in presenza di aggregati, costruiamo un **programma ridotto** seguendo questi passi:
 
-1. **Eliminazione delle regole**:
- - Rimuovere tutte le regole che contengono un **letterale negativo falso** o un **letterale aggregato falso**.
+- **Eliminazione delle regole**:
+- Rimuovere tutte le regole che contengono un **letterale negativo falso** o un **letterale aggregato falso**.
 
-2. **Rimozione di letterali aggregati**:
- - Rimuovere i letterali aggregati e negativi dalle regole rimanenti.
+- **Rimozione di letterali aggregati**:
+- Rimuovere i letterali aggregati e negativi dalle regole rimanenti.
 
-3. Se l'interpretazione **I** è un **modello minimale** del programma ridotto, allora I è un **Answer Set**.
+- Se l'interpretazione **I** è un **modello minimale** del programma ridotto, allora I è un **Answer Set**.
 

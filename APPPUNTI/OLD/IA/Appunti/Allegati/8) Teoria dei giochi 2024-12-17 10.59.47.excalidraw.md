@@ -1,18 +1,16 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
 Giochi in forma estesa ^RzMtfNYx
 
-Rappresentano situazioni in cui i giocatori 
+Rappresentano situazioni in cui i giocatori
 prendono decisioni in momenti diversi,
 considerando cosa è successo in passato ^9TgE0kRG
 
@@ -24,7 +22,7 @@ Rappresentazione basata su Game Tree ^Y6xw7QgF
 - Nodi terminali
 - Strategia ^pbIqVyfX
 
- { ^r1NwoYo8
+{ ^r1NwoYo8
 
 Subgame Perfect Equilibrium ^kQ4cqvJC
 
@@ -33,10 +31,10 @@ di Nash ^jiz2OQim
 
 - Sottogiochi
 - SPE: equilibrio anche per il sottogioco
- - Assicura hce le strategie siano razionali
- in ogni possibile sottosituazione ^RSQia8vT
+- Assicura hce le strategie siano razionali
+in ogni possibile sottosituazione ^RSQia8vT
 
- { ^XWeYAnKZ
+{ ^XWeYAnKZ
 
 %%
 ## Drawing

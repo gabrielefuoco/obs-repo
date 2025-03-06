@@ -27,7 +27,7 @@ Il language modeling è importante non solo per la semplice predizione della par
 	* **Estrattiva:** Evidenzia le frasi più importanti da un testo.
 	* **Astrattiva:** Rimodula il testo originale creando un riassunto. Anche la summarization astrattiva può essere considerata un caso particolare di language modeling, poiché, data una sequenza di testo in input, genera una nuova sequenza di testo in output.
 
-# N-gram Language Models
+## N-gram Language Models
 
 Un n-gram è una sequenza di *n* token consecutivi in un testo. I modelli n-gram stimano la probabilità della parola successiva contando le occorrenze di n-gram in un corpus.
 
@@ -286,8 +286,8 @@ La perplexity rappresenta l'inverso della probabilità geometrica media di predi
 
 * **Relazione con la cross-entropy:** La perplexity è equivalente all'esponenziale della cross-entropy loss media:
 
- $$\text{Perplexity} = \exp\left(\frac{1}{T} \sum_{t=1}^{T} -\log P(x^{(t+1)}|x^{(t)}, \dots, x^{(1)}) \right) = \exp(J(\theta))$$
- dove $J(\theta)$ è la cross-entropy loss media.
+$$\text{Perplexity} = \exp\left(\frac{1}{T} \sum_{t=1}^{T} -\log P(x^{(t+1)}|x^{(t)}, \dots, x^{(1)}) \right) = \exp(J(\theta))$$
+dove $J(\theta)$ è la cross-entropy loss media.
 
 ##### Una Perplexity inferiore è migliore.
 
@@ -299,25 +299,25 @@ $$\quad\frac{\partial h^{(t)}}{\partial h^{(t-1)}} = \sigma'\left(W_{xh} h^{(t-1
 
 Cosa succede se σ fosse la funzione identità, σ(x) = x?
 
- $$
- \begin{aligned}
- \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &= \text{diag}\left(\sigma'\left(W_{xh} h^{(t-1)} + W_{sx} x^{(t)} + b_{h}\right)\right) W_{h} \\
- &= \boldsymbol{I} W_{h} \\
- &= W_{h}
- \end{aligned}
- $$
+$$
+\begin{aligned}
+\frac{\partial h^{(t)}}{\partial h^{(t-1)}} &= \text{diag}\left(\sigma'\left(W_{xh} h^{(t-1)} + W_{sx} x^{(t)} + b_{h}\right)\right) W_{h} \\
+&= \boldsymbol{I} W_{h} \\
+&= W_{h}
+\end{aligned}
+$$
 - In questo caso semplificato, la derivata dipende direttamente da $W_h$.
 
 Consideriamo il gradiente della loss $J^{(i)}(\theta)$ al passo `i`, rispetto allo stato nascosto $\boldsymbol{h}^{(j)}$ ad un passo precedente `j`. Sia $\ell = i - j$.
 
- $$
- \begin{aligned}
- \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}} &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{t=j+1}^{i} \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &\text{(regola della catena)}\\
- &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{t=j+1}^{i} W_{h} \\
- &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_{h}^{\ell}
- \end{aligned}
- $$
- Se $W_{h}$ ha autovalori con modulo minore di 1, allora questo termine diventa esponenzialmente piccolo all'aumentare di $\ell$, causando il *vanishing gradient*.
+$$
+\begin{aligned}
+\frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}} &= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{t=j+1}^{i} \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &\text{(regola della catena)}\\
+&= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{t=j+1}^{i} W_{h} \\
+&= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_{h}^{\ell}
+\end{aligned}
+$$
+Se $W_{h}$ ha autovalori con modulo minore di 1, allora questo termine diventa esponenzialmente piccolo all'aumentare di $\ell$, causando il *vanishing gradient*.
 
 Definizione di $h^{(t)}$: applicazione di una funzione di attivazione (solitamente una funzione non lineare come la tangente iperbolica o la funzione ReLU) alla combinazione lineare dell'embedding dell'input al *timestep* `t`, del bias e della trasformazione dello stato nascosto al *timestep* precedente. La diagonalizzazione della derivata della funzione di attivazione per $W_h$ semplifica l'analisi del problema del *vanishing gradient*.
 
@@ -329,13 +329,13 @@ La derivata della funzione di costo J rispetto allo stato nascosto ad un passo p
 
 * Consideriamo il caso in cui gli autovalori di $W_h$ siano tutti minori di 1 in modulo:
 
- * $\lambda_1, \lambda_2, \ldots, \lambda_n < 1$ (autovalori)
- * $\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n$ (autovettori)
+* $\lambda_1, \lambda_2, \ldots, \lambda_n < 1$ (autovalori)
+* $\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n$ (autovettori)
 
 * Possiamo riscrivere il gradiente usando gli autovettori di $W_h$ come base:
 
- * $\frac{\partial J^{(i)}(\theta)}{\partial \mathbf{h}^{(j)}} = \sum_{k=1}^n c_k \lambda_{k}^\ell \mathbf{q}_k$
- * Per grandi valori di $\ell$ (grandi distanze temporali), $\lambda_k^\ell$ si avvicina a 0, quindi il gradiente tende a 0. Questo è il *vanishing gradient*.
+* $\frac{\partial J^{(i)}(\theta)}{\partial \mathbf{h}^{(j)}} = \sum_{k=1}^n c_k \lambda_{k}^\ell \mathbf{q}_k$
+* Per grandi valori di $\ell$ (grandi distanze temporali), $\lambda_k^\ell$ si avvicina a 0, quindi il gradiente tende a 0. Questo è il *vanishing gradient*.
 
 ##### Cosa succede con le funzioni di attivazione non lineari (quelle che usiamo normalmente)?
 
@@ -359,7 +359,7 @@ Nel caso peggiore, questo si tradurrà in **Inf** o **NaN** nella rete (e si dov
 ##### Algoritmo 1: Pseudo-codice per il *norm clipping*
 
 * **se** $\|\mathbf{g}\| >$ soglia **allora**
- * $\mathbf{g} \leftarrow \frac{\text{soglia}}{\|\mathbf{g}\|} \mathbf{g}$
+	* $\mathbf{g} \leftarrow \frac{\text{soglia}}{\|\mathbf{g}\|} \mathbf{g}$
 * **fine se**
 
 **Intuizione:** si fa un passo nella stessa direzione, ma più piccolo.
@@ -377,8 +377,8 @@ $$h^{(t)} = \sigma (W_{hh} h^{(t-1)} + W_{xz} x^{(t)} + b)$$
 
 * Per risolvere questo problema, si possono adottare due approcci principali:
 
- * **Utilizzare una memoria separata che viene aggiunta:** Questo è l'approccio utilizzato dalle LSTM (Long Short-Term Memory).
- * **Creare connessioni dirette e più lineari nel modello:** Questo è l'approccio utilizzato da tecniche come l'attention e le connessioni residuali.
+* **Utilizzare una memoria separata che viene aggiunta:** Questo è l'approccio utilizzato dalle LSTM (Long Short-Term Memory).
+* **Creare connessioni dirette e più lineari nel modello:** Questo è l'approccio utilizzato da tecniche come l'attention e le connessioni residuali.
 
 Si necessita di un intervento architetturale: invece di riscrivere lo stato corrente considerando l'intera sequenza, si aggiorna lo stato rispetto a un contesto più breve, mantenendo separatamente un buffer che indica quanto utilizzare dal contesto precedente nella generazione delle nuove parole.
 
@@ -388,57 +388,56 @@ Le LSTM sono un tipo di RNN progettato per risolvere il problema del *vanishing 
 
 L'obiettivo principale delle LSTM è riprogettare le RNN dotandole di una "memoria" interna, migliorando così la backpropagation. Viene introdotta la notazione `c` per rappresentare la cella di memoria, che gestisce le informazioni a lungo termine. Le LSTM permettono operazioni di lettura, scrittura e cancellazione di informazioni, controllate da *gate* specifici. Questi *gate* sono vettori con la stessa dimensionalità dello stato della cella e determinano quali informazioni devono essere gestite. Il loro stato (aperto o chiuso) è dinamico e varia in base all'input e al contesto.
 
-**Sequenza di Input e Calcolo degli Stati Nascosti e degli Stati delle Celle**
+##### Sequenza di Input e Calcolo degli Stati Nascosti e degli Stati delle Celle
 
 Data una sequenza di input $x^{(t)}$, l'obiettivo è calcolare una sequenza di stati nascosti $h^{(t)}$ e stati delle celle $c^{(t)}$. Le operazioni principali eseguite al timestep $t$ sono descritte di seguito:
 
 **Forget Gate:** Determina quali informazioni provenienti dallo stato della cella precedente devono essere mantenute o dimenticate.
 
-*   $f^{(t)} = \sigma \left( W_f h^{(t-1)} + U_f x^{(t)} + b_f \right)$
+* $f^{(t)} = \sigma \left( W_f h^{(t-1)} + U_f x^{(t)} + b_f \right)$
 
-    *   Dove $f^{(t)}$ è il gate di dimenticanza al timestep $t$, $\sigma$ è la funzione sigmoide, $W_f$ e $U_f$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_f$ è il bias. L'intervallo di output è tra 0 e 1.
+* Dove $f^{(t)}$ è il gate di dimenticanza al timestep $t$, $\sigma$ è la funzione sigmoide, $W_f$ e $U_f$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_f$ è il bias. L'intervallo di output è tra 0 e 1.
 
 **Gate di Input:** Determina quali parti del nuovo contenuto della cella devono essere scritte nella cella.
 
-*   $i^{(t)} = \sigma \left( W_i h^{(t-1)} + U_i x^{(t)} + b_i \right)$
+* $i^{(t)} = \sigma \left( W_i h^{(t-1)} + U_i x^{(t)} + b_i \right)$
 
-    *   Dove $i^{(t)}$ è il gate di input al timestep $t$, $\sigma$ è la funzione sigmoide, $W_i$ e $U_i$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_i$ è il bias. L'intervallo di output è tra 0 e 1.
+* Dove $i^{(t)}$ è il gate di input al timestep $t$, $\sigma$ è la funzione sigmoide, $W_i$ e $U_i$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_i$ è il bias. L'intervallo di output è tra 0 e 1.
 
 **Gate di Output:** Determina quali parti della cella devono essere inviate allo stato nascosto.
 
-*   $o^{(t)} = \sigma \left( W_o h^{(t-1)} + U_o x^{(t)} + b_o \right)$
+* $o^{(t)} = \sigma \left( W_o h^{(t-1)} + U_o x^{(t)} + b_o \right)$
 
-    *   Dove $o^{(t)}$ è il gate di output al timestep $t$, $\sigma$ è la funzione sigmoide, $W_o$ e $U_o$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_o$ è il bias. L'intervallo di output è tra 0 e 1.
+* Dove $o^{(t)}$ è il gate di output al timestep $t$, $\sigma$ è la funzione sigmoide, $W_o$ e $U_o$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_o$ è il bias. L'intervallo di output è tra 0 e 1.
 
 **Nuovo Contenuto della Cella:** Rappresenta il nuovo contenuto potenziale da scrivere nella cella.
 
-*   $\tilde{c}^{(t)} = \tanh \left( W_c h^{(t-1)} + U_c x^{(t)} + b_c \right)$
+* $\tilde{c}^{(t)} = \tanh \left( W_c h^{(t-1)} + U_c x^{(t)} + b_c \right)$
 
-    *   Dove $\tilde{c}^{(t)}$ è il nuovo contenuto della cella al timestep $t$, $\tanh$ è la funzione tangente iperbolica, $W_c$ e $U_c$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_c$ è il bias.
+* Dove $\tilde{c}^{(t)}$ è il nuovo contenuto della cella al timestep $t$, $\tanh$ è la funzione tangente iperbolica, $W_c$ e $U_c$ sono le matrici dei pesi, $h^{(t-1)}$ è lo stato nascosto precedente, $x^{(t)}$ è l'input corrente e $b_c$ è il bias.
 
 **Stato della Cella:** Aggiorna lo stato della cella, "dimenticando" alcune informazioni dallo stato precedente e "memorizzando" ("input") il nuovo contenuto.
 
-*   $c^{(t)} = f^{(t)} \circ c^{(t-1)} + i^{(t)} \circ \tilde{c}^{(t)}$
+* $c^{(t)} = f^{(t)} \circ c^{(t-1)} + i^{(t)} \circ \tilde{c}^{(t)}$
 
-    *   Dove $c^{(t)}$ è lo stato della cella al timestep $t$, $f^{(t)}$ è il gate di dimenticanza, $c^{(t-1)}$ è lo stato della cella precedente, $i^{(t)}$ è il gate di input, $\tilde{c}^{(t)}$ è il nuovo contenuto della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
+* Dove $c^{(t)}$ è lo stato della cella al timestep $t$, $f^{(t)}$ è il gate di dimenticanza, $c^{(t-1)}$ è lo stato della cella precedente, $i^{(t)}$ è il gate di input, $\tilde{c}^{(t)}$ è il nuovo contenuto della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
 
 **Stato Nascosto:** Genera lo stato nascosto, "leggendo" ("output") alcune informazioni dalla cella.
 
-*   $h^{(t)} = o^{(t)} \circ \tanh c^{(t)}$
+* $h^{(t)} = o^{(t)} \circ \tanh c^{(t)}$
 
-    *   Dove $h^{(t)}$ è lo stato nascosto al timestep $t$, $o^{(t)}$ è il gate di output, $c^{(t)}$ è lo stato della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
+* Dove $h^{(t)}$ è lo stato nascosto al timestep $t$, $o^{(t)}$ è il gate di output, $c^{(t)}$ è lo stato della cella e $\circ$ rappresenta il prodotto elemento-wise (Hadamard).
 
-**Note:**
+##### Note:
 
-*   Tutti i vettori coinvolti hanno la stessa lunghezza $n$.
-*   I gate sono applicati utilizzando il prodotto elemento-wise (o Hadamard): $\circ$.
+* Tutti i vettori coinvolti hanno la stessa lunghezza $n$.
+* I gate sono applicati utilizzando il prodotto elemento-wise (o Hadamard): $\circ$.
 
 Partendo dal basso, calcoliamo gli stati nascosti $h^{(t)}$ e le celle di memoria $c^{(t)}$. $h^{(t)}$ è una combinazione element-wise tra l'attivazione dello stato della cella (tanh) e $o^{(t)}$, l'*output gate* (filtro), che controlla quali parti della cella di memoria contribuiscono allo stato nascosto al passo `t`.
 
 $c^{(t)}$ è la combinazione tra $c^{(t-1)}$ e il nuovo contenuto da inserire in memoria. Questa combinazione è controllata da due *gate*: `f` (*forget gate*) e `i` (*input gate*). Lo stato di memoria al passo `t` è la combinazione tra una parte dello stato di memoria al passo precedente e il nuovo contenuto, determinato trasformando l'input e combinandolo linearmente con lo stato nascosto al passo precedente. Il risultato è $\tilde{c}^{(t)}$.
 
 Ogni *gate* è ottenuto come trasformazione non lineare (sigmoide) della combinazione lineare dell'input $x^{(t)}$ e dello stato nascosto $h^{(t-1)}$. Ogni *gate* ha parametri distinti.
-
 
 ![[10)-20241119095018808.png]]
 ![[10)-20241119095044205.png]]
@@ -508,8 +507,8 @@ La traduzione automatica è un task considerato particolarmente difficile fino a
 
 L'idea centrale è apprendere un modello probabilistico dai dati. Supponiamo di voler tradurre dal francese all'inglese. Data una frase francese `x`, vogliamo generare la migliore frase inglese `y`, massimizzando la probabilità $P(y|x)$. Questo equivale a massimizzare la probabilità congiunta $P(x, y) = P(x|y)P(y)$. Dobbiamo quindi apprendere due componenti:
 
-1. **Il modello di traduzione:** apprende come le parole e le frasi dovrebbero essere tradotte. Viene addestrato su dati paralleli (coppie di frasi tradotte).
-2. **Il modello linguistico:** modella la probabilità a priori di una frase in inglese. Viene addestrato su dati monolinguali (un grande corpus di testo in inglese).
+- **Il modello di traduzione:** apprende come le parole e le frasi dovrebbero essere tradotte. Viene addestrato su dati paralleli (coppie di frasi tradotte).
+- **Il modello linguistico:** modella la probabilità a priori di una frase in inglese. Viene addestrato su dati monolinguali (un grande corpus di testo in inglese).
 
 I due modelli non vengono addestrati separatamente. Il modello linguistico non si basa solo sulle proprietà intrinseche del decoder addestrato su grandi corpus, ma deve essere condizionato all'input. Serve uno spazio di rappresentazione comune in cui l'input viene codificato in uno spazio denso (embedding della frase) e utilizzato per condizionare parola per parola la frase prodotta.
 
@@ -528,10 +527,10 @@ L'idea generale alla base di un modello seq2seq è un'architettura encoder-decod
 - **Encoder:** Una rete neurale che prende in input una sequenza e produce una rappresentazione vettoriale compatta (una rappresentazione neurale).
 - **Decoder:** Un'altra rete neurale che genera l'output in base alla rappresentazione vettoriale prodotta dall'encoder.
 - **Seq2Seq:** Se sia l'input che l'output sono sequenze, il modello è chiamato seq2seq. I modelli seq2seq sono utili per molti task oltre alla traduzione automatica:
-	 * Summarization (testo lungo → testo corto)
-	 * Dialogo (turni precedenti → turno successivo)
-	 * Parsing (testo in input → albero sintattico come sequenza)
-	 * Generazione di codice (linguaggio naturale → codice Python)
+* Summarization (testo lungo → testo corto)
+* Dialogo (turni precedenti → turno successivo)
+* Parsing (testo in input → albero sintattico come sequenza)
+* Generazione di codice (linguaggio naturale → codice Python)
 
 ##### Il modello seq2seq è un esempio di modello linguistico condizionale:
 
@@ -603,14 +602,14 @@ Calcola un punteggio di corrispondenza tra la traduzione generata e le traduzion
 
 ##### Problemi con la precisione:
 
-*   **Ripetizioni:** La precisione semplice può essere ingannata da traduzioni che ripetono le stesse parole.
-*   **Multiple frasi di riferimento:** Se ci sono più frasi di riferimento, la precisione deve essere calcolata considerando tutte le frasi.
+* **Ripetizioni:** La precisione semplice può essere ingannata da traduzioni che ripetono le stesse parole.
+* **Multiple frasi di riferimento:** Se ci sono più frasi di riferimento, la precisione deve essere calcolata considerando tutte le frasi.
 
 ##### Precisione "clipped":
 
-*   Si confronta ogni parola della frase predetta con tutte le frasi di riferimento.
-*   Se la parola corrisponde a una frase di riferimento, è considerata corretta.
-*   Il conteggio delle parole corrette è limitato al numero massimo di volte in cui quella parola appare nella frase di riferimento.
+* Si confronta ogni parola della frase predetta con tutte le frasi di riferimento.
+* Se la parola corrisponde a una frase di riferimento, è considerata corretta.
+* Il conteggio delle parole corrette è limitato al numero massimo di volte in cui quella parola appare nella frase di riferimento.
 
 ##### Geometric Average (Clipped) Precision Scores
 
@@ -627,16 +626,16 @@ Il punteggio BLEU è il prodotto della precisione geometrica media e di una pena
 
 ##### Vantaggi:
 
-*   Calcolo rapido e facile da comprendere.
-*   Corrisponde al modo in cui un umano valuterebbe lo stesso testo.
-*   Indipendente dalla lingua.
-*   Può essere utilizzato quando si hanno più frasi di riferimento.
+* Calcolo rapido e facile da comprendere.
+* Corrisponde al modo in cui un umano valuterebbe lo stesso testo.
+* Indipendente dalla lingua.
+* Può essere utilizzato quando si hanno più frasi di riferimento.
 
 ##### Svantaggi:
 
-*   Non considera il significato delle parole, solo le corrispondenze esatte.
-*   Ignora l'importanza delle parole e l'ordine delle parole.
-*   Ad esempio, "La guardia arrivò tardi a causa della pioggia" e "La pioggia arrivò tardi a causa della guardia" avrebbero lo stesso punteggio BLEU unigramma.
+* Non considera il significato delle parole, solo le corrispondenze esatte.
+* Ignora l'importanza delle parole e l'ordine delle parole.
+* Ad esempio, "La guardia arrivò tardi a causa della pioggia" e "La pioggia arrivò tardi a causa della guardia" avrebbero lo stesso punteggio BLEU unigramma.
 
 Per superare questi limiti, sarebbero necessari modelli multilingue più sofisticati che possano codificare gli embedding delle frasi nel loro complesso, invece di concentrarsi sulle singole parole. Questi modelli potrebbero fungere da "oracolo", valutando la qualità della traduzione in base al significato e al contesto, piuttosto che solo sulla corrispondenza lessicale.
 
@@ -711,16 +710,15 @@ Esistono diversi modi per calcolare $\boldsymbol{e} \in \mathbb{R}^N$ da $\bolds
 
 L'attention mechanism coinvolge sempre:
 
-1. **Calcolo degli *attention scores*** $\boldsymbol{e} \in \mathbb{R}^{N}$.
-2. **Applicazione della softmax per ottenere la distribuzione di attenzione** $\boldsymbol{\alpha}$: $\boldsymbol{\alpha} = \operatorname{softmax}(\boldsymbol{e}) \in \mathbb{R}^{N}$.
-3. **Calcolo della somma pesata dei valori usando la distribuzione di attenzione:** $\boldsymbol{a} = \sum_{i=1}^{N} \alpha_{i} \boldsymbol{h}_{i} \in \mathbb{R}^{d_{1}}$, ottenendo l'**output di attenzione** $\boldsymbol{a}$ (a volte chiamato vettore di contesto).
+- **Calcolo degli *attention scores*** $\boldsymbol{e} \in \mathbb{R}^{N}$.
+- **Applicazione della softmax per ottenere la distribuzione di attenzione** $\boldsymbol{\alpha}$: $\boldsymbol{\alpha} = \operatorname{softmax}(\boldsymbol{e}) \in \mathbb{R}^{N}$.
+- **Calcolo della somma pesata dei valori usando la distribuzione di attenzione:** $\boldsymbol{a} = \sum_{i=1}^{N} \alpha_{i} \boldsymbol{h}_{i} \in \mathbb{R}^{d_{1}}$, ottenendo l'**output di attenzione** $\boldsymbol{a}$ (a volte chiamato vettore di contesto).
 
 La dimensionalità dello stato nascosto può essere diversa per encoder e decoder, anche se in pratica spesso coincidono. Per architetture *encoder-only*, potrebbe essere inferiore. Gli stati dell'encoder ($\boldsymbol{h}$) fungono da coppie chiave-valore per le query ($\boldsymbol{s}$) del decoder. Abbiamo tante query quanti sono i *timestep* del decoder ($T$) e $N$ valori.
 
 ## L'Attention come Tecnica Generale di Deep Learning
 
 L'attention mechanism, inizialmente applicato ai modelli seq2seq per la traduzione automatica, è una tecnica molto più generale, applicabile a diverse architetture e task di deep learning.
-
 
 ##### Definizione generale dell'attenzione:
 
@@ -732,6 +730,6 @@ Data una serie di vettori (chiamati *valori*) e un vettore *query*, l'attenzione
 
 Si può dire metaforicamente che la query "si concentra" sui valori.
 
-Ad esempio, nel modello seq2seq con *cross-attention*, ogni stato nascosto del decoder (query) si concentra su tutti gli stati nascosti dell'encoder (valori).  Tuttavia, l'attention non è limitata alle architetture seq2seq.
+Ad esempio, nel modello seq2seq con *cross-attention*, ogni stato nascosto del decoder (query) si concentra su tutti gli stati nascosti dell'encoder (valori). Tuttavia, l'attention non è limitata alle architetture seq2seq.
 
 In generale, l'attention può essere intesa come una tecnica per calcolare una somma ponderata di valori, condizionata a una query. Questa somma rappresenta un riassunto selettivo delle informazioni contenute nei valori, mentre la query determina su quali valori concentrarsi.

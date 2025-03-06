@@ -27,9 +27,9 @@ Gli ambienti competitivi sono caratterizzati dalla presenza di due o più agenti
 
 Esistono tre approcci principali per affrontare gli ambienti multi-agente nella teoria dei giochi:
 
-1. **Economia aggregata:** Si considera un aggregato di agenti come un'economia, senza predire l'azione del singolo agente.
-2. **Ambiente non deterministico:** Gli agenti avversari sono considerati un elemento che rende l'ambiente non deterministico, senza considerare che gli avversari tentano attivamente di vincere.
-3. **Alberi di gioco:** Gli avversari sono modellati esplicitamente con tecniche di ricerca basate su alberi di giochi.
+- **Economia aggregata:** Si considera un aggregato di agenti come un'economia, senza predire l'azione del singolo agente.
+- **Ambiente non deterministico:** Gli agenti avversari sono considerati un elemento che rende l'ambiente non deterministico, senza considerare che gli avversari tentano attivamente di vincere.
+- **Alberi di gioco:** Gli avversari sono modellati esplicitamente con tecniche di ricerca basate su alberi di giochi.
 
 ### Tipi di Giochi
 
@@ -69,9 +69,9 @@ Anzitutto, con mossa si intende che entrambi i giocatori abbiano compiuto un'azi
 Il valore MiniMax di uno stato è l'utilità (per MAX) di trovarsi nello stato corrispondente, è calcolato ricorsivamente ed è definito come:
 
 $$MiniMax(s) =$$
- se s è uno stato terminale allora $utilità(s, MAX)$
- altrimenti $max_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MAX deve muovere
- altrimenti $min_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MIN deve muovere
+se s è uno stato terminale allora $utilità(s, MAX)$
+altrimenti $max_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MAX deve muovere
+altrimenti $min_{a ∈ A(s)} MiniMax(Successore(s, a))$ se MIN deve muovere
 
 Ad esempio, consideriamo il seguente albero di gioco:
 
@@ -87,7 +87,7 @@ Ad ogni turno, MAX preferirà muoversi verso uno stato di valore massimo mentre 
 
 Quanto è efficiente questa ricerca? Nel caso peggiore bisogna esplorare tutto lo spazio di ricerca, come una DFS. Quindi, la complessità spaziale è $O(b · m)$ mentre quella temporale è $O(b^m)$ dove m è la profondità e b è il fattore di branching.
 
-## Alpha-Beta Pruning: 
+## Alpha-Beta Pruning:
 
 La ricerca MiniMax, utilizzata per determinare la strategia ottima in un gioco a somma zero, può diventare computazionalmente costosa a causa della crescita esponenziale del numero di stati con l'aumentare della profondità dell'albero di gioco. L'Alpha-Beta Pruning è una tecnica di ottimizzazione che permette di potare porzioni dell'albero di gioco irrilevanti per la ricerca, riducendo il numero di nodi da esplorare.
 
@@ -135,10 +135,10 @@ La ricerca ad Albero Monte Carlo è una tecnica utilizzata per la ricerca in gio
 ### Funzionamento
 
 La ricerca ad Albero Monte Carlo procede in quattro fasi:
-1. **Selezione:** Partendo dalla radice dell'albero di gioco, si sceglie un nodo figlio e si prosegue fino a raggiungere una foglia (un nodo mai esplorato). La scelta del nodo figlio è guidata da una politica di selezione.
-2. **Espansione:** Si genera un nuovo figlio (o più di uno) al nodo foglia e gli si assegna un termine di sfruttamento, inizialmente pari a 0.
-3. **Simulazione:** Partendo dal nodo appena generato, si simulano le mosse per entrambi i giocatori fino a raggiungere uno stato terminale. La scelta delle mosse durante la simulazione è guidata da una politica di simulazione.
-4. **Retropropagazione:** Il risultato della simulazione viene utilizzato per aggiornare il termine di sfruttamento di tutti i nodi esplorati durante la simulazione, fino alla radice del nodo espanso.
+- **Selezione:** Partendo dalla radice dell'albero di gioco, si sceglie un nodo figlio e si prosegue fino a raggiungere una foglia (un nodo mai esplorato). La scelta del nodo figlio è guidata da una politica di selezione.
+- **Espansione:** Si genera un nuovo figlio (o più di uno) al nodo foglia e gli si assegna un termine di sfruttamento, inizialmente pari a 0.
+- **Simulazione:** Partendo dal nodo appena generato, si simulano le mosse per entrambi i giocatori fino a raggiungere uno stato terminale. La scelta delle mosse durante la simulazione è guidata da una politica di simulazione.
+- **Retropropagazione:** Il risultato della simulazione viene utilizzato per aggiornare il termine di sfruttamento di tutti i nodi esplorati durante la simulazione, fino alla radice del nodo espanso.
 
 ### Politiche di Selezione e Simulazione
 
@@ -165,5 +165,5 @@ Una strategia vincente per i fantasmi esiste se, per ogni possibile posizione di
 
 ### Complessità
 
-La complessità dell'algoritmo per trovare una strategia vincente per i fantasmi è polinomiale se lo stato del gioco viene rappresentato in modo logaritmico. La dimensione dello stato è data da $(k + 1) · log_2 |V|$, 
+La complessità dell'algoritmo per trovare una strategia vincente per i fantasmi è polinomiale se lo stato del gioco viene rappresentato in modo logaritmico. La dimensione dello stato è data da $(k + 1) · log_2 |V|$,
 dove $k$ è il numero di fantasmi, $|V|$ è il numero di nodi nel grafo.

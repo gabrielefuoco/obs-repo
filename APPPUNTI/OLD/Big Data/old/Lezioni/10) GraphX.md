@@ -20,24 +20,24 @@
 
 - Un grafo è una struttura composta da un insieme di **vertici (nodi)** connessi da **archi**.
 - Utilizzato per rappresentare relazioni non lineari tra oggetti, è applicabile in diversi ambiti, tra cui:
- - **Reti sociali**
- - **Rappresentazione di dati** e **conoscenza**
- - **Ottimizzazione** e **routing**
- - **Sistemi di raccomandazione**
- - **Modellazione della diffusione di malattie**
+- **Reti sociali**
+- **Rappresentazione di dati** e **conoscenza**
+- **Ottimizzazione** e **routing**
+- **Sistemi di raccomandazione**
+- **Modellazione della diffusione di malattie**
 - I grafi permettono di ottenere intuizioni sui pattern sottostanti e rappresentazioni accurate dei fenomeni analizzati.
 
 ## Strumenti Graph-Parallel e Big Data
 
 - Con dataset sempre più **grandi** e **complessi**, gli strumenti tradizionali per elaborare grafi sono **inefficienti**.
 - Framework come **Hadoop** e **Spark** non sono ottimali per i grafi perché:
- - Non considerano la **struttura del grafo** sottostante.
- - Portano a eccessivi **spostamenti di dati** e **prestazioni degradate**.
+- Non considerano la **struttura del grafo** sottostante.
+- Portano a eccessivi **spostamenti di dati** e **prestazioni degradate**.
 #### Soluzione: Framework Graph-Parallel
 
 - Framework come **Pregel** di Google sono progettati per l’elaborazione efficiente di **grafi su larga scala**:
- - Supportano algoritmi **graph-parallel** iterativi.
- - Si basano sul modello **Bulk Synchronous Parallel (BSP)**.
+- Supportano algoritmi **graph-parallel** iterativi.
+- Si basano sul modello **Bulk Synchronous Parallel (BSP)**.
 
 ## Il Modello Bulk Synchronous Parallel (BSP)
 
@@ -45,22 +45,22 @@
 
 - **Bulk Synchronous Parallel (BSP)**, introdotto da Leslie Valiant negli anni '90, è un modello per calcolo parallelo distribuito, particolarmente adatto a problemi iterativi su larga scala.
 - Un sistema BSP è composto da:
- - **Elementi di elaborazione (PE)**: eseguono calcoli locali.
- - **Router**: gestisce la comunicazione **point-to-point** tra PE.
- - **Sincronizzatore**: coordina la sincronizzazione tra PE.
+- **Elementi di elaborazione (PE)**: eseguono calcoli locali.
+- **Router**: gestisce la comunicazione **point-to-point** tra PE.
+- **Sincronizzatore**: coordina la sincronizzazione tra PE.
 
 ### Superstep
 
 - Il calcolo nel BSP avviene in **superstep**, ognuno con tre fasi:
- 1. **Calcolo concorrente**: ogni processore esegue calcoli locali in modo asincrono.
- 2. **Comunicazione globale**: i processi scambiano dati tra loro.
- 3. **Sincronizzazione**: ogni processo attende che tutti raggiungano la stessa barriera prima di procedere.
+- **Calcolo concorrente**: ogni processore esegue calcoli locali in modo asincrono.
+- **Comunicazione globale**: i processi scambiano dati tra loro.
+- **Sincronizzazione**: ogni processo attende che tutti raggiungano la stessa barriera prima di procedere.
 
 ## Framework Pregel e Programmazione Vertex-Centric
 
 - **Pregel** (Google) supporta l'elaborazione distribuita di grafi basandosi su:
- - **BSP**: i vertici eseguono calcoli locali, inviano messaggi e si sincronizzano.
- - **Programmazione vertex-centric**: permette di operare sui singoli vertici e i loro archi.
+- **BSP**: i vertici eseguono calcoli locali, inviano messaggi e si sincronizzano.
+- **Programmazione vertex-centric**: permette di operare sui singoli vertici e i loro archi.
 
 #### Vantaggi
 
@@ -70,33 +70,33 @@
 ### Alternative a Pregel
 
 - Alternative open-source includono:
- - **Apache Giraph**
- - **Gelly (Apache Flink)**
- - **GraphX (Apache Spark)**
+- **Apache Giraph**
+- **Gelly (Apache Flink)**
+- **GraphX (Apache Spark)**
 
-# Apache Spark GraphX
+## Apache Spark GraphX
 
 ## Caratteristiche Chiave
 
 - **GraphX** è una libreria di Apache Spark per l'elaborazione distribuita di grafi su larga scala.
 - Le caratteristiche principali includono:
- - **Resilient Distributed Graphs (RDG)**: Estende gli RDD di Spark per partizionare in modo efficiente i dati del grafo su un cluster.
- - **Algoritmi per Grafi**: Include algoritmi integrati come **PageRank**, **componenti connesse**, e **conteggio dei triangoli**.
- - **Operatori per Grafi**: Permette operazioni come **mappatura**, creazione di **sottografi**, inversione degli archi e altre manipolazioni dei grafi.
- - **Integrazione con Spark**: Supporta l'integrazione con altri componenti Spark per combinare l'elaborazione di grafi con machine learning e analisi dati.
+- **Resilient Distributed Graphs (RDG)**: Estende gli RDD di Spark per partizionare in modo efficiente i dati del grafo su un cluster.
+- **Algoritmi per Grafi**: Include algoritmi integrati come **PageRank**, **componenti connesse**, e **conteggio dei triangoli**.
+- **Operatori per Grafi**: Permette operazioni come **mappatura**, creazione di **sottografi**, inversione degli archi e altre manipolazioni dei grafi.
+- **Integrazione con Spark**: Supporta l'integrazione con altri componenti Spark per combinare l'elaborazione di grafi con machine learning e analisi dati.
 
 ## Resilient Distributed Graphs (RDG)
 
 - GraphX introduce il **Resilient Distributed Graph (RDG)**, una nuova astrazione basata su un multigrafo diretto con proprietà attaccate ai vertici e agli archi.
 - Ogni grafo è composto da:
- - Un **RDD per i vertici** (tupla: ID, attributo)
- - Un **RDD per gli archi** (tupla: ID sorgente, ID destinazione, attributo)
+- Un **RDD per i vertici** (tupla: ID, attributo)
+- Un **RDD per gli archi** (tupla: ID sorgente, ID destinazione, attributo)
 - Questa struttura consente operazioni **data-parallel distribuite** tipiche di Spark.
 
 ## EdgeTriplet
 
 - **EdgeTriplet** fornisce una vista estesa del grafo, combinando le informazioni di un arco con quelle dei vertici di origine e destinazione:
- - **Tripla**: (ID sorgente, ID destinazione, attributo sorgente, attributo arco, attributo destinazione)
+- **Tripla**: (ID sorgente, ID destinazione, attributo sorgente, attributo arco, attributo destinazione)
 - Utile per ottenere informazioni complete su archi e vertici interconnessi.
 
 ## Partizionamento Vertex-Cut
@@ -141,8 +141,8 @@ def joinVertices[U](table: RDD[(VertexId, U)])(mapFunc: (VertexId, VD, U) => VD)
 ## API Pregel
 
 - GraphX implementa il modello **Pregel** per applicazioni **graph-parallel**:
- - Ogni vertice esegue in parallelo una funzione definita dall'utente (UDF) e può inviare messaggi ai vicini.
- - Il calcolo dei messaggi viene eseguito in base alla **tripla** dell'arco.
+- Ogni vertice esegue in parallelo una funzione definita dall'utente (UDF) e può inviare messaggi ai vicini.
+- Il calcolo dei messaggi viene eseguito in base alla **tripla** dell'arco.
 
 #### Operatore Pregel
 
@@ -160,9 +160,9 @@ def pregel[A](
 ```
 
 - **Funzioni UDF**:
- - `vprog`: comportamento del vertice, calcola il valore aggiornato.
- - `sendMsg`: invia messaggi ai vertici adiacenti.
- - `mergeMsg`: unisce i messaggi ricevuti in uno solo.
+- `vprog`: comportamento del vertice, calcola il valore aggiornato.
+- `sendMsg`: invia messaggi ai vertici adiacenti.
+- `mergeMsg`: unisce i messaggi ricevuti in uno solo.
 
 ### Vantaggi di GraphX
 
@@ -177,8 +177,8 @@ def pregel[A](
 - PageRank è un algoritmo iterativo sviluppato da Larry Page e Sergey Brin, utilizzato da Google Search per classificare le pagine web nei risultati del suo motore di ricerca.
 - Si basa sull'idea che un collegamento da una pagina a un'altra possa essere visto come un voto di fiducia: le pagine con più collegamenti in entrata da fonti autorevoli sono considerate più importanti o autorevoli.
 - PageRank modella il processo che porta un utente a una data pagina:
- - L'utente generalmente arriva su quella pagina attraverso una sequenza di link casuali, seguendo un percorso attraverso multiple pagine.
- - L'utente può eventualmente smettere di cliccare sui link in uscita e cercare un URL diverso che non è direttamente raggiungibile dalla pagina corrente (cioè, il salto casuale).
+- L'utente generalmente arriva su quella pagina attraverso una sequenza di link casuali, seguendo un percorso attraverso multiple pagine.
+- L'utente può eventualmente smettere di cliccare sui link in uscita e cercare un URL diverso che non è direttamente raggiungibile dalla pagina corrente (cioè, il salto casuale).
 - La probabilità che un utente continui a cliccare sui link in uscita è il fattore di smorzamento, generalmente impostato a d = 0,85, mentre la probabilità di salto casuale è 1 - d = 0,15.
 
 ### Approfondimento matematico
@@ -216,8 +216,8 @@ Dove:
 - **TextRank** è un algoritmo di riassunto estrattivo basato su **PageRank**, proposto da Mihalcea e Tarau nel 2004.
 - Modella un testo come un grafo pesato di frasi collegate semanticamente, selezionando le frasi più rappresentative.
 - Formalmente, dato un testo T da riassumere, l'algoritmo crea un grafo G = <S,E>:
- - L'insieme S = {s1,...,sn} contiene le n frasi presenti in T.
- - L'insieme E contiene gli archi del grafo ed è creato collegando ogni coppia di frasi in S, dove ogni connessione è associata a un peso wi,j che rappresenta la similarità testuale tra si e sj.
+- L'insieme S = {s1,...,sn} contiene le n frasi presenti in T.
+- L'insieme E contiene gli archi del grafo ed è creato collegando ogni coppia di frasi in S, dove ogni connessione è associata a un peso wi,j che rappresenta la similarità testuale tra si e sj.
 
 ### Messaggi Chiave
 

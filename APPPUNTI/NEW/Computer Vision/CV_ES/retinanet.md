@@ -1,4 +1,4 @@
-# Retinanet
+## Retinanet
 
 Retinanet è un esempio di architettura di rete single stage. È costituita da un modulo principale chiamato *backbone* e da due moduli secondari chiamati *subnetwork*. Il primo estrae le feature map dall'intera immagine mentre le subnet costituiscono i moduli di classificazione e regressione.
 
@@ -238,7 +238,7 @@ class RetinaNet(nn.Module):
 
 ```
 
-# Loss
+## Loss
 
 L'altra innovazione introdotta in RetinaNet è la formulazione della loss. Come gestire il problema delle classi sbilanciate?
 

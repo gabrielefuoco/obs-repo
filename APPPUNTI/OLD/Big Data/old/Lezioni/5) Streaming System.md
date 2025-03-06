@@ -32,7 +32,7 @@
 - Il **tempo dell'evento** rappresenta il momento in cui un dato è stato prodotto (ad esempio, quando un utente compie un'azione).
 - Il **tempo di ingestione** è quando i dati vengono ricevuti dal sistema.
 - Il **tempo di elaborazione** è quando il sistema elabora quei dati.
- - È importante notare che questi tempi spesso non coincidono: un evento potrebbe verificarsi molto prima di essere elaborato dal sistema.
+- È importante notare che questi tempi spesso non coincidono: un evento potrebbe verificarsi molto prima di essere elaborato dal sistema.
 
 #### Serie Temporali
 
@@ -49,11 +49,11 @@
 
 #### Approcci all'Elaborazione di Stream
 
-1. **Elaborazione agnostica del tempo**: Il tempo non è considerato rilevante (es. filtraggio o join interni).
-2. **Elaborazione approssimativa**: Utilizza tecniche di stima per ottenere risultati sufficientemente accurati con risorse limitate.
-3. **Finestre temporali**: Definiscono intervalli specifici di tempo per raggruppare gli eventi, basati su:
- - **Tempo di elaborazione**: Finestra definita in base a quando i dati vengono elaborati.
- - **Tempo dell'evento**: Finestra basata sul tempo in cui gli eventi si verificano.
+- **Elaborazione agnostica del tempo**: Il tempo non è considerato rilevante (es. filtraggio o join interni).
+- **Elaborazione approssimativa**: Utilizza tecniche di stima per ottenere risultati sufficientemente accurati con risorse limitate.
+- **Finestre temporali**: Definiscono intervalli specifici di tempo per raggruppare gli eventi, basati su:
+- **Tempo di elaborazione**: Finestra definita in base a quando i dati vengono elaborati.
+- **Tempo dell'evento**: Finestra basata sul tempo in cui gli eventi si verificano.
 
 #### Elaborazione Agnostica del Tempo
 
@@ -64,7 +64,7 @@
 #### Esempio di Filtraggio
 
 - **Obiettivo**: Filtrare log di traffico web per includere solo quelli provenienti da un dominio specifico.
-- **Metodo**: Per ogni record che arriva, verifichiamo se appartiene al dominio desiderato e lo scartiamo se non lo è. Poiché ogni elemento viene processato singolarmente, il tempo in cui arriva non influisce sull'elaborazione. 
+- **Metodo**: Per ogni record che arriva, verifichiamo se appartiene al dominio desiderato e lo scartiamo se non lo è. Poiché ogni elemento viene processato singolarmente, il tempo in cui arriva non influisce sull'elaborazione.
 - **Conclusione**: Il tempo dell'evento non è rilevante; l'importante è la presenza o meno di un dominio specifico.
 
 #### Esempio di Inner Join
@@ -76,17 +76,17 @@
 ## Elaborazione Approssimativa
 
 - **Definizione**: Si utilizzano algoritmi che forniscono risposte approssimative basate su un riepilogo dei dati ("sketch"), anziché analizzare ogni elemento singolarmente.
-- **Esempi**: 
- - **Top-N approssimativo**: Trova gli N elementi più frequenti senza dover esaminare tutti i dati.
- - **K-means in streaming**: Algoritmo di clustering che aggiorna i centri in modo incrementale man mano che nuovi dati vengono ricevuti.
+- **Esempi**:
+- **Top-N approssimativo**: Trova gli N elementi più frequenti senza dover esaminare tutti i dati.
+- **K-means in streaming**: Algoritmo di clustering che aggiorna i centri in modo incrementale man mano che nuovi dati vengono ricevuti.
 
 ## Finestre Temporali (Windowing)
 
 - Le finestre temporali suddividono i flussi di dati in blocchi finiti per l’elaborazione. Esistono diversi tipi di finestre:
 
-1. **Finestre Fisse**: Intervalli di tempo predefiniti, es. 5 minuti.
-2. **Finestre Scorrevoli**: Finestre che si sovrappongono, es. ogni minuto ma analizzano i dati degli ultimi 5 minuti.
-3. **Sessioni**: Finestre che raggruppano eventi che fanno parte della stessa sessione logica, ad esempio eventi consecutivi di un utente.
+- **Finestre Fisse**: Intervalli di tempo predefiniti, es. 5 minuti.
+- **Finestre Scorrevoli**: Finestre che si sovrappongono, es. ogni minuto ma analizzano i dati degli ultimi 5 minuti.
+- **Sessioni**: Finestre che raggruppano eventi che fanno parte della stessa sessione logica, ad esempio eventi consecutivi di un utente.
 
 #### Finestre per Tempo di Elaborazione
 
@@ -100,11 +100,11 @@
 
 ## Operatori di Base per lo Streaming
 
-1. **Aggregazione a Finestre**: Calcola aggregati su finestre temporali, ad esempio:
- - Velocità media
- - Numero di accessi a un URL in un certo periodo
-2. **Join a Finestre**: Unisce i dati basati su una finestra temporale. Utilizzato per correlare eventi che si verificano nello stesso intervallo di tempo, come ad esempio:
- - Temperatura registrata in diverse stazioni meteorologiche nello stesso intervallo di tempo.
+- **Aggregazione a Finestre**: Calcola aggregati su finestre temporali, ad esempio:
+- Velocità media
+- Numero di accessi a un URL in un certo periodo
+- **Join a Finestre**: Unisce i dati basati su una finestra temporale. Utilizzato per correlare eventi che si verificano nello stesso intervallo di tempo, come ad esempio:
+- Temperatura registrata in diverse stazioni meteorologiche nello stesso intervallo di tempo.
 
 ### Elaborazione di Eventi Complessi
 
@@ -129,25 +129,23 @@ C.Stazione = A.Stazione && A.Temp - C.Temp > 3
 Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce successivamente alla Stazione#1.
 
 - Gli eventi complessi possono essere costruiti usando operatori logici come:
- - **SEQ**: Definisce una sequenza di eventi.
- - **AND, OR, NEG**: Condizioni logiche. 
----
+- **SEQ**: Definisce una sequenza di eventi.
+- **AND, OR, NEG**: Condizioni logiche.
 ### Requisiti dello Streaming di Big Data
 
-1. **Mantenere i dati in movimento**: Architettura che gestisce flussi di dati costanti.
-2. **Accesso dichiarativo**: Linguaggi di alto livello come StreamSQL.
-3. **Gestione delle imperfezioni**: Gestione di dati in ritardo, mancanti o non ordinati.
-4. **Risultati prevedibili**: Coerenza e utilizzo corretto del tempo dell'evento.
-5. **Integrazione dati stream e batch**: Combinare elaborazioni su dati storici e in tempo reale.
-6. **Sicurezza e disponibilità**: Gestire guasti e assicurare la persistenza dei dati.
-7. **Partizionamento e scalabilità**: Distribuzione dei dati e calcolo su larga scala.
-8. **Elaborazione istantanea**: Risposta immediata agli eventi in arrivo.
----
+- **Mantenere i dati in movimento**: Architettura che gestisce flussi di dati costanti.
+- **Accesso dichiarativo**: Linguaggi di alto livello come StreamSQL.
+- **Gestione delle imperfezioni**: Gestione di dati in ritardo, mancanti o non ordinati.
+- **Risultati prevedibili**: Coerenza e utilizzo corretto del tempo dell'evento.
+- **Integrazione dati stream e batch**: Combinare elaborazioni su dati storici e in tempo reale.
+- **Sicurezza e disponibilità**: Gestire guasti e assicurare la persistenza dei dati.
+- **Partizionamento e scalabilità**: Distribuzione dei dati e calcolo su larga scala.
+- **Elaborazione istantanea**: Risposta immediata agli eventi in arrivo.
 ### Elaborazione di Big Data
 
 - **Database tradizionali**: Hanno sempre elaborato grandi quantità di dati, ma non sono adatti ai big data perché:
- - **Dati strutturati**: I database funzionano bene con dati strutturati.
- - **Big data**: Spesso non sono completamente strutturati e richiedono tecniche più flessibili rispetto a semplici operazioni di selezione, proiezione e join.
+- **Dati strutturati**: I database funzionano bene con dati strutturati.
+- **Big data**: Spesso non sono completamente strutturati e richiedono tecniche più flessibili rispetto a semplici operazioni di selezione, proiezione e join.
 
 ### Prima Soluzione: MapReduce (MR)
 
@@ -188,12 +186,11 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 - **Vantaggi**: Facile da implementare, coerenza e tolleranza ai guasti ben gestibili.
 - **Svantaggi**: Difficoltà a gestire eventi con tempi specifici e sessioni.
 
----
 ### Architettura di Streaming Vera
 
 - **Struttura**: Un programma di streaming è rappresentato come un **DAG (Direct Acyclic Graph)** di operatori e stream intermedi.
- - **Operatore**: Unità di calcolo che può mantenere uno stato.
- - **Stream intermedi**: Flussi logici di record passati tra operatori.
+- **Operatore**: Unità di calcolo che può mantenere uno stato.
+- **Stream intermedi**: Flussi logici di record passati tra operatori.
 
 | **Trasformazioni di Stream** | **Descrizione** |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -207,10 +204,10 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 
 - **Problema**: I dati possono arrivare in anticipo, in orario o in ritardo rispetto al tempo previsto.
 - **Soluzione**: L'uso di **watermark**, che tracciano il progresso temporale degli eventi durante l'elaborazione.
- - **Definizione**: Un watermark è una funzione \( F(P) \to E \), dove:
- - \( P \): Punto nel tempo di elaborazione.
- - \( E \): Punto nel tempo dell'evento.
- - **Funzione**: Indica che il sistema crede di aver ricevuto tutti i dati con tempi di evento inferiori a \( E \). In altre parole, segnala che non ci si aspetta più dati precedenti a questo punto temporale.
+- **Definizione**: Un watermark è una funzione \( F(P) \to E \), dove:
+- \( P \): Punto nel tempo di elaborazione.
+- \( E \): Punto nel tempo dell'evento.
+- **Funzione**: Indica che il sistema crede di aver ricevuto tutti i dati con tempi di evento inferiori a \( E \). In altre parole, segnala che non ci si aspetta più dati precedenti a questo punto temporale.
 
 ### Watermark Perfetti vs Euristici
 
@@ -219,31 +216,31 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 ### Lezioni Apprese dal Batch
 
 - **Batch Processing**:
- - Se un calcolo batch fallisce, è possibile ripetere l'operazione come una transazione, mantenendo la coerenza.
- - Il tasso di transazione è costante, il che semplifica la gestione degli errori.
- - **Domanda**: Possiamo applicare questi principi di affidabilità a una vera esecuzione in streaming?
+- Se un calcolo batch fallisce, è possibile ripetere l'operazione come una transazione, mantenendo la coerenza.
+- Il tasso di transazione è costante, il che semplifica la gestione degli errori.
+- **Domanda**: Possiamo applicare questi principi di affidabilità a una vera esecuzione in streaming?
 
 ### Creazione di Snapshot - Approccio Naive
 
 - **Processo di Snapshot**:
- - Pausare l'esecuzione su determinati punti temporali $t_1, t_2, \dots.$
- - Raccogliere lo stato attuale del sistema (es. lo stato della memoria o dei calcoli).
- - Ripristinare l'esecuzione una volta terminata la raccolta dello snapshot.
+- Pausare l'esecuzione su determinati punti temporali $t_1, t_2, \dots.$
+- Raccogliere lo stato attuale del sistema (es. lo stato della memoria o dei calcoli).
+- Ripristinare l'esecuzione una volta terminata la raccolta dello snapshot.
 
 ### Partizionamento e Scalabilità Automatici
 
 - **Tre Tipi di Parallelizzazione**:
- - I grandi sistemi di streaming devono supportare diversi tipi di parallelizzazione per bilanciare carico, distribuzione e prestazioni.
- - L'architettura deve garantire che tutti i tre tipi siano supportati per migliorare la scalabilità e l'efficienza.
+- I grandi sistemi di streaming devono supportare diversi tipi di parallelizzazione per bilanciare carico, distribuzione e prestazioni.
+- L'architettura deve garantire che tutti i tre tipi siano supportati per migliorare la scalabilità e l'efficienza.
 
 ## Apache Storm
 
 - **Descrizione**: Piattaforma scalabile per l'elaborazione di flussi di dati in tempo reale.
- - **Calcolo basato su tuple**: Le unità di elaborazione sono tuple, che rappresentano elementi di dati.
- - **Topologia**: Un programma Storm è strutturato come un **grafo di topologia**, dove:
- - **Vertici**: Rappresentano i nodi di calcolo o le trasformazioni dei dati.
- - **Archi**: Rappresentano i flussi di dati tra i nodi.
- - **Stream**: Una sequenza illimitata di tuple (flussi di dati) che vengono processati continuamente.
+- **Calcolo basato su tuple**: Le unità di elaborazione sono tuple, che rappresentano elementi di dati.
+- **Topologia**: Un programma Storm è strutturato come un **grafo di topologia**, dove:
+- **Vertici**: Rappresentano i nodi di calcolo o le trasformazioni dei dati.
+- **Archi**: Rappresentano i flussi di dati tra i nodi.
+- **Stream**: Una sequenza illimitata di tuple (flussi di dati) che vengono processati continuamente.
 
 - **Motore di Basso Livello**: È un sistema flessibile, che permette di gestire calcoli personalizzati e adattarsi a diverse architetture di elaborazione.
 
@@ -258,55 +255,55 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 ### Storm vs Hadoop
 
 - **Somiglianze**:
- - Entrambi i sistemi utilizzano cluster per l'elaborazione distribuita.
+- Entrambi i sistemi utilizzano cluster per l'elaborazione distribuita.
 
 - **Differenze**:
- - **Hadoop** esegue job **MapReduce**, che hanno una fine definita.
- - **Storm** esegue **topologie**, che elaborano dati in modo continuo e teoricamente senza fine.
+- **Hadoop** esegue job **MapReduce**, che hanno una fine definita.
+- **Storm** esegue **topologie**, che elaborano dati in modo continuo e teoricamente senza fine.
 
 ### Modello Dati di Storm
 
 - **Tupla**: L'unità base di dati in Storm, composta da un elenco di campi.
- - Ogni campo può avere diversi tipi di dati come byte, integer, float, ecc.
- - È possibile definire tipi di dati personalizzati tramite l'API di Storm.
- - **Accesso ai campi**: Puoi accedere ai valori della tupla tramite:
- - **Nome del campo**: `getValueByField(String)`
- - **Indice posizionale**: `getValue(int)`
+- Ogni campo può avere diversi tipi di dati come byte, integer, float, ecc.
+- È possibile definire tipi di dati personalizzati tramite l'API di Storm.
+- **Accesso ai campi**: Puoi accedere ai valori della tupla tramite:
+- **Nome del campo**: `getValueByField(String)`
+- **Indice posizionale**: `getValue(int)`
 
 ### Concetti di Storm: Stream e Spout
 
 - **Stream**: Una sequenza illimitata di tuple, rappresentata come coppie chiave-valore, ad esempio `<"UIUC", 5>`.
 - **Spout**: La sorgente dei dati di uno stream. Ad esempio:
- - Una **API Twitterhose** può fungere da spout, emettendo un flusso continuo di tweet.
+- Una **API Twitterhose** può fungere da spout, emettendo un flusso continuo di tweet.
 
 ## Componenti di una Topologia Storm
 
 #### Spout
 
 - **Funzione**: Uno spout è la fonte di dati in una topologia Storm. Esso si occupa di:
- - Leggere o ascoltare dati da una fonte esterna (ad esempio, una coda o un API).
- - Pubblicare (emissione) i dati sotto forma di stream.
+- Leggere o ascoltare dati da una fonte esterna (ad esempio, una coda o un API).
+- Pubblicare (emissione) i dati sotto forma di stream.
 - Uno spout può emettere più stream contemporaneamente.
 - **Metodi importanti**:
- - `nextTuple()`: Legge i prossimi dati disponibili e li emette come tuple nello stream.
- - `open()`: Configura lo spout all'inizio della topologia (ad esempio, per connettersi a una fonte esterna).
+- `nextTuple()`: Legge i prossimi dati disponibili e li emette come tuple nello stream.
+- `open()`: Configura lo spout all'inizio della topologia (ad esempio, per connettersi a una fonte esterna).
 
 #### Bolt
 
 - **Funzione**: I bolt sono i nodi che elaborano i dati ricevuti dallo spout o da altri bolt, eseguendo trasformazioni, filtri, unioni, ecc. Ogni bolt può:
- - Ricevere dati (tuple) da uno o più stream.
- - Applicare trasformazioni o elaborazioni ai dati.
- - Emissione di nuovi stream di output.
+- Ricevere dati (tuple) da uno o più stream.
+- Applicare trasformazioni o elaborazioni ai dati.
+- Emissione di nuovi stream di output.
 - I bolt possono essere concatenati per eseguire trasformazioni più complesse.
 - **Metodi importanti**:
- - `execute(Tuple input)`: Viene eseguito per ogni tupla ricevuta. Contiene la logica di elaborazione.
- - `prepare(Map stormConf, TopologyContext context, OutputCollector collector)`: Configura il bolt, ad esempio per inizializzare risorse o settaggi necessari.
+- `execute(Tuple input)`: Viene eseguito per ogni tupla ricevuta. Contiene la logica di elaborazione.
+- `prepare(Map stormConf, TopologyContext context, OutputCollector collector)`: Configura il bolt, ad esempio per inizializzare risorse o settaggi necessari.
 
 ### Definizione di una Topologia Storm
 
 - **Cos'è una Topologia**: È un'astrazione di un grafo diretto aciclico (DAG) che rappresenta il flusso di elaborazione dei dati. La topologia Storm viene distribuita su un cluster per elaborare i dati in tempo reale.
- - **Spout**: Fonte dei dati. Può leggere tuple da una coda ed emetterle come stream.
- - **Bolt**: Nodo che trasforma/elabora i dati. Consuma un certo numero di stream di input, li processa e può emettere nuovi flussi(stream).
+- **Spout**: Fonte dei dati. Può leggere tuple da una coda ed emetterle come stream.
+- **Bolt**: Nodo che trasforma/elabora i dati. Consuma un certo numero di stream di input, li processa e può emettere nuovi flussi(stream).
 - Ogni nodo (spout o bolt) viene eseguito in parallelo, migliorando l'efficienza di elaborazione.
 
 ### Architettura di Apache Storm
@@ -317,23 +314,23 @@ Questo pattern rileva una sequenza di eventi in cui la temperatura diminuisce su
 
 ### Componenti di Storm
 
-1. **Nimbus**
- - È il **master** del cluster Storm, con responsabilità come:
- - Distribuire il codice dell'applicazione ai nodi worker.
- - Assegnare task ai worker.
- - Monitorare i task e riavviarli in caso di errori.
- - È **stateless** (senza stato), quindi memorizza tutte le informazioni critiche in **ZooKeeper**.
- - Solo un singolo nodo Nimbus è attivo in un cluster, e può essere riavviato senza interrompere i task in esecuzione.
+- **Nimbus**
+- È il **master** del cluster Storm, con responsabilità come:
+- Distribuire il codice dell'applicazione ai nodi worker.
+- Assegnare task ai worker.
+- Monitorare i task e riavviarli in caso di errori.
+- È **stateless** (senza stato), quindi memorizza tutte le informazioni critiche in **ZooKeeper**.
+- Solo un singolo nodo Nimbus è attivo in un cluster, e può essere riavviato senza interrompere i task in esecuzione.
 
-2. **Supervisor**
- - Sono i nodi worker che eseguono i task assegnati da Nimbus.
- - Ogni nodo supervisor gestisce la creazione, l'avvio e la chiusura dei processi worker.
- - Anche il supervisor è **fail-fast** e memorizza il proprio stato in ZooKeeper.
+- **Supervisor**
+- Sono i nodi worker che eseguono i task assegnati da Nimbus.
+- Ogni nodo supervisor gestisce la creazione, l'avvio e la chiusura dei processi worker.
+- Anche il supervisor è **fail-fast** e memorizza il proprio stato in ZooKeeper.
 
-3. **ZooKeeper**
- - ZooKeeper coordina il cluster distribuendo informazioni di configurazione tra Nimbus e i nodi supervisor.
- - Nimbus e i supervisor comunicano solo tramite ZooKeeper, garantendo che il sistema continui a funzionare anche se uno dei componenti viene temporaneamente interrotto.
- - Poiché tutti i dati di stato vengono memorizzati in ZooKeeper, è possibile riavviare Nimbus o un supervisor senza perdita di dati o di stato.
+- **ZooKeeper**
+- ZooKeeper coordina il cluster distribuendo informazioni di configurazione tra Nimbus e i nodi supervisor.
+- Nimbus e i supervisor comunicano solo tramite ZooKeeper, garantendo che il sistema continui a funzionare anche se uno dei componenti viene temporaneamente interrotto.
+- Poiché tutti i dati di stato vengono memorizzati in ZooKeeper, è possibile riavviare Nimbus o un supervisor senza perdita di dati o di stato.
 
 ### Storm vs Hadoop
 
@@ -363,7 +360,7 @@ Una topologia in esecuzione consiste in molti processi worker distribuiti su mol
 - Quando un worker smette di funzionare, il **supervisor** lo riavvierà.
 - Se un nodo supervisor smette di funzionare, **Nimbus** riassegnerà il lavoro ad altri nodi.
 - Se **Nimbus** smette di funzionare, le topologie continueranno a funzionare normalmente, ma non sarà possibile eseguire nuove riassegnazioni dei task.
- - Questo è diverso da Hadoop, dove se il **JobTracker** smette di funzionare, tutti i job in esecuzione vengono persi.
+- Questo è diverso da Hadoop, dove se il **JobTracker** smette di funzionare, tutti i job in esecuzione vengono persi.
 - È preferibile eseguire ZooKeeper con almeno **3 nodi**, in modo da poter tollerare il fallimento di 1 server ZooKeeper.
 
 ## Una Topologia di Conteggio Parole di Esempio

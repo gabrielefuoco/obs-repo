@@ -10,7 +10,7 @@ L'embedding è una tecnica di rappresentazione dei dati testuali in uno spazio v
 
 * **Word Embedding**: È una rappresentazione distribuita delle parole nello spazio vettoriale, in cui le parole simili vengono mappate in punti vicini. Esistono diversi algoritmi per imparare le rappresentazioni di embedding, come Word2Vec e GloVe. Questi algoritmi catturano le relazioni semantiche e sintattiche tra le parole, consentendo un'elaborazione del linguaggio naturale più efficace.
 
-* **Sentence Embedding**: È una rappresentazione vettoriale di un'intera frase o documento, ottenuta combinando le rappresentazioni di embedding delle singole parole che lo compongono. Esistono diversi approcci per ottenere sentence embedding, come l'utilizzo di reti neurali ricorrenti o trasformatori. 
+* **Sentence Embedding**: È una rappresentazione vettoriale di un'intera frase o documento, ottenuta combinando le rappresentazioni di embedding delle singole parole che lo compongono. Esistono diversi approcci per ottenere sentence embedding, come l'utilizzo di reti neurali ricorrenti o trasformatori.
 
 ## Support Vector Machine (SVM)
 
@@ -28,16 +28,16 @@ L'embedding è una tecnica di rappresentazione dei dati testuali in uno spazio v
 
 * Le tecniche di ensemble mirano a migliorare l'accuratezza di classificazione combinando le predizioni di più classificatori base.
 
- * Un classificatore ensemble costruisce un insieme di classificatori base dal training set e classifica un nuovo esempio effettuando un voto sulle predizioni dei singoli classificatori.
+* Un classificatore ensemble costruisce un insieme di classificatori base dal training set e classifica un nuovo esempio effettuando un voto sulle predizioni dei singoli classificatori.
 
 * Affinché un ensemble funzioni meglio di un singolo classificatore, è necessario che i classificatori base soddisfino due condizioni:
 
- * Devono essere tra loro indipendenti, ovvero con errori non correlati;
- * Devono performare meglio di un semplice classificatore casuale.
+* Devono essere tra loro indipendenti, ovvero con errori non correlati;
+* Devono performare meglio di un semplice classificatore casuale.
 
 * Quando queste condizioni sono soddisfatte, la combinazione dei voti dei classificatori base permette all'ensemble di ridurre l'errore complessivo rispetto ai singoli componenti.
 
- * Ad esempio, con 25 classificatori binari aventi errore 0.35 ciascuno, un ensemble a maggioranza commette un errore di solo 0.06, decisamente inferiore.
+* Ad esempio, con 25 classificatori binari aventi errore 0.35 ciascuno, un ensemble a maggioranza commette un errore di solo 0.06, decisamente inferiore.
 $$\\text{ensemble}=P(X \geq 13)=\sum_{i=13}^25 \binom{25}{i} \epsilon^i(1-\epsilon)^{25-i}=0.06$$
 
 * Tuttavia, nella pratica è difficile garantire l'indipendenza assoluta dei classificatori base. Ciononostante, tecniche ensemble in cui i componenti sono parzialmente correlati hanno generalmente mostrato miglioramenti nelle prestazioni rispetto ai singoli classificatori.
@@ -53,9 +53,9 @@ L'idea di base è quella di costruire più classificatori a partire dai dati ori
 
 * La procedura prevede di:
 
- 1. Generare k sottoinsiemi $D_i$ di dimensione N campionando con ricampionamento i dati originali.
- 2. Addestrare k modelli $C_i$ su ciascun $D_i$.
- 3. Per classificare una nuova istanza, assegnarla alla classe che riceve più voti tra i k modelli.
+- Generare k sottoinsiemi $D_i$ di dimensione N campionando con ricampionamento i dati originali.
+- Addestrare k modelli $C_i$ su ciascun $D_i$.
+- Per classificare una nuova istanza, assegnarla alla classe che riceve più voti tra i k modelli.
 
 * Ogni insieme $D_i$ contiene circa il 63% dei dati originali, con alcune istanze duplicate e altre omesse. Ciò genera diversità tra i modelli $C_i$, che imparano aspetti leggermente diversi dei dati.
 
@@ -69,8 +69,8 @@ L'idea di base è quella di costruire più classificatori a partire dai dati ori
 
 * Inizialmente, tutti gli esempi hanno lo stesso peso. Ad ogni iterazione:
 
- * Si addestra un nuovo classificatore su un campione estratto in base ai pesi correnti.
- * Si utilizzano le predizioni di tale classificatore per aggiornare i pesi degli esempi: quelli classificati erroneamente vedono aumentare il loro peso, quelli classificati correttamente lo vedono diminuire.
+* Si addestra un nuovo classificatore su un campione estratto in base ai pesi correnti.
+* Si utilizzano le predizioni di tale classificatore per aggiornare i pesi degli esempi: quelli classificati erroneamente vedono aumentare il loro peso, quelli classificati correttamente lo vedono diminuire.
 
 * In questo modo, gli esempi più difficili acquisiscono sempre più importanza nelle iterazioni successive, permettendo al modello di imparare a classificarli meglio.
 
@@ -86,12 +86,12 @@ L'idea di base è quella di costruire più classificatori a partire dai dati ori
 
 * Inizialmente, tutti gli esempi di training hanno lo stesso peso 1/N. Poi, ad ogni iterazione i:
 
- 1. Si campiona un sottoinsieme $D_i$ dal dataset originale utilizzando la distribuzione di pesi corrente $w_i$.
- 2. Si addestra un nuovo classificatore base $C_i$ sul sottoinsieme $D_i$.
- 3. Si calcola l'errore pesato $\epsilon_i$ di $C_i$, basato sui pesi $w_i$ degli esempi classificati erroneamente.
- 4. Si calcola l'importanza $\alpha_i$ di $C_i$ in base a $\epsilon_i$, con $\alpha_i$ alto se $\epsilon_i$ è basso (buon classificatore).
- 5. Si aggiornano i pesi $w_i$ per la prossima iterazione: aumentati per gli esempi che $C_i$ ha classificato erroneamente, diminuiti per quelli corretti. Ciò aumenta l'importanza degli esempi difficili.
- 6. Se $\epsilon_i > 0.5$, i pesi vengono reinizializzati uniformemente e si ricampiona $D_i$.
+- Si campiona un sottoinsieme $D_i$ dal dataset originale utilizzando la distribuzione di pesi corrente $w_i$.
+- Si addestra un nuovo classificatore base $C_i$ sul sottoinsieme $D_i$.
+- Si calcola l'errore pesato $\epsilon_i$ di $C_i$, basato sui pesi $w_i$ degli esempi classificati erroneamente.
+- Si calcola l'importanza $\alpha_i$ di $C_i$ in base a $\epsilon_i$, con $\alpha_i$ alto se $\epsilon_i$ è basso (buon classificatore).
+- Si aggiornano i pesi $w_i$ per la prossima iterazione: aumentati per gli esempi che $C_i$ ha classificato erroneamente, diminuiti per quelli corretti. Ciò aumenta l'importanza degli esempi difficili.
+- Se $\epsilon_i > 0.5$, i pesi vengono reinizializzati uniformemente e si ricampiona $D_i$.
 
 * Alla fine delle k iterazioni, la previsione finale dell'ensemble è una combinazione pesata delle previsioni dei k classificatori base, utilizzando i rispettivi $\alpha_i$ come pesi. Ciò permette ai migliori classificatori di influenzare maggiormente la risposta.
 
@@ -117,14 +117,14 @@ L'idea di base è quella di costruire più classificatori a partire dai dati ori
 
 * **Random Forest:** costruisce un insieme di alberi decisionali decorrelati, ognuno addestrato su:
 
- 1. Un campione bootstrap dei dati di training (come nel bagging).
- 2. Un sottoinsieme casuale di features selezionate ad ogni nodo dell'albero.
+- Un campione bootstrap dei dati di training (come nel bagging).
+- Un sottoinsieme casuale di features selezionate ad ogni nodo dell'albero.
 
 * Nello specifico, per costruire una Random Forest di T alberi su un dataset con N istanze e d features:
 
- 1. Si estrae un campione bootstrap $D_i$ di N istanze.
- 2. Si addestra un albero decisionale $T_i$ su $D_i$, selezionando casualmente $p \le d$ features ad ogni nodo e scegliendo quella che massimizza la riduzione di impurità.
- 3. Si ripetono i passi 1-2 per T volte.
+- Si estrae un campione bootstrap $D_i$ di N istanze.
+- Si addestra un albero decisionale $T_i$ su $D_i$, selezionando casualmente $p \le d$ features ad ogni nodo e scegliendo quella che massimizza la riduzione di impurità.
+- Si ripetono i passi 1-2 per T volte.
 
 * Il valore di p è un iperparametro chiave: valori piccoli riducono la correlazione tra alberi ma ne limitano la potenza predittiva, mentre valori grandi possono portare ad alberi molto correlati.
 
@@ -138,16 +138,16 @@ L'idea di base è quella di costruire più classificatori a partire dai dati ori
 
 * La procedura è la seguente:
 
- 1. Le classi vengono divise casualmente in due sottoinsiemi disgiunti $A_0$ e $A_1$.
- 2. I dati di training vengono ricodificati in un problema binario, assegnando classe 0 agli esempi in $A_0$ e classe 1 a quelli in $A_1$.
- 3. Si addestra un classificatore binario su questi dati ricodificati.
- 4. Si ripetono i passi 1-3 più volte, ottenendo diversi classificatori binari con diversa codifica classe.
+- Le classi vengono divise casualmente in due sottoinsiemi disgiunti $A_0$ e $A_1$.
+- I dati di training vengono ricodificati in un problema binario, assegnando classe 0 agli esempi in $A_0$ e classe 1 a quelli in $A_1$.
+- Si addestra un classificatore binario su questi dati ricodificati.
+- Si ripetono i passi 1-3 più volte, ottenendo diversi classificatori binari con diversa codifica classe.
 
 * Per classificare un nuovo esempio:
 
- * Ogni classificatore binario assegna un voto alle classi di $A_0$ o $A_1$ a seconda della sua predizione.
- * Si conta il numero di voti per ogni classe originale.
- * Si assegna l'esempio alla classe con più voti.
+* Ogni classificatore binario assegna un voto alle classi di $A_0$ o $A_1$ a seconda della sua predizione.
+* Si conta il numero di voti per ogni classe originale.
+* Si assegna l'esempio alla classe con più voti.
 
 * Questa tecnica scompone il problema multi-classe in molteplici problemi binari più semplici, permettendo di sfruttare algoritmi efficienti di classificazione binaria. La diversità nei sottoinsiemi di codifica classe generati casualmente permette di ottenere un ensemble accurato.
 

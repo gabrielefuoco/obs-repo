@@ -1,6 +1,6 @@
 ### Topic Modeling
 
-Il **Topic Modeling**, in particolare il **Stochastic Topic Modeling**, ha avuto un grande impatto nella prima decade degli anni 2000. Si tratta di un'espressione generica che indica la modellazione e la rappresentazione dei dati testuali. La differenza principale con i modelli precedenti risiede nel fatto che il **Topic Modeling** rappresenta un **topic** come una **distribuzione di probabilità sullo spazio dei termini**. Allo stesso tempo, un documento è visto come una **miscela di distribuzioni di probabilità dei topic**. 
+Il **Topic Modeling**, in particolare il **Stochastic Topic Modeling**, ha avuto un grande impatto nella prima decade degli anni 2000. Si tratta di un'espressione generica che indica la modellazione e la rappresentazione dei dati testuali. La differenza principale con i modelli precedenti risiede nel fatto che il **Topic Modeling** rappresenta un **topic** come una **distribuzione di probabilità sullo spazio dei termini**. Allo stesso tempo, un documento è visto come una **miscela di distribuzioni di probabilità dei topic**.
 
 ### Basi di Conoscenza Lessicali
 
@@ -9,32 +9,32 @@ Le **Basi di Conoscenza Lessicali** sono un elemento importante del **Knowledge 
 ### Ritorno al Vector Space Model
 
 Il **Vector Space Model** riemergerà nell'ambito dell'Information Retrieval. Vedremo un modello e le sue proprietà, insieme a una generalizzazione che rappresenta la versione probabilistica della funzione TF, specificamente per i task di retrieval.
- 
-**Premessa:** Un sistema tradizionale di Information Retrieval richiede un meccanismo di matching, ovvero un sistema di **ranking**. 
+
+**Premessa:** Un sistema tradizionale di Information Retrieval richiede un meccanismo di matching, ovvero un sistema di **ranking**.
 
 ## Incertezza nella Ricerca di Informazioni
 
-Quando si parla di ricerca di informazioni, è importante considerare che la query dell'utente non sempre corrisponde a una richiesta precisa e chiara. Questo perché la traduzione in linguaggio naturale dell'esigenza informativa può essere imprecisa, soprattutto in termini di obiettivi di ricerca. 
+Quando si parla di ricerca di informazioni, è importante considerare che la query dell'utente non sempre corrisponde a una richiesta precisa e chiara. Questo perché la traduzione in linguaggio naturale dell'esigenza informativa può essere imprecisa, soprattutto in termini di obiettivi di ricerca.
 
-Per affrontare questa incertezza, è necessario introdurre una nozione di **incertezza** nei sistemi di recupero delle informazioni. 
+Per affrontare questa incertezza, è necessario introdurre una nozione di **incertezza** nei sistemi di recupero delle informazioni.
 
 #### Un esempio dal Data Mining
 
-Questa incertezza è affrontata introducendo modelli probabilistici, analogamente a quanto avviene nell' "uncertainty data mining",  dove l'incertezza nei dati, ad esempio quelli sensoriali, viene gestita tramite approcci probabilistici.
+Questa incertezza è affrontata introducendo modelli probabilistici, analogamente a quanto avviene nell' "uncertainty data mining", dove l'incertezza nei dati, ad esempio quelli sensoriali, viene gestita tramite approcci probabilistici.
 
 ##### Incertezza nelle Misurazioni Sensoriali
 
-Ad esempio, i sensori ottici utilizzati per la rilevazione del particolato atmosferico sono più economici di quelli pneumatici, ma sono anche più sensibili all'umidità, portando a sovrastima.  Questo evidenzia la difficoltà di ottenere valori precisi nelle misurazioni sensoriali.
+Ad esempio, i sensori ottici utilizzati per la rilevazione del particolato atmosferico sono più economici di quelli pneumatici, ma sono anche più sensibili all'umidità, portando a sovrastima. Questo evidenzia la difficoltà di ottenere valori precisi nelle misurazioni sensoriali.
 
 ### Introduzione all'Incertezza nei Dati
 
-In un contesto di analisi dati, come la classificazione o il retrieval di informazioni, spesso si assume che i dati siano rappresentati da valori numerici. Tuttavia, è importante considerare che questi valori numerici possono essere affetti da incertezza. 
+In un contesto di analisi dati, come la classificazione o il retrieval di informazioni, spesso si assume che i dati siano rappresentati da valori numerici. Tuttavia, è importante considerare che questi valori numerici possono essere affetti da incertezza.
 
 Un modo per gestire questa incertezza è associare a ciascun valore una distribuzione di probabilità univariata, ad esempio una distribuzione gaussiana con media pari al valore stesso. In questo modo, si passa da vettori multidimensionali a insiemi di distribuzioni di probabilità, rendendo l'analisi più complessa ma anche più realistica.
 
 ### Strumenti per la Gestione dell'Incertezza
 
-Per lavorare con distribuzioni di probabilità, si possono utilizzare strumenti come la divergenza di *Shannon-Jensen*, che fornisce una misura di distanza tra distribuzioni. 
+Per lavorare con distribuzioni di probabilità, si possono utilizzare strumenti come la divergenza di *Shannon-Jensen*, che fornisce una misura di distanza tra distribuzioni.
 
 L'introduzione dell'incertezza nei dati è particolarmente importante in contesti come il data mining, il knowledge management e l'information retrieval. Questo perché l'incertezza permette di creare sistemi di retrieval più raffinati, in grado di soddisfare richieste complesse e di identificare il miglior set di risultati (result set) composto dai documenti più rilevanti.
 
@@ -67,7 +67,7 @@ Il problema può essere formalizzato come un problema di **classificazione**. Si
 
 * **X:** Rappresentazione vettoriale del documento.
 * **R:** Classe "rilevante".
-	* **R=1** significa "pertinente" e **R=0** "non pertinente"
+* **R=1** significa "pertinente" e **R=0** "non pertinente"
 * **P(R=1|X):** Probabilità che il documento X appartenga alla classe R.
 
 ##### Formula di Bayes:
@@ -90,7 +90,7 @@ Dove:
 
 L'assunzione di indipendenza condizionata può essere problematica nei dati testuali, a causa delle relazioni di dipendenza tra le dimensioni. È importante considerare questo aspetto quando si applica la classificazione a dati testuali.
 
-Il problema della classificazione si basa sulla formula di *price*, dove il denominatore rimane costante indipendentemente dalla classe o dalla distanza. 
+Il problema della classificazione si basa sulla formula di *price*, dove il denominatore rimane costante indipendentemente dalla classe o dalla distanza.
 
 ##### Il termine di *likelihood*
 
@@ -149,21 +149,21 @@ L'obiettivo è solo il ranking
 
 ## Applicazione del Teorema di Bayes per il Ranking dei Documenti
 
-Come già visto con altre applicazioni del teorema di Bayes, non siamo interessati al punteggio (score) o alle probabilità in sé, ma al **ranking** dei documenti. 
+Come già visto con altre applicazioni del teorema di Bayes, non siamo interessati al punteggio (score) o alle probabilità in sé, ma al **ranking** dei documenti.
 
-La novità rispetto alla classificazione Bayesiana è che questa volta ricorreremo a **O(R|QX)**, ovvero la probabilità di osservare la classe **R** dato il documento **X** e la query **Q**. 
+La novità rispetto alla classificazione Bayesiana è che questa volta ricorreremo a **O(R|QX)**, ovvero la probabilità di osservare la classe **R** dato il documento **X** e la query **Q**.
 
 **O(R|QX)** è un rapporto tra la probabilità che il documento **X** sia della classe **R** (R = 1) e la probabilità che il documento **X** non sia della classe **R** (R = 0). In formule:
 
 $$O(R|Q\vec{X}) = \frac{P(R=1|Q\vec{X})}{P(R=0|Q\vec{X})}$$
 
-Per ognuno di questi termini applichiamo il teorema di Bayes. 
+Per ognuno di questi termini applichiamo il teorema di Bayes.
 
 ### Odds
 
 Gli odds sono una misura di probabilità che rappresenta il rapporto tra la probabilità di un evento e la probabilità del suo complemento. In questo caso, gli odds ci aiutano a stabilire un ordinamento tra i documenti piuttosto che assegnare loro un punteggio.
 
-Gli odds ci aiutano a rimanere concentrati sull'analisi specifica per stabilire un ordinamento tra i documenti. 
+Gli odds ci aiutano a rimanere concentrati sull'analisi specifica per stabilire un ordinamento tra i documenti.
 
 ##### Cosa sono gli Odds Ratio (OR)?
 
@@ -195,7 +195,7 @@ Sono due misure utilizzate per valutare l'associazione tra un evento (ad esempio
 
 ### Rischio Relativo
 
-Il rischio relativo (RR) misura la probabilità di un evento in presenza di una variabile rispetto alla probabilità dello stesso evento in assenza della variabile. 
+Il rischio relativo (RR) misura la probabilità di un evento in presenza di una variabile rispetto alla probabilità dello stesso evento in assenza della variabile.
 
 ##### Formula:
 
@@ -240,7 +240,7 @@ dove:
 
 ## Odds Ratio e Rischio Relativo: Un Confronto
 
-La **Odds Ratio (OR)** è una misura di associazione tra un fattore di rischio e un evento. È definita come il rapporto tra le odds di un evento nel gruppo esposto al fattore di rischio e le odds dello stesso evento nel gruppo non esposto. 
+La **Odds Ratio (OR)** è una misura di associazione tra un fattore di rischio e un evento. È definita come il rapporto tra le odds di un evento nel gruppo esposto al fattore di rischio e le odds dello stesso evento nel gruppo non esposto.
 
 ##### Proprietà importanti dell'Odds Ratio:
 
@@ -314,11 +314,11 @@ Dove:
 
 Per stimare la produttoria di likelihood, si divide la produttoria in due parti:
 
-1. **Produttoria per i termini presenti nel documento:** 
+- **Produttoria per i termini presenti nel documento:**
 $$\begin{aligned}
- \prod_{x_{i}=1} \frac{p\left(x_{i}=1 \mid R=1,q\right)}{p\left(x_{i}=1 \mid R=0,q\right)} 
- \end{aligned}$$
-2. **Produttoria per i termini assenti nel documento:** 
+\prod_{x_{i}=1} \frac{p\left(x_{i}=1 \mid R=1,q\right)}{p\left(x_{i}=1 \mid R=0,q\right)}
+\end{aligned}$$
+- **Produttoria per i termini assenti nel documento:**
 $$\begin{aligned}
 \prod_{x_{i}=0} \frac{p\left(x_{i}=0 \mid R=1,q\right)}{p\left(x_{i}=0 \mid R=0,q\right)}
 \end{aligned}$$
@@ -329,7 +329,7 @@ Per semplificare la notazione, si utilizzano le seguenti abbreviazioni:
 * **P<sub>i</sub>**: Likelihood rispetto alla presenza del termine i-esimo, data l'ipotesi di rilevanza.
 * **R<sub>i</sub>**: Likelihood rispetto alla presenza del termine i-esimo, data l'ipotesi di non rilevanza.
 
-Quindi, la produttoria di likelihood può essere riscritta come $\prod_{i=1}^{n} \left( \frac{P_i}{R_i} \right)$ 
+Quindi, la produttoria di likelihood può essere riscritta come $\prod_{i=1}^{n} \left( \frac{P_i}{R_i} \right)$
 
 ## Probabilità di Osservazione dei Termini in un Documento
 
@@ -380,8 +380,8 @@ $$
 
 Distinguiamo due parti importanti:
 
-1. **Produttoria dei termini "match":** Rappresenta i termini in cui il documento è rilevante per la query.
-2. **Produttoria dei termini "non-match":** Rappresenta i termini in cui il documento non è rilevante per la query.
+- **Produttoria dei termini "match":** Rappresenta i termini in cui il documento è rilevante per la query.
+- **Produttoria dei termini "non-match":** Rappresenta i termini in cui il documento non è rilevante per la query.
 
 Analizziamo ora l'ultimo passaggio aritmetico. Introduciamo una produttoria fittizia iterando su tutti i termini "match" (x con i = 1):
 $$
@@ -392,8 +392,8 @@ $$
 Scomponiamo questi termini e li ridistribuiamo nelle due produttorie originali:
 
 * Alcuni termini della produttoria fittizia vanno nella **prima produttoria** per formare un **odds ratio**:
- * P / (1 - P): Probabilità di osservare il termine dato che il documento è rilevante, diviso la probabilità di osservare il termine dato che il documento non è rilevante.
- * R / (1 - R): Probabilità di osservare il termine dato che il documento non è rilevante, diviso la probabilità di non osservare il termine dato che il documento non è rilevante.
+* P / (1 - P): Probabilità di osservare il termine dato che il documento è rilevante, diviso la probabilità di osservare il termine dato che il documento non è rilevante.
+* R / (1 - R): Probabilità di osservare il termine dato che il documento non è rilevante, diviso la probabilità di non osservare il termine dato che il documento non è rilevante.
 * Nella **prima produttoria** abbiamo ora un **odds ratio** per ogni termine "match".
 * Dalla produttoria fittizia rimane la quantità `1 con i / 1 con i`, identica al rapporto presente nella **seconda produttoria** (termini "non-match").
 
@@ -409,7 +409,7 @@ Questa produttoria finale considera sia i termini "match" che "non-match". I ter
 Ricapitolando, abbiamo ottenuto:
 
 * **Odds ratio di R dato il primo termine:** Rappresenta la probabilità di rilevanza del documento dato il primo termine della query.
-* **Produttoria sui termini indipendenti:** Rappresenta l'influenza dei termini che non dipendono dalla rilevanza del documento. 
+* **Produttoria sui termini indipendenti:** Rappresenta l'influenza dei termini che non dipendono dalla rilevanza del documento.
 
 ## Retrieval Status Value (RSV)
 
@@ -417,9 +417,9 @@ Il **Retrieval Status Value (RSV)** è un punteggio che viene assegnato a un doc
 
 ##### Calcolo dell'RSV:
 
-1. **Produttoria degli odds ratio:** Per ogni termine della query che corrisponde a un termine nel documento, si calcola l'**odds ratio**. L'odds ratio è il rapporto tra la probabilità che il termine appaia nel documento e la probabilità che appaia in un documento casuale.
-2. **Sommatoria dei logaritmi:** Si calcola la sommatoria dei logaritmi degli odds ratio per tutti i termini corrispondenti.
-3. **RSV:** Il risultato della sommatoria dei logaritmi è il **Retrieval Status Value (RSV)**.
+- **Produttoria degli odds ratio:** Per ogni termine della query che corrisponde a un termine nel documento, si calcola l'**odds ratio**. L'odds ratio è il rapporto tra la probabilità che il termine appaia nel documento e la probabilità che appaia in un documento casuale.
+- **Sommatoria dei logaritmi:** Si calcola la sommatoria dei logaritmi degli odds ratio per tutti i termini corrispondenti.
+- **RSV:** Il risultato della sommatoria dei logaritmi è il **Retrieval Status Value (RSV)**.
 
 ##### Esempio:
 
@@ -444,20 +444,20 @@ Per calcolare gli odds ratio, è necessario stimare le probabilità di occorrenz
 
 ## Analisi dei Dati di Addestramento dei Modelli Linguistici
 
-L'analisi dei dati di addestramento dei modelli linguistici è un campo di ricerca attuale e complesso. Una sfida particolarmente impegnativa è la **"inversione del modello"**: risalire ai dati di addestramento originali a partire dal modello stesso e dai suoi output. 
+L'analisi dei dati di addestramento dei modelli linguistici è un campo di ricerca attuale e complesso. Una sfida particolarmente impegnativa è la **"inversione del modello"**: risalire ai dati di addestramento originali a partire dal modello stesso e dai suoi output.
 
 Seppur estremamente difficile, una simile scoperta avrebbe un impatto rivoluzionario. Il fatto che gruppi con ingenti risorse finanziarie stiano investendo in questa direzione è un segnale positivo dell'importanza di questa ricerca.
 
 Attualmente, la **trasparenza** riguardo ai dati di addestramento dei modelli linguistici è limitata, specialmente per i modelli open source. Dichiarare genericamente che i dati provengono da "web, prosa e poesia" non è sufficiente: è necessario un livello di dettaglio molto più elevato.
 
-Un'analisi efficace richiederebbe l'**addestramento di un modello specifico** in grado di riconoscere il contesto dei dati di addestramento originali. Questo processo è a sua volta molto complesso e necessita di dataset di addestramento altamente specifici. 
+Un'analisi efficace richiederebbe l'**addestramento di un modello specifico** in grado di riconoscere il contesto dei dati di addestramento originali. Questo processo è a sua volta molto complesso e necessita di dataset di addestramento altamente specifici.
 
 ## Simboli e Definizioni
 
 Per comprendere meglio i concetti di NLP, è necessario introdurre alcuni simboli e definizioni:
 
 * **RSV:** Questi simboli rappresentano il logaritmo del produttore di all special.
- $$
+$$
 RSV = \log \prod_{x_i=q_i=1} \frac{p_i(1-r_i)}{r_i(1-p_i)} = \sum_{x_i=q_i=1} \log \frac{p_i(1-r_i)}{r_i(1-p_i)}
 $$
 * **i:** Rappresenta il numero di termini, ovvero la dimensione del vocabolario.
@@ -505,7 +505,7 @@ c_i = K(N,n,S,s) = \log \frac{s/(S-s)}{(n-s)/(N-n-S+s)}
 $$
 ## $r_i$ e l'approssimazione dei non rilevanti
 
-Partiamo da $r_i$, che rappresenta la probabilità di incidenza del termine di ricerca in documenti non rilevanti. 
+Partiamo da $r_i$, che rappresenta la probabilità di incidenza del termine di ricerca in documenti non rilevanti.
 
 **Ipotesi:** È ragionevole assumere che l'insieme dei documenti non rilevanti possa essere approssimato dall'intera collezione. Questo perché i documenti rilevanti sono generalmente una piccola porzione rispetto all'intero insieme dei documenti, soprattutto in contesti come il web.
 
@@ -526,11 +526,11 @@ $$\log \frac{1-r_i}{r_i} = \log \frac{N-n-S+s}{n-s} \approx \log \frac{N-n}{n} \
 
 ## Probabilità e Smoothing
 
-È raro che un sostantivo o un verbo (termini di contenuto) appaia in un numero elevato di documenti. Il logaritmo del numero di documenti rilevanti in cui appare un termine diviso per il numero totale di documenti (log(n grande / n piccolo)) rappresenta la **norma inversa del termine**. 
+È raro che un sostantivo o un verbo (termini di contenuto) appaia in un numero elevato di documenti. Il logaritmo del numero di documenti rilevanti in cui appare un termine diviso per il numero totale di documenti (log(n grande / n piccolo)) rappresenta la **norma inversa del termine**.
 
 ##### Incertezza e Probabilità
 
-Stiamo trattando l'informazione in modo probabilistico, introducendo incertezza. Questo significa che non abbiamo un valore fisso, ma dobbiamo muoverci in un intorno. La **TFPF (Term Frequency-Probability Factor)** è una misura robusta perché è coerente con la legge di Zipf. 
+Stiamo trattando l'informazione in modo probabilistico, introducendo incertezza. Questo significa che non abbiamo un valore fisso, ma dobbiamo muoverci in un intorno. La **TFPF (Term Frequency-Probability Factor)** è una misura robusta perché è coerente con la legge di Zipf.
 
 ##### Smoothing
 
@@ -541,7 +541,7 @@ Introduciamo dei **parametri di smoothing** per evitare che il modello risponda 
 
 ##### Smoothing nella Probabilità
 
-Nella teoria della probabilità, in particolare nell'inferenza bayesiana, lo smoothing viene utilizzato per evitare che il modello si affidi eccessivamente ai dati osservati. 
+Nella teoria della probabilità, in particolare nell'inferenza bayesiana, lo smoothing viene utilizzato per evitare che il modello si affidi eccessivamente ai dati osservati.
 
 La formula di probabilità condizionale è la seguente: $$ P_{i}^{(h+1)} = \frac{\left|V_{i}\right|+\kappa p_{i}^{(h)}}{\left|V\right|+K} $$
 
@@ -549,11 +549,11 @@ La formula di probabilità condizionale è la seguente: $$ P_{i}^{(h+1)} = \frac
 * **$|V_i|$:** Cardinalità dell'insieme $B$ contenente l'evento $i$. In altre parole, numero di volte in cui l'evento $i$ è presente nell'insieme $B$.
 * **$|V|$:** Cardinalità dell'insieme $B$, ovvero il numero totale di elementi in $B$.
 * **$K$:** Parametro di smoothing, utilizzato per gestire eventi non presenti in $B$ ed evitare probabilità nulle.
-* **$p_i^{(h)}$:** Probabilità di osservare l'evento $i$ all'iterazione $h$. 
+* **$p_i^{(h)}$:** Probabilità di osservare l'evento $i$ all'iterazione $h$.
 
 ##### Effetti dello Smoothing
 
-Lo smoothing introduce dei **fattori nascosti** che influenzano la probabilità di occorrenza di un termine. Questi fattori nascosti rappresentano la correlazione o la dipendenza tra i termini stessi. 
+Lo smoothing introduce dei **fattori nascosti** che influenzano la probabilità di occorrenza di un termine. Questi fattori nascosti rappresentano la correlazione o la dipendenza tra i termini stessi.
 
 ## Stima di $p_{i}$ e Relevance Feedback
 
@@ -565,9 +565,9 @@ Dopo aver affrontato la stima di $r_{i}$, ci concentriamo ora su $p_{i}$, la lik
 
 Esistono tre approcci principali per stimare $p_{i}$:
 
-1. **Stima da un sottoinsieme di documenti etichettati:** Questo approccio prevede la stima di $p_{i}$ da un sottoinsieme di documenti etichettati come rilevanti. Il meccanismo di feedback con l'utente o con un oracolo viene utilizzato per migliorare la stima.
-2. **Utilizzo di teorie e leggi:** Questo approccio si basa sull'utilizzo di teorie e leggi che consentono di approssimare $p_{i}$ in modo costante o attraverso una funzione dalla forma chiusa e nota.
-3. **Probabilistic Relevance Feedback:** Questo approccio si basa sul concetto di *probabilistic relevance feedback*, un'applicazione generale del feedback dell'utente per migliorare la ricerca di informazioni.
+- **Stima da un sottoinsieme di documenti etichettati:** Questo approccio prevede la stima di $p_{i}$ da un sottoinsieme di documenti etichettati come rilevanti. Il meccanismo di feedback con l'utente o con un oracolo viene utilizzato per migliorare la stima.
+- **Utilizzo di teorie e leggi:** Questo approccio si basa sull'utilizzo di teorie e leggi che consentono di approssimare $p_{i}$ in modo costante o attraverso una funzione dalla forma chiusa e nota.
+- **Probabilistic Relevance Feedback:** Questo approccio si basa sul concetto di *probabilistic relevance feedback*, un'applicazione generale del feedback dell'utente per migliorare la ricerca di informazioni.
 
 ### Probabilistic Relevance Feedback
 
@@ -579,7 +579,7 @@ L'obiettivo finale del *relevance feedback* è quello di migliorare la risposta 
 
 ##### Espansione della Query:
 
-L'espansione della query consiste nell'aggiungere nuovi termini alla query originale. Questi termini non sono scelti a caso, ma sono identificati come caratterizzanti i documenti rilevanti. Il sistema, iterazione dopo iterazione, identifica i documenti rilevanti e un meccanismo di estrazione di keyword identifica i termini importanti presenti in questi documenti. Questi termini vengono poi aggiunti alla query, migliorando la sua accuratezza. 
+L'espansione della query consiste nell'aggiungere nuovi termini alla query originale. Questi termini non sono scelti a caso, ma sono identificati come caratterizzanti i documenti rilevanti. Il sistema, iterazione dopo iterazione, identifica i documenti rilevanti e un meccanismo di estrazione di keyword identifica i termini importanti presenti in questi documenti. Questi termini vengono poi aggiunti alla query, migliorando la sua accuratezza.
 
 ## Relevance Feedback e Probabilistic Relevance Feedback
 
@@ -593,10 +593,10 @@ Il **probabilistic relevance feedback** è una tecnica che utilizza un modello p
 
 ##### Il processo di probabilistic relevance feedback prevede i seguenti passaggi:
 
-1. **Stima iniziale:** Si parte da una stima iniziale della probabilità che un documento sia rilevante (P(R|D)) e della probabilità che un termine sia rilevante (P(I|R)).
-2. **Identificazione dei documenti rilevanti:** L'utente identifica un set di documenti rilevanti tra quelli restituiti dal sistema.
-3. **Raffinamento della stima:** Il sistema utilizza il feedback dell'utente per raffinare la stima della probabilità di rilevanza dei termini e dei documenti.
-4. **Ricerca iterativa:** Il sistema utilizza le nuove stime per eseguire una nuova ricerca, restituendo risultati più pertinenti.
+- **Stima iniziale:** Si parte da una stima iniziale della probabilità che un documento sia rilevante (P(R|D)) e della probabilità che un termine sia rilevante (P(I|R)).
+- **Identificazione dei documenti rilevanti:** L'utente identifica un set di documenti rilevanti tra quelli restituiti dal sistema.
+- **Raffinamento della stima:** Il sistema utilizza il feedback dell'utente per raffinare la stima della probabilità di rilevanza dei termini e dei documenti.
+- **Ricerca iterativa:** Il sistema utilizza le nuove stime per eseguire una nuova ricerca, restituendo risultati più pertinenti.
 
 ##### Il probabilistic relevance feedback si basa sul concetto di **inverso documento**, che indica la probabilità che un termine sia presente in un documento rilevante. Questa probabilità viene utilizzata per stimare la probabilità che un documento sia rilevante per una query.
 
@@ -608,7 +608,7 @@ Supponiamo che l'utente abbia identificato 5 documenti rilevanti tra 10 restitui
 
 ## Approssimazione della Probabilità di Rilevanza
 
-In questo contesto, si cerca di approssimare la probabilità di rilevanza di un termine in un documento, rappresentata dal rapporto tra la cardinalità dell'insieme dei documenti rilevanti (V) e la cardinalità dell'insieme di tutti i documenti (I). 
+In questo contesto, si cerca di approssimare la probabilità di rilevanza di un termine in un documento, rappresentata dal rapporto tra la cardinalità dell'insieme dei documenti rilevanti (V) e la cardinalità dell'insieme di tutti i documenti (I).
 
 ##### Formula:
 
@@ -640,13 +640,13 @@ Il processo di stima della rilevanza dei documenti può essere migliorato utiliz
 
 Il modello **BM25**, utilizzato per il recupero delle informazioni, assegna punteggi di rilevanza ai documenti. Ad esempio, a due documenti con diverse frequenze di parole chiave, BM25 potrebbe assegnare un punteggio più alto al documento con una frequenza totale maggiore, anche se il secondo documento potrebbe essere più rilevante in base al contesto.
 
-Questa differenza di punteggio è dovuta alla **parametrizzazione** utilizzata da BM25, che tiene conto della **normalizzazione della richiesta**. 
+Questa differenza di punteggio è dovuta alla **parametrizzazione** utilizzata da BM25, che tiene conto della **normalizzazione della richiesta**.
 
 ### Esempio di Applicazione del Modello Vettoriale
 
 ##### Scenario:
 
-Immaginiamo di avere due documenti, due "terri", con una grana molto grossa (cioè, con poche informazioni in comune). 
+Immaginiamo di avere due documenti, due "terri", con una grana molto grossa (cioè, con poche informazioni in comune).
 
 ##### Osservazioni:
 

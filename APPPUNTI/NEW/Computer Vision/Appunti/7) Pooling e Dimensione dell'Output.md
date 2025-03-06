@@ -40,9 +40,9 @@ La formula $O = \left\lfloor \frac{I - K + 2P}{S} \right\rfloor + 1$ è una vers
 
 **Formula generale (con dilatazione)**:
 
- $$
- O = \left\lfloor \frac{I - K - (K-1)(D-1) + 2P}{S} \right\rfloor + 1
- $$
+$$
+O = \left\lfloor \frac{I - K - (K-1)(D-1) + 2P}{S} \right\rfloor + 1
+$$
 - Aggiunge il termine $-(K-1)(D-1)$, che tiene conto dell'effetto della dilatazione. Quando $D = 1$, questo termine diventa zero, riportandoci alla formula semplificata.
 - La dilatazione fa sì che gli elementi del kernel si "espandano", separandosi e quindi coprendo un'area maggiore rispetto al caso standard, e questo deve essere tenuto in considerazione nella formula.
 
@@ -98,27 +98,27 @@ Per calcolare la dimensione dell'output di un layer convoluzionale, è necessari
 
 Consideriamo un esempio con un input di 28x28, un kernel di 5x5, un padding di 2 e uno stride di 1.
 
-1. **Calcolo della dimensione dell'output dopo il primo layer convoluzionale:**
+- **Calcolo della dimensione dell'output dopo il primo layer convoluzionale:**
 
 $$Output_{size} = \frac{28 + 2 * 2 - 5}{1} + 1 = 24$$
 
- Quindi, la dimensione dell'output del primo layer convoluzionale è 24x24.
+Quindi, la dimensione dell'output del primo layer convoluzionale è 24x24.
 
-2. **Calcolo della dimensione dell'output dopo il secondo layer convoluzionale:**
+- **Calcolo della dimensione dell'output dopo il secondo layer convoluzionale:**
 
- Assumiamo che il secondo layer convoluzionale abbia un kernel di 3x3, un padding di 1 e uno stride di 2.
+Assumiamo che il secondo layer convoluzionale abbia un kernel di 3x3, un padding di 1 e uno stride di 2.
 
 $$Output_{size} = \frac{24 + 2 * 1 - 3}{2} + 1 = 12$$
 
- Quindi, la dimensione dell'output del secondo layer convoluzionale è 12x12.
+Quindi, la dimensione dell'output del secondo layer convoluzionale è 12x12.
 
-3. **Calcolo della dimensione dell'output dopo il terzo layer convoluzionale:**
+- **Calcolo della dimensione dell'output dopo il terzo layer convoluzionale:**
 
- Assumiamo che il terzo layer convoluzionale abbia un kernel di 3x3, un padding di 0 e uno stride di 2.
+Assumiamo che il terzo layer convoluzionale abbia un kernel di 3x3, un padding di 0 e uno stride di 2.
 
 $$Output_{size} = \frac{12 + 2 * 0 - 3}{2} + 1 = 6$$
 
- Quindi, la dimensione dell'output del terzo layer convoluzionale è 6x6.
+Quindi, la dimensione dell'output del terzo layer convoluzionale è 6x6.
 
 ### Dimensione del Fully-Connected Layer
 
@@ -140,16 +140,16 @@ L'obiettivo è comprendere come la dimensione dell'output di una convoluzione è
 
 Consideriamo un esempio con un input di dimensione 6,5 e un passo (stride) di 2. Il numero di filtri è 3.
 
-1. **Calcolo della dimensione dell'output:**
- - Dividiamo la dimensione dell'input per il passo: 6,5 / 2 = 3,25
- - Arrotondando per difetto, otteniamo 3.
- - Aggiungiamo il numero di filtri: 3 + 3 = 6
- - La dimensione finale dell'output è quindi 6.
+- **Calcolo della dimensione dell'output:**
+- Dividiamo la dimensione dell'input per il passo: 6,5 / 2 = 3,25
+- Arrotondando per difetto, otteniamo 3.
+- Aggiungiamo il numero di filtri: 3 + 3 = 6
+- La dimensione finale dell'output è quindi 6.
 
-2. **Spiegazione:**
- - Il passo (stride) determina quanti pixel vengono saltati durante la convoluzione.
- - Il numero di filtri determina il numero di operazioni di convoluzione eseguite.
- - La dimensione finale dell'output è determinata dal numero di operazioni di convoluzione e dalla dimensione dell'input dopo l'arrotondamento per difetto.
+- **Spiegazione:**
+- Il passo (stride) determina quanti pixel vengono saltati durante la convoluzione.
+- Il numero di filtri determina il numero di operazioni di convoluzione eseguite.
+- La dimensione finale dell'output è determinata dal numero di operazioni di convoluzione e dalla dimensione dell'input dopo l'arrotondamento per difetto.
 
 ##### Applicazione:
 
@@ -163,7 +163,7 @@ L'adattamento del modello non è un processo complesso. La principale differenza
 
 Le operazioni di calcolo matriciale, tipiche del deep learning, possono essere parallelizzate in modo efficiente utilizzando le GPU. Le GPU Nvidia sono storicamente le più utilizzate per la computer vision e il deep learning.
 
-Nvidia ha sviluppato CUDA, una libreria che sfrutta le capacità delle GPU Nvidia per accelerare il calcolo matriciale. 
+Nvidia ha sviluppato CUDA, una libreria che sfrutta le capacità delle GPU Nvidia per accelerare il calcolo matriciale.
 
 Se si dispone di un Mac con il framework Metal installato (di solito presente sui Mac di ultima generazione con chip M1, M2, M3), è possibile utilizzare tutti i dispositivi compatibili. In caso contrario, è possibile eseguire il codice in CPU, anche se le prestazioni potrebbero essere inferiori.
 
@@ -173,8 +173,8 @@ L'obiettivo è comprendere come la convoluzione può essere espressa in termini 
 
 ##### Passaggi:
 
-1. **Trasformazione dell'immagine in patch:** L'immagine viene suddivisa in patch di dimensioni definite.
-2. **Trasformazione in moltiplicazione di matrici:** L'operazione di convoluzione viene trasformata in una moltiplicazione di matrici.
+- **Trasformazione dell'immagine in patch:** L'immagine viene suddivisa in patch di dimensioni definite.
+- **Trasformazione in moltiplicazione di matrici:** L'operazione di convoluzione viene trasformata in una moltiplicazione di matrici.
 
 ##### Esempio:
 
@@ -194,7 +194,7 @@ La matrice immagine viene trasformata in un vettore di 16 elementi. Il kernel vi
 
 ## Applicazione di filtri
 
-Rappresenta il processo di applicazione di un filtro a una matrice di dati in Computer Vision. 
+Rappresenta il processo di applicazione di un filtro a una matrice di dati in Computer Vision.
 Il filtro viene rappresentato come una matrice, e l'applicazione del filtro equivale a una moltiplicazione matriciale.
 
 ##### Esempio:
@@ -263,26 +263,26 @@ La moltiplicazione di matrici è un'operazione fondamentale nelle reti neurali c
 
 Le reti neurali convoluzionali sono tipicamente strutturate in due parti:
 
-1. **Feature Learning:** Questa parte è composta da layer convoluzionali che estraggono le caratteristiche dell'immagine. I filtri convoluzionali, o kernel, vengono applicati all'immagine per creare mappe di feature, che rappresentano l'immagine in uno spazio di feature alternativo.
+- **Feature Learning:** Questa parte è composta da layer convoluzionali che estraggono le caratteristiche dell'immagine. I filtri convoluzionali, o kernel, vengono applicati all'immagine per creare mappe di feature, che rappresentano l'immagine in uno spazio di feature alternativo.
 
-2. **Classificazione:** Questa parte utilizza le feature estratte nella prima parte per classificare l'immagine.
+- **Classificazione:** Questa parte utilizza le feature estratte nella prima parte per classificare l'immagine.
 
 ### Pattern
 
 Esistono due pattern comuni per le reti neurali convoluzionali:
 
-1. **Due Parti:** La rete è composta da due parti distinte: feature learning e classificazione.
+- **Due Parti:** La rete è composta da due parti distinte: feature learning e classificazione.
 ![[cv-20241022120003661.png|582]]
 
-2. **Reticolo Convoluzionale:** Il reticolo convoluzionale è una struttura standard che viene utilizzata per estrarre le feature.
+- **Reticolo Convoluzionale:** Il reticolo convoluzionale è una struttura standard che viene utilizzata per estrarre le feature.
 ![[cv-20241022115957833.png|597]]
 
 ## Feature Learning e Reti Convoluzionali
 
 Il processo di **feature learning** in Computer Vision si divide in due fasi:
 
-1. **Estrazione delle feature:** da un'immagine si estrae un insieme di feature.
-2. **Organizzazione delle feature:** le feature estratte vengono organizzate per la classificazione.
+- **Estrazione delle feature:** da un'immagine si estrae un insieme di feature.
+- **Organizzazione delle feature:** le feature estratte vengono organizzate per la classificazione.
 
 La parte di organizzazione delle feature è spesso realizzata tramite tecniche tradizionali come la **regressione logistica**, eventualmente con più layer. Tuttavia, le reti neurali convoluzionali (CNN) offrono un modo più potente per rappresentare l'input in modo significativo.
 
@@ -319,12 +319,12 @@ La VGG è una rete neurale convoluzionale che si distingue per la sua semplicit�
 
 La scelta di utilizzare solo filtri 3x3 è motivata da due fattori principali:
 
-1. **Simulazione di filtri più grandi:** Un layer 5x5 può essere simulato con due layer 3x3 in cascata. Allo stesso modo, un layer 7x7 può essere simulato con tre layer 3x3 in cascata. Questo significa che la VGG può ottenere la stessa capacità di rappresentazione di reti con filtri più grandi, ma con un numero inferiore di parametri.
-2. **Riduzione della complessità computazionale:** Sebbene la simulazione di filtri più grandi con layer 3x3 in cascata non sia gratuita dal punto di vista computazionale, la VGG riesce comunque a ridurre la complessità complessiva della rete. Questo perché il numero di parametri da apprendere è inferiore rispetto a una rete con filtri più grandi.
+- **Simulazione di filtri più grandi:** Un layer 5x5 può essere simulato con due layer 3x3 in cascata. Allo stesso modo, un layer 7x7 può essere simulato con tre layer 3x3 in cascata. Questo significa che la VGG può ottenere la stessa capacità di rappresentazione di reti con filtri più grandi, ma con un numero inferiore di parametri.
+- **Riduzione della complessità computazionale:** Sebbene la simulazione di filtri più grandi con layer 3x3 in cascata non sia gratuita dal punto di vista computazionale, la VGG riesce comunque a ridurre la complessità complessiva della rete. Questo perché il numero di parametri da apprendere è inferiore rispetto a una rete con filtri più grandi.
 
 ##### Padding 1: Mantenere la dimensione dell'output
 
-La VGG utilizza un padding 1 per tutti i suoi layer convoluzionali. Questo significa che l'output di ogni layer convoluzionale ha la stessa dimensione dell'input. 
+La VGG utilizza un padding 1 per tutti i suoi layer convoluzionali. Questo significa che l'output di ogni layer convoluzionale ha la stessa dimensione dell'input.
 
 Con un padding 1, la dimensione dell'output è uguale alla dimensione dell'input. Questo è importante per mantenere la risoluzione dell'immagine durante il processo di convoluzione.
 
@@ -334,7 +334,7 @@ Con un padding 1, la dimensione dell'output è uguale alla dimensione dell'input
 * **Efficienza:** La standardizzazione dei filtri consente di ridurre il numero di parametri da apprendere, rendendo la rete più efficiente dal punto di vista computazionale.
 * **Prestazioni elevate:** Nonostante la sua semplicità, la VGG ha dimostrato di ottenere prestazioni elevate in diversi compiti di computer vision.
 
-## Architettura VGG 
+## Architettura VGG
 
 ### Impatto dei filtri 1x1
 
@@ -360,7 +360,7 @@ La parte successiva della rete, definita dalla configurazione, corrisponde al cl
 
 Esistono cinque configurazioni della VGG, che si differenziano per il numero di layer e quindi per il numero di composizioni possibili.
 
-Le reti VGG rappresentano un'evoluzione significativa rispetto a reti come LeNet, caratterizzate da un numero di layer convoluzionali molto più elevato. 
+Le reti VGG rappresentano un'evoluzione significativa rispetto a reti come LeNet, caratterizzate da un numero di layer convoluzionali molto più elevato.
 
 ##### Configurazioni VGG:
 

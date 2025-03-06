@@ -1,12 +1,10 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
@@ -15,14 +13,14 @@ Utilità attesa ^nV1bbBmi
 Preferenze dei giocatori
 in termini di utilità attesa ^BvJUY1VD
 
- Strategie Miste ^Q2rtIqZD
+Strategie Miste ^Q2rtIqZD
 
-- Distribuzione di probabilità sulle 
- azioni che un giocatore può scegliere
+- Distribuzione di probabilità sulle
+azioni che un giocatore può scegliere
 - Quando le scelte sono stocastiche ^9CcqotUF
 
-Utilità attesa di una 
- Strategia Mista ^l1JztJNy
+Utilità attesa di una
+Strategia Mista ^l1JztJNy
 
 Somma dei prodotti tra le prob con cui i sceglie l'azione s_i e il guadagno di quell'azione ^MRx9UIdw
 

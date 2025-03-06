@@ -23,7 +23,7 @@ Hive è un'applicazione di data warehousing in Hadoop.
 - Il linguaggio di query è HQL, variante di SQL.
 - Le tabelle sono memorizzate su HDFS come file piatti.
 - Sviluppato da Facebook, ora open source.
-### Pig 
+### Pig
 
 Ѐ un sistema di elaborazione dati su larga scala.
 - Gli script sono scritti in Pig Latin, un linguaggio di flusso dati
@@ -40,20 +40,20 @@ Hive è un'applicazione di data warehousing in Hadoop.
 - Il volume dei dati cresce rapidamente, superando le capacità dei tradizionali DBMS relazionali, che presentano limiti nella dimensione delle tabelle e nei file a causa delle restrizioni imposte dai sistemi operativi.
 - Le soluzioni tradizionali tendono ad essere non scalabili, costose e spesso proprietarie.
 - Hadoop supporta applicazioni distribuite per l'elaborazione di grandi volumi di dati, ma richiede l'uso del modello MapReduce, che presenta diversi svantaggi:
-	 - È complesso da programmare.
-	 - Ha un basso riutilizzo del codice.
-	 - È soggetto a errori.
-	 - Spesso richiede l'esecuzione di più fasi di job MapReduce.
-	 - La maggior parte degli utenti ha familiarità con SQL, non con MapReduce.
+- È complesso da programmare.
+- Ha un basso riutilizzo del codice.
+- È soggetto a errori.
+- Spesso richiede l'esecuzione di più fasi di job MapReduce.
+- La maggior parte degli utenti ha familiarità con SQL, non con MapReduce.
 #### Soluzione
 
 - Hive rende i dati non strutturati accessibili come tabelle, indipendentemente dal loro formato fisico.
 - Consente l'esecuzione di query SQL su queste tabelle.
 - Genera automaticamente un piano di esecuzione specifico per ogni query.
 - **Hive** è un sistema per la gestione di big data che:
- - Memorizza dati strutturati su HDFS.
- - Fornisce un'interfaccia di query semplice, utilizzando il modello MapReduce di Hadoop.
- - Supporta anche l'esecuzione su Spark tramite Hive on Spark.
+- Memorizza dati strutturati su HDFS.
+- Fornisce un'interfaccia di query semplice, utilizzando il modello MapReduce di Hadoop.
+- Supporta anche l'esecuzione su Spark tramite Hive on Spark.
 
 ## Cos'è Hive?
 
@@ -75,9 +75,9 @@ Hive è un'applicazione di data warehousing in Hadoop.
 - **Nessun supporto per aggiornamenti a livello di riga**: non consente modifiche su singole righe, limitando l'uso in applicazioni transazionali.
 - **Non adatto per OLTP (Online Transaction Processing)**: manca di operazioni di inserimento e aggiornamento a livello di riga.
 - **Utilizzo ottimale**: Hive eccelle nell'elaborazione batch di grandi set di dati immutabili, come:
- - Elaborazione di log
- - Data mining e text mining
- - Business intelligence
+- Elaborazione di log
+- Data mining e text mining
+- Business intelligence
 
 ### Layout Fisico
 
@@ -89,8 +89,8 @@ Hive è un'applicazione di data warehousing in Hadoop.
 
 - Hive assomiglia a un database SQL
 - Join relazionale su due tabelle:
- - Tabella dei conteggi delle parole dalla collezione di Shakespeare
- - Tabella dei conteggi delle parole dalla Bibbia
+- Tabella dei conteggi delle parole dalla collezione di Shakespeare
+- Tabella dei conteggi delle parole dalla Bibbia
 
 ```sql
 SELECT s.word, s.freq, k.freq 
@@ -120,8 +120,8 @@ Hive traduce le query SQL in operazioni MapReduce per l'elaborazione distribuita
 
 ### Trasformazione della Query
 
-1. **Abstract Syntax Tree (AST):** La query SQL viene convertita in un albero di sintassi astratta, che rappresenta la struttura logica della query.
-2. **Job MapReduce:** L'AST viene trasformato in uno o più job MapReduce, che gestiscono l'elaborazione distribuita dei dati.
+- **Abstract Syntax Tree (AST):** La query SQL viene convertita in un albero di sintassi astratta, che rappresenta la struttura logica della query.
+- **Job MapReduce:** L'AST viene trasformato in uno o più job MapReduce, che gestiscono l'elaborazione distribuita dei dati.
 
 ### Piano di Esecuzione
 
@@ -130,23 +130,23 @@ Il piano di esecuzione è suddiviso in più fasi, ciascuna eseguita tramite MapR
 #### Stage 1: MapReduce
 
 * **Map Operator Tree:**
- * **TableScan:** Scansiona la tabella per i dati necessari.
- * **Filter Operator:** Filtra le righe selezionate.
- * **Reduce Output Operator:** Prepara i dati filtrati per la fase Reduce.
+	* **TableScan:** Scansiona la tabella per i dati necessari.
+	* **Filter Operator:** Filtra le righe selezionate.
+	* **Reduce Output Operator:** Prepara i dati filtrati per la fase Reduce.
 * **Reduce Operator Tree:**
- * **Join Operator:** Unisce i dati da più fonti.
- * **Filter Operator:** Applica ulteriori filtri.
- * **Select Operator:** Seleziona le colonne specificate.
- * **File Output Operator:** Scrive i risultati in un file.
+	* **Join Operator:** Unisce i dati da più fonti.
+	* **Filter Operator:** Applica ulteriori filtri.
+	* **Select Operator:** Seleziona le colonne specificate.
+	* **File Output Operator:** Scrive i risultati in un file.
 
 #### Stage 2: MapReduce
 
 * **Map Operator Tree:** Prepara i dati per la fase Reduce.
- * **Reduce Output Operator:** Prepara l'output per la fase Reduce.
+* **Reduce Output Operator:** Prepara l'output per la fase Reduce.
 * **Reduce Operator Tree:**
- * **Extract:** Estrae i risultati finali.
- * **Limit:** Limita il numero di risultati (se presente).
- * **File Output Operator:** Scrive i risultati finali su HDFS o altro storage.
+	* **Extract:** Estrae i risultati finali.
+	* **Limit:** Limita il numero di risultati (se presente).
+	* **File Output Operator:** Scrive i risultati finali su HDFS o altro storage.
 
 #### Stage 0: Fetch
 
@@ -162,9 +162,9 @@ Ogni fase del piano di esecuzione include informazioni specifiche come:
 * **Espressioni di valore:** Come i dati devono essere trasformati.
 * **Formati di input/output:** Formati dei file di input e output.
 * **Predicati:** Condizioni per filtrare i dati.
-* **Alias delle tabelle:** Alias utilizzati per riferirsi alle tabelle nel piano di esecuzione. 
+* **Alias delle tabelle:** Alias utilizzati per riferirsi alle tabelle nel piano di esecuzione.
 
-# Apache Pig: Motivazione
+## Apache Pig: Motivazione
 
 ### Big Data
 
@@ -182,64 +182,64 @@ Ogni fase del piano di esecuzione include informazioni specifiche come:
 ## Apache Pig: Soluzione
 
 - **Apache Pig** fornisce un sistema di elaborazione dati di alto livello basato su MapReduce, semplificando la scrittura di script per l'analisi dei dati.
- - Inizialmente sviluppato da Yahoo!
+- Inizialmente sviluppato da Yahoo!
 - Gli script scritti in **Pig Latin**, il linguaggio di alto livello di Pig, vengono automaticamente tradotti in job MapReduce dal compilatore di Pig.
 - Utilizza il framework MapReduce per eseguire tutte le operazioni di elaborazione dati.
- - Gli script Pig Latin vengono convertiti in uno o più job MapReduce, che poi vengono eseguiti su Hadoop.
+- Gli script Pig Latin vengono convertiti in uno o più job MapReduce, che poi vengono eseguiti su Hadoop.
 - **Apache Pig** è disponibile anche su **Spark** come motore di esecuzione, consentendo la conversione dei comandi Pig Latin in trasformazioni e azioni Spark per un'elaborazione più rapida e flessibile.
 
 ## Pig Latin
 
 - **Linguaggio di trasformazione dati** orientato agli insiemi e procedurale
- - Offre primitive per operazioni come filtrare, combinare, suddividere e ordinare i dati.
- - Si concentra sul flusso di dati, senza strutture di controllo come cicli `for` o condizioni `if`.
- - Gli utenti descrivono le trasformazioni come una serie di passi.
- - Ogni trasformazione su insiemi di dati è senza stato (*stateless*).
+- Offre primitive per operazioni come filtrare, combinare, suddividere e ordinare i dati.
+- Si concentra sul flusso di dati, senza strutture di controllo come cicli `for` o condizioni `if`.
+- Gli utenti descrivono le trasformazioni come una serie di passi.
+- Ogni trasformazione su insiemi di dati è senza stato (*stateless*).
 - **Modello di dati flessibile**
- - Supporta bag annidate di tuple.
- - Gestisce tipi di dati semi-strutturati.
+- Supporta bag annidate di tuple.
+- Gestisce tipi di dati semi-strutturati.
 - **Esecuzione in Hadoop**
- - Un compilatore converte gli script Pig Latin in flussi di lavoro MapReduce.
+- Un compilatore converte gli script Pig Latin in flussi di lavoro MapReduce.
 
 ### Compilazione ed esecuzione degli script Pig
 
-1. **Analisi sintattica**: Il programma in Pig Latin viene analizzato per verificare la correttezza della sintassi e delle istanze.
- - L'output è un **piano logico** rappresentato come un DAG (Directed Acyclic Graph), che permette ottimizzazioni logiche.
-2. **Compilazione**: Il piano logico viene trasformato in una serie di istruzioni MapReduce.
-3. **Ottimizzazione**: Un ottimizzatore MR esegue ottimizzazioni come l'aggregazione anticipata, utilizzando la funzione `combiner` di MapReduce.
-4. **Esecuzione**: Il programma MR finale viene inviato al gestore dei job Hadoop per l'esecuzione.
+- **Analisi sintattica**: Il programma in Pig Latin viene analizzato per verificare la correttezza della sintassi e delle istanze.
+- L'output è un **piano logico** rappresentato come un DAG (Directed Acyclic Graph), che permette ottimizzazioni logiche.
+- **Compilazione**: Il piano logico viene trasformato in una serie di istruzioni MapReduce.
+- **Ottimizzazione**: Un ottimizzatore MR esegue ottimizzazioni come l'aggregazione anticipata, utilizzando la funzione `combiner` di MapReduce.
+- **Esecuzione**: Il programma MR finale viene inviato al gestore dei job Hadoop per l'esecuzione.
 
 ### Vantaggi di Pig
 
 - **Facilità di programmazione**
- - Compiti complessi con molte trasformazioni di dati correlate possono essere codificati come sequenze di flusso di dati, semplificando la scrittura, la comprensione e la manutenzione.
- - Riduce il tempo di sviluppo.
+- Compiti complessi con molte trasformazioni di dati correlate possono essere codificati come sequenze di flusso di dati, semplificando la scrittura, la comprensione e la manutenzione.
+- Riduce il tempo di sviluppo.
 - **Ottimizzazione automatica**
- - Il sistema è in grado di ottimizzare l'esecuzione dei compiti, permettendo agli sviluppatori di concentrarsi sulla semantica piuttosto che sull'efficienza.
+- Il sistema è in grado di ottimizzare l'esecuzione dei compiti, permettendo agli sviluppatori di concentrarsi sulla semantica piuttosto che sull'efficienza.
 - **Estensibilità**
- - Supporta UDF (funzioni definite dall'utente) in linguaggi come Java, Python e JavaScript per esigenze di elaborazione specifiche.
+- Supporta UDF (funzioni definite dall'utente) in linguaggi come Java, Python e JavaScript per esigenze di elaborazione specifiche.
 
 ### Svantaggi di Pig
 
 - **Lentezza di avvio** dei job MapReduce
- - L'inizializzazione e la pulizia dei job MapReduce richiedono tempo, poiché Hadoop deve pianificare i task.
+- L'inizializzazione e la pulizia dei job MapReduce richiedono tempo, poiché Hadoop deve pianificare i task.
 - **Non adatto per analisi OLAP interattive**
- - Non è pensato per fornire risultati in tempi brevi (<1 secondo).
+- Non è pensato per fornire risultati in tempi brevi (<1 secondo).
 - **Uso intensivo di UDF** in applicazioni complesse
- - L'uso massiccio di UDF può compromettere la semplicità rispetto a MapReduce.
+- L'uso massiccio di UDF può compromettere la semplicità rispetto a MapReduce.
 - **Debugging complicato**
- - Gli errori generati dalle UDF possono essere difficili da interpretare.
+- Gli errori generati dalle UDF possono essere difficili da interpretare.
 
 ### Pig Latin: Modello di Dati
 
 - **Atom**: Valore atomico semplice (es. numero o stringa).
 - **Tuple**: Sequenza di campi, ciascuno dei quali può essere di qualsiasi tipo.
 - **Bag**: Collezione di tuple, con possibilità di duplicati.
- - Le tuple in una bag possono avere lunghezze e tipi di campo diversi.
+- Le tuple in una bag possono avere lunghezze e tipi di campo diversi.
 - **Map**: Collezione di coppie chiave-valore.
- - La chiave è un atom, mentre il valore può essere di qualsiasi tipo.
+- La chiave è un atom, mentre il valore può essere di qualsiasi tipo.
 
-# Comandi Pig Latin
+## Comandi Pig Latin
 
 ## `LOAD`
 
@@ -256,11 +256,11 @@ AS (fieldName1, fieldName2, ...);
 
 - Il comando `FOREACH ... GENERATE` applica trasformazioni sui campi di una bag.
 - Ogni campo trasformato può essere:
- - Il nome di un campo della bag.
- - Una costante.
- - Un'espressione semplice (es. `f1 + f2`).
- - Una funzione predefinita (es. `SUM`, `AVG`, `COUNT`, `FLATTEN`).
- - Una funzione definita dall'utente (UDF), ad esempio: `tax(gross, percentage)`.
+- Il nome di un campo della bag.
+- Una costante.
+- Un'espressione semplice (es. `f1 + f2`).
+- Una funzione predefinita (es. `SUM`, `AVG`, `COUNT`, `FLATTEN`).
+- Una funzione definita dall'utente (UDF), ad esempio: `tax(gross, percentage)`.
 
 ```pig
 newBag = FOREACH bagName GENERATE field1, field2, ...;
@@ -364,51 +364,51 @@ Questa analisi mira a identificare gli utenti che tendono a visitare pagine web 
 
 ## Flusso Dati Concettuale
 
-1. **Caricamento dei Dati**:
- - Caricamento delle visite (user, url, time)
- - Caricamento delle pagine (url, pagerank)
+- **Caricamento dei Dati**:
+- Caricamento delle visite (user, url, time)
+- Caricamento delle pagine (url, pagerank)
 
-2. **Canonicalizzazione degli URL**: 
- Standardizzazione degli URL per garantire coerenza (es. rimozione di "www." o normalizzazione dei protocolli).
+- **Canonicalizzazione degli URL**:
+Standardizzazione degli URL per garantire coerenza (es. rimozione di "www." o normalizzazione dei protocolli).
 
-3. **Join**:
- Unione dei dati delle visite con i dati delle pagine basandosi sull'URL.
+- **Join**:
+Unione dei dati delle visite con i dati delle pagine basandosi sull'URL.
 
-4. **Raggruppamento per Utente**:
- Aggregazione dei dati per ciascun utente.
+- **Raggruppamento per Utente**:
+Aggregazione dei dati per ciascun utente.
 
-5. **Calcolo del PageRank Medio**:
- Per ogni utente, si calcola la media dei PageRank delle pagine visitate.
+- **Calcolo del PageRank Medio**:
+Per ogni utente, si calcola la media dei PageRank delle pagine visitate.
 
-6. **Filtraggio**:
- Selezione degli utenti con PageRank medio superiore a 0.5.
+- **Filtraggio**:
+Selezione degli utenti con PageRank medio superiore a 0.5.
 
 ## Flusso Dati a Livello di Sistema
 
-1. **Caricamento**:
- - Caricamento parallelo dei dati delle visite e delle pagine in più nodi.
+- **Caricamento**:
+- Caricamento parallelo dei dati delle visite e delle pagine in più nodi.
 
-2. **Canonicalizzazione**:
- Applicazione della funzione di canonicalizzazione agli URL delle visite.
+- **Canonicalizzazione**:
+Applicazione della funzione di canonicalizzazione agli URL delle visite.
 
-3. **Join Distribuito**:
- Unione dei dati delle visite e delle pagine attraverso i nodi del cluster.
+- **Join Distribuito**:
+Unione dei dati delle visite e delle pagine attraverso i nodi del cluster.
 
-4. **Raggruppamento e Calcolo**:
- - Raggruppamento dei dati per utente.
- - Calcolo del PageRank medio per ogni utente.
+- **Raggruppamento e Calcolo**:
+- Raggruppamento dei dati per utente.
+- Calcolo del PageRank medio per ogni utente.
 
-5. **Filtraggio Finale**:
- Applicazione del filtro per selezionare gli utenti con PageRank medio > 0.5.
+- **Filtraggio Finale**:
+Applicazione del filtro per selezionare gli utenti con PageRank medio > 0.5.
 
-6. **Risultato**:
- Produzione del set finale di "buoni utenti".
+- **Risultato**:
+Produzione del set finale di "buoni utenti".
 
 ## Esempio Pratico
 
 Considerando i dati di esempio:
 
-1. **Dopo il Join**:
+- **Dopo il Join**:
    ```
    Amy, www.cnn.com, 8:00, 0.9
    Amy, www.crap.com, 8:05, 0.2
@@ -417,13 +417,13 @@ Considerando i dati di esempio:
    Fred, cnn.com/index, 12:00, 0.9 (assumendo che sia lo stesso di www.cnn.com)
    ```
 
-2. **Dopo il Raggruppamento e Calcolo della Media**:
+- **Dopo il Raggruppamento e Calcolo della Media**:
    ```
    Amy, 0.675 (media di 0.9, 0.2, 0.7, 0.9)
    Fred, 0.9
    ```
 
-3. **Dopo il Filtraggio (avgPR > 0.5)**:
+- **Dopo il Filtraggio (avgPR > 0.5)**:
    ```
    Amy, 0.675
    Fred, 0.9
@@ -458,7 +458,7 @@ store GoodUsers into '/data/good_users';
 - Astrae i dettagli del framework di esecuzione
 - Gli utenti possono modificare l'ordine dei passaggi per migliorare le prestazioni
 - Usato in tandem con Hadoop e HDFS:
- - Le trasformazioni sono convertite in flussi di dati MapReduce
- - HDFS tiene traccia di dove sono memorizzati i dati
+- Le trasformazioni sono convertite in flussi di dati MapReduce
+- HDFS tiene traccia di dove sono memorizzati i dati
 - Le operazioni sono pianificate vicino ai loro dati
 

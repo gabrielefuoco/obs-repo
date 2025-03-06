@@ -1,5 +1,5 @@
 
-Un sistema di retrival, data una query da una sorgente informativa (repository), è in grado di identificare una porzione di risorse ritenute rilevanti alla query. 
+Un sistema di retrival, data una query da una sorgente informativa (repository), è in grado di identificare una porzione di risorse ritenute rilevanti alla query.
 
 ##### Sottoinsiemi Rilevanti e Recuperati
 
@@ -22,9 +22,9 @@ L'intersezione rappresenta la porzione di documenti recuperati dal sistema che s
 
 Per valutare un sistema di recupero informazioni, sono necessari tre elementi:
 
-1. **Collezione di documenti di riferimento:** Un insieme di documenti utilizzati per la valutazione.
-2. **Set di query di riferimento:** Un insieme di query utilizzate per la valutazione.
-3. **Valutazione di ogni documento:** Per ogni query, ogni documento viene valutato come rilevante o non rilevante.
+- **Collezione di documenti di riferimento:** Un insieme di documenti utilizzati per la valutazione.
+- **Set di query di riferimento:** Un insieme di query utilizzate per la valutazione.
+- **Valutazione di ogni documento:** Per ogni query, ogni documento viene valutato come rilevante o non rilevante.
 
 #### Valutazione del recupero non ordinato: Precisione e Richiamo
 
@@ -46,7 +46,7 @@ Un sistema che è più selettivo e meno abile a massimizzare il proprio spazio d
 
 ##### Conflitto tra Precisione e Richiamo:
 
-Le due misure sono in conflitto tra loro, poiché un sistema che cura l'aspetto della selezione tenderà ad essere più accurato di uno che tende ad esplorare lo spazio di ricerca, che sarà più esposto ad errori. Questo conflitto è dovuto al fatto che queste due misure sono correlate negativamente. 
+Le due misure sono in conflitto tra loro, poiché un sistema che cura l'aspetto della selezione tenderà ad essere più accurato di uno che tende ad esplorare lo spazio di ricerca, che sarà più esposto ad errori. Questo conflitto è dovuto al fatto che queste due misure sono correlate negativamente.
 
 ## Trade-off tra Precisione e Richiamo
 
@@ -80,7 +80,7 @@ Dove:
 * **Beta < 1:** Pesa maggiormente la precisione.
 
 ![[Senza nome-20241104120509218.png]]
-Questo plot ha sull'asse x la precisione a una recall fissata (asse y). Confronta la media armonica e la media geometrica: hanno lo stesso andamento, ma la media armonica penalizza di più rispetto alla geometrica in regimi bassi di uno dei due valori (precisione o richiamo). 
+Questo plot ha sull'asse x la precisione a una recall fissata (asse y). Confronta la media armonica e la media geometrica: hanno lo stesso andamento, ma la media armonica penalizza di più rispetto alla geometrica in regimi bassi di uno dei due valori (precisione o richiamo).
 
 ## Misure Basate sul Ranking
 
@@ -120,7 +120,7 @@ L'idea è di adattare le misure di set (come precisione e richiamo) per diventar
 ##### Esempio:
 
 * **Prec@3 di 2/3:** Se tra i primi 3 risultati, 2 sono rilevanti, la Precision@3 è 2/3.
-	![[Senza nome-20241104121345108.png]]
+![[Senza nome-20241104121345108.png]]
 * **Prec@4 di 2/4:** Se tra i primi 4 risultati, 2 sono rilevanti, la Precision@4 è 2/4.
 * **Prec@5 di 3/5:** Se tra i primi 5 risultati, 3 sono rilevanti, la Precision@5 è 3/5.
 
@@ -139,28 +139,28 @@ La curva Precision-Richiamo fornisce una visione d'insieme globale delle prestaz
 
 ![[Senza nome-20241104121409721.png]]
 
-Per valori bassi di richiamo, si hanno valori alti di precisione. Quando ci si sposta dall'origine, si ha un valore basso di richiamo ($r_1=0.5$), che poi sale a circa $r_2=0.8$. In questo punto, si ha la prima interpolazione. 
-Si interpola in corrispondenza di $r_2$, che è il valore massimo di precisione ottenuto fino a quel momento. 
-Non si utilizza la coppia richiamo = $r_1$ e precisione = 0.5, ma si interpola dicendo che per ogni valore di richiamo maggiore o uguale a $r_2$, si ha il valore massimo di precisione (da quel punto in poi). 
+Per valori bassi di richiamo, si hanno valori alti di precisione. Quando ci si sposta dall'origine, si ha un valore basso di richiamo ($r_1=0.5$), che poi sale a circa $r_2=0.8$. In questo punto, si ha la prima interpolazione.
+Si interpola in corrispondenza di $r_2$, che è il valore massimo di precisione ottenuto fino a quel momento.
+Non si utilizza la coppia richiamo = $r_1$ e precisione = 0.5, ma si interpola dicendo che per ogni valore di richiamo maggiore o uguale a $r_2$, si ha il valore massimo di precisione (da quel punto in poi).
 
 Dunque, l'interpolazione avviene quando vi è una risalita nel grafico. Il tratto in rosso rappresenta l'interpolazione.
 
 ## Mean Average Precision (MAP)
 
-La Mean Average Precision (MAP) è una misura utilizzata per valutare la performance di un sistema di recupero informazioni. 
+La Mean Average Precision (MAP) è una misura utilizzata per valutare la performance di un sistema di recupero informazioni.
 
 ##### Calcolo della MAP:
 
-1. **Posizioni dei documenti rilevanti:** Si identificano le posizioni nel ranking di ogni documento rilevante, indicate con $(K_1, K_2, … K_R)$.
-2. **Precision@K:** Si calcola la Precision@K per ogni posizione dei documenti rilevanti. La Precision@K è il rapporto tra il numero di documenti rilevanti recuperati fino alla posizione K e il numero totale di documenti recuperati fino alla posizione K.
-3. **Average Precision:** Si calcola la media delle Precision@K per tutti i documenti rilevanti.
-4. **MAP:** Si calcola la media aritmetica delle Average Precision ottenute per diverse query/ranking.
+- **Posizioni dei documenti rilevanti:** Si identificano le posizioni nel ranking di ogni documento rilevante, indicate con $(K_1, K_2, … K_R)$.
+- **Precision@K:** Si calcola la Precision@K per ogni posizione dei documenti rilevanti. La Precision@K è il rapporto tra il numero di documenti rilevanti recuperati fino alla posizione K e il numero totale di documenti recuperati fino alla posizione K.
+- **Average Precision:** Si calcola la media delle Precision@K per tutti i documenti rilevanti.
+- **MAP:** Si calcola la media aritmetica delle Average Precision ottenute per diverse query/ranking.
 
 ##### Esempio
 
 ![[Senza nome-20241104121732053.png]]
 
-In questo esempio, l'Average Precision è: $\frac{1}{3}\cdot\left( \frac{1}{1}+\frac{2}{3}+\frac{3}{5} \right)=0.76$ 
+In questo esempio, l'Average Precision è: $\frac{1}{3}\cdot\left( \frac{1}{1}+\frac{2}{3}+\frac{3}{5} \right)=0.76$
 
 La MAP è la media delle Average Precision calcolate per diverse query.
 
@@ -186,13 +186,13 @@ La Media della Precisione Media (MAP) è una misura di performance per i sistemi
 
 La Preferenza Binaria è una misura di performance progettata per situazioni in cui i giudizi di rilevanza sono noti per essere incompleti (ne abbiamo solo una conoscenza parziale).
 
-Calcola una relazione di preferenza su se i documenti giudicati rilevanti vengono recuperati prima dei documenti giudicati irrilevanti. 
+Calcola una relazione di preferenza su se i documenti giudicati rilevanti vengono recuperati prima dei documenti giudicati irrilevanti.
 * **Non vogliamo conoscere globalmente la posizione dei documenti realmente rilevanti.**
-* È irrazionale pensare che l'insieme dei retrieval coincida con quello dei rilevanti.
+	* È irrazionale pensare che l'insieme dei retrieval coincida con quello dei rilevanti.
 
 La misura è basata solo sui ranghi relativi dei documenti giudicati:
 
- $$\text{bpref}=\frac{1}{R}\sum_{r}\left( 1-\frac{|\text{n ranked higer than r}|}{min(R,N)} \right)$$
+$$\text{bpref}=\frac{1}{R}\sum_{r}\left( 1-\frac{|\text{n ranked higer than r}|}{min(R,N)} \right)$$
 
 Dove:
 
@@ -215,12 +215,11 @@ La **preferenza binaria** (*Bpref*) è una misura di rilevanza utile quando si h
 
 Il Mean Reciprocal Rank (MRR) è una misura di rilevanza che si basa sulla posizione del primo documento rilevante nella lista dei risultati di una query.
 
-* **Posizione del primo documento rilevante:** Si considera il rango (K) del primo documento rilevante nella lista.  Questo potrebbe corrispondere al primo documento cliccato dall'utente.
+* **Posizione del primo documento rilevante:** Si considera il rango (K) del primo documento rilevante nella lista. Questo potrebbe corrispondere al primo documento cliccato dall'utente.
 * **Punteggio del Rango Reciproco (RR):** Il punteggio RR è calcolato come $\frac{1}{K}$.
 * **MRR:** Il MRR è la media dei punteggi RR calcolati su più query.
 * **Vantaggi:** Il MRR è semplice da calcolare.
-* **Svantaggi:**  Il MRR penalizza pesantemente i sistemi che non posizionano il primo documento rilevante nelle prime posizioni della lista.  Un documento rilevante in posizione 2 avrà un punteggio RR di 0.5, mentre uno in posizione 10 avrà un punteggio di 0.1.
-
+* **Svantaggi:** Il MRR penalizza pesantemente i sistemi che non posizionano il primo documento rilevante nelle prime posizioni della lista. Un documento rilevante in posizione 2 avrà un punteggio RR di 0.5, mentre uno in posizione 10 avrà un punteggio di 0.1.
 
 ### Esempio di Calcolo del MRR
 
@@ -228,16 +227,15 @@ Consideriamo due liste di ranking con i rispettivi valori di Average Precision (
 
 Il Mean Average Precision (MAP) si calcola come media delle AP:
 
-$MAP = \frac{0.622 + 0.520}{2} = 0.571$
+$$MAP = \frac{0.622 + 0.520}{2} = 0.571$$
 
 Assumendo che i ranghi dei primi documenti rilevanti nelle due liste siano 1 e 2 rispettivamente, il Mean Reciprocal Rank (MRR) si calcola come:
 
-$MRR = \frac{\frac{1}{1} + \frac{1}{2}}{2} = \frac{1.0 + 0.5}{2} = 0.75$
-
+$$MRR = \frac{\frac{1}{1} + \frac{1}{2}}{2} = \frac{1.0 + 0.5}{2} = 0.75$$
 
 ### Esempio di Calcolo di $b_{pref}$
 
-Il calcolo di $b_{pref}$ (una metrica di preferenza) per due liste di ranking è mostrato di seguito.  La formula sembra calcolare una sorta di media pesata, dove il peso è dato dalla differenza tra 1 e il rapporto tra il rank e il numero totale di elementi. Senza ulteriori informazioni sul contesto, è difficile fornire una interpretazione più precisa.
+Il calcolo di $b_{pref}$ (una metrica di preferenza) per due liste di ranking è mostrato di seguito. La formula sembra calcolare una sorta di media pesata, dove il peso è dato dalla differenza tra 1 e il rapporto tra il rank e il numero totale di elementi. Senza ulteriori informazioni sul contesto, è difficile fornire una interpretazione più precisa.
 
 $$
 b_{pref_{f1}} = \frac{1}{5} \left( (1 - \frac{0}{5}) + (1 - \frac{1}{5}) + (1 - \frac{3}{5}) + (1 - \frac{5}{5}) + (1 - \frac{5}{5}) \right) = 0.44
@@ -245,7 +243,6 @@ $$
 
 $$b_{pref_{f2}} = \frac{1}{5} \left( (1 - \frac{1}{5}) + (1 - \frac{3}{5}) + (1 - \frac{3}{5}) + (1 - \frac{3}{5}) + (1 - \frac{3}{5}) \right) = 0.48
 $$
-
 
 ### Esempio con Documenti Rilevanti
 
@@ -262,52 +259,50 @@ Consideriamo un esempio con 5 documenti rilevanti (verdi) e due ranking (due que
 
 ##### Bpref:
 
-* **Bpref per il Ranking 1:** $\frac{1}{5} \times (1 - \frac{1}{5})$  (poiché il secondo documento rilevante è in posizione 3 e prima c'è solo un documento non rilevante).
+* **Bpref per il Ranking 1:** $\frac{1}{5} \times (1 - \frac{1}{5})$ (poiché il secondo documento rilevante è in posizione 3 e prima c'è solo un documento non rilevante).
 * **Bpref per il Ranking 2:** $\frac{1}{5} \times (1 - \frac{3}{5})$ (poiché ci sono 3 documenti non rilevanti prima del secondo documento rilevante).
-
 
 ## Top Weightedness
 
-La **Top Weightedness** si riferisce alla capacità di un sistema di assegnare maggiore importanza ai risultati posizionati ai ranghi migliori.  Si vuole che il sistema attribuisca un peso maggiore ai risultati in cima alla lista, poiché sono considerati più rilevanti.
+La **Top Weightedness** si riferisce alla capacità di un sistema di assegnare maggiore importanza ai risultati posizionati ai ranghi migliori. Si vuole che il sistema attribuisca un peso maggiore ai risultati in cima alla lista, poiché sono considerati più rilevanti.
 
 La misura **Discounted Cumulative Gain (DCG)** è un esempio di metrica che tiene conto della Top Weightedness.
 
 ## Guadagno Cumulativo Scontato (DCG)
 
-La MRR (Mean Reciprocal Rank) presenta limitazioni, soprattutto per la sua sensibilità alla posizione del solo primo documento rilevante.  Il DCG (Discounted Cumulative Gain) offre una soluzione più sofisticata.
+La MRR (Mean Reciprocal Rank) presenta limitazioni, soprattutto per la sua sensibilità alla posizione del solo primo documento rilevante. Il DCG (Discounted Cumulative Gain) offre una soluzione più sofisticata.
 
-**Due assunzioni fondamentali del DCG:**
+##### Due assunzioni fondamentali del DCG:
 
-1. I documenti altamente rilevanti sono più utili dei documenti marginalmente rilevanti.
-2. Più alta è la posizione di un documento rilevante nella classifica (rank bassi = posizioni migliori), meno utile è per l'utente, poiché è meno probabile che venga esaminato.
+- I documenti altamente rilevanti sono più utili dei documenti marginalmente rilevanti.
+- Più alta è la posizione di un documento rilevante nella classifica (rank bassi = posizioni migliori), meno utile è per l'utente, poiché è meno probabile che venga esaminato.
 
-Un aspetto cruciale nella valutazione dei sistemi di Information Retrieval è la **top-weightedness**, ovvero la capacità di dare maggiore peso ai risultati posizionati più in alto nella lista.  Il DCG è una metrica progettata per valutare proprio questo aspetto.
+Un aspetto cruciale nella valutazione dei sistemi di Information Retrieval è la **top-weightedness**, ovvero la capacità di dare maggiore peso ai risultati posizionati più in alto nella lista. Il DCG è una metrica progettata per valutare proprio questo aspetto.
 
-Il DCG considera il guadagno (o utilità) ottenuto da ciascun documento recuperato, applicando un fattore di sconto che diminuisce all'aumentare del rango del documento.  A differenza di metriche più semplici, il DCG introduce il concetto di **rilevanza graduata**, ovvero un punteggio che quantifica il grado di rilevanza di un documento, invece di una semplice distinzione binaria (rilevante/irrilevante).
+Il DCG considera il guadagno (o utilità) ottenuto da ciascun documento recuperato, applicando un fattore di sconto che diminuisce all'aumentare del rango del documento. A differenza di metriche più semplici, il DCG introduce il concetto di **rilevanza graduata**, ovvero un punteggio che quantifica il grado di rilevanza di un documento, invece di una semplice distinzione binaria (rilevante/irrilevante).
 
-**Caratteristiche principali del DCG:**
+##### Caratteristiche principali del DCG:
 
 * Utilizza la rilevanza graduata come misura di utilità, o guadagno, derivante dall'esame di un documento.
 * Il guadagno viene accumulato a partire dalla cima della classifica e viene scontato (ridotto) per i ranghi maggiori.
-* Lo sconto tipico è $\frac{1}{log_2(rango)}$, dove il logaritmo è solitamente in base 2.  Con base 2, lo sconto al rango 4 è 1/2, e al rango 8 è 1/3.
+* Lo sconto tipico è $\frac{1}{log_2(rango)}$, dove il logaritmo è solitamente in base 2. Con base 2, lo sconto al rango 4 è 1/2, e al rango 8 è 1/3.
 
-
-**Calcolo del DCG:**
+##### Calcolo del DCG:
 
 Cosa succede se i giudizi di rilevanza sono in una scala di $[0, r]$? ($r > 2$)
 
 * **Guadagno Cumulativo (CG) al rango n:**
-    * Siano i **rating** (punteggi di rilevanza) degli n documenti $r_1, r_2, \dots, r_n$ (in ordine di classifica).
-    * $CG = r_1 + r_2 + \dots + r_n$
+	* Siano i **rating** (punteggi di rilevanza) degli n documenti $r_1, r_2, \dots, r_n$ (in ordine di classifica).
+	* $CG = r_1 + r_2 + \dots + r_n$
 
 * **Guadagno Cumulativo Scontato (DCG) al rango n:**
-    * $DCG = r_1 + \frac{r_2}{\log_2(2)} + \frac{r_3}{\log_2(3)} + \dots + \frac{r_n}{\log_2(n)}$
-    * Il logaritmo rappresenta il fattore di sconto applicato al rating.
-* È possibile utilizzare basi diverse da 2 per il logaritmo.
+	* $DCG = r_1 + \frac{r_2}{\log_2(2)} + \frac{r_3}{\log_2(3)} + \dots + \frac{r_n}{\log_2(n)}$
+	* Il logaritmo rappresenta il fattore di sconto applicato al rating.
+	* È possibile utilizzare basi diverse da 2 per il logaritmo.
 
 ##### Guadagno Cumulativo Scontato
 
-* Il DCG (Discounted Cumulative Gain) è il guadagno totale accumulato ad un particolare rango p: 
+* Il DCG (Discounted Cumulative Gain) è il guadagno totale accumulato ad un particolare rango p:
 
 $$DCG_{p}=rel_{1}+\sum_{i=2}^p \frac{rel_{i}}{\log_{2}i}$$
 
@@ -325,14 +320,13 @@ $$DCG_{p}=\sum_{i=1}^p \frac{2^{rel_{i}}-1}{\log(1+i)}$$
 
 ## NDCG per riassumere le classifiche
 
+Il Discounted Cumulative Gain (DCG) è spesso normalizzato per ottenere il Normalized Discounted Cumulative Gain (NDCG). Questa normalizzazione è supervisionata, richiedendo la conoscenza del ranking ideale per la query in questione. L'NDCG si calcola dividendo il DCG ottenuto dal sistema per il DCG del ranking ideale, calcolato posizione per posizione.
 
-Il Discounted Cumulative Gain (DCG) è spesso normalizzato per ottenere il Normalized Discounted Cumulative Gain (NDCG).  Questa normalizzazione è supervisionata, richiedendo la conoscenza del ranking ideale per la query in questione.  L'NDCG si calcola dividendo il DCG ottenuto dal sistema per il DCG del ranking ideale, calcolato posizione per posizione.
-
-* **NDCG (Normalized Discounted Cumulative Gain) al rango *n*:**  Normalizza il DCG al rango *n* con il valore DCG al rango *n* della classifica ideale. La classifica ideale ordina i documenti prima in base al livello di rilevanza più alto, poi al successivo più alto e così via.
+* **NDCG (Normalized Discounted Cumulative Gain) al rango *n*:** Normalizza il DCG al rango *n* con il valore DCG al rango *n* della classifica ideale. La classifica ideale ordina i documenti prima in base al livello di rilevanza più alto, poi al successivo più alto e così via.
 * La normalizzazione è fondamentale per confrontare query con un numero variabile di risultati rilevanti.
-* L'NDCG è attualmente un metodo molto popolare per la valutazione dei sistemi di ricerca sul Web ed è preferibile al DCG quando la rilevanza della query è particolarmente importante.  Il calcolo prevede la divisione del DCG ottenuto dal sistema per il DCG del ranking ideale, calcolato posizione per posizione.
+* L'NDCG è attualmente un metodo molto popolare per la valutazione dei sistemi di ricerca sul Web ed è preferibile al DCG quando la rilevanza della query è particolarmente importante. Il calcolo prevede la divisione del DCG ottenuto dal sistema per il DCG del ranking ideale, calcolato posizione per posizione.
 
-Assumendo di conoscere il ranking ideale, si calcola il DCG sia per il ranking del sistema che per il ranking ideale.  Successivamente, si divide il DCG del ranking del sistema per il DCG del ranking ideale.
+Assumendo di conoscere il ranking ideale, si calcola il DCG sia per il ranking del sistema che per il ranking ideale. Successivamente, si divide il DCG del ranking del sistema per il DCG del ranking ideale.
 
 ## Confronto di liste di classifiche: Tau di Kendall
 
@@ -395,23 +389,20 @@ In sostanza, la Kappa measure confronta la probabilità di accordo osservata (P(
 
 Questo esempio illustra il calcolo della statistica Kappa per valutare l'accordo tra due giudici sulla rilevanza di elementi.
 
-**Dati:**
+##### Dati:
 
 Si consideri una matrice di accordo tra due giudici, dove:
 
 * 300 volte entrambi i giudici hanno concordato sulla rilevanza di un elemento.
-* 70 volte entrambi i giudici hanno concordato sulla non rilevanza di un elemento.
-* Il numero totale di valutazioni è 400 per ogni giudice.
+* 70 volte entrambi i giudici hanno concordato sulla non rilevanza di un elemento.* Il numero totale di valutazioni è 400 per ogni giudice.
 
+##### Calcolo della proporzione osservata di accordo:
 
-**Calcolo della proporzione osservata di accordo:**
-
-La proporzione osservata di accordo tra i giudici,  `P(A)`, è calcolata come segue:
+La proporzione osservata di accordo tra i giudici, `P(A)`, è calcolata come segue:
 
 $$P(A) = \frac{300 + 70}{400} = \frac{370}{400} = 0.925$$
 
-
-**Calcolo delle proporzioni marginali raggruppate:**
+##### Calcolo delle proporzioni marginali raggruppate:
 
 Le proporzioni marginali raggruppate rappresentano la probabilità di classificare un elemento come rilevante o non rilevante, considerando le valutazioni di entrambi i giudici:
 
@@ -419,27 +410,23 @@ $$P(nonrelevant) = \frac{(80 + 90)}{(400 + 400)} = \frac{170}{800} = 0.2125$$
 
 $$P(relevant) = \frac{(320 + 310)}{(400 + 400)} = \frac{630}{800} = 0.7875$$
 
-
-**Calcolo della probabilità di accordo casuale:**
+##### Calcolo della probabilità di accordo casuale:
 
 La probabilità che i due giudici siano d'accordo per caso, `P(E)`, è calcolata come:
 
 $$P(E) = P(nonrelevant)^2 + P(relevant)^2 = 0.2125^2 + 0.7875^2 = 0.665$$
 
+##### Calcolo della statistica Kappa:
 
-**Calcolo della statistica Kappa:**
-
-La statistica Kappa,  `κ`, misura l'accordo tra i giudici al di là di quello che ci si aspetterebbe per caso:
+La statistica Kappa, `κ`, misura l'accordo tra i giudici al di là di quello che ci si aspetterebbe per caso:
 
 $$\kappa = \frac{P(A) - P(E)}{1 - P(E)} = \frac{0.925 - 0.665}{1 - 0.665} = 0.776$$
 
 Questo valore di Kappa (0.776) indica un accordo accettabile tra i due giudici.
 
+##### Interpretazione:
 
-**Interpretazione:**
-
-La matrice di accordo fornisce informazioni sulla concordanza tra i due giudici nella valutazione della rilevanza degli elementi.  In questo caso specifico, l'alto valore di Kappa suggerisce un elevato livello di accordo tra i giudici, andando oltre quanto ci si aspetterebbe per puro caso.
-
+La matrice di accordo fornisce informazioni sulla concordanza tra i due giudici nella valutazione della rilevanza degli elementi. In questo caso specifico, l'alto valore di Kappa suggerisce un elevato livello di accordo tra i giudici, andando oltre quanto ci si aspetterebbe per puro caso.
 
 ##### Probabilità di Accordo (p(A))
 

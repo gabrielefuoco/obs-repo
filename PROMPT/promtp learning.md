@@ -1,7 +1,6 @@
 - Act as a socratic tutor and help me understand the concept of [args]. Ask me question to guide my understanding.
 - Give me a multi level explanation of [args]. First at the level of a child, then a high school student and then an academic explanation
 - Make a list of propositions in this text in the format "X is a type of Y", "W is caused by X", "A explain B". Put it into a table with three columns.
----
 - Fai le veci di un tutor socratico e aiutami a comprendere il concetto di [args]. Fammi delle domande per guidare la mia comprensione.
 - Spiegame il concetto di [args] a tre livelli di complessità: prima come se stessi spiegando a un bambino, poi a uno studente delle superiori e infine con una spiegazione accademica.
 - Crea un elenco delle proposizioni presenti in questo testo nel formato "X è un tipo di Y", "W è causato da X", "A spiega B". Mettilo in una tabella con tre colonne.

@@ -31,7 +31,7 @@ L'obiettivo non è solo trovare una funzione che si adatti ai dati, ma trovare l
 
 Invece di utilizzare un approccio basato sul "minimo", si adotta un framework di massima verosimiglianza. Questo significa che, tra tutti i possibili parametri *w* (appartenente a R^m) e *b* (appartenente a R), si cerca il parametro che massimizza la *likelihood* di *θ*.
 
-Massimizzare la *likelihood* di *θ* significa trovare il valore di *θ* che rende massima la probabilità di osservare i dati y_i, dati i parametri *θ* e i dati di input *x_i*. 
+Massimizzare la *likelihood* di *θ* significa trovare il valore di *θ* che rende massima la probabilità di osservare i dati y_i, dati i parametri *θ* e i dati di input *x_i*.
 
 Formalmente, si cerca:
 
@@ -42,7 +42,7 @@ Dove:
 * *n* rappresenta il numero di osservazioni.
 * *θ* appartiene a R^(m+1), lo spazio dei parametri.
 
-L'obiettivo finale è quindi trovare il valore di *θ* che massimizza la funzione di *likelihood*. 
+L'obiettivo finale è quindi trovare il valore di *θ* che massimizza la funzione di *likelihood*.
 
 ## Espressione della Funzione di Verosimiglianza (Likelihood)
 
@@ -59,16 +59,16 @@ Per risolvere questo problema, si utilizza una formulazione logaritmica, che per
 
 $$LL(\theta)=\sum_{i=1}^n y_{i}p(y_{i}|x_{i})+(1-y_{i})(1-p_{i(y_{i}|x_{i})})$$
 
-Questa formula rappresenta la *cross-entropy*, una misura della differenza tra la distribuzione vera delle etichette e la distribuzione predetta dal modello. 
+Questa formula rappresenta la *cross-entropy*, una misura della differenza tra la distribuzione vera delle etichette e la distribuzione predetta dal modello.
 
 In sintesi:
 - Massimizzare la *log-likelihood* equivale a minimizzare la *cross-entropy*.
 - La *cross-entropy* è una realizzazione della verosimiglianza nel dominio logaritmico.
-- Minimizzare la *cross-entropy* significa massimizzare il negativo della *log-likelihood*. 
+- Minimizzare la *cross-entropy* significa massimizzare il negativo della *log-likelihood*.
 ![[1.1-20241014224610360.png|535]]
 ### Ottimizzazione della Log-Likelihood
 
-Come ottimizzare la *log-likelihood*? Ci troviamo nello spazio dei numeri reali, con un vettore di parametri di dimensione *m* + 1. 
+Come ottimizzare la *log-likelihood*? Ci troviamo nello spazio dei numeri reali, con un vettore di parametri di dimensione *m* + 1.
 
 Ponendo $\hat{y_{i}}=y_{i}p(y_{i}|x_{i})$
 
@@ -83,7 +83,7 @@ Il segno meno indica che minimizzare la *cross-entropy* equivale a massimizzare 
 
 ### Interpretazione del Costo
 
-Il costo rappresenta la differenza tra l'etichetta vera e la predizione del modello. Un costo elevato indica una bassa probabilità e quindi una predizione poco accurata. 
+Il costo rappresenta la differenza tra l'etichetta vera e la predizione del modello. Un costo elevato indica una bassa probabilità e quindi una predizione poco accurata.
 
 La formulazione del costo cumulativo ci permette di utilizzare metodi di ottimizzazione basati sul gradiente per trovare il minimo della funzione di costo.
 
@@ -92,15 +92,15 @@ La formulazione del costo cumulativo ci permette di utilizzare metodi di ottimiz
 $$nll(D,\theta)=-\sum_{i=1}^n Cost(y_{i},\hat{y_{i}})$$
 Esistono due principali metodologie per ottimizzare la *log-likelihood*:
 
-1. **Metodi del Primo Ordine (Discesa del Gradiente):** Si basano sul calcolo del gradiente della funzione di costo e si muovono iterativamente nella direzione opposta al gradiente per trovare il minimo. Sono metodi relativamente semplici da implementare, ma possono richiedere molto tempo per convergere.
+- **Metodi del Primo Ordine (Discesa del Gradiente):** Si basano sul calcolo del gradiente della funzione di costo e si muovono iterativamente nella direzione opposta al gradiente per trovare il minimo. Sono metodi relativamente semplici da implementare, ma possono richiedere molto tempo per convergere.
 
-2. **Metodi del Secondo Ordine (Newton-Raphson):** Utilizzano anche l'informazione sulla curvatura della funzione di costo (matrice Hessiana) per convergere più velocemente al minimo. Tuttavia, il calcolo della matrice Hessiana può essere computazionalmente oneroso, soprattutto per un numero elevato di parametri.
+- **Metodi del Secondo Ordine (Newton-Raphson):** Utilizzano anche l'informazione sulla curvatura della funzione di costo (matrice Hessiana) per convergere più velocemente al minimo. Tuttavia, il calcolo della matrice Hessiana può essere computazionalmente oneroso, soprattutto per un numero elevato di parametri.
 
-La scelta del metodo di ottimizzazione dipende dalla specifica applicazione e dal compromesso tra velocità di convergenza e complessità computazionale. 
+La scelta del metodo di ottimizzazione dipende dalla specifica applicazione e dal compromesso tra velocità di convergenza e complessità computazionale.
 
 ## Limiti dei Metodi del Secondo Ordine
 
-Il calcolo della matrice Hessiana, necessaria per i metodi di ottimizzazione del secondo ordine come Newton-Raphson, può diventare problematico al crescere del numero di parametri (*m*). 
+Il calcolo della matrice Hessiana, necessaria per i metodi di ottimizzazione del secondo ordine come Newton-Raphson, può diventare problematico al crescere del numero di parametri (*m*).
 
 Una matrice Hessiana di grandi dimensioni comporta:
 
@@ -111,11 +111,11 @@ Una matrice Hessiana di grandi dimensioni comporta:
 
 La discesa del gradiente è un metodo iterativo del primo ordine che ha trovato largo impiego nel machine learning. L'idea di base è:
 
-1. **Inizializzazione:** Si parte da un punto casuale nello spazio dei parametri (k).
-2. **Iterazione:** Si aggiornano i parametri nella direzione opposta al gradiente della funzione di costo. Questo garantisce una diminuzione del costo ad ogni passo.
-3. **Criterio di arresto:** L'algoritmo termina quando:
- - Si raggiunge un punto stazionario (gradiente nullo).
- - La differenza tra i parametri in due iterazioni consecutive diventa trascurabile (es. $10^{-3}$).
+- **Inizializzazione:** Si parte da un punto casuale nello spazio dei parametri (k).
+- **Iterazione:** Si aggiornano i parametri nella direzione opposta al gradiente della funzione di costo. Questo garantisce una diminuzione del costo ad ogni passo.
+- **Criterio di arresto:** L'algoritmo termina quando:
+- Si raggiunge un punto stazionario (gradiente nullo).
+- La differenza tra i parametri in due iterazioni consecutive diventa trascurabile (es. $10^{-3}$).
 
 ## Costruzione della Sequenza di Aggiornamento
 
@@ -123,15 +123,15 @@ La discesa del gradiente costruisce una sequenza di parametri che minimizza la f
 $$nll(\theta^{(0)})\geq nll(\theta^{(1)})\geq nll(\theta^{(2)})$$
 ## Criterio di Arresto
 
-Il criterio di arresto più comune si basa sulla differenza tra i parametri in due iterazioni consecutive. Quando questa differenza scende sotto una soglia predefinita (es. 10^-3), si considera raggiunta una convergenza soddisfacente. La scelta della soglia è arbitraria e dipende dalla precisione desiderata. 
+Il criterio di arresto più comune si basa sulla differenza tra i parametri in due iterazioni consecutive. Quando questa differenza scende sotto una soglia predefinita (es. 10^-3), si considera raggiunta una convergenza soddisfacente. La scelta della soglia è arbitraria e dipende dalla precisione desiderata.
 
 ## Ottimizzazione tramite Funzione di Costo
 
-L'approccio generale per ottimizzare un modello di machine learning consiste nel definire una funzione di costo che misuri la differenza tra le predizioni del modello $(ŷ)$ e i valori reali $(y)$. 
+L'approccio generale per ottimizzare un modello di machine learning consiste nel definire una funzione di costo che misuri la differenza tra le predizioni del modello $(ŷ)$ e i valori reali $(y)$.
 
 $$Costo(y, ŷ)$$
 
-Se la funzione di costo è derivabile, possiamo utilizzare il gradiente per trovare il minimo. 
+Se la funzione di costo è derivabile, possiamo utilizzare il gradiente per trovare il minimo.
 
 Nel caso della regressione logistica, la funzione di costo comunemente utilizzata è la *cross-entropy* (o entropia, nel caso binario), strettamente legata alla *log-likelihood*.
 
@@ -157,7 +157,7 @@ Sostituendo $θ$ con $θ_{(t+1)}$ e p con $θ_t$, otteniamo:
 
 $$L(θ_{(t+1)}) ≈ L(θ_t) + (θ_{(t+1)} - θ_t)^T ∇L(θ_t)$$
 
-Sostituendo la regola di aggiornamento $(θ_{(t+1)} = θ_t - \lambda ∇L(θ_t))$ : 
+Sostituendo la regola di aggiornamento $(θ_{(t+1)} = θ_t - \lambda ∇L(θ_t))$ :
 
 ## Garanzia di Decrescenza della Funzione di Costo
 
@@ -170,7 +170,7 @@ $$L(θ_{(t+1)}) ≈ L(θ_t) - \lambda ∇L(θ_t)^T ∇L(θ_t)$$
 
 ## Interpretazione Geometrica
 
-Immaginiamo la funzione di costo $L(θ)$ come una superficie. 
+Immaginiamo la funzione di costo $L(θ)$ come una superficie.
 
 - Il punto $θ_t$ rappresenta la posizione corrente nello spazio dei parametri.
 - La tangente alla superficie in $θ_t$ è data dal gradiente $∇L(θ_t)$.
@@ -184,13 +184,13 @@ Il *learning rate* è un parametro cruciale che controlla la dimensione dei pass
 - **Valori troppo grandi:** Possono portare a oscillazioni intorno al minimo, impedendo la convergenza.
 - **Valori troppo piccoli:** Rallentano la convergenza, richiedendo molte iterazioni per raggiungere il minimo.
 
-La scelta ottimale del *learning rate* dipende dal problema specifico. 
+La scelta ottimale del *learning rate* dipende dal problema specifico.
 
 ![[1.1-20241014225616481.png|382]]
 
 ### Minimi Locali
 
-La discesa del gradiente garantisce di trovare un minimo locale della funzione di costo, ma non necessariamente il minimo globale. 
+La discesa del gradiente garantisce di trovare un minimo locale della funzione di costo, ma non necessariamente il minimo globale.
 
 Questo limite è evidente nell'esempio della funzione di Rosenbrock, dove la forma della funzione e la scelta del punto iniziale possono intrappolare l'algoritmo in un minimo locale.
 
@@ -202,12 +202,12 @@ Esistono diverse tecniche per cercare di superare il problema dei minimi locali,
 
 ### Costo Computazionale
 
-L'algoritmo di discesa del gradiente, seppur concettualmente semplice, può essere computazionalmente costoso. 
+L'algoritmo di discesa del gradiente, seppur concettualmente semplice, può essere computazionalmente costoso.
 
 Ad ogni iterazione, è necessario:
 
-1. Calcolare il gradiente della funzione di costo rispetto a tutti i parametri del modello.
-2. Aggiornare i parametri del modello utilizzando la regola di aggiornamento.
+- Calcolare il gradiente della funzione di costo rispetto a tutti i parametri del modello.
+- Aggiornare i parametri del modello utilizzando la regola di aggiornamento.
 
 Il costo di queste operazioni dipende dalla complessità della funzione di costo e dalla dimensione del dataset.
 
@@ -217,9 +217,9 @@ La non convessità delle funzioni di *loss* rappresenta una sfida nell'ottimizza
 
 ### Costo computazionale e ottimizzazione
 
-Il calcolo del gradiente della funzione *loss* (L(θ)), necessario per l'ottimizzazione, può essere computazionalmente oneroso, soprattutto per dataset di grandi dimensioni. 
+Il calcolo del gradiente della funzione *loss* (L(θ)), necessario per l'ottimizzazione, può essere computazionalmente oneroso, soprattutto per dataset di grandi dimensioni.
 
-Tuttavia, la natura incrementale del calcolo del gradiente permette di adottare approcci approssimati, come lo *stochastic gradient descent* (SGD). Invece di calcolare il gradiente su tutto il dataset, SGD considera solo un sottoinsieme di dati ad ogni passo, riducendo significativamente il costo computazionale. 
+Tuttavia, la natura incrementale del calcolo del gradiente permette di adottare approcci approssimati, come lo *stochastic gradient descent* (SGD). Invece di calcolare il gradiente su tutto il dataset, SGD considera solo un sottoinsieme di dati ad ogni passo, riducendo significativamente il costo computazionale.
 
 ## Approssimazioni della funzione di *loss*
 
@@ -229,7 +229,7 @@ L'idea delle approssimazioni consiste nel sostituire il calcolo dell'intera somm
 
 Ad esempio, se il dataset contiene 100.000 tuple e il batch ne contiene 50, 100 o 200, l'ordine di grandezza del calcolo si riduce drasticamente, con un notevole vantaggio dal punto di vista computazionale.
 
-La funzione di *loss* calcolata sul batch (L di B) rappresenta un'approssimazione della funzione di *loss* originale. Si assume che il batch scelto sia rappresentativo del dataset, permettendo di modificare l'algoritmo in modo più efficiente. 
+La funzione di *loss* calcolata sul batch (L di B) rappresenta un'approssimazione della funzione di *loss* originale. Si assume che il batch scelto sia rappresentativo del dataset, permettendo di modificare l'algoritmo in modo più efficiente.
 
 ## Minibatch (stochastic) Gradient Descent
 
@@ -240,9 +240,9 @@ SGD è un algoritmo di ottimizzazione che utilizza un approccio stocastico per a
 Dato un learning rate `λ`, un numero di epoche `N` e un numero di batch `M`:
 Il processo di SGD prevede le seguenti fasi:
 
-1. **Iterazioni:** Si itera per un certo numero di epoche.
-2. **Campionamento:** Ad ogni epoca, si campiona un sottoinsieme del dataset di addestramento (il batch).
-3. **Aggiornamento:** Si aggiorna il modello utilizzando il gradiente calcolato sul batch, che rappresenta un proxy della funzione di *loss*.
+- **Iterazioni:** Si itera per un certo numero di epoche.
+- **Campionamento:** Ad ogni epoca, si campiona un sottoinsieme del dataset di addestramento (il batch).
+- **Aggiornamento:** Si aggiorna il modello utilizzando il gradiente calcolato sul batch, che rappresenta un proxy della funzione di *loss*.
 
 ### Natura stocastica
 
@@ -293,9 +293,9 @@ Il processo di campionamento introduce un elemento di casualità nell'algoritmo,
 
 Per costruire un modello di classificazione, abbiamo bisogno di tre elementi chiave:
 
-1. **Funzione di probabilità:** Definisce la probabilità associata al responso del modello. Il responso può essere binario (es. positivo/negativo) o multi-classe (es. A, B, C).
-2. **Funzione di costo:** Misura la discrepanza tra le previsioni del modello e i dati reali. Deve essere derivabile rispetto ai parametri del modello (teta).
-3. **Gradiente discendente:** Un algoritmo che trova il valore ottimale dei parametri del modello minimizzando la funzione di costo. È un algoritmo "plug and play" che accetta la funzione di costo e restituisce l'ottimo in modo iterativo.
+- **Funzione di probabilità:** Definisce la probabilità associata al responso del modello. Il responso può essere binario (es. positivo/negativo) o multi-classe (es. A, B, C).
+- **Funzione di costo:** Misura la discrepanza tra le previsioni del modello e i dati reali. Deve essere derivabile rispetto ai parametri del modello (teta).
+- **Gradiente discendente:** Un algoritmo che trova il valore ottimale dei parametri del modello minimizzando la funzione di costo. È un algoritmo "plug and play" che accetta la funzione di costo e restituisce l'ottimo in modo iterativo.
 
 ### Esempio: regressione logistica
 
@@ -389,7 +389,7 @@ Quando si costruisce un istogramma o si calcolano i punti salienti dell'immagine
 
 L'algoritmo utilizzato per l'estrazione delle *feature* ha una serie di parametri che devono essere impostati. Se si modificano questi parametri, si ottengono *feature* diverse.
 
-In definitiva, si deve lavorare su una serie di "manopole" che rappresentano il *feature engineering*, ovvero il processo di scelta e costruzione delle *feature*. 
+In definitiva, si deve lavorare su una serie di "manopole" che rappresentano il *feature engineering*, ovvero il processo di scelta e costruzione delle *feature*.
 
 ## Il passaggio dal *feature engineering* all'apprendimento automatico delle *feature*
 
@@ -521,7 +521,7 @@ La complessità di una funzione di costo dipende dalla sua definizione. Nel caso
 
 ##### Combinazioni Lineari
 
-La **somma ponderata** tra le colonne, che rappresenta un'unità o un polo, implica sempre una combinazione lineare. 
+La **somma ponderata** tra le colonne, che rappresenta un'unità o un polo, implica sempre una combinazione lineare.
 
 ##### Estensioni della Regressione Logistica
 
@@ -688,10 +688,7 @@ L'aggiunta di livelli in una rete neurale aumenta la sua capacità di apprendere
 
 ##### Livelli e Complessità
 
-* **3 livelli:** Riescono a catturare modelli con 3 lati, come i triangoli.
-* **4 livelli:** Possono catturare modelli con 4 lati, come i quadrilateri.
-* **5 livelli:** Possono catturare modelli con 5 lati, come i pentagoni.
-
+* **3 livelli:** Riescono a catturare modelli con 3 lati, come i triangoli.* **4 livelli:** Possono catturare modelli con 4 lati, come i quadrilateri.* **5 livelli:** Possono catturare modelli con 5 lati, come i pentagoni.
 ##### Ridondanza e Separazione Lineare
 
 Un livello può essere ridondante, ovvero non contribuire significativamente all'apprendimento. Ad esempio, se il problema è separabile linearmente, 3 livelli potrebbero semplicemente riprodurre la stessa retta di separazione.

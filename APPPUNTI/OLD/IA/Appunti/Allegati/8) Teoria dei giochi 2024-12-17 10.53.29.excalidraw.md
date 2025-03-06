@@ -1,12 +1,10 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
@@ -22,12 +20,12 @@ pure ∃ sempre Nash in strategie miste ^bn6Y848e
 
 Supporto di una Strategia Mista ^i3nWKoQx
 
-Insieme delle azioni che il giocatore i 
+Insieme delle azioni che il giocatore i
 sceglie con una probabilità non nulla ^DD2mKTRO
 
 Un profilo di strategie miste ּσ* è Nash sse:
- - Per ogni giocatore, tutte le strategie pure nel 
- supporto di σ* sono best response ^1URfkvoh
+- Per ogni giocatore, tutte le strategie pure nel
+supporto di σ* sono best response ^1URfkvoh
 
 ## Embedded Files
 

@@ -1,18 +1,21 @@
-# Image processing
+## Image processing
 
 Le immagini possono essere trattate sia con operazioni aritmetiche sia con operazioni di trasformazione più complesse.
 
 ```python
 # import delle librerie
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
 # Required magic to display matplotlib plots in notebooks
+
 %matplotlib inline
 
 # in questa folder sono memorizzati alcuni file a supporto (path relativo al notebook corrente)
+
 IMGSRC = 'data'
 
 def myResourcePath(fname):
@@ -47,27 +50,29 @@ image_array = np.array(image)
 print(f'shape = {image_array.shape}')
 ```
 
- shape = (133, 200)
+shape = (133, 200)
 
 ![png](01_math_operations_4_1.png)
 
 Il codice seguente effettua tre operazioni
 
-1. converte tutti i pixel nelle righe [40:50] nel colore bianco
-2. con una maschera imposta i pixel al valore nero
-3. aggiunge una linea bianca (obliqua)
+- converte tutti i pixel nelle righe [40:50] nel colore bianco
+- con una maschera imposta i pixel al valore nero
+- aggiunge una linea bianca (obliqua)
 
-Nota sul metodo ogrid 
+Nota sul metodo ogrid
 
 An instance of numpy.lib.index_tricks.nd_grid which returns an open (i.e. not fleshed out) mesh-grid when indexed, so that only one dimension of each returned array is greater than 1. The dimension and number of the output arrays are equal to the number of indexing dimensions.
 
 ```python
 # Slicing
+
 img = image_array.copy()
 
 img[40:50] = 255
 
 # Masks
+
 lx, ly = img.shape
 X, Y = np.ogrid[0:lx, 0:ly]
 print(f'X = {X.shape}')
@@ -78,18 +83,20 @@ mask = (X - lx / 2) ** 2 + (Y - ly / 2) ** 2 > lx * ly / 4
 img[mask] = 0
 
 # Fancy indexing
+
 img[range(100), range(100)] = 255
 
 plt.imshow(img, cmap='gray')
 ```
 
- X = (133, 1)
- Y = (1, 200)
+X = (133, 1)
+Y = (1, 200)
 
 ![png](01_math_operations_6_2.png)
 
 ```python
 # MASK
+
 img = image_array.copy()
 
 lx, ly = img.shape
@@ -105,7 +112,7 @@ img[mask] = 255
 plt.imshow(img, cmap='gray')
 ```
 
- mask shape is (133, 200)
+mask shape is (133, 200)
 
 ![png](01_math_operations_7_2.png)
 
@@ -116,12 +123,15 @@ img = image_array.copy()
 
 lx, ly = img.shape
 # Cropping by left-upper point and bottom-right point
+
 crop_face = img[lx // 4: - lx // 4, ly // 4: - ly // 4]
 
 # up <-> down flip
+
 flip_ud_img = np.flipud(img)
 
 # rotation
+
 rotate_img = ndimage.rotate(img, 45)
 rotate_img_noreshape = ndimage.rotate(img, 45, reshape=False)
 
@@ -142,7 +152,7 @@ plt.imshow(crop_face, cmap='gray');
 
 ## Blurring/smoothing
 
-Filtro gaussiano vs filtro uniforme 
+Filtro gaussiano vs filtro uniforme
 
 ### filtro gaussiano
 

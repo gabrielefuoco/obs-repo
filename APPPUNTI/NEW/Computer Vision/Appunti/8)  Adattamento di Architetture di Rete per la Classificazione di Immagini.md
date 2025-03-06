@@ -1,7 +1,7 @@
 
-Prendiamo come esempio il caso in cui dobbiamo identificare un animale presente in un'immagine. Questo tipo di applicazione può essere risolta tramite un'architettura di rete neurale. Abbiamo già visto esempi di architetture come LeNet, piuttosto semplice, e GoogLeNet (o Inception), più sofisticata e probabilmente più interessante per noi. 
+Prendiamo come esempio il caso in cui dobbiamo identificare un animale presente in un'immagine. Questo tipo di applicazione può essere risolta tramite un'architettura di rete neurale. Abbiamo già visto esempi di architetture come LeNet, piuttosto semplice, e GoogLeNet (o Inception), più sofisticata e probabilmente più interessante per noi.
 
-La domanda è: come adatteremmo l'architettura per risolvere questo specifico problema? Qual è la differenza tra l'identificare un solo animale e identificarne diversi nella stessa immagine? 
+La domanda è: come adatteremmo l'architettura per risolvere questo specifico problema? Qual è la differenza tra l'identificare un solo animale e identificarne diversi nella stessa immagine?
 
 In entrambi i casi, l'output desiderato è un vettore che associa valori a diverse categorie. Ad esempio, se avessimo solo due categorie, "cane" e "gatto", il vettore di output potrebbe essere [1, 0] per un cane e [0, 1] per un gatto. Ma cosa succede se abbiamo 10 possibili animali? Non possiamo avere 1024 risposte diverse per ogni immagine. Come possiamo quindi risolvere questo problema?
 
@@ -9,10 +9,10 @@ In entrambi i casi, l'output desiderato è un vettore che associa valori a diver
 
 La soluzione consiste nell'utilizzare una rete neurale con uno strato fully connected e una funzione di attivazione Softmax. Vediamo i passaggi:
 
-1. **Estrazione delle feature:** L'immagine di input viene passata al blocco di estrazione delle feature.
-2. **Linearizzazione:** Le feature estratte vengono linearizzate.
-3. **Strato Fully Connected:** Viene applicato uno strato fully connected alle feature linearizzate.
-4. **Output:** Otteniamo un vettore di output con la stessa dimensione del numero di categorie (ad esempio, 5 categorie: cane, gatto, gorilla, orso, toro). Ogni elemento del vettore di output rappresenta la probabilità che l'immagine appartenga a quella specifica categoria. La somma di tutte le probabilità deve essere uguale a 1.
+- **Estrazione delle feature:** L'immagine di input viene passata al blocco di estrazione delle feature.
+- **Linearizzazione:** Le feature estratte vengono linearizzate.
+- **Strato Fully Connected:** Viene applicato uno strato fully connected alle feature linearizzate.
+- **Output:** Otteniamo un vettore di output con la stessa dimensione del numero di categorie (ad esempio, 5 categorie: cane, gatto, gorilla, orso, toro). Ogni elemento del vettore di output rappresenta la probabilità che l'immagine appartenga a quella specifica categoria. La somma di tutte le probabilità deve essere uguale a 1.
 
 ### Funzione Softmax e Stabilità Numerica
 
@@ -40,7 +40,7 @@ Il secondo termine della formula è il logaritmo della somma degli esponenziali 
 log(Σ(i=1 a N) exp(y_i)) = m + log(Σ(i=1 a N) exp(y_i - m))
 ```
 
-Dove m è il valore massimo di y. 
+Dove m è il valore massimo di y.
 
 ### Implementazione in PyTorch
 
@@ -92,10 +92,10 @@ Consideriamo un blocco di un edificio nell'immagine. Il layer convoluzionale est
 
 ##### Processo di Classificazione:
 
-1. **Input:** L'immagine di dimensione 1x1x28x28 viene passata al modello.
-2. **Estrazione Feature:** Il layer convoluzionale estrae feature, ottenendo un vettore 1x16x4x4.
-3. **Appiattimento:** Il blocco di feature viene appiattito, ottenendo una matrice di dimensione "dimensione del batch" x 256.
-4. **Classificazione:** Il layer fully connected classifica le feature appiattite, fornendo la risposta sulla quale calcolare la logica.
+- **Input:** L'immagine di dimensione 1x1x28x28 viene passata al modello.
+- **Estrazione Feature:** Il layer convoluzionale estrae feature, ottenendo un vettore 1x16x4x4.
+- **Appiattimento:** Il blocco di feature viene appiattito, ottenendo una matrice di dimensione "dimensione del batch" x 256.
+- **Classificazione:** Il layer fully connected classifica le feature appiattite, fornendo la risposta sulla quale calcolare la logica.
 
 ##### Softmax:
 
@@ -107,8 +107,8 @@ Potremmo anche calcolare direttamente la softmax sul risultato del layer fully c
 
 Il processo di classificazione in Computer Vision prevede l'utilizzo di una rete neurale per classificare un'immagine in una delle possibili classi. Questo processo può essere suddiviso in due fasi:
 
-1. **Estrazione delle feature:** La rete neurale elabora l'immagine di input ("x") attraverso una serie di layer convoluzionali e pooling, estraendo le feature significative.
-2. **Classificazione:** Le feature estratte vengono appiattite e passate a layer fully connected, che producono un vettore di probabilità per ogni classe. La funzione di attivazione softmax viene applicata a questo vettore, normalizzando le probabilità in modo che la loro somma sia pari a 1.
+- **Estrazione delle feature:** La rete neurale elabora l'immagine di input ("x") attraverso una serie di layer convoluzionali e pooling, estraendo le feature significative.
+- **Classificazione:** Le feature estratte vengono appiattite e passate a layer fully connected, che producono un vettore di probabilità per ogni classe. La funzione di attivazione softmax viene applicata a questo vettore, normalizzando le probabilità in modo che la loro somma sia pari a 1.
 
 In questo scenario, la rete prevede una sola classe per ogni immagine, ovvero la classe con la probabilità più alta. Questo tipo di classificazione è definita **mutuamente esclusiva**, poiché un'immagine può appartenere solo a una classe alla volta.
 
@@ -116,8 +116,8 @@ In questo scenario, la rete prevede una sola classe per ogni immagine, ovvero la
 
 Nel caso della classificazione multipla, un'immagine può appartenere a più classi contemporaneamente. Ad esempio, un'immagine potrebbe contenere sia un cane che un gatto. Per gestire questo tipo di classificazione, è necessario modificare la rete neurale in due modi:
 
-1. **Funzione di attivazione:** La funzione di attivazione softmax viene sostituita con la funzione sigmoid. La sigmoid opera elemento per elemento, restituendo un vettore con la stessa dimensione dell'input, dove ogni elemento rappresenta la probabilità associata a una specifica classe.
-2. **Funzione di loss:** La cross-entropia su tutte le classi viene sostituita con una somma di cross-entropie binarie. Le etichette reali sono rappresentate da un vettore binario con "1" in corrispondenza degli oggetti presenti nell'immagine.
+- **Funzione di attivazione:** La funzione di attivazione softmax viene sostituita con la funzione sigmoid. La sigmoid opera elemento per elemento, restituendo un vettore con la stessa dimensione dell'input, dove ogni elemento rappresenta la probabilità associata a una specifica classe.
+- **Funzione di loss:** La cross-entropia su tutte le classi viene sostituita con una somma di cross-entropie binarie. Le etichette reali sono rappresentate da un vettore binario con "1" in corrispondenza degli oggetti presenti nell'immagine.
 
 ### Architettura della Rete
 
@@ -127,8 +127,8 @@ Nel caso della classificazione multipla, un'immagine può appartenere a più cla
 
 L'architettura di una rete neurale può essere suddivisa in due parti principali:
 
-1. **Estrazione delle Caratteristiche:** Questa parte "vede" l'immagine e ne estrae le caratteristiche salienti.
-2. **Interpretazione delle Caratteristiche:** Questa parte "interpreta" le caratteristiche estratte per classificare l'immagine.
+- **Estrazione delle Caratteristiche:** Questa parte "vede" l'immagine e ne estrae le caratteristiche salienti.
+- **Interpretazione delle Caratteristiche:** Questa parte "interpreta" le caratteristiche estratte per classificare l'immagine.
 
 Questa architettura è in grado di risolvere sia problemi di classificazione esclusiva che multipla, adattando semplicemente la funzione di attivazione e la funzione di loss.
 
@@ -162,8 +162,8 @@ Per mitigare il problema della complessità, possiamo utilizzare le **piramidi**
 
 Le Region Proposals sono aree predefinite all'interno dell'immagine, di varie dimensioni e posizioni. L'idea è quella di semplificare il processo di Object Detection in due fasi:
 
-1. **Individuazione delle Region Proposals:** si selezionano le aree dell'immagine che potrebbero contenere oggetti.
-2. **Predizione e Classificazione:** si analizzano solo le Region Proposals selezionate per identificare la presenza di oggetti e determinarne la posizione precisa tramite il **Bounding Box**.
+- **Individuazione delle Region Proposals:** si selezionano le aree dell'immagine che potrebbero contenere oggetti.
+- **Predizione e Classificazione:** si analizzano solo le Region Proposals selezionate per identificare la presenza di oggetti e determinarne la posizione precisa tramite il **Bounding Box**.
 
 Questo approccio offre diversi vantaggi:
 
@@ -177,7 +177,7 @@ Per valutare l'efficacia di un sistema di Object Detection si utilizzano diverse
 
 * **Precisione:** quanti oggetti individuati sono effettivamente presenti nell'immagine.
 * **Recall:** quanti oggetti effettivamente presenti nell'immagine sono stati individuati.
-* **Velocità:** quanti fotogrammi al secondo (FPS) il sistema è in grado di analizzare. 
+* **Velocità:** quanti fotogrammi al secondo (FPS) il sistema è in grado di analizzare.
 
 ## Valutazione delle prestazioni e architetture
 
@@ -199,10 +199,10 @@ Il sistema, in pratica, restituisce una lista di coordinate che identificano i b
 
 Possiamo quindi identificare quattro situazioni:
 
-1. **True Positive (TP):** Il bounding box rosso si sovrappone in modo significativo al bounding box reale, indicando una corretta rilevazione.
-2. **False Positive (FP):** Il bounding box rosso non si sovrappone in modo significativo al bounding box reale, indicando una rilevazione errata. Questo può accadere se il bounding box è troppo piccolo o posizionato in modo errato.
-3. **True Negative (TN):** Non viene rilevato alcun oggetto in un'area dove effettivamente non c'è alcun oggetto.
-4. **False Negative (FN):** Non viene rilevato alcun oggetto in un'area dove effettivamente è presente un oggetto.
+- **True Positive (TP):** Il bounding box rosso si sovrappone in modo significativo al bounding box reale, indicando una corretta rilevazione.
+- **False Positive (FP):** Il bounding box rosso non si sovrappone in modo significativo al bounding box reale, indicando una rilevazione errata. Questo può accadere se il bounding box è troppo piccolo o posizionato in modo errato.
+- **True Negative (TN):** Non viene rilevato alcun oggetto in un'area dove effettivamente non c'è alcun oggetto.
+- **False Negative (FN):** Non viene rilevato alcun oggetto in un'area dove effettivamente è presente un oggetto.
 
 Le situazioni più interessanti per noi sono i **falsi positivi** e i **falsi negativi**. La **precisione** e la **sensibilità** (recall) vengono misurate in base a queste quattro situazioni.
 
@@ -224,22 +224,22 @@ L'object detection, ovvero la capacità di identificare e localizzare oggetti al
 
 Esistono due tipi principali di architetture di object detection:
 
-##### 1. Multi-shot:
+##### Multi-shot:
 
 * Queste architetture utilizzano due fasi distinte:
- * **Fase 1: Generazione di Region Proposal:** In questa fase, l'algoritmo identifica aree dell'immagine che potrebbero contenere oggetti, chiamate "region proposal".
- * **Fase 2: Classificazione e Localizzazione:** In questa fase, le region proposal vengono classificate e localizzate con precisione.
+* **Fase 1: Generazione di Region Proposal:** In questa fase, l'algoritmo identifica aree dell'immagine che potrebbero contenere oggetti, chiamate "region proposal".
+* **Fase 2: Classificazione e Localizzazione:** In questa fase, le region proposal vengono classificate e localizzate con precisione.
 * Esempi di architetture multi-shot includono:
- * **R-CNN (Regions with CNN features):** Un'architettura pionieristica che ha introdotto l'utilizzo delle CNN per l'object detection.
- * **Fast R-CNN:** Un'evoluzione di R-CNN che ha migliorato la velocità di elaborazione.
- * **Faster R-CNN:** Un'ulteriore evoluzione che ha integrato la generazione di region proposal all'interno della rete neurale, rendendola ancora più efficiente.
+* **R-CNN (Regions with CNN features):** Un'architettura pionieristica che ha introdotto l'utilizzo delle CNN per l'object detection.
+* **Fast R-CNN:** Un'evoluzione di R-CNN che ha migliorato la velocità di elaborazione.
+* **Faster R-CNN:** Un'ulteriore evoluzione che ha integrato la generazione di region proposal all'interno della rete neurale, rendendola ancora più efficiente.
 
-##### 2. Single-shot:
+##### Single-shot:
 
 * Queste architetture combinano le due fasi in un unico passaggio, rendendole più veloci ma leggermente meno accurate rispetto alle architetture multi-shot.
 * Esempi di architetture single-shot includono:
- * **SSD (Single Shot MultiBox Detector):** Un'architettura che utilizza una rete neurale per generare direttamente le bounding box e classificare gli oggetti.
- * **YOLO (You Only Look Once):** Un'architettura che elabora l'intera immagine in un'unica volta, rendendola molto veloce.
+* **SSD (Single Shot MultiBox Detector):** Un'architettura che utilizza una rete neurale per generare direttamente le bounding box e classificare gli oggetti.
+* **YOLO (You Only Look Once):** Un'architettura che elabora l'intera immagine in un'unica volta, rendendola molto veloce.
 
 ### Scelta dell'Architettura
 

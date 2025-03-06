@@ -34,12 +34,12 @@ Le regole di associazione sono un concetto chiave nell'analisi di associazione, 
 **Definizione:** Una regola di associazione è rappresentata come X → Y, dove X e Y sono insiemi disgiunti di elementi ($X \cap Y = \emptyset$). La forza di una regola è misurata attraverso due metriche:
 
 * **Supporto:** La frazione di transazioni che contengono sia X che Y. Misura quanto spesso la regola è applicabile ai dati.
- $$S(X \cup Y) = \frac{\sigma(X \cup Y)}{N}$$
- Dove $\sigma(X \cup Y)$ è il numero di transazioni che contengono sia X che Y, e N è il numero totale di transazioni.
+$$S(X \cup Y) = \frac{\sigma(X \cup Y)}{N}$$
+Dove $\sigma(X \cup Y)$ è il numero di transazioni che contengono sia X che Y, e N è il numero totale di transazioni.
 
 * **Confidenza:** La frequenza con cui Y compare nelle transazioni contenenti X. Valuta l'affidabilità della regola.
- $$c(X \to Y) = \frac{\sigma(X \cup Y)}{\sigma(X)}$$
- Dove $\sigma(X)$ è il numero di transazioni che contengono X.
+$$c(X \to Y) = \frac{\sigma(X \cup Y)}{\sigma(X)}$$
+Dove $\sigma(X)$ è il numero di transazioni che contengono X.
 
 **Scopo:** L'obiettivo è individuare regole forti, ovvero con supporto e confidenza elevati rispetto alle soglie fissate. Queste regole rappresentano pattern frequenti e affidabili nei dati.
 
@@ -66,8 +66,8 @@ Questo approccio è proibitivamente costoso.
 
 Gli algoritmi tipicamente scompongono il problema in due sotto-task:
 
-1. **Generazione degli Itemset Frequenti:** Trovare tutti gli itemset che soddisfano minsup.
-2. **Generazione delle Regole:** Per ogni itemset frequente L, generare regole $f \to (L-f)$ con f sottoinsieme non vuoto di L, aventi $\text{confidenza} \ge \text{minconf}$.
+- **Generazione degli Itemset Frequenti:** Trovare tutti gli itemset che soddisfano minsup.
+- **Generazione delle Regole:** Per ogni itemset frequente L, generare regole $f \to (L-f)$ con f sottoinsieme non vuoto di L, aventi $\text{confidenza} \ge \text{minconf}$.
 
 Questa decomposizione sfrutta il fatto che il supporto di X→Y è uguale a quello di X∪Y. Quindi, si possono subito escludere regole con itemset non frequente.
 
@@ -85,22 +85,22 @@ Approccio "brute-force" per trovare gli itemset frequenti in un insieme di trans
 
 * **Scopo:** Trovare tutti gli itemset frequenti in un insieme di transazioni.
 * **Procedura:**
- 1. Generare tutti gli itemset candidati, escludendo quelli vuoti o singoletti.
- 2. Per ogni candidato, contare il suo supporto confrontandolo con ogni transazione.
+- Generare tutti gli itemset candidati, escludendo quelli vuoti o singoletti.
+- Per ogni candidato, contare il suo supporto confrontandolo con ogni transazione.
 * **Complessità:** $O(NMw)$, dove:
- * N è il numero di transazioni.
- * M è il numero di itemset candidati ($O(2^d)$ con d elementi distinti).
- * w è la dimensione massima di una transazione.
+* N è il numero di transazioni.
+* M è il numero di itemset candidati ($O(2^d)$ con d elementi distinti).
+* w è la dimensione massima di una transazione.
 * **Problema:** La complessità esponenziale in d rende l'approccio inefficiente.
 
 ##### Strategie per ridurre la complessità:
 
-1. **Ridurre M (numero di candidati):**
- * Utilizzare il principio di Apriori per escludere molti candidati senza calcolare il supporto.
-2. **Ridurre N (numero di transazioni):**
- * Possibile per itemset di grandi dimensioni.
-3. **Ridurre NM (numero totale di confronti):**
- * Usare strutture dati efficienti per memorizzare candidati e transazioni. 
+- **Ridurre M (numero di candidati):**
+* Utilizzare il principio di Apriori per escludere molti candidati senza calcolare il supporto.
+- **Ridurre N (numero di transazioni):**
+* Possibile per itemset di grandi dimensioni.
+- **Ridurre NM (numero totale di confronti):**
+* Usare strutture dati efficienti per memorizzare candidati e transazioni.
 
 ## Generazione di Itemset Frequenti: Il Principio Apriori
 
@@ -200,11 +200,11 @@ Dove:
 
 ## Generazione di Candidati con Forza Bruta e Pruning
 
-L'approccio di forza bruta per generare itemset di una data cardinalità (ad esempio, 3) consiste nel creare tutti i possibili itemset di quella cardinalità. Per 6 item, questo significa generare $\begin{pmatrix} 6 \\ 3 \end{pmatrix}= 20$ itemset. 
+L'approccio di forza bruta per generare itemset di una data cardinalità (ad esempio, 3) consiste nel creare tutti i possibili itemset di quella cardinalità. Per 6 item, questo significa generare $\begin{pmatrix} 6 \\ 3 \end{pmatrix}= 20$ itemset.
 
 Il numero di itemset da generare dipende dal numero totale di item (*n*) e dalla cardinalità desiderata (*k*): $\begin{pmatrix}n \\k\end{pmatrix}$.
 
-Per ridurre il numero di itemset da verificare, si può applicare il **pruning**. Questo processo elimina gli itemset candidati che contengono almeno un itemset non frequente. In questo modo, si evita di verificare itemset che sicuramente non saranno frequenti. 
+Per ridurre il numero di itemset da verificare, si può applicare il **pruning**. Questo processo elimina gli itemset candidati che contengono almeno un itemset non frequente. In questo modo, si evita di verificare itemset che sicuramente non saranno frequenti.
 
 ## Generazione di Candidati con il Principio Apriori
 
@@ -212,18 +212,18 @@ Per ridurre il numero di itemset da verificare, si può applicare il **pruning**
 
 Questo metodo genera itemset di cardinalità *k* combinando itemset frequenti di cardinalità *k −*1 e *k −*2. Il processo prevede:
 
-1. **Calcolo degli itemset frequenti di cardinalità 1 e 2.**
-2. **Merge:** Combinare gli itemset frequenti di cardinalità *k −*1 e *k −*2 se i loro prefissi sono identici.
-3. **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
-4. **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
+- **Calcolo degli itemset frequenti di cardinalità 1 e 2.**
+- **Merge:** Combinare gli itemset frequenti di cardinalità *k −*1 e *k −*2 se i loro prefissi sono identici.
+- **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
+- **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
 
 ### Metodo $F_{k−1}×F_{k−1}$
 
 Questo metodo ottimizza la generazione di candidati combinando due itemset di cardinalità *k −*1. Il processo prevede:
 
-1. **Merge:** Combinare due itemset di cardinalità *k −*1 se i loro prefissi sono uguali.
-2. **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
-3. **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
+- **Merge:** Combinare due itemset di cardinalità *k −*1 se i loro prefissi sono uguali.
+- **Pruning:** Eliminare gli itemset candidati che contengono almeno un itemset non frequente.
+- **Conteggio del supporto:** Verificare la frequenza degli itemset candidati rimanenti.
 
 ##### Esempio:
 
@@ -282,8 +282,8 @@ Nonostante il pruning, il problema della generazione di regole rimane esponenzia
 
 Il processo di scoperta di regole associative presenta due sfide principali:
 
-1. **Numero esponenziale di itemset e regole:** Il numero di possibili itemset e regole cresce esponenzialmente con la dimensione del dataset.
-2. **Calcolo del supporto e della confidenza:** Il calcolo della frequenza di ogni itemset e della confidenza di ogni regola richiede un tempo significativo, soprattutto per dataset di grandi dimensioni.
+- **Numero esponenziale di itemset e regole:** Il numero di possibili itemset e regole cresce esponenzialmente con la dimensione del dataset.
+- **Calcolo del supporto e della confidenza:** Il calcolo della frequenza di ogni itemset e della confidenza di ogni regola richiede un tempo significativo, soprattutto per dataset di grandi dimensioni.
 
 La complessità degli algoritmi per le regole associative è influenzata da diversi fattori:
 
@@ -418,7 +418,7 @@ $$
 s_{XY}, \ \text{Support count di } X \text{ e } Y \\
 s_{\overline{X}Y}, \ \text{Support count di } X \text{ e } \bar{Y} \\
 s_{X\overline{Y}}, \ \text{Support count di } \bar{X} \text{ e } Y \\
-s_{\overline{X}\overline{Y}},\ \text{Support count di } \bar{X} \text{ e } \bar{Y} 
+s_{\overline{X}\overline{Y}},\ \text{Support count di } \bar{X} \text{ e } \bar{Y}
 \end{aligned}
 $$
 
@@ -438,18 +438,18 @@ La condizione per una regola associativa *X → Y* di essere interessante è c
 
 $$P (Y |X) > P (Y ) =\frac {P (X, Y )}{ P (X) > P (Y )} = P (X, Y ) > P (X) × P (Y )$$
 
-Quando $P(X, Y) > P(X) \times P(Y)$ è soddisfatta si dice che le due variabili sono **correlate positivamente**, negativamente altrimenti. 
-Quando $P(X, Y) = P(X) \times P(Y)$ abbiamo **indipendenza**. 
+Quando $P(X, Y) > P(X) \times P(Y)$ è soddisfatta si dice che le due variabili sono **correlate positivamente**, negativamente altrimenti.
+Quando $P(X, Y) = P(X) \times P(Y)$ abbiamo **indipendenza**.
 ### Misure di Correlazione
 
 Diverse misure vengono utilizzate per quantificare la correlazione tra *X* e _Y_:
 
 * **Lift**: Misura il rapporto tra la probabilità condizionata di *Y* dato *X* e la probabilità di _Y_:
-	* $\text{Lift}=\frac{P(Y|X)}{P(Y)}$
-	* Utilizzato per le regole associative.
+* $\text{Lift}=\frac{P(Y|X)}{P(Y)}$
+* Utilizzato per le regole associative.
 * **Interest**: Misura la differenza tra la probabilità congiunta di *X* e *Y* e il prodotto delle probabilità marginali di *X* e _Y_:
-	* $\text{Interest}=\frac{P(X,Y)}{P(X)\times P(Y)}$
-	* Utilizzato per gli itemset.
+* $\text{Interest}=\frac{P(X,Y)}{P(X)\times P(Y)}$
+* Utilizzato per gli itemset.
 * **ϕ-coefficient:** Misura la correlazione tra due variabili binarie.
 $$\phi_\text{coefficient}=\frac{P(X,Y)-P(X)\times P(Y)}{\sqrt{ P(X) \times [1 - P(X)] \times P(Y) \times [1 - P(Y)] }}$$
 
@@ -464,25 +464,25 @@ In questo esempio, la regola con correlazione più alta (0.9) ha un valore di *
 
 Le metriche utilizzate per valutare le regole associative presentano diverse proprietà che influenzano la loro interpretazione e applicabilità. Ecco alcune proprietà chiave:
 
-##### 1. Simmetria:
+##### Simmetria:
 
 * Alcune metriche sono **simmetriche**, il che significa che il risultato è lo stesso indipendentemente dall'ordine degli elementi nella regola (es. *A → B* è equivalente a *B → A*). Esempi di metriche simmetriche includono Jaccard, coseno e Lift.
 * Altre metriche sono **asimmetriche**, il che significa che il risultato dipende dall'ordine degli elementi nella regola. Esempi di metriche asimmetriche includono confidenza e Laplace.
 * Le metriche simmetriche sono più adatte per misurare la validità dell'itemset, mentre le metriche asimmetriche sono più adatte per misurare la validità della regola.
 
-##### 2. Variazione di Scala:
+##### Variazione di Scala:
 
 * Alcune metriche sono **insensibili** alla variazione di scala del dataset. Questo significa che il risultato rimane lo stesso anche se il numero di elementi nel dataset cambia.
 * Altre metriche sono **sensibili** alla variazione di scala. Questo significa che il risultato cambia se il numero di elementi nel dataset cambia.
 * La scelta della metrica dipende dal contesto e dalla sensibilità desiderata alla variazione di scala.
 
-##### 3. Correlazione:
+##### Correlazione:
 
 * Il coefficiente *ϕ* è una metrica che misura la correlazione tra due variabili binarie.
 * Il coefficiente *ϕ* è **insensibile** all'inversione dei valori delle variabili. Questo significa che il risultato rimane lo stesso anche se si scambiano i valori di *X* e *Y*.
 * La sensibilità all'inversione può essere un vantaggio o uno svantaggio a seconda del contesto.
 
-##### 4. Addizione di Casi Nulli:
+##### Addizione di Casi Nulli:
 
 * Alcune metriche sono **sensibili** all'aggiunta di casi nulli (transazioni che non contengono né *X* né *Y*). Questo significa che il risultato cambia se si aggiungono casi nulli al dataset.
 * Altre metriche sono **insensibili** all'aggiunta di casi nulli. Questo significa che il risultato rimane lo stesso anche se si aggiungono casi nulli al dataset.
@@ -546,9 +546,9 @@ La distribuzione del supporto è spesso distorta, con pochi itemset ad alto supp
 ##### Conseguenze:
 
 * **Supporto minimo elevato:**
- * Perdita di itemset rari che potrebbero essere interessanti per l'analisi.
+	* Perdita di itemset rari che potrebbero essere interessanti per l'analisi.
 * **Supporto minimo basso:**
- * Calcolo costoso con un numero eccessivo di itemset.
+	* Calcolo costoso con un numero eccessivo di itemset.
 
 ## Dataset con Supporto non Omogeneo
 
@@ -643,13 +643,13 @@ $$hconf = min\left\{ \frac{s(X)}{s(x_1)}, ..., \frac{s(X)}{s(x_n)} \right\} = \f
 
 ##### Vantaggi:
 
-1. Un'elevata H-confidence implica una stretta relazione tra tutti gli elementi del pattern.
-2. Vengono eliminati i cross-support pattern.
-3. Pattern con basso supporto e elevata H-confidence possono essere individuati efficientemente.
+- Un'elevata H-confidence implica una stretta relazione tra tutti gli elementi del pattern.
+- Vengono eliminati i cross-support pattern.
+- Pattern con basso supporto e elevata H-confidence possono essere individuati efficientemente.
 
 ## Cross Support e H-confidence
 
-Il supporto di un itemset diminuisce all'aumentare del numero di elementi che lo compongono. Questo perché il supporto di un itemset è limitato dal supporto dei suoi elementi individuali. 
+Il supporto di un itemset diminuisce all'aumentare del numero di elementi che lo compongono. Questo perché il supporto di un itemset è limitato dal supporto dei suoi elementi individuali.
 
 La **h-confidence** è una misura che quantifica la relazione tra il supporto di un itemset e il supporto dei suoi elementi individuali. È definita come il rapporto tra il supporto dell'itemset e il supporto massimo dei suoi elementi:
 
@@ -666,14 +666,14 @@ $$hconf \le \frac{min\{s(x_1), ..., s(x_n)\}}{max\{s(x_1), ..., s(x_n)\}} = r$$
 
 Un itemset con h-confidence bassa indica che il supporto dell'itemset è significativamente inferiore al supporto dei suoi elementi individuali. Questi itemset sono chiamati **hyperclique**.
 
-Gli hyperclique sono interessanti perché possono rivelare pattern con basso supporto che potrebbero essere trascurati da un'analisi basata solo sul supporto. 
+Gli hyperclique sono interessanti perché possono rivelare pattern con basso supporto che potrebbero essere trascurati da un'analisi basata solo sul supporto.
 
 È possibile definire **hyperclique chiusi** e **massimali** in base alla h-confidence:
 
 * Un hyperclique $X$ è **chiuso** se nessuno dei suoi immediati superset ha la stessa h-confidence di $X$.
 * Un hyperclique $X$ è **massimale** se nessuno dei suoi immediati superset è un hyperclique.
 
-La h-confidence può essere utilizzata in sostituzione o congiunzione con il supporto per trovare itemset con supporti comparati. 
+La h-confidence può essere utilizzata in sostituzione o congiunzione con il supporto per trovare itemset con supporti comparati.
 
 ## Attributi Categorici e Continui
 
@@ -688,13 +688,13 @@ Se abbiamo un dataset di questo tipo
 
 ![[7) Regole associative-20241004204718638.png|539]]
 
- Potremmo generare regole di questo tipo:
+Potremmo generare regole di questo tipo:
 
 $${\text{Level of education} = Graduate, \text{Online Banking} = Yes} → {\text{Privacy Concern} = Yes}$$
 
 Per applicare le regole viste fino a questo momento basta trasformare gli attributi categorici in attributi di tipo binario asimmetrici.
 
- Per ogni attributo categorico andiamo a generare tanti attributi quanti sono i valori del dominio. Nel caso dell'attributo *Gender* verranno creati due nuovi attributi *Male* e *Female*. Stesso procedimento per tutti gli altri attributi.
+Per ogni attributo categorico andiamo a generare tanti attributi quanti sono i valori del dominio. Nel caso dell'attributo *Gender* verranno creati due nuovi attributi *Male* e *Female*. Stesso procedimento per tutti gli altri attributi.
 
 ![[7) Regole associative-20241004204726076.png|502]]
 
@@ -758,11 +758,11 @@ $$
 Per evitare intervalli troppo ampi si potrebbe pensare di utilizzare come ottimizzazione un valore soglia (supporto massimo) per evitare intervalli troppo ampi. Nel caso in cui avessimo due regole ridondanti che hanno la stessa confidenza come queste:
 $$\begin{gather}
 R_{1}: \{ Age \in[18,20)\} \to \{\text{Chat Online} = Yes\} \\
-R_{2}:\{ Age \in[18,23)\} \to \{\text{Chat Online} = Yes\} 
+R_{2}:\{ Age \in[18,23)\} \to \{\text{Chat Online} = Yes\}
 \end{gather}
 $$
 
- andiamo ad eliminare la regola più specifica (intervallo di valori minore).
+andiamo ad eliminare la regola più specifica (intervallo di valori minore).
 
 ## Approccio Statistico
 
@@ -776,14 +776,14 @@ Dove abbiamo attributi numerici e categorici. Supponiamo inoltre di aver generat
 
 Nell'algoritmo, in questo caso, l'attributo target non viene considerato. Calcoliamo gli item-set frequenti senza considerare l'attributo target. Una volta generato l'itemset frequente andiamo a generare una regola dove nel corpo abbiamo tutto l'itemset frequente e nel conseguente ci sta l'attributo target del quale consideriamo alcune misure statistiche. I passi sono riportati di seguito:
 
-1. **Elimina l'attributo target dai dati.**
-2. **Estrai gli itemset frequenti dal resto degli attributi.**
-3. **"Binarizza" gli attributi continui (eccetto l'attributo target).**
-4. **Per ogni itemset frequente, calcola le corrispondenti statistiche descrittive dell'attributo target.**
-5. **Gli itemset frequenti diventano regole introducendo la variabile target come conseguente.**
-6. **Applica il test statistico per determinare quanto è interessante la regola (validazione delle regole).**
+- **Elimina l'attributo target dai dati.**
+- **Estrai gli itemset frequenti dal resto degli attributi.**
+- **"Binarizza" gli attributi continui (eccetto l'attributo target).**
+- **Per ogni itemset frequente, calcola le corrispondenti statistiche descrittive dell'attributo target.**
+- **Gli itemset frequenti diventano regole introducendo la variabile target come conseguente.**
+- **Applica il test statistico per determinare quanto è interessante la regola (validazione delle regole).**
 
-**Nota:** La binarizzazione degli attributi continui è un passaggio importante per poter applicare l'algoritmo di estrazione di regole di associazione. Questo passaggio consiste nel trasformare gli attributi continui in attributi binari, ovvero attributi che possono assumere solo due valori (ad esempio, 0 o 1). 
+**Nota:** La binarizzazione degli attributi continui è un passaggio importante per poter applicare l'algoritmo di estrazione di regole di associazione. Questo passaggio consiste nel trasformare gli attributi continui in attributi binari, ovvero attributi che possono assumere solo due valori (ad esempio, 0 o 1).
 
 ### Validità delle Regole
 
@@ -802,7 +802,6 @@ Se \(μ > μ'\), vanno invertiti nella formula. Al denominatore abbiamo la varia
 Se questo valore \(Z\) è superiore ad una soglia fissata (\(Z_α\), che è un valore calcolato in base ad una determinata confidenza, come nei test statistici), allora la regola è significativa.
 
 ## 16.2.3 Senza Discretizzazione (minApriori)
-
 Queste tecniche per generare regole associative vengono utilizzate su molti tipi di dati, per esempio dati a grafo, dati sequenziali oppure su documenti. Diamo un cenno di quello che succede quando abbiamo dei documenti. In questo caso vogliamo generare delle regole che ci dicono che se un documento contiene con una certa rilevanza una parola o un gruppo di parole allora quel documento contiene anche con una certa frequenza un termine di interesse. Supponendo di avere questi documenti:
 
 ![[7) Regole associative-20241004205158405.png|287]]
@@ -811,7 +810,7 @@ Sulle righe abbiamo i documenti, sulle colonne le parole, nelle celle abbiamo le
 
 ![[7) Regole associative-20241004205207044.png|536]]
 
- Vogliamo ora calcolare dei gruppi di parole (itemset) per andarne a calcolare il supporto che è definito come segue: $sup(C) = \sum_{i \in T} \min_{j \in C} D(i, j)$ 
+Vogliamo ora calcolare dei gruppi di parole (itemset) per andarne a calcolare il supporto che è definito come segue: $sup(C) = \sum_{i \in T} \min_{j \in C} D(i, j)$
 
 dove:
 
@@ -863,10 +862,10 @@ then conf(X1 ⇒ Y) ≥ minconf
 ## Conseguenze
 
 * **Item ai livelli "alti" della gerarchia avranno supporti molto elevati.**
-* **Possibilità di pattern cross-support.** Se la soglia per il supporto è bassa saranno identificati molti pattern che coinvolgono item ai livelli alti della gerarchia.
+	* **Possibilità di pattern cross-support.** Se la soglia per il supporto è bassa saranno identificati molti pattern che coinvolgono item ai livelli alti della gerarchia.
 * **Il numero di associazioni ridondanti aumenta.**
- * Latte -> Pane
- * Latte scremato -> Pane
+	* Latte -> Pane
+	* Latte scremato -> Pane
 * **La dimensionalità dei dati aumenta e conseguentemente aumenta il tempo di elaborazione.**
 
 ##### Una soluzione alternativa è quella di generare i pattern frequenti separatamente per i diversi livelli della gerarchia.
@@ -877,5 +876,5 @@ then conf(X1 ⇒ Y) ≥ minconf
 ##### Conseguenze:
 
 * **Il costo di I/O crescerà notevolmente poiché saranno necessarie più scansioni dei dati.**
-* **Saranno persi eventuali associazioni cross-livello interessanti.** 
+* **Saranno persi eventuali associazioni cross-livello interessanti.**
 

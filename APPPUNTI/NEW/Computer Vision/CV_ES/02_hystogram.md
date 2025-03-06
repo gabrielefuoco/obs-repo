@@ -1,4 +1,4 @@
-# Analisi di immagini
+## Analisi di immagini
 
 - Visualizzazione delle immagini nei canali R,G,B
 - Conversione in scala di grigi
@@ -6,6 +6,7 @@
 
 ```python
 # import delle librerie
+
 import os
 import numpy as np
 import matplotlib
@@ -19,12 +20,14 @@ from io import BytesIO
 import IPython.display
 
 # Required magic to display matplotlib plots in notebooks
+
 %matplotlib inline
 
 pil2tensor = transforms.ToTensor()
 tensor2pil = transforms.ToPILImage()
 
 # in questa folder sono memorizzati alcuni file a supporto (path relativo al notebook corrente)
+
 IMGSRC = 'data'
 # print(f'workin dir is {os.path.abspath(".")}')
 
@@ -37,10 +40,13 @@ def myResourcePath(fname):
 
 ```python
 # Plot the image here using matplotlib.
+
 def plot_image(tensor):
     plt.figure()
     # imshow needs a numpy array with the channel dimension
+
     # as the the last dimension so we have to transpose things.
+
     plt.imshow(tensor.numpy().transpose(1, 2, 0))
     plt.show()
 ```
@@ -56,11 +62,12 @@ print(f'tensor shape {rgb_image.shape}')
 
 ![png](02_hystogram_3_0.png)
 
- tensor type torch.FloatTensor
- tensor shape torch.Size([3, 416, 600])
+tensor type torch.FloatTensor
+tensor shape torch.Size([3, 416, 600])
 
 ```python
 # tensori dei singoli canali
+
 r_image = rgb_image[0]
 g_image = rgb_image[1]
 b_image = rgb_image[2]
@@ -68,20 +75,25 @@ b_image = rgb_image[2]
 r_image.shape
 ```
 
- torch.Size([416, 600])
+torch.Size([416, 600])
 
 ```python
 def show_grayscale_image(tensor):
     # IPython.display can only show images from a file.
+
     # So we mock up an in-memory file to show it.
+
     # IPython.display needs a numpy array with channels first.
+
     # and it also has to be uint8 with values between 0 and 255.
+
     f = BytesIO()
     a = np.uint8(tensor.mul(255).numpy()) 
     Image.fromarray(a).save(f, 'png')
     IPython.display.display(IPython.display.Image(data = f.getvalue()))
 
 # Cat concatenates tensors along a given dimension, we choose width here (1), instead of height (0).
+
 show_grayscale_image(torch.cat((r_image, g_image, b_image), 1))
 ```
 
@@ -97,6 +109,7 @@ Proviamo a enfetizzare il contributo del canale G
 image_copy = rgb_image.clone()
 
 # Multiply the green channel by two, clamp the values to the 0-1 range.
+
 image_copy[1] = image_copy[1].mul(2.0).clamp(0.0, 1.0)
 
 plot_image(image_copy)
@@ -106,9 +119,11 @@ plot_image(image_copy)
 
 ```python
 # Try the opposite
+
 image_copy = rgb_image.clone()
 
 # Divide the green channel by two, clamp the values to the 0-1 range.
+
 image_copy[1] = image_copy[1].mul(0.5).clamp(0.0, 1.0)
 
 plot_image(image_copy)
@@ -118,7 +133,7 @@ plot_image(image_copy)
 
 ## Conversione in scala di grigi
 
-Come possiamo convertire un'immagine RGB in scala di grigi? Un modo semplice sarebbe la media di tutti e tre i canali RGB. 
+Come possiamo convertire un'immagine RGB in scala di grigi? Un modo semplice sarebbe la media di tutti e tre i canali RGB.
 
 Attenzione: nel tensore i canali hanno valori compresi nell'intervallo [0,1]
 
@@ -151,7 +166,7 @@ plot_grayscale_image(grayscale_image)
 
 ## Luminosità
 
-Abbiamo visto che visualizzando un solo canale posso visualizzare l'immagine in scala di grigi. 
+Abbiamo visto che visualizzando un solo canale posso visualizzare l'immagine in scala di grigi.
 Cambiando il contributo dei singoli canali posso variare la resa finale della conversione.
 
 Posso fare lo stesso con i singoli canali visualizzando l'immagine nei tre canali?
@@ -161,9 +176,11 @@ bright_rgb_image = rgb_image.clone()
 dark_rgb_image = rgb_image.clone()
 
 # Multiply all elements in the image by 1.8, and then clamp values between 0 and 1.
+
 bright_rgb_image.mul_(1.8).clamp_(0, 1)
 
 # Multiply all elements in the image by 0.6, and then clamp values between 0 and 1.
+
 dark_rgb_image.mul_(0.6).clamp_(0, 1)
 
 def show_image(tensor):
@@ -173,6 +190,7 @@ def show_image(tensor):
     IPython.display.display(IPython.display.Image(data = f.getvalue()))
 
 # Since these are color images (0: channels, 1: height, 2: width), we need to concat in the 2nd dimension. 
+
 show_image(torch.cat((rgb_image, bright_rgb_image, dark_rgb_image), 2))
 ```
 
@@ -190,16 +208,19 @@ g_image = rgb_image[1]
 b_image = rgb_image[2]
 
 # Compute histograms for each channel.
+
 hist_r = torch.histc(r_image, bins = 10, min = 0.0, max = 1.0)
 hist_g = torch.histc(g_image, bins = 10, min = 0.0, max = 1.0)
 hist_b = torch.histc(b_image, bins = 10, min = 0.0, max = 1.0)
 
 # Normalize the histograms so that they sum to 1.
+
 hist_r = hist_r.div(hist_r.sum())
 hist_g = hist_g.div(hist_g.sum())
 hist_b = hist_b.div(hist_b.sum())
 
 # Plot the histograms.
+
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, sharey = True, figsize=(20, 8))
 ax1.bar(np.linspace(1.0, 10.0, num = 10), hist_r.numpy(), color='r')
 ax2.bar(np.linspace(1.0, 10.0, num = 10), hist_g.numpy(), color='g')
@@ -219,11 +240,13 @@ def get_channels(rgbim, bins=10):
     b_channel = rgbim[2]
 
     # Compute histograms for each channel.
+
     hist_r = torch.histc(r_channel, bins=bins, min = 0.0, max = 1.0)
     hist_g = torch.histc(g_channel, bins=bins, min = 0.0, max = 1.0)
     hist_b = torch.histc(b_channel, bins=bins, min = 0.0, max = 1.0)
 
     # Normalize the histograms so that they sum to 1.
+
     hist_r = hist_r.div(hist_r.sum())
     hist_g = hist_g.div(hist_g.sum())
     hist_b = hist_b.div(hist_b.sum())

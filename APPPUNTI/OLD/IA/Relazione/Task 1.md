@@ -37,22 +37,22 @@ Il lavoro si articola in due fasi principali: **pianificazione classica** e **pi
 - Tempo impiegato per completare la pianificazione.
 - Memoria utilizzata durante il processo.
 
-## Task 1: Fase di modellazione 
+## Task 1: Fase di modellazione
 
 Dopo aver definito chiaramente le condizioni iniziali e gli obiettivi per entrambe le istanze, il passo successivo consiste nella traduzione del problema in un linguaggio di pianificazione formale, nel nostro caso il **PDDL** (Planning Domain Definition Language). Questo linguaggio è ampiamente utilizzato nell'intelligenza artificiale per rappresentare problemi di pianificazione.
 
 La modellazione in PDDL richiede la creazione di due file distinti:
-1. **Domain file**: specifica il dominio del problema, ovvero l'insieme delle azioni che possono essere eseguite dagli agenti robotici e le condizioni che determinano il cambiamento di stato del sistema. In questo file vengono descritte le dinamiche del mondo in cui operano i robot.
-2. **Problem file**: definisce il problema specifico da risolvere, contenente: 
-	* Gli oggetti coinvolti, ad esempio: scatole, stazioni di lavoro, agenti. 
-	* Lo stato iniziale del sistema. 
-	* Gli obiettivi che devono essere raggiunti.
+- **Domain file**: specifica il dominio del problema, ovvero l'insieme delle azioni che possono essere eseguite dagli agenti robotici e le condizioni che determinano il cambiamento di stato del sistema. In questo file vengono descritte le dinamiche del mondo in cui operano i robot.
+- **Problem file**: definisce il problema specifico da risolvere, contenente:
+* Gli oggetti coinvolti, ad esempio: scatole, stazioni di lavoro, agenti.
+* Lo stato iniziale del sistema.
+* Gli obiettivi che devono essere raggiunti.
 
-Questa separazione tra dominio e problema consente una maggiore flessibilità, permettendo di riutilizzare la stessa descrizione del dominio per risolvere diverse istanze di problemi simili, semplicemente cambiando lo stato iniziale o gli obiettivi da raggiungere. 
+Questa separazione tra dominio e problema consente una maggiore flessibilità, permettendo di riutilizzare la stessa descrizione del dominio per risolvere diverse istanze di problemi simili, semplicemente cambiando lo stato iniziale o gli obiettivi da raggiungere.
 
 ### Implementazione in PDDL
 
-Nell'implementazione del dominio utilizzando il linguaggio PDDL, è fondamentale definire i tipi, i predicati e le azioni che rappresentano le dinamiche del sistema. 
+Nell'implementazione del dominio utilizzando il linguaggio PDDL, è fondamentale definire i tipi, i predicati e le azioni che rappresentano le dinamiche del sistema.
 
 ``` Java
 (define (domain centralWarehouse)
@@ -105,16 +105,16 @@ L'uso di predicati come **carrierSlotOccupied/carrierSlotAvailable** e **noConte
 
 In PDDL, un'azione rappresenta una trasformazione da uno stato a un altro e si compone di tre sezioni fondamentali:
 
-1. **Parameters**: Definisce gli oggetti coinvolti nell'azione.
-2. **Precondition**: Specifica le condizioni che devono essere soddisfatte affinché l'azione possa essere eseguita, utilizzando predicati combinati tramite congiunzione o disgiunzione.
-3. **Effect** (o **Expansion**): Nella maggior parte dei casi si utilizza la sezione **Effect**, che descrive le conseguenze dell'azione attraverso predicati e espressioni logiche. 
+- **Parameters**: Definisce gli oggetti coinvolti nell'azione.
+- **Precondition**: Specifica le condizioni che devono essere soddisfatte affinché l'azione possa essere eseguita, utilizzando predicati combinati tramite congiunzione o disgiunzione.
+- **Effect** (o **Expansion**): Nella maggior parte dei casi si utilizza la sezione **Effect**, che descrive le conseguenze dell'azione attraverso predicati e espressioni logiche.
 
 Nel progetto, sono state implementate le seguenti azioni:
 
-#### 1. fill 
+#### fill
 
 L'azione di riempimento di una scatola con un contenuto specifico eseguita da un agente. Le precondizioni verificano che:
-- Il contenuto, la scatola e l'agente si trovino nella stessa posizione. 
+- Il contenuto, la scatola e l'agente si trovino nella stessa posizione.
 - La scatola sia vuota.
 **Effetti**:
 
@@ -132,7 +132,7 @@ L'azione di riempimento di una scatola con un contenuto specifico eseguita da un
     )
 ```
 
-#### 2. charge 
+#### charge
 
 L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verificano che:
 - Il mezzo abbia uno spazio disponibile (**carrierSlot**) per la scatola.
@@ -158,7 +158,7 @@ L'azione di carico di una scatola sul veicolo (carrier). Le precondizioni verifi
     )
 ```
 
-#### 3. discharge 
+#### discharge
 
 L'azione di scarico della scatola da un veicolo. Questa azione è applicabile solo se la scatola è vuota. Le precondizioni verificano che:
 - Lo slot del veicolo sia effettivamente occupato dalla scatola.
@@ -184,7 +184,7 @@ L'azione di scarico della scatola da un veicolo. Questa azione è applicabile so
     )
 ```
 
-#### 4. moveRobot 
+#### moveRobot
 
 L'azione di movimento di un robot privo di carrier, verso una nuova posizione. Le precondizioni verificano che:
 - Il robot si trovi nella posizione di partenza specificata.
@@ -203,7 +203,7 @@ L'azione di movimento di un robot privo di carrier, verso una nuova posizione. L
     )
 ```
 
-#### 5. moveCarrier 
+#### moveCarrier
 
 L'azione di movimento di un carrier da parte di un robot verso una nuova posizione. Le precondizioni verificano che:
 - Il robot e il carrier si trovino nella posizione di partenza.
@@ -225,7 +225,7 @@ L'azione di movimento di un carrier da parte di un robot verso una nuova posizio
     )
 ```
 
-#### 6. contentDelivered 
+#### contentDelivered
 
 Questo predicato viene introdotto per gestire il vincolo OR richiesto nelle istanze successive della pianificazione classica. Si tratta di un'azione fittizia che rappresenta la condizione in cui una workstation ha ricevuto il contenuto necessario. Le **precondizioni** verificano che:
 - La workstation abbia ricevuto almeno uno dei due contenuti richiesti.

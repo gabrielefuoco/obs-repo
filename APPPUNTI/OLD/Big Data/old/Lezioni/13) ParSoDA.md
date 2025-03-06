@@ -21,10 +21,10 @@
 
 - **Big Data nei Social Media**: I social media come Twitter e Flickr generano enormi quantità di dati, che possono essere sfruttati per **estrarre informazioni utili** su comportamenti e dinamiche umane.
 - **Crescita dell'analisi dei social media**: L'analisi dei social media è in rapido sviluppo, con applicazioni in:
- - Analisi dei sentimenti collettivi;
- - Analisi dei movimenti degli utenti (es. luoghi visitati e percorsi);
- - Comprensione del comportamento dei gruppi;
- - Studio delle dinamiche dell'opinione pubblica.
+- Analisi dei sentimenti collettivi;
+- Analisi dei movimenti degli utenti (es. luoghi visitati e percorsi);
+- Comprensione del comportamento dei gruppi;
+- Studio delle dinamiche dell'opinione pubblica.
 - **Sfide dei Big Data**: L'enorme dimensione e complessità dei dati richiedono **tecniche parallele e distribuite** per l'analisi.
 - **Barriere d'ingresso**: Nonostante l'esistenza di framework paralleli come MapReduce e Spark, la loro adozione è limitata dalle **competenze di programmazione** richieste.
 - **PaRSoDA**: La libreria **PaRSoDA (Parallel Social Data Analytics)** è stata creata per facilitare la costruzione di applicazioni di analisi dati parallele, rendendo più accessibile l'estrazione di conoscenza dai dati dei social media.
@@ -33,21 +33,21 @@
 
 - **Accessibilità**: PaRSoDA riduce le competenze di programmazione necessarie per sviluppare applicazioni di analisi dati.
 - **Funzionalità avanzate**: Include strumenti per l'elaborazione e l'analisi dei dati dai social media, con particolare attenzione a:
- - Mobilità degli utenti;
- - Sentimenti degli utenti;
- - Tendenze degli argomenti.
+- Mobilità degli utenti;
+- Sentimenti degli utenti;
+- Tendenze degli argomenti.
 - **Supporto ai Big Data**: Le funzioni sono basate sul modello MapReduce e sono progettate per l'esecuzione parallela su sistemi HPC e cloud.
 - Le applicazioni PaRSoDA sono eseguite su cluster Hadoop, utilizzando YARN come gestore delle risorse e HDFS come file system distribuito.
 
 ### Fasi di PaRSoDA
 
-1. **Acquisizione Dati**: Raccolta parallela di dati dai social media, memorizzati su un file system distribuito (HDFS).
-2. **Filtraggio Dati**: Applicazione di funzioni per filtrare i dati raccolti.
-3. **Mappatura Dati**: Trasformazione delle informazioni nei dati social media attraverso funzioni di mapping.
-4. **Partizionamento Dati**: Suddivisione dei dati in shard, ordinati secondo chiavi primarie e secondarie.
-5. **Riduzione Dati**: Aggregazione dei dati per shard utilizzando funzioni di riduzione specifiche.
-6. **Analisi Dati**: Esecuzione di funzioni di analisi per estrarre informazioni rilevanti.
-7. **Visualizzazione Dati**: Presentazione dei risultati tramite funzioni di visualizzazione personalizzabili.
+- **Acquisizione Dati**: Raccolta parallela di dati dai social media, memorizzati su un file system distribuito (HDFS).
+- **Filtraggio Dati**: Applicazione di funzioni per filtrare i dati raccolti.
+- **Mappatura Dati**: Trasformazione delle informazioni nei dati social media attraverso funzioni di mapping.
+- **Partizionamento Dati**: Suddivisione dei dati in shard, ordinati secondo chiavi primarie e secondarie.
+- **Riduzione Dati**: Aggregazione dei dati per shard utilizzando funzioni di riduzione specifiche.
+- **Analisi Dati**: Esecuzione di funzioni di analisi per estrarre informazioni rilevanti.
+- **Visualizzazione Dati**: Presentazione dei risultati tramite funzioni di visualizzazione personalizzabili.
 
 ## Come configurare le fasi in PaRSoDA
 
@@ -67,9 +67,9 @@
 
 - Per ogni fase, PaRSoDA fornisce un set di funzioni predefinite che possono essere eseguite.
 - Esempi:
- - Per l'**acquisizione dati**, PaRSoDA fornisce implementazioni di crawling per raccogliere dati da alcuni dei social network più popolari (es. Flickr, Twitter).
- - Per il **filtraggio dati**, PaRSoDA fornisce funzioni per filtrare elementi geotaggati in base alla loro posizione, timestamp, parole chiave contenute, ecc.
- - `isGeoTagged`, `isInPlace`, `containsKeywords`, ...
+- Per l'**acquisizione dati**, PaRSoDA fornisce implementazioni di crawling per raccogliere dati da alcuni dei social network più popolari (es. Flickr, Twitter).
+- Per il **filtraggio dati**, PaRSoDA fornisce funzioni per filtrare elementi geotaggati in base alla loro posizione, timestamp, parole chiave contenute, ecc.
+- `isGeoTagged`, `isInPlace`, `containsKeywords`, ...
 - Gli utenti sono liberi di **estendere queste funzioni** con le proprie.
 
 ### Modello dei metadati in PaRSoDA
@@ -106,15 +106,14 @@ Per gestire gli elementi dei social media raccolti da diverse reti sociali, PaRS
 Il documento di metadati è composto da due parti:
 - Una sezione `basic` che include campi comuni a tutti i social network;
 - Una sezione `extra` che contiene campi specifici della sorgente.
----
 ### Secondary Sort in Hadoop
 
 Il secondary sort è una tecnica che consente al programmatore di MapReduce di **controllare l'ordine** in cui i valori vengono visualizzati all'interno di una chiamata alla funzione reduce.
 
 - Utilizza una chiave composita **[firstKey, secondKey]**.
 - Il **partitioner** e il **group comparator** utilizzano solo la **firstKey**:
- - Il **partitioner** assegna tutti i record con la stessa firstKey a un singolo reducer (durante la **fase map**).
- - Dopo la **fase di shuffling**, i record vengono ricevuti dai nodi reducer, **raggruppati** usando la firstKey, e inviati al metodo reduce.
+- Il **partitioner** assegna tutti i record con la stessa firstKey a un singolo reducer (durante la **fase map**).
+- Dopo la **fase di shuffling**, i record vengono ricevuti dai nodi reducer, **raggruppati** usando la firstKey, e inviati al metodo reduce.
 
 ### Come eseguire un join in Hadoop
 
@@ -127,9 +126,9 @@ Un'operazione di **join** combina due dataset di grandi dimensioni in MapReduce.
 Il **map-side join** viene eseguito dal mapper **prima** che i dati vengano consumati dalla funzione map.
 
 - I dati devono essere **partizionati** e **ordinati**:
- - Gli input devono essere divisi in un numero uguale di partizioni.
- - Devono essere ordinati per la stessa chiave.
- - Tutti i record per una determinata chiave devono essere nella stessa partizione.
+- Gli input devono essere divisi in un numero uguale di partizioni.
+- Devono essere ordinati per la stessa chiave.
+- Tutti i record per una determinata chiave devono essere nella stessa partizione.
 - Viene implementato tramite `CompositeInputFormat`, che può eseguire join su set di dati ordinati e partizionati allo stesso modo.
 
 Il map-side join è generalmente **più veloce** del reduce-side join per piccoli dataset. Tuttavia, se i dati sono preparati con altri job MapReduce, la performance del map-side join diminuisce rispetto a un reduce-side join.
@@ -150,12 +149,11 @@ Un approccio comune per eseguire una join tra due tabelle di dati in Hadoop è i
 
 - Il **join di repartizione** esegue una join relazionale tra due tabelle, A e B.
 - Ogni task di map elabora una partizione di A o B. Ogni task emette una **chiave composta** costituita da:
- - Una **chiave di join**.
- - Una **chiave di tabella**.
+- Una **chiave di join**.
+- Una **chiave di tabella**.
 - La **chiave di join** viene utilizzata durante la partizione per assegnare tuple con la stessa chiave di join allo stesso task di reduce.
 - La **chiave di tabella** ordina le tuple, mettendo quelle di A prima di quelle di B.
 - Il reducer, per ogni chiave di join, elabora prima le tuple di A, mantenendole in memoria, e poi le tuple di B per eseguire la join.
----
 ### Parsoda - Applicazione di estrazione delle Regioni di Interesse (ROI)
 
 Un **punto di interesse (POI)** è una località significativa o interessante visitata dagli utenti (ad esempio, una piazza o un monumento).
@@ -166,30 +164,28 @@ Utilizzando un dataset di elementi geolocalizzati provenienti da social media co
 
 ## Struttura dell'Applicazione di Estrazione delle ROI
 
-1. **Acquisizione dati**: 
- Utilizziamo un file chiamato **"colosseo500m.json"** contenente tutti i post di Flickr pubblicati entro 500 metri dal Colosseo.
+- **Acquisizione dati**:
+Utilizziamo un file chiamato **"colosseo500m.json"** contenente tutti i post di Flickr pubblicati entro 500 metri dal Colosseo.
 
-2. **Filtro dati**: 
- Dato un set di parole chiave relative al Colosseo (es. "colosseo, coliseo, anfiteatrum flavium"), filtriamo tutti gli elementi che:
- - Contengono almeno una parola chiave del set;
- - Hanno informazioni geospaziali valide.
+- **Filtro dati**:
+Dato un set di parole chiave relative al Colosseo (es. "colosseo, coliseo, anfiteatrum flavium"), filtriamo tutti gli elementi che:
+- Contengono almeno una parola chiave del set;
+- Hanno informazioni geospaziali valide.
 
-3. **Mapping dati**: 
- Usiamo un **mapper di identità** predefinito, senza personalizzazioni aggiuntive.
+- **Mapping dati**:
+Usiamo un **mapper di identità** predefinito, senza personalizzazioni aggiuntive.
 
-4. **Partizione dati**: 
- La partizione dei dati avviene tramite la funzione predefinita, utilizzando un **approccio round robin** per distribuire i dati tra i nodi reducer.
+- **Partizione dati**:
+La partizione dei dati avviene tramite la funzione predefinita, utilizzando un **approccio round robin** per distribuire i dati tra i nodi reducer.
 
-5. **Riduzione dati**: 
- La funzione di riduzione estrae le **coordinate geografiche** (latitudine/longitudine) da ogni elemento e le restituisce in output.
+- **Riduzione dati**:
+La funzione di riduzione estrae le **coordinate geografiche** (latitudine/longitudine) da ogni elemento e le restituisce in output.
 
-6. **Analisi dati**: 
- Usiamo l'algoritmo **DBSCAN** per raggruppare i punti geospaziali ottenuti nella fase di riduzione. Questo passaggio consente di identificare un cluster che rappresenta (probabilmente) la **ROI** del Colosseo.
+- **Analisi dati**:
+Usiamo l'algoritmo **DBSCAN** per raggruppare i punti geospaziali ottenuti nella fase di riduzione. Questo passaggio consente di identificare un cluster che rappresenta (probabilmente) la **ROI** del Colosseo.
 
-7. **Visualizzazione dati**: 
- Convertiamo il cluster ottenuto nel passaggio precedente in formato **KML**. Questo formato consente di visualizzare la ROI come un **poligono** su piattaforme di mappe come OpenStreetMap o Google Maps.
-
---- 
+- **Visualizzazione dati**:
+Convertiamo il cluster ottenuto nel passaggio precedente in formato **KML**. Questo formato consente di visualizzare la ROI come un **poligono** su piattaforme di mappe come OpenStreetMap o Google Maps.
 
 ```java
 public class RoiMiningMain {
@@ -248,14 +244,12 @@ public class IsGeoTagged extends AbstractFilterFunction {
     }
 }
 ```
----
 ### Parsoda - Altri Casi d'Uso Applicativi
 
 I post sui social media sono spesso accompagnati da **coordinate geografiche** o altre informazioni (es. testo, campi di localizzazione) che permettono di identificare la posizione degli utenti.
 
 - Gli utenti che si spostano tra diverse località producono un'enorme quantità di dati geo-referenziati, utili per comprendere i comportamenti di mobilità.
 - Negli ultimi anni, c'è stato un crescente interesse nell'**estrazione di traiettorie** dai dati social geolocalizzati mediante tecniche di **trajectory mining**.
----
 Un estratto del codice Parsoda per implementare un'analisi di itemset frequenti.
 
 ```java
@@ -306,7 +300,7 @@ app.setAnalysisFunction(aFunction, aParams);
 | Trastevere | 8.7% | Foro Romano, Basilica di San Pietro, Colosseo | 4.4% |
 | Pantheon | 6.5% | Musei Vaticani, Basilica di San Pietro, Colosseo | 4.4% |
 | Fontana di Trevi | 5.3% | Fontana di Trevi, Pantheon, Colosseo | 4.0% |
-Tabella: Top 5 luoghi visitati a Roma 
+Tabella: Top 5 luoghi visitati a Roma
 #### Valutazione di usabilità
 
 | Fase | Parsoda | Hadoop |
@@ -341,10 +335,10 @@ Parsoda-py è una **riprogettazione completa** della libreria Java, adottando un
 ### Versione Basata su Python
 
 Parsoda-py offre quattro driver di esecuzione:
-1. **ParsodaSingleCoreDriver**: esegue algoritmi sequenziali su un singolo core.
-2. **ParsodaMultiCoreDriver**: utilizza i **thread pool** di Python per eseguire applicazioni multi-core localmente.
-3. **ParsodaPySparkDriver**: esegue l'applicazione su un cluster **Spark** tramite **PySpark**.
-4. **ParsodaPyCompssDriver**: esegue l'applicazione su un cluster **COMPSs** tramite **PyCOMPSs**.
+- **ParsodaSingleCoreDriver**: esegue algoritmi sequenziali su un singolo core.
+- **ParsodaMultiCoreDriver**: utilizza i **thread pool** di Python per eseguire applicazioni multi-core localmente.
+- **ParsodaPySparkDriver**: esegue l'applicazione su un cluster **Spark** tramite **PySpark**.
+- **ParsodaPyCompssDriver**: esegue l'applicazione su un cluster **COMPSs** tramite **PyCOMPSs**.
 ### Supporto a COMPSs
 
 Parsoda-py è esteso per supportare **COMPSs**, un runtime HPC sviluppato presso il **Barcelona Supercomputing Center (BSC)**, attraverso PyCOMPSs.
@@ -353,12 +347,11 @@ Parsoda-py è esteso per supportare **COMPSs**, un runtime HPC sviluppato presso
 ### Tipi di Crawler
 
 Parsoda-py offre due tipi di **crawler** per leggere dati da una o più fonti:
-1. **Crawler Locale**: legge i dati dal nodo master locale.
-2. **Crawler Distribuito**: partiziona la sorgente dati, permettendo la lettura parallela dai nodi worker.
+- **Crawler Locale**: legge i dati dal nodo master locale.
+- **Crawler Distribuito**: partiziona la sorgente dati, permettendo la lettura parallela dai nodi worker.
 
 Per ogni crawler, è possibile definire il numero di **partizioni** o la dimensione del **chunk**.
 
----
 ### Caso di Studio Applicativo
 
 Il seguente codice esegue un'applicazione di **sentiment mining** per analizzare il sentiment di un set di post sui social media basati sugli **emoji** contenuti:

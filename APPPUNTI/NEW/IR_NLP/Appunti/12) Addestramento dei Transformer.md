@@ -65,9 +65,9 @@ Nell'NLP moderno:
 * Quasi tutti i parametri nelle reti neurali NLP sono inizializzati tramite pre-addestramento.
 * I metodi di pre-addestramento nascondono parti dell'input al modello, addestrandolo a ricostruire tali parti.
 * Questo approccio si è dimostrato eccezionalmente efficace per costruire:
- * Rappresentazioni robuste del linguaggio.
- * Inizializzazioni dei parametri per modelli NLP performanti.
- * Distribuzioni di probabilità sul linguaggio da cui campionare.
+* Rappresentazioni robuste del linguaggio.
+* Inizializzazioni dei parametri per modelli NLP performanti.
+* Distribuzioni di probabilità sul linguaggio da cui campionare.
 
 Il pre-addestramento contestualizzato serve per la rappresentazione del linguaggio, ma anche per l'inizializzazione di un modello che, appoggiandosi su questa rappresentazione, viene poi specializzato su task specifici, come la classificazione.
 
@@ -100,7 +100,7 @@ Vengono aggiunti termini di perdita solo dalle parole che sono state "mascherate
 
 ## BERT: Bidirectional Encoder Representations from Transformers
 
-BERT utilizza una rappresentazione bidirezionale profonda di testo non etichettato nella fase di pre-addestramento tramite *Masked Language Modeling* (MLM). In altre parole, predice le parole in input mascherate condizionando congiuntamente le parole di contesto a sinistra e a destra in tutti gli strati dell'encoder. 
+BERT utilizza una rappresentazione bidirezionale profonda di testo non etichettato nella fase di pre-addestramento tramite *Masked Language Modeling* (MLM). In altre parole, predice le parole in input mascherate condizionando congiuntamente le parole di contesto a sinistra e a destra in tutti gli strati dell'encoder.
 
 Predice casualmente il **15%** dei token (sub-word):
 
@@ -133,9 +133,9 @@ La rappresentazione dell'input è la somma di *positional embeddings* e *segment
 
 ## Applicazione di BERT a diversi task
 
-L'utilizzo di BERT inizia con la classificazione del testo. Questo richiede l'aggiunta di una struttura da apprendere al modello pre-addestrato, specifica per il task. Si aggiunge, all'ultimo layer, una *testa di classificazione*. I parametri da apprendere utilizzano come input l'embedding **CLS** (una codifica compatta dell'intera sequenza di input). 
+L'utilizzo di BERT inizia con la classificazione del testo. Questo richiede l'aggiunta di una struttura da apprendere al modello pre-addestrato, specifica per il task. Si aggiunge, all'ultimo layer, una *testa di classificazione*. I parametri da apprendere utilizzano come input l'embedding **CLS** (una codifica compatta dell'intera sequenza di input).
 
-In alternativa, si possono utilizzare tutti gli embedding di output di tutti i token, applicando un *average pooling*. Sono disponibili due varianti di BERT: una con 12 layer e una con 24 layer, con dimensionalità rispettivamente di 764 e 1024. 
+In alternativa, si possono utilizzare tutti gli embedding di output di tutti i token, applicando un *average pooling*. Sono disponibili due varianti di BERT: una con 12 layer e una con 24 layer, con dimensionalità rispettivamente di 764 e 1024.
 
 Come per le reti multilayer in generale, i layer più vicini all'input apprendono relazioni a corto raggio, mentre quelli più vicini all'output apprendono relazioni semantiche (a lungo raggio).
 
@@ -174,38 +174,35 @@ BERT ha riscosso un enorme successo ed è estremamente versatile; il fine-tuning
 
 ## Estensioni di BERT
 
-Esistono numerose varianti di BERT, tra cui RoBERTa e SpanBERT, che apportano miglioramenti al processo di pre-addestramento.  Alcuni miglioramenti comunemente accettati includono:
+Esistono numerose varianti di BERT, tra cui RoBERTa e SpanBERT, che apportano miglioramenti al processo di pre-addestramento. Alcuni miglioramenti comunemente accettati includono:
 
 * **RoBERTa:** allunga i tempi di addestramento di BERT e rimuove il task di *Next Sentence Prediction* (NSP).
 * **SpanBERT:** maschera sequenze contigue di parole, rendendo il pre-addestramento più impegnativo ed efficace.
 
-
 ### RoBERTa
 
-La principale differenza rispetto a BERT risiede nell'utilizzo esclusivo del **masked language modelling (MLM)** come task di pre-training.  Gli altri miglioramenti includono:
+La principale differenza rispetto a BERT risiede nell'utilizzo esclusivo del **masked language modelling (MLM)** come task di pre-training. Gli altri miglioramenti includono:
 
 * **Maggiori dati di addestramento:** Oltre a BookCorpus e Wikipedia inglese, RoBERTa utilizza:
-    * CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
-    * Stories (31 GB)
-    * OpenWebText (38 GB)
+* CC-News (parte inglese del dataset CommonCrawl news) (76 GB)
+* Stories (31 GB)
+* OpenWebText (38 GB)
 
-* **Addestramento molto più lungo:**  Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori a parità di costo computazionale.  Inoltre:
-    * NSP è rimosso.
-    * MLM è **dinamico**: la stessa maschera non viene utilizzata ripetutamente; il sampling viene ripetuto per ogni epoca e per ogni istanza.
+* **Addestramento molto più lungo:** Diminuire il numero di step di BERT e aumentare la dimensione del batch porta a risultati migliori a parità di costo computazionale. Inoltre:
+* NSP è rimosso.
+* MLM è **dinamico**: la stessa maschera non viene utilizzata ripetutamente; il sampling viene ripetuto per ogni epoca e per ogni istanza.
 
 * **Sequenze di pre-addestramento:** Lunghezza di 512 token (contro una lunghezza prevalente di 128 token nel 90% degli step di pre-addestramento di BERT).
 
 * **Tokenizzazione BPE:** Con 50.000 sub-word (contro un vocabolario a livello di carattere di 30.000 token in BERT).
 
 * **Due dimensioni del modello:**
-    * RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
-    * RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
+	* RoBERTa-base (12 layer, 12 teste di attenzione, 768 dimensioni nascoste)
+	* RoBERTa-large (24 layer, 16 teste di attenzione, 1024 dimensioni nascoste)
 
-* **Prestazioni superiori a BERT:**  Su benchmark classici come GLUE, SQuAD v2.0 e RACE.
-
+* **Prestazioni superiori a BERT:** Su benchmark classici come GLUE, SQuAD v2.0 e RACE.
 
 Il paper su RoBERTa dimostra che una maggiore potenza di calcolo e una maggiore quantità di dati possono migliorare significativamente il pre-addestramento, anche senza modificare l'architettura dell'encoder Transformer. I vantaggi derivano da una fase di pre-training più lunga e accurata.
-
 
 ### SpanBERT
 
@@ -214,17 +211,17 @@ SpanBERT si differenzia per la generalizzazione del masking: non più limitato a
 * **Nuovo approccio di pre-addestramento:** Con schema di mascheramento, obiettivo di addestramento e procedura di addestramento delle sequenze differenti rispetto a BERT.
 
 * **Mascheramento di span adiacenti:** Invece di mascherare singoli token casuali, vengono mascherati span adiacenti casuali.
-    * La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce lunghezze brevi.
-    * Il punto di partenza del mascheramento è selezionato casualmente.
-    * Vengono mascherate solo parole complete.
+* La lunghezza dello span è scelta da una distribuzione geometrica sbilanciata che favorisce lunghezze brevi.
+* Il punto di partenza del mascheramento è selezionato casualmente.
+* Vengono mascherate solo parole complete.
 
 * **Obiettivo di confine dello span (SBO - Span-Boundary Objective):**
-    * Si evita di mascherare parzialmente una parola.
-    * Ogni token dello span è predetto usando solo i token ai confini dello span (il primo token prima dell'inizio e il primo token dopo la fine).
-    * Questo incoraggia il modello a registrare più informazioni sullo span nelle codifiche di output dei confini.
-    * Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
-    * Come in MLM, SBO minimizza la perdita di cross-entropia.
-    * La perdita complessiva è la somma delle perdite MLM e SBO per ogni token nello span.
+	* Si evita di mascherare parzialmente una parola.
+	* Ogni token dello span è predetto usando solo i token ai confini dello span (il primo token prima dell'inizio e il primo token dopo la fine).
+	* Questo incoraggia il modello a registrare più informazioni sullo span nelle codifiche di output dei confini.
+	* Ogni token dello span è rappresentato usando le codifiche di output dei confini e l'embedding di posizione relativa del token target.
+	* Come in MLM, SBO minimizza la perdita di cross-entropia.
+	* La perdita complessiva è la somma delle perdite MLM e SBO per ogni token nello span.
 
 ## S-BERT: BERT per la similarità di frasi
 
@@ -242,19 +239,19 @@ Il **Similarity-Learning** è un tipico problema di apprendimento che si esprime
 
 Esistono due approcci principali per estendere un modello BERT a un task di *similarity learning*:
 
-1. **Cross-encoding:** Si utilizza un singolo modello BERT, passando come input una coppia di frasi. La similarità viene poi valutata tramite una funzione obiettivo appropriata.
-2. **Rete Siamese:** L'approccio della rete siamese utilizza due istanze dello stesso modello BERT (condivisione dei pesi). Ogni istanza riceve una delle due frasi in input. La similarità tra le frasi viene quindi calcolata tramite una funzione obiettivo applicata agli output delle due istanze di BERT. Questo metodo genera *sentence embeddings* ottimizzati per la misurazione della similarità.
+- **Cross-encoding:** Si utilizza un singolo modello BERT, passando come input una coppia di frasi. La similarità viene poi valutata tramite una funzione obiettivo appropriata.
+- **Rete Siamese:** L'approccio della rete siamese utilizza due istanze dello stesso modello BERT (condivisione dei pesi). Ogni istanza riceve una delle due frasi in input. La similarità tra le frasi viene quindi calcolata tramite una funzione obiettivo applicata agli output delle due istanze di BERT. Questo metodo genera *sentence embeddings* ottimizzati per la misurazione della similarità.
 
 Il processo della rete siamese prevede:
 
-1. **Generazione degli embedding:** Ogni istanza di BERT genera un embedding per la frase corrispondente, tipicamente tramite un meccanismo di pooling (es. average pooling).
-2. **Aggiunta di residui:** Possono essere aggiunti residui agli embedding per migliorare la rappresentazione.
-3. **Feed-forward:** Gli embedding vengono passati attraverso una rete feed-forward.
-4. **Calcolo della similarità:** La similarità viene calcolata utilizzando una funzione softmax o una loss basata sull'apprendimento contrastivo.
+- **Generazione degli embedding:** Ogni istanza di BERT genera un embedding per la frase corrispondente, tipicamente tramite un meccanismo di pooling (es. average pooling).
+- **Aggiunta di residui:** Possono essere aggiunti residui agli embedding per migliorare la rappresentazione.
+- **Feed-forward:** Gli embedding vengono passati attraverso una rete feed-forward.
+- **Calcolo della similarità:** La similarità viene calcolata utilizzando una funzione softmax o una loss basata sull'apprendimento contrastivo.
 
 In entrambi i casi, l'obiettivo è ottenere rappresentazioni vettoriali (sentence embeddings) che catturino efficacemente la similarità semantica tra le frasi.
 
-### Esempi di funzioni obiettivo: 
+### Esempi di funzioni obiettivo:
 
 Due funzioni obiettivo comunemente utilizzate per l'apprendimento della similarità semantica sono la *Triplet Loss* e la *Multiple Negative Ranking Loss*.
 
@@ -296,7 +293,7 @@ Viene introdotto il concetto di **token sentinella**. Ogni *span* mascherato vie
 
 ### Modello T5
 
-T5 (Text-to-Text Transfer Transformer) rappresenta un modello di riferimento per le architetture encoder-decoder. 
+T5 (Text-to-Text Transfer Transformer) rappresenta un modello di riferimento per le architetture encoder-decoder.
 Il metodo di addestramento di T5 permette al trasformer di apprendere molteplici task contemporaneamente. Questo approccio, chiamato **instruction training**, è fondamentale per la generazione del linguaggio.
 
 L'instruction training consiste nel fornire al modello esempi di diversi task, formulati come problemi di testo-a-testo. Ogni modello che deve svolgere attività di text-to-text necessita di questo tipo di addestramento per imparare a riconoscere e risolvere esempi corrispondenti a task indipendenti.
@@ -312,7 +309,7 @@ Essendo un modello *decoder-only*, GPT è stato progettato per diversi task di g
 * **Tokenizzazione:** Codifica Byte-Pair con 40.000 merges.
 * **Dataset:** Addestrato su BooksCorpus: un corpus contenente oltre 7000 libri unici. La presenza di lunghi span di testo contiguo ha permesso di apprendere dipendenze a lunga distanza.
 
- Tra i benchmark utilizzati per la valutazione del modello c'è la *Natural Language Inference* (NLI). Questo benchmark permette di addestrare modelli per il task di *entailment*, fornendo in input coppie di frasi etichettate con una delle tre seguenti classi: Entailment (conseguenza logica), Contraddittorio, Neutrale.
+Tra i benchmark utilizzati per la valutazione del modello c'è la *Natural Language Inference* (NLI). Questo benchmark permette di addestrare modelli per il task di *entailment*, fornendo in input coppie di frasi etichettate con una delle tre seguenti classi: Entailment (conseguenza logica), Contraddittorio, Neutrale.
 
 L'**input** al decoder è formattato come una sequenza di token. È presente un token di inizio frase e un token di inizio per il decoder, che funge anche da fine frase per il primo token.
 

@@ -50,5 +50,5 @@ Gli agenti possono essere classificati mediante **PEAS** (performance measure, e
 La modellazione dello stato del mondo dipende dagli obiettivi dell'agente. Lo stato può essere:
 * **Semplice:** Modellazione atomica.
 * **Vettoriale:** Aggregazione di più elementi.
-* **Strutturato:** Stati complessi con sotto-problemi. 
+* **Strutturato:** Stati complessi con sotto-problemi.
 

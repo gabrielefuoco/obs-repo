@@ -28,7 +28,7 @@ I pesi sono i **parametri** della rete, e sono modificati durante il processo di
 
 Ogni neurone applica una **funzione di attivazione** al suo input per produrre un output. La funzione di attivazione introduce non linearità nella rete, permettendole di apprendere relazioni complesse tra i dati.
 
-Quando ogni neurone del livello i-esimo è collegato a ogni neurone del livello i+1-esimo, la rete è detta **densa**. 
+Quando ogni neurone del livello i-esimo è collegato a ogni neurone del livello i+1-esimo, la rete è detta **densa**.
 
 ![[8)-20241024130054817.png|354]]
 
@@ -93,7 +93,7 @@ $$h:\{ -1,+1 \}^n\to\{ -1,+1 \}$$
 
 ### Funzione AND
 
-La funzione AND restituisce +1 se tutti gli input sono +1, altrimenti restituisce -1. 
+La funzione AND restituisce +1 se tutti gli input sono +1, altrimenti restituisce -1.
 Per implementare la funzione AND, utilizziamo un percettrone con due input (x1 e x2) e un singolo neurone con funzione di attivazione segno. Assegniamo un peso di +1 ad entrambi gli input.
 
 La sua rappresentazione matematica è:
@@ -182,7 +182,7 @@ Problema XOR: non è linearmente separabile
 
 ## XOR
 
-La funzione XOR (Exclusive OR) restituisce +1 se solo uno dei due input è +1, altrimenti -1. 
+La funzione XOR (Exclusive OR) restituisce +1 se solo uno dei due input è +1, altrimenti -1.
 $$x_1 \oplus x_2 = x_1 \overline{x_2} + \overline{x_1} x_2$$
 
 A differenza delle funzioni booleane elementari come AND, OR e NOT, la funzione XOR non è linearmente separabile. Ciò significa che non è possibile tracciare un singolo iperpiano (una retta nel caso bidimensionale) in grado di separare correttamente i punti corrispondenti a +1 da quelli corrispondenti a -1.
@@ -198,7 +198,7 @@ $$h_{XOR}(\vec{x})=h_{AND}(h_{OR}(\vec{x}),h_{NAND}(\vec{x}))$$
 un altro modo di rappresentarlo è
 
 ![[9)-20241025091123687.png]]
-Con due funzioni di uguaglianza: funzione di uguaglianza sopra(-1,+1), uguaglianza sotto (+1-1) 
+Con due funzioni di uguaglianza: funzione di uguaglianza sopra(-1,+1), uguaglianza sotto (+1-1)
 
 $$h_{XOR}(\vec{x})=h_{OR}(h_{(-1+1)}^{EQ}(\vec{x}),h_{(+1-1)}^{EQ}(\vec{x}))$$
 
@@ -222,10 +222,7 @@ Il numero di neuroni potrebbe essere esponenziale nel numero di variabili. Dunqu
 
 Se ragioniamo in termini di semispazi, con un livello possiamo modellare dei semispazi:
 
-* **1 livello:** semispazi
-* **2 livelli:** intersezione di semispazi, catturare regioni convesse a "k facce", dove k è il numero di semispazi intersecati
-* **3 livelli:** unione di regioni convesse 
-
+* **1 livello:** semispazi* **2 livelli:** intersezione di semispazi, catturare regioni convesse a "k facce", dove k è il numero di semispazi intersecati* **3 livelli:** unione di regioni convesse
 ## Proprietà
 
 Se invece ragioniamo in termini di funzioni arbitrarie (e non solo booleane), che hanno come dominio $R$, vale la seguente proprietà:
@@ -236,12 +233,12 @@ Data la funzione:
 
 $$f:[-1+1]^d\to[-1+1]$$
 
-con $f$ Lipschitz, allora per ogni $\epsilon>0$ posso costruire una rete neurale che approssimi la mia funzione con un errore al massimo pari ad $\epsilon$. 
+con $f$ Lipschitz, allora per ogni $\epsilon>0$ posso costruire una rete neurale che approssimi la mia funzione con un errore al massimo pari ad $\epsilon$.
 $$\forall x\in D,f(x)-\epsilon\leq h(x)\leq f(x)+\epsilon$$
 
 ## Proprietà
 
-Per ogni funzione $f$ che può essere calcolata da una Macchina di Turing in tempo $O(T(d))$, esiste una rete neurale di size $O(T(d)^2)$ che calcola $f$. 
+Per ogni funzione $f$ che può essere calcolata da una Macchina di Turing in tempo $O(T(d))$, esiste una rete neurale di size $O(T(d)^2)$ che calcola $f$.
 
 ## Proprietà
 
@@ -257,8 +254,7 @@ $$w_{1}=
 \begin{bmatrix}
 -1 &-1 & 1.5 \\
 +1 & +1 & 0.5 \\
-0 &0&1
-\end{bmatrix}
+0 &0&1\end{bmatrix}
 $$
 
 Se moltiplichiamo questa matrice per il vettore di input:
@@ -276,8 +272,7 @@ $$\phi=
 \begin{bmatrix}
 -x_{1} & -x_{2} &1.5 \\
 x_{1} & x_{2} & 0.5 \\
-0 & 0 &1
-\end{bmatrix}
+0 & 0 &1\end{bmatrix}
 $$
 
 Il risultato di questa moltiplicazione costruisce gli input del livello successivo.
@@ -289,8 +284,7 @@ I pesi del livello successivo sono rappresentati da:
 $$\phi \left([+1, +1, -1.5] \cdot \phi\begin{bmatrix}
 -1 &-1 & 1.5 \\
 +1 & +1 & 0.5 \\
-0 &0&1
-\end{bmatrix}
+0 &0&1\end{bmatrix}
 \begin{bmatrix}
 x_{1} \\
 x_{2} \\
@@ -416,7 +410,7 @@ Un problema che si può incontrare con la discesa del gradiente è quello di rim
 
 * **Momentum:** Si aggiunge al termine di aggiornamento del gradiente una certa porzione del passo precedente. Questo aiuta a mantenere una certa velocità nella direzione corretta, evitando che l'algoritmo si blocchi in un minimo locale.
 $$\nabla \vec{w}^{(t)}=\mu \nabla \vec{w}^{(t-1)}- \eta(\vec{v_{t}}+\lambda \vec{w}^{(t)})$$
-	Dove $\mu$ rappresenta il momento
+Dove $\mu$ rappresenta il momento
 
 * **Tecniche di ottimizzazione stocastica:** Queste tecniche, che saranno trattate successivamente, permettono di esplorare lo spazio dei parametri in modo più efficiente, riducendo il rischio di rimanere intrappolati in un minimo locale.
 

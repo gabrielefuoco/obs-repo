@@ -15,20 +15,20 @@ $$J(w, b) = \frac{1}{2m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})^2$$
 
 Per minimizzare $J(w, b)$, si utilizza l'algoritmo di discesa del gradiente. I passi sono:
 
-1. **Inizializzazione:** Inizializzare *w* e *b* con valori arbitrari.
+- **Inizializzazione:** Inizializzare *w* e *b* con valori arbitrari.
 
-2. **Aggiornamento dei parametri:** Calcolare i nuovi parametri $w'$ e $b'$ che riducono $J(w, b)$, usando le formule delle derivate parziali.
+- **Aggiornamento dei parametri:** Calcolare i nuovi parametri $w'$ e $b'$ che riducono $J(w, b)$, usando le formule delle derivate parziali.
 
 ##### Caso semplice (1 attributo, 1 variabile dipendente):
 
- $$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
- $$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
+$$w' = w - \alpha \frac{\partial}{\partial w} J(w, b) = w - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
+$$b' = b - \alpha \frac{\partial}{\partial b} J(w, b) = b - \alpha \frac{1}{m} \sum_{i=1}^m (f_{wb}(x^{(i)}) - y^{(i)})$$
 
 ##### Caso più complesso (n attributi, 1 variabile dipendente):
 
 ##### Modello di regressione lineare a più valori:
 
- $$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
+$$y^{(i)} = w_1x_1^{(i)} + ... + w_nx_n^{(i)}$$
 ##### Aggiornamento dei parametri:
 
 $$
@@ -42,11 +42,11 @@ b' = b - \alpha \frac{\partial}{\partial b} J(w, b)
 \end{aligned}
 $$
 
- dove:
+dove:
 
- * $α$ è il *learning rate*, che determina l'ampiezza dello spostamento dei parametri ad ogni iterazione.
+* $α$ è il *learning rate*, che determina l'ampiezza dello spostamento dei parametri ad ogni iterazione.
 
-3. **Iterazione:** Ripetere il passo 2 fino a raggiungere il minimo di $J(w, b)$.
+- **Iterazione:** Ripetere il passo 2 fino a raggiungere il minimo di $J(w, b)$.
 
 ##### Osservazioni:
 
@@ -64,8 +64,8 @@ $$
 ##### Metodo:
 
 * Per ogni valore $x$ di un attributo $i$, si sottrae la media $\mu_{i}$ di quell'attributo e si divide per la deviazione standard $\sigma_{i}$:
- $$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
-**Risultato:** Tutti i valori di un attributo vengono trasformati in una scala con media 0 e deviazione standard 1. 
+$$x_{i}'=\frac{(x-\mu_{i})}{\sigma_{i}}$$
+**Risultato:** Tutti i valori di un attributo vengono trasformati in una scala con media 0 e deviazione standard 1.
 
 ## Funzione logistica
 
@@ -96,7 +96,7 @@ $$
 
 * La funzione di costo lineare quadratica non è convessa se sostituita con σ(z).
 * Si utilizza una nuova funzione di costo convessa per permettere l'applicazione della discesa del gradiente durante l'addestramento.
-* Formula: $J(w,b)=\frac{1}{2m}\sum_{i=1}^m(wx^{(i)}+b-y^{(i)})$ 
+* Formula: $J(w,b)=\frac{1}{2m}\sum_{i=1}^m(wx^{(i)}+b-y^{(i)})$
 
 ## Calcolo delle derivate per l'aggiornamento dei parametri
 

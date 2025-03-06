@@ -1,4 +1,4 @@
-# Trasformazioni affini e non affini
+## Trasformazioni affini e non affini
 
 Trasformazioni geometriche elementari
 
@@ -9,6 +9,7 @@ Trasformazioni geometriche elementari
 
 ```python
 # import delle librerie
+
 import os
 import numpy as np
 import matplotlib
@@ -22,12 +23,14 @@ from io import BytesIO
 import IPython.display
 
 # Required magic to display matplotlib plots in notebooks
+
 %matplotlib inline
 
 pil2tensor = transforms.ToTensor()
 tensor2pil = transforms.ToPILImage()
 
 # in questa folder sono memorizzati alcuni file a supporto (path relativo al notebook corrente)
+
 IMGSRC = 'data'
 # print(f'workin dir is {os.path.abspath(".")}')
 
@@ -53,7 +56,7 @@ plot_image(rgb_image)
 
 ```
 
- image shape is (133, 200, 3)
+image shape is (133, 200, 3)
 
 ![png](02_transformations_2_1.png)
 
@@ -65,6 +68,7 @@ Tensor -> tensor 3D: rgb x H x W
 
 ```python
 # Rotation
+
 image2 = img.rotate(45)
 plot_image(np.array(image2))
 ```
@@ -73,8 +77,8 @@ plot_image(np.array(image2))
 
 Per rotazioni semplici si può usare il metodo *transpose*
 
- transpose(method):
- Transpose image (flip or rotate in 90 degree steps)
+transpose(method):
+Transpose image (flip or rotate in 90 degree steps)
 
 ```python
 image2 = img.transpose(Image.ROTATE_90)
@@ -95,23 +99,23 @@ for method, name in transpose_contants.items():
     plot_image(np.array(image2))
 ```
 
- try method FLIP_LEFT_RIGHT
+try method FLIP_LEFT_RIGHT
 
 ![png](02_transformations_7_1.png)
 
- try method FLIP_TOP_BOTTOM
+try method FLIP_TOP_BOTTOM
 
 ![png](02_transformations_7_3.png)
 
- try method ROTATE_90
+try method ROTATE_90
 
 ![png](02_transformations_7_5.png)
 
- try method ROTATE_180
+try method ROTATE_180
 
 ![png](02_transformations_7_7.png)
 
- try method ROTATE_270
+try method ROTATE_270
 
 ![png](02_transformations_7_9.png)
 
@@ -128,8 +132,8 @@ print(f'new size is {image2.size}')
 plot_image(np.array(image2))
 ```
 
- current size is (200, 133)
- new size is (100, 66)
+current size is (200, 133)
+new size is (100, 66)
 
 ![png](02_transformations_8_1.png)
 
@@ -146,8 +150,8 @@ print(f'new size is {image2.size}')
 plot_image(np.array(image2))
 ```
 
- current size is (200, 133)
- new size is (100, 133)
+current size is (200, 133)
+new size is (100, 133)
 
 ![png](02_transformations_9_1.png)
 
@@ -164,8 +168,8 @@ print(f'new size is {image2.size}')
 plot_image(np.array(image2))
 ```
 
- current size is (200, 133)
- new size is (400, 266)
+current size is (200, 133)
+new size is (400, 266)
 
 ![png](02_transformations_10_1.png)
 
@@ -187,8 +191,8 @@ print(f'new size is {image2.size}')
 
 ![png](02_transformations_11_1.png)
 
- original size is (200, 133)
- new size is (178, 57)
+original size is (200, 133)
+new size is (178, 57)
 
 ## Trasformazioni e pytorch
 
@@ -214,29 +218,27 @@ for i, (item, c_index) in enumerate(dataset):
 
 ```
 
- 0 -> torch.Size([3, 266, 400])
-
+0 -> torch.Size([3, 266, 400])
 ![png](02_transformations_13_1.png)
 
- 1 -> torch.Size([3, 267, 400])
-
+1 -> torch.Size([3, 267, 400])
 ![png](02_transformations_13_3.png)
 
- 2 -> torch.Size([3, 267, 400])
-
+2 -> torch.Size([3, 267, 400])
 ![png](02_transformations_13_5.png)
 
- 3 -> torch.Size([3, 281, 400])
-
+3 -> torch.Size([3, 281, 400])
 ![png](02_transformations_13_7.png)
 
 ```python
 
 transformations = T.Compose([
 #    T.CenterCrop(100),
+
     T.Resize((32,32)),
     T.ToTensor(),
 #    T.RandomErasing()
+
 ])
 
 dataset = dataset_util.ImageFolder(IMAGE_DATASET, transform=transformations)
@@ -246,20 +248,16 @@ for i, (item, c_index) in enumerate(dataset):
     show_tensor_image(item)
 ```
 
- 0 -> torch.Size([3, 32, 32])
-
+0 -> torch.Size([3, 32, 32])
 ![png](02_transformations_14_1.png)
 
- 1 -> torch.Size([3, 32, 32])
-
+1 -> torch.Size([3, 32, 32])
 ![png](02_transformations_14_3.png)
 
- 2 -> torch.Size([3, 32, 32])
-
+2 -> torch.Size([3, 32, 32])
 ![png](02_transformations_14_5.png)
 
- 3 -> torch.Size([3, 32, 32])
-
+3 -> torch.Size([3, 32, 32])
 ![png](02_transformations_14_7.png)
 
 ```python
@@ -281,19 +279,15 @@ for i, (item, c_index) in enumerate(dataset):
     show_tensor_image(item)
 ```
 
- 0 -> torch.Size([3, 266, 400])
-
+0 -> torch.Size([3, 266, 400])
 ![png](02_transformations_15_1.png)
 
- 1 -> torch.Size([3, 267, 400])
-
+1 -> torch.Size([3, 267, 400])
 ![png](02_transformations_15_3.png)
 
- 2 -> torch.Size([3, 267, 400])
-
+2 -> torch.Size([3, 267, 400])
 ![png](02_transformations_15_5.png)
 
- 3 -> torch.Size([3, 281, 400])
-
+3 -> torch.Size([3, 281, 400])
 ![png](02_transformations_15_7.png)
 

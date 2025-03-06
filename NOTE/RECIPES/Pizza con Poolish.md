@@ -14,14 +14,14 @@
 ##### Ingredienti:
 
 * 400g di farina
-* 6-8g di malto d'orzo 
+* 6-8g di malto d'orzo
 * 150-200g di acqua
 * 33g di sale
 * 25g di olio evo
 
-**Procedimento:** Aggiungere gli ingredienti al Poolish e impastare(farina, malto - sale - acqua a filo, olio). 
-Eseguire una prima piega, lasciare riposare per 2 ore. 
-Eseguire una seconda piega, lasciare riposare per 20 minuti. 
+**Procedimento:** Aggiungere gli ingredienti al Poolish e impastare(farina, malto - sale - acqua a filo, olio).
+Eseguire una prima piega, lasciare riposare per 2 ore.
+Eseguire una seconda piega, lasciare riposare per 20 minuti.
 Procedere con lo staglio e lasciare riposare per altre 4 ore prima della cottura.
 
 **Tempo totale di lievitazione:** 22/24 ore

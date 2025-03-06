@@ -48,10 +48,10 @@
 ```
 
 * **Cluster Privati:** Sono disponibili diverse opzioni per cluster privati:
- * **Modalità Standalone:** Simile agli script di deployment di Hadoop.
- * **Mesos:** Un framework di orchestrazione dei cluster.
- * **Hadoop YARN:** Il framework di gestione dei cluster di Hadoop.
- * **Amazon EMR:** Un servizio di cluster gestito da Amazon (tinyurl.com/spark-emr). 
+* **Modalità Standalone:** Simile agli script di deployment di Hadoop.
+* **Mesos:** Un framework di orchestrazione dei cluster.
+* **Hadoop YARN:** Il framework di gestione dei cluster di Hadoop.
+* **Amazon EMR:** Un servizio di cluster gestito da Amazon (tinyurl.com/spark-emr).
 ## Persistenza RDD
 
 **Definizione:** La persistenza (o memorizzazione nella cache) di un RDD in memoria è una funzionalità fondamentale di Spark che consente di migliorare le prestazioni delle operazioni successive.
@@ -75,19 +75,19 @@
 
 ##### Passaggi:
 
-1. **Caricamento:** Caricare il file di log in un RDD: `lines = spark.textFile("hdfs://...")`
-2. **Filtraggio:** Filtrare le righe che iniziano con "ERROR": `errors = lines.filter(lambda s: s.startswith("ERROR"))`
-3. **Mappatura:** Estrarre i messaggi di errore: `messages = errors.map(lambda s: s.spli[2])`
-4. **Memorizzazione nella Cache:** Memorizzare l'RDD `messages` nella cache: `messages.cache()`
-5. **Ricerca:** Eseguire ricerche interattive sui messaggi:
- * `messages.filter(lambda s: "mysql" in s).count()`
- * `messages.filter(lambda s: "php" in s).count()`
+- **Caricamento:** Caricare il file di log in un RDD: `lines = spark.textFile("hdfs://...")`
+- **Filtraggio:** Filtrare le righe che iniziano con "ERROR": `errors = lines.filter(lambda s: s.startswith("ERROR"))`
+- **Mappatura:** Estrarre i messaggi di errore: `messages = errors.map(lambda s: s.spli[2])`
+- **Memorizzazione nella Cache:** Memorizzare l'RDD `messages` nella cache: `messages.cache()`
+- **Ricerca:** Eseguire ricerche interattive sui messaggi:
+* `messages.filter(lambda s: "mysql" in s).count()`
+* `messages.filter(lambda s: "php" in s).count()`
 
 ##### Risultati:
 
 * **Wikipedia:** Un esempio di ricerca full-text su un dataset di 60GB su 20 macchine EC2.
- * Tempo di esecuzione con cache: 0.5 secondi
- * Tempo di esecuzione senza cache: 20 secondi
+* Tempo di esecuzione con cache: 0.5 secondi
+* Tempo di esecuzione senza cache: 20 secondi
 
 ##### Tabella di Confronto:
 
@@ -244,8 +244,8 @@ val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
 * Quando un utente esegue un'azione su un RDD, lo scheduler costruisce un DAG (Directed Acyclic Graph) di stage dal grafo di lineage dell'RDD.
 * Uno stage contiene il maggior numero possibile di trasformazioni in pipeline con dipendenze strette.
 * Il confine di uno stage è definito da:
- * **Shuffle:** per dipendenze ampie (ad esempio, operazioni di join o group by).
- * **Partizioni già calcolate:** se una partizione è già stata calcolata e memorizzata in memoria, non è necessario ricalcolarla.
+* **Shuffle:** per dipendenze ampie (ad esempio, operazioni di join o group by).
+* **Partizioni già calcolate:** se una partizione è già stata calcolata e memorizzata in memoria, non è necessario ricalcolarla.
 
 ## Pianificazione dei Job in Spark (continua)
 
@@ -261,13 +261,13 @@ val count = ones.reduce(_+_) // Calcola la somma degli elementi dell'RDD
 ## Località dei Dati (continua)
 
 * **Livelli di Località:** La località dei dati indica quanto sono vicini i dati al codice che li elabora. Esistono diversi livelli di località in base alla posizione corrente dei dati. In ordine dal più vicino al più lontano:
- * **PROCESS_LOCAL:** i dati e il task si trovano sullo stesso executor.
- * **NODE_LOCAL:** i dati e il task si trovano sullo stesso nodo, ma su executor diversi.
- * **RACK_LOCAL:** i dati e il task si trovano sullo stesso rack, ma su nodi diversi.
- * **ANY:** i dati e il task possono trovarsi ovunque nel cluster.
+* **PROCESS_LOCAL:** i dati e il task si trovano sullo stesso executor.
+* **NODE_LOCAL:** i dati e il task si trovano sullo stesso nodo, ma su executor diversi.
+* **RACK_LOCAL:** i dati e il task si trovano sullo stesso rack, ma su nodi diversi.
+* **ANY:** i dati e il task possono trovarsi ovunque nel cluster.
 * **Strategia di Pianificazione:** Spark preferisce pianificare tutti i task al livello di località migliore, ma questo non è sempre possibile. In situazioni in cui non ci sono dati non elaborati su alcun executor inattivo, Spark passa a livelli di località inferiori. Ci sono due opzioni:
- * **Aspettare:** Aspettare che un CPU occupato si liberi per avviare un task sui dati sullo stesso server.
- * **Avviare Immediatamente:** Avviare immediatamente un nuovo task in un luogo più lontano che richiede lo spostamento dei dati.
+* **Aspettare:** Aspettare che un CPU occupato si liberi per avviare un task sui dati sullo stesso server.
+* **Avviare Immediatamente:** Avviare immediatamente un nuovo task in un luogo più lontano che richiede lo spostamento dei dati.
 * **Comportamento Tipico:** Spark in genere aspetta un po' nella speranza che un CPU occupato si liberi. Una volta scaduto il timeout, inizia a spostare i dati da lontano al CPU libero.
 
 ## Spark: Impostazione del Livello di Parallelismo
@@ -323,8 +323,11 @@ println("Final w: " + w)
 
 ```python
 # Regressione Logistica - algoritmo di apprendimento automatico iterativo
+
 # Trova l'iperpiano migliore che separa due insiemi di punti in uno spazio di caratteristiche multidimensionale.
+
 # Applica l'operazione MapReduce ripetutamente allo stesso set di dati, quindi beneficia notevolmente
+
 # dalla memorizzazione nella cache dell'input in RAM
 
 points = spark.textFile(...).map(parsePoint).cache()
@@ -389,35 +392,35 @@ System.out.println("Final separating plane: " + w);
 * **Collezioni di dati distribuite immutabili:** Come gli RDD, DataFrames e Datasets sono collezioni di dati distribuite e immutabili. Ciò significa che i dati sono suddivisi tra i nodi del cluster e non possono essere modificati direttamente.
 * **Valutazione pigra:** Anche DataFrames e Datasets vengono valutati in modo pigro, come gli RDD. Le operazioni vengono eseguite solo quando viene invocata un'azione (ad esempio, `collect`, `count`, `take`).
 * **DataFrames:** Introdotti in Spark 1.3, i DataFrames introducono il concetto di schema per descrivere i dati. Lo schema definisce il tipo di dati di ogni colonna e il nome della colonna.
- * **Organizzazione dei dati:** I dati in un DataFrame sono organizzati in colonne denominate, come una tabella in un database relazionale. Questo rende i DataFrames più facili da usare e da comprendere rispetto agli RDD.
- * **Dati strutturati e semi-strutturati:** I DataFrames sono progettati per lavorare con dati strutturati e semi-strutturati, come file JSON, CSV, Parquet e Avro.
- * **Spark SQL:** Spark SQL fornisce API per eseguire query SQL su DataFrames con una semplice sintassi simile a SQL.
- * **Implementazione come Datasets:** Da Spark 2.0, i DataFrames sono implementati come un caso speciale di Datasets.
+* **Organizzazione dei dati:** I dati in un DataFrame sono organizzati in colonne denominate, come una tabella in un database relazionale. Questo rende i DataFrames più facili da usare e da comprendere rispetto agli RDD.
+* **Dati strutturati e semi-strutturati:** I DataFrames sono progettati per lavorare con dati strutturati e semi-strutturati, come file JSON, CSV, Parquet e Avro.
+* **Spark SQL:** Spark SQL fornisce API per eseguire query SQL su DataFrames con una semplice sintassi simile a SQL.
+* **Implementazione come Datasets:** Da Spark 2.0, i DataFrames sono implementati come un caso speciale di Datasets.
 
 ## Datasets
 
 * **Estensione dei DataFrames:** Introdotti in Spark 1.6, i Datasets estendono i DataFrames fornendo un'interfaccia di programmazione tipizzata e sicura.
- * **Collezione di dati tipizzata:** Un Dataset è una collezione di dati strutturata ma tipizzata. Ciò significa che ogni elemento del Dataset ha un tipo di dati definito.
- * **Tipizzazione forte:** A differenza dei DataFrames, che sono generici e non tipizzati, i Datasets sono fortemente tipizzati. Questo rende il codice più sicuro e più facile da leggere.
- * **Classe SparkSession:** La classe `SparkSession` è il punto di ingresso per entrambe le API, DataFrames e Datasets.
+* **Collezione di dati tipizzata:** Un Dataset è una collezione di dati strutturata ma tipizzata. Ciò significa che ogni elemento del Dataset ha un tipo di dati definito.
+* **Tipizzazione forte:** A differenza dei DataFrames, che sono generici e non tipizzati, i Datasets sono fortemente tipizzati. Questo rende il codice più sicuro e più facile da leggere.
+* **Classe SparkSession:** La classe `SparkSession` è il punto di ingresso per entrambe le API, DataFrames e Datasets.
 
 ## Datasets
 
 * **Vantaggi:** I Datasets offrono i vantaggi degli RDD (tipizzazione forte, capacità di utilizzare funzioni lambda) con quelli del motore di esecuzione ottimizzato di Spark SQL (ottimizzatore Catalyst).
- * **Tipizzazione forte e funzioni lambda:** I Datasets consentono di utilizzare la tipizzazione forte e le funzioni lambda, come gli RDD.
- * **Ottimizzazione Catalyst:** I Datasets sfruttano l'ottimizzatore Catalyst di Spark SQL, che ottimizza il piano di esecuzione delle query per migliorare le prestazioni.
- * **Disponibilità:** I Datasets sono disponibili in Scala e Java, ma non in Python e R.
- * **Costruzione:** I Datasets possono essere costruiti da oggetti JVM.
- * **Trasformazioni funzionali:** I Datasets possono essere manipolati utilizzando trasformazioni funzionali come `map`, `filter`, `flatMap`, ecc.
- * **Valutazione pigra:** I Datasets sono pigri, ovvero il calcolo viene attivato solo quando viene invocata un'azione.
- * **Piano logico e piano fisico:** Internamente, un piano logico descrive il calcolo necessario per produrre i dati. Quando viene invocata un'azione, l'ottimizzatore di query di Spark ottimizza il piano logico e genera un piano fisico per un'esecuzione efficiente in modo parallelo e distribuito.
+* **Tipizzazione forte e funzioni lambda:** I Datasets consentono di utilizzare la tipizzazione forte e le funzioni lambda, come gli RDD.
+* **Ottimizzazione Catalyst:** I Datasets sfruttano l'ottimizzatore Catalyst di Spark SQL, che ottimizza il piano di esecuzione delle query per migliorare le prestazioni.
+* **Disponibilità:** I Datasets sono disponibili in Scala e Java, ma non in Python e R.
+* **Costruzione:** I Datasets possono essere costruiti da oggetti JVM.
+* **Trasformazioni funzionali:** I Datasets possono essere manipolati utilizzando trasformazioni funzionali come `map`, `filter`, `flatMap`, ecc.
+* **Valutazione pigra:** I Datasets sono pigri, ovvero il calcolo viene attivato solo quando viene invocata un'azione.
+* **Piano logico e piano fisico:** Internamente, un piano logico descrive il calcolo necessario per produrre i dati. Quando viene invocata un'azione, l'ottimizzatore di query di Spark ottimizza il piano logico e genera un piano fisico per un'esecuzione efficiente in modo parallelo e distribuito.
 
 ## Datasets
 
 * **Creazione di un Dataset:**
- * **Da un file:** Utilizzando la funzione `read`.
- * **Da un RDD:** Convertendo un RDD esistente.
- * **Tramite trasformazioni:** Applicando trasformazioni su Datasets esistenti.
+	* **Da un file:** Utilizzando la funzione `read`.
+	* **Da un RDD:** Convertendo un RDD esistente.
+	* **Tramite trasformazioni:** Applicando trasformazioni su Datasets esistenti.
 
 * **Esempio in Scala:**
 
@@ -437,10 +440,10 @@ Dataset<String> names = people.map((Person p) -> p.name, Encoders.STRING);
 * **Disponibilità:** I DataFrames sono disponibili in Scala, Java, Python e R.
 * **Rappresentazione:** In Scala e Java, un DataFrame è rappresentato da un Dataset di righe.
 * **Costruzione:** I DataFrames possono essere costruiti da:
- * **RDD esistenti:** Sia inferendo lo schema usando la riflessione sia specificando lo schema in modo programmatico.
- * **Tabelle in Hive:**
- * **File di dati strutturati:** JSON, Parquet, CSV, Avro.
-* **Manipolazione:** I DataFrames possono essere manipolati in modo simile agli RDD.
+* **RDD esistenti:** Sia inferendo lo schema usando la riflessione sia specificando lo schema in modo programmatico.
+* **Tabelle in Hive:**
+	* **File di dati strutturati:** JSON, Parquet, CSV, Avro.
+	* **Manipolazione:** I DataFrames possono essere manipolati in modo simile agli RDD.
 
 ## *MLlib*
 
@@ -466,23 +469,23 @@ model.transform(df).show()
 ##### Funzionalità di MLlib:
 
 * **Algoritmi ML distribuiti:**
- * Classificazione (ad esempio, regressione logistica)
- * Regressione
- * Clustering (ad esempio, K-mean)
- * Raccomandazione
- * Alberi decisionali
- * Foreste casuali
- * E altro ancora.
+	* Classificazione (ad esempio, regressione logistica)
+	* Regressione
+	* Clustering (ad esempio, K-mean)
+	* Raccomandazione
+	* Alberi decisionali
+	* Foreste casuali
+	* E altro ancora.
 * **Utility:**
- * Trasformazioni di feature
- * Valutazione del modello
- * Messa a punto degli iperparametri
+	* Trasformazioni di feature
+	* Valutazione del modello
+	* Messa a punto degli iperparametri
 * **Algebra lineare distribuita:**
- * PCA (Principal Component Analysis)
+	* PCA (Principal Component Analysis)
 * **Statistica:**
- * Statistiche riassuntive
- * Test di ipotesi
-* **Supporto per DataFrames:** MLlib adotta DataFrames per supportare una varietà di tipi di dati.
+	* Statistiche riassuntive
+	* Test di ipotesi
+	* **Supporto per DataFrames:** MLlib adotta DataFrames per supportare una varietà di tipi di dati.
 ## Mllib: Esempio
 
 * **Set di dati:** Il set di dati contiene etichette e vettori di feature.
@@ -490,25 +493,25 @@ model.transform(df).show()
 
 ##### Passaggi:
 
-1. **Crea un DataFrame:** Ogni record del DataFrame contiene l'etichetta e le feature rappresentate da un vettore.
+- **Crea un DataFrame:** Ogni record del DataFrame contiene l'etichetta e le feature rappresentate da un vettore.
 
    ```python
    df = sqlContext.createDataFrame(data, ["label", "features"])
    ```
 
-2. **Imposta i parametri dell'algoritmo:** In questo caso, limitiamo il numero di iterazioni a 10.
+- **Imposta i parametri dell'algoritmo:** In questo caso, limitiamo il numero di iterazioni a 10.
 
    ```python
    lr = LogisticRegression(maxIter=10)
    ```
 
-3. **Adatta il modello ai dati:**
+- **Adatta il modello ai dati:**
 
    ```python
    model = lr.fit(df)
    ```
 
-4. **Predici le etichette e mostra i risultati:** Dato un set di dati, predici l'etichetta di ogni punto e mostra i risultati.
+- **Predici le etichette e mostra i risultati:** Dato un set di dati, predici l'etichetta di ogni punto e mostra i risultati.
 
    ```python
    model.transform(df).show()
@@ -524,11 +527,11 @@ Spark Streaming utilizza un'astrazione di alto livello chiamata **DStream** (dis
 
 Spark Streaming funziona internamente come segue:
 
-1. **Dati di input:** I dati in streaming vengono ricevuti da una o più fonti.
-2. **Flusso:** I dati vengono elaborati in modo continuo come un flusso.
-3. **Micro-batch:** I dati vengono suddivisi in micro-batch.
-4. **Motore Spark:** Ogni micro-batch viene elaborato dal motore Spark.
-5. **Dati elaborati:** I risultati dell'elaborazione vengono restituiti come un nuovo flusso di dati.
+- **Dati di input:** I dati in streaming vengono ricevuti da una o più fonti.
+- **Flusso:** I dati vengono elaborati in modo continuo come un flusso.
+- **Micro-batch:** I dati vengono suddivisi in micro-batch.
+- **Motore Spark:** Ogni micro-batch viene elaborato dal motore Spark.
+- **Dati elaborati:** I risultati dell'elaborazione vengono restituiti come un nuovo flusso di dati.
 
 ## Spark Streaming: Esempio
 
@@ -547,11 +550,11 @@ sc.twitterStream(...)
 
 In questo esempio:
 
-1. Viene caricato un file di spammers da HDFS.
-2. Viene creato un flusso di tweet da Twitter.
-3. I tweet che contengono "Santa Clara University" vengono filtrati.
-4. Ogni tweet viene associato all'utente corrispondente e viene verificato se l'utente è presente nel file di spammers.
-5. I risultati vengono stampati.
+- Viene caricato un file di spammers da HDFS.
+- Viene creato un flusso di tweet da Twitter.
+- I tweet che contengono "Santa Clara University" vengono filtrati.
+- Ogni tweet viene associato all'utente corrispondente e viene verificato se l'utente è presente nel file di spammers.
+- I risultati vengono stampati.
 
 ## Operazioni su finestre temporali
 
@@ -574,23 +577,23 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
 
 ##### Esempio:
 
-1. **Carica i dati usando Spark SQL:**
+- **Carica i dati usando Spark SQL:**
 
    ```python
    points = spark.sql("select latitude, longitude from tweets")
    ```
 
- Questo codice carica i dati di latitudine e longitudine dai tweet in un DataFrame usando Spark SQL.
+Questo codice carica i dati di latitudine e longitudine dai tweet in un DataFrame usando Spark SQL.
 
-2. **Addestra un modello di machine learning:**
+- **Addestra un modello di machine learning:**
 
    ```python
    model = KMeans.train(points, 10)
    ```
 
- Questo codice addestra un modello di clustering K-means usando MLlib, utilizzando i dati di latitudine e longitudine caricati nel DataFrame.
+Questo codice addestra un modello di clustering K-means usando MLlib, utilizzando i dati di latitudine e longitudine caricati nel DataFrame.
 
-3. **Applica il modello a un flusso:**
+- **Applica il modello a un flusso:**
 
    ```python
    sc.twitterStream(...)
@@ -598,7 +601,7 @@ Spark offre la possibilità di combinare diverse librerie per creare pipeline di
      .reduceByWindow("5s", lambda a, b: a + b)
    ```
 
- Questo codice crea un flusso di tweet da Twitter, predice il cluster di appartenenza per ogni tweet usando il modello K-means addestrato e calcola il numero di tweet per cluster ogni 5 secondi.
+Questo codice crea un flusso di tweet da Twitter, predice il cluster di appartenenza per ogni tweet usando il modello K-means addestrato e calcola il numero di tweet per cluster ogni 5 secondi.
 
 ## Spark GraphX
 
@@ -654,10 +657,10 @@ PageRank assegna un rango (punteggio) ai nodi (pagine web) in base ai link che p
 
 ##### Algoritmo:
 
-1. **Inizializzazione:** Inizializza il rango di ogni pagina a 1.
-2. **Iterazione:** Per un numero fisso di iterazioni o fino alla convergenza:
- * **Calcolo dei contributi:** Ogni pagina `p` contribuisce con `rank(p) / |neighbors(p)|` a tutte le pagine a cui punta (i suoi vicini).
- * **Aggiornamento dei ranghi:** Il rango di ogni pagina viene aggiornato a `0.15 + 0.85 * somma_contributi`. La costante 0.15 rappresenta un fattore di smorzamento che tiene conto dei "salti casuali" tra le pagine.
+- **Inizializzazione:** Inizializza il rango di ogni pagina a 1.
+- **Iterazione:** Per un numero fisso di iterazioni o fino alla convergenza:
+* **Calcolo dei contributi:** Ogni pagina `p` contribuisce con `rank(p) / |neighbors(p)|` a tutte le pagine a cui punta (i suoi vicini).
+* **Aggiornamento dei ranghi:** Il rango di ogni pagina viene aggiornato a `0.15 + 0.85 * somma_contributi`. La costante 0.15 rappresenta un fattore di smorzamento che tiene conto dei "salti casuali" tra le pagine.
 
 ##### Implementazione in Scala:
 
@@ -702,4 +705,4 @@ Spark offre prestazioni significativamente migliori rispetto a Hadoop per l'esec
 * Asse X: Numero di macchine
 * Asse Y: Tempo di iterazione (s)
 * Barra blu: Hadoop
-* Barra arancione: Spark 
+* Barra arancione: Spark

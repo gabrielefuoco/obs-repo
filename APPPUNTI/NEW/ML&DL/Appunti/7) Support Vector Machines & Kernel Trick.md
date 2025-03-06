@@ -28,9 +28,9 @@ dove $y_i$ è l'etichetta del punto $\vec{x_i}$.
 
 ## Hard SVM
 
-L'obiettivo dell'Hard SVM è trovare l'iperpiano che massimizza il margine, poichè un margine più ampio rende l'iperpiano separatore più robusto. 
-Il training set è un campione casuale, quindi possiamo immaginare che i dati che non abbiamo visto possano essere approssimati perturbando il dominio dei dati. 
-In questo contesto, un ampio margine garantisce una maggiore robustezza rispetto a queste perturbazioni. 
+L'obiettivo dell'Hard SVM è trovare l'iperpiano che massimizza il margine, poichè un margine più ampio rende l'iperpiano separatore più robusto.
+Il training set è un campione casuale, quindi possiamo immaginare che i dati che non abbiamo visto possano essere approssimati perturbando il dominio dei dati.
+In questo contesto, un ampio margine garantisce una maggiore robustezza rispetto a queste perturbazioni.
 
 Questo si traduce nel seguente problema di ottimizzazione:
 
@@ -43,7 +43,7 @@ $$(\vec{w}^*,b^*)=\arg \max_{(\vec{w},b)\in R^{d+1}}\min_{1\leq_{1}\leq,m} \frac
 Questo problema è soggetto ai seguenti vincoli:
 
 $$
-\begin{cases} 
+\begin{cases}
 (\vec{w}^*,b^*)=\arg\min_{(\vec{w},b)\in R^{d+1}} \ \|\vec{w}\|^2 \\
 \forall_{i}, y_{i}(<\vec{w},\vec{x_{i}}>+b)\geq 1
 \end{cases}
@@ -78,7 +78,7 @@ L'approccio della Soft SVM è quello di rilassare i vincoli dell'Hard SVM, poich
 La formulazione della Soft SVM diventa:
 
 $$
-\begin{cases} 
+\begin{cases}
 (\vec{w}^*,b^*)=\arg\min_{(\vec{w},b)\in R^{d+1}} \ \|\vec{w}\|^2 \\ \\
 
 \forall_{i}, y_{i}<\vec{w},\vec{x_{i}}>\ \geq 1-\xi_{i}, \ \xi_{i}\geq_{0}
@@ -88,7 +88,7 @@ $$
 In questo modo, i vincoli sono stati rilassati. Tuttavia, è necessario porre un vincolo sull'assegnamento dei valori a $\xi_i$. Questo si ottiene modificando la funzione obiettivo:
 
 $$
-\begin{cases} 
+\begin{cases}
 (\vec{w}^*,b^*)=\arg\min_{(\vec{w},b)\in R^{d+1}} \ \lambda\|\vec{w}\|^2 +\frac{1}{m} \sum_{i=1}^m \xi_{i} \\ \\
 
 \forall_{i}, y_{i}<\vec{w},\vec{x_{i}} > \ \geq 1-\xi_{i}, \ \xi_{i}\geq_{0}
@@ -102,7 +102,7 @@ Il valore di $\xi_i$ può essere espresso come:
 $$\xi_{i}=
 \begin{cases}
 0, \ se \ y_{i} <\vec{w},x_{i}> \ \geq 1\\
- \\
+\\
 1-y_{i}<\vec{w},x_{i}>, \ \text{ altrimenti}
 \end{cases}
 
@@ -121,7 +121,7 @@ $$
 che può essere riscritta come:
 
 $$
-\vec{w}^*=\arg\min_{\vec{w}\in R^{d+1}} \ L_{S}^{\text{hinge}}+ \lambda \|\vec{w}\|^2 
+\vec{w}^*=\arg\min_{\vec{w}\in R^{d+1}} \ L_{S}^{\text{hinge}}+ \lambda \|\vec{w}\|^2
 $$
 
 Questa formulazione è un esempio di Regularized Linear Model (RLM). $L_S^{hinge}$ è una funzione convessa ed è la surrogata di $L_S^{0-1}$.
@@ -198,15 +198,15 @@ $\phi(x)=(x,x^2)$, ($x^2$ diventa la nuova y)
 
 Questa tecnica pone alcuni problemi:
 
-1. **Learnability:** in generale non è mai buono aumentare la dimensionalità dei dati. Se aumentiamo il numero di feature ci aspettiamo che la qualità dei dati andrà a calare. 
- SVM è un problema complex-lip..-bounded
- $m=\frac{8p^2b^2}{\epsilon^2}$ sample complexity è indipendente dalla dimensione dello spazio
+- **Learnability:** in generale non è mai buono aumentare la dimensionalità dei dati. Se aumentiamo il numero di feature ci aspettiamo che la qualità dei dati andrà a calare.
+SVM è un problema complex-lip..-bounded
+$m=\frac{8p^2b^2}{\epsilon^2}$ sample complexity è indipendente dalla dimensione dello spazio
 
-2. **Problema computazionale:**
+- **Problema computazionale:**
 $$\vec{x_{i}} \to \vec{x_{i}'=\phi(\vec{x_{i}})}$$
 $$\phi:R^d\to R^{d_{2}}, d_{2}\gg d$$
 $$<\vec{x}_{i},\vec{x_{j}}> \ \leftrightarrow \ <\phi(\vec{x_{i}}),\phi(\vec{x_{j}})>$$
- il primo termine costa $O(d)$ e il secondo costa $O(d_2)$
+il primo termine costa $O(d)$ e il secondo costa $O(d_2)$
 
 ## Introduzione alle Funzioni Kernel
 
@@ -216,7 +216,7 @@ Le SVM sono classificate come problemi "sparse-bounded", il cui livello di compl
 
 Tuttavia, l'aumento della dimensionalità comporta un aumento esponenziale delle dimensioni dello spazio dei dati, con conseguente aumento del costo computazionale.
 
-Per sfruttare i vantaggi di una maggiore dimensionalità senza pagarne il prezzo computazionale, si utilizza il "kernel trick". Questo strumento permette di applicare trasformazioni di dimensionalità senza dover calcolare esplicitamente le coordinate dei dati nello spazio trasformato. 
+Per sfruttare i vantaggi di una maggiore dimensionalità senza pagarne il prezzo computazionale, si utilizza il "kernel trick". Questo strumento permette di applicare trasformazioni di dimensionalità senza dover calcolare esplicitamente le coordinate dei dati nello spazio trasformato.
 
 In questo contesto, consideriamo:
 
@@ -242,7 +242,7 @@ Data una trasformazione $\phi: \mathbb{R}^{d_{1}} \to \mathbb{R}^{d_{2}}, (d_{2}
 
 $$\forall \vec{x_{1}},\vec{x_{2}} \in \mathbb{R}^{d_{1}}, K_{\phi}(\vec{x_{1}},\vec{x_{2}})\ = \ <\phi (\vec{x_1}),\phi(\vec{x_{2})}>$$
 
-Le funzioni kernel interessanti hanno costo computazionale $O(d_{1})$. 
+Le funzioni kernel interessanti hanno costo computazionale $O(d_{1})$.
 Se troviamo una funzione avente questa proprietà, abbiamo risolto il nostro problema.
 
 ##### Nota:

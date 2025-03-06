@@ -9,8 +9,8 @@ Questo paradigma si basa sull'idea di combinare diversi predittori "deboli" (wea
 
 Data una classe di ipotesi $H$, un weak learner è definito da una diversa classe di ipotesi $B$ con le seguenti proprietà:
 
-1. **Efficienza computazionale di ERM(B):** Il calcolo di $ERM(B)$ (Empirical Risk Minimization su B) deve essere efficiente, idealmente con costo sub-quadratico.
-2. **Performance migliore di un classificatore casuale:** L'ipotesi restituita da $ERM(B)$ deve avere prestazioni migliori di un classificatore casuale sui problemi risolti in maniera esatta da $H$.
+- **Efficienza computazionale di ERM(B):** Il calcolo di $ERM(B)$ (Empirical Risk Minimization su B) deve essere efficiente, idealmente con costo sub-quadratico.
+- **Performance migliore di un classificatore casuale:** L'ipotesi restituita da $ERM(B)$ deve avere prestazioni migliori di un classificatore casuale sui problemi risolti in maniera esatta da $H$.
 
 ##### Formalmente:
 
@@ -54,13 +54,13 @@ Prima di approfondire il boosting, analizziamo come applicare la regola della mi
 
 ##### Algoritmo:
 
-1. **Ordinamento:** Ordiniamo i punti in ℝ.
-2. **Sogli:** Determiniamo le soglie (potenzialmente infinite, ma quelle significative sono date dal valore mediano tra due 𝜃).
-3. **Calcolo dell'errore empirico:** Per ogni soglia 𝜃𝑖, calcoliamo l'errore empirico 𝐹[𝜃𝑖]. L'errore è dato dal numero di punti della classe positiva che si trovano a destra della soglia.
+- **Ordinamento:** Ordiniamo i punti in ℝ.
+- **Sogli:** Determiniamo le soglie (potenzialmente infinite, ma quelle significative sono date dal valore mediano tra due 𝜃).
+- **Calcolo dell'errore empirico:** Per ogni soglia 𝜃𝑖, calcoliamo l'errore empirico 𝐹[𝜃𝑖]. L'errore è dato dal numero di punti della classe positiva che si trovano a destra della soglia.
 
 ##### Complessità:
 
-L'ordinamento dei punti ha una complessità data da $t(m)=m\log (m)+(m+1)\cdot O(1)=O(m \log(m))$, dove 𝑚 è il numero di punti. 
+L'ordinamento dei punti ha una complessità data da $t(m)=m\log (m)+(m+1)\cdot O(1)=O(m \log(m))$, dove 𝑚 è il numero di punti.
 La funzione decision stump vale +1 a sinistra di 𝜃 e -1 a destra.
 
 $$t_{d}=d \cdot m \cdot \log(m)$$
@@ -95,14 +95,14 @@ dove $h_t(x)$ è il classificatore debole ottenuto all'iterazione *t*, con outpu
 
 ##### Metodo:
 
-1. Inizializza $D^{(1)} = (\frac{1}{m}, \dots, \frac{1}{m})$.
-2. **For** $t = 1$ **to** $T$ **do**:
- * $h_t = WL(S, D^{(t)})$: addestra un classificatore debole sull'insieme di dati $S$ con distribuzione di pesi $D^{(t)}$.
- * $\epsilon_t = \sum_{i=1}^m D_i^{(t)} \mathbb{1}[h_t(x_i) \neq y_i]$: calcola l'errore pesato del classificatore debole.
- * $\omega_t = \frac{1}{2} \log(\frac{1 - \epsilon_t}{\epsilon_t})$: calcola il peso del classificatore debole. Un errore minore implica un peso maggiore.
- * Aggiorna la distribuzione dei pesi:
+- Inizializza $D^{(1)} = (\frac{1}{m}, \dots, \frac{1}{m})$.
+- **For** $t = 1$ **to** $T$ **do**:
+* $h_t = WL(S, D^{(t)})$: addestra un classificatore debole sull'insieme di dati $S$ con distribuzione di pesi $D^{(t)}$.
+* $\epsilon_t = \sum_{i=1}^m D_i^{(t)} \mathbb{1}[h_t(x_i) \neq y_i]$: calcola l'errore pesato del classificatore debole.
+* $\omega_t = \frac{1}{2} \log(\frac{1 - \epsilon_t}{\epsilon_t})$: calcola il peso del classificatore debole. Un errore minore implica un peso maggiore.
+* Aggiorna la distribuzione dei pesi:
 
- $$D_i^{(t+1)} = \frac{D_i^{(t)} \exp(-\omega_t y_i h_t(x_i))}{\sum_{j=1}^m D_j^{(t)} \exp(-\omega_t y_j h_t(x_j))}$$
+$$D_i^{(t+1)} = \frac{D_i^{(t)} \exp(-\omega_t y_i h_t(x_i))}{\sum_{j=1}^m D_j^{(t)} \exp(-\omega_t y_j h_t(x_j))}$$
 
 Questo aggiornamento riduce il peso degli esempi classificati correttamente e aumenta il peso di quelli classificati erroneamente.
 
@@ -132,7 +132,7 @@ Se comunque prendiamo due punti all'interno dell'insieme, il segmento che li uni
 $$
 \begin{cases}
 \vec{v} = \alpha \vec{u} + (1 - \alpha)\vec{v} \\
-\alpha \in [0,1] 
+\alpha \in [0,1]
 \end{cases}$$
 
 $$\forall\alpha\in[0,1],\alpha \vec{u}+(1-\alpha)\vec{v}\in C$$
@@ -158,7 +158,7 @@ Se $f$ è una funzione convessa, ogni minimo locale è un minimo globale.
 ### Proprietà
 
 1) $f$ è convessa
-2) $f'$ è monotona non decrescente 
+2) $f'$ è monotona non decrescente
 3) $f''$ è non negativa
 
 ### Esempi

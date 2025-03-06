@@ -1,0 +1,1 @@
+python md_cleaner.py "C:\Users\gabri\Documents\Obsidian Vault\Repo\APPPUNTI"

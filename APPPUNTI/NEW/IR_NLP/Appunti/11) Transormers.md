@@ -46,7 +46,7 @@ Sia $\mathbf{w}_{1:n}$ una sequenza di parole nel vocabolario $V$, ad esempio "Z
 
 Per ogni $\mathbf{w}_{i}$, sia $\mathbf{x}_{i} = E \mathbf{w}_{i}$, dove $E \in \mathbb{R}^{d \times |V|}$ è una matrice di embedding.
 
-1. Trasformiamo ogni embedding di parola con matrici di peso $Q, K, V$, ciascuna in $\mathbb{R}^{d \times d}$:
+- Trasformiamo ogni embedding di parola con matrici di peso $Q, K, V$, ciascuna in $\mathbb{R}^{d \times d}$:
 
 $$
 \begin{aligned}
@@ -56,7 +56,7 @@ $$
 \end{aligned}
 $$
 
-2. Calcoliamo le similarità a coppie tra chiavi e query; normalizziamo con softmax:
+- Calcoliamo le similarità a coppie tra chiavi e query; normalizziamo con softmax:
 
 $$
 \begin{aligned}
@@ -65,7 +65,7 @@ e_{i j} &= \mathbf{q}_{i}^{\top} \mathbf{k}_{j} \\
 \end{aligned}
 $$
 
-3. Calcoliamo l'output per ogni parola come somma pesata dei valori:
+- Calcoliamo l'output per ogni parola come somma pesata dei valori:
 
 $$
 \mathbf{o}_{i} = \sum_{j} \alpha_{i j} \mathbf{v}_{j}
@@ -182,11 +182,11 @@ $$\text{output} = \text{softmax}(XQ(XK)^T)XV \in \mathbb{R}^{n \times d}$$
 
 ### Passaggi del Calcolo
 
-1. **Calcolo dei prodotti scalari query-key:** $XQ(XK)^T$ produce una matrice di prodotti scalari tra le query e le chiavi.
+- **Calcolo dei prodotti scalari query-key:** $XQ(XK)^T$ produce una matrice di prodotti scalari tra le query e le chiavi.
 
-2. **Applicazione della funzione softmax:** $\text{softmax}(XQ(XK)^T)$ normalizza i prodotti scalari, generando una matrice di pesi di attenzione.
+- **Applicazione della funzione softmax:** $\text{softmax}(XQ(XK)^T)$ normalizza i prodotti scalari, generando una matrice di pesi di attenzione.
 
-3. **Calcolo della media pesata:** $\text{softmax}(XQ(XK)^T)XV$ calcola la media pesata dei valori, utilizzando i pesi di attenzione calcolati nel passaggio precedente.
+- **Calcolo della media pesata:** $\text{softmax}(XQ(XK)^T)XV$ calcola la media pesata dei valori, utilizzando i pesi di attenzione calcolati nel passaggio precedente.
 
 ![[11) Transormers-20241122125849498.png]]
 
@@ -276,12 +276,12 @@ Il Transformer Decoder è costituito da una pila di blocchi di decodifica. Ogni 
 
 ### Funzionamento del Transformer Decoder
 
-1. L'input viene inserito nel primo blocco di decodifica.
-2. La self-attention assegna pesi alle parole.
-3. I pesi vengono aggiunti all'input e normalizzati (Add & Norm).
-4. Il risultato passa attraverso la rete feed-forward.
-5. L'output della rete feed-forward viene aggiunto all'input e normalizzato (Add & Norm).
-6. Il processo si ripete per ogni blocco.
+- L'input viene inserito nel primo blocco di decodifica.
+- La self-attention assegna pesi alle parole.
+- I pesi vengono aggiunti all'input e normalizzati (Add & Norm).
+- Il risultato passa attraverso la rete feed-forward.
+- L'output della rete feed-forward viene aggiunto all'input e normalizzato (Add & Norm).
+- Il processo si ripete per ogni blocco.
 
 ![[11) Transormers-20241122130213176.png]]
 

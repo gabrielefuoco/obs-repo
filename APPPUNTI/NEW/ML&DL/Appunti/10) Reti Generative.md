@@ -20,7 +20,7 @@ Le funzioni di codifica e decodifica sono definite come:
 
 ## Reti Neurali Generative
 
-A partire da un dataset, una rete neurale generativa riesce a prendere la distribuzione che ha generato i dati e sfruttarla per generare nuovi esempi chiamati "*Esempi sintetici*". 
+A partire da un dataset, una rete neurale generativa riesce a prendere la distribuzione che ha generato i dati e sfruttarla per generare nuovi esempi chiamati "*Esempi sintetici*".
 Vogliamo che tali esempi siano indistinguibili da quelli reali.
 
 Si può usare un *autoencoder* per generare esempi sintetici:
@@ -108,7 +108,7 @@ $$
 
 ## Gestire le Ricompense
 
-L'obiettivo dell'agente è massimizzare la ricompensa cumulativa. Questa ricompensa, indicata con $G$, dipende dalla politica $\pi$, dalla funzione di transizione $P$ e dalla funzione di ricompensa $R$, nel caso di un singolo agente, o anche dagli altri agenti nel caso di giochi multi-agente, dove si introduce la competizione o la cooperazione. 
+L'obiettivo dell'agente è massimizzare la ricompensa cumulativa. Questa ricompensa, indicata con $G$, dipende dalla politica $\pi$, dalla funzione di transizione $P$ e dalla funzione di ricompensa $R$, nel caso di un singolo agente, o anche dagli altri agenti nel caso di giochi multi-agente, dove si introduce la competizione o la cooperazione.
 
 Un esempio di definizione delle ricompense potrebbe essere:
 
@@ -173,10 +173,10 @@ Gli approcci di Reinforcement Learning assumono che gli stati siano Markowiani.
 Un **MDP** è una quintupla $<S,A,T,R,\gamma>$ dove:
 - $S$ è lo spazio degli stati
 - $A$ è l'insieme delle azioni
-- $T:S \times A \times S \to[0,1]: T(s,a,s')$ 
-	- È una funzione di transizione che restituisce la probabilità di passare in $s'$ dato che siamo in $S$ e eseguiamo $A$ 
-- $R: S \times A \times S \to R'$ , dove $R'$ è l'insieme delle ricompense 
-	- $R(s,a,s')$ ricompensa ottenuta quando da $s$ passiamo a $s'$ eseguendo l'azione $a$
+- $T:S \times A \times S \to[0,1]: T(s,a,s')$
+- È una funzione di transizione che restituisce la probabilità di passare in $s'$ dato che siamo in $S$ e eseguiamo $A$
+- $R: S \times A \times S \to R'$ , dove $R'$ è l'insieme delle ricompense
+- $R(s,a,s')$ ricompensa ottenuta quando da $s$ passiamo a $s'$ eseguendo l'azione $a$
 - $\gamma \in [0,1]$ è il *discount factor*
 
 Se $S$ e $A$ sono insiemi finiti, parliamo di *MDP finiti*.
@@ -279,7 +279,7 @@ $$
 $$
 Nella pratica, però, non conosciamo questi valori.
 
-# Q-Learning
+## Q-Learning
 
 L'obiettivo del Q-learning è stimare la funzione Q ottimale, $Q^*(s,a)$. Si costruisce un *training set* $T = \{ \langle s, a, r, s' \rangle \}$, che accumula l'esperienza dell'agente, dove:
 
@@ -321,17 +321,17 @@ Questo problema può essere formulato come un problema di regressione classico, 
 
 NFQ utilizza una rete neurale per approssimare la funzione Q. Il processo di apprendimento prevede i seguenti passi:
 
-1. **Determinazione del massimo Q-value:** Per ogni stato successivo `s'`, la rete neurale fornisce i valori Q per tutte le azioni possibili, $Q(s', a'; \theta_k)$. Si determina quindi il massimo di questi valori: $M = \max_{a' \in A} Q(s', a'; \theta_k)$.
+- **Determinazione del massimo Q-value:** Per ogni stato successivo `s'`, la rete neurale fornisce i valori Q per tutte le azioni possibili, $Q(s', a'; \theta_k)$. Si determina quindi il massimo di questi valori: $M = \max_{a' \in A} Q(s', a'; \theta_k)$.
 
-2. **Costruzione del target:** Si costruisce il target $Y_k^Q$ utilizzando la ricompensa ricevuta `r` e il massimo Q-value calcolato al passo precedente:
+- **Costruzione del target:** Si costruisce il target $Y_k^Q$ utilizzando la ricompensa ricevuta `r` e il massimo Q-value calcolato al passo precedente:
 
- $$Y_k^Q = r + \gamma \cdot M$$
+$$Y_k^Q = r + \gamma \cdot M$$
 
-3. **Minimizzazione della loss function:** Si utilizza una loss function, tipicamente il Mean Squared Error (MSE), per minimizzare la differenza tra il valore Q predetto dalla rete neurale e il target:
+- **Minimizzazione della loss function:** Si utilizza una loss function, tipicamente il Mean Squared Error (MSE), per minimizzare la differenza tra il valore Q predetto dalla rete neurale e il target:
 
- $$l_{NFQ} = \frac{1}{2} (Q(s, a; \theta_k) - Y_k^Q)^2$$
+$$l_{NFQ} = \frac{1}{2} (Q(s, a; \theta_k) - Y_k^Q)^2$$
 
- I parametri $\theta_k$ della rete neurale vengono aggiornati iterativamente per minimizzare questa loss function, migliorando così l'approssimazione della funzione Q ottimale.
+I parametri $\theta_k$ della rete neurale vengono aggiornati iterativamente per minimizzare questa loss function, migliorando così l'approssimazione della funzione Q ottimale.
 
 **Problema:** a volta la convergenza può essere lenta o diventare instabile. Inoltre, tende a sovrastimare i valori. Per evitare queste problematiche sono state sviluppate delle euristiche.
 
@@ -339,8 +339,8 @@ NFQ utilizza una rete neurale per approssimare la funzione Q. Il processo di app
 
 DQN utilizza due reti neurali separate per stimare la funzione Q:
 
-1. **Rete aggiornata:** $Q(s, a; \theta_k)$ – utilizzata per selezionare le azioni e per calcolare la loss function.
-2. **Rete target:** $Q(s, a; \theta_k^-)$ – utilizzata per calcolare il valore target.
+- **Rete aggiornata:** $Q(s, a; \theta_k)$ – utilizzata per selezionare le azioni e per calcolare la loss function.
+- **Rete target:** $Q(s, a; \theta_k^-)$ – utilizzata per calcolare il valore target.
 
 Entrambe le reti hanno la stessa struttura, ma pesi ($\theta$) differenti. Questo disaccoppiamento tra il calcolo del valore target e l'aggiornamento dei pesi migliora la stabilità dell'apprendimento.
 
@@ -389,8 +389,8 @@ $$p(x) \approx \frac{k/n}{V}$$
 
 Due metodi principali per la stima di densità non parametrica sono:
 
-1. Stima di densità con *K-Nearest Neighbor* (KNN)
-2. Stima di densità con *Kernel* (KDE)
+- Stima di densità con *K-Nearest Neighbor* (KNN)
+- Stima di densità con *Kernel* (KDE)
 
 ## K-Nearest Neighbor Density Estimation (KNN)
 
@@ -477,7 +477,7 @@ k(u)=
 $$
 
 $$KDE: p(x)=\frac{1}{nh^d}\sum_{i=1}^n K\left( \frac{\vec{x}-\vec{x}_{i}}{h} \right)$$
-Problema: costo computazionale elevato, perchè devo guardare tutti i punti del dataset. 
+Problema: costo computazionale elevato, perchè devo guardare tutti i punti del dataset.
 Soluzione 1: ignorare i punti oltre una certa distanza, ma questo potrebbe portare ad errori.
 Soluzione 2: utilizzare kernel con area sottea 1 e che sono simmetrici (ad es Tricube)
 

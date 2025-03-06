@@ -7,24 +7,30 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-# Calcolo del FID 
+## Calcolo del FID
 
 Confronto di due distribuzioni con media e covarianza
 
 ```python
 # calculate frechet inception distance
+
 def calculate_fid(act1, act2):
     # calculate mean and covariance statistics
+
     mu1, sigma1 = act1.mean(axis=0), np.cov(act1, rowvar=False)
     mu2, sigma2 = act2.mean(axis=0), np.cov(act2, rowvar=False)
 	# calculate sum squared difference between means
+
     ssdiff = np.sum((mu1 - mu2)**2.0)
     # calculate sqrt of product between cov
+
     covmean = sqrtm(sigma1.dot(sigma2))
     # check and correct imaginary numbers from sqrt
+
     if np.iscomplexobj(covmean):
         covmean = covmean.real
     # calculate score
+
     fid = ssdiff + np.trace(sigma1 + sigma2 - 2.0 * covmean)
     return fid
 ```
@@ -129,7 +135,7 @@ fig.show();
 
 ![png](FrechetInceptionDistanceExample_11_0.png)
 
-# Un esempio con delle immagini
+## Un esempio con delle immagini
 
 ```python
 from PIL import Image
@@ -167,6 +173,7 @@ inception_model.to(device)
 inception_model = inception_model.eval()
 
 # reset classification layers
+
 inception_model.fc = torch.nn.Identity()
 
 ```
@@ -177,7 +184,7 @@ cat1FF = inception_model(cat1.view(1, 3, 100, 100).to(device)).cpu().detach()
 cat1FF.shape
 ```
 
- torch.Size([1, 2048])
+torch.Size([1, 2048])
 
 Calcoliamo le FM delle immagini in input
 
@@ -202,7 +209,7 @@ nocatFF = torch.cat((nocatFF, nocatFF), dim=0)
 cat1FF.shape
 ```
 
- torch.Size([2, 2048])
+torch.Size([2, 2048])
 
 ```python
 fid1 = calculate_fid(cat1FF.numpy(), cat1FF.numpy()) 
@@ -212,7 +219,7 @@ fid3 = calculate_fid(cat1FF.numpy(), nocatFF.numpy())
 fid1, fid2, fid3
 ```
 
- (0.0, 657.1576538085938, 1090.859619140625)
+(0.0, 657.1576538085938, 1090.859619140625)
 
 ```python
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(16, 8))

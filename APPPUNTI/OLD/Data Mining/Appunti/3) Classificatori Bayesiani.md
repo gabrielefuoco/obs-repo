@@ -12,22 +12,22 @@ I modelli di classificazione che utilizzano la teoria della probabilità per rap
 * **Visione frequentista:** La probabilità si basa sulla frequenza relativa degli eventi.
 * **Visione bayesiana:** La probabilità ha una visione più flessibile.
 * **Probabilità congiunta:** La probabilità di osservare due eventi contemporaneamente.
- * $P(X=x_i, Y=y_j) = \frac{n_{ij}}{N}$ , dove $n_{ij}$ è la frequenza assoluta dell'evento X = xi & Y = yj su un numero totale N di osservazioni.
+* $P(X=x_i, Y=y_j) = \frac{n_{ij}}{N}$ , dove $n_{ij}$ è la frequenza assoluta dell'evento X = xi & Y = yj su un numero totale N di osservazioni.
 * **Marginalizzazione:** Somma delle probabilità congiunte rispetto a una delle variabili casuali.
- * $P(X=x_i) = \frac{n_{i}}{N}=\frac{\sum_{j=1}^k n_{ij}}{N}=\sum_{j=1}^K P(X=x_i, Y=y_j)$ 
- * $P(X=x_i)$ è la **probabilità marginale di X**.
+* $P(X=x_i) = \frac{n_{i}}{N}=\frac{\sum_{j=1}^k n_{ij}}{N}=\sum_{j=1}^K P(X=x_i, Y=y_j)$
+* $P(X=x_i)$ è la **probabilità marginale di X**.
 
 ### Probabilità Condizionata
 
 * **Probabilità condizionata:** La probabilità di osservare la variabile casuale Y ogni volta che la variabile casuale X assume un particolare valore.
- * $P(Y|X) = \frac{P(X,Y)}{P(X)}$ 
- * $P(X|Y) = \frac{P(X,Y)}{P(Y)}$ 
+* $P(Y|X) = \frac{P(X,Y)}{P(X)}$
+* $P(X|Y) = \frac{P(X,Y)}{P(Y)}$
 * **Relazione tra probabilità congiunta e condizionata:**
- * $P(X, Y)= P(Y|X) \times P(X) = P(X|Y) \times P(Y)$ 
+	* $P(X, Y)= P(Y|X) \times P(X) = P(X|Y) \times P(Y)$
 
 ### Teorema di Bayes
 
-* **Formula:** $P(Y|X) = \frac{P(Y,X)}{P(X)}=\frac{P(X|Y)P(Y)}{P(X)}$ 
+* **Formula:** $P(Y|X) = \frac{P(Y,X)}{P(X)}=\frac{P(X|Y)P(Y)}{P(X)}$
 * **Significato:** Fornisce una relazione tra le probabilità condizionali $P (Y I X) \text{ e } P(XIY$).
 
 ##### Nota
@@ -47,25 +47,25 @@ I modelli di classificazione che utilizzano la teoria della probabilità per rap
 $$P(Y|X_1, X_2, ..., X_d) = \frac{P(X_1, X_2, ..., X_d|Y)P(Y)}{P(X_1, X_2, ..., X_d)}$$
 
 * **Scegliere Y che massimizza $P(Y|X_1, X_2, ..., X_d)$ è equivalente a scegliere il valore di Y che massimizza $P(X_1, X_2, ..., X_d|Y)$**.
- * $P(X_1, X_2, ..., X_d|Y)$ è la **probabilità condizionata di classe** degli attributi data l'etichetta della classe.
- * Misura la probabilità di osservare gli attributi $X_1, X_2, ..., X_d$ dalla distribuzione delle osservazioni di Y.
- * Se il record con attributi $X_1, X_2, ..., X_d$ appartiene davvero alla classe Y, allora ci si aspetta che $P(X_1, X_2, ..., X_d|Y)$ sia alto.
+* $P(X_1, X_2, ..., X_d|Y)$ è la **probabilità condizionata di classe** degli attributi data l'etichetta della classe.
+* Misura la probabilità di osservare gli attributi $X_1, X_2, ..., X_d$ dalla distribuzione delle osservazioni di Y.
+* Se il record con attributi $X_1, X_2, ..., X_d$ appartiene davvero alla classe Y, allora ci si aspetta che $P(X_1, X_2, ..., X_d|Y)$ sia alto.
 
 ### Termini del Teorema di Bayes
 
 * **$P(Y)$: Probabilità a priori.**
- * Rappresenta il punto di vista Bayesiano.
- * Cattura le convinzioni preliminari sulla distribuzione delle etichette di classe, indipendentemente dai valori degli attributi osservati.
- * Ad esempio, potremmo avere una convinzione preliminare che la probabilità che una persona soffra di una malattia cardiaca sia pari a α, indipendentemente dai rapporti diagnostici.
+	* Rappresenta il punto di vista Bayesiano.
+	* Cattura le convinzioni preliminari sulla distribuzione delle etichette di classe, indipendentemente dai valori degli attributi osservati.
+	* Ad esempio, potremmo avere una convinzione preliminare che la probabilità che una persona soffra di una malattia cardiaca sia pari a α, indipendentemente dai rapporti diagnostici.
 * **$P(X_1, ..., X_d)$: Probabilità of evidence.**
- * Questo termine non dipende dall'etichetta della classe e quindi può essere trattato come una costante di normalizzazione nel calcolo delle probabilità a posteriori $P(Y|X_1, X_2, ..., X_d)$.
+	* Questo termine non dipende dall'etichetta della classe e quindi può essere trattato come una costante di normalizzazione nel calcolo delle probabilità a posteriori $P(Y|X_1, X_2, ..., X_d)$.
 
 ### Stima delle Probabilità
 
 * La probabilità a priori $P(Y)$ può essere facilmente stimata dal training set calcolando la frazione di record appartenenti a ciascuna classe.
 * Per calcolare $P(X_1, X_2, ..., X_d|Y)$ (probabilità condizionata di classe), un approccio è considerare la frazione di record del training set di una data classe per ogni combinazione di valori di attributo.
- * Questo approccio diventa computazionalmente proibitivo all'aumentare del numero di attributi, a causa dell'incremento esponenziale delle possibili combinazioni di valori.
- * Inoltre, con un training set di piccole dimensioni, si rischia di avere stime imprecise delle probabilità condizionate di classe.
+* Questo approccio diventa computazionalmente proibitivo all'aumentare del numero di attributi, a causa dell'incremento esponenziale delle possibili combinazioni di valori.
+* Inoltre, con un training set di piccole dimensioni, si rischia di avere stime imprecise delle probabilità condizionate di classe.
 
 ## Assunzione di Naïve Bayes
 
@@ -120,8 +120,8 @@ Quando si hanno attributi continui nell'algoritmo Naive Bayes, non è possibile 
 
 * Vengono proposte due strategie alternative:
 
-1. **Discretizzazione:** Discretizzare gli attributi continui in intervalli, trasformandoli in attributi ordinali. Questo comporta però il rischio di errori di stima a seconda del numero di intervalli scelti.
-2. **Distribuzione di probabilità:** Assumere che i valori degli attributi continui seguano una specifica distribuzione di probabilità, come la distribuzione Normale (Gaussiana).
+- **Discretizzazione:** Discretizzare gli attributi continui in intervalli, trasformandoli in attributi ordinali. Questo comporta però il rischio di errori di stima a seconda del numero di intervalli scelti.
+- **Distribuzione di probabilità:** Assumere che i valori degli attributi continui seguano una specifica distribuzione di probabilità, come la distribuzione Normale (Gaussiana).
 
 Nel caso della distribuzione Normale, la probabilità condizionata dell'attributo $x_{i}$ dato la classe $Y=y_{j}$ (ovvero $P(X_{i}=x_{i}|Y=y_{j})$) può essere calcolata usando la funzione di densità della Normale, con i parametri media $\mu_{ij}$ e varianza $\sigma_{ij}^2$ stimati dai dati del training set appartenenti alla classe yj.
 
@@ -156,8 +156,8 @@ Nell'algoritmo Naive Bayes, può capitare che la probabilità condizionata P(Xi|
 Le reti bayesiane sono in grado di catturare forme più generiche di indipendenza condizionale, usando rappresentazioni grafiche delle relazioni probabilistiche tra un insieme di variabili casuali.
 
 * Si utilizza un grafo diretto aciclico (DAG), in cui:
- * **Nodi:** corrispondono alle variabili casuali.
- * **Archi:** corrispondono alle relazioni di dipendenza tra una coppia di variabili.
+* **Nodi:** corrispondono alle variabili casuali.
+* **Archi:** corrispondono alle relazioni di dipendenza tra una coppia di variabili.
 
 ### Indipendenza Condizionale: La Condizione di Markov
 
@@ -182,14 +182,14 @@ $$= \prod_{i=1}^{n} P(X_i|X_1, ..., X_{i-1}) = \prod_{i=1}^{n} P(X_i|Parents(X_i
 * Ogni probabilità condizionale $P(X_i|X_1, ..., X_{i-1})$ rappresenta la probabilità di $X_i$ dato il valore dei suoi genitori (antenati) nella rete.
 * La seconda formulazione evidenzia che la probabilità condizionale di un nodo dipende solo dai suoi genitori diretti, non da tutti i suoi antenati.
 
-* Questa scomposizione della probabilità congiunta è fondamentale per la semplificazione del calcolo delle probabilità in una rete Bayesiana. 
+* Questa scomposizione della probabilità congiunta è fondamentale per la semplificazione del calcolo delle probabilità in una rete Bayesiana.
 
 ### Tabella di Probabilità Condizionata (CPT)
 
 * Per rappresentare la probabilità congiunta P(X) in una rete bayesiana, è sufficiente rappresentare la probabilità di ogni nodo Xi in termini dei suoi genitori parents(Xi).
 * Questo si ottiene tramite tabelle di probabilità condizionata (CPT):
- * Se Xi non ha genitori, la tabella contiene P(Xi);
- * Altrimenti contiene $P(X_{i}|\text{Parents}(X_{i}))$ per ogni combinazione di valori di $X_{i} \text{ e Parents}(X_{i})$.
+* Se Xi non ha genitori, la tabella contiene P(Xi);
+* Altrimenti contiene $P(X_{i}|\text{Parents}(X_{i}))$ per ogni combinazione di valori di $X_{i} \text{ e Parents}(X_{i})$.
 * Per una variabile booleana con k genitori, la tabella ha 2(k+1) voci.
 * Le CPT quantificano l'influenza dei genitori sul nodo corrente.
 
@@ -213,4 +213,4 @@ Dove la quantità $P(y, x, H)$ può essere ottenuta utilizzando la fattorizzazio
 * La probabilità marginale $P(x, y)$ può essere calcolata sommando la probabilità congiunta $P(y, x, H)$ su tutti i possibili valori della variabile nascosta $H$.
 * La fattorizzazione precedentemente descritta si riferisce alla scomposizione della probabilità congiunta in un prodotto di probabilità condizionali, come visto nella rete Bayesiana.
 
-Questa formulazione permette di calcolare la probabilità condizionale anche in presenza di variabili nascoste, sfruttando la fattorizzazione della probabilità congiunta. 
+Questa formulazione permette di calcolare la probabilità condizionale anche in presenza di variabili nascoste, sfruttando la fattorizzazione della probabilità congiunta.

@@ -4,7 +4,7 @@
 
 * La rete riceve input, non tutti con la stessa importanza.
 * Ogni input è associato ad un **peso** che ne determina l'influenza.
-* Lo **stimolo** ricevuto dalla rete è la combinazione lineare degli input ponderati: 
+* Lo **stimolo** ricevuto dalla rete è la combinazione lineare degli input ponderati:
 
 $$\sum_{i=1}^d w_{i}x_{i}$$
 
@@ -22,14 +22,14 @@ $$h_{\vec{w},\theta}(\vec{x})=sign[\sum_{i=1}^d w_{i}x_{i}-\theta]=sign<\vec{w},
 
 * **Inizializzazione:** $\vec{w}^{(1)}=(0,0,\dots,0)$
 * **Iterazione:**
- * Finché esiste un input $i$ per cui $y_{i} <\vec{w}^{(1)},\vec{x_{i}}> \leq_{0}$:
- * Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
- * Incrementa il contatore di iterazioni: $t=t+1$
+	* Finché esiste un input $i$ per cui $y_{i} <\vec{w}^{(1)},\vec{x_{i}}> \leq_{0}$:
+	* Aggiorna il vettore dei pesi: $\vec{w}^{(t+1)}=\vec{w}^{(1)}+y_{i}\vec{x_{i}}$
+	* Incrementa il contatore di iterazioni: $t=t+1$
 
 ##### Convergenza:
 
 * L'algoritmo converge sempre nel caso di dati **linearmente separabili**.
-* Al termine, restituisce un **iperpiano separatore**. 
+* Al termine, restituisce un **iperpiano separatore**.
 
 ## Teorema del Perceptron
 
@@ -55,30 +55,30 @@ Isolando $T$ dalla disuguaglianza, si ottiene $T \le RB$.
 
 Per dimostrare la disuguaglianza iniziale, consideriamo separatamente numeratore e denominatore:
 
-1. **Numeratore:**
+- **Numeratore:**
 
- Scriviamo il numeratore come la differenza del prodotto vettoriale: $$<w^*, w(t+1)> - <w^*, w(t)>.$$
- Possiamo riscriverlo come:
- $$<w^*, w(t+1) - w(t)> = <w^*, y_i x_i>.$$
- Portiamo fuori lo scalare:
- $$y_i <w^*, x_i> \ge 1$$
- Quindi sappiamo che la nostra differenza iniziale è $\ge 1$.
- $$<\vec{w}^*, \vec{w}^{(t+1)}> = \sum_{i=1}^I(<\vec{w}^*, w^{(t+1)}>-<w^*, w^{()}>) \ge T$$
- perché viene ripetuto T volte.
+Scriviamo il numeratore come la differenza del prodotto vettoriale: $$<w^*, w(t+1)> - <w^*, w(t)>.$$
+Possiamo riscriverlo come:
+$$<w^*, w(t+1) - w(t)> = <w^*, y_i x_i>.$$
+Portiamo fuori lo scalare:
+$$y_i <w^*, x_i> \ge 1$$
+Quindi sappiamo che la nostra differenza iniziale è $\ge 1$.
+$$<\vec{w}^*, \vec{w}^{(t+1)}> = \sum_{i=1}^I(<\vec{w}^*, w^{(t+1)}>-<w^*, w^{()}>) \ge T$$
+perché viene ripetuto T volte.
 
-2. **Denominatore:**
- $$||w(t+1)||^2 = ||w_t + y_i x_i||^2$$
- Sviluppiamo il quadrato:
- $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2$$
- Notiamo che abbiamo fatto un'iterazione, $x$ era missclassificato, quindi $2y_i <w_t, x_i> \le 0$, e $y_i^2$ è la nostra etichetta che vale 1. Allora possiamo riscrivere tutto come:
- $$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2 \le ||w_t||^2 + ||x_i||^2 \le ||w_t||^2 + R^2$$
- Siccome $||x_i|| \le R$, l'abbiamo sostituita con $R$.
+- **Denominatore:**
+$$||w(t+1)||^2 = ||w_t + y_i x_i||^2$$
+Sviluppiamo il quadrato:
+$$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2$$
+Notiamo che abbiamo fatto un'iterazione, $x$ era missclassificato, quindi $2y_i <w_t, x_i> \le 0$, e $y_i^2$ è la nostra etichetta che vale 1. Allora possiamo riscrivere tutto come:
+$$||w_t||^2 + 2y_i <w_t, x_i> + y_i^2 ||x_i||^2 \le ||w_t||^2 + ||x_i||^2 \le ||w_t||^2 + R^2$$
+Siccome $||x_i|| \le R$, l'abbiamo sostituita con $R$.
 
- Considerando la T-esima iterazione, abbiamo che:
- $$||w(t+1)||^2 \le ||w_t||^2 + R^2 \le ||w(t-1)||^2 + R^2 \le TR^2$$
- Mettendo tutto insieme, abbiamo:
- $$\frac{<\vec{w}^*, \vec{w}^{(t+1)}>}{||w^*|| ||w^{t+1}||} \ge \frac{T \sqrt{T}}{B \sqrt{T}R} = \frac{\sqrt{T}}{BR}$$
- Il teorema è dimostrato.
+Considerando la T-esima iterazione, abbiamo che:
+$$||w(t+1)||^2 \le ||w_t||^2 + R^2 \le ||w(t-1)||^2 + R^2 \le TR^2$$
+Mettendo tutto insieme, abbiamo:
+$$\frac{<\vec{w}^*, \vec{w}^{(t+1)}>}{||w^*|| ||w^{t+1}||} \ge \frac{T \sqrt{T}}{B \sqrt{T}R} = \frac{\sqrt{T}}{BR}$$
+Il teorema è dimostrato.
 
 ##### Conclusione:
 
@@ -114,7 +114,7 @@ Per trovare il nostro regressore dobbiamo trovare l'iperpiano che minimizza la r
 
 Ci sono due strade per risolvere il problema:
 
-1. **Trovare una soluzione in forma chiusa.**
+- **Trovare una soluzione in forma chiusa.**
 
 Studiamo i punti stazionari della funzione. Questa funzione ha una proprietà, ovvero quella di essere convessa.
 
@@ -173,9 +173,9 @@ $$h(x) = Pr[x \epsilon \text{classe positiva}] \epsilon [0, 1]$$
 **Funzionamento:** L'idea è la seguente, si basa sull'uso di modelli lineari (quindi su iperpiani), supponiamo di avere dei dati.
 
 * $h = 1$: certezza che $x$ sia della classe positiva.
-	* I valori compresi tra questi due si propendono per l'appartenenza alla classe positiva.
+* I valori compresi tra questi due si propendono per l'appartenenza alla classe positiva.
 * $h = 1/2$: massima incertezza di appartenenza.
-	* I valori compresi tra questi due valori si propendono per l'appartenenza alla classe negativa.
+* I valori compresi tra questi due valori si propendono per l'appartenenza alla classe negativa.
 * $h = 0$: certezza che appartiene ad un'altra classe.
 
 $<w, x>$ è proporzionale alla $dist(w, x)$.
@@ -188,7 +188,7 @@ $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
 
 $$h_{\vec{w}}(x) = \sigma(<\vec{w}, \vec{x}>) = \frac{1}{1 + e^{-<w, x>}}$$
 
-Abbiamo bisogno di una nuova Loss, la loss che utilizzeremo è la Cross Entropy Loss. 
+Abbiamo bisogno di una nuova Loss, la loss che utilizzeremo è la Cross Entropy Loss.
 
 ## Cross Entropy Loss
 
@@ -243,7 +243,7 @@ Concettualmente, questo teorema ci dice che non esiste un algoritmo di learning 
 
 Serve per caratterizzare la learnability delle classi di ipotesi infinite. Come funziona? Si parte da delle definizioni preliminari:
 
-1. **Restrizione di H a C dove C è un sottoinsieme di X:** È l'insieme delle funzioni che hanno C come dominio e possono essere derivate da H.
+- **Restrizione di H a C dove C è un sottoinsieme di X:** È l'insieme delle funzioni che hanno C come dominio e possono essere derivate da H.
 
 | X | h_1 | h_2 | h_3 | h_4 |
 | --- | --- | --- | --- | --- |
@@ -252,7 +252,7 @@ Serve per caratterizzare la learnability delle classi di ipotesi infinite. Come 
 | x_3 | 0 | 1 | 0 | 1 |
 H_c=?
 
-2. **SHATTERING:** una classe di ipotesi H FRANTUMA un sottoinsieme C di X se Hc contiene tutte le funzioni da C→{0,1}, la restrizione deve avere cardinalità 2C (|Hc|=2C).
+- **SHATTERING:** una classe di ipotesi H FRANTUMA un sottoinsieme C di X se Hc contiene tutte le funzioni da C→{0,1}, la restrizione deve avere cardinalità 2C (|Hc|=2C).
 
 Quindi, la **VC-DIMENSION** di una classe d'ipotesi H (VCdim(H)) è la taglia del più grande sottoinsieme di X che è Shattered da H. Ci dice su quanti elementi del dominio riusciamo a costruire tutte le funzioni.
 
@@ -270,34 +270,34 @@ La **VC-DIMENSION** (Vapnik-Chervonenkis Dimension) è una misura della compless
 
 Per calcolare la VC-DIMENSION di una classe di ipotesi, si seguono due passi:
 
-1. **Trovare il massimo numero di punti che possono essere shattered:**
- * Se esiste un sottoinsieme di punti C con |C|=d che può essere shattered dalla classe di ipotesi, allora la VC-DIMENSION è almeno d.
-2. **Verificare che non esistano sottoinsiemi di punti più grandi che possono essere shattered:**
- * Se per ogni sottoinsieme di punti C con |C|=d+1 la classe di ipotesi non può creare tutte le possibili classificazioni, allora la VC-DIMENSION è esattamente d.
+- **Trovare il massimo numero di punti che possono essere shattered:**
+* Se esiste un sottoinsieme di punti C con |C|=d che può essere shattered dalla classe di ipotesi, allora la VC-DIMENSION è almeno d.
+- **Verificare che non esistano sottoinsiemi di punti più grandi che possono essere shattered:**
+* Se per ogni sottoinsieme di punti C con |C|=d+1 la classe di ipotesi non può creare tutte le possibili classificazioni, allora la VC-DIMENSION è esattamente d.
 
 ##### Esempi:
 
 * Partiamo dalla classe di ipotesi delle funzioni soglia:
 $$H=\{ h_{0}(x)=1[x>0], \ 0\in R \}$$
- ![[3)-20241005175148387.png|403]]
- Abbiamo trovato un sottoinsieme di cardinalità 2 per cui prediamo i punti non riusciamo a costruire tutte le possibili funzioni da questo sottoinsieme a {0,1}.
+![[3)-20241005175148387.png|403]]
+Abbiamo trovato un sottoinsieme di cardinalità 2 per cui prediamo i punti non riusciamo a costruire tutte le possibili funzioni da questo sottoinsieme a {0,1}.
 * Prendiamo le funzioni intervallo:
 $$H=\{ h_{a,l}(x)\}=1[a\leq x\leq l,a,l \in R]$$
- ![[3)-20241005175437626.png|401]]
+![[3)-20241005175437626.png|401]]
 $$VCdim(M|n|)=2$$
 * Prendiamo la classe dei rettangolo:
 $$h_{a,b,c,d}(x)=1[a\leq x_{1}\leq b \cap c\leq\lambda_{2}\leq d], \ a,b,c,d \in R$$
- ![[3)-20241005175735494.png|507]]
+![[3)-20241005175735494.png|507]]
 
 ## TEOREMA FONDAMENTALE DEL PAC LEARNABLE
 
-Il teorema fondamentale del PAC Learnable afferma che una classe di ipotesi H è (Agnostic) PAC Learnable se e solo se la sua VC Dimension è finita. 
+Il teorema fondamentale del PAC Learnable afferma che una classe di ipotesi H è (Agnostic) PAC Learnable se e solo se la sua VC Dimension è finita.
 
 La VC Dimension (d) rappresenta la capacità di una classe di ipotesi di "frantumare" un insieme di dati. In altre parole, indica il numero massimo di punti che possono essere classificati in tutti i modi possibili dalla classe di ipotesi.
 
 Il teorema stabilisce che per poter imparare in modo PAC, la classe di ipotesi deve avere una VC Dimension finita. Questo significa che la classe di ipotesi non può essere troppo complessa, altrimenti non sarà possibile generalizzare a nuovi dati.
 
-La formula $m=0\ \left( \frac{d+\ln\left( \frac{1}{\delta} \right)}{Ɛ^c} \right)$ fornisce una stima del numero di esempi necessari per imparare in modo PAC. 
+La formula $m=0\ \left( \frac{d+\ln\left( \frac{1}{\delta} \right)}{Ɛ^c} \right)$ fornisce una stima del numero di esempi necessari per imparare in modo PAC.
 
 * **d:** VC Dimension della classe di ipotesi
 * **Ɛ:** Errore massimo consentito

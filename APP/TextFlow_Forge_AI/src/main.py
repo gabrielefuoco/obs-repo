@@ -77,9 +77,9 @@ def read_prompts(prompt_folder: Path) -> OrderedDict:
     return prompts
 
 
-def call_gemini_api(text_chunk: str, prompt: str, retries: int = 3) -> Optional[str]:
-    """Chiama l'API di Gemini 1.5 Flash con un chunk di testo e un prompt."""
-    model = genai.GenerativeModel("gemini-1.5-flash")
+def call_gemini_api(text_chunk: str, prompt: str, retries: int = 10) -> Optional[str]:
+    """Chiama l'API di Gemini 2.0 Flash con un chunk di testo e un prompt."""
+    model = genai.GenerativeModel("gemini-2.0-flash")
     for attempt in range(1, retries + 1):
         try:
             response = model.generate_content(

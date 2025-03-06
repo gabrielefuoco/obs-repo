@@ -35,9 +35,9 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 - **Archiviazione ed elaborazione massiva** di set di dati su cluster di server economici.
 - **Affidabilità e scalabilità** su hardware con una tendenza al guasto.
 - Include componenti fondamentali:
- - **HDFS**: Hadoop Distributed File System
- - **Hadoop YARN**: Gestione delle risorse del cluster
- - **Hadoop MapReduce**: Sistema per calcoli paralleli su grandi dataset
+- **HDFS**: Hadoop Distributed File System
+- **Hadoop YARN**: Gestione delle risorse del cluster
+- **Hadoop MapReduce**: Sistema per calcoli paralleli su grandi dataset
 
 #### HDFS (Hadoop Distributed File System):
 
@@ -59,51 +59,51 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 ## Hadoop su hardware commodity:
 
 - **Vantaggi**:
- - Utilizzo di **hardware standardizzato** e accessibile, senza dover dipendere da costosi fornitori proprietari.
- - Possibilità di scalare orizzontalmente (aggiungendo più nodi) piuttosto che verticalmente (aggiornando l'hardware esistente).
+- Utilizzo di **hardware standardizzato** e accessibile, senza dover dipendere da costosi fornitori proprietari.
+- Possibilità di scalare orizzontalmente (aggiungendo più nodi) piuttosto che verticalmente (aggiornando l'hardware esistente).
 
 - **Svantaggi**:
- - **Tassi di guasto** più elevati rispetto a soluzioni proprietarie, mitigati dalla replicazione e dalla gestione distribuita dei task.
+- **Tassi di guasto** più elevati rispetto a soluzioni proprietarie, mitigati dalla replicazione e dalla gestione distribuita dei task.
 #### Esempi di utilizzo:
 
 - **Yahoo!** ha utilizzato Hadoop per elaborare enormi dataset:
- - Nel 2014, Hadoop era installato su oltre **100.000 CPU** distribuite su più di **40.000 macchine**.
- - Nel 2017, Hadoop gestiva **36 cluster distinti** per vari progetti come Apache HBase, YARN e Storm.
+- Nel 2014, Hadoop era installato su oltre **100.000 CPU** distribuite su più di **40.000 macchine**.
+- Nel 2017, Hadoop gestiva **36 cluster distinti** per vari progetti come Apache HBase, YARN e Storm.
 
 ### Ottimizzazioni con Hadoop MapReduce:
 
 - MapReduce consente la programmazione di calcoli distribuiti, e può essere migliorato con strumenti come:
- - **Apache Pig** e **Apache Hive** per una programmazione più accessibile.
- - **Apache HBase** per un accesso più efficiente ai dati distribuiti.
+- **Apache Pig** e **Apache Hive** per una programmazione più accessibile.
+- **Apache HBase** per un accesso più efficiente ai dati distribuiti.
 
 ## HDFS
 
 - Progettato per hardware a basso costo, HDFS è tollerante ai guasti e fornisce **accesso veloce ai dati** per applicazioni con grandi set di dati.
 - Presupposti:
- - **Guasto hardware**: La rilevazione e il recupero dai guasti sono fondamentali.
- - **Accesso in streaming**: Ottimizzato per l'elaborazione batch, con enfasi sulla velocità di trasmissione.
- - **Grandi set di dati**: Scalabile a centinaia di nodi per set di dati di dimensioni da GB a TB.
- - **Modello di coerenza semplice**: Modello di accesso "write-once-read-many".
- - **Efficienza del calcolo**: Spostare il calcolo vicino ai dati è più efficiente che spostare i dati.
- - **Portabilità**: Progettato per essere eseguibile su diverse piattaforme hardware e software.
+- **Guasto hardware**: La rilevazione e il recupero dai guasti sono fondamentali.
+- **Accesso in streaming**: Ottimizzato per l'elaborazione batch, con enfasi sulla velocità di trasmissione.
+- **Grandi set di dati**: Scalabile a centinaia di nodi per set di dati di dimensioni da GB a TB.
+- **Modello di coerenza semplice**: Modello di accesso "write-once-read-many".
+- **Efficienza del calcolo**: Spostare il calcolo vicino ai dati è più efficiente che spostare i dati.
+- **Portabilità**: Progettato per essere eseguibile su diverse piattaforme hardware e software.
 
 ### Architettura di HDFS
 
 - **Master/Slave**: L'architettura di HDFS segue un modello **master/slave**.
 - Il cluster HDFS è composto da:
- - **NameNode**: È il server master che gestisce lo **spazio dei nomi** del file system e controlla l'accesso ai file.
- - **DataNode**: Un DataNode per ogni nodo del cluster, gestisce lo **storage** effettivo. 
+- **NameNode**: È il server master che gestisce lo **spazio dei nomi** del file system e controlla l'accesso ai file.
+- **DataNode**: Un DataNode per ogni nodo del cluster, gestisce lo **storage** effettivo.
 - I file vengono divisi in **blocchi** e distribuiti sui DataNode.
 
 #### Namespace del File System
 
 - HDFS espone un namespace che consente agli utenti di memorizzare dati in file e directory.
 - **NameNode**:
- - Esegue operazioni sui file e directory (apertura, chiusura, ridenominazione).
- - Mappa i blocchi ai DataNode.
+- Esegue operazioni sui file e directory (apertura, chiusura, ridenominazione).
+- Mappa i blocchi ai DataNode.
 - **DataNode**:
- - Gestisce le richieste di lettura e scrittura dai client.
- - Crea, elimina e replica i blocchi su istruzione del NameNode.
+- Gestisce le richieste di lettura e scrittura dai client.
+- Crea, elimina e replica i blocchi su istruzione del NameNode.
 - La struttura dei file segue un'**organizzazione gerarchica** (simile ad altri file system).
 
 #### Metadati del file system
@@ -115,8 +115,8 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 
 - **Lettura**: Il client chiede al NameNode la posizione dei blocchi per accedere ai dati.
 - **Scrittura**:
- - Il client richiede al NameNode una lista di DataNode disponibili.
- - Viene formata una pipeline in cui il primo DataNode memorizza il blocco e lo inoltra agli altri DataNode.
+- Il client richiede al NameNode una lista di DataNode disponibili.
+- Viene formata una pipeline in cui il primo DataNode memorizza il blocco e lo inoltra agli altri DataNode.
 
 #### Portabilità di HDFS
 
@@ -124,8 +124,8 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 #### Accessibilità di HDFS
 
 - HDFS è accessibile tramite:
- - **API Java**: per le applicazioni che interagiscono direttamente con HDFS.
- - **FS Shell**: un'interfaccia a riga di comando per interagire con HDFS.
+- **API Java**: per le applicazioni che interagiscono direttamente con HDFS.
+- **FS Shell**: un'interfaccia a riga di comando per interagire con HDFS.
 
 ## Esempi di comandi FS Shell
 
@@ -155,8 +155,8 @@ Apache Hadoop è un framework software open-source progettato per il **calcolo d
 - YARN opera tra **HDFS** e i motori di elaborazione, gestendo dinamicamente l'allocazione delle risorse per migliorare le prestazioni e l'uso delle risorse rispetto all'allocazione statica di MapReduce.
 
 - Supporta diversi **scheduler**, tra cui:
- - **FIFO Scheduler**: esegue job in ordine di arrivo.
- - **Fair Scheduler**: distribuisce equamente le risorse tra i job in esecuzione.
+- **FIFO Scheduler**: esegue job in ordine di arrivo.
+- **Fair Scheduler**: distribuisce equamente le risorse tra i job in esecuzione.
 #### Confronto con MapReduce
 
 - In Hadoop 1.0, il **JobTracker** centralizzava la gestione delle risorse e la pianificazione, causando colli di bottiglia.
@@ -180,41 +180,41 @@ YARN cerca di eseguire i task vicino ai dati per evitare l'uso eccessivo della l
 
 #### Flusso dei Dati MapReduce con un Reducer
 
-1. **Phase Map**:
- - I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
-2. **Shuffling & Sorting**:
- - Le coppie intermedie vengono raggruppate e ordinate per chiave.
-3. **Phase Reduce**:
- - Il singolo task Reduce riceve tutte le coppie chiave-valore ordinate e le aggrega per produrre l'output finale.
+- **Phase Map**:
+- I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
+- **Shuffling & Sorting**:
+- Le coppie intermedie vengono raggruppate e ordinate per chiave.
+- **Phase Reduce**:
+- Il singolo task Reduce riceve tutte le coppie chiave-valore ordinate e le aggrega per produrre l'output finale.
 #### Flusso dei Dati MapReduce con più Reducer
 
-1. **Phase Map**:
- - I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
-2. **Shuffling & Partitioning**:
- - L'output dei task Map viene suddiviso in partizioni (una per ciascun Reducer) in base a una funzione di partizionamento.
- - Le coppie chiave-valore intermedie vengono ordinate e inviate ai rispettivi Reducer.
-3. **Phase Reduce**:
- - Ogni task Reduce riceve un sottoinsieme delle chiavi e aggrega i valori associati, producendo una parte dell'output finale.
+- **Phase Map**:
+- I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
+- **Shuffling & Partitioning**:
+- L'output dei task Map viene suddiviso in partizioni (una per ciascun Reducer) in base a una funzione di partizionamento.
+- Le coppie chiave-valore intermedie vengono ordinate e inviate ai rispettivi Reducer.
+- **Phase Reduce**:
+- Ogni task Reduce riceve un sottoinsieme delle chiavi e aggrega i valori associati, producendo una parte dell'output finale.
 #### Flusso dei Dati MapReduce senza Reducer
 
-1. **Phase Map**:
- - I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
-2. **Shuffling & Sorting**:
- - Nessuna aggregazione viene effettuata poiché non è presente un task Reduce.
- - L'output delle fasi Map diventa l'output finale direttamente.
+- **Phase Map**:
+- I task Map elaborano i dati di input e producono coppie chiave-valore intermedie.
+- **Shuffling & Sorting**:
+- Nessuna aggregazione viene effettuata poiché non è presente un task Reduce.
+- L'output delle fasi Map diventa l'output finale direttamente.
 
 #### Differenze tra i tre scenari
 
-1. **Con un Reducer**:
- - Shuffling & Sorting delle chiavi.
- - Un singolo task Reduce per l'aggregazione delle chiavi.
-2. **Senza Reducer**:
- - Nessun Reduce viene eseguito.
- - L'output delle Map diventa l'output finale.
-3. **Con più Reducer**:
- - Shuffling & Sorting delle chiavi.
- - Output di ogni task Map partizionato tra diversi Reducer.
- - Ogni reducer riceve un sottoinsieme delle chiavi da aggregare.
+- **Con un Reducer**:
+- Shuffling & Sorting delle chiavi.
+- Un singolo task Reduce per l'aggregazione delle chiavi.
+- **Senza Reducer**:
+- Nessun Reduce viene eseguito.
+- L'output delle Map diventa l'output finale.
+- **Con più Reducer**:
+- Shuffling & Sorting delle chiavi.
+- Output di ogni task Map partizionato tra diversi Reducer.
+- Ogni reducer riceve un sottoinsieme delle chiavi da aggregare.
 
 #### Combiner
 
@@ -224,21 +224,21 @@ YARN cerca di eseguire i task vicino ai dati per evitare l'uso eccessivo della l
 
 ## Distribuzioni di Hadoop
 
-- **Cloudera CDH e MapR**: 
- - Sono distribuzioni integrate basate su Hadoop che contengono tutti i componenti necessari per la produzione.
- - **Cloudera**: Si è fusa con Hortonworks nel 2019.
- - **MapR**: Utilizza un file system proprietario (MapR-FS) invece di HDFS.
+- **Cloudera CDH e MapR**:
+- Sono distribuzioni integrate basate su Hadoop che contengono tutti i componenti necessari per la produzione.
+- **Cloudera**: Si è fusa con Hortonworks nel 2019.
+- **MapR**: Utilizza un file system proprietario (MapR-FS) invece di HDFS.
 Queste distribuzioni includono framework di sicurezza (es. Sentri, Ranger) per gestire l'accesso e le politiche di sicurezza.
 Cloudera CDH può essere installato su un **cluster a singolo nodo** usando hypervisor come VMware, KVM, VirtualBox o Docker. Le versioni QuickStart non sono adatte per l'uso in produzione.
 **I/O del disco** è spesso il principale collo di bottiglia delle prestazioni.
 **Fattori chiave di ottimizzazione**:
 
- - Numero di dischi per massimizzare la larghezza di banda I/O.
- - Configurazioni del BIOS.
- - Tipo di file system (es. EXT4 su Linux è preferito).
- - Gestione dei file aperti.
- - Dimensione ottimale del blocco HDFS.
- - Ottimizzazione dell'heap Java e delle garbage collection per le impostazioni JVM.
+- Numero di dischi per massimizzare la larghezza di banda I/O.
+- Configurazioni del BIOS.
+- Tipo di file system (es. EXT4 su Linux è preferito).
+- Gestione dei file aperti.
+- Dimensione ottimale del blocco HDFS.
+- Ottimizzazione dell'heap Java e delle garbage collection per le impostazioni JVM.
 ### Configurazione di Hadoop: Ottimizzazione dei Parametri
 
 - **Mapper**: Determinato dal numero di blocchi dei file di input. La dimensione del blocco HDFS può essere regolata per influenzare il numero di mapper. Idealmente, si dovrebbero avere tra 10 e 100 mapper per nodo, con mapper che durano almeno un minuto.
@@ -274,10 +274,9 @@ Cloudera CDH può essere installato su un **cluster a singolo nodo** usando hype
 - **Input/Output**: Utilizza Cloud Storage e Bigtable, accesso tramite API REST e Cloud SDK.
 
 **Java** è il principale linguaggio di programmazione per Hadoop. Composto da:
- - **Main**: Configura il job (mapper, reducer, partitioner).
- - **Mapper**: Elabora coppie (k,v).
- - **Reducer**: Aggrega i risultati da diverse chiavi.
----
+- **Main**: Configura il job (mapper, reducer, partitioner).
+- **Mapper**: Elabora coppie (k,v).
+- **Reducer**: Aggrega i risultati da diverse chiavi.
 ### WordCount in Java
 
 ```java

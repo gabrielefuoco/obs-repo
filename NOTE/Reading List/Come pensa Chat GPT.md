@@ -1,9 +1,9 @@
 
-Questo testo esplora il funzionamento dei Large Language Models (LLM) e come i ricercatori stanno cercando di renderli più comprensibili. 
+Questo testo esplora il funzionamento dei Large Language Models (LLM) e come i ricercatori stanno cercando di renderli più comprensibili.
 
 ### Analogia con il Cervello Umano
 
-I LLM, come il cervello umano, si basano su una rete di unità interconnesse (neuroni artificiali) che si scambiano informazioni. Questo scambio permette al modello di apprendere dai dati di addestramento, riconoscere pattern linguistici e generare risposte coerenti. 
+I LLM, come il cervello umano, si basano su una rete di unità interconnesse (neuroni artificiali) che si scambiano informazioni. Questo scambio permette al modello di apprendere dai dati di addestramento, riconoscere pattern linguistici e generare risposte coerenti.
 
 Nell'immagine, ogni pallino rappresenta un neurone artificiale organizzato in strati. Il colore indica l'intensità dell'attivazione in risposta a un input. Gli strati estraggono informazioni dal testo in modo gerarchico:
 
@@ -42,4 +42,4 @@ Nonostante i progressi, l'interpretabilità dei LLM presenta ancora sfide:
 - Definire quali concetti sono "poco etici" e come gestirli.
 - Comprendere appieno l'interazione complessa tra i neuroni.
 
-La ricerca sull'interpretabilità è fondamentale per rendere i LLM più affidabili, trasparenti e sicuri. 
+La ricerca sull'interpretabilità è fondamentale per rendere i LLM più affidabili, trasparenti e sicuri.

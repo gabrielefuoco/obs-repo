@@ -1,138 +1,281 @@
 import os
 import re
 import sys
+import shutil
+import tempfile
 
-def normalize_whitespace_outside_formulas(text):
-    """
-    Normalizza gli spazi multipli in una stringa, applicando la sostituzione
-    solo alle parti che NON sono formule (delimitate da $...$).
-    """
-    segments = re.split(r'(\$.*?\$)', text)
-    for idx, seg in enumerate(segments):
-        if not (seg.startswith("$") and seg.endswith("$")):
-            seg = re.sub(r' {2,}', ' ', seg)
-            segments[idx] = seg
-    return "".join(segments)
+# Precompile regular expressions for performance
+FORMULA_PATTERN = re.compile(r'(?<!\\)(\$.*?(?<!\\)\$)')
+MULTISPACE_PATTERN = re.compile(r' {2,}')
+UNDERSCORE_PATTERN = re.compile(r'(?<!\S)_([^_]+?)_(?!\S)')
+CODE_BLOCK_PATTERN = re.compile(r'^\s*```')
+HEADER_PATTERN = re.compile(r'^\s*#+\s')
+SINGLE_FORMULA_PATTERN = re.compile(r'^\s*\$([^$]+)\$\s*$')
+BOLD_LINE_PATTERN = re.compile(r'^\s*\*\*(.+?)\*\*\s*$')
+BOLD_COLON_PATTERN1 = re.compile(r'^\s*\*\*.+:\*\*\s*$')
+BOLD_COLON_PATTERN2 = re.compile(r'^\s*\*\*.+\*\*:\s*$')
+# Pattern per correggere il tag immagine errato
+WRONG_IMAGE_TAG_PATTERN = re.compile(r'!\[\[\|(?P<caption>.*?)\]\((?P<filename>.*?)\)')
 
-def replace_underscore_with_asterisks(text):
+def process_segments(text, formula_pattern, transformations):
+    segments = formula_pattern.split(text)
+    for i in range(len(segments)):
+        if i % 2 == 0:  # Indici pari: segmenti non-formula
+            for pattern, replacement in transformations:
+                segments[i] = pattern.sub(replacement, segments[i])
+    return ''.join(segments)
+
+def normalize_and_replace(text):
+    transformations = [
+        (MULTISPACE_PATTERN, ' '),
+        (UNDERSCORE_PATTERN, r'*\1*')
+    ]
+    return process_segments(text, FORMULA_PATTERN, transformations)
+
+def process_formula_line(line):
+    line = line.strip()
+    if not (line.startswith('$$') and line.endswith('$$')):
+        match = SINGLE_FORMULA_PATTERN.match(line)
+        if match:
+            return f'$${match.group(1)}$$'
+    return line
+
+def process_bold_line(line):
+    match = BOLD_LINE_PATTERN.match(line)
+    if match:
+        return f'##### {match.group(1)}'
+    return line
+
+def transform_h1_to_h2(line):
     """
-    Sostituisce l'uso di _frase_ con *frase* nelle parti che non sono formule.
+    Trasforma gli header h1 (riga che inizia con un solo '#' seguito da spazio)
+    in header h2 aggiungendo un ulteriore '#' all'inizio.
     """
-    segments = re.split(r'(\$.*?\$)', text)
-    for idx, seg in enumerate(segments):
-        if not (seg.startswith("$") and seg.endswith("$")):
-            seg = re.sub(r'(?<!\S)_([^_]+)_(?!\S)', r'*\1*', seg)
-            segments[idx] = seg
-    return "".join(segments)
+    return re.sub(r'^(\s*)#(\s+)', r'\1##\2', line)
+
+def correct_image_tag(line):
+    """
+    Corregge i tag delle immagini errati.
+    Esempio:
+      Tag errato: ![[|302](_page_8_Figure_6.jpeg)
+      Tag corretto: ![[_page_8_Figure_6.jpeg|302]]
+    """
+    return WRONG_IMAGE_TAG_PATTERN.sub(lambda m: f'![[{m.group("filename")}|{m.group("caption")}]]', line)
+
+def normalize_leading_enumeration(lines):
+    """
+    Normalizza le enumerazioni all'inizio di una riga.
+    Riconosce numerazioni composte da 1 a 3 gruppi di 1 o 2 cifre separati da punti,
+    con un eventuale punto finale opzionale, e rimuove eventuali spazi dopo i punti.
+    Se il pattern non rispetta queste regole, la riga viene lasciata inalterata.
+    
+    Esempio:
+      * **1.1. Mapper:**  ->  * **1.1 Mapper:**
+    """
+    numbering_pattern = re.compile(
+        r'^(?P<prefix>[\*\#\s]*(?:\*\*)?)'
+        r'(?P<number>\d{1,2}(?:\.\s*\d{1,2}(?:\.\s*\d{1,2})?)?)'
+        r'(?:\.)?(?P<suffix>\s+.*)'
+    )
+    new_lines = []
+    in_code_block = False
+    for line in lines:
+        if CODE_BLOCK_PATTERN.match(line):
+            in_code_block = not in_code_block
+            new_lines.append(line)
+            continue
+        if in_code_block:
+            new_lines.append(line)
+            continue
+        match = numbering_pattern.match(line)
+        if match:
+            prefix = match.group('prefix')
+            num = match.group('number')
+            suffix = match.group('suffix')
+            # Suddivide e unisce i gruppi, rimuovendo eventuali spazi attorno ai punti
+            parts = re.split(r'\.\s*', num)
+            # Verifica che ci siano al massimo 3 gruppi
+            if 1 <= len(parts) <= 3:
+                normalized_num = '.'.join(parts)
+                new_line = f"{prefix}{normalized_num}{suffix}"
+                new_lines.append(new_line)
+            else:
+                new_lines.append(line)
+        else:
+            new_lines.append(line)
+    return new_lines
+
+def process_code_blocks(lines):
+    processed = []
+    in_code = False
+    for line in lines:
+        stripped = line.rstrip('\n')
+        if CODE_BLOCK_PATTERN.match(stripped):
+            in_code = not in_code
+            processed.append(line)
+            continue
+        processed.append(line if in_code else None)
+    return processed
+
+def add_newlines_after_headers(lines):
+    processed = []
+    for i, line in enumerate(lines):
+        processed.append(line)
+        stripped = line.rstrip('\n')
+        if HEADER_PATTERN.match(stripped):
+            if i + 1 < len(lines) and lines[i + 1].strip() != '':
+                processed.append('\n')
+    return processed
+
+def normalize_tabulations(lines):
+    """
+    Normalizza l'indentazione delle liste puntate Markdown.
+    - Le righe di bullet header (es. "* **Titolo:**") vengono forzate a non avere indentazione.
+    - Le righe bullet che seguono immediatamente un header vengono indentate con una tabulazione.
+    - Le righe all'interno di blocchi di codice (``` ... ```) non vengono modificate.
+    """
+    new_lines = []
+    in_code_block = False
+    bullet_pattern = re.compile(r'^(\s*)\* (.*)$')
+    header_bullet_pattern = re.compile(r'^\*\*.*\*\*$')
+    
+    expecting_child = False
+    for line in lines:
+        if CODE_BLOCK_PATTERN.match(line):
+            in_code_block = not in_code_block
+            new_lines.append(line)
+            continue
+        if in_code_block:
+            new_lines.append(line)
+            continue
+
+        if line.strip() == "":
+            new_lines.append(line)
+            expecting_child = False
+            continue
+
+        m = bullet_pattern.match(line)
+        if m:
+            indent, content = m.group(1), m.group(2)
+            content_stripped = content.strip()
+            # Se il contenuto è un header bullet (testo in grassetto interamente),
+            # forziamo l'assenza di indentazione e attiviamo il flag per i figli
+            if header_bullet_pattern.match(content_stripped):
+                new_line = "* " + content_stripped + "\n"
+                new_lines.append(new_line)
+                expecting_child = True
+            else:
+                if expecting_child:
+                    new_line = "\t* " + content_stripped + "\n"
+                    new_lines.append(new_line)
+                else:
+                    new_line = "* " + content_stripped + "\n"
+                    new_lines.append(new_line)
+        else:
+            new_lines.append(line)
+            expecting_child = False
+
+    return new_lines
+
+def normalize_numbered_lists(lines):
+    """
+    Trasforma tutti gli elenchi numerici in elenchi puntati.
+    Ad esempio:
+        1. Elemento -> - Elemento
+    L'operazione viene applicata solo alle righe fuori dai blocchi di codice.
+    """
+    new_lines = []
+    in_code_block = False
+    numbered_pattern = re.compile(r'^(\s*)\d{1,2}\.\s+(.*)$')
+    for line in lines:
+        if CODE_BLOCK_PATTERN.match(line):
+            in_code_block = not in_code_block
+            new_lines.append(line)
+            continue
+        if in_code_block:
+            new_lines.append(line)
+            continue
+        m = numbered_pattern.match(line)
+        if m:
+            indent = m.group(1)
+            rest = m.group(2)
+            new_line = f"{indent}- {rest}\n"
+            new_lines.append(new_line)
+        else:
+            new_lines.append(line)
+    return new_lines
+
+def remove_only_dashes(lines):
+    """
+    Rimuove tutte le righe che contengono esclusivamente '---' (eventualmente circondate da spazi).
+    """
+    new_lines = []
+    dash_pattern = re.compile(r'^\s*---\s*$')
+    for line in lines:
+        if dash_pattern.match(line):
+            continue
+        new_lines.append(line)
+    return new_lines
 
 def process_markdown_file(file_path):
-    """
-    Legge il file Markdown e applica le seguenti trasformazioni, evitando di intervenire:
-      - All'interno di blocchi di codice (delimitati da tripli backtick)
-      - All'interno delle formule (delimitate da $)
-      
-    Le modifiche applicate sono:
-      1. Riduzione di righe vuote multiple a una singola riga vuota.
-      2. Aggiunta di una riga vuota dopo ogni header (linee che iniziano con '#' seguito da spazio).
-      3. Normalizzazione degli spazi bianchi fuori dalle formule.
-      4. Inserimento di una riga vuota dopo una riga contenente solo una frase in grassetto che termina con i due punti,
-         gestendo la posizione dei due punti (sia all'interno che subito dopo il grassetto).
-      5. Uniformazione della sintassi: _frase_ viene sostituito con *frase*.
-      6. Se una riga contiene solo una formula espressa come $formula$, la trasforma in $$formula$$.
-      7. Trasformazione delle righe che sono esclusivamente in grassetto in header h5,
-         ovvero, **frase** diventa "##### frase". Se la riga contiene altro al di fuori del grassetto,
-         essa non viene modificata.
-    """
-    with open(file_path, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+    except IOError as e:
+        print(f"Error reading {file_path}: {e}")
+        return
 
     processed_lines = []
     in_code_block = False
-    i = 0
-    while i < len(lines):
-        line = lines[i]
-        stripped_line = line.rstrip('\n')
 
-        # Gestione dei blocchi di codice: inizio/fine blocco delimitato da ```
-        if re.match(r'^\s*```', stripped_line):
-            processed_lines.append(line)
+    for line in lines:
+        stripped_line = line.rstrip('\n')
+        if CODE_BLOCK_PATTERN.match(stripped_line):
             in_code_block = not in_code_block
-            i += 1
+            processed_lines.append(line)
             continue
 
         if in_code_block:
             processed_lines.append(line)
-            i += 1
             continue
 
-        # Applicazione delle trasformazioni fuori dai blocchi di codice:
-        # 1. Normalizzazione degli spazi bianchi (escludendo le formule)
-        modified_line = normalize_whitespace_outside_formulas(stripped_line)
-        # 2. Sostituzione di _frase_ con *frase* (escludendo le formule)
-        modified_line = replace_underscore_with_asterisks(modified_line)
-        # 3. Se la riga contiene solo una formula espressa con un singolo paio di $,
-        #    trasformala in $$formula$$ (solo se non è già stata trasformata)
-        if not (modified_line.strip().startswith('$$') and modified_line.strip().endswith('$$')):
-            formula_match = re.match(r'^\s*\$(.+?)\$\s*$', modified_line)
-            if formula_match:
-                formula_content = formula_match.group(1)
-                modified_line = f'$${formula_content}$$'
-        # 4. Se la riga è interamente in grassetto (e non contiene altro),
-        #    trasformala in header h5 (rimuovendo i delimitatori **)
-        h5_match = re.match(r'^\s*\*\*(.+?)\*\*\s*$', modified_line)
-        if h5_match:
-            content = h5_match.group(1)
-            modified_line = f'##### {content}'
+        modified_line = normalize_and_replace(stripped_line)
+        modified_line = process_formula_line(modified_line)
+        modified_line = process_bold_line(modified_line)
+        modified_line = transform_h1_to_h2(modified_line)   # Trasforma gli header h1 in h2
+        modified_line = correct_image_tag(modified_line)    # Corregge i tag delle immagini errati
+        processed_lines.append(modified_line + '\n')
 
-        # Ricostruisce la riga con newline
-        modified_line_with_newline = modified_line + "\n"
-        processed_lines.append(modified_line_with_newline)
-
-        # Aggiungi una riga vuota dopo gli header (cioè, se la riga modificata inizia con '#' e uno spazio)
-        if re.match(r'^\s*#+\s', modified_line):
-            if i + 1 < len(lines):
-                next_line = lines[i+1]
-                if next_line.strip() != "":
-                    processed_lines.append("\n")
-            else:
-                processed_lines.append("\n")
-
-        # Aggiungi una riga vuota dopo una riga contenente solo una frase in grassetto che termina con i due punti.
-        # Gestisce entrambe le varianti: **frase:** oppure **frase**:
-        if (re.match(r'^\s*\*\*.+:\*\*\s*$', modified_line) or
-            re.match(r'^\s*\*\*.+\*\*:\s*$', modified_line)):
-            if i + 1 < len(lines):
-                next_line = lines[i+1]
-                if next_line.strip() != "":
-                    processed_lines.append("\n")
-            else:
-                processed_lines.append("\n")
-        i += 1
-
-    # Riduci eventuali sequenze di righe vuote multiple a una singola riga vuota
+    # Applica le trasformazioni
+    processed_lines = normalize_tabulations(processed_lines)
+    processed_lines = normalize_numbered_lists(processed_lines)
+    processed_lines = normalize_leading_enumeration(processed_lines)
+    processed_lines = add_newlines_after_headers(processed_lines)
+    processed_lines = remove_only_dashes(processed_lines)
+    
+    # Rimuove righe vuote consecutive
     final_lines = []
-    previous_empty = False
+    prev_empty = False
     for line in processed_lines:
-        if line.strip() == "":
-            if not previous_empty:
-                final_lines.append("\n")
-                previous_empty = True
-        else:
+        curr_empty = (line.strip() == '')
+        if not (prev_empty and curr_empty):
             final_lines.append(line)
-            previous_empty = False
+        prev_empty = curr_empty
 
-    with open(file_path, 'w', encoding='utf-8') as f:
-        f.writelines(final_lines)
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8') as tmp:
+            tmp.writelines(final_lines)
+        shutil.move(tmp.name, file_path)
+    except IOError as e:
+        print(f"Error writing {file_path}: {e}")
+        if os.path.exists(tmp.name):
+            os.remove(tmp.name)
 
 def process_directory(root_dir):
-    """
-    Itera ricorsivamente su tutte le sottocartelle a partire da root_dir e
-    processa ogni file con estensione .md.
-    """
-    for subdir, dirs, files in os.walk(root_dir):
+    for root, _, files in os.walk(root_dir):
         for file in files:
             if file.endswith('.md'):
-                file_path = os.path.join(subdir, file)
+                file_path = os.path.join(root, file)
                 print(f"Processing: {file_path}")
                 process_markdown_file(file_path)
 
@@ -140,5 +283,4 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python script.py <root_directory>")
         sys.exit(1)
-    root_directory = sys.argv[1]
-    process_directory(root_directory)
+    process_directory(sys.argv[1])

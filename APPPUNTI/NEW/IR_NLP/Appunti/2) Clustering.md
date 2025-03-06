@@ -32,7 +32,7 @@ Il VSM è spesso associato al **Bag of Words Model (BoW)**. Il BoW considera i d
 
 ### Limiti del VSM e del BoW
 
-Il VSM e il BoW, pur essendo semplici ed efficaci, presentano limiti significativi: la *mancanza di struttura sintattica* porta a perdita di informazioni semantiche, e la *sensibilità alla frequenza dei termini* può causare sovra-rappresentazione di termini comuni e sottorappresentazione di termini rari.  L'esempio delle frasi "Il gatto insegue il topo" e "Il topo insegue il gatto" evidenzia come il BoW, ignorando l'ordine delle parole, fallisca nel distinguere significati diversi
+Il VSM e il BoW, pur essendo semplici ed efficaci, presentano limiti significativi: la *mancanza di struttura sintattica* porta a perdita di informazioni semantiche, e la *sensibilità alla frequenza dei termini* può causare sovra-rappresentazione di termini comuni e sottorappresentazione di termini rari. L'esempio delle frasi "Il gatto insegue il topo" e "Il topo insegue il gatto" evidenzia come il BoW, ignorando l'ordine delle parole, fallisca nel distinguere significati diversi
 
 #### Soluzioni Alternative
 
@@ -61,7 +61,7 @@ Tuttavia, l'etichettatura della posizione delle parole presenta anche alcuni lim
 
 ## Cluto
 
-Cluto è un algoritmo progettato per il clustering di grandi dataset sparsi e ad alta dimensionalità.  Si basa su un'euristica per ottimizzare una funzione obiettivo non esplicitata
+Cluto è un algoritmo progettato per il clustering di grandi dataset sparsi e ad alta dimensionalità. Si basa su un'euristica per ottimizzare una funzione obiettivo non esplicitata
 
 ##### Caratteristiche:
 
@@ -71,7 +71,7 @@ Cluto è un algoritmo progettato per il clustering di grandi dataset sparsi e ad
 * **Visualizzazione delle relazioni:** Fornisce strumenti modulari per visualizzare le relazioni tra cluster, oggetti e feature.
 * **Utilizzo:** Può essere utilizzato sia come programma stand-alone sia tramite API.
 * **Tipi di cluster:** Supporta i b-cluster e gli s-cluster.
-* **Input:** L'input può essere una matrice di dati (matrice documenti-termini, input classico di k-means) o una matrice di similarità (input classico per l'agglomerativa). 
+* **Input:** L'input può essere una matrice di dati (matrice documenti-termini, input classico di k-means) o una matrice di similarità (input classico per l'agglomerativa).
 
 ## Clustering
 
@@ -81,14 +81,14 @@ Cluto è un algoritmo progettato per il clustering di grandi dataset sparsi e ad
 
 ##### Bisetting k-way Clustering
 
-- A differenza del direct k-way clustering, inizia con un unico cluster e lo suddivide iterativamente in due sotto-cluster (k-1 volte) fino a raggiungere k cluster.  
+- A differenza del direct k-way clustering, inizia con un unico cluster e lo suddivide iterativamente in due sotto-cluster (k-1 volte) fino a raggiungere k cluster.
 - La scelta del cluster da suddividere può seguire diverse strategie (es. il cluster più grande o quello con maggiore varianza).
 ##### Graph Partitioning Based
 
-- Questo metodo si basa sul concetto di min cut. 
-- Ad ogni iterazione, si rompono i legami con i valori di similarità più bassi. 
-- Il numero di cluster desiderato (k) rimane come input. 
-- Si ottengono m componenti connesse, che portano a un totale di k+m cluster. 
+- Questo metodo si basa sul concetto di min cut.
+- Ad ogni iterazione, si rompono i legami con i valori di similarità più bassi.
+- Il numero di cluster desiderato (k) rimane come input.
+- Si ottengono m componenti connesse, che portano a un totale di k+m cluster.
 
 ## Clustering Partizionale a k-vie e Clustering Gerarchico Agglomerativo
 
@@ -104,8 +104,8 @@ Il k-means trova k cluster che diventano le foglie per un clustering gerarchico 
 
 ##### Benefici di questo approccio:
 
-1. **Accuratezza:** Il k-means è un algoritmo dinamico che cerca di minimizzare l'errore quadratico, incentivando la riallocazione degli oggetti tra i cluster. Questa proprietà non è presente nel clustering gerarchico agglomerativo, dove una volta effettuato il merge non è possibile riconsiderare la scelta. Questo può avere un impatto sull'accuratezza del clustering.
-2. **Efficienza:** Partendo da $\sqrt{n}$ foglie, il costo del clustering è $O(n \cdot \log \sqrt{n})$. Questo impatta positivamente sull'efficienza del processo. 
+- **Accuratezza:** Il k-means è un algoritmo dinamico che cerca di minimizzare l'errore quadratico, incentivando la riallocazione degli oggetti tra i cluster. Questa proprietà non è presente nel clustering gerarchico agglomerativo, dove una volta effettuato il merge non è possibile riconsiderare la scelta. Questo può avere un impatto sull'accuratezza del clustering.
+- **Efficienza:** Partendo da $\sqrt{n}$ foglie, il costo del clustering è $O(n \cdot \log \sqrt{n})$. Questo impatta positivamente sull'efficienza del processo.
 
 Il costo quadratico rimane lineare al numero di oggetti iniziali.
 
@@ -113,7 +113,7 @@ Traiamo beneficio dalla dinamicità del k-means, che ha risolto il problema degl
 
 La distanza tra l'ottimo globale e quello locale è determinata nei primi passi dell'algoritmo.
 
-Con questa combinazione in cascata, otteniamo un algoritmo che fa da trade-off tra i due e fa leva sui punti di forza di entrambi. 
+Con questa combinazione in cascata, otteniamo un algoritmo che fa da trade-off tra i due e fa leva sui punti di forza di entrambi.
 
 ## Formato dei File di Input
 
@@ -141,12 +141,12 @@ Oltre al file di input della matrice, possono essere forniti file di etichette o
 
 Utilizzando il file `rclassfile`, possiamo confrontare la soluzione di clustering ottenuta con una classificazione di riferimento. Questo permette di calcolare metriche come:
 
-* **Precision:** Rappresenta la proporzione di oggetti correttamente classificati in un cluster rispetto al numero totale di oggetti nel cluster. 
-	* $\frac{tp}{tp+fp}$
+* **Precision:** Rappresenta la proporzione di oggetti correttamente classificati in un cluster rispetto al numero totale di oggetti nel cluster.
+* $\frac{tp}{tp+fp}$
 * **Recall:** Rappresenta la proporzione di oggetti correttamente classificati in un cluster rispetto al numero totale di oggetti della classe.
-	* $\frac{tp}{tp+fn}$
+* $\frac{tp}{tp+fn}$
 * **F-measure:** È la media armonica di precision e recall.
-	* $\frac{2pr}{p+r}$
+* $\frac{2pr}{p+r}$
 ## Entropia
 
 L'entropia può essere utilizzata per valutare la qualità del clustering.
@@ -155,7 +155,7 @@ L'entropia può essere utilizzata per valutare la qualità del clustering.
 
 Sia $C = \{C_1, ..., C_k\}$ l'insieme dei cluster e $C^* = \{C_1^*, ..., C_h^*\}$ la classificazione di riferimento. L'entropia di un cluster $j \in \{1, ..., k\}$ è definita come:
 
-$$E_j = -\sum_{i=1}^h  \ Pr(C_i^* | C_j)  \ \log(Pr(C_i^* | C_j))$$
+$$E_j = -\sum_{i=1}^h \ Pr(C_i^* | C_j) \ \log(Pr(C_i^* | C_j))$$
 
 dove:
 
@@ -190,7 +190,7 @@ Questo tool è progettato per eseguire il clustering partizionale, assegnando og
 
 #### Z-Score
 
-Se specificato, ogni riga del file di output conterrà due numeri in più: *internal z-score* ed *external z-score*. 
+Se specificato, ogni riga del file di output conterrà due numeri in più: *internal z-score* ed *external z-score*.
 
 * **Internal z-score:** Indica quanto l'oggetto è vicino al centroide del cluster a cui è stato assegnato.
 * **External z-score:** Indica quanto l'oggetto è vicino ai centroidi degli altri cluster.
@@ -201,7 +201,7 @@ La sicurezza non è implementata in questo tool.
 
 ###### Triflie
 
-Pluto fornisce anche un *triflie*, ottenuto eseguendo un clustering gerarchico agglomerativo partendo da un clustering partizionale a k-vie. 
+Pluto fornisce anche un *triflie*, ottenuto eseguendo un clustering gerarchico agglomerativo partendo da un clustering partizionale a k-vie.
 
 ## Funzione Obiettivo
 
@@ -214,26 +214,26 @@ Se si tiene conto sia della compattezza che della separabilità dei cluster, l'o
 Il log di Pluto fornisce informazioni dettagliate sul processo di clustering.
 In particolare, riporta:
 
-* **Riepilogo dei parametri:**  parametri utilizzati nell'esecuzione.
+* **Riepilogo dei parametri:** parametri utilizzati nell'esecuzione.
 * **Dettaglio sulla soluzione di cluster:** informazioni su ogni cluster.
 * **Entropia e purezza (opzionale):** se fornito un file di etichette di classe (`rclassfile`).
 * **Tempistica:** durata del processo di clustering.
-  
+
 ##### Document Clustering
 
-Nel caso di *document clustering*, con l'opzione `-showfeatures`, il log mostra le *feature descrittive* (caratterizzano il cluster) e *discriminative* (distinguono il cluster dagli altri).  
+Nel caso di *document clustering*, con l'opzione `-showfeatures`, il log mostra le *feature descrittive* (caratterizzano il cluster) e *discriminative* (distinguono il cluster dagli altri).
 L'ideale è che i due insiemi coincidano, indicando cluster ben caratterizzati e distinti
 
 ### Analisi dei Cluster
 
 Per ogni cluster, è possibile analizzare le caratteristiche più significative in due modi:
 
-##### 1. Caratteristiche più descrittive:
+##### Caratteristiche più descrittive:
 
 * Si identificano le **L** caratteristiche che contribuiscono maggiormente alla similarità tra gli oggetti all'interno del cluster.
 * Per ogni caratteristica, si calcola la **percentuale di similarità** rispetto al cluster.
 
-##### 2. Caratteristiche più discriminative:
+##### Caratteristiche più discriminative:
 
 * Si identificano le **L** caratteristiche che contribuiscono maggiormente alla dissimilarità tra gli oggetti del cluster e gli oggetti appartenenti agli altri cluster.
 * Per ogni caratteristica, si calcola la **percentuale di dissimilarità** rispetto al resto degli oggetti.

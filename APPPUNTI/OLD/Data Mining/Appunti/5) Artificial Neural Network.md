@@ -28,7 +28,7 @@ Analogamente ai neuroni biologici, i nodi raccolgono segnali in ingresso, li som
 ### Tipi di Modelli
 
 * **Modello Biologico**: ha l’obiettivo di imitare sistemi neurali biologici come le funzionalità auditive e visive.
-	* Rispetto ai neuroni biologici, le reti neurali artificiali hanno una connettività molto maggiore ma tempi di commutazione più lenti (millisecondi invece di nanosecondi).
+* Rispetto ai neuroni biologici, le reti neurali artificiali hanno una connettività molto maggiore ma tempi di commutazione più lenti (millisecondi invece di nanosecondi).
 * **Modello guidato dalle applicazioni**: caratterizzato da un'architettura condizionata dalle necessità applicative
 
 ## Perceptron
@@ -54,27 +54,27 @@ $$y = sign(w^T x + b)$$
 
 Il Perceptron è quindi un modello semplice che combina linearmente gli input pesati, applica una soglia e produce un output binario 0/1 o -1/+1.
 
-I pesi $w_i$ e il bias $b$ vengono addestrati sui dati per risolvere problemi di classificazione binaria. 
+I pesi $w_i$ e il bias $b$ vengono addestrati sui dati per risolvere problemi di classificazione binaria.
 
 ## Addestramento del Perceptron
 
 Dato un training set, siamo interessati all'apprendimento dei parametri $w$ e $b$. L'algoritmo di addestramento del Perceptron procede come segue:
 
-1. **Inizializzazione:**
- - Inizializza un training set contenente coppie (input $x$, output atteso $y$).
- - Imposta $k = 0$ (contatore delle iterazioni).
- - Inizializza i pesi $w(0)$ con valori casuali.
+- **Inizializzazione:**
+- Inizializza un training set contenente coppie (input $x$, output atteso $y$).
+- Imposta $k = 0$ (contatore delle iterazioni).
+- Inizializza i pesi $w(0)$ con valori casuali.
 
-2. **Iterazioni:**
- - Ripeti fino a quando l'errore medio sul training set non scende sotto una soglia $\gamma$:
+- **Iterazioni:**
+- Ripeti fino a quando l'errore medio sul training set non scende sotto una soglia $\gamma$:
 $$\frac{\sum_{i=1}^n|y_{i}-f(\tilde{w}^{(k)},x_{i})|}{n}$$
- - **Per ogni esempio (x, y) nel training set:**
- - Calcola l'output stimato $f(\tilde{w}^{(k)},x_{i})$ con i pesi correnti.
- - **Per ogni peso $w_j$:**
- - Aggiorna il peso con la regola:
- $$w_j^{(k+1)} = w_j^{(k)} + \lambda (y_{i} f(\tilde{w}^{(k)},x_{i})) x_j$$
- - $k=k+1$.
- - Ritorna al passo 2.
+- **Per ogni esempio (x, y) nel training set:**
+- Calcola l'output stimato $f(\tilde{w}^{(k)},x_{i})$ con i pesi correnti.
+- **Per ogni peso $w_j$:**
+- Aggiorna il peso con la regola:
+$$w_j^{(k+1)} = w_j^{(k)} + \lambda (y_{i} f(\tilde{w}^{(k)},x_{i})) x_j$$
+- $k=k+1$.
+- Ritorna al passo 2.
 
 ##### Note:
 
@@ -82,7 +82,7 @@ $$\frac{\sum_{i=1}^n|y_{i}-f(\tilde{w}^{(k)},x_{i})|}{n}$$
 - $\lambda$ è il learning rate, compreso tra 0 e 1, che controlla l'entità dell'aggiornamento dei pesi ad ogni iterazione.
 - $x_j$ è il valore del $j$-esimo attributo dell'esempio $x$ del training set.
 
-L'aggiornamento dei pesi avviene tramite una regola di discesa del gradiente stocastica, con passo $\lambda$, correggendo i pesi in modo proporzionale all'errore commesso su quell'esempio. 
+L'aggiornamento dei pesi avviene tramite una regola di discesa del gradiente stocastica, con passo $\lambda$, correggendo i pesi in modo proporzionale all'errore commesso su quell'esempio.
 
 ### Aggiornamento dei Pesi
 
@@ -167,7 +167,7 @@ $$a_i^l = f(z_i^l) = f(\sum_j w_{ij}^l a_j^{l-1} + b_i^l)$$
 * $b_i^l$ è il termine di bias nel nodo i-esimo.
 * $z_i^l = \sum_j w_{ij}^l a_j^{l-1} + b_i^l$ è noto come predittore lineare
 * $f()$ è la funzione di attivazione che ha il compito di convertire $z$ in $a$.
-		Si osservi che per definizione $a_j^0 = x_j$ e $a^L = \hat{y}$
+Si osservi che per definizione $a_j^0 = x_j$ e $a^L = \hat{y}$
 
 ## Funzioni di attivazione
 
@@ -175,10 +175,8 @@ Esistono numerose funzioni di attivazione alternativamente alla funzione segno, 
 
 ### Funzione gradino:
 
-$$gradino(x) = \begin{cases} 
-1 \text{ se } x > t \\
-0 \text{ altrimenti}
-\end{cases}$$
+$$gradino(x) = \begin{cases}
+1 \text{ se } x > t \\0 \text{ altrimenti}\end{cases}$$
 
 ### Funzione sigmoidea:
 
@@ -204,9 +202,7 @@ $$f(x) = \max(0, x)$$
 La derivata della funzione RELU è:
 
 $$\frac{\delta f(x)}{\delta x} = \begin{cases}
-1 & x > 0 \\
-0 & x < 0
-\end{cases}$$
+1 & x > 0 \\0 & x < 0\end{cases}$$
 
 Nota che la funzione RELU non è derivabile in 0.
 
@@ -288,18 +284,18 @@ $$\delta_j^l = \sum_i \left(\delta_i^{l+1} \times a_i^{l+1}(1-a_i^{l+1}) \times 
 
 L'equazione precedente fornisce una rappresentazione sintetica di $\delta_j^l$ al livello $l$ in termini dei valori $\delta_i^{l+1}$ calcolati al livello $l+1$. Quindi, procedendo a ritroso dal livello di output $L$ ai livelli nascosti, possiamo applicare e calcolare ricorsivamente $\delta_i^l$ per ogni nodo nascosto. Successivamente utilizziamo $\delta_i^l$ per calcolare le derivate parziali della perdita rispetto a $w_{ij}^l$ e $b_i^l$.
 
-1. $D_{train} = \{(x_k, y_k) | k = 1, 2, ..., n\}$ e inizializza $c = 0$
-2. Inizializza $(w^{(0)}, b^{(0)})$ con valori randomici.
-3. Finché $(w^{(c+1)}, b^{(c+1)})$ e $(w^{(c)}, b^{(c)})$ non convergono al medesimo valore
- (a) Per ogni record $(x_k, y_k) \in D_{train}$
- i. Calcola il set dei valori di attivazione $(a_i^l)_k$ utilizzando $x_k$
- ii. Calcola il set dei valori $(\delta_i^l)_k$ utilizzando backpropagation
- iii. Calcola $(Loss)_k, (Loss')_k$
- (b) Calcola $\frac{\partial E}{\partial w_{ij}^l} = \sum_k (\frac{\partial Loss}{\partial w_{ij}^l})_k$
- (c) Calcola $\frac{\partial E}{\partial b_i^l} = \sum_k (\frac{\partial Loss}{\partial b_i^l})_k$
- (d) Aggiorna $(w^{(c+1)}, b^{(c+1)})$ utilizzando la discesa del gradiente
- (e) Aggiorna $c = c + 1$
- (f) Go To 3
+- $D_{train} = \{(x_k, y_k) | k = 1, 2, ..., n\}$ e inizializza $c = 0$
+- Inizializza $(w^{(0)}, b^{(0)})$ con valori randomici.
+- Finché $(w^{(c+1)}, b^{(c+1)})$ e $(w^{(c)}, b^{(c)})$ non convergono al medesimo valore
+(a) Per ogni record $(x_k, y_k) \in D_{train}$
+Calcola il set dei valori di attivazione $(a_i^l)_k$ utilizzando $x_k$
+Calcola il set dei valori $(\delta_i^l)_k$ utilizzando backpropagation
+Calcola $(Loss)_k, (Loss')_k$
+(b) Calcola $\frac{\partial E}{\partial w_{ij}^l} = \sum_k (\frac{\partial Loss}{\partial w_{ij}^l})_k$
+(c) Calcola $\frac{\partial E}{\partial b_i^l} = \sum_k (\frac{\partial Loss}{\partial b_i^l})_k$
+(d) Aggiorna $(w^{(c+1)}, b^{(c+1)})$ utilizzando la discesa del gradiente
+(e) Aggiorna $c = c + 1$
+(f) Go To 3
 
 ### Caratteristiche delle ANN
 

@@ -1,4 +1,4 @@
-# Scikit image
+## Scikit image
 
 La libreria scikit image è costituita da una collezione di algoritmi per l'image processing.
 
@@ -8,15 +8,18 @@ La libreria scikit image è costituita da una collezione di algoritmi per l'imag
 
 ```python
 # import delle librerie
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
 # Required magic to display matplotlib plots in notebooks
+
 %matplotlib inline
 
 # in questa folder sono memorizzati alcuni file a supporto (path relativo al notebook corrente)
+
 IMGSRC = 'data'
 
 def myResourcePath(fname):
@@ -28,6 +31,7 @@ def myResourcePath(fname):
 
 ```python
 # immagini di esempio
+
 from skimage import data
 
 img0 = data.chelsea()
@@ -57,13 +61,14 @@ ax0.imshow(linear0, cmap='gray')
 ax1.imshow(linear1, cmap='gray')
 ```
 
- Linear0: float64 0.0 1.0
- Linear1: uint8 0 255
+Linear0: float64 0.0 1.0
+Linear1: uint8 0 255
 
 ![png](04_skimage_3_2.png)
 
 ```python
 # convert between format [0, 255] and [0, 1]
+
 from skimage import img_as_float, img_as_ubyte
 
 image = data.chelsea()
@@ -79,6 +84,7 @@ print("231/255 =", 231/255.)
 
 ```python
 # loading image file
+
 from skimage import io, color
 
 image = io.imread(myResourcePath('car.jpg'))
@@ -102,6 +108,7 @@ plt.imshow(gray, cmap='gray')
 
 ```python
 # collection of images
+
 ic = io.ImageCollection(os.path.join(IMGSRC, '*.jpg'))
 
 print(f'Type: {type(ic)}')
@@ -109,18 +116,20 @@ print(f'Type: {type(ic)}')
 ic.files
 ```
 
- ['data/car.jpg',
- 'data/figure_geometriche.jpg',
- 'data/google_android.jpg',
- 'data/logo.jpg',
- 'data/sudokuoriginal.jpg',
- 'data/track.jpg']
+['data/car.jpg',
+'data/figure_geometriche.jpg',
+'data/google_android.jpg',
+'data/logo.jpg',
+'data/sudokuoriginal.jpg',
+'data/track.jpg']
 
 ```python
 f, axes = plt.subplots(nrows=2, ncols=len(ic) // 2 + 1, figsize=(20, 5))
 
 # subplots returns the figure and an array of axes
+
 # we use `axes.ravel()` to turn these into a list
+
 axes = axes.ravel()
 
 for ax in axes:
@@ -137,6 +146,7 @@ plt.tight_layout()
 
 ```python
 # thanks to https://github.com/scikit-image/skimage-tutorials
+
 import skdemo
 
 image = data.chelsea()
@@ -164,17 +174,18 @@ plt.imshow(blue_image)
 
 ```python
 # nella libreria sono disponibili altri metodi di utilità
+
 skdemo.imshow_with_histogram?
 ```
 
- Plot an image side-by-side with its histogram.
+Plot an image side-by-side with its histogram.
 
- - Plot the image next to the histogram
- - Plot each RGB channel separately (if input is color)
- - Automatically flatten channels
- - Select reasonable bins based on the image's dtype
+- Plot the image next to the histogram
+- Plot each RGB channel separately (if input is color)
+- Automatically flatten channels
+- Select reasonable bins based on the image's dtype
 
- See `plot_histogram` for information on how the histogram is plotted.
+See `plot_histogram` for information on how the histogram is plotted.
 
 ```python
 skdemo.imshow_with_histogram(data.camera())
@@ -188,7 +199,7 @@ skdemo.imshow_with_histogram(data.chelsea())
 
 ![png](04_skimage_11_1.png)
 
-# Trasformazioni di base
+## Trasformazioni di base
 
 Esempi di roto-traslazioni
 
@@ -205,9 +216,11 @@ skdemo.imshow_all(image, rotated)
 
 ```python
 # traslazione
+
 from skimage.transform import SimilarityTransform
 
 # spostamento sugli assi x,y
+
 tform = SimilarityTransform(translation=(-50, -100))
 warped = transform.warp(image, tform)
 
@@ -218,7 +231,9 @@ skdemo.imshow_all(image, warped)
 
 ```python
 # scale -> float, Scale factor.
+
 # rotation -> float, Rotation angle in counter-clockwise direction as radians.
+
 # translation(tx, ty) -> array, x, y translation parameters.
 
 tform = SimilarityTransform(scale=.5, translation=(120, -70), rotation=np.deg2rad(30))
@@ -229,7 +244,7 @@ skdemo.imshow_all(image, warped)
 
 ![png](04_skimage_15_0.png)
 
-# Skimage filters
+## Skimage filters
 
 Il package filters contiene alcune funzioni di utilità
 
@@ -237,6 +252,7 @@ Il package filters contiene alcune funzioni di utilità
 from skimage import filters
 
 # i filtri di threasholding sono numerosi, ne vediamo uno che funziona per immagini in scala di grigi
+
 image = data.camera()
 threshold = filters.threshold_otsu(image)
 print(f'suggested threashold is {threshold}')
@@ -244,12 +260,13 @@ print(f'suggested threashold is {threshold}')
 skdemo.imshow_all(image, image > threshold)
 ```
 
- suggested threashold is 102
+suggested threashold is 102
 
 ![png](04_skimage_17_1.png)
 
 ```python
 # gaussian filter
+
 image = data.astronaut()
 
 gaussian_result = filters.gaussian(image, sigma=10, multichannel=True)
@@ -259,12 +276,13 @@ skdemo.imshow_all(image, gaussian_result)
 
 ![png](04_skimage_18_0.png)
 
-# Edge detection
+## Edge detection
 
 Esempi di edge detection utilizzando il filtro sobel
 
 ```python
 # esempio con immagine 2D
+
 pixelated = data.camera()
 pixelated_gradient = filters.sobel(pixelated)
 skdemo.imshow_all(pixelated, pixelated_gradient)
@@ -342,7 +360,7 @@ out = skimage.feature.hog(image, feature_vector=False)
 out.shape
 ```
 
- (35, 54, 3, 3, 9)
+(35, 54, 3, 3, 9)
 
 ```python
 import matplotlib.pyplot as plt
@@ -363,6 +381,7 @@ ax1.imshow(image, cmap=plt.cm.gray)
 ax1.set_title('Input image')
 
 # Rescale histogram for better display
+
 hog_image_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 10))
 
 ax2.axis('off')

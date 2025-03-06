@@ -16,7 +16,7 @@
 | **Speedup** | Rapporto tra il tempo di esecuzione di un programma seriale e quello della sua versione parallela. Misura l'accelerazione ottenuta con la parallelizzazione. |
 | **Efficienza** | Rapporto tra lo speedup e il numero di processori utilizzati. Misura l'efficacia nell'utilizzo delle risorse di calcolo. |
 | **Legge di Amdahl** | Formula che calcola lo speedup massimo ottenibile in base alla frazione di codice intrinsecamente sequenziale. Evidenzia i limiti della parallelizzazione quando una parte del codice non è parallelizzabile. |
-# Problem Decomposition
+## Problem Decomposition
 
 Esistono due tipi principali di decomposizione dei problemi:
 - **Decomposizione del dominio**
@@ -44,8 +44,8 @@ In questi casi, la **decomposizione funzionale** o **"task parallelism"** è pre
 #### Vantaggi del task parallelism
 
 - Di solito è implementato nel **paradigma client-server**:
- - Un processo master assegna i task ai processi slave.
- - Può essere implementato a qualsiasi livello del programma, per esempio, facendo eseguire più input in parallelo o assegnando task specifici a ciascun processore.
+- Un processo master assegna i task ai processi slave.
+- Può essere implementato a qualsiasi livello del programma, per esempio, facendo eseguire più input in parallelo o assegnando task specifici a ciascun processore.
 
 ## Problematiche della programmazione parallela
 
@@ -68,20 +68,20 @@ Lo scopo principale di un programma parallelo è ottenere migliori prestazioni r
 
 - Il **tempo di esecuzione totale** è un fattore chiave nella programmazione parallela.
 - Il tempo di esecuzione è composto da:
- - **Tempo di calcolo**
- - **Tempo di inattività** (idle time)
- - **Tempo di computazione**: è il tempo trascorso eseguendo calcoli sui dati.
- - **Idle time**: è il tempo che un processo trascorre aspettando i dati da altri processori.
- - **Tempo di comunicazione**: è il tempo necessario ai processi per inviare e ricevere messaggi. 
-	 - Si misura in termini di **latenza** (tempo necessario per iniziare la comunicazione) e **larghezza di banda** (velocità di trasmissione dei dati).
-	 - I programmi seriali non usano la comunicazione tra processi, quindi è importante minimizzare questo tempo per migliorare le prestazioni.
+- **Tempo di calcolo**
+- **Tempo di inattività** (idle time)
+- **Tempo di computazione**: è il tempo trascorso eseguendo calcoli sui dati.
+- **Idle time**: è il tempo che un processo trascorre aspettando i dati da altri processori.
+- **Tempo di comunicazione**: è il tempo necessario ai processi per inviare e ricevere messaggi.
+- Si misura in termini di **latenza** (tempo necessario per iniziare la comunicazione) e **larghezza di banda** (velocità di trasmissione dei dati).
+- I programmi seriali non usano la comunicazione tra processi, quindi è importante minimizzare questo tempo per migliorare le prestazioni.
 
 ## Sovrapposizione tra Comunicazione e Computazione
 
 - Per ridurre l'**idle time**, si può sovrapporre la comunicazione e la computazione:
- - Un processo può essere occupato con nuovi task mentre attende il completamento della comunicazione.
- - Ciò è possibile utilizzando tecniche di comunicazione **non-bloccanti** e computazione **non specifica ai dati**.
- - Tuttavia, nella pratica, è difficile implementare efficacemente questa interleaving.
+- Un processo può essere occupato con nuovi task mentre attende il completamento della comunicazione.
+- Ciò è possibile utilizzando tecniche di comunicazione **non-bloccanti** e computazione **non specifica ai dati**.
+- Tuttavia, nella pratica, è difficile implementare efficacemente questa interleaving.
 
 ## Metriche di Prestazione nei Sistemi Paralleli
 
@@ -96,9 +96,9 @@ Lo scopo principale di un programma parallelo è ottenere migliori prestazioni r
 
 $$ S = \frac{Ts}{Tp}$$
 
- - Esempio: somma di *n* numeri, **Tp = O(logn)** e **Ts = O(n)**. Lo speedup è **S = O(n/logn)**.
- - Lo **speedup** non può superare il numero di processori, **S ≤ p**.
- - Lo **speedup superlineare** si verifica quando le prestazioni parallele superano quelle seriali, ad esempio a causa di vantaggi hardware o algoritmi più efficienti in parallelo.
+- Esempio: somma di *n* numeri, **Tp = O(logn)** e **Ts = O(n)**. Lo speedup è **S = O(n/logn)**.
+- Lo **speedup** non può superare il numero di processori, **S ≤ p**.
+- Lo **speedup superlineare** si verifica quando le prestazioni parallele superano quelle seriali, ad esempio a causa di vantaggi hardware o algoritmi più efficienti in parallelo.
 
 ### Efficienza (E)
 
@@ -106,7 +106,7 @@ $$ S = \frac{Ts}{Tp}$$
 
 $$ E = \frac{S}{p}$$
 
- - Misura quanto efficacemente ogni processore viene utilizzato. Esempio: somma di *n* numeri su *n* processori, $Tp = O(log(n)), \ E = O(\frac{1}{log(n)}).$
+- Misura quanto efficacemente ogni processore viene utilizzato. Esempio: somma di *n* numeri su *n* processori, $Tp = O(log(n)), \ E = O(\frac{1}{log(n)}).$
 
 ## Legge di Amdahl
 
@@ -114,8 +114,8 @@ $$ E = \frac{S}{p}$$
 
 $$ S ≤ \frac{1}{f + \frac{1-f}{p}}$$
 
- - Per esempio, se **f = 10%**, lo **speedup** massimo è **S ≤ 10** man mano che **p** tende a infinito.
- - La legge assume che la frazione sequenziale di un programma sia costante. Tuttavia, in molti casi, con l'aumentare della dimensione del problema, la parte sequenziale si riduce. 
+- Per esempio, se **f = 10%**, lo **speedup** massimo è **S ≤ 10** man mano che **p** tende a infinito.
+- La legge assume che la frazione sequenziale di un programma sia costante. Tuttavia, in molti casi, con l'aumentare della dimensione del problema, la parte sequenziale si riduce.
 
 ### Considerazioni su Amdahl
 

@@ -106,9 +106,9 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 
 * **Definizione:** Un agente razionale deve avere una preferenza definita tra due premi, o essere indifferente tra essi.
 * **Formulazione:** $(A ≻ B) ∨ (B ≻ A) ∨ (A ∼ B)$
- * A ≻ B: A è preferito a B
- * B ≻ A: B è preferito ad A
- * A ∼ B: A e B sono indifferenti
+* A ≻ B: A è preferito a B
+* B ≻ A: B è preferito ad A
+* A ∼ B: A e B sono indifferenti
 
 ### Continuity (Continuità)
 
@@ -124,7 +124,7 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 
 * **Definizione:** Se A è preferito a B, allora una lotteria che offre A con una probabilità maggiore è preferita a una lotteria che offre A con una probabilità minore.
 * **Formulazione:** $A ≻ B =⇒ (p ≥ q ⇐⇒ [p, A; (1 − p), B] ⪰ [q, A; (1 − q), B])$
- * ⪰ indica una preferenza debole (può essere indifferente o preferita)
+* ⪰ indica una preferenza debole (può essere indifferente o preferita)
 
 ##### Notazione:
 
@@ -140,15 +140,15 @@ Questi assiomi definiscono le proprietà che devono essere soddisfatte dalle pre
 Se le preferenze di un agente soddisfano gli assiomi di razionalità, allora esiste una funzione di utilità a valori reali che può essere utilizzata per rappresentare tali preferenze.
 
 * **Formulazione:** $U(A) ≥ U(B) ⇐⇒ A ⪰ B$
- * U(A): Utilità del premio A
- * U(B): Utilità del premio B
- * A ⪰ B: A è preferito o indifferente a B
+* U(A): Utilità del premio A
+* U(B): Utilità del premio B
+* A ⪰ B: A è preferito o indifferente a B
 Questa formulazione implica che le preferenze possono essere ordinate in base al valore di utilità, permettendo così all'agente di fare scelte razionali.
 
 * **Utilità di una lotteria:** $U([p_1, S_1; ... ; p_n, S_n]) = \sum_i \ p_i · U(S_i)$
- * Si: i-esimo stato
- * pi_: Probabilità dello stato Si
- * U(Si): Utilità dello stato Si
+* Si: i-esimo stato
+* pi_: Probabilità dello stato Si
+* U(Si): Utilità dello stato Si
 Questa formula consente di calcolare l'utilità attesa di una lotteria, sommando le utilità pesate dalle rispettive probabilità.
 
 In sintesi, il teorema afferma che se le preferenze di un agente sono razionali, allora esiste una funzione di utilità che può essere utilizzata per ordinare le preferenze tra premi e lotterie.

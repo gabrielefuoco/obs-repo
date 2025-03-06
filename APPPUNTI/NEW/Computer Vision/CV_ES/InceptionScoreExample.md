@@ -1,4 +1,4 @@
-# Inception Score Example
+## Inception Score Example
 
 Esempio di calcolo dell'Inception Score
 
@@ -25,7 +25,7 @@ from scipy.stats import entropy
 USE_CUDA = True
 ```
 
-# Caricamento del dataset
+## Caricamento del dataset
 
 Utilizzo solo le immagini ignorando le labal
 
@@ -52,7 +52,7 @@ dataset = IgnoreLabelDataset(cifar)
 
 ```
 
-# Classificazione del dataset
+## Classificazione del dataset
 
 Calcolo le probabilità per ogni classe
 
@@ -79,6 +79,7 @@ def get_pred(x):
     return softmax(x).cpu().detach().numpy()
 
 # Get predictions
+
 preds = np.zeros((N, 1000))
 
 for i, batch in enumerate(dataloader):
@@ -90,9 +91,9 @@ for i, batch in enumerate(dataloader):
 preds.shape
 ```
 
- (50000, 1000)
+(50000, 1000)
 
-# Calcolo dello score
+## Calcolo dello score
 
 A partire dalla distribuzione delle probabilità calcolo la KL e l'IS
 
@@ -114,5 +115,5 @@ score, devstd = np.mean(split_scores), np.std(split_scores)
 print(f'Inception Score is {score} with devstd {devstd}')
 ```
 
- Inception Score is 9.672773924506332 with devstd 0.14991434268517465
+Inception Score is 9.672773924506332 with devstd 0.14991434268517465
 

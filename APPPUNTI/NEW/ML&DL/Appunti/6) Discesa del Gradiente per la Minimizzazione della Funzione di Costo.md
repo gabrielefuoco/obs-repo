@@ -6,17 +6,17 @@ Un algoritmo efficiente per la minimizzazione di funzioni convesse è la **disce
 
 ##### Funzionamento:
 
-1. **Punto di partenza:** Si inizia con una soluzione iniziale, indicata con `w`.
-2. **Calcolo del gradiente:** Ad ogni iterazione, si calcola il gradiente della funzione `F(w)` nel punto corrente `w`. Il gradiente rappresenta la derivata della funzione in caso di funzione monodimensionale, mentre in caso di funzione multidimensionale è un vettore che indica la direzione di massima pendenza.
-3. **Aggiornamento della soluzione:** Si aggiorna la soluzione `w` muovendosi nella direzione opposta al gradiente. Questo perché si vuole minimizzare la funzione, quindi ci si sposta nella direzione di discesa. L'aggiornamento è dato da:
+- **Punto di partenza:** Si inizia con una soluzione iniziale, indicata con `w`.
+- **Calcolo del gradiente:** Ad ogni iterazione, si calcola il gradiente della funzione `F(w)` nel punto corrente `w`. Il gradiente rappresenta la derivata della funzione in caso di funzione monodimensionale, mentre in caso di funzione multidimensionale è un vettore che indica la direzione di massima pendenza.
+- **Aggiornamento della soluzione:** Si aggiorna la soluzione `w` muovendosi nella direzione opposta al gradiente. Questo perché si vuole minimizzare la funzione, quindi ci si sposta nella direzione di discesa. L'aggiornamento è dato da:
 
 $$w(t+1) = w(t) - η * ∇f(w(t))$$
 
- dove:
- - `w(t)` è la soluzione corrente all'iterazione `t`.
- - `η` è il **learning rate**, che determina l'ampiezza dello spostamento ad ogni iterazione. Un valore di `η` troppo grande può portare a oscillazioni e difficoltà nel trovare il minimo, mentre un valore troppo piccolo può rallentare la convergenza.
+dove:
+- `w(t)` è la soluzione corrente all'iterazione `t`.
+- `η` è il **learning rate**, che determina l'ampiezza dello spostamento ad ogni iterazione. Un valore di `η` troppo grande può portare a oscillazioni e difficoltà nel trovare il minimo, mentre un valore troppo piccolo può rallentare la convergenza.
 
-4. **Iterazione:** Si ripetono i passaggi 2 e 3 fino a raggiungere un punto di minimo o un criterio di arresto.
+- **Iterazione:** Si ripetono i passaggi 2 e 3 fino a raggiungere un punto di minimo o un criterio di arresto.
 
 $$\begin{align*}
 & \vec{w} = \vec{0} \\
@@ -35,9 +35,9 @@ $$\begin{equation}
 \begin{aligned}
 
 & \quad \quad\begin{aligned}
- & \operatorname{1) Return} \operatorname{\arg\min_{1\leq t\leq T+1} f(\vec{w}^ {(A)})}\\
- & \text{2) } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)} \\
- & \operatorname{3) } \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
+& \operatorname{1) Return} \operatorname{\arg\min_{1\leq t\leq T+1} f(\vec{w}^ {(A)})}\\
+& \text{2) } \frac{1}{T+1}\sum_{t=1}^{T+1}\vec{w}^{(A)} \\
+& \operatorname{3) } \frac{1}{(T+\hat{L})^2} \sum_{t + L}^{T} w > (A)
 \end{aligned}
 \end{aligned}
 \right. \\
@@ -82,12 +82,12 @@ si può usare questo approccio, con la necessità di calcolare questo gradiente
 
 Nella regressione lineare, la funzione di costo è la "mean squared error":
 $$\begin{aligned}
-lsq(\vec{w},(\vec{x}, y)) &= \frac{1}{2} (\langle\vec{w}, \vec{x}\rangle-y)^2 
+lsq(\vec{w},(\vec{x}, y)) &= \frac{1}{2} (\langle\vec{w}, \vec{x}\rangle-y)^2
 \end{aligned}
 $$
 $$\begin{aligned}
 \nabla \vec{w} \ lsq \ (\vec{w},(\vec{x}, y)) &= \nabla \vec{w} \left[\frac{1}{2} (\langle \vec{w}, \vec{x}\rangle-y)^2\right] \\
-&= \frac{1}{2} \cdot 2(\langle \vec{w}, \vec{x}\rangle-y)\vec{x} 
+&= \frac{1}{2} \cdot 2(\langle \vec{w}, \vec{x}\rangle-y)\vec{x}
 \end{aligned}$$
 
 ## GD+ Linear Regression
@@ -125,9 +125,9 @@ Il vettore direzione si ottiene calcolando il gradiente della funzione di costo 
 
 $$\vec{V}_{t}=\nabla l(\vec{w}^{(t)},(\vec{x},y)), \text{ con } (\vec{x},y)\text{ scelti casualmente da S}$$
 
-Quindi si lavora su sottoinsieme e non intero dataset alle singole iterazioni 
+Quindi si lavora su sottoinsieme e non intero dataset alle singole iterazioni
 
-### Dimostrazione 
+### Dimostrazione
 
 La proprietà che il valore atteso del vettore direzione coincide con il gradiente può essere dimostrata matematicamente. Il valore atteso $E[\cdot]$ del gradiente della funzione di costo, immaginando che i valori siano campionati dalla distribuzione dei dati, può essere scritto come:
 
@@ -176,7 +176,7 @@ Il **learning rate** è un parametro fondamentale negli algoritmi di apprendimen
 $$\eta=
 \begin{cases}
 \text{costante } \eta=\eta_{0} \\
-\text{variabile } \eta^{(t)}=\frac{\eta_{0}}{\sqrt{ t }} 
+\text{variabile } \eta^{(t)}=\frac{\eta_{0}}{\sqrt{ t }}
 \end{cases}
 $$
 Un learning rate costante presenta alcuni svantaggi:
@@ -199,12 +199,12 @@ La **loss surrogata** è una funzione di costo che viene utilizzata al posto del
 
 Ad esempio, nel caso dei semispazi e della **loss 0-1**, la funzione di costo originale è non convessa, il che rende difficile l'utilizzo della discesa del gradiente. In questo caso, si può utilizzare una loss surrogata, come la **loss logistica**, che ha le seguenti proprietà:
 
-1. **Upper bound**: la loss surrogata è un limite superiore della loss originale, ovvero il suo valore è sempre maggiore o uguale al valore della loss originale per ogni punto.
-2. **Convessità**: la loss surrogata è una funzione convessa, permettendo l'utilizzo della discesa del gradiente e garantendo la convergenza al minimo globale.
+- **Upper bound**: la loss surrogata è un limite superiore della loss originale, ovvero il suo valore è sempre maggiore o uguale al valore della loss originale per ogni punto.
+- **Convessità**: la loss surrogata è una funzione convessa, permettendo l'utilizzo della discesa del gradiente e garantendo la convergenza al minimo globale.
 
 ### Esempio: Hinge Loss
 
-Un esempio di loss surrogata per la loss 0-1 è la **hinge loss**. 
+Un esempio di loss surrogata per la loss 0-1 è la **hinge loss**.
 
 ![[6)-20241021162126348.png]]
 La hinge loss vale 0 per punti classificati correttamente con un margine maggiore di 1, e cresce linearmente per punti classificati errati o con un margine inferiore a 1.
@@ -240,14 +240,14 @@ Una funzione è detta di Lipschitz se la norma della differenza tra le immagini 
 
 Una funzione $f:R^d \to R^k$ si dice $\rho\text{-lipschitz}$ se $\forall w_{1},w_{2} \in R^d,$ $\| f(\vec{w_{1}})-f(\vec{w_{2}}) \| \leq \rho \| \vec{w_{1}}-\vec{w_{2}} \|$
 
-La definizione di funzione $\rho\text{-lipschitz}$ implica che il gradiente è limitato superiormente. 
+La definizione di funzione $\rho\text{-lipschitz}$ implica che il gradiente è limitato superiormente.
 
 L'introduzione di questo concetto è fondamentale per caratterizzare i problemi di apprendimento convessi
 
 ## Problema di Learning Convex-Lipschitz-Bounded
 
 Un problema di learning si dice convex-lipschitz-bounded se
-1) La classe d'ipotesi H è un insieme convesso e $\vec{\forall}w\in H, \| \vec{w}\|\leq B$ (bound) 
+1) La classe d'ipotesi H è un insieme convesso e $\vec{\forall}w\in H, \| \vec{w}\|\leq B$ (bound)
 2) La funzione di Loss è convessa e $\rho\text{-lipschitz}$
 
 ## RLM-REGULARIZED LOSS MINIMIZATIO
@@ -275,8 +275,8 @@ La Regolarizzazione di Tikhonov è una regola di apprendimento che, data una cla
 
 Questo termine ha due funzioni principali:
 
-1. **Stabilizzatore**: Se il dataset di training varia leggermente, ci aspettiamo che l'algoritmo restituisca un modello simile. Un algoritmo stabile è meno sensibile alle piccole variazioni nei dati.
-2. **Misura della complessità del modello**: Il termine di regolarizzazione può essere interpretato come una misura della complessità del modello. Modelli più complessi tendono ad avere un termine di regolarizzazione più elevato.
+- **Stabilizzatore**: Se il dataset di training varia leggermente, ci aspettiamo che l'algoritmo restituisca un modello simile. Un algoritmo stabile è meno sensibile alle piccole variazioni nei dati.
+- **Misura della complessità del modello**: Il termine di regolarizzazione può essere interpretato come una misura della complessità del modello. Modelli più complessi tendono ad avere un termine di regolarizzazione più elevato.
 
 $$R(\vec{w})=\lambda \| \vec{w}\|^2$$
 

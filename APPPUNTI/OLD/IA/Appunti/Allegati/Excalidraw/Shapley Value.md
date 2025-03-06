@@ -1,12 +1,10 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
@@ -18,13 +16,13 @@ Shapley Value ^NqEc6oGO
 
 - ∃ Sempre
 
-- Unica pre-imputazione a soddisfare i 3 
- assiomi ^nKufmW4U
+- Unica pre-imputazione a soddisfare i 3
+assiomi ^nKufmW4U
 
 Caratteristiche ^4uMdwTVr
 
 - Equità
-- Stabilità 
+- Stabilità
 - Meritocrazia ^l6JoKOf5
 
 { ^TEGRJ9oJ

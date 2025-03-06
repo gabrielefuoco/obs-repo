@@ -1,19 +1,17 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
 Giochi colazionali ^gxqwOTob
 
 Solution concept
- ^CNcogcKU
+^CNcogcKU
 
 ? ^NwKHY0zW
 
@@ -22,21 +20,21 @@ Grand Coalition ^0DCYsqtT
 Worth Fun ^TBR3dVSC
 
 Worth tot
- ^FEsDIQbY
+^FEsDIQbY
 
- Assunzioni
+Assunzioni
 - Trasferable utility
 -Non TU ^DO12lVMF
 
 Outcome ^nrGmkiXn
 
 Imputation set
- ^zwsxLo7p
+^zwsxLo7p
 
 Efficiency ^38EHQjqT
 
 Individual Rationality
- ^4Gtik6lk
+^4Gtik6lk
 
 Fairness ^Q5xLF2zs
 
@@ -44,10 +42,10 @@ Stability ^SBFzMn6i
 
 Caratteristiche ^BtDTQpxL
 
-- Superadditivi 
+- Superadditivi
 - Additivi
 - Somma Costante
-- Convessi 
+- Convessi
 - Semplici ^MXpyGksc
 
 { ^WCFh7xG7

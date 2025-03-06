@@ -1,12 +1,10 @@
----
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
 
----
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
-# Excalidraw Data
+## Excalidraw Data
 
 ## Text Elements
 
@@ -19,10 +17,10 @@ insieme delle imputazioni x t.c. ^wRDxXFbz
 Stabilità ^tr8EnAAt
 
 garantisce
- ^z5BdQQFw
+^z5BdQQFw
 
 Proprietà
- ^rD8qL9eF
+^rD8qL9eF
 
 - Simmetria
 - Dummy Player
@@ -33,7 +31,7 @@ Proprietà
 Giochi colazionali ^kwaEDvC8
 
 Solution concept
- ^EzkMAHoT
+^EzkMAHoT
 
 ? ^RmudJ18u
 
@@ -42,21 +40,21 @@ Grand Coalition ^WoFYMgfB
 Worth Fun ^98MZwlj8
 
 Worth tot
- ^H4wqlexh
+^H4wqlexh
 
- Assunzioni
+Assunzioni
 - Trasferable utility
 -Non TU ^hAjMcKij
 
 Outcome ^U1ighhQt
 
 Imputation set
- ^2vPNHn6U
+^2vPNHn6U
 
 Efficiency ^ynYE8ba8
 
 Individual Rationality
- ^UYpRkDlC
+^UYpRkDlC
 
 Fairness ^4XTUsptV
 
@@ -64,10 +62,10 @@ Stability ^B9Btt5CA
 
 Caratteristiche ^ZSukRUXB
 
-- Superadditivi 
+- Superadditivi
 - Additivi
 - Somma Costante
-- Convessi 
+- Convessi
 - Semplici ^bWdQxqLg
 
 { ^mRgubP2Z
@@ -80,13 +78,13 @@ Shapley Value ^sAFI3iBm
 
 - ∃ Sempre
 
-- Unica pre-imputazione a soddisfare i 3 
- assiomi ^9cUB6WyM
+- Unica pre-imputazione a soddisfare i 3
+assiomi ^9cUB6WyM
 
 Caratteristiche ^20GaEWWn
 
 - Equità
-- Stabilità 
+- Stabilità
 - Meritocrazia ^u20JcEwS
 
 { ^9ovQ6DLl

@@ -68,26 +68,25 @@ Scala offre una sintassi più concisa e funzionale per l'utilizzo di classi. La 
 
 ### Sintesi
 
-Scala è un linguaggio di programmazione moderno che offre una sintassi concisa e leggibile, un forte sistema di tipi statici e prestazioni elevate. La sua natura orientata agli oggetti e funzionale lo rende un linguaggio potente e versatile per lo sviluppo di software. 
+Scala è un linguaggio di programmazione moderno che offre una sintassi concisa e leggibile, un forte sistema di tipi statici e prestazioni elevate. La sua natura orientata agli oggetti e funzionale lo rende un linguaggio potente e versatile per lo sviluppo di software.
 
----
 ### L'Essenza di Scala
 
 Scala è stato progettato con due ipotesi chiave:
 
-1. **Scalabilità:** Un linguaggio di programmazione generico dovrebbe essere scalabile, ovvero i suoi concetti dovrebbero essere applicabili sia a piccole che a grandi parti di codice.
-2. **Unificazione:** La scalabilità può essere raggiunta unificando e generalizzando i concetti della programmazione funzionale (FP) e della programmazione orientata agli oggetti (OOP).
+- **Scalabilità:** Un linguaggio di programmazione generico dovrebbe essere scalabile, ovvero i suoi concetti dovrebbero essere applicabili sia a piccole che a grandi parti di codice.
+- **Unificazione:** La scalabilità può essere raggiunta unificando e generalizzando i concetti della programmazione funzionale (FP) e della programmazione orientata agli oggetti (OOP).
 
 ### Unificazione di FP e OOP
 
 Scala combina i punti di forza di FP e OOP per creare un linguaggio potente e versatile:
 
 * **Programmazione orientata agli oggetti (OOP):**
- * **Adattabilità e estensione:** Facilita l'adattamento e l'estensione di sistemi complessi attraverso sottotipi, ereditarietà e configurazioni dinamiche.
- * **Astrazione parziale:** Le classi fungono da astrazioni parziali, consentendo di modellare sistemi complessi in modo graduale.
+	* **Adattabilità e estensione:** Facilita l'adattamento e l'estensione di sistemi complessi attraverso sottotipi, ereditarietà e configurazioni dinamiche.
+	* **Astrazione parziale:** Le classi fungono da astrazioni parziali, consentendo di modellare sistemi complessi in modo graduale.
 * **Programmazione funzionale (FP):**
- * **Composizione:** Facilita la costruzione di soluzioni complesse partendo da parti semplici tramite funzioni di ordine superiore, tipi algebrici e pattern matching.
- * **Polimorfismo parametrico:** Consente di scrivere codice generico che può essere applicato a diversi tipi di dati.
+	* **Composizione:** Facilita la costruzione di soluzioni complesse partendo da parti semplici tramite funzioni di ordine superiore, tipi algebrici e pattern matching.
+	* **Polimorfismo parametrico:** Consente di scrivere codice generico che può essere applicato a diversi tipi di dati.
 
 ### Scala: Un Linguaggio Unificato
 
@@ -169,15 +168,14 @@ assert(capital("Russia") == "? ")
 
 ##### In sintesi:
 
-Il codice dimostra come Scala consente di specificare il tipo di dati delle collezioni, di utilizzare i trait per aggiungere funzionalità e di fornire valori predefiniti per le variabili. Questo approccio aiuta a rendere il codice più sicuro, affidabile e manutenibile. 
+Il codice dimostra come Scala consente di specificare il tipo di dati delle collezioni, di utilizzare i trait per aggiungere funzionalità e di fornire valori predefiniti per le variabili. Questo approccio aiuta a rendere il codice più sicuro, affidabile e manutenibile.
 
----
 ## Grande o piccolo? Il dilemma del design dei linguaggi
 
 Ogni linguaggio di programmazione deve affrontare un dilemma fondamentale: essere **grande** o **piccolo**.
 ### Grande è buono
 
-Un linguaggio **grande** offre una vasta gamma di funzionalità e costrutti, rendendolo **espressivo** e **facile da usare** per compiti complessi. 
+Un linguaggio **grande** offre una vasta gamma di funzionalità e costrutti, rendendolo **espressivo** e **facile da usare** per compiti complessi.
 ### Piccolo è buono
 
 Un linguaggio **piccolo** si concentra su un set di funzionalità essenziale, risultando **elegante** e **facile da apprendere**.
@@ -199,8 +197,6 @@ Scala affronta questo dilemma concentrandosi sulle **capacità di astrazione e c
 | + composizione mixin con trait | - trattamento speciale delle interfacce |
 | + membri di tipo astratto | - wildcard |
 | + pattern matching | |
-
----
 
 ## L'estensibilità di Scala: un esempio con i numeri complessi
 
@@ -243,8 +239,6 @@ z: Complex = 0.0 + 1.0 * i
 
 In questo esempio, `Complex` è un tipo di dato definito dall'utente che rappresenta i numeri complessi. Scala consente di utilizzare `Complex` come se fosse un tipo nativo, supportando operazioni come l'addizione, la moltiplicazione e l'assegnazione.
 
----
-
 #### Implementazione dei numeri complessi
 
 ```scala
@@ -272,8 +266,6 @@ class Complex(val re: Double, val im: Double) {
 
 - **`+`** è un identificatore; può essere utilizzato come nome di metodo.
 
----
-
 Le operazioni infisse sono chiamate metodi:
 ```scala
 a + b è lo stesso di a.+(b)
@@ -281,7 +273,6 @@ a + b è lo stesso di a.+(b)
 
 - **Oggetti** sostituiscono i membri statici della classe.
 - **Parametri di classe** invece di campi + costruttore esplicito.
----
 
 ## Il design di Scala: un linguaggio ibrido
 
@@ -335,8 +326,6 @@ new Function1[Int, Int] {
 
 Questo dimostra che le funzioni in Scala sono oggetti che implementano il *trait* `Function1`.
 
----
-
 #### Scala cheat sheet (1): Definizioni
 
 ##### Definizioni di metodo in Scala:
@@ -380,7 +369,7 @@ final String x = expression;
 ```scala
 obj.meth(arg)
 ```
-o 
+o
 ```scala
 obj meth arg
 ```
@@ -490,8 +479,6 @@ interface T {
 class C extends Super implements T
 ```
 
----
-
 ## Sintassi di base e concetti chiave
 
 Scala è un linguaggio di programmazione orientato agli oggetti che integra funzionalità funzionali. Questo documento introduce i concetti di base della programmazione in Scala, inclusi la sintassi, i tipi di dati e i concetti chiave come oggetti, classi, metodi e tratti.
@@ -546,7 +533,7 @@ Scala supporta una varietà di tipi di dati, tra cui:
 * **Any:** Supertipo di ogni altro tipo, qualsiasi oggetto è di tipo `Any`.
 * **AnyRef:** Supertipo di qualsiasi tipo di riferimento.
 
-## Variabili in Scala: 
+## Variabili in Scala:
 
 In Scala, le variabili possono essere dichiarate usando le parole chiave `var` e `val`:
 
@@ -1084,7 +1071,7 @@ Quando si eredita da più tratti in Scala, si utilizza la parola chiave `extend
 
 ## Classe Astratta
 
- Una classe astratta in Scala si differenzia da un trait per la presenza di un costruttore e per la possibilità di essere invocata
+Una classe astratta in Scala si differenzia da un trait per la presenza di un costruttore e per la possibilità di essere invocata
 
 ```scala
 abstract class Person(private val name: String) {
@@ -1148,7 +1135,7 @@ println(list3)
 list3.foreach(x => print(x))
 ```
 * **Definizione:** Una lista è una collezione di dati **immutabili**.
-* **Implementazione:** In Scala, `List` rappresenta una lista collegata. 
+* **Implementazione:** In Scala, `List` rappresenta una lista collegata.
 
 ## ListBuffer
 
@@ -1171,8 +1158,8 @@ list1.prepend("y")
 
 * **Implementazione:** Questa implementazione di buffer utilizza una lista mutabile come struttura dati sottostante.
 * **Tempo di esecuzione:**
- * **Prepend e Append:** Le operazioni di inserimento all'inizio (prepend) e alla fine (append) della lista hanno un tempo di esecuzione costante. Ciò significa che il tempo necessario per completare queste operazioni non dipende dalla dimensione della lista.
- * **Altre operazioni:** La maggior parte delle altre operazioni, come l'accesso a un elemento specifico o la rimozione di un elemento in una posizione specifica, hanno un tempo di esecuzione lineare. Ciò significa che il tempo necessario per completare queste operazioni aumenta linearmente con la dimensione della lista. 
+	* **Prepend e Append:** Le operazioni di inserimento all'inizio (prepend) e alla fine (append) della lista hanno un tempo di esecuzione costante. Ciò significa che il tempo necessario per completare queste operazioni non dipende dalla dimensione della lista.
+	* **Altre operazioni:** La maggior parte delle altre operazioni, come l'accesso a un elemento specifico o la rimozione di un elemento in una posizione specifica, hanno un tempo di esecuzione lineare. Ciò significa che il tempo necessario per completare queste operazioni aumenta linearmente con la dimensione della lista.
 
 ## Set
 
@@ -1230,7 +1217,7 @@ val (a: String, b: Int, c: Boolean) = ("b", 2, false)
 println(a)
 ```
 
- Una tupla è un valore che contiene un numero fisso di elementi, ciascuno con il proprio tipo. Le tuple sono immutabili.
+Una tupla è un valore che contiene un numero fisso di elementi, ciascuno con il proprio tipo. Le tuple sono immutabili.
 
 ## Array
 
@@ -1253,12 +1240,12 @@ println(arr3)
 arr3.foreach(x => print(x))
 ```
 
-* **Definizione:** Un Array è un tipo speciale di collezione in Scala. 
+* **Definizione:** Un Array è un tipo speciale di collezione in Scala.
 * **Caratteristiche:**
- * **Dimensione fissa:** Un array ha una dimensione fissa, che viene definita al momento della creazione.
- * **Tipo di dato uniforme:** Tutti gli elementi di un array devono essere dello stesso tipo di dato.
- * **Indici:** Gli elementi di un array sono indicizzati a partire da zero. L'ultimo elemento ha indice `n-1`, dove `n` è il numero totale di elementi.
- * **Mutabilità:** Gli elementi di un array sono mutabili, ovvero possono essere modificati dopo la creazione dell'array. 
+	* **Dimensione fissa:** Un array ha una dimensione fissa, che viene definita al momento della creazione.
+	* **Tipo di dato uniforme:** Tutti gli elementi di un array devono essere dello stesso tipo di dato.
+	* **Indici:** Gli elementi di un array sono indicizzati a partire da zero. L'ultimo elemento ha indice `n-1`, dove `n` è il numero totale di elementi.
+	* **Mutabilità:** Gli elementi di un array sono mutabili, ovvero possono essere modificati dopo la creazione dell'array.
 
 ## Equals
 
@@ -1386,5 +1373,5 @@ prices.map { case (k, v) => (k, v - 1.1) }.toMap
 ##### Conclusione:
 
 * L'utilizzo di `case` nel pattern matching è necessario quando si lavora con funzioni che accettano tuple come argomenti.
-* `case` consente di decomporre la tupla in variabili separate, rendendo la funzione più leggibile e facile da usare. 
+* `case` consente di decomporre la tupla in variabili separate, rendendo la funzione più leggibile e facile da usare.
 

@@ -1,12 +1,12 @@
-# Yolo - You Only Look Once
+## Yolo - You Only Look Once
 
 Yolo è una rete single stage. Sono state proposte tre versioni che hanno introdotto miglioramenti al design della rete e l'utilizzo degli anchor box. Se non specificato con il termini Yolo ci si riferisce alla versione 3.
 
 L'idea è quella di dividere l'immagine in griglie di dimensione SxS. Per ogni cella si predicono B boxes espresse in termini di:
 
-1. Coordinate, quadruple (bx,by,bw,bh) che definiscono l'offset del bounding box rispetto alla posizione della cella;
-2. Objectness score (P0), indica la probabilità che la cella contenga un oggetto;
-3. Class prediction, è la probabilità associata alla classe nel caso in cui la cella contenga un oggetto.
+- Coordinate, quadruple (bx,by,bw,bh) che definiscono l'offset del bounding box rispetto alla posizione della cella;
+- Objectness score (P0), indica la probabilità che la cella contenga un oggetto;
+- Class prediction, è la probabilità associata alla classe nel caso in cui la cella contenga un oggetto.
 
 Il valore dell'object score è dato dalla formula:
 
@@ -90,15 +90,18 @@ def create_modules(module_defs):
         elif module_def["type"] == "yolo":
             anchor_idxs = [int(x) for x in module_def["mask"].split(",")]
             # Extract anchors
+
             anchors = [int(x) for x in module_def["anchors"].split(",")]
             anchors = [(anchors[i], anchors[i + 1]) for i in range(0, len(anchors), 2)]
             anchors = [anchors[i] for i in anchor_idxs]
             num_classes = int(module_def["classes"])
             img_size = int(hyperparams["height"])
             # Define detection layer
+
             yolo_layer = YOLOLayer(anchors, num_classes, img_size)
             modules.add_module(f"yolo_{module_i}", yolo_layer)
         # Register module list and number of output filters
+
         module_list.append(modules)
         output_filters.append(filters)
 
@@ -148,6 +151,7 @@ class YOLOLayer(nn.Module):
         FloatTensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
         self.stride = self.img_dim / self.grid_size
         # Calculate offsets for each grid
+
         self.grid_x = torch.arange(g).repeat(g, 1).view([1, 1, g, g]).type(FloatTensor)
         self.grid_y = torch.arange(g).repeat(g, 1).t().view([1, 1, g, g]).type(FloatTensor)
         self.scaled_anchors = FloatTensor([(a_w / self.stride, a_h / self.stride) for a_w, a_h in self.anchors])
@@ -157,6 +161,7 @@ class YOLOLayer(nn.Module):
     def forward(self, x, targets=None, img_dim=None):
 
         # Tensors for cuda support
+
         FloatTensor = torch.cuda.FloatTensor if x.is_cuda else torch.FloatTensor
         LongTensor = torch.cuda.LongTensor if x.is_cuda else torch.LongTensor
         ByteTensor = torch.cuda.ByteTensor if x.is_cuda else torch.ByteTensor
@@ -172,6 +177,7 @@ class YOLOLayer(nn.Module):
         )
 
         # Get outputs
+
         x = torch.sigmoid(prediction[..., 0])  # Center x
         y = torch.sigmoid(prediction[..., 1])  # Center y
         w = prediction[..., 2]  # Width
@@ -180,10 +186,12 @@ class YOLOLayer(nn.Module):
         pred_cls = torch.sigmoid(prediction[..., 5:])  # Cls pred.
 
         # If grid size does not match current we compute new offsets
+
         if grid_size != self.grid_size:
             self.compute_grid_offsets(grid_size, cuda=x.is_cuda)
 
         # Add offset and scale with anchors
+
         pred_boxes = FloatTensor(prediction[..., :4].shape)
         pred_boxes[..., 0] = x.data + self.grid_x
         pred_boxes[..., 1] = y.data + self.grid_y
@@ -211,6 +219,7 @@ class YOLOLayer(nn.Module):
             )
 
             # Loss : Mask outputs to ignore non-existing objects (except with conf. loss)
+
             loss_x = self.mse_loss(x[obj_mask], tx[obj_mask])
             loss_y = self.mse_loss(y[obj_mask], ty[obj_mask])
             loss_w = self.mse_loss(w[obj_mask], tw[obj_mask])
@@ -222,6 +231,7 @@ class YOLOLayer(nn.Module):
             total_loss = loss_x + loss_y + loss_w + loss_h + loss_conf + loss_cls
 
             # Metrics
+
             cls_acc = 100 * class_mask[obj_mask].mean()
             conf_obj = pred_conf[obj_mask].mean()
             conf_noobj = pred_conf[noobj_mask].mean()
@@ -290,6 +300,7 @@ class Darknet(nn.Module):
         """Parses and loads the weights stored in 'weights_path'"""
 
         # Open the weights file
+
         with open(weights_path, "rb") as f:
             header = np.fromfile(f, dtype=np.int32, count=5)  # First five are header values
             self.header_info = header  # Needed to write header when saving weights
@@ -297,6 +308,7 @@ class Darknet(nn.Module):
             weights = np.fromfile(f, dtype=np.float32)  # The rest are weights
 
         # Establish cutoff for loading backbone weights
+
         cutoff = None
         if "darknet53.conv.74" in weights_path:
             cutoff = 75
@@ -309,31 +321,38 @@ class Darknet(nn.Module):
                 conv_layer = module[0]
                 if module_def["batch_normalize"]:
                     # Load BN bias, weights, running mean and running variance
+
                     bn_layer = module[1]
                     num_b = bn_layer.bias.numel()  # Number of biases
                     # Bias
+
                     bn_b = torch.from_numpy(weights[ptr : ptr + num_b]).view_as(bn_layer.bias)
                     bn_layer.bias.data.copy_(bn_b)
                     ptr += num_b
                     # Weight
+
                     bn_w = torch.from_numpy(weights[ptr : ptr + num_b]).view_as(bn_layer.weight)
                     bn_layer.weight.data.copy_(bn_w)
                     ptr += num_b
                     # Running Mean
+
                     bn_rm = torch.from_numpy(weights[ptr : ptr + num_b]).view_as(bn_layer.running_mean)
                     bn_layer.running_mean.data.copy_(bn_rm)
                     ptr += num_b
                     # Running Var
+
                     bn_rv = torch.from_numpy(weights[ptr : ptr + num_b]).view_as(bn_layer.running_var)
                     bn_layer.running_var.data.copy_(bn_rv)
                     ptr += num_b
                 else:
                     # Load conv. bias
+
                     num_b = conv_layer.bias.numel()
                     conv_b = torch.from_numpy(weights[ptr : ptr + num_b]).view_as(conv_layer.bias)
                     conv_layer.bias.data.copy_(conv_b)
                     ptr += num_b
                 # Load conv. weights
+
                 num_w = conv_layer.weight.numel()
                 conv_w = torch.from_numpy(weights[ptr : ptr + num_w]).view_as(conv_layer.weight)
                 conv_layer.weight.data.copy_(conv_w)
@@ -349,10 +368,12 @@ class Darknet(nn.Module):
         self.header_info.tofile(fp)
 
         # Iterate through layers
+
         for i, (module_def, module) in enumerate(zip(self.module_defs[:cutoff], self.module_list[:cutoff])):
             if module_def["type"] == "convolutional":
                 conv_layer = module[0]
                 # If batch norm, load bn first
+
                 if module_def["batch_normalize"]:
                     bn_layer = module[1]
                     bn_layer.bias.data.cpu().numpy().tofile(fp)
@@ -360,9 +381,11 @@ class Darknet(nn.Module):
                     bn_layer.running_mean.data.cpu().numpy().tofile(fp)
                     bn_layer.running_var.data.cpu().numpy().tofile(fp)
                 # Load conv bias
+
                 else:
                     conv_layer.bias.data.cpu().numpy().tofile(fp)
                 # Load conv weights
+
                 conv_layer.weight.data.cpu().numpy().tofile(fp)
 
         fp.close()
